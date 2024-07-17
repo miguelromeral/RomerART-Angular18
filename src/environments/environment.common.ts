@@ -1,4 +1,4 @@
-import packageJson from '../package.json';
+import packageJson from '../../package.json';
 
 export const COMMON_ENV = {
   appVersion: packageJson.version,
