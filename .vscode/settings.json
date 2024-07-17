@@ -14,5 +14,8 @@
     "editor.formatOnSave": true
   },
   "editor.suggest.snippetsPreventQuickSuggestions": false,
-  "editor.inlineSuggest.enabled": true
+  "editor.inlineSuggest.enabled": true,
+  // "files.associations": { "*.scss": "postcss" },
+  "css.customData": [".vscode/tailwind.json"],
+  "scss.lint.unknownAtRules": "ignore"
 }
