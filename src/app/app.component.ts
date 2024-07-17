@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,9 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'romerart-angular18';
+  title = `romerart-angular18 ${environment.appVersion} ${environment.production}`;
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('Environment:', environment);
+  }
 }
