@@ -1,0 +1,136 @@
+/* Every row of the chat */
+.mr-chat-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: flex-end;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+
+/* Container for the left part of the message (the text, not including the image) */
+.mr-chat-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /*margin-right: 10px;*/
+  width: -webkit-fill-available;
+}
+
+
+/* Text of the message */
+.mr-chat-message {
+  background: var(--mr-chat-color);
+  font-weight: var(--mr-font-weight-medium);
+  color: var(--mr-text-color-opposite);
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-top: var(--mr-chat-margin-vertical);
+  margin-bottom: var(--mr-chat-margin-vertical);
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  transition: var(--mr-transition-time) ease-in-out;
+}
+
+/* Space from the last message to line up the image at its right side */
+.mr-chat-message.last {
+  margin-bottom: 20px !important;
+}
+
+
+/* Apex of the last message (colored) */
+.mr-chat-message.last:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  right: -8px;
+  height: 20px;
+  width: 20px;
+  background: var(--mr-chat-color);
+  border-bottom-left-radius: 15px;
+}
+
+/* Apex of the last message (background) */
+.mr-chat-message.last:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: -10px;
+  width: 10px;
+  height: 20px;
+  background: var(--mr-background-color);
+  border-bottom-left-radius: 10px;
+}
+
+/* Profile Picture */
+img.mr-chat-image-miguel {
+  width: var(--mr-profile-pic-size-bottom-bar);
+  height: var(--mr-profile-pic-size-bottom-bar);
+  border-radius: var(--mr-profile-pic-size-bottom-bar);
+  border: var(--mr-border-size) solid var(--mr-chat-color);
+  padding: var(--mr-padding-picture);
+  user-select: none;
+  pointer-events: none;
+}
+
+
+.dislikes .mr-chat-icon {
+  border-color: var(--mr-chat-color-dislikes);
+}
+
+.likes .mr-chat-icon {
+  border-color: var(--mr-chat-color-likes);
+}
+
+/* Row of pros */
+.mr-chat-row.likes div {
+  color: var(--mr-chat-color-likes);
+}
+
+/* Row of pros */
+.mr-chat-row.likes .mr-chat-message:hover {
+  background-color: var(--mr-chat-color-likes);
+  color: var(--mr-text-color-opposite);
+}
+
+
+/* Message of pros */
+.mr-chat-row.likes .mr-chat-message {
+  background-color: transparent;
+  border: 2px solid var(--mr-chat-color-likes);
+}
+
+/* Row of cons */
+.mr-chat-row.dislikes div {
+  color: var(--mr-chat-color-dislikes);
+}
+
+/* Message of cons */
+.mr-chat-row.dislikes .mr-chat-message {
+  background-color: transparent;
+  border: 2px solid var(--mr-chat-color-dislikes);
+}
+
+.mr-chat-row.dislikes .mr-chat-message:hover {
+  background-color: var(--mr-chat-color-dislikes);
+  color: var(--mr-text-color-opposite);
+}
+
+
+.mr-chat-icon {
+  position: absolute;
+  border: var(--mr-border-size) solid var(--mr-chat-color);
+  border-radius: 20px;
+  width: 40px;
+  background-color: var(--mr-bg-color);
+  /* text-align: center; */
+  right: 10px;
+  /* margin-right: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -2,12 +2,25 @@ import { Component, Input, OnInit } from '@angular/core';
 import { LoggerService } from '../../../services/logger/logger.service';
 import { ApiService } from '../../../services/api/api.service';
 import { Drawing } from '../../../../models/art/drawing.model';
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { TitleComponent } from '../../../components/art/details/title/title.component';
+import { TrackComponent } from '../../../components/spotify/track/track.component';
+import { CommentComponent } from '@app/components/art/details/comment/comment.component';
+import { CommentWrapperComponent } from '@app/components/art/details/comment-wrapper/comment-wrapper.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [NgIf, JsonPipe],
+  imports: [
+    NgIf,
+    JsonPipe,
+    TitleComponent,
+    TrackComponent,
+    NgFor,
+    NgClass,
+    CommentComponent,
+    CommentWrapperComponent,
+  ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
@@ -29,16 +42,12 @@ export class DetailsComponent implements OnInit {
 
   loadDrawing() {
     if (this.id) {
-      this.logger.log(
-        `The drawing with ID '${this.id}' should be loading here...`
-      );
-
       this.api.getDrawingDetails(this.id).subscribe(data => {
         this.response = data;
         if (data) {
           // this.logger.log(data);
           this.drawing = data;
-          this.logger.log(this.drawing);
+          // this.logger.log(this.drawing);
         }
         this.drawingNotFound = data === undefined || data.id === '';
       });

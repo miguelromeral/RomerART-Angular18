@@ -1,15 +1,40 @@
-<p>
-  ID: {{id}}
-</p>
-<div>
+<div class="mx-auto w-full">
   <div *ngIf="drawing">
-    {{drawing.id}}
-    {{drawing.title}}
+    <!-- TODO: añadir botón de admin para editarlo -->
+
+    <h1 class="mr-image-page-title">{{ drawing.title }}</h1>
+
+    <div class="row">
+      <app-art-details-title
+        [character]="drawing.name"
+        [modelName]="drawing.modelName">
+      </app-art-details-title>
+    </div>
+
+    <!-- TODO: imagen y formulario para votar -->
+
+    <div class="mr-social-container">
+      <app-spotify-track [trackId]="drawing.spotifyTrackId"></app-spotify-track>
+    </div>
+
+    <app-art-details-comment-wrapper [comments]="drawing.listComments">
+    </app-art-details-comment-wrapper>
+
+    <app-art-details-comment-wrapper
+      [comments]="drawing.listCommentPros"
+      [type]="'like'">
+    </app-art-details-comment-wrapper>
+
+    <app-art-details-comment-wrapper
+      [comments]="drawing.listCommentCons"
+      [type]="'dislike'">
+    </app-art-details-comment-wrapper>
+
+    <h4>Detalles</h4>
   </div>
-  <div *ngIf="drawingNotFound">
-    Drawing Not Found
-  </div>
+
+  <div *ngIf="drawingNotFound">Drawing Not Found</div>
   <pre>
-    {{response | json}}
+    {{ response | json }}
   </pre>
 </div>

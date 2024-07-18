@@ -1,0 +1,15 @@
+<div
+  class="mr-social-container"
+  style="width: 100%"
+  [ngClass]="{
+    'mr-comment-pro': type === 'like',
+    'mr-comment-con': type === 'dislike',
+  }">
+  <div class="mr-chat-container" style="width: 100%">
+    <app-art-details-comment
+      *ngFor="let comment of comments"
+      [comment]="comment"
+      [type]="type">
+    </app-art-details-comment>
+  </div>
+</div>
