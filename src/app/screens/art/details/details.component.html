@@ -1,1 +1,15 @@
-<p>details works!</p>
+<p>
+  ID: {{id}}
+</p>
+<div>
+  <div *ngIf="drawing">
+    {{drawing.id}}
+    {{drawing.title}}
+  </div>
+  <div *ngIf="drawingNotFound">
+    Drawing Not Found
+  </div>
+  <pre>
+    {{response | json}}
+  </pre>
+</div>
