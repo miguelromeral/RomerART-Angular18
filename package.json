@@ -1,14 +1,17 @@
 {
   "name": "romerart-angular18",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && copyfiles web.config dist/romerart-angular18/",
     "watch": "ng build --watch --configuration development",
+    "prod": "ng build --configuration production && copyfiles web.config dist/romerart-angular18/",
     "test": "ng test",
     "serve:ssr:romerart-angular18": "node dist/romerart-angular18/server/server.mjs",
-    "lint": "ng lint --fix"
+    "lint": "ng lint --fix",
+    "postbuild": "copyfiles web.config dist/romerart-angular18/",
+    "deploy": "firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -16,6 +19,7 @@
     "@angular/common": "^18.1.0",
     "@angular/compiler": "^18.1.0",
     "@angular/core": "^18.1.0",
+    "@angular/fire": "^18.0.1",
     "@angular/forms": "^18.1.0",
     "@angular/platform-browser": "^18.1.0",
     "@angular/platform-browser-dynamic": "^18.1.0",
