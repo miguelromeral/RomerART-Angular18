@@ -1,0 +1,23 @@
+<div class="mr-details-section">
+  <span class="mr-details-section-title hvr-underline-reveal">
+    {{ title }}
+  </span>
+  <div
+    class="mr-details-section-content"
+    [ngClass]="{ large: large, capitalize: capitalize }">
+    <ul *ngIf="listItems.length > 0">
+      <li *ngFor="let item of listItems">
+        {{ item }}
+      </li>
+    </ul>
+    <div class="mr-tag-container" *ngIf="tags">
+      <span class="mr-tag" *ngFor="let tag of listTags">
+        <!-- TODO: añadir este replace?? -->
+        <!-- @tag.Replace(" ", "") -->
+        {{ tag }}
+      </span>
+    </div>
+
+    <div *ngIf="rawText" [innerHTML]="rawText"></div>
+  </div>
+</div>

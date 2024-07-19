@@ -31,6 +31,49 @@
     </app-art-details-comment-wrapper>
 
     <h4>Detalles</h4>
+
+    <app-details-section
+      [title]="'📅 Fecha'"
+      [rawText]="drawing.date !== '' ? drawing.formattedDate : 'No Date Known'">
+    </app-details-section>
+
+    <app-details-section
+      [title]="'🕓 Tiempo (estimado)'"
+      [rawText]="drawing.timeHuman">
+    </app-details-section>
+
+    <app-details-section [title]="'🖌 Estilo'" [rawText]="drawing.typeName">
+    </app-details-section>
+
+    <app-details-section
+      *ngIf="drawing.software > 0"
+      [title]="'💻 Software'"
+      [rawText]="drawing.softwareName">
+    </app-details-section>
+
+    <app-details-section
+      *ngIf="drawing.paper > 0"
+      [title]="'📄 Tamaño de Papel'"
+      [rawText]="drawing.paperHuman">
+    </app-details-section>
+
+    <app-details-section
+      *ngIf="drawing.productType > 0 && drawing.productName !== ''"
+      [title]="getProductTitle()"
+      [rawText]="drawing.productName">
+    </app-details-section>
+
+    <app-details-section
+      *ngIf="drawing.modelName !== ''"
+      [title]="'👤 Modelo'"
+      [rawText]="drawing.modelName">
+    </app-details-section>
+    <!--
+    <app-details-section
+      *ngIf="drawing.referenceUrl !== ''"
+      [title]="'🖼 Referencia'"
+      [rawText]="`<a href='${drawing.referenceUrl}\' target=\'_blank\'>Abrir en nueva pestaña</a>`">
+    </app-details-section> -->
   </div>
 
   <div *ngIf="drawingNotFound">Drawing Not Found</div>

@@ -7,6 +7,7 @@ import { TitleComponent } from '../../../components/art/details/title/title.comp
 import { TrackComponent } from '../../../components/spotify/track/track.component';
 import { CommentComponent } from '@app/components/art/details/comment/comment.component';
 import { CommentWrapperComponent } from '@app/components/art/details/comment-wrapper/comment-wrapper.component';
+import { SectionComponent } from '@app/components/art/details/section/section.component';
 
 @Component({
   selector: 'app-details',
@@ -20,6 +21,7 @@ import { CommentWrapperComponent } from '@app/components/art/details/comment-wra
     NgClass,
     CommentComponent,
     CommentWrapperComponent,
+    SectionComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -51,6 +53,21 @@ export class DetailsComponent implements OnInit {
         }
         this.drawingNotFound = data === undefined || data.id === '';
       });
+    }
+  }
+
+  getProductTitle(): string {
+    switch (this.drawing?.productType) {
+      case 1:
+        return '🎮 Videojuego';
+      case 2:
+        return '🎞 Actor/Actriz';
+      case 3:
+        return '🎙 Cantante';
+      case 4:
+        return '⚽ Deporte';
+      default:
+        return 'Temática';
     }
   }
 }
