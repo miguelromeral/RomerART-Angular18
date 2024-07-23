@@ -35,6 +35,11 @@
                 "glob": "web.config",
                 "input": "src",
                 "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/bootstrap-icons/font",
+                "output": "/assets/fonts/bootstrap-icons"
               }
             ],
             "styles": [
