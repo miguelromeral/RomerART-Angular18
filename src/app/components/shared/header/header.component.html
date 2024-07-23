@@ -1,0 +1,8 @@
+<header
+  class="header flex flex-row justify-between px-1 py-0"
+  [ngClass]="{ development: !production, production: production }">
+  <span>MiguelRomeral</span>
+  <span>
+    {{ version }}
+  </span>
+</header>
