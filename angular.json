@@ -30,6 +30,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "web.config",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
@@ -102,6 +107,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "web.config",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
