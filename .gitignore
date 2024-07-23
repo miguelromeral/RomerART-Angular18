@@ -20,12 +20,19 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
-# Visual Studio Code
+# Ignorar todos los archivos en .vscode
 .vscode/*
-.vscode/settings.json
+
+# Exceptuar algunos archivos específicos
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/tailwind.json
+
+# Volver a ignorar settings.json específicamente
+.vscode/settings.json
+
+# History
 .history/*
 
 # Miscellaneous
