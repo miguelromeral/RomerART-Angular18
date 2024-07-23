@@ -18,17 +18,15 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
+    "types": ["jquery"],
     "baseUrl": "src",
     "paths": {
       "@app/*": ["app/*"],
       "@components/*": ["app/components/*"],
       "@services/*": ["app/services/*"],
       "@models/*": ["models/*"],
-      "@assets/*": ["../public/assets/*"],
+      "@assets/*": ["../public/assets/*"]
     }
   },
   "angularCompilerOptions": {
