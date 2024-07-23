@@ -1,12 +1,12 @@
 import { NgClass, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
-import { Customization } from 'utils/customization';
+import { ScoreBoardComponent } from '../score-board/score-board.component';
 
 @Component({
   selector: 'app-art-details-image',
   standalone: true,
-  imports: [NgIf, NgClass],
+  imports: [NgIf, NgClass, ScoreBoardComponent],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
 })
@@ -27,29 +27,5 @@ export class ImageComponent {
       ".mr-error-load-placeholder[data-error-drawing-id='" + drawingId + "']";
     //console.log(selector);
     $(selector).addClass('show');
-  }
-
-  getClassScore(score: number) {
-    return Customization.getClassScore(score);
-  }
-
-  onChangeRangeVote(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    const score = parseInt(target.value, 10);
-    const spScoreUser = $('#spScoreUser');
-
-    spScoreUser.text(score.toString());
-
-    spScoreUser.removeClass('bad mild good platinum');
-
-    if (score < 50) {
-      spScoreUser.addClass('bad');
-    } else if (score < 65) {
-      spScoreUser.addClass('mild');
-    } else if (score < 95) {
-      spScoreUser.addClass('good');
-    } else if (score < 101) {
-      spScoreUser.addClass('platinum');
-    }
   }
 }

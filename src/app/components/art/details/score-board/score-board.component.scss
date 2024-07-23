@@ -1,0 +1,169 @@
+.mr-scores {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 10px 0px;
+  user-select: none;
+  /*border: 1px solid white;*/
+  border-radius: 4px;
+  padding: 4px;
+  background-color: red;
+  background-color: var(--mr-vote-card-background-color);
+}
+
+.mr-scores-reviews {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.mr-scores-critic,
+.mr-scores-popular-span {
+  padding: 8px;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--mr-score-background-color-none);
+  color: var(--mr-text-color-opposite);
+  font-size: xx-large;
+  font-weight: var(--mr-font-weight-bold);
+}
+
+.mr-scores-critic-container {
+  position: relative;
+}
+
+.mr-scores-critic {
+  border-radius: 8px;
+}
+
+.mr-scores-popular-span {
+  border-radius: 30px;
+  transition: var(--mr-transition-time);
+}
+
+.mr-scores-popular {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.mr-scores-popular-votes {
+  font-size: var(--mr-font-size-small);
+  color: var(--mr-text-color-not-important);
+  padding: 0px 5px;
+  border-radius: 20px;
+  transition: var(--mr-transition-time);
+}
+
+#spNumberUserVotes {
+  transition: var(--mr-transition-time);
+}
+
+#btnOpenVoteForm {
+  position: relative;
+  top: 10px;
+  border-radius: 30px;
+}
+
+#btnVote {
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#cardVoteForm {
+  /*background-color: var(--mr-vote-card-background-color);*/
+  background-color: transparent;
+  color: var(--mr-text-color);
+  border: none;
+}
+
+#voteForm {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+#divLabelVote {
+  display: flex;
+  justify-content: space-between;
+}
+
+#spScoreUser {
+  flex-grow: 0;
+  font-weight: var(--mr-font-weight-bold);
+  font-size: var(--mr-font-size-large);
+  border: 1px solid black;
+  /* padding: 0px 5px; */
+  border-radius: 4px;
+  width: 50px;
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--mr-transition-time);
+}
+
+#spScoreUser:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) white;
+}
+
+#spScoreUser.bad {
+  color: var(--mr-score-background-color-bad);
+  border-color: var(--mr-score-background-color-bad);
+}
+
+#spScoreUser.bad:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) var(--mr-score-background-color-bad);
+}
+
+#spScoreUser.mild {
+  color: var(--mr-score-background-color-mild);
+  border-color: var(--mr-score-background-color-mild);
+}
+
+#spScoreUser.mild:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) var(--mr-score-background-color-mild);
+}
+
+#spScoreUser.good {
+  color: var(--mr-score-background-color-good);
+  border-color: var(--mr-score-background-color-good);
+}
+
+#spScoreUser.good:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) var(--mr-score-background-color-good);
+}
+
+#spScoreUser.platinum {
+  color: var(--mr-score-platinum-blue);
+  border-color: var(--mr-score-platinum-blue);
+}
+
+#spScoreUser.platinum:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) var(--mr-score-platinum-blue);
+}
+
+.mr-score-image {
+  background-color: var(--mr-vote-card-background-color);
+  padding: 2px;
+  border-radius: 30px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+}
+
+.mr-score-image img {
+  background-color: var(--mr-vote-card-background-color);
+}

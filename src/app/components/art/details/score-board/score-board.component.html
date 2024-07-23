@@ -1,0 +1,92 @@
+<div class="mr-scores">
+  <div class="mr-scores-reviews">
+    <div
+      class="mr-scores-critic-container mr-score-miguel"
+      title="Puntuación del Artista">
+      <span
+        [ngClass]="getClassScore(drawing.scoreCritic)"
+        class="mr-scores-critic hvr-buzz-out">
+        {{ drawing.scoreCritic === 0 ? '--' : drawing.scoreCritic }}
+      </span>
+      <div class="mr-score-image">
+        <img
+          src="assets/images/miguel.jpeg"
+          class="mr-chat-image-miguel"
+          alt="Me" />
+      </div>
+    </div>
+    <div
+      class="mr-scores-popular mr-score-popular"
+      title="Puntuación de los Usuarios">
+      <span
+        id="spScoreUserVotes"
+        [ngClass]="getClassScore(drawing.scorePopular)"
+        class="mr-scores-popular-span hvr-buzz-out">
+        {{ drawing.scorePopularHuman === 0 ? '--' : drawing.scorePopularHuman }}
+      </span>
+      <div
+        id="divScorePopular"
+        class="mr-scores-popular-votes"
+        title="Votos de Usuarios">
+        <span id="spNumberUserVotes">
+          {{ drawing.votesPopular }}
+        </span>
+        <span> voto{{ drawing.votesPopular !== 1 ? 's' : '' }} </span>
+      </div>
+    </div>
+    <button
+      id="btnOpenVoteForm"
+      class="btn mr-custom-btn mr-score-popular"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#cardVoteForm"
+      aria-expanded="false"
+      aria-controls="cardVoteForm"
+      (click)="openVoteForm()">
+      Votar
+    </button>
+  </div>
+  <div
+    *ngIf="showVoteForm"
+    class="mr-scores-form mr-score-popular mt-2"
+    id="containerCollapseVoteForm">
+    <div id="cardVoteForm" class="card card-body">
+      <form
+        id="voteForm"
+        asp-action="Vote"
+        asp-controller="Art"
+        data-ajax="true"
+        data-ajax-method="POST"
+        data-ajax-begin="onBeginVote"
+        data-ajax-failure="OnFailureVote"
+        data-ajax-success="onSuccessVote"
+        data-ajax-complete="onCompleteVote">
+        <input type="hidden" name="id" [value]="drawing.id" />
+
+        <div id="divLabelVote">
+          <span>Seleccione una puntuación</span>
+          <span id="spScoreUser" class="good">70</span>
+        </div>
+
+        <input
+          type="range"
+          name="score"
+          class="mr-custom-range form-range"
+          min="1"
+          max="100"
+          step="1"
+          value="70"
+          id="rScoreUser"
+          (input)="onChangeRangeVote($event)" />
+
+        <button
+          id="btnVote"
+          type="button"
+          class="btn mr-custom-btn vibrate mt-2"
+          onclick="voteDrawing(event)">
+          <i id="iCheerIcon" class="bi bi-send-plus"></i> Envia tu Voto Ahora
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
