@@ -8,6 +8,7 @@ import { TrackComponent } from '../../../components/spotify/track/track.componen
 import { CommentComponent } from '@app/components/art/details/comment/comment.component';
 import { CommentWrapperComponent } from '@app/components/art/details/comment-wrapper/comment-wrapper.component';
 import { SectionComponent } from '@app/components/art/details/section/section.component';
+import { ImageComponent } from '@app/components/art/details/image/image.component';
 
 @Component({
   selector: 'app-details',
@@ -22,13 +23,13 @@ import { SectionComponent } from '@app/components/art/details/section/section.co
     CommentComponent,
     CommentWrapperComponent,
     SectionComponent,
+    ImageComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
 export class DetailsComponent implements OnInit {
   @Input() id: string | null = null;
-  response: any;
   drawing: Drawing | undefined;
   drawingNotFound: boolean | undefined;
 
@@ -45,7 +46,6 @@ export class DetailsComponent implements OnInit {
   loadDrawing() {
     if (this.id) {
       this.api.getDrawingDetails(this.id).subscribe(data => {
-        this.response = data;
         if (data) {
           // this.logger.log(data);
           this.drawing = data;

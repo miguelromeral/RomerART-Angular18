@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-details-section',
@@ -18,18 +18,4 @@ export class SectionComponent {
   @Input() large = false;
   @Input() tags = false;
   @Input() capitalize = false;
-
-  // @Input() set trackId(id: string) {
-  //   this.spotifyUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-  //     `https://open.spotify.com/embed/track/${id}?utm_source=generator`
-  //   );
-  // }
-
-  // ngOnInit() {
-  //   if (this.tags && this.rawText.length > 0) {
-  //     this.listTags = this.rawText.split(this.tagDelimiter);
-  //   }
-  // }
-
-  // @foreach(var tag in Model.RawText.Split(";"))
 }

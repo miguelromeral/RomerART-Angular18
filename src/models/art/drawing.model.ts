@@ -34,7 +34,7 @@ export class Drawing {
   scoreCritic: number;
   scorePopular: number;
   votesPopular: number;
-  scorePopularHuman: string;
+  scorePopularHuman: number;
   listComments: string[];
   listCommentPros: string[];
   commentCons: string;
@@ -81,7 +81,7 @@ export class Drawing {
     this.scoreCritic = data.scoreCritic || 0;
     this.scorePopular = data.scorePopular || 0;
     this.votesPopular = data.votesPopular || 0;
-    this.scorePopularHuman = data.scorePopularHuman || '';
+    this.scorePopularHuman = data.scorePopularHuman || 0;
     this.listComments = data.listComments || [];
     this.listCommentPros = data.listCommentPros || [];
     this.commentCons = data.commentCons || '';

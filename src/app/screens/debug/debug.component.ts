@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '../../services/logger/logger.service';
-import { environment } from '../../../environments/environment';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-debug',
@@ -14,6 +14,6 @@ export class DebugComponent implements OnInit {
 
   ngOnInit() {
     this.logger.log('Inicializado!');
-    console.log('Environment:', environment);
+    $('#debug').text('desde TS!');
   }
 }

@@ -13,6 +13,8 @@
 
     <!-- TODO: imagen y formulario para votar -->
 
+    <app-art-details-image [drawing]="drawing"></app-art-details-image>
+
     <div class="mr-social-container">
       <app-spotify-track [trackId]="drawing.spotifyTrackId"></app-spotify-track>
     </div>
@@ -87,7 +89,4 @@
   </div>
 
   <div *ngIf="drawingNotFound">Drawing Not Found</div>
-  <pre>
-    {{ response | json }}
-  </pre>
 </div>

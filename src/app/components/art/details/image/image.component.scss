@@ -1,0 +1,395 @@
+/* First column, including the image and the likes */
+.mr-first-column-image {}
+
+
+/* Full Image container */
+.mr-img-full-container {
+  position: relative;
+  border: var(--mr-border-size) solid var(--mr-chat-color);
+  border-radius: var(--mr-border-radius);
+  padding: var(--mr-padding-btw-border-image);
+  width: -webkit-fill-available;
+  min-height: 100px;
+  transition: var(--mr-transition-time) ease;
+}
+
+.mr-img-full-container.fullscreen {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: block;
+  align-items: center;
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+  background-color: var(--mr-background-color-fullscreen-image);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  border: none;
+  border-radius: 0px;
+}
+
+.mr-img-full-container.fullscreen img {
+  height: auto;
+  width: auto;
+  /* object-fit: cover; */
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+/* If the image is a favorite, change border color */
+.mr-img-full-container.favorite {
+  border-color: var(--mr-color-gold);
+}
+
+/* Favorite Icon */
+#iFavoriteIcon {
+  display: none;
+}
+
+/* Favorite Icon */
+.mr-img-full-container.favorite #iFavoriteIcon {
+  position: absolute;
+  display: block;
+  top: var(--mr-spacing-img-buttons);
+  right: var(--mr-spacing-img-buttons);
+  color: var(--mr-color-gold);
+  text-shadow: 0px 0px 10px var(--mr-color-gold);
+}
+
+#divIconFullScreen {
+  position: absolute;
+  display: block;
+  top: var(--mr-spacing-img-buttons);
+  left: var(--mr-spacing-img-buttons);
+  color: black;
+  transition: var(--mr-transition-time) ease-in-out;
+  color: var(--mr-chat-color);
+  font-size: var(--mr-font-size-large);
+  text-shadow: 1px 1px 0px black;
+}
+
+#divIconFullScreen #iFS {
+  display: block;
+}
+
+#divIconFullScreen #iFSe {
+  display: none;
+}
+
+#divImgFull.fullscreen #iFS {
+  display: none;
+}
+
+#divImgFull.fullscreen #iFSe {
+  display: block;
+}
+
+
+
+#divIconFullScreen:hover {
+  color: white;
+  cursor: pointer;
+}
+
+/* Watermark */
+/*.mr-img-full-container::after {
+    content: "MiguelRomeral";
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0px 0px 5px #ffffff85;
+}*/
+/* Full resolution image */
+img.mr-img-full {
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+  border-radius: var(--mr-border-radius-image);
+  transition: var(--mr-transition-time) ease-in-out;
+}
+
+/* Placeholder shown before the own image if error */
+.mr-img-full-container .mr-error-load-placeholder {
+  z-index: 1;
+}
+
+
+/* Like button */
+#btnCheer {
+  background-color: var(--mr-color-red);
+  border-radius: 50px;
+  padding: 5px 20px;
+  font-weight: var(--mr-font-weight-bold);
+  cursor: pointer;
+  transition: var(--mr-transition-time) ease-in;
+}
+
+/* Like Button disabled */
+#btnCheer:disabled {
+  animation: none;
+  background-color: black;
+}
+
+/* Container of the likes and views */
+.mr-stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+  margin-top: var(--mr-margin-vertical);
+}
+
+/* Item of the likes or views */
+.mr-stats-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: var(--mr-gap-icon-text);
+}
+
+/* Item of the likes */
+.mr-stats-item.likes {
+  color: var(--mr-color-red-light);
+}
+
+/* Container of the like count, for animation purposes*/
+#divContainerLikes {
+  display: inline-flex;
+}
+
+
+.mr-thanks-message {
+  background-color: var(--mr-chat-color);
+  color: var(--mr-text-color-opposite);
+  position: absolute;
+  border-radius: var(--mr-border-radius);
+  padding: 2px 10px;
+  z-index: 10000;
+  border: 1px solid var(--mr-chat-color-secondary);
+  font-weight: var(--mr-font-weight-bold);
+}
+
+
+.mr-scores {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 10px 0px;
+  user-select: none;
+  /*border: 1px solid white;*/
+  border-radius: 4px;
+  padding: 4px;
+  background-color: red;
+  background-color: var(--mr-vote-card-background-color);
+}
+
+.mr-scores-reviews {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.mr-scores-critic,
+.mr-scores-popular-span {
+  padding: 8px;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--mr-score-background-color-none);
+  color: var(--mr-text-color-opposite);
+  font-size: xx-large;
+  font-weight: var(--mr-font-weight-bold);
+}
+
+.mr-scores-critic-container {
+  position: relative;
+}
+
+.mr-scores-critic {
+  border-radius: 8px;
+}
+
+.mr-scores-popular-span {
+  border-radius: 30px;
+  transition: var(--mr-transition-time);
+}
+
+.mr-scores-popular {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.mr-scores-popular-votes {
+  font-size: var(--mr-font-size-small);
+  color: var(--mr-text-color-not-important);
+  padding: 0px 5px;
+  border-radius: 20px;
+  transition: var(--mr-transition-time);
+}
+
+#spNumberUserVotes {
+  transition: var(--mr-transition-time);
+}
+
+#btnOpenVoteForm {
+  position: relative;
+  top: 10px;
+  border-radius: 30px;
+}
+
+#btnVote {
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#cardVoteForm {
+  /*background-color: var(--mr-vote-card-background-color);*/
+  background-color: transparent;
+  color: var(--mr-text-color);
+  border: none;
+}
+
+#voteForm {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+#divLabelVote {
+  display: flex;
+  justify-content: space-between;
+}
+
+#spScoreUser {
+  flex-grow: 0;
+  font-weight: var(--mr-font-weight-bold);
+  font-size: var(--mr-font-size-large);
+  border: 1px solid black;
+  /* padding: 0px 5px; */
+  border-radius: 4px;
+  width: 50px;
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--mr-transition-time);
+}
+
+#spScoreUser:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) white;
+}
+
+#spScoreUser.bad {
+  color: var(--mr-score-background-color-bad);
+  border-color: var(--mr-score-background-color-bad);
+}
+
+#spScoreUser.bad:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) var(--mr-score-background-color-bad);
+}
+
+#spScoreUser.mild {
+  color: var(--mr-score-background-color-mild);
+  border-color: var(--mr-score-background-color-mild);
+}
+
+#spScoreUser.mild:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) var(--mr-score-background-color-mild);
+}
+
+#spScoreUser.good {
+  color: var(--mr-score-background-color-good);
+  border-color: var(--mr-score-background-color-good);
+}
+
+#spScoreUser.good:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) var(--mr-score-background-color-good);
+}
+
+#spScoreUser.platinum {
+  color: var(--mr-score-platinum-blue);
+  border-color: var(--mr-score-platinum-blue);
+}
+
+#spScoreUser.platinum:hover {
+  box-shadow: 0px 0px var(--mr-text-shadow-score) var(--mr-score-platinum-blue);
+}
+
+.mr-score-image {
+  background-color: var(--mr-vote-card-background-color);
+  padding: 2px;
+  border-radius: 30px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+}
+
+.mr-score-image img {
+  background-color: var(--mr-vote-card-background-color);
+}
+
+
+/* Placeholder when the image couldn't be loaded */
+.mr-error-load-placeholder {
+  transition: var(--mr-transition-time) ease-out;
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  height: 100%;
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: pink;
+}
+
+/* Emoji of the error placeholder */
+.mr-error-load-placeholder .emoji {
+  font-size: x-large;
+}
+
+/* Text of the error placeholder */
+.mr-error-load-placeholder .subtitle {
+  font-size: var(--mr-font-size-small);
+  text-align: center;
+}
+
+/* Show the placeholder when error */
+.mr-error-load-placeholder.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border-radius: var(--mr-border-radius-image);
+}
