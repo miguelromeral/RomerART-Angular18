@@ -68,12 +68,22 @@
       [title]="'👤 Modelo'"
       [rawText]="drawing.modelName">
     </app-details-section>
-    <!--
+
     <app-details-section
       *ngIf="drawing.referenceUrl !== ''"
-      [title]="'🖼 Referencia'"
-      [rawText]="`<a href='${drawing.referenceUrl}\' target=\'_blank\'>Abrir en nueva pestaña</a>`">
-    </app-details-section> -->
+      [title]="'🖼 Referencia'">
+      <a [href]="drawing.referenceUrl" target="_blank"
+        >Abrir en nueva pestaña</a
+      >
+    </app-details-section>
+
+    <app-details-section
+      *ngIf="drawing.tags.length > 0"
+      [title]="'🏷 Etiquetas'"
+      [tags]="true"
+      [capitalize]="true"
+      [listTags]="drawing.tags">
+    </app-details-section>
   </div>
 
   <div *ngIf="drawingNotFound">Drawing Not Found</div>

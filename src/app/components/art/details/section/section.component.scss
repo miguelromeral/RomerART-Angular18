@@ -4,3 +4,17 @@
   font-size: var(--mr-font-size-small);
   color: var(--mr-chat-color);
 }
+
+.mr-tag-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.mr-tag {
+  font-size: var(--mr-font-size-small);
+  background-color: var(--mr-chat-color-secondary);
+  padding: 0px 5px;
+  border-radius: var(--mr-border-radius);
+}

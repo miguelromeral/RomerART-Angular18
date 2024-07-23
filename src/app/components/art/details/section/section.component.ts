@@ -8,16 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './section.component.html',
   styleUrl: './section.component.scss',
 })
-export class SectionComponent implements OnInit {
+export class SectionComponent {
   tagDelimiter = ';';
 
   @Input() title!: string;
   @Input() rawText = '';
   @Input() listItems: string[] = [];
+  @Input() listTags: string[] = [];
   @Input() large = false;
   @Input() tags = false;
   @Input() capitalize = false;
-  listTags: string[] = [];
 
   // @Input() set trackId(id: string) {
   //   this.spotifyUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -25,11 +25,11 @@ export class SectionComponent implements OnInit {
   //   );
   // }
 
-  ngOnInit() {
-    if (this.tags && this.rawText.length > 0) {
-      this.listTags = this.rawText.split(this.tagDelimiter);
-    }
-  }
+  // ngOnInit() {
+  //   if (this.tags && this.rawText.length > 0) {
+  //     this.listTags = this.rawText.split(this.tagDelimiter);
+  //   }
+  // }
 
   // @foreach(var tag in Model.RawText.Split(";"))
 }
