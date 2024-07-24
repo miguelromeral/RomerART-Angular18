@@ -32,7 +32,7 @@ export class DrawingService {
     environment.data.softwares.map(sw => new DrawingSoftware(sw));
 
   getDrawingPaperSizes = (): DrawingPaperSize[] =>
-    environment.data.softwares.map(paper => new DrawingPaperSize(paper));
+    environment.data.paperSizes.map(paper => new DrawingPaperSize(paper));
 
   getDrawingDetails(id: string): Observable<Drawing> {
     return this.http
@@ -54,6 +54,12 @@ export class DrawingService {
       .pipe(
         catchError(this.handleError<DrawingCharacter[]>('getDrawingCharacters'))
       );
+  }
+
+  getDrawingModels(): Observable<string[]> {
+    return this.http
+      .get<string[]>(`${this.apiUrl}art/select/models`)
+      .pipe(catchError(this.handleError<string[]>('getDrawingModels')));
   }
 
   cheerDrawing(id: string): Observable<void> {

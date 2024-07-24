@@ -9,7 +9,16 @@
     </p>
   </div>
 
-  <form>
+  <form
+    id="formFilter"
+    asp-action="Filter"
+    asp-controller="Art"
+    data-ajax="true"
+    data-ajax-method="POST"
+    data-ajax-begin="onBeginFilter"
+    data-ajax-failure="onFailureFilter"
+    data-ajax-success="onSuccessFilter"
+    data-ajax-complete="onCompleteFilter">
     <div class="row">
       <div class="mr-sort-filter-container" data-bs-theme="dark">
         <div class="mr-sort-filter">
@@ -137,6 +146,75 @@
 
           <option value="none">(Ningún Personaje)</option>
         </select>
+
+        <select
+          id="sFilterModel"
+          class="mr-custom-select form-select form-select-sm mr-filter-item"
+          name="ModelName"
+          data-bs-theme="dark"
+          onchange="sendFormFilterGallery()">
+          <option value="" selected>👩 MODELO</option>
+
+          <option *ngFor="let model of listDrawingModels" [value]="model">
+            {{ model }}
+          </option>
+
+          <option value="none">(Ningún Modelo)</option>
+        </select>
+
+        <select
+          id="sFilterSoftware"
+          class="mr-custom-select form-select form-select-sm mr-filter-item"
+          name="Software"
+          data-bs-theme="dark"
+          onchange="sendFormFilterGallery()">
+          <option value="0" selected>💻 SOFTWARE</option>
+
+          <option *ngFor="let sw of listDrawingSoftwares" [value]="sw.id">
+            {{ sw.name }}
+          </option>
+        </select>
+
+        <select
+          id="sFilterPaper"
+          class="mr-custom-select form-select form-select-sm mr-filter-item"
+          name="Paper"
+          data-bs-theme="dark"
+          onchange="sendFormFilterGallery()">
+          <option value="0" selected>📄 TAMAÑO</option>
+
+          <option *ngFor="let paper of listDrawingPapers" [value]="paper.id">
+            {{ paper.name }}
+          </option>
+        </select>
+
+        <select
+          id="sFilterSpotify"
+          class="mr-custom-select form-select form-select-sm mr-filter-item mr-spotify"
+          name="Spotify"
+          data-bs-theme="dark"
+          onchange="sendFormFilterGallery()">
+          <option value="null" selected>🎵 MÚSICA</option>
+          <option value="true">Pista de Spotify Sugerida</option>
+          <option value="false">Sin pista sugerida</option>
+        </select>
+
+        <div class="mr-choice-filter mr-filter-item">
+          <label
+            class="form-check-label choice-label"
+            for="flexSwitchCheckChecked"
+            style="font-weight: bold"
+            >⭐ FAVORITOS</label
+          >
+          <input
+            class="form-check-input"
+            name="Favorites"
+            type="checkbox"
+            role="switch"
+            value="true"
+            id="flexSwitchCheckChecked"
+            onchange="sendFormFilterGallery()" />
+        </div>
       </div>
     </div>
   </form>

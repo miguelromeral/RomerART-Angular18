@@ -8,10 +8,13 @@ import { DrawingProduct } from '@models/art/drawing-product.model';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { Subscription } from 'rxjs';
 import {
+  sortByTextAscending,
   sortCharactersByName,
   sortProductsByName,
 } from '@utils/sorting/sort-utils';
 import { DrawingCharacter } from '@models/art/drawing-character.model';
+import { DrawingSoftware } from '@models/art/drawing-software.model';
+import { DrawingPaperSize } from '@models/art/drawing-paper-size.model';
 
 @Component({
   selector: 'app-search',
@@ -26,6 +29,9 @@ export class SearchComponent implements OnInit {
   listDrawingProductTypes: DrawingProductType[] = [];
   listDrawingProducts: DrawingProduct[] = [];
   listDrawingCharacters: DrawingCharacter[] = [];
+  listDrawingModels: string[] = [];
+  listDrawingSoftwares: DrawingSoftware[] = [];
+  listDrawingPapers: DrawingPaperSize[] = [];
 
   constructor(
     private drawingService: DrawingService,
@@ -51,6 +57,11 @@ export class SearchComponent implements OnInit {
     this.drawingService.getDrawingCharacters().subscribe(list => {
       this.listDrawingCharacters = list.sort(sortCharactersByName);
     });
+    this.drawingService.getDrawingModels().subscribe(list => {
+      this.listDrawingModels = list.sort(sortByTextAscending);
+    });
+    this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
+    this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
   }
 
   translateData() {

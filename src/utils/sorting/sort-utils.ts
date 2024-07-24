@@ -13,7 +13,9 @@ export function sortCharactersByName(
   a: DrawingCharacter,
   b: DrawingCharacter
 ): number {
-  return a.characterName
-    .toLowerCase()
-    .localeCompare(b.characterName.toLowerCase());
+  return sortByTextAscending(a.characterName, b.characterName);
+}
+
+export function sortByTextAscending(a: string, b: string): number {
+  return a.toLowerCase().localeCompare(b.toLowerCase());
 }
