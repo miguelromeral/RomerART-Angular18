@@ -1,0 +1,13 @@
+<h1>{{ text('TITLE') | translate }}</h1>
+<p>{{ text('DESCRIPTION') | translate }}</p>
+<label for="language-select">{{
+  text('FORM.CHANGE-LANGUAGE.TITLE') | translate
+}}</label>
+<select id="language-select" (change)="changeLanguage($event)">
+  <option
+    *ngFor="let lang of languages"
+    [value]="lang.code"
+    [attr.selected]="currentLanguage === lang.code">
+    {{ lang.text }}
+  </option>
+</select>

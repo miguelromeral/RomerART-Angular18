@@ -1,19 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { LoggerService } from '../../services/logger/logger.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import $ from 'jquery';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageService } from '@app/services/language/language.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-debug',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './debug.component.html',
   styleUrl: './debug.component.scss',
 })
-export class DebugComponent implements OnInit {
-  constructor(private logger: LoggerService) {}
+export class DebugComponent implements OnInit, OnDestroy {
+  private languageSub: Subscription | undefined;
+
+  constructor(private languageService: LanguageService) {}
 
   ngOnInit() {
-    this.logger.log('Inicializado!');
-    $('#debug').text('desde TS!');
+    // Suscribirse a los cambios de idioma
+    this.languageSub = this.languageService.currentLanguage$.subscribe(() => {
+      this.updateText();
+    });
+
+    // Actualizar el texto inicialmente
+    this.updateText();
+  }
+
+  changeLanguage(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const lang = target.value;
+    this.languageService.changeLanguage(lang);
+  }
+
+  ngOnDestroy() {
+    if (this.languageSub) {
+      this.languageSub.unsubscribe();
+    }
+  }
+
+  private updateText() {
+    this.languageService.translateText('TITLE').subscribe((res: string) => {
+      $('#debug').text(res);
+    });
   }
 }

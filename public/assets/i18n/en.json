@@ -1,0 +1,16 @@
+{
+  "TITLE": "Hello",
+  "DESCRIPTION": "This is an example.",
+  "SCREENS": {
+    "SETTINGS": {
+      "TITLE": "Settings",
+      "DESCRIPTION": "Change the app's behaviour and style and custom your experience.",
+      "FORM": {
+        "CHANGE-LANGUAGE": {
+          "TITLE": "Change language",
+          "DESCRIPTION": "Change the app's language. Some content of the app (such as drawings) will not be translated."
+        }
+      }
+    }
+  }
+}

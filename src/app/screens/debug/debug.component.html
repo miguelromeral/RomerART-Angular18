@@ -1,2 +1,11 @@
 <p>debug works!</p>
 <span id="debug">...</span>
+<span id="debug2">...</span>
+
+<h1>{{ 'TITLE' | translate }}</h1>
+<p>{{ 'DESCRIPTION' | translate }}</p>
+<label for="language-select">{{ 'SELECT_LANGUAGE' | translate }}</label>
+<select id="language-select" (change)="changeLanguage($event)">
+  <option value="en">English</option>
+  <option value="es">Español</option>
+</select>

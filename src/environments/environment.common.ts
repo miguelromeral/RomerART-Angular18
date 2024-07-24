@@ -46,8 +46,16 @@ export const COMMON_ENV = {
   },
   language: {
     default: 'es',
-    available: ['es', 'en'],
-    flagIcons: ['es', 'sh'],
+    available: [
+      {
+        code: 'es',
+        text: 'Espñol',
+      },
+      // {
+      //   code: 'en',
+      //   text: 'English',
+      // },
+    ],
   },
   utils: {
     hearts: {
