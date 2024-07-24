@@ -3,7 +3,7 @@
     id="divImgFull"
     class="mr-img-full-container heart-rain"
     [ngClass]="{ favorite: drawing.favorite }"
-    (dblclick)="cheerDrawing()">
+    (dblclick)="cheerDrawing($event)">
     <img
       id="imgFull"
       [src]="drawing.url"
@@ -51,7 +51,7 @@
           id="btnCheer"
           type="button"
           class="btn btn-danger mr-like-button like-semaphore vibrate"
-          (click)="cheerDrawing()">
+          (click)="cheerDrawing($event)">
           <i id="iCheerIcon" class="bi bi-heart"></i> ¡ KUDOS !
         </button>
       </div>

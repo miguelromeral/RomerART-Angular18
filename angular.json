@@ -41,7 +41,8 @@
             ],
             "styles": [
               "src/styles/styles.scss",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": ["node_modules/jquery/dist/jquery.min.js"],
             "server": "src/main.server.ts",
@@ -118,7 +119,8 @@
             ],
             "styles": [
               "src/styles/styles.scss",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": ["node_modules/jquery/dist/jquery.min.js"]
           }
