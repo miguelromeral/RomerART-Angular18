@@ -24,7 +24,11 @@
       id="iFavoriteIcon"
       class="bi bi-star-fill"
       title="One of my favorites drawings."></i>
-    <div id="divIconFullScreen" (click)="fullScreenImage()">
+    <div
+      id="divIconFullScreen"
+      tabindex="0"
+      (click)="fullScreenImage()"
+      (keydown)="fullScreenImageOnKeyDown($event)">
       <i id="iFS" class="bi bi-fullscreen" title="Ver en pantalla completa"></i>
       <i
         id="iFSe"
@@ -48,7 +52,7 @@
         <input type="hidden" name="id" [value]="drawing.id" />
 
         <button
-          id="btnCheer"
+          [id]="btnCheerId"
           type="button"
           class="btn btn-danger mr-like-button like-semaphore vibrate"
           (click)="cheerDrawing($event)">
@@ -59,8 +63,9 @@
 
     <div class="mr-stats-item views" title="Views">
       <i class="bi bi-eye"></i>
-      <!-- TODO: traer la función FormatoLegible a este proyecto -->
-      <span>{{ drawing.views + 1 }}</span>
+      <span [title]="drawing.views + 1 + ' visualizaciones'">{{
+        formatoLegible(drawing.views + 1)
+      }}</span>
     </div>
     <div class="mr-stats-item likes kudos" title="Kudos">
       <i class="bi bi-heart"></i>

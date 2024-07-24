@@ -537,3 +537,18 @@ div.mr-social-links {
   color: var(--mr-text-color-opposite);
   background-blend-mode: exclusion;
 }
+
+
+
+
+
+.mr-thanks-message {
+  background-color: var(--mr-chat-color);
+  color: var(--mr-text-color-opposite);
+  position: absolute;
+  border-radius: var(--mr-border-radius);
+  padding: 2px 10px;
+  z-index: 10000;
+  border: 1px solid var(--mr-chat-color-secondary);
+  font-weight: var(--mr-font-weight-bold);
+}
