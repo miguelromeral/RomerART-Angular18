@@ -6,9 +6,11 @@ export class TextUtils {
     if (numero < MIL) {
       return numero.toString();
     } else if (numero < UN_MILLON) {
-      return `${Math.round(numero / MIL)} k`;
+      const valorFormateado = Math.round((numero / MIL) * 10) / 10;
+      return `${valorFormateado} k`;
     } else {
-      return `${Math.round(numero / UN_MILLON)} M`;
+      const valorFormateado = Math.round((numero / UN_MILLON) * 10) / 10;
+      return `${valorFormateado} M`;
     }
   }
 }
