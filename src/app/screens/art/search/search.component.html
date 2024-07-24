@@ -99,6 +99,44 @@
           </option>
           <option value="0">(Otro Tipo)</option>
         </select>
+
+        <select
+          id="sFilterProductName"
+          class="mr-custom-select form-select form-select-sm mr-filter-item"
+          name="ProductName"
+          data-bs-theme="dark"
+          onchange="sendFormFilterGallery()">
+          <option value="" selected>🖼 TEMÁTICA</option>
+
+          <option
+            *ngFor="let product of listDrawingProducts"
+            [value]="product.productName">
+            {{ getEmojiFromProductType(product.productTypeId) }}
+            {{ product.productName }}
+          </option>
+
+          <option value="none">(Ninguna Temática)</option>
+        </select>
+
+        <!-- TODO: incluir colecciones -->
+
+        <select
+          id="sFilterCharacterName"
+          class="mr-custom-select form-select form-select-sm mr-filter-item"
+          name="CharacterName"
+          data-bs-theme="dark"
+          onchange="sendFormFilterGallery()">
+          <option value="" selected>😺 PERSONAJE</option>
+
+          <option
+            *ngFor="let character of listDrawingCharacters"
+            [value]="character.characterName">
+            {{ getEmojiFromProductType(character.productTypeId) }}
+            {{ character.characterName }}
+          </option>
+
+          <option value="none">(Ningún Personaje)</option>
+        </select>
       </div>
     </div>
   </form>

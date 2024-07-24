@@ -55,6 +55,7 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  // TODO: leer los datos del environment
   getProductTitle(): string {
     switch (this.drawing?.productType) {
       case 1:

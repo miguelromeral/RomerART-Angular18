@@ -4,8 +4,14 @@ import { RouterOutlet } from '@angular/router';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LanguageService } from '@app/services/language/language.service';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
+import { DrawingProduct } from '@models/art/drawing-product.model';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { Subscription } from 'rxjs';
+import {
+  sortCharactersByName,
+  sortProductsByName,
+} from '@utils/sorting/sort-utils';
+import { DrawingCharacter } from '@models/art/drawing-character.model';
 
 @Component({
   selector: 'app-search',
@@ -18,6 +24,8 @@ export class SearchComponent implements OnInit {
   private languageSub: Subscription | undefined;
   listDrawingStyles: DrawingStyle[] = [];
   listDrawingProductTypes: DrawingProductType[] = [];
+  listDrawingProducts: DrawingProduct[] = [];
+  listDrawingCharacters: DrawingCharacter[] = [];
 
   constructor(
     private drawingService: DrawingService,
@@ -36,6 +44,13 @@ export class SearchComponent implements OnInit {
   loadSelects() {
     this.listDrawingStyles = this.drawingService.getDrawingStyles();
     this.listDrawingProductTypes = this.drawingService.getDrawingProductTypes();
+    this.drawingService.getDrawingProducts().subscribe(list => {
+      // TODO: hacer que esto funcione
+      this.listDrawingProducts = list.sort(sortProductsByName);
+    });
+    this.drawingService.getDrawingCharacters().subscribe(list => {
+      this.listDrawingCharacters = list.sort(sortCharactersByName);
+    });
   }
 
   translateData() {
@@ -55,6 +70,21 @@ export class SearchComponent implements OnInit {
         });
       });
     }
+  }
+
+  getEmojiFromProductType(id: number) {
+    const results = this.listDrawingProductTypes.filter(
+      product => product.id === id
+    );
+    if (results.length !== 1) {
+      return '';
+    }
+
+    this.listDrawingProducts.sort((a: DrawingProduct, b: DrawingProduct) => {
+      return a.productName.localeCompare(b.productName);
+    });
+
+    return results[0].emoji;
   }
 
   FILTER_FORM_ID = 'formFilter';

@@ -117,6 +117,38 @@ export const COMMON_ENV = {
         emoji: '📷',
       },
     ],
+    softwares: [
+      {
+        id: 1,
+        name: 'Medibang Paint',
+      },
+      {
+        id: 2,
+        name: 'Clip Studio Paint',
+      },
+      {
+        id: 3,
+        name: 'Adobe Photoshop',
+      },
+    ],
+    paperSizes: [
+      {
+        id: 3,
+        name: 'A3',
+      },
+      {
+        id: 4,
+        name: 'A4',
+      },
+      {
+        id: 5,
+        name: 'A5',
+      },
+      {
+        id: 6,
+        name: 'A6',
+      },
+    ],
   },
   utils: {
     hearts: {
