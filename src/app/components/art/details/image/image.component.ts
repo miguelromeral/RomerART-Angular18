@@ -41,13 +41,11 @@ export class ImageComponent {
     HeartUtils.showHearts();
 
     this.drawingService.cheerDrawing(this.drawing.id).subscribe({
-      next: () => console.log('Cheer enviado correctamente!'),
       error: err => console.error('Error al enviar cheer:', err),
       complete: () => {
         $('#' + this.btnCheerId).removeAttr('disabled');
       },
     });
-    console.log('done');
   }
 
   fullScreenImage() {

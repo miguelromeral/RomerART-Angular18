@@ -51,7 +51,7 @@ export const COMMON_ENV = {
   },
   utils: {
     hearts: {
-      bootstrapIcon: 'bi-suit-heart-fill',
+      bootstrapIcon: 'bi-heart-fill',
       size: {
         min: 0.5,
         max: 1.5,
