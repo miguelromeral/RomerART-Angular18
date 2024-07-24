@@ -51,10 +51,71 @@ export const COMMON_ENV = {
         code: 'es',
         text: 'Espñol',
       },
-      // {
-      //   code: 'en',
-      //   text: 'English',
-      // },
+      {
+        code: 'en',
+        text: 'English',
+      },
+    ],
+  },
+  data: {
+    styles: [
+      {
+        id: 1,
+        code: 'DATA.DRAWING.STYLES.PENCILS',
+        text: 'Lápices de Grafito',
+      },
+      {
+        id: 2,
+        code: 'DATA.DRAWING.STYLES.DIGITAL',
+        text: 'Digital',
+      },
+      {
+        id: 3,
+        code: 'DATA.DRAWING.STYLES.SKETCH',
+        text: 'Sketch',
+      },
+      {
+        id: 4,
+        code: 'DATA.DRAWING.STYLES.MARKERS',
+        text: 'Marcadores',
+      },
+      {
+        id: 5,
+        code: 'DATA.DRAWING.STYLES.COLORED',
+        text: 'Lápices de Colores',
+      },
+      {
+        id: 6,
+        code: 'DATA.DRAWING.STYLES.PEN',
+        text: 'Bolígrafo',
+      },
+    ],
+    productTypes: [
+      {
+        id: 1,
+        code: 'DATA.DRAWING.PRODUCTS_TYPES.VIDEOGAME',
+        emoji: '🎮',
+      },
+      {
+        id: 2,
+        code: 'DATA.DRAWING.PRODUCTS_TYPES.ACTOR',
+        emoji: '🎞',
+      },
+      {
+        id: 3,
+        code: 'DATA.DRAWING.PRODUCTS_TYPES.SINGER',
+        emoji: '🎙',
+      },
+      {
+        id: 4,
+        code: 'DATA.DRAWING.PRODUCTS_TYPES.SPORTMAN',
+        emoji: '⚽',
+      },
+      {
+        id: 5,
+        code: 'DATA.DRAWING.PRODUCTS_TYPES.INFLUENCER',
+        emoji: '📷',
+      },
     ],
   },
   utils: {

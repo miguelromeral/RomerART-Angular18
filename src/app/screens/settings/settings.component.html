@@ -3,7 +3,10 @@
 <label for="language-select">{{
   text('FORM.CHANGE-LANGUAGE.TITLE') | translate
 }}</label>
-<select id="language-select" (change)="changeLanguage($event)">
+<select
+  id="language-select"
+  class="mr-custom-select"
+  (change)="changeLanguage($event)">
   <option
     *ngFor="let lang of languages"
     [value]="lang.code"

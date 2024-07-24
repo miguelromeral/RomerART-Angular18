@@ -15,12 +15,14 @@ export class LanguageService {
   constructor(private translate: TranslateService) {
     const languages = environment.language.available.map(lang => lang.code);
     translate.addLangs(languages);
-    let browserLang =
-      translate.getBrowserLang() || environment.language.default;
-    if (!languages.includes(browserLang)) {
-      browserLang = environment.language.default;
-    }
-    translate.use(browserLang);
+    // TODO: volver a poner esta configuración cuando se termine
+    // let browserLang =
+    //   translate.getBrowserLang() || environment.language.default;
+    // if (!languages.includes(browserLang)) {
+    //   browserLang = environment.language.default;
+    // }
+    // translate.use(browserLang);
+    translate.use('es');
     this.languageSubject.next(this.translate.currentLang); // Emitir el idioma inicial
   }
 

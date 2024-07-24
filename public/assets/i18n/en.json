@@ -1,6 +1,22 @@
 {
   "TITLE": "Hello",
   "DESCRIPTION": "This is an example.",
+  "DATA": {
+    "DRAWING": {
+      "STYLES": {
+        "PENCILS": "Graphite Pencils",
+        "DIGITAL": "Digital Art"
+      },
+      "PRODUCTS_TYPES": {
+        "OTHER": "Other",
+        "VIDEOGAME": "Videogame",
+        "ACTOR": "Actor / Actress",
+        "SINGER": "Singer",
+        "SPORTMAN": "Sportman",
+        "INFLUENCER": "Influencer"
+      }
+    }
+  },
   "SCREENS": {
     "SETTINGS": {
       "TITLE": "Settings",

@@ -1,6 +1,27 @@
 {
   "TITLE": "Hola",
   "DESCRIPTION": "Este es un ejemplo.",
+  "DATA": {
+    "DRAWING": {
+      "STYLES": {
+        "OTHER": "Otros",
+        "PENCILS": "Lápices de Grafito",
+        "DIGITAL": "Digital",
+        "SKETCH": "Boceto",
+        "MARKERS": "Rotuladores",
+        "COLORED": "Lápices de Colores",
+        "PEN": "Bolígrafo"
+      },
+      "PRODUCTS_TYPES": {
+        "OTHER": "Otros",
+        "VIDEOGAME": "Videojuego",
+        "ACTOR": "Actor / Actriz",
+        "SINGER": "Cantante",
+        "SPORTMAN": "Deportista",
+        "INFLUENCER": "Influencer"
+      }
+    }
+  },
   "SCREENS": {
     "SETTINGS": {
       "TITLE": "Ajustes",

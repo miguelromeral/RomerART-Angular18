@@ -39,7 +39,6 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.logger.log('ID: ' + this.id);
     this.loadDrawing();
   }
 

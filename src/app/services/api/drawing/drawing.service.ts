@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { catchError, Observable, of } from 'rxjs';
 import { Drawing } from '../../../../models/art/drawing.model';
+import { DrawingStyle } from '@models/art/drawing-style.model';
+import { DrawingProductType } from '@models/art/drawing-product-type.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,12 @@ export class DrawingService {
   private apiUrl = environment.api.url;
 
   constructor(private http: HttpClient) {}
+
+  getDrawingStyles = (): DrawingStyle[] =>
+    environment.data.styles.map(style => new DrawingStyle(style));
+
+  getDrawingProductTypes = (): DrawingProductType[] =>
+    environment.data.productTypes.map(type => new DrawingProductType(type));
 
   getDrawingDetails(id: string): Observable<Drawing> {
     return this.http

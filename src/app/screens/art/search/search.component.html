@@ -1,0 +1,105 @@
+<router-outlet></router-outlet>
+
+<div class="container">
+  <div>
+    <h1>🎨 Galería</h1>
+    <p>
+      Aquí están algunos de mis dibujos e ilustraciones públicas.
+      <strong>Pulsa en cualquiera de ellos para ver los detalles</strong>.
+    </p>
+  </div>
+
+  <form>
+    <div class="row">
+      <div class="mr-sort-filter-container" data-bs-theme="dark">
+        <div class="mr-sort-filter">
+          <span> Ordenar por... </span>
+          <select
+            id="sFilterSortBy"
+            class="mr-custom-select filters form-select form-select-sm"
+            name="Sortby"
+            aria-label="Default select example"
+            data-bs-theme="dark"
+            onchange="sendFormFilterGallery()"
+            data-bs-theme="dark">
+            <option value="date-desc">Nuevos Primero</option>
+            <option value="date-asc">Viejos Primero</option>
+            <option value="name-asc">Nombre (Ascendente)</option>
+            <option value="name-desc">Nombre (Descendente)</option>
+            <option value="time-asc">Más Rápidos</option>
+            <option value="time-desc">Más Largos</option>
+            <option value="kudos-desc" class="kudos">Más Kudos</option>
+            <option value="kudos-asc" class="kudos">Menos Kudos</option>
+            <option value="views-desc" class="views">Más Vistos</option>
+            <option value="views-asc" class="views">Menos Vistos</option>
+            <option value="scorem-desc" class="mr-score-miguel">
+              Mejor Puntuación
+            </option>
+            <option value="scorem-asc" class="mr-score-miguel">
+              Peor Puntuación
+            </option>
+            <option value="scoreu-desc" class="mr-score-popular">
+              Mejor Puntuación Popular
+            </option>
+            <option value="scoreu-asc" class="mr-score-popular">
+              Peor Puntuación Popular
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div
+        id="formFilterAlert"
+        class="alert alert-danger"
+        style="display: none"
+        role="alert"></div>
+
+      <span class="mr-suboption-filter"> Filtrar por... </span>
+      <div class="mr-filter-container">
+        <button class="btn btn-dark mr-custom-btn" onclick="resetFilters()">
+          <span><i id="iFavoriteIcon" class="bi bi-trash"></i></span>
+        </button>
+
+        <input
+          id="tbTags"
+          name="TextQuery"
+          class="form-control mr-custom-text mr-filter-item"
+          type="text"
+          placeholder="Buscar por nombre, modelo, producto, etc."
+          onchange="sendFormFilterGallery();"
+          onkeydown="capturarEnter(event)" />
+
+        <select
+          id="sFilterType"
+          class="mr-custom-select form-select form-select-sm mr-filter-item"
+          name="Type"
+          data-bs-theme="dark"
+          onchange="sendFormFilterGallery()">
+          <option value="-1" selected>🖌 ESTILO</option>
+          <option *ngFor="let style of listDrawingStyles" [value]="style.id">
+            {{ style.translatedText }}
+          </option>
+          <option value="0">(Otro Estilo)</option>
+        </select>
+
+        <select
+          id="sFilterProduct"
+          class="mr-custom-select form-select form-select-sm mr-filter-item"
+          name="ProductType"
+          data-bs-theme="dark"
+          onchange="sendFormFilterGallery()">
+          <option value="-1" selected>📺 TIPO</option>
+
+          <option
+            *ngFor="let type of listDrawingProductTypes"
+            [value]="type.id">
+            {{ type.emoji }} {{ type.translatedText }}
+          </option>
+          <option value="0">(Otro Tipo)</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
