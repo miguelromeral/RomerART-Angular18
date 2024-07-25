@@ -13,13 +13,11 @@ export const routes: Routes = [
   {
     path: 'art',
     component: SearchComponent,
-    children: [
-      {
-        path: 'details/:id',
-        component: DetailsComponent,
-        data: { withComponentInputBinding: true },
-      },
-    ],
+  },
+  {
+    path: 'art/details/:id',
+    component: DetailsComponent,
+    data: { withComponentInputBinding: true },
   },
   { path: '**', component: NotfoundComponent },
 ];

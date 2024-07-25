@@ -40,6 +40,12 @@ export class DrawingService {
       .pipe(catchError(this.handleError<Drawing>('getArtDetails')));
   }
 
+  getAllDrawings(): Observable<Drawing[]> {
+    return this.http
+      .get<Drawing[]>(`${this.apiUrl}art/drawings`)
+      .pipe(catchError(this.handleError<Drawing[]>('getAllDrawings')));
+  }
+
   getDrawingProducts(): Observable<DrawingProduct[]> {
     return this.http
       .get<DrawingProduct[]>(`${this.apiUrl}art/select/products`)
@@ -69,6 +75,15 @@ export class DrawingService {
     return this.http
       .post<void>(url, JSON.stringify(id), { headers })
       .pipe(catchError(this.handleError<void>('cheer')));
+  }
+
+  filterDrawings(): Observable<Drawing[]> {
+    const url = `${this.apiUrl}art/filter`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .post<Drawing[]>(url, {}, { headers })
+      .pipe(catchError(this.handleError<Drawing[]>('filterDrawings')));
   }
 
   // // Método para enviar datos

@@ -1,0 +1,92 @@
+<!-- <p>{{ drawing.id }}</p> -->
+
+<div
+  [attr.data-drawingId]="drawing.id"
+  class="mr-img-thumbnail cuadrado"
+  [ngClass]="{ favorite: drawing.favorite }">
+  <div class="contenido">
+    <div
+      *ngIf="drawing.spotifyTrackId"
+      class="mr-thumbnail-spotify-icon mr-img-thumbnail-info mr-spotify">
+      <a [href]="drawing.spotifyUrl" target="_blank">
+        <i class="bi bi-spotify"></i>
+      </a>
+    </div>
+    <a
+      class="mr-img-thumbnail-container slide-right"
+      [routerLink]="'details/' + drawing.id">
+      <img
+        [src]="url"
+        [alt]="drawing.title"
+        *ngIf="!bErrorLoadingImage"
+        (error)="errorLoadingImage(drawing.id)"
+        loading="lazy"
+        decoding="async" />
+
+      <div class="mr-error-load-placeholder" *ngIf="bErrorLoadingImage">
+        <span class="emoji">🙃</span>
+        <span class="subtitle">Imagen No Encontrada</span>
+      </div>
+
+      <span class="mr-img-thumbnail-date mr-img-thumbnail-info">
+        {{ drawing.formattedDateMini }}
+      </span>
+
+      <div class="mr-img-thumbnail-details-container mr-img-thumbnail-info">
+        <div class="mr-img-thumbnail-stats mr-img-thumbnail-info">
+          <!-- <div class="mr-img-thumbnail-stats-item">
+                <i class="bi bi-eye"></i>
+                <span>drawing.views</span>
+            </div> -->
+          <div class="mr-img-thumbnail-stats-item likes kudos">
+            <i class="bi bi-heart"></i>
+            <span> {{ drawing.likesHuman }}</span>
+          </div>
+        </div>
+
+        <div class="mr-img-thumbnail-score-container mr-img-thumbnail-info">
+          <span
+            *ngIf="drawing.scoreCritic > 0"
+            class="mr-img-thumbnail-score miguel mr-score-miguel"
+            [ngClass]="getClassScore(drawing.scoreCritic)">
+            {{ drawing.scoreCritic }}
+          </span>
+          <span
+            *ngIf="drawing.scorePopular > 0"
+            class="mr-img-thumbnail-score popular mr-score-popular"
+            [ngClass]="getClassScore(drawing.scorePopular)">
+            {{ drawing.scorePopularHuman }}
+          </span>
+        </div>
+      </div>
+
+      <span
+        *ngIf="drawing?.name && drawing?.modelName"
+        class="mr-img-thumbnail-title mr-img-thumbnail-info">
+        <span>{{ drawing.name }}</span>
+        <span class="mr-img-thumbnail-subtitle"
+          ><span style="font-size: x-small">por</span>
+          {{ drawing.modelName }}</span
+        >
+      </span>
+
+      <span
+        *ngIf="drawing?.name && !drawing?.modelName"
+        class="mr-img-thumbnail-title mr-img-thumbnail-info">
+        {{ drawing.name }}
+      </span>
+
+      <span
+        *ngIf="!drawing?.name && drawing?.modelName"
+        class="mr-img-thumbnail-title mr-img-thumbnail-info">
+        {{ drawing.modelName }}
+      </span>
+
+      <span
+        *ngIf="!drawing?.name && !drawing?.modelName"
+        class="mr-img-thumbnail-title mr-img-thumbnail-info">
+        <!-- Este span puede estar vacío como en el ejemplo de Razor -->
+      </span>
+    </a>
+  </div>
+</div>

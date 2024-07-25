@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
@@ -15,11 +15,13 @@ import {
 import { DrawingCharacter } from '@models/art/drawing-character.model';
 import { DrawingSoftware } from '@models/art/drawing-software.model';
 import { DrawingPaperSize } from '@models/art/drawing-paper-size.model';
+import { Drawing } from '@models/art/drawing.model';
+import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [RouterOutlet, NgFor],
+  imports: [RouterOutlet, NgFor, NgClass, DrawingThumbnailComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
@@ -32,6 +34,7 @@ export class SearchComponent implements OnInit {
   listDrawingModels: string[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
+  listDrawings: Drawing[] = [];
 
   constructor(
     private drawingService: DrawingService,
@@ -44,6 +47,14 @@ export class SearchComponent implements OnInit {
     this.languageSub = this.languageService.currentLanguage$.subscribe(lang => {
       console.log('Traduciendo cadenas en search... (' + lang + ')');
       this.translateData();
+    });
+
+    this.filterResults();
+  }
+
+  filterResults() {
+    this.drawingService.getAllDrawings().subscribe(list => {
+      this.listDrawings = list;
     });
   }
 
