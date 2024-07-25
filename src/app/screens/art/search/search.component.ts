@@ -1,4 +1,4 @@
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
@@ -17,16 +17,28 @@ import { DrawingSoftware } from '@models/art/drawing-software.model';
 import { DrawingPaperSize } from '@models/art/drawing-paper-size.model';
 import { Drawing } from '@models/art/drawing.model';
 import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DrawingFilter } from '@models/art/drawing-filter.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [RouterOutlet, NgFor, NgClass, DrawingThumbnailComponent],
+  imports: [
+    RouterOutlet,
+    NgFor,
+    NgIf,
+    NgClass,
+    DrawingThumbnailComponent,
+    ReactiveFormsModule,
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit {
   private languageSub: Subscription | undefined;
+
+  /* Filter Form Select */
   listDrawingStyles: DrawingStyle[] = [];
   listDrawingProductTypes: DrawingProductType[] = [];
   listDrawingProducts: DrawingProduct[] = [];
@@ -34,7 +46,96 @@ export class SearchComponent implements OnInit {
   listDrawingModels: string[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
+
+  /* Filter Form Behaviour */
+  filterFormLoading = true;
+  get resultsNotFound(): boolean {
+    return this.listDrawings.length === 0;
+  }
+
+  /* Filter Form */
+
+  filterForm = new FormGroup({
+    sortBy: new FormControl(environment.forms.drawingFilter.default.sortBy),
+    textQuery: new FormControl(
+      environment.forms.drawingFilter.default.textQuery
+    ),
+    type: new FormControl(environment.forms.drawingFilter.default.type),
+    productType: new FormControl(
+      environment.forms.drawingFilter.default.productType
+    ),
+    productName: new FormControl(
+      environment.forms.drawingFilter.default.productName
+    ),
+    // collection: new FormControl(
+    //   environment.forms.drawingFilter.default.collection
+    // ),
+    characterName: new FormControl(
+      environment.forms.drawingFilter.default.characterName
+    ),
+    modelName: new FormControl(
+      environment.forms.drawingFilter.default.modelName
+    ),
+    software: new FormControl(environment.forms.drawingFilter.default.software),
+    paper: new FormControl(environment.forms.drawingFilter.default.paper),
+    formSpotify: new FormControl(
+      environment.forms.drawingFilter.default.spotify
+    ),
+    formFavorites: new FormControl(
+      environment.forms.drawingFilter.default.favorites
+    ),
+  });
+
+  /* Result List */
   listDrawings: Drawing[] = [];
+
+  resetFilters() {
+    this.filterForm.controls.sortBy.setValue(
+      environment.forms.drawingFilter.default.sortBy
+    );
+    this.filterForm.controls.textQuery.reset();
+    this.filterForm.controls.type.setValue(
+      environment.forms.drawingFilter.default.type
+    );
+    this.filterForm.controls.productType.setValue(
+      environment.forms.drawingFilter.default.productType
+    );
+    this.filterForm.controls.productName.setValue(
+      environment.forms.drawingFilter.default.productName
+    );
+    // $(filtersControls.collection).val("");
+    this.filterForm.controls.characterName.setValue(
+      environment.forms.drawingFilter.default.characterName
+    );
+    this.filterForm.controls.modelName.setValue(
+      environment.forms.drawingFilter.default.modelName
+    );
+    this.filterForm.controls.software.setValue(
+      environment.forms.drawingFilter.default.software
+    );
+    this.filterForm.controls.paper.setValue(
+      environment.forms.drawingFilter.default.paper
+    );
+    this.filterForm.controls.formSpotify.setValue(
+      environment.forms.drawingFilter.default.spotify
+    );
+    this.filterForm.controls.formFavorites.setValue(
+      environment.forms.drawingFilter.default.favorites
+    );
+    // changeBasicArtUrl();
+  }
+
+  submitFilter() {
+    this.filterFormLoading = true;
+
+    const filters = new DrawingFilter(this.filterForm.value);
+
+    this.drawingService.filterDrawings(filters).subscribe(results => {
+      this.listDrawings = results;
+      console.log('Results: ' + results.map(d => d.id));
+      this.filterFormLoading = false;
+    });
+  }
 
   constructor(
     private drawingService: DrawingService,
@@ -55,6 +156,10 @@ export class SearchComponent implements OnInit {
   filterResults() {
     this.drawingService.getAllDrawings().subscribe(list => {
       this.listDrawings = list;
+
+      setTimeout(() => {
+        this.filterFormLoading = false;
+      }, 5000);
     });
   }
 

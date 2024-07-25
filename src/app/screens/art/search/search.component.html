@@ -8,6 +8,8 @@
   </div>
 
   <form
+    [formGroup]="filterForm"
+    (submit)="submitFilter()"
     id="formFilter"
     asp-action="Filter"
     asp-controller="Art"
@@ -24,10 +26,10 @@
           <select
             id="sFilterSortBy"
             class="mr-custom-select filters form-select form-select-sm"
-            name="Sortby"
+            formControlName="sortBy"
             aria-label="Default select example"
             data-bs-theme="dark"
-            onchange="sendFormFilterGallery()"
+            (change)="submitFilter()"
             data-bs-theme="dark">
             <option value="date-desc">Nuevos Primero</option>
             <option value="date-asc">Viejos Primero</option>
@@ -65,25 +67,26 @@
 
       <span class="mr-suboption-filter"> Filtrar por... </span>
       <div class="mr-filter-container">
-        <button class="btn btn-dark mr-custom-btn" onclick="resetFilters()">
+        <button class="btn btn-dark mr-custom-btn" (click)="resetFilters()">
           <span><i id="iFavoriteIcon" class="bi bi-trash"></i></span>
         </button>
 
         <input
           id="tbTags"
-          name="TextQuery"
+          formControlName="textQuery"
           class="form-control mr-custom-text mr-filter-item"
           type="text"
           placeholder="Buscar por nombre, modelo, producto, etc."
-          onchange="sendFormFilterGallery();"
+          (change)="submitFilter()"
           onkeydown="capturarEnter(event)" />
 
         <select
           id="sFilterType"
+          *ngIf="listDrawingStyles.length > 0"
           class="mr-custom-select form-select form-select-sm mr-filter-item"
-          name="Type"
+          formControlName="type"
           data-bs-theme="dark"
-          onchange="sendFormFilterGallery()">
+          (change)="submitFilter()">
           <option value="-1" selected>🖌 ESTILO</option>
           <option *ngFor="let style of listDrawingStyles" [value]="style.id">
             {{ style.translatedText }}
@@ -93,10 +96,11 @@
 
         <select
           id="sFilterProduct"
+          *ngIf="listDrawingProductTypes.length > 0"
+          formControlName="productType"
           class="mr-custom-select form-select form-select-sm mr-filter-item"
-          name="ProductType"
           data-bs-theme="dark"
-          onchange="sendFormFilterGallery()">
+          (change)="submitFilter()">
           <option value="-1" selected>📺 TIPO</option>
 
           <option
@@ -109,10 +113,11 @@
 
         <select
           id="sFilterProductName"
+          *ngIf="listDrawingProducts.length > 0"
           class="mr-custom-select form-select form-select-sm mr-filter-item"
-          name="ProductName"
+          formControlName="productName"
           data-bs-theme="dark"
-          onchange="sendFormFilterGallery()">
+          (change)="submitFilter()">
           <option value="" selected>🖼 TEMÁTICA</option>
 
           <option
@@ -129,10 +134,11 @@
 
         <select
           id="sFilterCharacterName"
+          *ngIf="listDrawingCharacters.length > 0"
           class="mr-custom-select form-select form-select-sm mr-filter-item"
-          name="CharacterName"
+          formControlName="characterName"
           data-bs-theme="dark"
-          onchange="sendFormFilterGallery()">
+          (change)="submitFilter()">
           <option value="" selected>😺 PERSONAJE</option>
 
           <option
@@ -147,10 +153,11 @@
 
         <select
           id="sFilterModel"
+          *ngIf="listDrawingModels.length > 0"
           class="mr-custom-select form-select form-select-sm mr-filter-item"
-          name="ModelName"
+          formControlName="modelName"
           data-bs-theme="dark"
-          onchange="sendFormFilterGallery()">
+          (change)="submitFilter()">
           <option value="" selected>👩 MODELO</option>
 
           <option *ngFor="let model of listDrawingModels" [value]="model">
@@ -162,10 +169,11 @@
 
         <select
           id="sFilterSoftware"
+          *ngIf="listDrawingSoftwares.length > 0"
           class="mr-custom-select form-select form-select-sm mr-filter-item"
-          name="Software"
+          formControlName="software"
           data-bs-theme="dark"
-          onchange="sendFormFilterGallery()">
+          (change)="submitFilter()">
           <option value="0" selected>💻 SOFTWARE</option>
 
           <option *ngFor="let sw of listDrawingSoftwares" [value]="sw.id">
@@ -175,10 +183,11 @@
 
         <select
           id="sFilterPaper"
+          *ngIf="listDrawingPapers.length > 0"
           class="mr-custom-select form-select form-select-sm mr-filter-item"
-          name="Paper"
+          formControlName="paper"
           data-bs-theme="dark"
-          onchange="sendFormFilterGallery()">
+          (change)="submitFilter()">
           <option value="0" selected>📄 TAMAÑO</option>
 
           <option *ngFor="let paper of listDrawingPapers" [value]="paper.id">
@@ -189,9 +198,9 @@
         <select
           id="sFilterSpotify"
           class="mr-custom-select form-select form-select-sm mr-filter-item mr-spotify"
-          name="Spotify"
+          formControlName="formSpotify"
           data-bs-theme="dark"
-          onchange="sendFormFilterGallery()">
+          (change)="submitFilter()">
           <option value="null" selected>🎵 MÚSICA</option>
           <option value="true">Pista de Spotify Sugerida</option>
           <option value="false">Sin pista sugerida</option>
@@ -206,12 +215,12 @@
           >
           <input
             class="form-check-input"
-            name="Favorites"
+            formControlName="formFavorites"
             type="checkbox"
             role="switch"
             value="true"
             id="flexSwitchCheckChecked"
-            onchange="sendFormFilterGallery()" />
+            (change)="submitFilter()" />
         </div>
       </div>
     </div>
@@ -220,15 +229,15 @@
     <div class="mr-loader-container">
       <div id="divImageCounter" class="slide-right">
         <span class="mr-suboption-filter">
-          <span id="spResultsCount">{{ listDrawings.length }}</span>
+          <span id="spResultsCount">{{ listDrawings?.length || 0 }}</span>
           <span id="spTextoImagenes">imágenes</span
           ><span id="spTextoImagen" style="display: none">imagen</span>
         </span>
       </div>
-      <div id="artGalleryLoader" class="mr-loader">
+      <div id="artGalleryLoader" class="mr-loader" *ngIf="filterFormLoading">
         <img
           alt="Loading"
-          src="~/assets/bean eater-0.3s-200px.svg"
+          src=" assets/pacman-loading.svg"
           class="mr-loading-icon-pacman" />
         <span class="mr-loader-subtitle"
           >Filtrando imágenes. Por favor, espere.</span
@@ -241,7 +250,7 @@
         </app-drawing-thumbnail>
       </div>
       <!-- TODO: resolver porqué no se esconde esto -->
-      <div id="divNoResults" [ngClass]="{ hidden: listDrawings.length === 0 }">
+      <div id="divNoResults" *ngIf="resultsNotFound">
         <span> ¡Nada por aquí..! </span>
         <h2>😔</h2>
         <span> Vuelve a intentarlo utilizando otros filtros. </span>

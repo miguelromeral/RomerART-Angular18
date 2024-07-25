@@ -13,6 +13,7 @@ import { DrawingSoftware } from '@models/art/drawing-software.model';
 import { DrawingPaperSize } from '@models/art/drawing-paper-size.model';
 import { DrawingProduct } from '@models/art/drawing-product.model';
 import { DrawingCharacter } from '@models/art/drawing-character.model';
+import { DrawingFilter } from '@models/art/drawing-filter.model';
 
 @Injectable({
   providedIn: 'root',
@@ -77,12 +78,13 @@ export class DrawingService {
       .pipe(catchError(this.handleError<void>('cheer')));
   }
 
-  filterDrawings(): Observable<Drawing[]> {
+  filterDrawings(filters: DrawingFilter): Observable<Drawing[]> {
     const url = `${this.apiUrl}art/filter`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
+    console.log('Filters', filters);
     return this.http
-      .post<Drawing[]>(url, {}, { headers })
+      .post<Drawing[]>(url, filters, { headers })
       .pipe(catchError(this.handleError<Drawing[]>('filterDrawings')));
   }
 

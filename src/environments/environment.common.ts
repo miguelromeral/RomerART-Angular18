@@ -150,6 +150,24 @@ export const COMMON_ENV = {
       },
     ],
   },
+  forms: {
+    drawingFilter: {
+      default: {
+        sortBy: 'date-desc',
+        textQuery: '',
+        type: '-1',
+        productType: '-1',
+        productName: '',
+        collection: '',
+        characterName: '',
+        modelName: '',
+        software: '0',
+        paper: '0',
+        spotify: 'null',
+        favorites: false,
+      },
+    },
+  },
   utils: {
     hearts: {
       bootstrapIcon: 'bi-heart-fill',
