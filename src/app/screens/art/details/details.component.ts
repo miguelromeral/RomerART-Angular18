@@ -9,6 +9,7 @@ import { CommentWrapperComponent } from '@app/components/art/details/comment-wra
 import { SectionComponent } from '@app/components/art/details/section/section.component';
 import { ImageComponent } from '@app/components/art/details/image/image.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
+import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 
 @Component({
   selector: 'app-details',
@@ -24,6 +25,7 @@ import { DrawingService } from '@app/services/api/drawing/drawing.service';
     CommentWrapperComponent,
     SectionComponent,
     ImageComponent,
+    LayoutComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',

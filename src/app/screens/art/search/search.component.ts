@@ -21,6 +21,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DrawingFilter } from '@models/art/drawing-filter.model';
 import { environment } from 'environments/environment';
 import { Collection } from '@models/art/collection.model';
+import { LayoutComponent } from '@app/components/shared/layout/layout.component';
+import { queryParamsNames } from 'config/art/art-filter-form';
 
 @Component({
   selector: 'app-search',
@@ -32,6 +34,7 @@ import { Collection } from '@models/art/collection.model';
     NgClass,
     DrawingThumbnailComponent,
     ReactiveFormsModule,
+    LayoutComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -87,21 +90,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       environment.forms.drawingFilter.default.favorites
     ),
   });
-
-  queryParamsNames = {
-    sortBy: 'sort',
-    textQuery: 'query',
-    type: 'type',
-    productType: 'product_type',
-    product: 'product',
-    collection: 'collection',
-    character: 'character',
-    modelName: 'model',
-    software: 'software',
-    paper: 'paper',
-    spotify: 'spotify',
-    favorites: 'favorites',
-  };
 
   /* Result List */
   listDrawings: Drawing[] = [];
@@ -406,67 +394,67 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.textQuery,
+      queryParamsNames.textQuery,
       filters,
       'textQuery'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.type,
+      queryParamsNames.type,
       filters,
       'type'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.productType,
+      queryParamsNames.productType,
       filters,
       'productType'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.product,
+      queryParamsNames.product,
       filters,
       'productName'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.collection,
+      queryParamsNames.collection,
       filters,
       'collection'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.character,
+      queryParamsNames.character,
       filters,
       'characterName'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.modelName,
+      queryParamsNames.modelName,
       filters,
       'modelName'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.software,
+      queryParamsNames.software,
       filters,
       'software'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.paper,
+      queryParamsNames.paper,
       filters,
       'paper'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.spotify,
+      queryParamsNames.spotify,
       filters,
       'formSpotify'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      this.queryParamsNames.favorites,
+      queryParamsNames.favorites,
       filters,
       'formFavorites'
     );
@@ -500,47 +488,47 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.textQuery,
-        params[this.queryParamsNames.textQuery]
+        params[queryParamsNames.textQuery]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.type,
-        params[this.queryParamsNames.type]
+        params[queryParamsNames.type]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.productType,
-        params[this.queryParamsNames.productType]
+        params[queryParamsNames.productType]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.productName,
-        params[this.queryParamsNames.product]
+        params[queryParamsNames.product]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.collection,
-        params[this.queryParamsNames.collection]
+        params[queryParamsNames.collection]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.characterName,
-        params[this.queryParamsNames.character]
+        params[queryParamsNames.character]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.modelName,
-        params[this.queryParamsNames.modelName]
+        params[queryParamsNames.modelName]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.software,
-        params[this.queryParamsNames.software]
+        params[queryParamsNames.software]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.paper,
-        params[this.queryParamsNames.paper]
+        params[queryParamsNames.paper]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.formSpotify,
-        params[this.queryParamsNames.spotify]
+        params[queryParamsNames.spotify]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.formFavorites,
-        params[this.queryParamsNames.favorites]
+        params[queryParamsNames.favorites]
       );
       // console.log('Filtering from query params');
       this.submitFilter();
