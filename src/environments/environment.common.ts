@@ -49,7 +49,7 @@ export const COMMON_ENV = {
     available: [
       {
         code: 'es',
-        text: 'Espñol',
+        text: 'Español',
       },
       {
         code: 'en',
