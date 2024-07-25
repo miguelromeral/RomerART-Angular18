@@ -6,7 +6,7 @@ export class DrawingFilter {
   type: string | null;
   productType: string | null;
   productName: string | null;
-  // collection: string | null;
+  collection: string | null;
   characterName: string | null;
   modelName: string | null;
   software: string | null;
@@ -25,8 +25,8 @@ export class DrawingFilter {
       data.productType || environment.forms.drawingFilter.default.productType;
     this.productName =
       data.productName || environment.forms.drawingFilter.default.productName;
-    // this.collection =
-    //   data.collection || environment.forms.drawingFilter.default.collection;
+    this.collection =
+      data.collection || environment.forms.drawingFilter.default.collection;
     this.characterName =
       data.characterName ||
       environment.forms.drawingFilter.default.characterName;

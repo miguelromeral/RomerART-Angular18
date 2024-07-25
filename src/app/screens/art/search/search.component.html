@@ -130,7 +130,19 @@
           <option value="none">(Ninguna Temática)</option>
         </select>
 
-        <!-- TODO: incluir colecciones -->
+        <select
+          id="sFilterCollection"
+          class="mr-custom-select form-select form-select-sm mr-filter-item"
+          *ngIf="listCollections.length > 0"
+          formControlName="collection"
+          data-bs-theme="dark"
+          (change)="submitFilter()">
+          <option value="" selected>🤩 COLECCIÓN</option>
+
+          <option [value]="col.id" *ngFor="let col of listCollections">
+            {{ col.name }}
+          </option>
+        </select>
 
         <select
           id="sFilterCharacterName"

@@ -14,6 +14,7 @@ import { DrawingPaperSize } from '@models/art/drawing-paper-size.model';
 import { DrawingProduct } from '@models/art/drawing-product.model';
 import { DrawingCharacter } from '@models/art/drawing-character.model';
 import { DrawingFilter } from '@models/art/drawing-filter.model';
+import { Collection } from '@models/art/collection.model';
 
 @Injectable({
   providedIn: 'root',
@@ -86,6 +87,12 @@ export class DrawingService {
     return this.http
       .post<Drawing[]>(url, filters, { headers })
       .pipe(catchError(this.handleError<Drawing[]>('filterDrawings')));
+  }
+
+  getAllCollections(): Observable<Collection[]> {
+    return this.http
+      .get<Collection[]>(`${this.apiUrl}art/collections`)
+      .pipe(catchError(this.handleError<Collection[]>('getAllCollections')));
   }
 
   // // Método para enviar datos

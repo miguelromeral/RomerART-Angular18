@@ -20,6 +20,7 @@ import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DrawingFilter } from '@models/art/drawing-filter.model';
 import { environment } from 'environments/environment';
+import { Collection } from '@models/art/collection.model';
 
 @Component({
   selector: 'app-search',
@@ -46,6 +47,7 @@ export class SearchComponent implements OnInit {
   listDrawingModels: string[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
+  listCollections: Collection[] = [];
 
   /* Filter Form Behaviour */
   filterFormLoading = true;
@@ -67,9 +69,9 @@ export class SearchComponent implements OnInit {
     productName: new FormControl(
       environment.forms.drawingFilter.default.productName
     ),
-    // collection: new FormControl(
-    //   environment.forms.drawingFilter.default.collection
-    // ),
+    collection: new FormControl(
+      environment.forms.drawingFilter.default.collection
+    ),
     characterName: new FormControl(
       environment.forms.drawingFilter.default.characterName
     ),
@@ -103,7 +105,9 @@ export class SearchComponent implements OnInit {
     this.filterForm.controls.productName.setValue(
       environment.forms.drawingFilter.default.productName
     );
-    // $(filtersControls.collection).val("");
+    this.filterForm.controls.collection.setValue(
+      environment.forms.drawingFilter.default.collection
+    );
     this.filterForm.controls.characterName.setValue(
       environment.forms.drawingFilter.default.characterName
     );
@@ -132,7 +136,7 @@ export class SearchComponent implements OnInit {
 
     this.drawingService.filterDrawings(filters).subscribe(results => {
       this.listDrawings = results;
-      console.log('Results: ' + results.map(d => d.id));
+      // console.log('Results: ' + results.map(d => d.id));
       this.filterFormLoading = false;
     });
   }
@@ -156,10 +160,7 @@ export class SearchComponent implements OnInit {
   filterResults() {
     this.drawingService.getAllDrawings().subscribe(list => {
       this.listDrawings = list;
-
-      setTimeout(() => {
-        this.filterFormLoading = false;
-      }, 5000);
+      this.filterFormLoading = false;
     });
   }
 
@@ -178,6 +179,9 @@ export class SearchComponent implements OnInit {
     });
     this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
     this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
+    this.drawingService.getAllCollections().subscribe(list => {
+      this.listCollections = list;
+    });
   }
 
   translateData() {
