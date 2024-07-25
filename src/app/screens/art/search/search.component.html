@@ -78,7 +78,7 @@
           type="text"
           placeholder="Buscar por nombre, modelo, producto, etc."
           (change)="submitFilter()"
-          onkeydown="capturarEnter(event)" />
+          (keydown)="capturarEnter($event)" />
 
         <select
           id="sFilterType"

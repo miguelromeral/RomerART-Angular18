@@ -1,6 +1,6 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LanguageService } from '@app/services/language/language.service';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
@@ -36,8 +36,9 @@ import { Collection } from '@models/art/collection.model';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   private languageSub: Subscription | undefined;
+  queryParamsSubscription: Subscription | undefined;
 
   /* Filter Form Select */
   listDrawingStyles: DrawingStyle[] = [];
@@ -56,7 +57,6 @@ export class SearchComponent implements OnInit {
   }
 
   /* Filter Form */
-
   filterForm = new FormGroup({
     sortBy: new FormControl(environment.forms.drawingFilter.default.sortBy),
     textQuery: new FormControl(
@@ -87,6 +87,21 @@ export class SearchComponent implements OnInit {
       environment.forms.drawingFilter.default.favorites
     ),
   });
+
+  queryParamsNames = {
+    sortBy: 'sort',
+    textQuery: 'query',
+    type: 'type',
+    productType: 'product_type',
+    product: 'product',
+    collection: 'collection',
+    character: 'character',
+    modelName: 'model',
+    software: 'software',
+    paper: 'paper',
+    spotify: 'spotify',
+    favorites: 'favorites',
+  };
 
   /* Result List */
   listDrawings: Drawing[] = [];
@@ -126,7 +141,7 @@ export class SearchComponent implements OnInit {
     this.filterForm.controls.formFavorites.setValue(
       environment.forms.drawingFilter.default.favorites
     );
-    // changeBasicArtUrl();
+    this.changeBasicArtUrl();
   }
 
   submitFilter() {
@@ -134,6 +149,9 @@ export class SearchComponent implements OnInit {
 
     const filters = new DrawingFilter(this.filterForm.value);
 
+    // Prevent resubmitting the form when updating URL query params
+    this.queryParamsSubscription?.unsubscribe();
+    this.changeBasicArtUrl();
     this.drawingService.filterDrawings(filters).subscribe(results => {
       this.listDrawings = results;
       // console.log('Results: ' + results.map(d => d.id));
@@ -143,7 +161,9 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private drawingService: DrawingService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -154,7 +174,8 @@ export class SearchComponent implements OnInit {
       this.translateData();
     });
 
-    this.filterResults();
+    this.setValuesFromQueryParams();
+    // this.filterResults();
   }
 
   filterResults() {
@@ -168,14 +189,20 @@ export class SearchComponent implements OnInit {
     this.listDrawingStyles = this.drawingService.getDrawingStyles();
     this.listDrawingProductTypes = this.drawingService.getDrawingProductTypes();
     this.drawingService.getDrawingProducts().subscribe(list => {
-      // TODO: hacer que esto funcione
-      this.listDrawingProducts = list.sort(sortProductsByName);
+      if (list) {
+        // TODO: hacer que esto funcione
+        this.listDrawingProducts = list.sort(sortProductsByName);
+      }
     });
     this.drawingService.getDrawingCharacters().subscribe(list => {
-      this.listDrawingCharacters = list.sort(sortCharactersByName);
+      if (list) {
+        this.listDrawingCharacters = list.sort(sortCharactersByName);
+      }
     });
     this.drawingService.getDrawingModels().subscribe(list => {
-      this.listDrawingModels = list.sort(sortByTextAscending);
+      if (list) {
+        this.listDrawingModels = list.sort(sortByTextAscending);
+      }
     });
     this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
     this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
@@ -218,53 +245,30 @@ export class SearchComponent implements OnInit {
     return results[0].emoji;
   }
 
-  FILTER_FORM_ID = 'formFilter';
-  ALERT_FILTER_FORM_ID = 'formFilterAlert';
-
-  LOADING_ICON_ART_GALLERY = 'artGalleryLoader';
-  DIV_ART_GALLERY = 'artGallery';
-
-  CHEER_FORM_ID = 'cheerForm';
-
-  timeMsDelayLike = 1000;
-
-  filtersControls = {
-    tags: '#tbTags',
-    type: '#sFilterType',
-    product: '#sFilterProduct',
-    productName: '#sFilterProductName',
-    collection: '#sFilterCollection',
-    characterName: '#sFilterCharacterName',
-    model: '#sFilterModel',
-    software: '#sFilterSoftware',
-    paper: '#sFilterPaper',
-    spotify: '#sFilterSpotify',
-    favorite: '#flexSwitchCheckChecked',
-    sortby: '#sFilterSortBy',
-  };
-
-  sendFormFilterGallery() {
-    // this.changeBasicArtUrl();
-    // $('#' + this.FILTER_FORM_ID).submit();
+  capturarEnter(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      // this.submitFilter();
+    }
   }
 
-  changeBasicArtUrl() {
-    // this.changeArtUrl(
-    //   $(this.filtersControls.tags).val(),
-    //   $(this.filtersControls.type).val(),
-    //   $(this.filtersControls.product).val(),
-    //   $(this.filtersControls.productName).val(),
-    //   $(this.filtersControls.collection).val(),
-    //   $(this.filtersControls.characterName).val(),
-    //   $(this.filtersControls.model).val(),
-    //   $(this.filtersControls.software).val(),
-    //   $(this.filtersControls.paper).val(),
-    //   $(this.filtersControls.spotify).val(),
-    //   $(this.filtersControls.favorite).prop('checked'),
-    //   $(this.filtersControls.sortby).val(),
-    //   false
-    // );
-  }
+  // changeBasicArtUrl() {
+  // this.changeArtUrl(
+  //   $(this.filtersControls.tags).val(),
+  //   $(this.filtersControls.type).val(),
+  //   $(this.filtersControls.product).val(),
+  //   $(this.filtersControls.productName).val(),
+  //   $(this.filtersControls.collection).val(),
+  //   $(this.filtersControls.characterName).val(),
+  //   $(this.filtersControls.model).val(),
+  //   $(this.filtersControls.software).val(),
+  //   $(this.filtersControls.paper).val(),
+  //   $(this.filtersControls.spotify).val(),
+  //   $(this.filtersControls.favorite).prop('checked'),
+  //   $(this.filtersControls.sortby).val(),
+  //   false
+  // );
+  // }
   // changeArtUrl(
   //   textQuery: string,
   //   type: number,
@@ -393,4 +397,167 @@ export class SearchComponent implements OnInit {
   //   // }
   //   // return null;
   // }
+
+  /* Set values into query paramaters */
+
+  changeBasicArtUrl() {
+    const filters = new DrawingFilter(this.filterForm.value);
+    const queryParams: Record<string, string> = {};
+
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.textQuery,
+      filters,
+      'textQuery'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.type,
+      filters,
+      'type'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.productType,
+      filters,
+      'productType'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.product,
+      filters,
+      'productName'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.collection,
+      filters,
+      'collection'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.character,
+      filters,
+      'characterName'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.modelName,
+      filters,
+      'modelName'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.software,
+      filters,
+      'software'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.paper,
+      filters,
+      'paper'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.spotify,
+      filters,
+      'formSpotify'
+    );
+    this.changeBasicArtUrlParameter(
+      queryParams,
+      this.queryParamsNames.favorites,
+      filters,
+      'formFavorites'
+    );
+    this.router.navigate(['/art'], { queryParams });
+  }
+
+  changeBasicArtUrlParameter(
+    queryParams: Record<string, string>,
+    queryName: string,
+    filters: DrawingFilter,
+    filterName: string
+  ): Record<string, string> {
+    const value = filters[filterName as keyof DrawingFilter]?.toString();
+    // console.log(filterName + ' --> ' + value);
+    if (
+      value !== '' &&
+      value !== '-1' &&
+      value !== '0' &&
+      value !== 'null' &&
+      value !== null &&
+      value !== 'undefined' &&
+      value !== undefined &&
+      value !== 'false'
+    ) {
+      queryParams[queryName] = value || '';
+    }
+    return queryParams;
+  }
+
+  setValuesFromQueryParams() {
+    this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.textQuery,
+        params[this.queryParamsNames.textQuery]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.type,
+        params[this.queryParamsNames.type]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.productType,
+        params[this.queryParamsNames.productType]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.productName,
+        params[this.queryParamsNames.product]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.collection,
+        params[this.queryParamsNames.collection]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.characterName,
+        params[this.queryParamsNames.character]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.modelName,
+        params[this.queryParamsNames.modelName]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.software,
+        params[this.queryParamsNames.software]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.paper,
+        params[this.queryParamsNames.paper]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.formSpotify,
+        params[this.queryParamsNames.spotify]
+      );
+      this.setValueFromQueryParamsIntoForm(
+        this.filterForm.controls.formFavorites,
+        params[this.queryParamsNames.favorites]
+      );
+      // console.log('Filtering from query params');
+      this.submitFilter();
+    });
+  }
+  setValueFromQueryParamsIntoForm(formControl: FormControl, parameter: string) {
+    if (
+      parameter !== null &&
+      parameter !== undefined &&
+      parameter !== '' &&
+      parameter !== 'false'
+    ) {
+      formControl.setValue(parameter);
+    }
+  }
+
+  ngOnDestroy() {
+    this.queryParamsSubscription?.unsubscribe();
+  }
 }
