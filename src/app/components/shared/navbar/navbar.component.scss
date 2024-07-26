@@ -1,16 +1,5 @@
 .mr-bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding: 0px;
   height: var(--mr-bottom-bar-height);
-  align-items: center;
-  flex-wrap: nowrap;
-  flex-direction: row;
   backdrop-filter: blur(5px);
   background-color: var(--mr-nav-color-a);
   z-index: 1000000;
@@ -20,29 +9,7 @@
 
 @media screen and (min-width: 600px) {
   .mr-bottom-bar {
-    position: fixed;
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    left: 0;
-    top: 0;
-    height: min-content;
-    max-height: 90vh;
-    width: var(--mr-bottom-bar-width);
-    justify-content: flex-start;
-    padding-top: 30px;
-    background-color: var(--mr-chat-color-terciary);
-    gap: 4px;
     animation: slide-right var(--mr-transition-time) ease-out;
-    overflow-y: auto;
-    z-index: -1;
-    margin: 10px var(--mr-bottom-bar-width-margin) var(--mr-bottom-bar-height) var(--mr-bottom-bar-width-margin);
-    border-radius: var(--mr-border-radius);
-    padding: var(--mr-padding-btw-border-image);
-    width: var(--mr-bottom-bar-width);
-    overflow-y: auto;
-    overflow-x: hidden;
   }
 
 }
