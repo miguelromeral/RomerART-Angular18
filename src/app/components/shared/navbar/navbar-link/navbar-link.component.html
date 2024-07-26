@@ -1,0 +1,23 @@
+<a
+  class="mr-bottom-bar-button"
+  [ngClass]="optionClass"
+  [routerLink]="routerLink"
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page">
+  <div class="mr-bottom-bar-icon" *ngIf="icon !== '' && iconActive !== ''">
+    <i class="bi" [ngClass]="active ? iconActive : icon"></i>
+  </div>
+
+  <div class="mr-bottom-profile-pic" *ngIf="image !== ''">
+    <img
+      [src]="image"
+      class="mr-chat-image-miguel brand"
+      alt="Me"
+      [ngStyle]="{
+        'border-color': active ? 'var(--mr-chat-color)' : 'transparent',
+        border: active ? '2px solid var(--mr-chat-color)' : 'none',
+      }" />
+  </div>
+
+  <div *ngIf="text !== ''" class="mr-bottom-bar-text">{{ text }}</div>
+</a>
