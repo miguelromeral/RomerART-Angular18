@@ -9,6 +9,7 @@
     </div>
 
     <app-art-search-filter-form
+      (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
       (fetchedResults)="onFetchedResults($event)"
       (isLoading)="onIsFilterFormLoading($event)">
     </app-art-search-filter-form>
@@ -18,7 +19,7 @@
         <div id="divImageCounter" class="slide-right">
           <span class="mr-suboption-filter">
             <span id="spResultsCount">{{ listDrawings?.length || 0 }}</span>
-            <span id="spTextoImagenes">imágenes</span
+            <span id="spTextoImagenes"> imágenes</span
             ><span id="spTextoImagen" style="display: none">imagen</span>
           </span>
         </div>
@@ -36,6 +37,12 @@
             [drawing]="drawing"
             *ngFor="let drawing of listDrawings">
           </app-drawing-thumbnail>
+          <button
+            *ngIf="!filterFormLoading && showButtonFetchMore"
+            type="button"
+            (click)="requestMoreDrawings()">
+            +
+          </button>
         </div>
         <!-- TODO: resolver porqué no se esconde esto -->
         <div id="divNoResults" *ngIf="resultsNotFound">

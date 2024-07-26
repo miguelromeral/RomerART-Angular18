@@ -9,7 +9,7 @@
           formControlName="sortBy"
           aria-label="Default select example"
           data-bs-theme="dark"
-          (change)="submitFilter()"
+          (change)="filterControlChange()"
           data-bs-theme="dark">
           <option value="date-desc">Nuevos Primero</option>
           <option value="date-asc">Viejos Primero</option>
@@ -57,7 +57,7 @@
         class="form-control mr-custom-text mr-filter-item"
         type="text"
         placeholder="Buscar por nombre, modelo, producto, etc."
-        (change)="submitFilter()"
+        (change)="filterControlChange()"
         (keydown)="capturarEnter($event)" />
 
       <select
@@ -66,7 +66,7 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="type"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="-1" selected>🖌 ESTILO</option>
         <option *ngFor="let style of listDrawingStyles" [value]="style.id">
           {{ style.translatedText }}
@@ -80,7 +80,7 @@
         formControlName="productType"
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="-1" selected>📺 TIPO</option>
 
         <option *ngFor="let type of listDrawingProductTypes" [value]="type.id">
@@ -95,7 +95,7 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="productName"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="" selected>🖼 TEMÁTICA</option>
 
         <option
@@ -114,7 +114,7 @@
         *ngIf="listCollections.length > 0"
         formControlName="collection"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="" selected>🤩 COLECCIÓN</option>
 
         <option [value]="col.id" *ngFor="let col of listCollections">
@@ -128,7 +128,7 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="characterName"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="" selected>😺 PERSONAJE</option>
 
         <option
@@ -147,7 +147,7 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="modelName"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="" selected>👩 MODELO</option>
 
         <option *ngFor="let model of listDrawingModels" [value]="model">
@@ -163,7 +163,7 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="software"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="0" selected>💻 SOFTWARE</option>
 
         <option *ngFor="let sw of listDrawingSoftwares" [value]="sw.id">
@@ -177,7 +177,7 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="paper"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="0" selected>📄 TAMAÑO</option>
 
         <option *ngFor="let paper of listDrawingPapers" [value]="paper.id">
@@ -190,7 +190,7 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item mr-spotify"
         formControlName="formSpotify"
         data-bs-theme="dark"
-        (change)="submitFilter()">
+        (change)="filterControlChange()">
         <option value="null" selected>🎵 MÚSICA</option>
         <option value="true">Pista de Spotify Sugerida</option>
         <option value="false">Sin pista sugerida</option>
@@ -210,7 +210,7 @@
           role="switch"
           value="true"
           id="flexSwitchCheckChecked"
-          (change)="submitFilter()" />
+          (change)="filterControlChange()" />
       </div>
     </div>
   </div>

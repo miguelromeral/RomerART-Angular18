@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LanguageService } from '@app/services/language/language.service';
 import { Drawing } from '@models/art/drawing.model';
@@ -23,6 +23,9 @@ import { FilterFormComponent } from '@app/components/art/search/filter-form/filt
 })
 export class SearchComponent {
   listDrawings: Drawing[] = [];
+  @ViewChild(FilterFormComponent) filterFormComponent!: FilterFormComponent;
+
+  showButtonFetchMore = true;
 
   filterFormLoading = true;
   get resultsNotFound(): boolean {
@@ -39,5 +42,13 @@ export class SearchComponent {
   }
   onIsFilterFormLoading(loading: boolean) {
     this.filterFormLoading = loading;
+  }
+
+  requestMoreDrawings() {
+    this.filterFormComponent.requestMoreDrawings();
+  }
+
+  existsMoreResultsToFetch(moreFound: boolean) {
+    this.showButtonFetchMore = moreFound;
   }
 }

@@ -15,6 +15,8 @@ export class DrawingFilter {
   spotify: boolean | null;
   formFavorites: boolean | null;
   favorites: boolean;
+  pageSize: number | null;
+  pageNumber: number | null;
 
   constructor(data: Partial<DrawingFilter> = {}) {
     this.sortBy = data.sortBy || environment.forms.drawingFilter.default.sortBy;
@@ -45,5 +47,7 @@ export class DrawingFilter {
     }
     this.formFavorites = data.formFavorites || null;
     this.favorites = (data.formFavorites || null) === true;
+    this.pageNumber = data.pageNumber || 0;
+    this.pageSize = data.pageSize || 0;
   }
 }

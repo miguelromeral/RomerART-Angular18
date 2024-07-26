@@ -8,7 +8,6 @@ import {
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { DrawingFilter } from '@models/art/drawing-filter.model';
-import { queryParamsNames } from 'config/art/art-filter-form';
 import { DrawingThumbnailComponent } from '../../drawing-thumbnail/drawing-thumbnail.component';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -29,6 +28,7 @@ import {
   sortCharactersByName,
   sortProductsByName,
 } from '@utils/sorting/sort-utils';
+import { ArtFilterFormConfig } from 'config/art/art-filter-form.config';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -52,6 +52,7 @@ export class FilterFormComponent implements OnInit, OnDestroy {
   /* Communication to parent */
   @Output() fetchedResults = new EventEmitter<Drawing[]>();
   @Output() isLoading = new EventEmitter<boolean>();
+  @Output() existsMoreResultsToFetch = new EventEmitter<boolean>();
 
   /* Filter Form Select */
   listDrawingStyles: DrawingStyle[] = [];
@@ -62,6 +63,7 @@ export class FilterFormComponent implements OnInit, OnDestroy {
   listDrawingSoftwares: DrawingSoftware[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
   listCollections: Collection[] = [];
+  listDrawings: Drawing[] = [];
 
   /* Filter Form */
   filterForm = new FormGroup({
@@ -93,6 +95,8 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     formFavorites: new FormControl(
       environment.forms.drawingFilter.default.favorites
     ),
+    pageSize: new FormControl(ArtFilterFormConfig.pagination.resultsPerPage),
+    pageNumber: new FormControl(ArtFilterFormConfig.pagination.firstPage),
   });
 
   constructor(
@@ -111,6 +115,14 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     });
 
     this.setValuesFromQueryParams();
+  }
+
+  requestMoreDrawings() {
+    this.filterForm.controls.pageNumber.setValue(
+      (this.filterForm.value.pageNumber ?? 0) +
+        ArtFilterFormConfig.pagination.firstPage
+    );
+    this.submitFilter();
   }
 
   resetFilters() {
@@ -148,7 +160,16 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     this.filterForm.controls.formFavorites.setValue(
       environment.forms.drawingFilter.default.favorites
     );
+    this.filterForm.controls.pageNumber.setValue(1);
+    this.listDrawings = [];
     this.changeBasicArtUrl();
+  }
+
+  filterControlChange() {
+    this.filterForm.controls.pageNumber.setValue(
+      ArtFilterFormConfig.pagination.firstPage
+    );
+    this.submitFilter();
   }
 
   submitFilter() {
@@ -160,8 +181,22 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     this.queryParamsSubscription?.unsubscribe();
     this.changeBasicArtUrl();
     this.drawingService.filterDrawings(filters).subscribe(results => {
-      this.fetchedResults.emit(results);
-      // console.log('Results: ' + results.map(d => d.id));
+      if (results.length > 1) {
+        if (
+          (this.filterForm.value.pageNumber ??
+            ArtFilterFormConfig.pagination.firstPage) <= 1
+        ) {
+          this.listDrawings = results;
+        } else {
+          this.listDrawings = [...this.listDrawings, ...results];
+        }
+        this.fetchedResults.emit(this.listDrawings);
+        // console.log('Results: ' + results.map(d => d.id));
+      }
+      this.existsMoreResultsToFetch.emit(
+        results.length === ArtFilterFormConfig.pagination.resultsPerPage
+      );
+
       this.isLoading.emit(false);
     });
   }
@@ -239,67 +274,67 @@ export class FilterFormComponent implements OnInit, OnDestroy {
 
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.textQuery,
+      ArtFilterFormConfig.queryParamsNames.textQuery,
       filters,
       'textQuery'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.type,
+      ArtFilterFormConfig.queryParamsNames.type,
       filters,
       'type'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.productType,
+      ArtFilterFormConfig.queryParamsNames.productType,
       filters,
       'productType'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.product,
+      ArtFilterFormConfig.queryParamsNames.product,
       filters,
       'productName'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.collection,
+      ArtFilterFormConfig.queryParamsNames.collection,
       filters,
       'collection'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.character,
+      ArtFilterFormConfig.queryParamsNames.character,
       filters,
       'characterName'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.modelName,
+      ArtFilterFormConfig.queryParamsNames.modelName,
       filters,
       'modelName'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.software,
+      ArtFilterFormConfig.queryParamsNames.software,
       filters,
       'software'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.paper,
+      ArtFilterFormConfig.queryParamsNames.paper,
       filters,
       'paper'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.spotify,
+      ArtFilterFormConfig.queryParamsNames.spotify,
       filters,
       'formSpotify'
     );
     this.changeBasicArtUrlParameter(
       queryParams,
-      queryParamsNames.favorites,
+      ArtFilterFormConfig.queryParamsNames.favorites,
       filters,
       'formFavorites'
     );
@@ -333,47 +368,47 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.textQuery,
-        params[queryParamsNames.textQuery]
+        params[ArtFilterFormConfig.queryParamsNames.textQuery]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.type,
-        params[queryParamsNames.type]
+        params[ArtFilterFormConfig.queryParamsNames.type]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.productType,
-        params[queryParamsNames.productType]
+        params[ArtFilterFormConfig.queryParamsNames.productType]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.productName,
-        params[queryParamsNames.product]
+        params[ArtFilterFormConfig.queryParamsNames.product]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.collection,
-        params[queryParamsNames.collection]
+        params[ArtFilterFormConfig.queryParamsNames.collection]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.characterName,
-        params[queryParamsNames.character]
+        params[ArtFilterFormConfig.queryParamsNames.character]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.modelName,
-        params[queryParamsNames.modelName]
+        params[ArtFilterFormConfig.queryParamsNames.modelName]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.software,
-        params[queryParamsNames.software]
+        params[ArtFilterFormConfig.queryParamsNames.software]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.paper,
-        params[queryParamsNames.paper]
+        params[ArtFilterFormConfig.queryParamsNames.paper]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.formSpotify,
-        params[queryParamsNames.spotify]
+        params[ArtFilterFormConfig.queryParamsNames.spotify]
       );
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.formFavorites,
-        params[queryParamsNames.favorites]
+        params[ArtFilterFormConfig.queryParamsNames.favorites]
       );
       // console.log('Filtering from query params');
       this.submitFilter();

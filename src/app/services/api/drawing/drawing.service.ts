@@ -83,7 +83,8 @@ export class DrawingService {
     const url = `${this.apiUrl}art/filter`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    console.log('Filters', filters);
+    // console.log('Filters', filters);
+    // console.log('Page Number', filters.pageNumber);
     return this.http
       .post<Drawing[]>(url, filters, { headers })
       .pipe(catchError(this.handleError<Drawing[]>('filterDrawings')));
