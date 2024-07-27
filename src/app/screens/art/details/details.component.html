@@ -1,10 +1,10 @@
 <app-layout>
   <div
     *ngIf="drawing"
-    class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2">
+    class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2 lg:grid-cols-3">
     <!-- TODO: añadir botón de admin para editarlo -->
 
-    <div class="sm:col-span-2">
+    <div class="sm:col-span-2 lg:col-span-3">
       <div
         class="border-b text-2xl italic"
         [ngClass]="
@@ -20,6 +20,7 @@
         [modelName]="drawing.modelName">
       </app-art-details-title>
     </div>
+
     <app-art-details-image [drawing]="drawing"></app-art-details-image>
 
     <div class="flex flex-col gap-2">
@@ -36,15 +37,18 @@
       </app-art-details-comment-wrapper>
     </div>
 
-    <app-art-details-comment-wrapper
-      [comments]="drawing.listCommentPros"
-      [type]="'like'">
-    </app-art-details-comment-wrapper>
+    <div
+      class="flex flex-col gap-2 sm:col-span-2 sm:flex-row lg:col-span-1 lg:flex-col">
+      <app-art-details-comment-wrapper
+        [comments]="drawing.listCommentPros"
+        [type]="'like'">
+      </app-art-details-comment-wrapper>
 
-    <app-art-details-comment-wrapper
-      [comments]="drawing.listCommentCons"
-      [type]="'dislike'">
-    </app-art-details-comment-wrapper>
+      <app-art-details-comment-wrapper
+        [comments]="drawing.listCommentCons"
+        [type]="'dislike'">
+      </app-art-details-comment-wrapper>
+    </div>
 
     <app-details-section
       [title]="'📅 Fecha'"
