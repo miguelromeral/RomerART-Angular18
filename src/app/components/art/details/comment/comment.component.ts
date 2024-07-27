@@ -13,5 +13,5 @@ export type CommentType = '' | 'like' | 'dislike';
 export class CommentComponent {
   @Input() type: CommentType = '';
   @Input() comment: string | null = null;
-  @Input() last = false;
+  @Input() first = false;
 }

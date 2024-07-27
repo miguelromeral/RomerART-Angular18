@@ -7,28 +7,6 @@
   gap: 20px;
 }
 
-/* Column that displays the messages */
-div.mr-chat-container {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-}
-
-
-
-.mr-comments .mr-chat-message-container {
-  /*padding-right: 10px;*/
-}
-
-.mr-comments .mr-chat-message-container:has(.last) {
-  padding-right: 10px;
-}
-
-
-
-
-
 @media (min-width: 992px) {
   .mr-row-pros-cons {
     flex-direction: column !important;
@@ -53,9 +31,4 @@ div.mr-chat-container {
   .mr-row-pros-cons>div {
     flex: 1;
   }
-}
-
-.mr-chat-row.likes .mr-chat-message,
-.mr-chat-row.dislikes .mr-chat-message {
-  margin-bottom: 20px;
 }
