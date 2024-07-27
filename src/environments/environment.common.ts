@@ -1,6 +1,7 @@
 import packageJson from '../../package.json';
 
 export const COMMON_ENV = {
+  appName: 'MiguelRomeral',
   appVersion: packageJson.version,
   social_links: [
     {

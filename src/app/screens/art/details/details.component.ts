@@ -11,6 +11,7 @@ import { ImageComponent } from '@app/components/art/details/image/image.componen
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { ScoreBoardComponent } from '@app/components/art/details/score-board/score-board.component';
+import { MetadataService } from '@app/services/metadata/metadata.service';
 
 @Component({
   selector: 'app-details',
@@ -39,7 +40,8 @@ export class DetailsComponent implements OnInit {
 
   constructor(
     private logger: LoggerService,
-    private drawingService: DrawingService
+    private drawingService: DrawingService,
+    private metadataService: MetadataService
   ) {}
 
   ngOnInit() {
@@ -51,7 +53,13 @@ export class DetailsComponent implements OnInit {
       this.drawingService.getDrawingDetails(this.id).subscribe(data => {
         if (data) {
           // this.logger.log(data);
-          this.drawing = data;
+          this.drawing = new Drawing(data);
+          this.metadataService.updateMetadata(
+            this.drawing.pageTitle(),
+            this.drawing.title,
+            this.drawing.urlThumbnail,
+            window.location.href
+          );
           // this.logger.log(this.drawing);
         }
         this.drawingNotFound = data === undefined || data.id === '';

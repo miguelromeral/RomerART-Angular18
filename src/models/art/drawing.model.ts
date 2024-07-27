@@ -1,3 +1,5 @@
+import { environment } from 'environments/environment';
+
 export class Drawing {
   id: string;
   path: string;
@@ -91,5 +93,15 @@ export class Drawing {
     this.isTraditional = data.isTraditional || false;
     this.formattedDate = data.formattedDate || '';
     this.formattedDateMini = data.formattedDateMini || '';
+  }
+
+  pageTitle(): string {
+    if (this.name !== '' && this.modelName !== '') {
+      return `${this.name}, por ${this.modelName}`;
+    } else if (this.name !== '' || this.modelName !== '') {
+      return this.name !== '' ? this.name : this.modelName;
+    } else {
+      return environment.appName;
+    }
   }
 }
