@@ -69,4 +69,24 @@ export class ImageComponent {
     //console.log(selector);
     $(selector).addClass('show');
   }
+
+  // TODO: cambiar el texto de esto
+  shareDrawing() {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: document.title,
+          text: 'Check out this awesome site!',
+          url: window.location.href,
+        })
+        .then(() => {
+          console.log('Thanks for sharing!');
+        })
+        .catch(error => {
+          console.error('Error sharing', error);
+        });
+    } else {
+      alert('Web Share API not supported in your browser.');
+    }
+  }
 }

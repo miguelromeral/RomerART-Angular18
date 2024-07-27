@@ -1,13 +1,13 @@
-<div class="mr-first-column-image">
+<div class="flex flex-col flex-nowrap gap-0">
   <div
     id="divImgFull"
-    class="mr-img-full-container heart-rain"
+    class="mr-img-full-container heart-rain relative min-h-24 w-full"
     [ngClass]="{ favorite: drawing.favorite }"
     (dblclick)="cheerDrawing($event)">
     <img
       id="imgFull"
       [src]="drawing.url"
-      class="mr-img-full"
+      class="mr-img-full pointer-events-none w-full select-none"
       (error)="errorLoadingImage(drawing.id)"
       loading="lazy"
       decoding="async"
@@ -21,11 +21,13 @@
     </div>
 
     <i
+      *ngIf="drawing.favorite"
       id="iFavoriteIcon"
-      class="bi bi-star-fill"
+      class="bi bi-star-fill absolute block"
       title="One of my favorites drawings."></i>
     <div
       id="divIconFullScreen"
+      class="absolute left-0 top-0 flex aspect-square h-6 w-6 flex-nowrap justify-center rounded-br-md bg-black p-1 align-middle text-sm text-white"
       tabindex="0"
       (click)="fullScreenImage()"
       (keydown)="fullScreenImageOnKeyDown($event)">
@@ -36,45 +38,42 @@
         title="Cerrar la pantalla completa"></i>
     </div>
   </div>
+  <div
+    class="m-2 flex flex-row flex-nowrap justify-between text-2xl"
+    [ngClass]="drawing.favorite ? 'text-gold-300' : ''">
+    <div
+      class="flex select-none flex-row flex-nowrap gap-4"
+      [title]="drawing.likes + ' kudos'">
+      <form id="cheerForm">
+        <div
+          class="mr-like-container flex flex-row flex-nowrap items-end gap-1">
+          <input type="hidden" name="id" [value]="drawing.id" />
 
-  <div class="mr-stats-container">
-    <form
-      id="cheerForm"
-      asp-action="Cheer"
-      asp-controller="Art"
-      data-ajax="true"
-      data-ajax-method="POST"
-      data-ajax-begin="onBeginCheer"
-      data-ajax-failure="OnFailureCheer"
-      data-ajax-success="onSuccessCheer"
-      data-ajax-complete="onCompleteCheer">
-      <div class="mr-like-container">
-        <input type="hidden" name="id" [value]="drawing.id" />
-
-        <button
-          [id]="btnCheerId"
-          type="button"
-          class="btn btn-danger mr-like-button like-semaphore vibrate"
-          (click)="cheerDrawing($event)">
-          <i id="iCheerIcon" class="bi bi-heart"></i> ¡ KUDOS !
-        </button>
+          <button
+            [id]="btnCheerId"
+            type="button"
+            class="mr-like-button"
+            (click)="cheerDrawing($event)">
+            <i id="iCheerIcon" class="bi bi-heart"></i>
+          </button>
+          <div id="spLikesCounter" class="text-sm">
+            {{ drawing.likesHuman }}
+          </div>
+        </div>
+      </form>
+      <div
+        class="flex flex-row flex-nowrap items-end gap-1"
+        [title]="drawing.views + ' visualizaciones'">
+        <i class="bi bi-eye"></i>
+        <div id="spLikesCounter" class="text-sm">
+          {{ formatoLegible(drawing.views + 1) }}
+        </div>
       </div>
-    </form>
-
-    <div class="mr-stats-item views" title="Views">
-      <i class="bi bi-eye"></i>
-      <span [title]="drawing.views + 1 + ' visualizaciones'">{{
-        formatoLegible(drawing.views + 1)
-      }}</span>
     </div>
-    <div class="mr-stats-item likes kudos" title="Kudos">
-      <i class="bi bi-heart"></i>
-      <div id="divContainerLikes">
-        <div id="spLikesCounter">{{ drawing.likesHuman }}</div>
-      </div>
+    <div>
+      <button (click)="shareDrawing()">
+        <i class="bi bi-share"></i>
+      </button>
     </div>
   </div>
-
-  <app-art-details-score-board [drawing]="drawing">
-  </app-art-details-score-board>
 </div>

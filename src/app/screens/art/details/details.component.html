@@ -1,19 +1,30 @@
 <app-layout>
-  <div *ngIf="drawing">
+  <div *ngIf="drawing" class="flex flex-col flex-nowrap gap-2">
     <!-- TODO: añadir botón de admin para editarlo -->
 
-    <h1 class="mr-image-page-title">{{ drawing.title }}</h1>
-
-    <div class="row">
-      <app-art-details-title
-        [character]="drawing.name"
-        [modelName]="drawing.modelName">
-      </app-art-details-title>
+    <div
+      class="border-b text-2xl italic"
+      [ngClass]="
+        drawing.favorite
+          ? 'border-b-gold-500 text-gold-500'
+          : 'border-b-main-400 text-main-500'
+      ">
+      <h1 class="mr-image-page-title">{{ drawing.title }}</h1>
     </div>
+
+    <app-art-details-title
+      [character]="drawing.name"
+      [modelName]="drawing.modelName">
+    </app-art-details-title>
+
+    <div class="row"></div>
 
     <!-- TODO: imagen y formulario para votar -->
 
     <app-art-details-image [drawing]="drawing"></app-art-details-image>
+
+    <app-art-details-score-board [drawing]="drawing">
+    </app-art-details-score-board>
 
     <div class="mr-social-container">
       <app-spotify-track [trackId]="drawing.spotifyTrackId"></app-spotify-track>

@@ -1,15 +1,5 @@
-/* First column, including the image and the likes */
-.mr-first-column-image {}
-
-
 /* Full Image container */
 .mr-img-full-container {
-  position: relative;
-  border: var(--mr-border-size) solid var(--mr-chat-color);
-  border-radius: var(--mr-border-radius);
-  padding: var(--mr-padding-btw-border-image);
-  width: -webkit-fill-available;
-  min-height: 100px;
   transition: var(--mr-transition-time) ease;
 }
 
@@ -33,28 +23,13 @@
 }
 
 .mr-img-full-container.fullscreen img {
-  height: auto;
-  width: auto;
-  /* object-fit: cover; */
-  max-width: 100%;
-  max-height: 100%;
+  // max-width: 100%;
+  // max-height: 100%;
 }
 
-
-/* If the image is a favorite, change border color */
-.mr-img-full-container.favorite {
-  border-color: var(--mr-color-gold);
-}
 
 /* Favorite Icon */
 #iFavoriteIcon {
-  display: none;
-}
-
-/* Favorite Icon */
-.mr-img-full-container.favorite #iFavoriteIcon {
-  position: absolute;
-  display: block;
   top: var(--mr-spacing-img-buttons);
   right: var(--mr-spacing-img-buttons);
   color: var(--mr-color-gold);
@@ -62,15 +37,7 @@
 }
 
 #divIconFullScreen {
-  position: absolute;
-  display: block;
-  top: var(--mr-spacing-img-buttons);
-  left: var(--mr-spacing-img-buttons);
-  color: black;
   transition: var(--mr-transition-time) ease-in-out;
-  color: var(--mr-chat-color);
-  font-size: var(--mr-font-size-large);
-  text-shadow: 1px 1px 0px black;
 }
 
 #divIconFullScreen #iFS {
@@ -113,11 +80,6 @@
 }*/
 /* Full resolution image */
 img.mr-img-full {
-  width: 100%;
-  height: auto;
-  user-select: none;
-  pointer-events: none;
-  border-radius: var(--mr-border-radius-image);
   transition: var(--mr-transition-time) ease-in-out;
 }
 
@@ -129,9 +91,6 @@ img.mr-img-full {
 
 /* Like button */
 #btnCheer {
-  background-color: var(--mr-color-red);
-  border-radius: 50px;
-  padding: 5px 20px;
   font-weight: var(--mr-font-weight-bold);
   cursor: pointer;
   transition: var(--mr-transition-time) ease-in;
@@ -141,30 +100,6 @@ img.mr-img-full {
 #btnCheer:disabled {
   animation: none;
   background-color: black;
-}
-
-/* Container of the likes and views */
-.mr-stats-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  align-items: center;
-  margin-top: var(--mr-margin-vertical);
-}
-
-/* Item of the likes or views */
-.mr-stats-item {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: var(--mr-gap-icon-text);
-}
-
-/* Item of the likes */
-.mr-stats-item.likes {
-  color: var(--mr-color-red-light);
 }
 
 /* Container of the like count, for animation purposes*/

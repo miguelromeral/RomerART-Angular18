@@ -10,6 +10,7 @@ import { SectionComponent } from '@app/components/art/details/section/section.co
 import { ImageComponent } from '@app/components/art/details/image/image.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
+import { ScoreBoardComponent } from '@app/components/art/details/score-board/score-board.component';
 
 @Component({
   selector: 'app-details',
@@ -26,6 +27,7 @@ import { LayoutComponent } from '@app/components/shared/layout/layout.component'
     SectionComponent,
     ImageComponent,
     LayoutComponent,
+    ScoreBoardComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',

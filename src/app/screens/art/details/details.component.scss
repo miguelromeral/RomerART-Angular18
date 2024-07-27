@@ -9,12 +9,9 @@
 
 /* Title of the Drawing */
 .mr-image-page-title {
-  color: var(--mr-chat-color) !important;
-  font-style: italic;
   transition: var(--mr-transition-time) ease-in-out;
 }
 
 .mr-image-page-title:hover {
   color: var(--mr-text-color) !important;
-
 }
