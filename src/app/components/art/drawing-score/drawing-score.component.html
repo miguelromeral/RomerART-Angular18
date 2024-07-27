@@ -1,0 +1,6 @@
+<span
+  *ngIf="score > 0"
+  class="mr-img-thumbnail-score miguel mr-score-miguel"
+  [ngClass]="getClassScore(score) + ' ' + (popular ? 'popular' : 'miguel')">
+  {{ score }}
+</span>

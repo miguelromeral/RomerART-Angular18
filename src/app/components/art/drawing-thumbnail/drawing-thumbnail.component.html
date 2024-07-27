@@ -1,8 +1,6 @@
-<!-- <p>{{ drawing.id }}</p> -->
-
 <div
   [attr.data-drawingId]="drawing.id"
-  class="mr-img-thumbnail cuadrado"
+  class="mr-img-thumbnail relative aspect-square h-full w-full"
   [ngClass]="{ favorite: drawing.favorite }">
   <div class="contenido">
     <div
@@ -23,17 +21,22 @@
         loading="lazy"
         decoding="async" />
 
-      <div class="mr-error-load-placeholder" *ngIf="bErrorLoadingImage">
+      <div
+        class="mr-error-load-placeholder absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col flex-wrap items-center justify-center align-middle"
+        *ngIf="bErrorLoadingImage">
         <span class="emoji">🙃</span>
-        <span class="subtitle">Imagen No Encontrada</span>
+        <span class="subtitle text-center">Imagen No Encontrada</span>
       </div>
 
-      <span class="mr-img-thumbnail-date mr-img-thumbnail-info">
+      <span
+        class="mr-img-thumbnail-date mr-img-thumbnail-info absolute left-0 top-0 rounded-br-lg px-2 py-0">
         {{ drawing.formattedDateMini }}
       </span>
 
-      <div class="mr-img-thumbnail-details-container mr-img-thumbnail-info">
-        <div class="mr-img-thumbnail-stats mr-img-thumbnail-info">
+      <div
+        class="mr-img-thumbnail-details-container mr-img-thumbnail-info relative flex h-8 w-full flex-row flex-nowrap items-center justify-between p-1">
+        <div
+          class="mr-img-thumbnail-stats mr-img-thumbnail-info bottom-0 -z-10 flex flex-row flex-nowrap items-center justify-around">
           <!-- <div class="mr-img-thumbnail-stats-item">
                 <i class="bi bi-eye"></i>
                 <span>drawing.views</span>
@@ -44,19 +47,10 @@
           </div>
         </div>
 
-        <div class="mr-img-thumbnail-score-container mr-img-thumbnail-info">
-          <span
-            *ngIf="drawing.scoreCritic > 0"
-            class="mr-img-thumbnail-score miguel mr-score-miguel"
-            [ngClass]="getClassScore(drawing.scoreCritic)">
-            {{ drawing.scoreCritic }}
-          </span>
-          <span
-            *ngIf="drawing.scorePopular > 0"
-            class="mr-img-thumbnail-score popular mr-score-popular"
-            [ngClass]="getClassScore(drawing.scorePopular)">
-            {{ drawing.scorePopularHuman }}
-          </span>
+        <div class="mr-img-thumbnail-score-container flex flex-row gap-1">
+          <app-drawing-score [score]="drawing.scoreCritic"> </app-drawing-score>
+          <app-drawing-score [score]="drawing.scorePopular" [popular]="true">
+          </app-drawing-score>
         </div>
       </div>
 

@@ -25,7 +25,8 @@ export class SearchComponent {
   listDrawings: Drawing[] = [];
   @ViewChild(FilterFormComponent) filterFormComponent!: FilterFormComponent;
 
-  showButtonFetchMore = true;
+  showButtonFetchMore = false;
+  // showButtonFetchMore = true;
 
   filterFormLoading = true;
   get resultsNotFound(): boolean {

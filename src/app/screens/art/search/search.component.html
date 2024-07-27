@@ -32,8 +32,11 @@
             >Filtrando imágenes. Por favor, espere.</span
           >
         </div>
-        <div id="artGallery" class="mr-img-gallery">
+        <div
+          id="artGallery"
+          class="mr-img-gallery grid h-full w-full grid-cols-3 gap-1 sm:grid-cols-4">
           <app-drawing-thumbnail
+            class="h-full w-full"
             [drawing]="drawing"
             *ngFor="let drawing of listDrawings">
           </app-drawing-thumbnail>
@@ -45,7 +48,10 @@
           </button>
         </div>
         <!-- TODO: resolver porqué no se esconde esto -->
-        <div id="divNoResults" *ngIf="resultsNotFound">
+        <div
+          id="divNoResults"
+          *ngIf="resultsNotFound"
+          class="mt-20 flex min-h-32 flex-col items-center justify-start gap-3">
           <span> ¡Nada por aquí..! </span>
           <h2>😔</h2>
           <span> Vuelve a intentarlo utilizando otros filtros. </span>

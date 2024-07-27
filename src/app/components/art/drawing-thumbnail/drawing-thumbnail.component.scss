@@ -1,30 +1,11 @@
 @import url('../../../../styles/variables.scss');
 
 
-/* Container of every thumbnails */
-#artGallery.mr-img-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  flex-direction: row;
-  align-content: center;
-  align-items: center;
-  transition: var(--mr-transition-time) ease-in-out;
-  opacity: 1;
-}
-
-#artGallery.mr-img-gallery.loading {
-  opacity: 0.1;
-}
-
 /* Container of one thumbnail */
 .mr-img-thumbnail-container {
-  /*display: flex;*/
-  /*align-items: center;
-    justify-content: center;*/
   height: 100%;
   width: 100%;
-  text-decoration: none;
+  // text-decoration: none;
 }
 
 
@@ -34,19 +15,13 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
-  border-radius: var(--mr-border-radius-image);
 }
 
 /* Date thumbnail */
 .mr-img-thumbnail-date {
-  z-index: 1;
-  position: absolute;
-  top: 2px;
-  left: 2px;
   background-color: var(--mr-thumbnail-date-background-color);
-  padding: 0px 8px;
   font-size: x-small;
-  border-radius: 30px;
+  z-index: 1;
   color: var(--mr-text-color-opposite);
   transition: var(--mr-transition-time) ease-in-out;
 }
@@ -107,7 +82,6 @@
 
 .carousel-item .cuadrado {
   position: relative;
-  border-radius: var(--mr-border-radius) !important;
   /* margin: 1%; */
   /* width: 90% !important; */
   /* padding-bottom: 85% !important; */
@@ -116,30 +90,14 @@
   /* height: 100%;    */
 }
 
-/* Each thumbnail. Size: 4xN */
-.cuadrado {
-  width: 23%;
-  padding-bottom: 23%;
-  position: relative;
-  border-radius: var(--mr-border-radius) !important;
-  margin: 1%;
-}
-
 /* Each thumbnail. Size: 3xN */
 @media screen and (max-width: 600px) {
   .carousel-item .cuadrado {
     position: relative;
-    border-radius: var(--mr-border-radius) !important;
     margin: 1%;
     /* width: 90% !important; */
     /* padding-bottom: 85% !important; */
     padding: 33%;
-  }
-
-  .cuadrado {
-    width: 31% !important;
-    padding-bottom: 31% !important;
-    margin: 1%;
   }
 }
 
@@ -155,7 +113,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--mr-border-radius-image);
 }
 
 /* Thumbnail content, square shape */
@@ -170,7 +127,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--mr-border-radius-image);
 }
 
 .favorite .mr-img-thumbnail-title {
@@ -179,19 +135,9 @@
 
 
 .mr-img-thumbnail-stats {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   color: var(--mr-thumbnail-text-color);
-  z-index: -1;
-  /* position: absolute; */
-  bottom: 0px;
-  /* width: 100%; */
-  justify-content: space-around;
-  flex-wrap: nowrap;
   transition: var(--mr-transition-time) ease-in-out;
   font-size: var(--mr-font-size-small);
-  /* height: -webkit-fill-available; */
 }
 
 
@@ -213,50 +159,18 @@ mr-img-thumbnail-stats-item {
 
 
 .mr-img-thumbnail-score-container {
-  display: flex;
-  flex-direction: row;
   font-size: var(--mr-font-size-small);
   font-weight: var(--mr-font-weight-bold);
-  gap: 4px;
   transition: var(--mr-transition-time) ease-in-out;
   z-index: 1;
 }
 
 
-.mr-img-thumbnail-score {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 2px;
-}
-
-.mr-img-thumbnail-score.miguel {
-  border-radius: 4px;
-}
-
-.mr-img-thumbnail-score.popular {
-  border-radius: 20px;
-}
-
 
 .mr-img-thumbnail-details-container {
   background: var(--mr-thumbnails-details-background);
-  border-radius: 4px;
-  position: relative;
-  padding: 4px;
   bottom: 29px;
   transition: var(--mr-transition-time);
-  z-index: -1;
-  opacity: 0;
-  width: 100%;
-  height: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 
 a:hover .mr-img-thumbnail-details-container {
@@ -301,23 +215,7 @@ a:hover .mr-img-thumbnail-details-container {
 /* Placeholder when the image couldn't be loaded */
 .mr-error-load-placeholder {
   transition: var(--mr-transition-time) ease-out;
-  position: absolute;
-  width: 100%;
   background-color: black;
-  height: 100%;
-  border-radius: 8px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  border-radius: var(--mr-border-radius-image);
   color: pink;
 }
 
@@ -329,5 +227,4 @@ a:hover .mr-img-thumbnail-details-container {
 /* Text of the error placeholder */
 .mr-error-load-placeholder .subtitle {
   font-size: var(--mr-font-size-small);
-  text-align: center;
 }

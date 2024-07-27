@@ -181,21 +181,21 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     this.queryParamsSubscription?.unsubscribe();
     this.changeBasicArtUrl();
     this.drawingService.filterDrawings(filters).subscribe(results => {
-      if (results.length > 1) {
-        if (
-          (this.filterForm.value.pageNumber ??
-            ArtFilterFormConfig.pagination.firstPage) <= 1
-        ) {
-          this.listDrawings = results;
-        } else {
-          this.listDrawings = [...this.listDrawings, ...results];
-        }
-        this.fetchedResults.emit(this.listDrawings);
-        // console.log('Results: ' + results.map(d => d.id));
-      }
-      this.existsMoreResultsToFetch.emit(
-        results.length === ArtFilterFormConfig.pagination.resultsPerPage
-      );
+      // if (results.length > 1) {
+      //   if (
+      //     (this.filterForm.value.pageNumber ??
+      //       ArtFilterFormConfig.pagination.firstPage) <= 1
+      //   ) {
+      this.listDrawings = results;
+      // } else {
+      //   this.listDrawings = [...this.listDrawings, ...results];
+      // }
+      this.fetchedResults.emit(this.listDrawings);
+      // console.log('Results: ' + results.map(d => d.id));
+      // }
+      // this.existsMoreResultsToFetch.emit(
+      //   results.length === ArtFilterFormConfig.pagination.resultsPerPage
+      // );
 
       this.isLoading.emit(false);
     });

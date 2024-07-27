@@ -2,16 +2,12 @@
   transition: var(--mr-transition-time) ease-in-out;
 }
 
-#divNoResults {
-  display: flex;
-  min-height: 100px;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 10px;
-  margin-top: 50px;
+/* Container of every thumbnails */
+#artGallery.mr-img-gallery {
+  transition: var(--mr-transition-time) ease-in-out;
+  opacity: 1;
 }
 
-/* #sFilterSoftware, #sFilterPaper {
-  display: none;
-} */
+#artGallery.mr-img-gallery.loading {
+  opacity: 0.1;
+}

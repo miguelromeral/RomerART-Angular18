@@ -3,11 +3,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Drawing } from '@models/art/drawing.model';
 import { Customization } from '@utils/customization';
+import { DrawingScoreComponent } from '../drawing-score/drawing-score.component';
 
 @Component({
   selector: 'app-drawing-thumbnail',
   standalone: true,
-  imports: [NgClass, NgIf, RouterLink],
+  imports: [NgClass, NgIf, RouterLink, DrawingScoreComponent],
   templateUrl: './drawing-thumbnail.component.html',
   styleUrl: './drawing-thumbnail.component.scss',
 })
@@ -40,9 +41,5 @@ export class DrawingThumbnailComponent implements OnInit {
     // $(selector).addClass('show');
     console.log('Error loading image');
     this.bErrorLoadingImage = true;
-  }
-
-  getClassScore(score: number) {
-    return Customization.getClassScore(score);
   }
 }
