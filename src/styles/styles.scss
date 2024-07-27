@@ -173,22 +173,6 @@ img.mr-chat-image-miguel {
   font-size: var(--mr-font-size-small);
 }
 
-.mr-details-section-content {
-  font-weight: var(--mr-font-weight-light);
-  padding-top: 8px;
-}
-
-.mr-details-section-content.large {
-  max-height: var(--mr-details-section-large-height);
-  width: 100%;
-  overflow: auto;
-}
-
-.mr-details-section-content.capitalize {
-  text-transform: capitalize;
-}
-
-
 
 .mr-powered-by-logos {
   display: flex;

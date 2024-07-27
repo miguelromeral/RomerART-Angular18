@@ -12,6 +12,7 @@ import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { ScoreBoardComponent } from '@app/components/art/details/score-board/score-board.component';
 import { MetadataService } from '@app/services/metadata/metadata.service';
+import { ArtSectionType } from 'config/art/art-section.config';
 
 @Component({
   selector: 'app-details',
@@ -67,19 +68,18 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  // TODO: leer los datos del environment
-  getProductTitle(): string {
+  getProductSectionType(): ArtSectionType {
     switch (this.drawing?.productType) {
       case 1:
-        return '🎮 Videojuego';
+        return 'game';
       case 2:
-        return '🎞 Actor/Actriz';
+        return 'actor';
       case 3:
-        return '🎙 Cantante';
+        return 'singer';
       case 4:
-        return '⚽ Deporte';
+        return 'sportman';
       default:
-        return 'Temática';
+        return '';
     }
   }
 }

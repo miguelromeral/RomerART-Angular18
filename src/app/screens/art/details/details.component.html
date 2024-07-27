@@ -38,7 +38,7 @@
     </div>
 
     <div
-      class="flex flex-col gap-2 sm:col-span-2 sm:flex-row lg:col-span-1 lg:flex-col">
+      class="grid grid-cols-1 gap-2 sm:col-span-2 sm:grid-cols-2 lg:col-span-1 lg:grid-cols-1">
       <app-art-details-comment-wrapper
         [comments]="drawing.listCommentPros"
         [type]="'like'">
@@ -50,59 +50,59 @@
       </app-art-details-comment-wrapper>
     </div>
 
-    <app-details-section
-      [title]="'📅 Fecha'"
-      [rawText]="drawing.date !== '' ? drawing.formattedDate : 'No Date Known'">
-    </app-details-section>
+    <div
+      class="col-span-1 mt-20 flex flex-col flex-nowrap gap-2 sm:col-span-2 lg:col-span-3">
+      <app-details-section
+        type="date"
+        [rawText]="
+          drawing.date !== '' ? drawing.formattedDate : 'No Date Known'
+        ">
+      </app-details-section>
 
-    <app-details-section
-      [title]="'🕓 Tiempo (estimado)'"
-      [rawText]="drawing.timeHuman">
-    </app-details-section>
+      <app-details-section type="time" [rawText]="drawing.timeHuman">
+      </app-details-section>
 
-    <app-details-section [title]="'🖌 Estilo'" [rawText]="drawing.typeName">
-    </app-details-section>
+      <app-details-section type="style" [rawText]="drawing.typeName">
+      </app-details-section>
 
-    <app-details-section
-      *ngIf="drawing.software > 0"
-      [title]="'💻 Software'"
-      [rawText]="drawing.softwareName">
-    </app-details-section>
+      <app-details-section
+        *ngIf="drawing.software > 0"
+        type="software"
+        [rawText]="drawing.softwareName">
+      </app-details-section>
 
-    <app-details-section
-      *ngIf="drawing.paper > 0"
-      [title]="'📄 Tamaño de Papel'"
-      [rawText]="drawing.paperHuman">
-    </app-details-section>
+      <app-details-section
+        *ngIf="drawing.paper > 0"
+        type="paper"
+        [rawText]="drawing.paperHuman">
+      </app-details-section>
 
-    <app-details-section
-      *ngIf="drawing.productType > 0 && drawing.productName !== ''"
-      [title]="getProductTitle()"
-      [rawText]="drawing.productName">
-    </app-details-section>
+      <app-details-section
+        *ngIf="drawing.productType > 0 && drawing.productName !== ''"
+        [type]="getProductSectionType()"
+        [rawText]="drawing.productName">
+      </app-details-section>
 
-    <app-details-section
-      *ngIf="drawing.modelName !== ''"
-      [title]="'👤 Modelo'"
-      [rawText]="drawing.modelName">
-    </app-details-section>
+      <app-details-section
+        *ngIf="drawing.modelName !== ''"
+        type="model"
+        [rawText]="drawing.modelName">
+      </app-details-section>
 
-    <app-details-section
-      *ngIf="drawing.referenceUrl !== ''"
-      [title]="'🖼 Referencia'">
-      <a [href]="drawing.referenceUrl" target="_blank"
-        >Abrir en nueva pestaña</a
-      >
-    </app-details-section>
+      <app-details-section *ngIf="drawing.referenceUrl !== ''" type="reference">
+        <a [href]="drawing.referenceUrl" target="_blank"
+          >Abrir en nueva pestaña</a
+        >
+      </app-details-section>
 
-    <app-details-section
-      class="sm:col-span-2"
-      *ngIf="drawing.tags.length > 0"
-      [title]="'🏷 Etiquetas'"
-      [tags]="true"
-      [capitalize]="true"
-      [listTags]="drawing.tags">
-    </app-details-section>
+      <app-details-section
+        class="sm:col-span-2"
+        *ngIf="drawing.tags.length > 0"
+        [tags]="true"
+        [capitalize]="true"
+        [listTags]="drawing.tags">
+      </app-details-section>
+    </div>
   </div>
 
   <div *ngIf="drawingNotFound">Drawing Not Found</div>

@@ -1,24 +1,30 @@
-<div class="mr-details-section">
-  <span class="mr-details-section-title hvr-underline-reveal">
-    {{ title }}
+<div class="flex flex-row flex-wrap gap-1" *ngIf="tags; else noTags">
+  <span class="text-xs italic text-slate-500" *ngFor="let tag of listTags">
+    <!-- TODO: añadir este replace?? -->
+    <!-- @tag.Replace(" ", "") -->
+    #{{ tag.toLowerCase() }}
   </span>
-  <div
-    class="mr-details-section-content"
-    [ngClass]="{ large: large, capitalize: capitalize }">
-    <ul *ngIf="listItems.length > 0">
-      <li *ngFor="let item of listItems">
-        {{ item }}
-      </li>
-    </ul>
-    <div class="mr-tag-container" *ngIf="tags">
-      <span class="mr-tag" *ngFor="let tag of listTags">
-        <!-- TODO: añadir este replace?? -->
-        <!-- @tag.Replace(" ", "") -->
-        {{ tag }}
-      </span>
+</div>
+
+<ng-template #noTags>
+  <div class="mr-art-section flex flex-row gap-5">
+    <div
+      class="text-main-400 flex flex-nowrap justify-end gap-2 overflow-x-hidden">
+      <i class="bi" [ngClass]="selectedType.icon"></i>
+      <!-- <span class="title uppercase">{{ selectedType.text }}</span> -->
     </div>
 
-    <div *ngIf="rawText" [innerHTML]="rawText"></div>
-    <ng-content></ng-content>
+    <div
+      class="mr-details-section-content"
+      [ngClass]="{ large: large, capitalize: capitalize }">
+      <ul *ngIf="listItems.length > 0">
+        <li *ngFor="let item of listItems">
+          {{ item }}
+        </li>
+      </ul>
+
+      <div *ngIf="rawText" [innerHTML]="rawText"></div>
+      <ng-content></ng-content>
+    </div>
   </div>
-</div>
+</ng-template>
