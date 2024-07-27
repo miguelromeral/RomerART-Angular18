@@ -2,16 +2,16 @@
   [attr.data-drawingId]="drawing.id"
   class="mr-img-thumbnail relative aspect-square h-full w-full"
   [ngClass]="{ favorite: drawing.favorite }">
-  <div class="contenido">
+  <div class="contenido relative h-full w-full overflow-hidden object-contain">
     <div
       *ngIf="drawing.spotifyTrackId"
-      class="mr-thumbnail-spotify-icon mr-img-thumbnail-info mr-spotify">
-      <a [href]="drawing.spotifyUrl" target="_blank">
+      class="mr-thumbnail-spotify-icon mr-img-thumbnail-info mr-spotify absolute right-0 top-0 h-5 rounded-bl-xl bg-black p-1">
+      <a [href]="drawing.spotifyUrl" target="_blank" class="relative">
         <i class="bi bi-spotify"></i>
       </a>
     </div>
     <a
-      class="mr-img-thumbnail-container slide-right"
+      class="mr-img-thumbnail-container slide-right h-full w-full"
       [routerLink]="'details/' + drawing.id">
       <img
         [src]="url"
@@ -19,7 +19,8 @@
         *ngIf="!bErrorLoadingImage"
         (error)="errorLoadingImage(drawing.id)"
         loading="lazy"
-        decoding="async" />
+        decoding="async"
+        class="h-full w-full object-cover" />
 
       <div
         class="mr-error-load-placeholder absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col flex-wrap items-center justify-center align-middle"
