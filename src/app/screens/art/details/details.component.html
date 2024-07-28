@@ -5,7 +5,7 @@
     [ngClass]="{ favorite: drawing.favorite }">
     <!-- TODO: añadir botón de admin para editarlo -->
 
-    <div class="flex flex-col gap-2 sm:col-span-2">
+    <div class="flex w-full flex-col gap-2 sm:col-span-2">
       <div
         class="border-b text-2xl italic"
         [ngClass]="
@@ -22,10 +22,10 @@
       </app-art-details-title>
     </div>
 
-    <div class="flex flex-col flex-nowrap gap-2">
+    <div class="flex w-full flex-col flex-nowrap gap-2">
       <app-art-details-image [drawing]="drawing"></app-art-details-image>
     </div>
-    <div>
+    <div class="w-full">
       <app-tab-panel [tabs]="panelTabs" selectedTab="comments">
         <app-art-details-comment-wrapper
           tab-content-comments

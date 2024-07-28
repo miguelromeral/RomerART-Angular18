@@ -64,8 +64,7 @@ export class DetailsComponent implements OnInit {
           this.metadataService.updateMetadata(
             this.drawing.pageTitle(),
             this.drawing.title,
-            this.drawing.urlThumbnail,
-            window.location.href
+            this.drawing.urlThumbnail
           );
 
           this.panelTabs = ArtInfoTabsConfig.getTabs(/*this.drawing*/);
