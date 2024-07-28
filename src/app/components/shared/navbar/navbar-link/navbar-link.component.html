@@ -1,14 +1,18 @@
 <a
-  class="mr-bottom-bar-button"
+  class="mr-bottom-bar-button flex h-full w-full flex-col flex-nowrap items-center justify-center gap-0 sm:flex-row sm:gap-1 lg:h-12 lg:justify-start lg:px-2"
   [ngClass]="optionClass"
   [routerLink]="routerLink"
   routerLinkActive="active"
   ariaCurrentWhenActive="page">
-  <div class="mr-bottom-bar-icon" *ngIf="icon !== '' && iconActive !== ''">
+  <div
+    class="mr-bottom-bar-icon relative pt-1 text-lg"
+    *ngIf="icon !== '' && iconActive !== ''">
     <i class="bi" [ngClass]="active ? iconActive : icon"></i>
   </div>
 
-  <div class="mr-bottom-profile-pic" *ngIf="image !== ''">
+  <div
+    class="mr-bottom-profile-pic relative rounded-full text-center"
+    *ngIf="image !== ''">
     <img
       [src]="image"
       class="mr-chat-image-miguel brand"
@@ -19,5 +23,9 @@
       }" />
   </div>
 
-  <div *ngIf="text !== ''" class="mr-bottom-bar-text">{{ text }}</div>
+  <div
+    *ngIf="text !== ''"
+    class="mr-bottom-bar-text relative bottom-1 text-sm sm:bottom-0 sm:text-lg">
+    {{ text }}
+  </div>
 </a>
