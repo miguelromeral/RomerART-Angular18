@@ -21,13 +21,16 @@
       </app-art-details-title>
     </div>
 
-    <app-art-details-image [drawing]="drawing"></app-art-details-image>
+    <div class="flex flex-col flex-nowrap gap-2">
+      <app-art-details-image
+        [drawing]="drawing"
+        (requestOpenScoreForm)="openVoteForm()"></app-art-details-image>
 
-    <div class="flex flex-col gap-2">
-      <!-- TODO: volver a habilitar esta parte-->
-      <!-- <app-art-details-score-board [drawing]="drawing">
-      </app-art-details-score-board> -->
+      <app-art-details-score-board [drawing]="drawing" *ngIf="showVoteForm">
+      </app-art-details-score-board>
+    </div>
 
+    <div class="flex flex-col gap-5">
       <div class="mr-social-container">
         <app-spotify-track
           [trackId]="drawing.spotifyTrackId"></app-spotify-track>

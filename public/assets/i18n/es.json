@@ -32,6 +32,11 @@
           "DESCRIPTION": "Cambia el idioma de la aplicación en los menús. El contenido de algunas partes de la aplicación como los dibujos no serán traducidos."
         }
       }
+    },
+    "DRAWING-DETAILS": {
+      "DETAILS": {
+        "VIEWS": "{{views}} visualizaciones, {{votes}} votos de usuarios"
+      }
     }
   }
 }

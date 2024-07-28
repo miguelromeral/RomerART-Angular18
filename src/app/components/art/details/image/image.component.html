@@ -39,7 +39,7 @@
     </div>
   </div>
   <div
-    class="m-2 flex flex-row flex-nowrap justify-between text-2xl"
+    class="my-2 flex flex-row flex-nowrap justify-between text-2xl"
     [ngClass]="drawing.favorite ? 'text-gold-200' : ''">
     <div
       class="flex select-none flex-row flex-nowrap gap-4"
@@ -50,9 +50,9 @@
           <input type="hidden" name="id" [value]="drawing.id" />
 
           <button
+            class="btn-image"
             [id]="btnCheerId"
             type="button"
-            class="mr-like-button"
             (click)="cheerDrawing($event)">
             <i id="iCheerIcon" class="bi bi-heart"></i>
           </button>
@@ -61,19 +61,38 @@
           </div>
         </div>
       </form>
+
       <div
-        class="flex flex-row flex-nowrap items-end gap-1"
-        [title]="drawing.views + ' visualizaciones'">
-        <i class="bi bi-eye"></i>
-        <div id="spLikesCounter" class="text-sm">
-          {{ formatoLegible(drawing.views + 1) }}
-        </div>
+        class="btn-image"
+        (click)="openVoteForm()"
+        (keypress.enter)="openVoteForm()"
+        tabindex="0"
+        title="Asignar tu propia puntuación al dibujo">
+        <i class="bi bi-send-plus"></i>
       </div>
-    </div>
-    <div>
-      <button (click)="shareDrawing()">
+      <button
+        class="btn-image"
+        (click)="shareDrawing()"
+        (keypress.enter)="shareDrawing()"
+        tabindex="0"
+        title="Compartir dibujo">
         <i class="bi bi-share"></i>
       </button>
     </div>
+    <div class="flex select-none flex-row flex-nowrap gap-4 font-bold">
+      <app-drawing-score
+        class="h-8 w-8"
+        [score]="drawing.scorePopular"
+        [popular]="true"></app-drawing-score>
+      <app-drawing-score
+        class="h-8 w-8"
+        [score]="drawing.scoreCritic"></app-drawing-score>
+    </div>
+  </div>
+  <div class="my-2 text-sm">
+    <span>{{
+      text('DETAILS.VIEWS')
+        | translate: { views: drawing.views, votes: drawing.votesPopular }
+    }}</span>
   </div>
 </div>

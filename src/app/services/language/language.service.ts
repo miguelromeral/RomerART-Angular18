@@ -17,9 +17,11 @@ export class LanguageService {
   constructor(
     private translate: TranslateService,
     private localStorageService: LocalStorageService
-  ) {
+  ) {}
+
+  init() {
     const languages = environment.language.available.map(lang => lang.code);
-    translate.addLangs(languages);
+    this.translate.addLangs(languages);
 
     const currentLanguage =
       this.localStorageService.getItem<string>(
@@ -33,7 +35,8 @@ export class LanguageService {
     //   browserLang = environment.language.default;
     // }
     // translate.use(browserLang);
-    translate.use(currentLanguage);
+
+    this.translate.use(currentLanguage);
     this.languageSubject.next(this.translate.currentLang); // Emitir el idioma inicial
   }
 

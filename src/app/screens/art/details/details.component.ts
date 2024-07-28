@@ -38,6 +38,7 @@ export class DetailsComponent implements OnInit {
   @Input() id: string | null = null;
   drawing: Drawing | undefined;
   drawingNotFound: boolean | undefined;
+  showVoteForm = false;
 
   constructor(
     private logger: LoggerService,
@@ -81,5 +82,8 @@ export class DetailsComponent implements OnInit {
       default:
         return '';
     }
+  }
+  openVoteForm() {
+    this.showVoteForm = true;
   }
 }

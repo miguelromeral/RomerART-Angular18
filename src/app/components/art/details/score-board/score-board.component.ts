@@ -12,11 +12,6 @@ import { Customization } from 'utils/customization';
 })
 export class ScoreBoardComponent {
   @Input() drawing!: Drawing;
-  showVoteForm = false;
-
-  openVoteForm() {
-    this.showVoteForm = true;
-  }
 
   getClassScore(score: number) {
     return Customization.getClassScore(score);

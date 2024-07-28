@@ -1,24 +1,36 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { ScoreBoardComponent } from '../score-board/score-board.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { HeartUtils } from 'utils/customization/heart-utils';
 import { environment } from 'environments/environment';
 import { TextUtils } from 'utils/customization/text-utils';
+import { DrawingScoreComponent } from '../../drawing-score/drawing-score.component';
+import { LanguageComponent } from '@models/components/LanguageComponent';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-art-details-image',
   standalone: true,
-  imports: [NgIf, NgClass, ScoreBoardComponent],
+  imports: [
+    NgIf,
+    NgClass,
+    ScoreBoardComponent,
+    DrawingScoreComponent,
+    TranslateModule,
+  ],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
 })
-export class ImageComponent {
+export class ImageComponent extends LanguageComponent {
   @Input() drawing!: Drawing;
   btnCheerId = 'btnCheer';
+  @Output() requestOpenScoreForm = new EventEmitter<boolean>();
 
-  constructor(private drawingService: DrawingService) {}
+  constructor(private drawingService: DrawingService) {
+    super('SCREENS.DRAWING-DETAILS');
+  }
 
   cheerDrawing(event: MouseEvent) {
     $('#' + this.btnCheerId).attr('disabled', 'true');
@@ -86,7 +98,11 @@ export class ImageComponent {
           console.error('Error sharing', error);
         });
     } else {
-      alert('Web Share API not supported in your browser.');
+      console.error('Web Share API not supported in your browser.');
     }
+  }
+
+  openVoteForm() {
+    this.requestOpenScoreForm.emit(true);
   }
 }

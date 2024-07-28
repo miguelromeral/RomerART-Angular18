@@ -5,6 +5,7 @@ import { CommonModule, JsonPipe, NgClass, NgIf } from '@angular/common';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { environment } from 'environments/environment';
 import { MetadataService } from './services/metadata/metadata.service';
+import { LanguageService } from './services/language/language.service';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +27,13 @@ import { MetadataService } from './services/metadata/metadata.service';
 export class AppComponent implements OnInit {
   title = environment.appName;
 
-  constructor(private metadataService: MetadataService) {}
+  constructor(
+    private metadataService: MetadataService,
+    private languageService: LanguageService
+  ) {}
 
   ngOnInit() {
+    this.languageService.init();
     this.metadataService.updateMetadata(
       environment.appName,
       'Página web en Angular 18',

@@ -5,7 +5,7 @@
   <div class="contenido relative h-full w-full overflow-hidden object-contain">
     <div
       *ngIf="drawing.spotifyTrackId"
-      class="mr-thumbnail-spotify-icon mr-img-thumbnail-info mr-spotify absolute right-0 top-0 h-5 rounded-bl-xl bg-black p-1">
+      class="mr-thumbnail-spotify-icon mr-img-thumbnail-info mr-spotify absolute right-1 top-1 h-5">
       <a [href]="drawing.spotifyUrl" target="_blank" class="relative">
         <i class="bi bi-spotify"></i>
       </a>
@@ -49,8 +49,14 @@
         </div>
 
         <div class="mr-img-thumbnail-score-container flex flex-row gap-1">
-          <app-drawing-score [score]="drawing.scoreCritic"> </app-drawing-score>
-          <app-drawing-score [score]="drawing.scorePopular" [popular]="true">
+          <app-drawing-score
+            [score]="drawing.scorePopular"
+            [popular]="true"
+            class="h-6 w-6 text-lg">
+          </app-drawing-score>
+          <app-drawing-score
+            [score]="drawing.scoreCritic"
+            class="h-6 w-6 text-lg">
           </app-drawing-score>
         </div>
       </div>

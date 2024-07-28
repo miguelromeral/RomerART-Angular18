@@ -147,3 +147,7 @@ img.mr-img-full {
   flex-wrap: wrap;
   border-radius: var(--mr-border-radius-image);
 }
+
+.btn-image {
+  @apply cursor-pointer transition-all duration-300 hover:text-main-400;
+}

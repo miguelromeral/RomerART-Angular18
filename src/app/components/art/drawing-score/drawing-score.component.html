@@ -1,6 +1,13 @@
-<span
+<div
   *ngIf="score > 0"
-  class="mr-img-thumbnail-score miguel mr-score-miguel"
-  [ngClass]="getClassScore(score) + ' ' + (popular ? 'popular' : 'miguel')">
+  class="miguel mr-score-miguel flex h-full w-full items-center justify-center"
+  [title]="
+    popular
+      ? 'Nota media que los usuarios han asignado'
+      : 'Nota que Miguel ha asignado al dibujo'
+  "
+  [ngClass]="
+    getClassScore(score) + ' ' + (popular ? 'rounded-full' : 'rounded-sm')
+  ">
   {{ score }}
-</span>
+</div>
