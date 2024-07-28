@@ -42,7 +42,6 @@ export class DetailsComponent implements OnInit {
   @Input() id: string | null = null;
   drawing: Drawing | undefined;
   drawingNotFound: boolean | undefined;
-  showVoteForm = false;
 
   panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
 
@@ -90,8 +89,5 @@ export class DetailsComponent implements OnInit {
       default:
         return '';
     }
-  }
-  openVoteForm() {
-    this.showVoteForm = true;
   }
 }

@@ -1,5 +1,5 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { ScoreBoardComponent } from '../score-board/score-board.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
@@ -26,7 +26,6 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ImageComponent extends LanguageComponent {
   @Input() drawing!: Drawing;
   btnCheerId = 'btnCheer';
-  @Output() requestOpenScoreForm = new EventEmitter<boolean>();
 
   constructor(private drawingService: DrawingService) {
     super('SCREENS.DRAWING-DETAILS');
@@ -100,9 +99,5 @@ export class ImageComponent extends LanguageComponent {
     } else {
       console.error('Web Share API not supported in your browser.');
     }
-  }
-
-  openVoteForm() {
-    this.requestOpenScoreForm.emit(true);
   }
 }

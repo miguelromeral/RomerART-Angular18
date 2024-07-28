@@ -23,12 +23,7 @@
     </div>
 
     <div class="flex flex-col flex-nowrap gap-2">
-      <app-art-details-image
-        [drawing]="drawing"
-        (requestOpenScoreForm)="openVoteForm()"></app-art-details-image>
-
-      <app-art-details-score-board [drawing]="drawing" *ngIf="showVoteForm">
-      </app-art-details-score-board>
+      <app-art-details-image [drawing]="drawing"></app-art-details-image>
     </div>
     <div>
       <app-tab-panel [tabs]="panelTabs" selectedTab="comments">
@@ -54,9 +49,17 @@
           *ngIf="drawing.spotifyTrackId !== ''"
           [trackId]="drawing.spotifyTrackId"></app-spotify-track>
 
+        <app-art-details-score-board tab-content-vote [drawing]="drawing">
+        </app-art-details-score-board>
+
         <div
           tab-content-details
           class="col-span-1 flex flex-col flex-nowrap gap-2 sm:col-span-2">
+          <app-details-section
+            type="views"
+            [rawText]="drawing.views.toString()">
+          </app-details-section>
+
           <app-details-section
             type="date"
             [rawText]="

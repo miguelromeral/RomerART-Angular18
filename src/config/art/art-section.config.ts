@@ -10,6 +10,7 @@ export type ArtSectionType =
   | 'software'
   | 'reference'
   | 'model'
+  | 'views'
   | 'sportman';
 
 export interface IArtSectionType {
@@ -30,6 +31,11 @@ export class ArtSectionConfig {
       id: 'time',
       icon: 'bi-stopwatch',
       text: 'Tiempo',
+    },
+    {
+      id: 'views',
+      icon: 'bi-eye',
+      text: 'Visualizaciones',
     },
     {
       id: 'style',

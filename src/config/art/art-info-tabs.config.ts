@@ -6,6 +6,7 @@ export interface IArtInfoTabsConfigId {
   dislikes: string;
   spotify: string;
   details: string;
+  vote: string;
 }
 
 export const artTabInfoIds: IArtInfoTabsConfigId = {
@@ -14,6 +15,7 @@ export const artTabInfoIds: IArtInfoTabsConfigId = {
   dislikes: 'dislikes',
   spotify: 'spotify',
   details: 'details',
+  vote: 'vote',
 };
 
 export class ArtInfoTabsConfig {
@@ -43,6 +45,13 @@ export class ArtInfoTabsConfig {
       icon: 'bi-hand-thumbs-down',
       iconSelected: 'bi-hand-thumbs-down-fill',
       // visible: (drawing: Drawing) => drawing.commentCons !== '',
+    },
+    {
+      id: artTabInfoIds.vote,
+      label: 'Calificar',
+      icon: 'bi-send-plus',
+      iconSelected: 'bi-send-plus-fill',
+      // visible: (drawing: Drawing) => drawing && true,
     },
     {
       id: artTabInfoIds.spotify,
