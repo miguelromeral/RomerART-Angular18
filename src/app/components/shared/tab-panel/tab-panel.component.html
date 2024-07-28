@@ -1,0 +1,38 @@
+<div class="flex w-full">
+  <button
+    *ngFor="let tab of tabs; let i = index"
+    (click)="changeTab(tab.id)"
+    [class.active]="selectedTab === tab.id"
+    class="tab-button flex flex-nowrap gap-2">
+    <i
+      class="bi"
+      [ngClass]="tab.iconSelected"
+      *ngIf="selectedTab === tab.id; else iconNotSelected"></i>
+    <ng-template #iconNotSelected>
+      <i class="bi" [ngClass]="tab.icon"></i>
+    </ng-template>
+    <span *ngIf="selectedTab === tab.id">
+      {{ tab.label }}
+    </span>
+  </button>
+</div>
+<div class="tab-content">
+  <ng-container *ngIf="selectedTab === panelsId.comments">
+    <ng-content select="[tab-content-comments]"></ng-content>
+  </ng-container>
+  <!-- <ng-content
+    *ngIf="selectedTab === panelsId.comments"
+    select="[tab-content-comments]"></ng-content> -->
+  <ng-content
+    *ngIf="selectedTab === panelsId.likes"
+    select="[tab-content-likes]"></ng-content>
+  <ng-content
+    *ngIf="selectedTab === panelsId.dislikes"
+    select="[tab-content-dislikes]"></ng-content>
+  <ng-content
+    *ngIf="selectedTab === panelsId.spotify"
+    select="[tab-content-spotify]"></ng-content>
+  <ng-content
+    *ngIf="selectedTab === panelsId.details"
+    select="[tab-content-details]"></ng-content>
+</div>

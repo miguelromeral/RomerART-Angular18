@@ -1,10 +1,11 @@
 <app-layout>
   <div
     *ngIf="drawing"
-    class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2 lg:grid-cols-3">
+    class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2"
+    [ngClass]="{ favorite: drawing.favorite }">
     <!-- TODO: añadir botón de admin para editarlo -->
 
-    <div class="flex flex-col gap-2 sm:col-span-2 lg:col-span-3">
+    <div class="flex flex-col gap-2 sm:col-span-2">
       <div
         class="border-b text-2xl italic"
         [ngClass]="
@@ -29,82 +30,87 @@
       <app-art-details-score-board [drawing]="drawing" *ngIf="showVoteForm">
       </app-art-details-score-board>
     </div>
+    <div>
+      <app-tab-panel [tabs]="panelTabs" selectedTab="comments">
+        <app-art-details-comment-wrapper
+          tab-content-comments
+          [comments]="drawing.listComments">
+        </app-art-details-comment-wrapper>
 
-    <div class="flex flex-col gap-5">
-      <div class="mr-social-container">
+        <app-art-details-comment-wrapper
+          tab-content-likes
+          [comments]="drawing.listCommentPros"
+          [type]="'like'">
+        </app-art-details-comment-wrapper>
+
+        <app-art-details-comment-wrapper
+          tab-content-dislikes
+          [comments]="drawing.listCommentCons"
+          [type]="'dislike'">
+        </app-art-details-comment-wrapper>
+
         <app-spotify-track
+          tab-content-spotify
+          *ngIf="drawing.spotifyTrackId !== ''"
           [trackId]="drawing.spotifyTrackId"></app-spotify-track>
-      </div>
 
-      <app-art-details-comment-wrapper [comments]="drawing.listComments">
-      </app-art-details-comment-wrapper>
-    </div>
+        <div
+          tab-content-details
+          class="col-span-1 flex flex-col flex-nowrap gap-2 sm:col-span-2">
+          <app-details-section
+            type="date"
+            [rawText]="
+              drawing.date !== '' ? drawing.formattedDate : 'No Date Known'
+            ">
+          </app-details-section>
 
-    <div
-      class="grid grid-cols-1 gap-2 sm:col-span-2 sm:grid-cols-2 lg:col-span-1 lg:grid-cols-1">
-      <app-art-details-comment-wrapper
-        [comments]="drawing.listCommentPros"
-        [type]="'like'">
-      </app-art-details-comment-wrapper>
+          <app-details-section type="time" [rawText]="drawing.timeHuman">
+          </app-details-section>
 
-      <app-art-details-comment-wrapper
-        [comments]="drawing.listCommentCons"
-        [type]="'dislike'">
-      </app-art-details-comment-wrapper>
-    </div>
+          <app-details-section type="style" [rawText]="drawing.typeName">
+          </app-details-section>
 
-    <div
-      class="col-span-1 mt-20 flex flex-col flex-nowrap gap-2 sm:col-span-2 lg:col-span-3">
-      <app-details-section
-        type="date"
-        [rawText]="
-          drawing.date !== '' ? drawing.formattedDate : 'No Date Known'
-        ">
-      </app-details-section>
+          <app-details-section
+            *ngIf="drawing.software > 0"
+            type="software"
+            [rawText]="drawing.softwareName">
+          </app-details-section>
 
-      <app-details-section type="time" [rawText]="drawing.timeHuman">
-      </app-details-section>
+          <app-details-section
+            *ngIf="drawing.paper > 0"
+            type="paper"
+            [rawText]="drawing.paperHuman">
+          </app-details-section>
 
-      <app-details-section type="style" [rawText]="drawing.typeName">
-      </app-details-section>
+          <app-details-section
+            *ngIf="drawing.productType > 0 && drawing.productName !== ''"
+            [type]="getProductSectionType()"
+            [rawText]="drawing.productName">
+          </app-details-section>
 
-      <app-details-section
-        *ngIf="drawing.software > 0"
-        type="software"
-        [rawText]="drawing.softwareName">
-      </app-details-section>
+          <app-details-section
+            *ngIf="drawing.modelName !== ''"
+            type="model"
+            [rawText]="drawing.modelName">
+          </app-details-section>
 
-      <app-details-section
-        *ngIf="drawing.paper > 0"
-        type="paper"
-        [rawText]="drawing.paperHuman">
-      </app-details-section>
+          <app-details-section
+            *ngIf="drawing.referenceUrl !== ''"
+            type="reference">
+            <a [href]="drawing.referenceUrl" target="_blank"
+              >Abrir en nueva pestaña</a
+            >
+          </app-details-section>
 
-      <app-details-section
-        *ngIf="drawing.productType > 0 && drawing.productName !== ''"
-        [type]="getProductSectionType()"
-        [rawText]="drawing.productName">
-      </app-details-section>
-
-      <app-details-section
-        *ngIf="drawing.modelName !== ''"
-        type="model"
-        [rawText]="drawing.modelName">
-      </app-details-section>
-
-      <app-details-section *ngIf="drawing.referenceUrl !== ''" type="reference">
-        <a [href]="drawing.referenceUrl" target="_blank"
-          >Abrir en nueva pestaña</a
-        >
-      </app-details-section>
-
-      <app-details-section
-        class="sm:col-span-2"
-        *ngIf="drawing.tags.length > 0"
-        [tags]="true"
-        [capitalize]="true"
-        [listTags]="drawing.tags">
-      </app-details-section>
+          <app-details-section
+            class="sm:col-span-2"
+            *ngIf="drawing.tags.length > 0"
+            [tags]="true"
+            [capitalize]="true"
+            [listTags]="drawing.tags">
+          </app-details-section>
+        </div>
+      </app-tab-panel>
     </div>
   </div>
 

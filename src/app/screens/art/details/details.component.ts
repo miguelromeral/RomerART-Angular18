@@ -13,6 +13,9 @@ import { LayoutComponent } from '@app/components/shared/layout/layout.component'
 import { ScoreBoardComponent } from '@app/components/art/details/score-board/score-board.component';
 import { MetadataService } from '@app/services/metadata/metadata.service';
 import { ArtSectionType } from 'config/art/art-section.config';
+import { TabPanelComponent } from '@app/components/shared/tab-panel/tab-panel.component';
+import { TabPanelItem } from '@models/components/tab-panel-item.model';
+import { ArtInfoTabsConfig } from 'config/art/art-info-tabs.config';
 
 @Component({
   selector: 'app-details',
@@ -30,6 +33,7 @@ import { ArtSectionType } from 'config/art/art-section.config';
     ImageComponent,
     LayoutComponent,
     ScoreBoardComponent,
+    TabPanelComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -39,6 +43,8 @@ export class DetailsComponent implements OnInit {
   drawing: Drawing | undefined;
   drawingNotFound: boolean | undefined;
   showVoteForm = false;
+
+  panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
 
   constructor(
     private logger: LoggerService,
@@ -62,6 +68,8 @@ export class DetailsComponent implements OnInit {
             this.drawing.urlThumbnail,
             window.location.href
           );
+
+          this.panelTabs = ArtInfoTabsConfig.getTabs(/*this.drawing*/);
           // this.logger.log(this.drawing);
         }
         this.drawingNotFound = data === undefined || data.id === '';
