@@ -1,6 +1,6 @@
-$header-background-color-production: black;
+$header-background-color-production: rgba(0, 0, 0, 0.7);
 $header-color-production: rgb(145, 145, 145);
-$header-background-color-development: rgb(26, 61, 179);
+$header-background-color-development: rgb(26, 61, 179, 0.7);
 $header-color-development: rgb(114, 142, 235);
 
 /* Header */
@@ -12,4 +12,10 @@ $header-color-development: rgb(114, 142, 235);
 .header.development {
   background-color: $header-background-color-development;
   color: $header-color-development;
+}
+
+header {
+  backdrop-filter: blur(5px);
+  background-color: var(--mr-nav-color-a);
+  z-index: 1000000;
 }
