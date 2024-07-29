@@ -22,22 +22,19 @@
         decoding="async"
         class="h-full w-full object-cover" />
 
-      <div
-        class="mr-error-load-placeholder absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col flex-wrap items-center justify-center align-middle"
-        *ngIf="bErrorLoadingImage">
-        <span class="emoji">🙃</span>
-        <span class="subtitle text-center">Imagen No Encontrada</span>
+      <div class="mr-error-load-placeholder" *ngIf="bErrorLoadingImage">
+        <span class="text-2xl">🙃</span>
+        <span class="subtitle text-center text-sm">Imagen No Encontrada</span>
       </div>
 
-      <span
-        class="mr-img-thumbnail-date mr-img-thumbnail-info absolute left-0 top-0 rounded-br-lg px-2 py-0">
+      <span class="mr-img-thumbnail-date mr-img-thumbnail-info">
         {{ drawing.formattedDateMini }}
       </span>
 
       <div
         class="mr-img-thumbnail-details-container mr-img-thumbnail-info relative flex h-8 w-full flex-row flex-nowrap items-center justify-between p-1">
         <div
-          class="mr-img-thumbnail-stats mr-img-thumbnail-info bottom-0 -z-10 flex flex-row flex-nowrap items-center justify-around">
+          class="mr-img-thumbnail-stats mr-img-thumbnail-info bottom-0 -z-10 flex flex-row flex-nowrap items-center justify-around text-sm">
           <!-- <div class="mr-img-thumbnail-stats-item">
                 <i class="bi bi-eye"></i>
                 <span>drawing.views</span>
@@ -48,7 +45,8 @@
           </div>
         </div>
 
-        <div class="mr-img-thumbnail-score-container flex flex-row gap-1">
+        <div
+          class="mr-img-thumbnail-score-container flex flex-row gap-1 text-sm">
           <app-drawing-score
             [score]="drawing.scorePopular"
             [popular]="true"
@@ -65,9 +63,8 @@
         *ngIf="drawing?.name && drawing?.modelName"
         class="mr-img-thumbnail-title mr-img-thumbnail-info">
         <span>{{ drawing.name }}</span>
-        <span class="mr-img-thumbnail-subtitle"
-          ><span style="font-size: x-small">por</span>
-          {{ drawing.modelName }}</span
+        <span class="mr-img-thumbnail-subtitle text-center text-sm italic"
+          ><span class="text-xs">por</span> {{ drawing.modelName }}</span
         >
       </span>
 

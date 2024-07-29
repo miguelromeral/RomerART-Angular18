@@ -13,8 +13,10 @@ html {
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+}
 
-  transition: background-color 0.3s, color 0.3s;
+* {
+  transition: var(--mr-transition-time);
 }
 
 body {
@@ -24,6 +26,7 @@ body {
   background: var(--mr-background-color);
   color: var(--mr-text-color);
   font-weight: var(--mr-font-weight-medium);
+  transition: background-color 0.3s;
 }
 
 main {

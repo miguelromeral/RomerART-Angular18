@@ -4,9 +4,10 @@
 
 @import './variables.scss';
 @import './normalize.scss';
+@import './inputs.scss';
 @import './animations.scss';
 @import './controls.scss';
-@import './light-theme.scss';
+// @import './light-theme.scss';
 
 html {
   position: relative;
@@ -14,7 +15,6 @@ html {
 }
 
 body {
-  /*transition: var(--mr-transition-time);*/
   font-size: var(--mr-font-size-default);
 }
 
@@ -52,28 +52,6 @@ img.mr-loading-icon-pacman {
 span.mr-loader-subtitle {
   font-style: italic;
   font-weight: var(--mr-font-weight-bold);
-}
-
-.mr-custom-select {
-  background-color: var(--mr-control-background-color);
-  border: 1px solid var(--mr-chat-color);
-  color: var(--mr-text-color);
-  height: var(--mr-control-height);
-  display: flex;
-  align-items: center;
-  transition: var(--mr-transition-time) ease-in-out;
-  cursor: pointer;
-}
-
-.mr-custom-btn {
-  background-color: var(--mr-chat-color);
-  border: 1px solid var(--mr-chat-color);
-  color: var(--mr-text-color-opposite);
-  height: var(--mr-control-height);
-  display: flex;
-  align-items: center;
-  transition: var(--mr-transition-time) ease-in-out;
-  cursor: pointer;
 }
 
 
@@ -247,23 +225,8 @@ div.mr-social-links {
   }
 }
 
-.mr-development-banner {
-  color: var(--mr-development-banner-color);
-}
 
 
-
-.mr-custom-range::-webkit-slider-thumb {
-  background-color: var(--mr-chat-color);
-}
-
-.mr-custom-range::-webkit-slider-thumb:hover {
-  background-color: var(--mr-chat-color-secondary);
-}
-
-.mr-custom-range::-webkit-slider-runnable-track {
-  background-color: var(--mr-custom-range-track-color);
-}
 
 .mr-score-bad {
   background: var(--mr-score-background-color-bad) !important;

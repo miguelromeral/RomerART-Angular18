@@ -1,15 +1,11 @@
 /* Every row of the chat */
+@import '../../../../../styles/variables.scss';
 
 
-
-/* Text of the message */
-.mr-chat-message {
-  transition: var(--mr-transition-time) ease-in-out;
-}
 
 /* Profile Picture */
 img.mr-chat-image-miguel {
-  width: var(--mr-profile-pic-size-bottom-bar);
+  width: #{$mr-profile-pic-size};
   height: var(--mr-profile-pic-size-bottom-bar);
   border-radius: var(--mr-profile-pic-size-bottom-bar);
   border: var(--mr-border-size) solid var(--mr-chat-color);

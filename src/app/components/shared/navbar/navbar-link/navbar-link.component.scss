@@ -1,15 +1,16 @@
-.mr-bottom-bar-button {
+a.mr-bottom-bar-button {
   text-decoration: none;
-  transition: background-color var(--mr-transition-time) ease;
+  color: var(--mr-nav-text-color) !important;
 }
 
 .mr-bottom-profile-pic {
   background-color: transparent;
   width: var(--mr-bottom-bar-icon-width);
+  height: var(--mr-bottom-bar-icon-width);
 }
 
 .mr-bottom-bar-button:hover {
-  background-color: var(--mr-chat-color-secondary);
+  background-color: var(--mr-nav-bg-color-hover);
 }
 
 

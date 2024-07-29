@@ -1,11 +1,116 @@
+/* Background Color */
+$mr-bg-color-light: #fafafa;
+$mr-bg-color-dark: #191919;
+
+/* Text Color */
+$mr-text-color-light: #191919;
+$mr-text-color-dark: #fafafa;
+$mr-text-color-opposite-light: #fafafa;
+$mr-text-color-opposite-dark: #191919;
+$mr-text-color-secondary-light: rgb(143 58 155);
+$mr-text-color-secondary-dark: rgb(209 149 217);
+
+/* Font Families */
+$mr-font-family-josefine:
+  /*'Manrope', */
+  'Josefin Sans', sans-serif;
+$mr-font-family-sans-serif: sans-serif;
+
+/* Input Background Color */
+$mr-input-bg-color-light: #fafafa;
+$mr-input-bg-color-dark: #191919;
+
+
+/* Profile Pic Size */
+$mr-profile-pic-size: 40px;
+
+/********************************/
+//    Navbar
+/********************************/
+
+/* Navbar Background Color */
+$mr-nav-bg-color-light: rgb(253, 236, 255);
+$mr-nav-bg-color-dark: rgb(15, 12, 17, 0.90);
+/* Navbar Text Color */
+$mr-nav-text-color-light: black;
+$mr-nav-text-color-dark: white;
+/* Navbar Background Color on Hover */
+$mr-nav-bg-color-hover-light: rgb(213, 158, 219);
+$mr-nav-bg-color-hover-dark: rgba(52, 37, 61, 0.9);
+/* Navbar Profile Pic Size */
+$mr-nav-profile-pic-size: 30px;
+
+
+/********************************/
+//    Drawing Thumbnails
+/********************************/
+
+/* Thumbnail Date Background Color */
+$mr-thumbnail-date-bg-color-light: #191919;
+$mr-thumbnail-date-bg-color-dark: #fafafa;
+/* Thumbnail Date Text Color */
+$mr-thumbnail-date-text-color-light: #fafafa;
+$mr-thumbnail-date-text-color-dark: #191919;
+/* Thumbnail Background on Hover */
+$mr-thumbnail-bg-hover-light: linear-gradient(160deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, #{$mr-bg-color-light} 100%);
+$mr-thumbnail-bg-hover-dark: linear-gradient(160deg, transparent 0%, rgba(0, 0, 0, 0.6) 50%, #{$mr-bg-color-dark} 100%);
+$mr-thumbnail-bg-hover-favorite: linear-gradient(160deg, transparent 0%, #ffb023 100%);
+/* Thumbnail Text Color */
+$mr-thumbnail-text-color-light: #191919;
+$mr-thumbnail-text-color-dark: #fafafa;
+$mr-thumbnail-text-color-favorite: #fafafa;
+/* Thumbnail Spotify Icon Color */
+$mr-thumbnail-spotify-color: green;
+
+:root {
+  --mr-background-color: #{$mr-bg-color-light};
+  --mr-text-color: #{$mr-text-color-light};
+  --mr-font-family: #{$mr-font-family-josefine};
+  --mr-text-color-opposite: #{$mr-text-color-opposite-light};
+  --mr-control-background-color: #{$mr-input-bg-color-light}; // TODO: cambiar el nombre de variable por "--mr-input-bg-color"
+  --mr-text-color-not-important: #{$mr-text-color-secondary-light}; // TODO: cambiar variable por "--mr-text-color-secondary"
+  --mr-profile-pic-size: #{$mr-profile-pic-size};
+
+  /* Navbar */
+  --mr-nav-color-a: #{$mr-nav-bg-color-light}; // TODO: cambiar por "--mr-nav-bg-color"
+  --mr-nav-text-color: #{$mr-nav-text-color-light};
+  --mr-nav-bg-color-hover: #{$mr-nav-bg-color-hover-light};
+  --mr-bottom-bar-icon-width: #{$mr-nav-profile-pic-size};
+
+  /* Drawing Thumbnails */
+  --mr-thumbnail-date-background-color: #{$mr-thumbnail-date-bg-color-light};
+  --mr-thumbnail-date-text-color: #{$mr-thumbnail-date-text-color-light};
+  --mr-thumbnail-bg-hover: #{$mr-thumbnail-bg-hover-light};
+  --mr-thumbnail-bg-hover-favorite: #{$mr-thumbnail-bg-hover-favorite};
+  --mr-thumbnail-text-color: #{$mr-thumbnail-text-color-light};
+  --mr-thumbnail-text-color-favorite: #{$mr-thumbnail-text-color-favorite};
+  --mr-thumbnail-spotify-color: #{$mr-thumbnail-spotify-color};
+}
+
+
+.dark {
+  --mr-background-color: #{$mr-bg-color-dark};
+  --mr-text-color: #{$mr-text-color-dark};
+  --mr-text-color-opposite: #{$mr-text-color-opposite-dark};
+  --mr-control-background-color: #{$mr-input-bg-color-dark};
+
+  /* Navbar */
+  --mr-nav-color-a: #{$mr-nav-bg-color-dark};
+  --mr-nav-bg-color-hover: #{$mr-nav-bg-color-hover-dark};
+  --mr-nav-text-color: #{$mr-nav-text-color-dark};
+
+  /* Drawing Thumbnails */
+  --mr-thumbnail-date-background-color: #{$mr-thumbnail-date-bg-color-dark};
+  --mr-thumbnail-date-text-color: #{$mr-thumbnail-date-text-color-dark};
+  --mr-thumbnail-bg-hover: #{$mr-thumbnail-bg-hover-dark};
+  --mr-thumbnail-text-color: #{$mr-thumbnail-text-color-dark};
+}
+
+
+
 /* variables.css */
 
 :root {
-  --mr-background-color: #191919;
-  --mr-background-color-light: white;
-  --mr-bg-color-dark: #191919;
-  --mr-bg-color-light: white;
-  --mr-bg-color: var(--mr-bg-color-dark);
   --mr-background-color-secondary: #271e2c;
   --mr-text-color-terciary: rgb(199 70 215);
   --mr-color-box-shadow: #c6b896;
@@ -22,9 +127,6 @@
   --mr-color-gold: #ffb023;
   --mr-color-spotify: #22b95b;
   --mr-nav-color: rgb(29 11 40);
-  --mr-nav-color-a: rgb(15, 12, 17, 0.90);
-  --mr-nav-color-light: rgb(248 215 252);
-  --mr-profile-pic-size: 40px;
   --mr-profile-pic-size-bottom-bar: 30px;
   --mr-margin-vertical: 20px;
   --mr-border-size: 2px;
@@ -49,12 +151,10 @@
   --mr-bottom-bar-width-margin: 1vw;
   --mr-bottom-bar-height-margin: 5vh;
   --mr-body-width: 80vw;
-  --mr-bottom-bar-icon-width: 30px;
   --mr-development-banner-color-dark: cyan;
   --mr-development-banner-color-light: #0068ff;
   --mr-development-banner-color: var(--mr-development-banner-color-dark);
   --mr-link-color: var(--mr-chat-color);
-  --mr-thumbnail-text-color: white;
   --mr-thumbnail-text-likes-color: var(--mr-color-red-light);
   --mr-background-color-fullscreen-image: rgba(0, 0, 0, 0.8);
   --mr-spacing-img-buttons: 10px;
@@ -81,12 +181,6 @@
   --mr-custom-range-track-color-dark: var(--mr-nav-color-light);
   --mr-custom-range-track-color-light: white;
   --mr-custom-range-track-color: var(--mr-custom-range-track-color-dark);
-  --mr-thumbnails-details-background-dark: linear-gradient(180deg, transparent 0%, var(--mr-background-color) 50%, var(--mr-background-color) 100%);
-  --mr-thumbnails-details-background-light: linear-gradient(180deg, transparent 0%, var(--mr-background-color-light) 50%, var(--mr-background-color-light) 100%);
-  --mr-thumbnails-details-background: var(--mr-thumbnails-details-background-dark);
-  --mr-thumbnails-details-background-carousel-dark: linear-gradient(180deg, transparent 0%, var(--mr-background-color-secondary) 50%, var(--mr-background-color-secondary) 100%);
-  --mr-thumbnails-details-background-carousel-light: linear-gradient(180deg, transparent 0%, var(--mr-nav-color-light) 50%, var(--mr-nav-color-light) 100%);
-  --mr-thumbnails-details-background-carousel: var(--mr-thumbnails-details-background-carousel-dark);
   --mr-text-shadow-score: 20px;
 }
 
@@ -113,32 +207,15 @@
   --mr-ff-materia-magic-color: radial-gradient(circle at 30% 30%, white 0%, #127d14 5%, #081b0b 20%, #12b408 60%, var(--mr-ff-materia-magic-border) 100%);
 }
 
+
+
 /* Settings */
 :root {
-  --mr-font-family-default:
-    /*'Manrope', */
-    'Josefin Sans', sans-serif;
-  --mr-font-family-sans-serif: sans-serif;
-  --mr-font-family: var(--mr-font-family-default);
   --mr-font-weight-light: light;
   --mr-font-weight-medium: normal;
   --mr-font-weight-bold: bold;
-  --mr-text-color-dark: white;
-  --mr-text-color-light: black;
-  --mr-text-color: var(--mr-text-color-dark);
-  --mr-text-color-opposite: var(--mr-text-color-light);
-  --mr-control-background-color-dark: var(--mr-chat-color-secondary);
-  --mr-control-background-color-light: var(--mr-nav-color-light);
-  --mr-control-background-color: var(--mr-control-background-color-dark);
-  --mr-thumbnail-date-background-color-dark: white;
-  --mr-thumbnail-date-background-color-light: black;
-  --mr-thumbnail-date-background-color: var(--mr-thumbnail-date-background-color-dark);
   /* Font Size */
   --mr-font-size-large: large;
   --mr-font-size-default: medium;
   --mr-font-size-small: small;
-  --mr-text-color-not-important-dark: rgb(209 149 217);
-  --mr-text-color-not-important-light: rgb(143 58 155);
-  /*--mr-text-color-not-important: var(--mr-text-color-not-important-dark);*/
-  --mr-text-color-not-important: var(--mr-chat-color);
 }

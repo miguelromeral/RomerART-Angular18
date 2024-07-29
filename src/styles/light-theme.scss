@@ -1,57 +1,51 @@
-body.light-theme {
-  background-color: var(--mr-background-color-light);
-  color: var(--mr-text-color-light);
-}
+@import './variables.scss';
 
 
-body.light-theme .mr-bottom-bar {
+html.dark .mr-bottom-bar {
   background-color: var(--mr-nav-color-light);
 }
 
-/*body.light-theme nav a, body.light-theme .nav-link, body.light-theme a {
+/*html.dark nav a, html.dark .nav-link, html.dark a {
       color: var(--mr-color-emphasis-light) !important;
   }*/
 
-body.light-theme .mr-collection-section {
+html.dark .mr-collection-section {
   background-color: var(--mr-nav-color-light);
 }
 
-body.light-theme .mr-chat-message {
+html.dark .mr-chat-message {
   color: var(--mr-text-color-dark);
 }
 
-body.light-theme .mr-chat-message.last:after {
-  background-color: var(--mr-background-color-light);
-}
 
-body.light-theme .mr-tag {
+html.dark .mr-tag {
   background-color: var(--mr-nav-color-light);
   color: var(--mr-text-color-light);
 }
 
-body.light-theme .mr-thanks-message {
+html.dark .mr-thanks-message {
   color: var(--mr-background-color-light);
 }
 
 
-body.light-theme .mr-powered-by-logos {
+html.dark .mr-powered-by-logos {
   filter: grayscale(100%) invert(85%);
 }
 
-body.light-theme .mr-bottom-profile-pic {
+html.dark .mr-bottom-profile-pic {
   background-color: var(--mr-nav-color-light);
 }
 
-body.light-theme .mr-bottom-bar-button:hover {
+html.dark .mr-bottom-bar-button:hover {
   background-color: var(--mr-chat-color);
   color: white !important;
 }
 
-body.light-theme .mr-img-thumbnail-title {
+html.dark .mr-img-thumbnail-title {
   background: linear-gradient(160deg, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
 }
 
-body.light-theme .favorite .mr-img-thumbnail-title {
+html.dark .favorite .mr-img-thumbnail-title {
   background: linear-gradient(160deg, transparent 0%, var(--mr-color-gold) 100%);
   color: white;
 }
@@ -62,8 +56,10 @@ html:not([style*="--mr-chat-color"]) {
 }
 
 
-:root .light-theme {
-  --mr-bg-color: var(--mr-bg-color-light);
+:root .dark {
+  $mr-background-color: $mr-background-color-dark;
+
+
   --mr-text-color: var(--mr-text-color-light);
   --mr-text-color-opposite: var(--mr-text-color-dark);
   --mr-control-background-color: var(--mr-control-background-color-light);
