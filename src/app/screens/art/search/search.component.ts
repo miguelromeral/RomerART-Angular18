@@ -1,11 +1,11 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { DrawingService } from '@app/services/api/drawing/drawing.service';
-import { LanguageService } from '@app/services/language/language.service';
 import { Drawing } from '@models/art/drawing.model';
 import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { FilterFormComponent } from '@app/components/art/search/filter-form/filter-form.component';
+import { LanguageComponent } from '@models/components/LanguageComponent';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search',
@@ -17,11 +17,12 @@ import { FilterFormComponent } from '@app/components/art/search/filter-form/filt
     DrawingThumbnailComponent,
     LayoutComponent,
     FilterFormComponent,
+    TranslateModule,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
-export class SearchComponent {
+export class SearchComponent extends LanguageComponent {
   listDrawings: Drawing[] = [];
   @ViewChild(FilterFormComponent) filterFormComponent!: FilterFormComponent;
 
@@ -33,10 +34,9 @@ export class SearchComponent {
     return this.listDrawings.length === 0;
   }
 
-  constructor(
-    private drawingService: DrawingService,
-    private languageService: LanguageService
-  ) {}
+  constructor() {
+    super('SCREENS.DRAWING-SEARCH');
+  }
 
   onFetchedResults(list: Drawing[]) {
     this.listDrawings = list;

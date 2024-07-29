@@ -1,6 +1,4 @@
 {
-  "TITLE": "Hola",
-  "DESCRIPTION": "Este es un ejemplo.",
   "DATA": {
     "DRAWING": {
       "STYLES": {
@@ -30,6 +28,67 @@
         "CHANGE-LANGUAGE": {
           "TITLE": "Cambiar idioma",
           "DESCRIPTION": "Cambia el idioma de la aplicación en los menús. El contenido de algunas partes de la aplicación como los dibujos no serán traducidos."
+        }
+      }
+    },
+    "DRAWING-SEARCH": {
+      "TITLE": "Galería",
+      "SUBTITLE": "Aquí están algunos de mis dibujos e ilustraciones públicas. Pulsa en cualquiera de ellos para ver los detalles",
+      "FORM": {
+        "TITLE": "Filtrar por...",
+        "SORTBY": {
+          "TITLE": "Ordenar por...",
+          "DATE-DESC": "Nuevos Primero",
+          "DATE-ASC": "Viejos Primero",
+          "NAME-ASC": "Nombre (ascendente)",
+          "NAME-DESC": "Nombre (descendente)",
+          "TIME-ASC": "Más Rápidos",
+          "TIME-DESC": "Más Largos",
+          "KUDOS-DESC": "Más Kudos",
+          "KUDOS-ASC": "Menos Kudos",
+          "VIEWS-DESC": "Más Vistos",
+          "VIEWS-ASC": "Menos Vistos",
+          "SCOREM-DESC": "Mejor Puntuación",
+          "SCOREM-ASC": "Peor Puntuación",
+          "SCOREU-DESC": "Mejor Puntuación Popular",
+          "SCOREU-ASC": "Peor Puntuación Popular"
+        },
+        "QUERY": {
+          "PLACEHOLDER": "Personaje | Modelo | Producto"
+        },
+        "STYLE": {
+          "TITLE": "🖌 ESTILO"
+        },
+        "PRODUCT-TYPE": {
+          "TITLE": "📺 TIPO"
+        },
+        "PRODUCT": {
+          "TITLE": "🖼 TEMÁTICA"
+        },
+        "COLLECTION": {
+          "TITLE": "🤩 COLECCIÓN"
+        },
+        "CHARACTER": {
+          "TITLE": "😺 PERSONAJE",
+          "NONE": "(Ningún Personaje)"
+        },
+        "MODEL": {
+          "TITLE": "👩 MODELO",
+          "NONE": "(Ningún Modelo)"
+        },
+        "SOFTWARE": {
+          "TITLE": "💻 SOFTWARE"
+        },
+        "PAPER": {
+          "TITLE": "📄 TAMAÑO"
+        },
+        "SPOTIFY": {
+          "TITLE": "🎵 MÚSICA",
+          "YES": "Pista de Spotify Sugerida",
+          "NO": "Sin pista sugerida"
+        },
+        "FAVORITES": {
+          "TITLE": "⭐ FAVORITOS"
         }
       }
     },

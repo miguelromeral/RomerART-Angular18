@@ -27,6 +27,67 @@
           "DESCRIPTION": "Change the app's language. Some content of the app (such as drawings) will not be translated."
         }
       }
+    },
+    "DRAWING-SEARCH": {
+      "TITLE": "Gallery",
+      "SUBTITLE": "Here there are a few of my public drawings and illustrations. Touch any of them to see details",
+      "FORM": {
+        "TITLE": "Filter by...",
+        "SORTBY": {
+          "TITLE": "Sort by...",
+          "DATE-DESC": "Latest",
+          "DATE-ASC": "Oldest",
+          "NAME-ASC": "Name (ascending)",
+          "NAME-DESC": "Name (descending)",
+          "TIME-ASC": "Fastest",
+          "TIME-DESC": "Slowest",
+          "KUDOS-DESC": "More Kudos",
+          "KUDOS-ASC": "Less Kudos",
+          "VIEWS-DESC": "More Viewed",
+          "VIEWS-ASC": "Less Viewed",
+          "SCOREM-DESC": "Best Score",
+          "SCOREM-ASC": "Worst Score",
+          "SCOREU-DESC": "Best Popular Score",
+          "SCOREU-ASC": "Worst Popular Score"
+        },
+        "QUERY": {
+          "PLACEHOLDER": "Character | Model | Product"
+        },
+        "STYLE": {
+          "TITLE": "🖌 STYLE"
+        },
+        "PRODUCT-TYPE": {
+          "TITLE": "📺 TYPE"
+        },
+        "PRODUCT": {
+          "TITLE": "🖼 THEME"
+        },
+        "COLLECTION": {
+          "TITLE": "🤩 COLLECTION"
+        },
+        "CHARACTER": {
+          "TITLE": "😺 CHARACTER",
+          "NONE": "(No character)"
+        },
+        "MODEL": {
+          "TITLE": "👩 MODEL",
+          "NONE": "(No model)"
+        },
+        "SOFTWARE": {
+          "TITLE": "💻 SOFTWARE"
+        },
+        "PAPER": {
+          "TITLE": "📄 SIZE"
+        },
+        "SPOTIFY": {
+          "TITLE": "🎵 MUSIC",
+          "YES": "Spotify Track Suggested",
+          "NO": "No Track"
+        },
+        "FAVORITES": {
+          "TITLE": "⭐ FAVORITES"
+        }
+      }
     }
   }
 }

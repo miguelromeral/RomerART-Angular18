@@ -37,7 +37,8 @@ export class AppComponent implements OnInit {
     this.metadataService.updateMetadata(
       environment.appName,
       'Página web en Angular 18',
-      window?.location?.origin + '/assets/images/miguel.jpeg'
+      ''
+      // window?.location?.origin + '/assets/images/miguel.jpeg'
     );
   }
 }

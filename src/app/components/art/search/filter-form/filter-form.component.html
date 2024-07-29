@@ -2,37 +2,21 @@
   <div class="row">
     <div class="mr-sort-filter-container" data-bs-theme="dark">
       <div class="mr-sort-filter">
-        <span> Ordenar por... </span>
+        <span>{{ text('SORTBY.TITLE') | translate }}</span>
         <select
           id="sFilterSortBy"
           class="mr-custom-select filters form-select form-select-sm"
           formControlName="sortBy"
-          aria-label="Default select example"
-          data-bs-theme="dark"
           (change)="filterControlChange()"
           data-bs-theme="dark">
-          <option value="date-desc">Nuevos Primero</option>
-          <option value="date-asc">Viejos Primero</option>
-          <option value="name-asc">Nombre (Ascendente)</option>
-          <option value="name-desc">Nombre (Descendente)</option>
-          <option value="time-asc">Más Rápidos</option>
-          <option value="time-desc">Más Largos</option>
-          <option value="kudos-desc" class="kudos">Más Kudos</option>
-          <option value="kudos-asc" class="kudos">Menos Kudos</option>
-          <option value="views-desc" class="views">Más Vistos</option>
-          <option value="views-asc" class="views">Menos Vistos</option>
-          <option value="scorem-desc" class="mr-score-miguel">
-            Mejor Puntuación
-          </option>
-          <option value="scorem-asc" class="mr-score-miguel">
-            Peor Puntuación
-          </option>
-          <option value="scoreu-desc" class="mr-score-popular">
-            Mejor Puntuación Popular
-          </option>
-          <option value="scoreu-asc" class="mr-score-popular">
-            Peor Puntuación Popular
-          </option>
+          <ng-container *ngFor="let option of listOptionsSortBy">
+            <option
+              *ngIf="option.visible"
+              [value]="option.value"
+              [ngClass]="option.class">
+              {{ text(option.textCode) | translate }}
+            </option>
+          </ng-container>
         </select>
       </div>
     </div>
@@ -45,18 +29,21 @@
       style="display: none"
       role="alert"></div>
 
-    <span class="mr-suboption-filter"> Filtrar por... </span>
-    <div class="mr-filter-container">
-      <button class="btn btn-dark mr-custom-btn" (click)="resetFilters()">
-        <span><i id="iFavoriteIcon" class="bi bi-trash"></i></span>
+    <span class="mr-suboption-filter">{{ text('TITLE') | translate }}</span>
+    <div
+      class="mr-filter-container grid w-full grid-cols-8 items-center gap-1 sm:grid-cols-9 lg:grid-cols-8">
+      <button
+        class="btn btn-dark mr-custom-btn flex items-center justify-center"
+        (click)="resetFilters()">
+        <i id="iFavoriteIcon" class="bi bi-trash"></i>
       </button>
 
       <input
         id="tbTags"
         formControlName="textQuery"
-        class="form-control mr-custom-text mr-filter-item"
+        class="form-control mr-custom-text col-span-7 w-full sm:col-span-8 lg:col-span-7"
         type="text"
-        placeholder="Buscar por nombre, modelo, producto, etc."
+        [placeholder]="text('QUERY.PLACEHOLDER') | translate"
         (change)="filterControlChange()"
         (keydown)="capturarEnter($event)" />
 
@@ -67,11 +54,13 @@
         formControlName="type"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="-1" selected>🖌 ESTILO</option>
+        <option value="-1" selected>
+          {{ text('STYLE.TITLE') | translate }}
+        </option>
         <option *ngFor="let style of listDrawingStyles" [value]="style.id">
           {{ style.translatedText }}
         </option>
-        <option value="0">(Otro Estilo)</option>
+        <!-- <option value="0">(Otro Estilo)</option> -->
       </select>
 
       <select
@@ -81,12 +70,14 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="-1" selected>📺 TIPO</option>
+        <option value="-1" selected>
+          {{ text('PRODUCT-TYPE.TITLE') | translate }}
+        </option>
 
         <option *ngFor="let type of listDrawingProductTypes" [value]="type.id">
           {{ type.emoji }} {{ type.translatedText }}
         </option>
-        <option value="0">(Otro Tipo)</option>
+        <!-- <option value="0">(Otro Tipo)</option> -->
       </select>
 
       <select
@@ -96,7 +87,9 @@
         formControlName="productName"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="" selected>🖼 TEMÁTICA</option>
+        <option value="" selected>
+          {{ text('PRODUCT.TITLE') | translate }}
+        </option>
 
         <option
           *ngFor="let product of listDrawingProducts"
@@ -105,7 +98,7 @@
           {{ product.productName }}
         </option>
 
-        <option value="none">(Ninguna Temática)</option>
+        <!-- <option value="none">(Ninguna Temática)</option> -->
       </select>
 
       <select
@@ -115,7 +108,9 @@
         formControlName="collection"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="" selected>🤩 COLECCIÓN</option>
+        <option value="" selected>
+          {{ text('COLLECTION.TITLE') | translate }}
+        </option>
 
         <option [value]="col.id" *ngFor="let col of listCollections">
           {{ col.name }}
@@ -129,16 +124,20 @@
         formControlName="characterName"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="" selected>😺 PERSONAJE</option>
-
-        <option
-          *ngFor="let character of listDrawingCharacters"
-          [value]="character.characterName">
-          {{ getEmojiFromProductType(character.productTypeId) }}
-          {{ character.characterName }}
+        <option value="" selected>
+          {{ text('CHARACTER.TITLE') | translate }}
         </option>
 
-        <option value="none">(Ningún Personaje)</option>
+        <ng-container *ngFor="let character of listDrawingCharacters">
+          <option
+            *ngIf="character.characterName !== ''"
+            [value]="character.characterName">
+            {{ getEmojiFromProductType(character.productTypeId) }}
+            {{ character.characterName }}
+          </option>
+        </ng-container>
+
+        <option value="none">{{ text('CHARACTER.NONE') | translate }}</option>
       </select>
 
       <select
@@ -148,13 +147,13 @@
         formControlName="modelName"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="" selected>👩 MODELO</option>
+        <option value="" selected>{{ text('MODEL.TITLE') | translate }}</option>
 
         <option *ngFor="let model of listDrawingModels" [value]="model">
           {{ model }}
         </option>
 
-        <option value="none">(Ningún Modelo)</option>
+        <option value="none">{{ text('MODEL.NONE') | translate }}</option>
       </select>
 
       <select
@@ -164,7 +163,9 @@
         formControlName="software"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="0" selected>💻 SOFTWARE</option>
+        <option value="0" selected>
+          {{ text('SOFTWARE.TITLE') | translate }}
+        </option>
 
         <option *ngFor="let sw of listDrawingSoftwares" [value]="sw.id">
           {{ sw.name }}
@@ -178,7 +179,9 @@
         formControlName="paper"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="0" selected>📄 TAMAÑO</option>
+        <option value="0" selected>
+          {{ text('PAPER.TITLE') | translate }}
+        </option>
 
         <option *ngFor="let paper of listDrawingPapers" [value]="paper.id">
           {{ paper.name }}
@@ -191,17 +194,23 @@
         formControlName="formSpotify"
         data-bs-theme="dark"
         (change)="filterControlChange()">
-        <option value="null" selected>🎵 MÚSICA</option>
-        <option value="true">Pista de Spotify Sugerida</option>
-        <option value="false">Sin pista sugerida</option>
+        <option value="null" selected>
+          {{ text('SPOTIFY.TITLE') | translate }}
+        </option>
+        <option value="true">
+          {{ text('SPOTIFY.YES') | translate }}
+        </option>
+        <option value="false">
+          {{ text('SPOTIFY.NO') | translate }}
+        </option>
       </select>
 
       <div class="mr-choice-filter mr-filter-item">
         <label
           class="form-check-label choice-label"
           for="flexSwitchCheckChecked"
-          style="font-weight: bold"
-          >⭐ FAVORITOS</label
+          style="font-weight: bold">
+          {{ text('FAVORITES.TITLE') | translate }}</label
         >
         <input
           class="form-check-input"

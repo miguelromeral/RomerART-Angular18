@@ -9,7 +9,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { DrawingFilter } from '@models/art/drawing-filter.model';
 import { DrawingThumbnailComponent } from '../../drawing-thumbnail/drawing-thumbnail.component';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DrawingStyle } from '@models/art/drawing-style.model';
@@ -28,7 +28,13 @@ import {
   sortCharactersByName,
   sortProductsByName,
 } from '@utils/sorting/sort-utils';
-import { ArtFilterFormConfig } from 'config/art/art-filter-form.config';
+import {
+  ArtFilterFormConfig,
+  artFilterValuesSortBy,
+  IArtFilterValuesSortBy,
+} from 'config/art/art-filter-form.config';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageComponent } from '@models/components/LanguageComponent';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -38,6 +44,8 @@ import { ArtFilterFormConfig } from 'config/art/art-filter-form.config';
     NgFor,
     NgIf,
     NgClass,
+    CommonModule,
+    TranslateModule,
     DrawingThumbnailComponent,
     ReactiveFormsModule,
     LayoutComponent,
@@ -45,7 +53,10 @@ import { ArtFilterFormConfig } from 'config/art/art-filter-form.config';
   templateUrl: './filter-form.component.html',
   styleUrl: './filter-form.component.scss',
 })
-export class FilterFormComponent implements OnInit, OnDestroy {
+export class FilterFormComponent
+  extends LanguageComponent
+  implements OnInit, OnDestroy
+{
   private languageSub: Subscription | undefined;
   queryParamsSubscription: Subscription | undefined;
 
@@ -55,6 +66,7 @@ export class FilterFormComponent implements OnInit, OnDestroy {
   @Output() existsMoreResultsToFetch = new EventEmitter<boolean>();
 
   /* Filter Form Select */
+  listOptionsSortBy: IArtFilterValuesSortBy[] = artFilterValuesSortBy;
   listDrawingStyles: DrawingStyle[] = [];
   listDrawingProductTypes: DrawingProductType[] = [];
   listDrawingProducts: DrawingProduct[] = [];
@@ -104,7 +116,9 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     private languageService: LanguageService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    super('SCREENS.DRAWING-SEARCH.FORM');
+  }
 
   ngOnInit(): void {
     this.loadSelects();
@@ -272,6 +286,13 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     const filters = new DrawingFilter(this.filterForm.value);
     const queryParams: Record<string, string> = {};
 
+    // TODO: arreglar que el sortby como queryparams no funciona bien
+    // this.changeBasicArtUrlParameter(
+    //   queryParams,
+    //   ArtFilterFormConfig.queryParamsNames.sortBy,
+    //   filters,
+    //   'sortBy'
+    // );
     this.changeBasicArtUrlParameter(
       queryParams,
       ArtFilterFormConfig.queryParamsNames.textQuery,

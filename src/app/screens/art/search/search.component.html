@@ -1,11 +1,8 @@
 <app-layout>
   <div class="container">
     <div>
-      <h1>🎨 Galería</h1>
-      <p>
-        Aquí están algunos de mis dibujos e ilustraciones públicas.
-        <strong>Pulsa en cualquiera de ellos para ver los detalles</strong>.
-      </p>
+      <h1>{{ text('TITLE') | translate }}</h1>
+      <p>{{ text('SUBTITLE') | translate }}</p>
     </div>
 
     <app-art-search-filter-form
