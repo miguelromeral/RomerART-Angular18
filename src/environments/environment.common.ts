@@ -45,19 +45,6 @@ export const COMMON_ENV = {
   customization: {
     dateFormat: 'DD/MM/YYYY HH:mm',
   },
-  language: {
-    default: 'es',
-    available: [
-      {
-        code: 'es',
-        text: 'Español',
-      },
-      {
-        code: 'en',
-        text: 'English',
-      },
-    ],
-  },
   data: {
     styles: [
       {

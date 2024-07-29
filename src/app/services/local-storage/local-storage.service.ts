@@ -1,37 +1,53 @@
-import { Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { StorageService } from '@ng-web-apis/storage';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
+  static isBrowser = new BehaviorSubject<boolean>(false);
+
+  constructor(
+    private storage: StorageService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
+    LocalStorageService.isBrowser.next(isPlatformBrowser(platformId));
+  }
+
   // Método para guardar datos en el localStorage
-  setItem<T>(key: string, value: T): void {
-    try {
-      const serializedValue = JSON.stringify(value);
-      localStorage.setItem(key, serializedValue);
-    } catch (e) {
-      console.error(`Error al guardar en localStorage: ${e}`);
+  setItem(key: string, value: string): void {
+    if (LocalStorageService.isBrowser) {
+      try {
+        this.storage.setItem(key, value);
+      } catch (e) {
+        console.error(`Error al guardar en localStorage: ${e}`);
+      }
+    } else {
+      console.warn('Storage not supported in Server side');
     }
   }
 
   // Método para recuperar datos del localStorage
-  getItem<T>(key: string): T | null {
-    try {
-      const serializedValue = localStorage.getItem(key);
-      if (serializedValue === null) {
+  getItem(key: string): string | null {
+    if (LocalStorageService.isBrowser) {
+      try {
+        return this.storage.getItem(key);
+      } catch (e) {
+        console.error(`Error al recuperar del localStorage: ${e}`);
         return null;
       }
-      return JSON.parse(serializedValue) as T;
-    } catch (e) {
-      console.error(`Error al recuperar del localStorage: ${e}`);
-      return null;
+    } else {
+      console.warn('Storage not supported in Server side');
     }
+    return '---';
   }
 
   // Método para eliminar un ítem del localStorage
   removeItem(key: string): void {
     try {
-      localStorage.removeItem(key);
+      this.storage.removeItem(key);
     } catch (e) {
       console.error(`Error al eliminar del localStorage: ${e}`);
     }
@@ -40,7 +56,7 @@ export class LocalStorageService {
   // Método para limpiar todo el localStorage
   clear(): void {
     try {
-      localStorage.clear();
+      this.storage.clear();
     } catch (e) {
       console.error(`Error al limpiar el localStorage: ${e}`);
     }
