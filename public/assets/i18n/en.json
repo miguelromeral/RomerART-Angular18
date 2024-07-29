@@ -18,6 +18,16 @@
     }
   },
   "SCREENS": {
+    "NAVBAR": {
+      "LINKS": {
+        "HOME": "Home",
+        "ART": "Art",
+        "PLAYLIST": "Playlist",
+        "ABOUT": "About",
+        "SETTINGS": "Settings",
+        "DEBUG": "Debug"
+      }
+    },
     "SETTINGS": {
       "TITLE": "Settings",
       "DESCRIPTION": "Change the app's behaviour and style and custom your experience.",

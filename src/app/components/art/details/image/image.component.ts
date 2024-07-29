@@ -52,6 +52,9 @@ export class ImageComponent extends LanguageComponent {
     HeartUtils.showHearts();
 
     this.drawingService.cheerDrawing(this.drawing.id).subscribe({
+      next: () => {
+        this.drawing.likes += 1;
+      },
       error: err => console.error('Error al enviar cheer:', err),
       complete: () => {
         $('#' + this.btnCheerId).removeAttr('disabled');

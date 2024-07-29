@@ -6,9 +6,9 @@
     [currentUrl]="currentRoute"
     [routerLink]="link.link"
     [icon]="link.icon"
-    [optionClass]="link.customClass"
+    [optionClass]="link.customClass ?? ''"
     [iconActive]="link.iconActive"
-    [text]="link.text"
-    [image]="link.image">
+    [text]="text(link.textCode) | translate"
+    [image]="link.image ?? ''">
   </app-navbar-link>
 </nav>

@@ -21,6 +21,16 @@
     }
   },
   "SCREENS": {
+    "NAVBAR": {
+      "LINKS": {
+        "HOME": "Inicio",
+        "ART": "Galería",
+        "PLAYLIST": "Playlist",
+        "ABOUT": "Sobre Mí",
+        "SETTINGS": "Ajustes",
+        "DEBUG": "Debug"
+      }
+    },
     "SETTINGS": {
       "TITLE": "Ajustes",
       "DESCRIPTION": "Cambia el comportamiento y el estilo de la aplicación para personalizar tu experiencia.",
@@ -94,7 +104,15 @@
     },
     "DRAWING-DETAILS": {
       "DETAILS": {
-        "VIEWS": "{{views}} visualizaciones, {{votes}} votos de usuarios"
+        "VIEWS": "{{views}} visualizaciones, {{votes}} votos de usuarios",
+        "TAB-TITLES": {
+          "COMMENTS": "Comentarios",
+          "LIKES": "Positivo",
+          "DISLIKES": "Negativo",
+          "VOTE": "Vota",
+          "SPOTIFY": "Spotify",
+          "INFO": "Detalles"
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 export interface TabPanelItem {
   id: string;
-  label: string;
   icon: string;
+  textCode: string;
   iconSelected: string;
   // visible: (drawing: Drawing) => boolean;
 }

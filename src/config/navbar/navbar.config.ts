@@ -1,52 +1,51 @@
+export interface INavBarLink {
+  link: string;
+  icon: string;
+  iconActive: string;
+  textCode: string;
+  customClass?: string;
+  image?: string;
+}
+
 export class NavBarConfig {
-  static links = [
+  static links: INavBarLink[] = [
     {
       link: '/',
       icon: 'bi-house-door',
       iconActive: 'bi-house-door-fill',
-      text: 'Inicio',
-      customClass: '',
-      image: '',
+      textCode: 'LINKS.HOME',
     },
     {
       link: '/art',
       icon: 'bi-easel',
       iconActive: 'bi-easel-fill',
-      text: 'Art',
-      customClass: '',
-      image: '',
+      textCode: 'LINKS.ART',
     },
     {
       link: '/playlist',
       icon: 'bi-cassette',
       iconActive: 'bi-cassette-fill',
-      text: 'Playlist',
+      textCode: 'LINKS.PLAYLIST',
       customClass: 'mr-spotify',
-      image: '',
     },
     {
       link: '/about',
       icon: '',
       iconActive: '',
-      text: 'Sobre Mí',
-      customClass: '',
+      textCode: 'LINKS.ABOUT',
       image: 'assets/images/miguel.jpeg',
     },
     {
       link: '/settings',
       icon: 'bi-gear',
       iconActive: 'bi-gear-fill',
-      text: 'Ajustes',
-      customClass: '',
-      image: '',
+      textCode: 'LINKS.SETTINGS',
     },
     {
       link: '/debug',
       icon: 'bi-bug',
       iconActive: 'bi-bug-fill',
-      text: 'Debug',
-      customClass: '',
-      image: '',
+      textCode: 'LINKS.DEBUG',
     },
   ];
 }

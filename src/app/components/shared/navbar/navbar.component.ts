@@ -7,7 +7,9 @@ import {
   RouterLinkActive,
 } from '@angular/router';
 import { NavbarLinkComponent } from './navbar-link/navbar-link.component';
-import { NavBarConfig } from 'config/navbar/navbar.config';
+import { INavBarLink, NavBarConfig } from 'config/navbar/navbar.config';
+import { LanguageComponent } from '@models/components/LanguageComponent';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
@@ -19,18 +21,21 @@ import { NavBarConfig } from 'config/navbar/navbar.config';
     NgStyle,
     NgFor,
     NavbarLinkComponent,
+    TranslateModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent extends LanguageComponent implements OnInit {
   currentRoute = '';
-  listLinks = NavBarConfig.links;
+  listLinks: INavBarLink[] = NavBarConfig.links;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    super('SCREENS.NAVBAR');
+  }
 
   ngOnInit() {
     // Subscribe to route changes

@@ -3,7 +3,7 @@
     *ngFor="let tab of tabs; let i = index"
     (click)="changeTab(tab.id)"
     [class.active]="selectedTab === tab.id"
-    class="tab-button flex flex-nowrap gap-2">
+    class="tab-button flex flex-nowrap gap-2 focus:outline-none">
     <i
       class="bi"
       [ngClass]="tab.iconSelected"
@@ -12,7 +12,7 @@
       <i class="bi" [ngClass]="tab.icon"></i>
     </ng-template>
     <span *ngIf="selectedTab === tab.id">
-      {{ tab.label }}
+      {{ text(tab.textCode) | translate }}
     </span>
   </button>
 </div>
