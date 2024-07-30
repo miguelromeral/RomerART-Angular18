@@ -49,8 +49,8 @@ export class ArtInfoTabsConfig {
     {
       id: artTabInfoIds.vote,
       textCode: 'DETAILS.TAB-TITLES.VOTE',
-      icon: 'bi-send-plus',
-      iconSelected: 'bi-send-plus-fill',
+      icon: 'bi-9-circle',
+      iconSelected: 'bi-9-circle-fill',
       // visible: (drawing: Drawing) => drawing && true,
     },
     {

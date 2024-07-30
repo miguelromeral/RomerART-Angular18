@@ -1,14 +1,13 @@
 <form [formGroup]="filterForm" (submit)="submitFilter()" id="formFilter">
   <div class="row">
-    <div class="mr-sort-filter-container" data-bs-theme="dark">
-      <div class="mr-sort-filter">
-        <span>{{ text('SORTBY.TITLE') | translate }}</span>
+    <div class="mr-sort-filter-container inline-flex w-full flex-row-reverse">
+      <div class="mr-sort-filter flex flex-col items-end">
+        <span class="text-sm">{{ text('SORTBY.TITLE') | translate }}</span>
         <select
           id="sFilterSortBy"
           class="mr-custom-select filters form-select form-select-sm"
           formControlName="sortBy"
-          (change)="filterControlChange()"
-          data-bs-theme="dark">
+          (change)="filterControlChange()">
           <ng-container *ngFor="let option of listOptionsSortBy">
             <option
               *ngIf="option.visible"
@@ -29,7 +28,9 @@
       style="display: none"
       role="alert"></div>
 
-    <span class="mr-suboption-filter">{{ text('TITLE') | translate }}</span>
+    <span class="mr-suboption-filter text-sm">{{
+      text('TITLE') | translate
+    }}</span>
     <div
       class="mr-filter-container grid w-full grid-cols-8 items-center gap-1 sm:grid-cols-9 lg:grid-cols-8">
       <button
@@ -52,7 +53,6 @@
         *ngIf="listDrawingStyles.length > 0"
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="type"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="-1" selected>
           {{ text('STYLE.TITLE') | translate }}
@@ -68,7 +68,6 @@
         *ngIf="listDrawingProductTypes.length > 0"
         formControlName="productType"
         class="mr-custom-select form-select form-select-sm mr-filter-item"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="-1" selected>
           {{ text('PRODUCT-TYPE.TITLE') | translate }}
@@ -85,7 +84,6 @@
         *ngIf="listDrawingProducts.length > 0"
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="productName"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="" selected>
           {{ text('PRODUCT.TITLE') | translate }}
@@ -106,7 +104,6 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         *ngIf="listCollections.length > 0"
         formControlName="collection"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="" selected>
           {{ text('COLLECTION.TITLE') | translate }}
@@ -122,7 +119,6 @@
         *ngIf="listDrawingCharacters.length > 0"
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="characterName"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="" selected>
           {{ text('CHARACTER.TITLE') | translate }}
@@ -145,7 +141,6 @@
         *ngIf="listDrawingModels.length > 0"
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="modelName"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="" selected>{{ text('MODEL.TITLE') | translate }}</option>
 
@@ -161,7 +156,6 @@
         *ngIf="listDrawingSoftwares.length > 0"
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="software"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="0" selected>
           {{ text('SOFTWARE.TITLE') | translate }}
@@ -177,7 +171,6 @@
         *ngIf="listDrawingPapers.length > 0"
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="paper"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="0" selected>
           {{ text('PAPER.TITLE') | translate }}
@@ -192,7 +185,6 @@
         id="sFilterSpotify"
         class="mr-custom-select form-select form-select-sm mr-filter-item mr-spotify"
         formControlName="formSpotify"
-        data-bs-theme="dark"
         (change)="filterControlChange()">
         <option value="null" selected>
           {{ text('SPOTIFY.TITLE') | translate }}

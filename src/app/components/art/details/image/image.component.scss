@@ -1,36 +1,30 @@
+.mr-img-full-container {
+  transition: var(--mr-transition-time) ease;
+}
+
 .mr-img-full-container.fullscreen {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  display: block;
-  align-items: center;
+  @apply fixed top-0 left-0 right-0 bottom-0 items-center h-full w-full flex justify-center;
   z-index: 10000;
-  height: 100%;
-  width: 100%;
   background-color: var(--mr-background-color-fullscreen-image);
   backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: center;
   border: none;
-  border-radius: 0px;
 }
 
 .mr-img-full-container.fullscreen img {
-  // max-width: 100%;
-  // max-height: 100%;
+  // TODO: la pantalla completa se expande demasiado
+  @apply max-h-screen max-w-full object-cover;
 }
 
 
 /* Favorite Icon */
 #iFavoriteIcon {
-  top: var(--mr-spacing-img-buttons);
-  right: var(--mr-spacing-img-buttons);
-  color: var(--mr-color-gold);
-  text-shadow: 0px 0px 10px var(--mr-color-gold);
+  color: var(--mr-favorite-icon-color);
+  text-shadow: 0px 0px 10px var(--mr-favorite-icon-color);
 }
 
+#divIconFullScreen {
+  transition: var(--mr-transition-time) ease-in-out;
+}
 
 #divIconFullScreen #iFS {
   display: block;
@@ -48,11 +42,8 @@
   display: block;
 }
 
-
-
-#divIconFullScreen:hover {
-  color: white;
-  cursor: pointer;
+img.mr-img-full {
+  transition: var(--mr-transition-time) ease-in-out;
 }
 
 /* Watermark */
@@ -76,64 +67,13 @@
   z-index: 1;
 }
 
-
-/* Like button */
-#btnCheer {
-  font-weight: var(--mr-font-weight-bold);
-  cursor: pointer;
-}
-
-/* Like Button disabled */
-#btnCheer:disabled {
-  animation: none;
-  background-color: black;
-}
-
-/* Container of the like count, for animation purposes*/
-#divContainerLikes {
-  display: inline-flex;
-}
-
-
-
-
 /* Placeholder when the image couldn't be loaded */
 .mr-error-load-placeholder {
   display: none;
-  position: absolute;
-  width: 100%;
-  background-color: black;
-  height: 100%;
-  border-radius: 8px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  color: pink;
-}
-
-/* Emoji of the error placeholder */
-.mr-error-load-placeholder .emoji {
-  font-size: x-large;
-}
-
-/* Text of the error placeholder */
-.mr-error-load-placeholder .subtitle {
-  font-size: var(--mr-font-size-small);
-  text-align: center;
+  transition: var(--mr-transition-time) ease-out;
 }
 
 /* Show the placeholder when error */
 .mr-error-load-placeholder.show {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  border-radius: var(--mr-border-radius-image);
-}
-
-.btn-image {
-  @apply cursor-pointer transition-all duration-300 hover:text-main-400;
+  @apply flex items-center justify-center flex-col flex-wrap content-center;
 }

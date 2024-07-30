@@ -1,6 +1,10 @@
+.art-section .icon,
+.art-section .tag {
+  color: var(--mr-section-text-color);
+}
+
 .mr-art-section .title {
   width: 0px;
-  transition: var(--mr-transition-time) ease-in-out;
 }
 
 .mr-art-section:hover .title {

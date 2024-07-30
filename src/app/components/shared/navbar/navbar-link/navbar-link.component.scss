@@ -1,6 +1,7 @@
 a.mr-bottom-bar-button {
   text-decoration: none;
   color: var(--mr-nav-text-color) !important;
+  transition: background-color var(--mr-transition-time) ease;
 }
 
 .mr-bottom-profile-pic {

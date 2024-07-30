@@ -1,44 +1,6 @@
-.choice-label {
-  color: var(--mr-color-gold);
-  background-color: transparent;
-  border: 1px solid var(--mr-color-gold);
-  padding: 0px 10px;
-  border-radius: 20px;
-  transition: var(--mr-transition-time) ease-out;
-  cursor: pointer;
-}
-
-.mr-choice-filter:has(input:checked) .choice-label {
-  color: black;
-  background-color: var(--mr-color-gold);
-}
-
-.mr-choice-filter input {
-  display: none;
-}
-
-
-.mr-choice-filter {
-  color: var(--mr-color-gold);
-}
-
-
-.mr-sort-filter-container {
-  display: inline-flex;
-  flex-direction: row-reverse;
-  width: 100%;
-}
-
-.mr-sort-filter-container .mr-sort-filter {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
 .mr-sort-filter-container .mr-sort-filter span,
 span.mr-suboption-filter {
-  font-size: var(--mr-font-size-small);
-  color: var(--mr-text-color-not-important);
+  color: var(--mr-art-search-labels-color);
 }
 
 .mr-filter-item {

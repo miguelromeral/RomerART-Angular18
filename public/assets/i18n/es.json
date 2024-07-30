@@ -108,7 +108,6 @@
     },
     "DRAWING-DETAILS": {
       "DETAILS": {
-        "VIEWS": "{{views}} visualizaciones, {{votes}} votos de usuarios",
         "TAB-TITLES": {
           "COMMENTS": "Comentarios",
           "LIKES": "Positivo",
@@ -116,6 +115,10 @@
           "VOTE": "Vota",
           "SPOTIFY": "Spotify",
           "INFO": "Detalles"
+        },
+        "SECTIONS": {
+          "VIEWS": "{{views}} visualizaciones",
+          "VOTES": "{{votes}} votos de usuarios"
         }
       }
     }

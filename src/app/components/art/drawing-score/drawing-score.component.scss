@@ -1,0 +1,25 @@
+.mr-score-bad {
+  background: var(--mr-score-background-color-bad) !important;
+  color: var(--mr-score-text-color-bad) !important;
+  border-color: var(--mr-score-border-color-bad) !important;
+}
+
+.mr-score-mild {
+  background-color: var(--mr-score-background-color-mild) !important;
+  color: var(--mr-score-text-color-mild) !important;
+  border-color: var(--mr-score-border-color-mild) !important;
+}
+
+.mr-score-good {
+  background-color: var(--mr-score-background-color-good) !important;
+  color: var(--mr-score-text-color-good) !important;
+  border-color: var(--mr-score-border-color-good) !important;
+}
+
+.mr-score-platinum {
+  background: var(--mr-score-background-color-platinum) !important;
+  color: var(--mr-score-text-color-platinum) !important;
+  border: 1px solid var(--mr-score-platinum-blue) !important;
+  text-shadow: 1px 1px 0px var(--mr-score-platinum-blue) !important;
+  border-color: var(--mr-score-border-color-platinum) !important;
+}

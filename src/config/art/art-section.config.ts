@@ -11,12 +11,15 @@ export type ArtSectionType =
   | 'reference'
   | 'model'
   | 'views'
+  | 'votes'
+  | 'likes'
   | 'sportman';
 
 export interface IArtSectionType {
   id: ArtSectionType;
   icon: string;
   text: string;
+  textCode?: string;
 }
 
 export class ArtSectionConfig {
@@ -35,6 +38,18 @@ export class ArtSectionConfig {
     {
       id: 'views',
       icon: 'bi-eye',
+      text: 'Visualizaciones',
+      textCode: 'VIEWS',
+    },
+    {
+      id: 'votes',
+      icon: 'bi-9-circle',
+      text: 'Votos de usuarios',
+      textCode: 'VOTES',
+    },
+    {
+      id: 'likes',
+      icon: 'bi-heart',
       text: 'Visualizaciones',
     },
     {
@@ -67,6 +82,7 @@ export class ArtSectionConfig {
       icon: 'bi-image',
       text: 'Referencia',
     },
+
     {
       id: 'actor',
       icon: 'bi-stars',

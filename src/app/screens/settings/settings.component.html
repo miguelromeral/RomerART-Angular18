@@ -1,40 +1,40 @@
-<app-layout class="flex flex-col items-start justify-start gap-10">
-  <h1>{{ text('TITLE') | translate }}</h1>
+<app-layout>
+  <div class="flex flex-col">
+    <h1 class="pb-10">{{ text('TITLE') | translate }}</h1>
 
-  <app-setting-section
-    [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | translate"
-    [description]="text('DESCRIPTION') | translate">
-    <select
-      id="language-select"
-      class="mr-custom-select"
-      (change)="changeLanguage($event)">
-      <option
-        *ngFor="let lang of languages"
-        [value]="lang.code"
-        [selected]="currentLanguage === lang.code">
-        {{ lang.text }}
-      </option>
-    </select>
-  </app-setting-section>
+    <h3>Accesibilidad</h3>
+    <div class="mr-settings-subject flex flex-col gap-6">
+      <app-setting-section
+        [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | translate"
+        [description]="text('DESCRIPTION') | translate">
+        <select
+          id="language-select"
+          class="mr-custom-select"
+          (change)="changeLanguage($event)">
+          <option
+            *ngFor="let lang of languages"
+            [value]="lang.code"
+            [selected]="currentLanguage === lang.code">
+            {{ lang.text }}
+          </option>
+        </select>
+      </app-setting-section>
 
-  <div
-    class="border-2 border-red-400 text-red-400 dark:border-yellow-400 dark:text-yellow-400">
-    DEBUGGING!
+      <app-setting-section
+        [title]="'Cambiar Tema'"
+        [description]="'Cambiar colores'">
+        <select
+          id="theme-select"
+          class="mr-custom-select"
+          (change)="changeTheme($event)">
+          <option
+            *ngFor="let theme of themes"
+            [value]="theme.value"
+            [selected]="theme.value === currentTheme">
+            {{ text(theme.textCode) | translate }}
+          </option>
+        </select>
+      </app-setting-section>
+    </div>
   </div>
-
-  <app-setting-section
-    [title]="'Cambiar Tema'"
-    [description]="'Cambiar colores'">
-    <select
-      id="theme-select"
-      class="mr-custom-select"
-      (change)="changeTheme($event)">
-      <option
-        *ngFor="let theme of themes"
-        [value]="theme.value"
-        [selected]="theme.value === currentTheme">
-        {{ text(theme.textCode) | translate }}
-      </option>
-    </select>
-  </app-setting-section>
 </app-layout>

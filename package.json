@@ -1,6 +1,6 @@
 {
-  "name": "romerart-angular18",
-  "version": "0.1.4",
+  "name": "miguelromeral",
+  "version": "0.1.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

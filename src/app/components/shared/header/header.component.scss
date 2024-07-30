@@ -1,21 +1,14 @@
-$header-background-color-production: rgba(0, 0, 0, 0.7);
-$header-color-production: rgb(145, 145, 145);
-$header-background-color-development: rgb(26, 61, 179, 0.7);
-$header-color-development: rgb(114, 142, 235);
-
-/* Header */
-.header.production {
-  background-color: $header-background-color-production;
-  color: $header-color-production;
+header {
+  backdrop-filter: blur(5px);
+  z-index: 1000000;
 }
 
 .header.development {
-  background-color: $header-background-color-development;
-  color: $header-color-development;
+  background-color: var(--header-background-color-development);
+  color: var(--header-color-development);
 }
 
-header {
-  backdrop-filter: blur(5px);
-  background-color: var(--mr-nav-color-a);
-  z-index: 1000000;
+.header.production {
+  background-color: var(--header-background-color-production);
+  color: var(--header-color-production);
 }

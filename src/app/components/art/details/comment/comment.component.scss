@@ -1,15 +1,18 @@
-/* Every row of the chat */
-@import '../../../../../styles/variables.scss';
+// /* Profile Picture */
+// img.mr-chat-image-miguel {
+//   width: var(--mr-profile-pic-size);
+//   height: var(--mr-profile-pic-size-bottom-bar);
+//   border-radius: var(--mr-profile-pic-size-bottom-bar);
+//   border: var(--mr-border-size) solid var(--mr-chat-color);
+//   padding: var(--mr-padding-picture);
+//   user-select: none;
+//   pointer-events: none;
+// }
 
+.comment.like {
+  color: var(--mr-comment-like-color);
+}
 
-
-/* Profile Picture */
-img.mr-chat-image-miguel {
-  width: #{$mr-profile-pic-size};
-  height: var(--mr-profile-pic-size-bottom-bar);
-  border-radius: var(--mr-profile-pic-size-bottom-bar);
-  border: var(--mr-border-size) solid var(--mr-chat-color);
-  padding: var(--mr-padding-picture);
-  user-select: none;
-  pointer-events: none;
+.comment.dislike {
+  color: var(--mr-comment-dislike-color);
 }

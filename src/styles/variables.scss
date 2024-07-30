@@ -54,13 +54,97 @@ $mr-thumbnail-date-text-color-dark: #191919;
 /* Thumbnail Background on Hover */
 $mr-thumbnail-bg-hover-light: linear-gradient(160deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, #{$mr-bg-color-light} 100%);
 $mr-thumbnail-bg-hover-dark: linear-gradient(160deg, transparent 0%, rgba(0, 0, 0, 0.6) 50%, #{$mr-bg-color-dark} 100%);
-$mr-thumbnail-bg-hover-favorite: linear-gradient(160deg, transparent 0%, #ffb023 100%);
+$mr-thumbnail-bg-hover-favorite-light: linear-gradient(160deg, transparent 0%, #ffb023 50%, #{$mr-bg-color-light} 100%);
+$mr-thumbnail-bg-hover-favorite-dark: linear-gradient(160deg, transparent 0%, #ffb023 50%, #{$mr-bg-color-dark} 100%);
 /* Thumbnail Text Color */
 $mr-thumbnail-text-color-light: #191919;
 $mr-thumbnail-text-color-dark: #fafafa;
 $mr-thumbnail-text-color-favorite: #fafafa;
 /* Thumbnail Spotify Icon Color */
 $mr-thumbnail-spotify-color: green;
+
+
+/********************************/
+//    Score Label
+/********************************/
+// Score Bad
+$mr-score-bg-color-bad-light: red;
+$mr-score-bg-color-bad-dark: transparent;
+$mr-score-border-color-bad-light: red;
+$mr-score-border-color-bad-dark: theme('colors.red.400');
+$mr-score-border-color-bad-light: red;
+$mr-score-border-color-bad-dark: theme('colors.red.400');
+$mr-score-text-color-bad-light: white;
+$mr-score-text-color-bad-dark: theme('colors.red.400');
+// Score Mild
+$mr-score-bg-color-mild-light: #edad25;
+$mr-score-bg-color-mild-dark: transparent;
+$mr-score-border-color-mild-light: #edad25;
+$mr-score-border-color-mild-dark: #edad25;
+$mr-score-text-color-mild-light: black;
+$mr-score-text-color-mild-dark: #edad25;
+// Score Good
+$mr-score-bg-color-good-light: #36b936;
+$mr-score-bg-color-good-dark: transparent;
+$mr-score-border-color-good-light: #36b936;
+$mr-score-border-color-good-dark: #36b936;
+$mr-score-text-color-good-light: black;
+$mr-score-text-color-good-dark: #36b936;
+// Score Platinum
+$mr-score-bg-color-platinum-light: linear-gradient(135deg, white 30%, var(--mr-score-platinum-blue) 55%, white 55%, var(--mr-score-platinum-white) 100%);
+$mr-score-bg-color-platinum-dark: transparent;
+$mr-score-border-color-platinum-light: blue;
+$mr-score-border-color-platinum-dark: #add7ff;
+$mr-score-text-color-platinum-light: #333664;
+$mr-score-text-color-platinum-dark: #add7ff;
+
+/********************************/
+//    Drawing Details
+/********************************/
+
+/* Title */
+$mr-drawing-details-title-color-light: theme('colors.main.400');
+$mr-drawing-details-title-color-dark: theme('colors.main.500');
+/* Comment Colors */
+$mr-comment-like-color-light: green;
+$mr-comment-like-color-dark: green;
+$mr-comment-dislike-color-light: red;
+$mr-comment-dislike-color-dark: red;
+/* Favorite Icon */
+$mr-favorite-icon-color: var(--mr-color-gold);
+/* Section Info */
+$mr-section-text-color-light: theme('colors.main.400');
+$mr-section-text-color-dark: theme('colors.main.500');
+/* Tab Panels */
+$mr-tab-panel-section-color-light: theme('colors.main.400');
+$mr-tab-panel-section-color-dark: theme('colors.main.500');
+
+/********************************/
+//    Drawing Search Form
+/********************************/
+$mr-art-search-labels-color-light: theme('colors.main.400');
+$mr-art-search-labels-color-dark: theme('colors.main.500');
+
+/********************************/
+//    Settings Screen
+/********************************/
+$mr-setting-subject-border-color-light: theme('colors.main.400');
+$mr-setting-subject-border-color-dark: theme('colors.main.500');
+
+/********************************/
+//    Header
+/********************************/
+$header-background-color-production-light: rgba(235, 175, 228, 0.7);
+$header-background-color-production-dark: rgba(0, 0, 0, 0.7);
+$header-color-production-light: rgb(66, 51, 66);
+$header-color-production-dark: rgb(116, 114, 117);
+$header-background-color-development-light: rgba(182, 28, 61, 0.85);
+$header-background-color-development-dark: rgba(204, 35, 72, 0.7);
+$header-color-development-light: rgb(209, 220, 255);
+$header-color-development-dark: rgb(209, 220, 255);
+
+
+/**************************************************************/
 
 :root {
   --mr-background-color: #{$mr-bg-color-light};
@@ -81,10 +165,44 @@ $mr-thumbnail-spotify-color: green;
   --mr-thumbnail-date-background-color: #{$mr-thumbnail-date-bg-color-light};
   --mr-thumbnail-date-text-color: #{$mr-thumbnail-date-text-color-light};
   --mr-thumbnail-bg-hover: #{$mr-thumbnail-bg-hover-light};
-  --mr-thumbnail-bg-hover-favorite: #{$mr-thumbnail-bg-hover-favorite};
+  --mr-thumbnail-bg-hover-favorite: #{$mr-thumbnail-bg-hover-favorite-light};
   --mr-thumbnail-text-color: #{$mr-thumbnail-text-color-light};
   --mr-thumbnail-text-color-favorite: #{$mr-thumbnail-text-color-favorite};
   --mr-thumbnail-spotify-color: #{$mr-thumbnail-spotify-color};
+
+  /* Score Label */
+  --mr-score-background-color-bad: #{$mr-score-bg-color-bad-light};
+  --mr-score-border-color-bad: #{$mr-score-border-color-bad-light};
+  --mr-score-text-color-bad: #{$mr-score-text-color-bad-light};
+  --mr-score-background-color-mild: #{$mr-score-bg-color-mild-light};
+  --mr-score-border-color-mild: #{$mr-score-border-color-mild-light};
+  --mr-score-text-color-mild: #{$mr-score-text-color-mild-light};
+  --mr-score-background-color-good: #{$mr-score-bg-color-good-light};
+  --mr-score-border-color-good: #{$mr-score-border-color-good-light};
+  --mr-score-text-color-good: #{$mr-score-text-color-good-light};
+  --mr-score-background-color-platinum: #{$mr-score-bg-color-platinum-light};
+  --mr-score-border-color-platinum: #{$mr-score-border-color-platinum-light};
+  --mr-score-text-color-platinum: #{$mr-score-text-color-platinum-light};
+
+  /* Drawing Details */
+  --mr-drawing-details-title-color: #{$mr-drawing-details-title-color-light};
+  --mr-comment-like-color: #{$mr-comment-like-color-light};
+  --mr-comment-dislike-color: #{$mr-comment-dislike-color-light};
+  --mr-favorite-icon-color: #{$mr-favorite-icon-color};
+  --mr-section-text-color: #{$mr-section-text-color-light};
+  --mr-tab-panel-section-color: #{$mr-tab-panel-section-color-light};
+
+  /* Drawing Search Form */
+  --mr-art-search-labels-color: #{$mr-art-search-labels-color-light};
+
+  /* Settings Screen */
+  --mr-setting-subject-border-color: #{$mr-setting-subject-border-color-light};
+
+  /* Header */
+  --header-background-color-production: #{$header-background-color-production-light};
+  --header-color-production: #{$header-color-production-light};
+  --header-background-color-development: #{$header-background-color-development-light};
+  --header-color-development: #{$header-color-development-light};
 }
 
 
@@ -103,7 +221,40 @@ $mr-thumbnail-spotify-color: green;
   --mr-thumbnail-date-background-color: #{$mr-thumbnail-date-bg-color-dark};
   --mr-thumbnail-date-text-color: #{$mr-thumbnail-date-text-color-dark};
   --mr-thumbnail-bg-hover: #{$mr-thumbnail-bg-hover-dark};
+  --mr-thumbnail-bg-hover-favorite: #{$mr-thumbnail-bg-hover-favorite-dark};
   --mr-thumbnail-text-color: #{$mr-thumbnail-text-color-dark};
+
+  /* Score Label */
+  --mr-score-background-color-bad: #{$mr-score-bg-color-bad-dark};
+  --mr-score-border-color-bad: #{$mr-score-border-color-bad-dark};
+  --mr-score-text-color-bad: #{$mr-score-text-color-bad-dark};
+  --mr-score-background-color-mild: #{$mr-score-bg-color-mild-dark};
+  --mr-score-border-color-mild: #{$mr-score-border-color-mild-dark};
+  --mr-score-text-color-mild: #{$mr-score-text-color-mild-dark};
+  --mr-score-background-color-good: #{$mr-score-bg-color-good-dark};
+  --mr-score-border-color-good: #{$mr-score-border-color-good-dark};
+  --mr-score-text-color-good: #{$mr-score-text-color-good-dark};
+  --mr-score-background-color-platinum: #{$mr-score-bg-color-platinum-dark};
+  --mr-score-border-color-platinum: #{$mr-score-border-color-platinum-dark};
+  --mr-score-text-color-platinum: #{$mr-score-text-color-platinum-dark};
+
+  /* Drawing Details */
+  --mr-comment-like-color: #{$mr-comment-like-color-dark};
+  --mr-comment-dislike-color: #{$mr-comment-dislike-color-dark};
+  --mr-section-text-color: #{$mr-section-text-color-dark};
+  --mr-tab-panel-section-color: #{$mr-tab-panel-section-color-dark};
+
+  /* Drawing Search Form */
+  --mr-art-search-labels-color: #{$mr-art-search-labels-color-dark};
+
+  /* Settings Screen */
+  --mr-setting-subject-border-color: #{$mr-setting-subject-border-color-dark};
+
+  /* Header */
+  --header-background-color-production: #{$header-background-color-production-dark};
+  --header-color-production: #{$header-color-production-dark};
+  --header-background-color-development: #{$header-background-color-development-dark};
+  --header-color-development: #{$header-color-development-dark};
 }
 
 
@@ -164,17 +315,10 @@ $mr-thumbnail-spotify-color: green;
   --mr-score-background-color-none-dark: #8c6992;
   --mr-score-background-color-none-light: #d8bedd;
   --mr-score-background-color-none: var(--mr-score-background-color-none-dark);
-  --mr-score-background-color-bad: red;
-  --mr-score-background-color-mild: #edad25;
-  --mr-score-background-color-good: #36b936;
-  --mr-score-background-color-platinum: linear-gradient(135deg, white 30%, var(--mr-score-platinum-blue) 55%, white 55%, var(--mr-score-platinum-white) 100%);
+
   --mr-score-text-color-none-dark: black;
   --mr-score-text-color-none-light: white;
   --mr-score-text-color-none: var(--mr-score-text-color-none-dark);
-  --mr-score-text-color-bad: white;
-  --mr-score-text-color-mild: black;
-  --mr-score-text-color-good: black;
-  --mr-score-text-color-platinum: #333664;
   --mr-vote-card-background-color-dark: var(--mr-background-color-secondary);
   --mr-vote-card-background-color-light: var(--mr-nav-color-light);
   --mr-vote-card-background-color: var(--mr-vote-card-background-color-dark);

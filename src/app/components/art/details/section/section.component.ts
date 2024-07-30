@@ -1,5 +1,7 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { LanguageComponent } from '@models/components/LanguageComponent';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   ArtSectionConfig,
   ArtSectionType,
@@ -9,11 +11,11 @@ import {
 @Component({
   selector: 'app-details-section',
   standalone: true,
-  imports: [NgClass, NgFor, NgIf],
+  imports: [NgClass, NgFor, NgIf, TranslateModule],
   templateUrl: './section.component.html',
   styleUrl: './section.component.scss',
 })
-export class SectionComponent implements OnInit {
+export class SectionComponent extends LanguageComponent implements OnInit {
   tagDelimiter = ';';
 
   @Input() type: ArtSectionType = '';
@@ -25,6 +27,10 @@ export class SectionComponent implements OnInit {
   @Input() capitalize = false;
 
   selectedType: IArtSectionType = { id: '', icon: '', text: '' };
+
+  constructor() {
+    super('SCREENS.DRAWING-DETAILS.DETAILS.SECTIONS');
+  }
 
   ngOnInit() {
     this.loadSelectedType();

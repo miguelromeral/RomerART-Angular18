@@ -3,11 +3,8 @@
 }
 
 .tab-button.active {
-  @apply border-main-400 text-main-300;
-}
-
-.favorite .tab-button.active {
-  @apply border-gold-500 text-gold-500;
+  border-color: var(--mr-tab-panel-section-color);
+  color: var(--mr-tab-panel-section-color);
 }
 
 .tab-content {

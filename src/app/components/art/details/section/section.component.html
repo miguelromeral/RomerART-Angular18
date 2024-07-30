@@ -1,5 +1,7 @@
-<div class="flex flex-row flex-wrap gap-1" *ngIf="tags; else noTags">
-  <span class="text-xs italic text-slate-500" *ngFor="let tag of listTags">
+<div
+  class="art-section flex flex-row flex-wrap gap-1"
+  *ngIf="tags; else noTags">
+  <span class="tag text-xs italic" *ngFor="let tag of listTags">
     <!-- TODO: añadir este replace?? -->
     <!-- @tag.Replace(" ", "") -->
     #{{ tag.toLowerCase() }}
@@ -7,9 +9,9 @@
 </div>
 
 <ng-template #noTags>
-  <div class="mr-art-section flex flex-row gap-5">
+  <div class="art-section flex flex-row gap-5">
     <div
-      class="flex flex-nowrap justify-end gap-2 overflow-x-hidden font-light text-main-300">
+      class="icon flex flex-nowrap justify-end gap-2 overflow-x-hidden font-light">
       <i class="bi" [ngClass]="selectedType.icon"></i>
       <!-- <span class="title uppercase">{{ selectedType.text }}</span> -->
     </div>
@@ -23,8 +25,18 @@
         </li>
       </ul>
 
-      <div *ngIf="rawText" [innerHTML]="rawText"></div>
+      <div
+        *ngIf="
+          rawText && selectedType.id !== 'votes' && selectedType.id !== 'views'
+        "
+        [innerHTML]="rawText"></div>
       <ng-content></ng-content>
+      <ng-container *ngIf="selectedType.id === 'views'">
+        {{ text(selectedType.textCode!) | translate: { views: rawText } }}
+      </ng-container>
+      <ng-container *ngIf="selectedType.id === 'votes'">
+        {{ text(selectedType.textCode!) | translate: { votes: rawText } }}
+      </ng-container>
     </div>
   </div>
 </ng-template>

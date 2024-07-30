@@ -1,6 +1,6 @@
 /* Thumbnail */
 .mr-img-thumbnail-container img {
-  // transition: opacity var(--mr-transition-time) ease-in-out;
+  transition: opacity var(--mr-transition-time) ease-in-out;
 }
 
 /* Date thumbnail */
@@ -9,6 +9,7 @@
   background-color: var(--mr-thumbnail-date-background-color);
   color: var(--mr-thumbnail-date-text-color);
   z-index: 1;
+  transition: var(--mr-transition-time) ease-in-out;
 }
 
 .contenido:has(.mr-img-thumbnail-container:hover) .mr-img-thumbnail-date {
@@ -19,7 +20,7 @@
 .mr-img-thumbnail-title {
   @apply h-full w-full absolute top-0 left-0 flex items-center justify-center flex-col text-center;
   background: var(--mr-thumbnail-bg-hover);
-  // transition: var(--mr-transition-time) ease-in-out;
+  transition: var(--mr-transition-time) ease-in-out;
   color: var(--mr-thumbnail-text-color);
   font-size: var(--mr-font-size-large);
   backdrop-filter: blur(2px);
@@ -75,6 +76,7 @@
 
 .mr-img-thumbnail-stats {
   color: var(--mr-thumbnail-text-color);
+  transition: var(--mr-transition-time) ease-in-out;
 }
 
 .favorite .mr-img-thumbnail-stats {
@@ -87,12 +89,14 @@
 
 .mr-img-thumbnail-score-container {
   z-index: 1;
+  transition: var(--mr-transition-time) ease-in-out;
 }
 
 
 
 .mr-img-thumbnail-details-container {
   bottom: 29px;
+  transition: var(--mr-transition-time);
 }
 
 a:hover .mr-img-thumbnail-details-container {
@@ -107,6 +111,7 @@ a:hover .mr-img-thumbnail-details-container {
 
 .mr-thumbnail-spotify-icon {
   /* TODO: este color no funciona */
+  transition: var(--mr-transition-time);
   color: var(--mr-thumbnail-spotify-color) !important;
   z-index: 3;
   opacity: 0;
@@ -128,4 +133,5 @@ a:hover .mr-img-thumbnail-details-container {
 .mr-error-load-placeholder {
   @apply absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col flex-wrap items-center justify-center align-middle;
   background: var(--mr-thumbnail-bg-hover);
+  transition: var(--mr-transition-time) ease-out;
 }

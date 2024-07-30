@@ -1,17 +1,7 @@
-@import url('../../../../styles/variables.scss');
-
-/* images.css
-/***************************************************/
-
-
-
-/***************************************************/
-
 /* Title of the Drawing */
 .mr-image-page-title {
+  @apply border-b italic;
   transition: var(--mr-transition-time) ease-in-out;
-}
-
-.mr-image-page-title:hover {
-  color: var(--mr-text-color) !important;
+  color: var(--mr-drawing-details-title-color) !important;
+  border-color: var(--mr-drawing-details-title-color) !important;
 }

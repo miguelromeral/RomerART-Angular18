@@ -13,10 +13,7 @@ html {
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
-}
-
-* {
-  transition: var(--mr-transition-time);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 body {
@@ -191,4 +188,29 @@ footer {
 .navbar-brand {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+
+h1 {
+  @apply text-2xl uppercase;
+}
+
+h2 {
+  @apply text-xl;
+}
+
+h3 {
+  @apply text-lg;
+}
+
+h4 {
+  @apply text-base;
+}
+
+h5 {
+  @apply text-sm;
+}
+
+h6 {
+  @apply text-xs;
 }

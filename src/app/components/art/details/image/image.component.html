@@ -14,20 +14,20 @@
       alt="drawing" />
 
     <div
-      class="mr-error-load-placeholder"
+      class="mr-error-load-placeholder absolute bottom-0 left-0 right-0 top-0 h-full w-full"
       [attr.data-error-drawing-id]="drawing.id">
-      <span class="emoji">🙃</span>
-      <span class="subtitle">Image Not Found</span>
+      <span class="text-2xl">🙃</span>
+      <span class="text-center text-sm">Image Not Found</span>
     </div>
 
     <i
       *ngIf="drawing.favorite"
       id="iFavoriteIcon"
-      class="bi bi-star-fill absolute block"
+      class="bi bi-star-fill absolute right-1 top-1 block"
       title="One of my favorites drawings."></i>
     <div
       id="divIconFullScreen"
-      class="absolute left-0 top-0 flex aspect-square h-6 w-6 flex-nowrap justify-center rounded-br-md bg-black p-1 align-middle text-sm text-white"
+      class="absolute left-0 top-0 flex aspect-square h-6 w-6 cursor-pointer flex-nowrap justify-center rounded-br-md bg-black p-1 align-middle text-sm text-white"
       tabindex="0"
       (click)="fullScreenImage()"
       (keydown)="fullScreenImageOnKeyDown($event)">
@@ -38,9 +38,7 @@
         title="Cerrar la pantalla completa"></i>
     </div>
   </div>
-  <div
-    class="my-2 flex flex-row flex-nowrap justify-between text-2xl"
-    [ngClass]="drawing.favorite ? 'text-gold-200' : ''">
+  <div class="my-2 flex flex-row flex-nowrap justify-between text-2xl">
     <div
       class="flex select-none flex-row flex-nowrap gap-4"
       [title]="drawing.likes + ' kudos'">
@@ -67,10 +65,10 @@
         (keypress.enter)="shareDrawing()"
         tabindex="0"
         title="Compartir dibujo">
-        <i class="bi bi-share"></i>
+        <i class="bi bi-send"></i>
       </button>
     </div>
-    <div class="flex select-none flex-row flex-nowrap gap-4 font-bold">
+    <div class="flex select-none flex-row flex-nowrap gap-4 text-xl font-bold">
       <app-drawing-score
         class="h-8 w-8"
         [score]="drawing.scorePopular"
@@ -79,11 +77,5 @@
         class="h-8 w-8"
         [score]="drawing.scoreCritic"></app-drawing-score>
     </div>
-  </div>
-  <div class="my-2 text-sm">
-    <span>{{
-      text('DETAILS.VIEWS')
-        | translate: { views: drawing.views, votes: drawing.votesPopular }
-    }}</span>
   </div>
 </div>

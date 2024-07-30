@@ -6,15 +6,7 @@
     <!-- TODO: añadir botón de admin para editarlo -->
 
     <div class="flex w-full flex-col gap-2 sm:col-span-2">
-      <div
-        class="border-b text-2xl italic"
-        [ngClass]="
-          drawing.favorite
-            ? 'border-b-gold-500 text-gold-500'
-            : 'border-b-main-400 text-main-400'
-        ">
-        <h1 class="mr-image-page-title">{{ drawing.title }}</h1>
-      </div>
+      <h1 class="mr-image-page-title">{{ drawing.title }}</h1>
 
       <app-art-details-title
         [character]="drawing.name"
@@ -58,6 +50,11 @@
           <app-details-section
             type="views"
             [rawText]="drawing.views.toString()">
+          </app-details-section>
+
+          <app-details-section
+            type="votes"
+            [rawText]="drawing.votesPopular.toString()">
           </app-details-section>
 
           <app-details-section
@@ -117,5 +114,6 @@
     </div>
   </div>
 
+  <!-- TODO: crear plantilla para imagen no encontrada -->
   <div *ngIf="drawingNotFound">Drawing Not Found</div>
 </app-layout>

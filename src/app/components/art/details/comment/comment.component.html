@@ -1,10 +1,9 @@
 <!-- TODO: mover la imagen al comment-wrapper para que no haya un salto desde el primer comentario hasta el siguiente-->
 <div
-  class="grid grid-cols-10"
+  class="comment grid grid-cols-10"
   [ngClass]="{
-    'text-main-50': type === '',
-    'text-green-400': type === 'like',
-    'text-red-400': type === 'dislike',
+    like: type === 'like',
+    dislike: type === 'dislike',
   }">
   <!-- <div class="flex w-full items-start justify-start">
     <div *ngIf="first">

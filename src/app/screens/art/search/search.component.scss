@@ -7,3 +7,7 @@
 #artGallery.mr-img-gallery.loading {
   opacity: 0.1;
 }
+
+#spResultsCount {
+  transition: var(--mr-transition-time) ease-in-out;
+}

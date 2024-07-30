@@ -32,3 +32,27 @@
 .mr-custom-range::-webkit-slider-runnable-track {
   background-color: var(--mr-custom-range-track-color);
 }
+
+.choice-label {
+  color: var(--mr-color-gold);
+  background-color: transparent;
+  border: 1px solid var(--mr-color-gold);
+  padding: 0px 10px;
+  border-radius: 20px;
+  transition: var(--mr-transition-time) ease-out;
+  cursor: pointer;
+}
+
+.mr-choice-filter:has(input:checked) .choice-label {
+  color: black;
+  background-color: var(--mr-color-gold);
+}
+
+.mr-choice-filter input {
+  display: none;
+}
+
+
+.mr-choice-filter {
+  color: var(--mr-color-gold);
+}
