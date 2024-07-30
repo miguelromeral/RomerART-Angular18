@@ -9,6 +9,7 @@ import { TextUtils } from 'utils/customization/text-utils';
 import { DrawingScoreComponent } from '../../drawing-score/drawing-score.component';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 
 @Component({
   selector: 'app-art-details-image',
@@ -19,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ScoreBoardComponent,
     DrawingScoreComponent,
     TranslateModule,
+    CustomTranslatePipe,
   ],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',

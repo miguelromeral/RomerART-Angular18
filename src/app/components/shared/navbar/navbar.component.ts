@@ -10,6 +10,7 @@ import { NavbarLinkComponent } from './navbar-link/navbar-link.component';
 import { INavBarLink, NavBarConfig } from 'config/navbar/navbar.config';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgFor,
     NavbarLinkComponent,
     TranslateModule,
+    CustomTranslatePipe,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',

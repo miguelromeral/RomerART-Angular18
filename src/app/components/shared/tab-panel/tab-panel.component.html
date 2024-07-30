@@ -12,7 +12,7 @@
       <i class="bi" [ngClass]="tab.icon"></i>
     </ng-template>
     <span *ngIf="selectedTab === tab.id">
-      {{ text(tab.textCode) | translate }}
+      {{ text(tab.textCode) | mrTranslate }}
     </span>
   </button>
 </div>

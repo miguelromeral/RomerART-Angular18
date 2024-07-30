@@ -2,7 +2,7 @@
   <div class="row">
     <div class="mr-sort-filter-container inline-flex w-full flex-row-reverse">
       <div class="mr-sort-filter flex flex-col items-end">
-        <span class="text-sm">{{ text('SORTBY.TITLE') | translate }}</span>
+        <span class="text-sm">{{ text('SORTBY.TITLE') | mrTranslate }}</span>
         <select
           id="sFilterSortBy"
           class="mr-custom-select filters form-select form-select-sm"
@@ -13,7 +13,7 @@
               *ngIf="option.visible"
               [value]="option.value"
               [ngClass]="option.class">
-              {{ text(option.textCode) | translate }}
+              {{ text(option.textCode) | mrTranslate }}
             </option>
           </ng-container>
         </select>
@@ -29,7 +29,7 @@
       role="alert"></div>
 
     <span class="mr-suboption-filter text-sm">{{
-      text('TITLE') | translate
+      text('TITLE') | mrTranslate
     }}</span>
     <div
       class="mr-filter-container grid w-full grid-cols-8 items-center gap-1 sm:grid-cols-9 lg:grid-cols-8">
@@ -44,7 +44,7 @@
         formControlName="textQuery"
         class="form-control mr-custom-text col-span-7 w-full sm:col-span-8 lg:col-span-7"
         type="text"
-        [placeholder]="text('QUERY.PLACEHOLDER') | translate"
+        [placeholder]="text('QUERY.PLACEHOLDER') | mrTranslate"
         (change)="filterControlChange()"
         (keydown)="capturarEnter($event)" />
 
@@ -55,7 +55,7 @@
         formControlName="type"
         (change)="filterControlChange()">
         <option value="-1" selected>
-          {{ text('STYLE.TITLE') | translate }}
+          {{ text('STYLE.TITLE') | mrTranslate }}
         </option>
         <option *ngFor="let style of listDrawingStyles" [value]="style.id">
           {{ style.translatedText }}
@@ -70,7 +70,7 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         (change)="filterControlChange()">
         <option value="-1" selected>
-          {{ text('PRODUCT-TYPE.TITLE') | translate }}
+          {{ text('PRODUCT-TYPE.TITLE') | mrTranslate }}
         </option>
 
         <option *ngFor="let type of listDrawingProductTypes" [value]="type.id">
@@ -86,7 +86,7 @@
         formControlName="productName"
         (change)="filterControlChange()">
         <option value="" selected>
-          {{ text('PRODUCT.TITLE') | translate }}
+          {{ text('PRODUCT.TITLE') | mrTranslate }}
         </option>
 
         <option
@@ -106,7 +106,7 @@
         formControlName="collection"
         (change)="filterControlChange()">
         <option value="" selected>
-          {{ text('COLLECTION.TITLE') | translate }}
+          {{ text('COLLECTION.TITLE') | mrTranslate }}
         </option>
 
         <option [value]="col.id" *ngFor="let col of listCollections">
@@ -121,7 +121,7 @@
         formControlName="characterName"
         (change)="filterControlChange()">
         <option value="" selected>
-          {{ text('CHARACTER.TITLE') | translate }}
+          {{ text('CHARACTER.TITLE') | mrTranslate }}
         </option>
 
         <ng-container *ngFor="let character of listDrawingCharacters">
@@ -133,7 +133,7 @@
           </option>
         </ng-container>
 
-        <option value="none">{{ text('CHARACTER.NONE') | translate }}</option>
+        <option value="none">{{ text('CHARACTER.NONE') | mrTranslate }}</option>
       </select>
 
       <select
@@ -142,13 +142,15 @@
         class="mr-custom-select form-select form-select-sm mr-filter-item"
         formControlName="modelName"
         (change)="filterControlChange()">
-        <option value="" selected>{{ text('MODEL.TITLE') | translate }}</option>
+        <option value="" selected>
+          {{ text('MODEL.TITLE') | mrTranslate }}
+        </option>
 
         <option *ngFor="let model of listDrawingModels" [value]="model">
           {{ model }}
         </option>
 
-        <option value="none">{{ text('MODEL.NONE') | translate }}</option>
+        <option value="none">{{ text('MODEL.NONE') | mrTranslate }}</option>
       </select>
 
       <select
@@ -158,7 +160,7 @@
         formControlName="software"
         (change)="filterControlChange()">
         <option value="0" selected>
-          {{ text('SOFTWARE.TITLE') | translate }}
+          {{ text('SOFTWARE.TITLE') | mrTranslate }}
         </option>
 
         <option *ngFor="let sw of listDrawingSoftwares" [value]="sw.id">
@@ -173,7 +175,7 @@
         formControlName="paper"
         (change)="filterControlChange()">
         <option value="0" selected>
-          {{ text('PAPER.TITLE') | translate }}
+          {{ text('PAPER.TITLE') | mrTranslate }}
         </option>
 
         <option *ngFor="let paper of listDrawingPapers" [value]="paper.id">
@@ -187,13 +189,13 @@
         formControlName="formSpotify"
         (change)="filterControlChange()">
         <option value="null" selected>
-          {{ text('SPOTIFY.TITLE') | translate }}
+          {{ text('SPOTIFY.TITLE') | mrTranslate }}
         </option>
         <option value="true">
-          {{ text('SPOTIFY.YES') | translate }}
+          {{ text('SPOTIFY.YES') | mrTranslate }}
         </option>
         <option value="false">
-          {{ text('SPOTIFY.NO') | translate }}
+          {{ text('SPOTIFY.NO') | mrTranslate }}
         </option>
       </select>
 
@@ -202,7 +204,7 @@
           class="form-check-label choice-label"
           for="flexSwitchCheckChecked"
           style="font-weight: bold">
-          {{ text('FAVORITES.TITLE') | translate }}</label
+          {{ text('FAVORITES.TITLE') | mrTranslate }}</label
         >
         <input
           class="form-check-input"

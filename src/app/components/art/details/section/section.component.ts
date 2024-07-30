@@ -1,5 +1,6 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -11,7 +12,7 @@ import {
 @Component({
   selector: 'app-details-section',
   standalone: true,
-  imports: [NgClass, NgFor, NgIf, TranslateModule],
+  imports: [NgClass, NgFor, NgIf, TranslateModule, CustomTranslatePipe],
   templateUrl: './section.component.html',
   styleUrl: './section.component.scss',
 })

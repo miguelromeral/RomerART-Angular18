@@ -32,10 +32,10 @@
         [innerHTML]="rawText"></div>
       <ng-content></ng-content>
       <ng-container *ngIf="selectedType.id === 'views'">
-        {{ text(selectedType.textCode!) | translate: { views: rawText } }}
+        {{ text(selectedType.textCode!) | mrTranslate: { views: rawText } }}
       </ng-container>
       <ng-container *ngIf="selectedType.id === 'votes'">
-        {{ text(selectedType.textCode!) | translate: { votes: rawText } }}
+        {{ text(selectedType.textCode!) | mrTranslate: { votes: rawText } }}
       </ng-container>
     </div>
   </div>

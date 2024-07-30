@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TabPanelItem } from '@models/components/tab-panel-item.model';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,7 +12,7 @@ import {
 @Component({
   selector: 'app-tab-panel',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, CustomTranslatePipe],
   templateUrl: './tab-panel.component.html',
   styleUrl: './tab-panel.component.scss',
 })

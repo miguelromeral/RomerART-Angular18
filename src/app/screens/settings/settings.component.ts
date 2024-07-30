@@ -12,16 +12,19 @@ import {
 } from 'config/settings/local-storage.config';
 import { LayoutComponent } from '../../components/shared/layout/layout.component';
 import { ThemeService } from '@app/services/theme/theme.service';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
   imports: [
     TranslateModule,
+    CustomTranslatePipe,
     NgFor,
     SettingSectionComponent,
     LayoutComponent,
     LayoutComponent,
+    CustomTranslatePipe,
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',

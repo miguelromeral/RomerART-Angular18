@@ -1,12 +1,12 @@
 <app-layout>
   <div class="flex flex-col">
-    <h1 class="pb-10">{{ text('TITLE') | translate }}</h1>
+    <h1 class="pb-10">{{ text('TITLE') | mrTranslate }}</h1>
 
-    <h3>Accesibilidad</h3>
+    <h2>Accesibilidad</h2>
     <div class="mr-settings-subject flex flex-col gap-6">
       <app-setting-section
-        [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | translate"
-        [description]="text('DESCRIPTION') | translate">
+        [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | mrTranslate"
+        [description]="text('DESCRIPTION') | mrTranslate">
         <select
           id="language-select"
           class="mr-custom-select"
@@ -31,7 +31,7 @@
             *ngFor="let theme of themes"
             [value]="theme.value"
             [selected]="theme.value === currentTheme">
-            {{ text(theme.textCode) | translate }}
+            {{ text(theme.textCode) | mrTranslate }}
           </option>
         </select>
       </app-setting-section>

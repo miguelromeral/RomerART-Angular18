@@ -35,6 +35,7 @@ import {
 } from 'config/art/art-filter-form.config';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageComponent } from '@models/components/LanguageComponent';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -46,6 +47,7 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
     NgClass,
     CommonModule,
     TranslateModule,
+    CustomTranslatePipe,
     DrawingThumbnailComponent,
     ReactiveFormsModule,
     LayoutComponent,

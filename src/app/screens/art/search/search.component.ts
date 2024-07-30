@@ -6,6 +6,7 @@ import { LayoutComponent } from '@app/components/shared/layout/layout.component'
 import { FilterFormComponent } from '@app/components/art/search/filter-form/filter-form.component';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 
 @Component({
   selector: 'app-search',
@@ -18,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     LayoutComponent,
     FilterFormComponent,
     TranslateModule,
+    CustomTranslatePipe,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',

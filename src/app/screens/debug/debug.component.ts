@@ -3,11 +3,12 @@ import $ from 'jquery';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '@app/services/language/language.service';
 import { Subscription } from 'rxjs';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 
 @Component({
   selector: 'app-debug',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateModule, CustomTranslatePipe],
   templateUrl: './debug.component.html',
   styleUrl: './debug.component.scss',
 })
