@@ -62,11 +62,11 @@ html:not([style*="--mr-chat-color"]) {
 
   --mr-text-color: var(--mr-text-color-light);
   --mr-text-color-opposite: var(--mr-text-color-dark);
-  --mr-control-background-color: var(--mr-control-background-color-light);
+  --mr-input-bg-color: var(--mr-input-bg-color-light);
   --mr-ff-border-color: #b6b6b6;
   --mr-development-banner-color: var(--mr-development-banner-color-light);
   --mr-thumbnail-date-background-color: var(--mr-thumbnail-date-background-color-light);
-  /*--mr-text-color-not-important: var(--mr-text-color-not-important-light);*/
+  /*--mr-text-color-secondary: var(--mr-text-color-secondary-light);*/
   --mr-score-background-color-none: var(--mr-score-background-color-none-light);
   --mr-score-text-color-none: var(--mr-score-text-color-none-light);
   --mr-vote-card-background-color: var(--mr-vote-card-background-color-light);

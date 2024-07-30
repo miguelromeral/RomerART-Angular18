@@ -57,14 +57,14 @@ span.mr-loader-subtitle {
 
 .mr-custom-text {
   height: var(--mr-control-height);
-  background-color: var(--mr-control-background-color);
+  background-color: var(--mr-input-bg-color);
   color: var(--mr-text-color);
   border-color: var(--mr-chat-color);
 }
 
 .mr-custom-select:hover,
 .mr-custom-btn:hover {
-  background-color: var(--mr-control-background-color);
+  background-color: var(--mr-input-bg-color);
   color: var(--mr-text-color);
 }
 

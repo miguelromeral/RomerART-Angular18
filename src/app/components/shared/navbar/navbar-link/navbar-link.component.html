@@ -5,7 +5,7 @@
   routerLinkActive="active"
   ariaCurrentWhenActive="page">
   <div
-    class="mr-bottom-bar-icon relative pt-1 text-lg"
+    class="mr-bottom-bar-icon relative pt-1 text-xl sm:text-lg"
     *ngIf="icon !== '' && iconActive !== ''">
     <i class="bi" [ngClass]="active ? iconActive : icon"></i>
   </div>
@@ -25,7 +25,7 @@
 
   <div
     *ngIf="text !== ''"
-    class="mr-bottom-bar-text relative bottom-1 text-sm sm:bottom-0 sm:text-lg">
+    class="mr-bottom-bar-text relative bottom-1 hidden text-sm sm:bottom-0 sm:block sm:text-lg">
     {{ text }}
   </div>
 </a>
