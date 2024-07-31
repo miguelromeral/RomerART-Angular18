@@ -2,7 +2,6 @@ import { NgClass, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Drawing } from '@models/art/drawing.model';
-import { Customization } from '@utils/customization';
 import { DrawingScoreComponent } from '../drawing-score/drawing-score.component';
 
 @Component({

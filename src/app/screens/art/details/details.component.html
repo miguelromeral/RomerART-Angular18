@@ -119,6 +119,15 @@
     </div>
   </div>
 
-  <!-- TODO: crear plantilla para imagen no encontrada -->
-  <div *ngIf="drawingNotFound">Drawing Not Found</div>
+  <div *ngIf="drawingNotFound" class="flex flex-col flex-nowrap gap-3">
+    <h1>
+      {{ text('NOTFOUND.TITLE') | mrTranslate }}
+    </h1>
+    <h3>
+      {{ text('NOTFOUND.SUBTITLE') | mrTranslate: { id } }}
+    </h3>
+    <a routerLink="/art">
+      {{ text('NOTFOUND.GO-TO-GALLERY') | mrTranslate }}
+    </a>
+  </div>
 </app-layout>

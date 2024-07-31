@@ -17,6 +17,10 @@ import { TabPanelComponent } from '@app/components/shared/tab-panel/tab-panel.co
 import { TabPanelItem } from '@models/components/tab-panel-item.model';
 import { ArtInfoTabsConfig } from 'config/art/art-info-tabs.config';
 import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { LanguageComponent } from '@models/components/LanguageComponent';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -31,15 +35,18 @@ import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.mo
     CommentComponent,
     CommentWrapperComponent,
     SectionComponent,
+    RouterModule,
     ImageComponent,
     LayoutComponent,
     ScoreBoardComponent,
     TabPanelComponent,
+    TranslateModule,
+    CustomTranslatePipe,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent extends LanguageComponent implements OnInit {
   @Input() id: string | null = null;
   drawing: Drawing | undefined;
   drawingNotFound: boolean | undefined;
@@ -50,7 +57,9 @@ export class DetailsComponent implements OnInit {
     private logger: LoggerService,
     private drawingService: DrawingService,
     private metadataService: MetadataService
-  ) {}
+  ) {
+    super('SCREENS.DRAWING-DETAILS');
+  }
 
   ngOnInit() {
     this.loadDrawing();
@@ -70,8 +79,9 @@ export class DetailsComponent implements OnInit {
 
           this.panelTabs = ArtInfoTabsConfig.getTabs(/*this.drawing*/);
           // this.logger.log(this.drawing);
+        } else {
+          this.drawingNotFound = true;
         }
-        this.drawingNotFound = data === undefined || data.id === '';
       });
     }
   }
