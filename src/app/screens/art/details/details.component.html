@@ -1,14 +1,21 @@
 <app-layout>
   <div
-    *ngIf="drawing"
     class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2"
     [ngClass]="{ favorite: drawing.favorite }">
     <!-- TODO: añadir botón de admin para editarlo -->
 
     <div class="flex w-full flex-col gap-2 sm:col-span-2">
-      <h1 class="mr-image-page-title">{{ drawing.title }}</h1>
+      <h1 class="mr-image-page-title">
+        <app-loading [loading]="loading">
+          <span content>
+            {{ drawing.title }}
+          </span>
+          <div loading class="h-8 w-full"></div>
+        </app-loading>
+      </h1>
 
       <app-art-details-title
+        [loading]="loading"
         [character]="drawing.name"
         [modelName]="drawing.modelName">
       </app-art-details-title>
@@ -16,105 +23,181 @@
 
     <div class="flex w-full flex-col flex-nowrap gap-2">
       <app-art-details-image
+        [loading]="loading"
         [drawing]="drawing"
         (submittedCheer)="receiveCheer($event)"></app-art-details-image>
     </div>
-    <div class="w-full">
+    <div class="w-full" *ngIf="drawing">
       <app-tab-panel [tabs]="panelTabs" selectedTab="comments">
-        <app-art-details-comment-wrapper
-          tab-content-comments
-          [comments]="drawing.listComments">
-        </app-art-details-comment-wrapper>
+        <app-loading [loading]="loading" tab-content-comments>
+          <div class="container flex flex-col gap-3" loading>
+            <div class="container flex flex-col gap-1">
+              <div class="h-4 w-full"></div>
+              <div class="h-4 w-full"></div>
+              <div class="h-4 w-1/3"></div>
+            </div>
+            <div class="container flex flex-col gap-1">
+              <div class="h-4 w-full"></div>
+              <div class="h-4 w-full"></div>
+              <div class="h-4 w-4/5"></div>
+            </div>
+            <div class="container flex flex-col gap-1">
+              <div class="h-4 w-full"></div>
+              <div class="h-4 w-1/2"></div>
+            </div>
+          </div>
+          <div content>
+            <app-art-details-comment-wrapper
+              [comments]="drawing.listComments"
+              [type]="''">
+            </app-art-details-comment-wrapper>
+          </div>
+        </app-loading>
 
-        <app-art-details-comment-wrapper
-          tab-content-likes
-          [comments]="drawing.listCommentPros"
-          [type]="'like'">
-        </app-art-details-comment-wrapper>
+        <app-loading [loading]="loading" tab-content-likes>
+          <div class="container flex flex-col gap-1" loading>
+            <div class="h-4 w-full"></div>
+            <div class="h-4 w-full"></div>
+            <div class="h-4 w-4/5"></div>
+          </div>
+          <div content>
+            <app-art-details-comment-wrapper
+              [comments]="drawing.listCommentPros"
+              [type]="'like'">
+            </app-art-details-comment-wrapper>
+          </div>
+        </app-loading>
 
-        <app-art-details-comment-wrapper
-          tab-content-dislikes
-          [comments]="drawing.listCommentCons"
-          [type]="'dislike'">
-        </app-art-details-comment-wrapper>
+        <app-loading [loading]="loading" tab-content-dislikes>
+          <div class="container flex flex-col gap-1" loading>
+            <div class="h-4 w-full"></div>
+            <div class="h-4 w-1/4"></div>
+          </div>
+          <div content>
+            <app-art-details-comment-wrapper
+              [comments]="drawing.listCommentCons"
+              [type]="'dislike'">
+            </app-art-details-comment-wrapper>
+          </div>
+        </app-loading>
 
-        <app-spotify-track
-          tab-content-spotify
-          *ngIf="drawing.spotifyTrackId !== ''"
-          [trackId]="drawing.spotifyTrackId"></app-spotify-track>
+        <app-loading [loading]="loading" tab-content-spotify>
+          <div class="h-32 w-full" loading></div>
+          <div content>
+            <app-spotify-track
+              *ngIf="drawing.spotifyTrackId !== ''"
+              [trackId]="drawing.spotifyTrackId"></app-spotify-track>
+          </div>
+        </app-loading>
 
-        <app-art-details-score-board
-          tab-content-vote
-          [drawing]="drawing"
-          (voteSubmitted)="receiveVoteSubmitted($event)">
-        </app-art-details-score-board>
+        <app-loading [loading]="loading" tab-content-vote>
+          <div class="container flex flex-col gap-2" loading>
+            <div class="container flex justify-between">
+              <div class="h-4 w-2/5"></div>
+              <div class="h-4 w-1/4"></div>
+            </div>
+            <div class="h-2 w-full"></div>
+            <div class="h-4 w-1/4"></div>
+          </div>
+          <div content>
+            <app-art-details-score-board
+              [drawing]="drawing"
+              (voteSubmitted)="receiveVoteSubmitted($event)">
+            </app-art-details-score-board>
+          </div>
+        </app-loading>
 
-        <div
-          tab-content-details
-          class="col-span-1 flex flex-col flex-nowrap gap-2 sm:col-span-2">
-          <app-details-section
-            type="views"
-            [rawText]="drawing.views.toString()">
-          </app-details-section>
+        <app-loading [loading]="loading" tab-content-details>
+          <div class="container flex flex-col gap-2" loading>
+            <div class="container grid grid-cols-8 items-center gap-2">
+              <div class="h-6 w-6"></div>
+              <div class="col-span-7 h-4 w-4/6"></div>
+            </div>
+            <div class="container grid grid-cols-8 items-center gap-2">
+              <div class="h-6 w-6"></div>
+              <div class="col-span-7 h-4 w-5/6"></div>
+            </div>
+            <div class="container grid grid-cols-8 items-center gap-2">
+              <div class="h-6 w-6"></div>
+              <div class="col-span-7 h-4 w-2/3"></div>
+            </div>
+            <div class="container grid grid-cols-8 items-center gap-2">
+              <div class="h-6 w-6"></div>
+              <div class="col-span-7 h-4 w-1/2"></div>
+            </div>
+            <div class="container grid grid-cols-8 items-center gap-2">
+              <div class="h-6 w-6"></div>
+              <div class="col-span-7 h-4 w-10/12"></div>
+            </div>
+          </div>
+          <div content>
+            <div
+              class="col-span-1 flex flex-col flex-nowrap gap-2 sm:col-span-2">
+              <app-details-section
+                type="views"
+                [rawText]="drawing.views.toString()">
+              </app-details-section>
 
-          <app-details-section
-            type="votes"
-            [rawText]="drawing.votesPopular.toString()">
-          </app-details-section>
+              <app-details-section
+                type="votes"
+                [rawText]="drawing.votesPopular.toString()">
+              </app-details-section>
 
-          <app-details-section
-            type="date"
-            [rawText]="
-              drawing.date !== '' ? drawing.formattedDate : 'No Date Known'
-            ">
-          </app-details-section>
+              <app-details-section
+                type="date"
+                [rawText]="
+                  drawing.date !== '' ? drawing.formattedDate : 'No Date Known'
+                ">
+              </app-details-section>
 
-          <app-details-section type="time" [rawText]="drawing.timeHuman">
-          </app-details-section>
+              <app-details-section type="time" [rawText]="drawing.timeHuman">
+              </app-details-section>
 
-          <app-details-section type="style" [rawText]="drawing.typeName">
-          </app-details-section>
+              <app-details-section type="style" [rawText]="drawing.typeName">
+              </app-details-section>
 
-          <app-details-section
-            *ngIf="drawing.software > 0"
-            type="software"
-            [rawText]="drawing.softwareName">
-          </app-details-section>
+              <app-details-section
+                *ngIf="drawing.software > 0"
+                type="software"
+                [rawText]="drawing.softwareName">
+              </app-details-section>
 
-          <app-details-section
-            *ngIf="drawing.paper > 0"
-            type="paper"
-            [rawText]="drawing.paperHuman">
-          </app-details-section>
+              <app-details-section
+                *ngIf="drawing.paper > 0"
+                type="paper"
+                [rawText]="drawing.paperHuman">
+              </app-details-section>
 
-          <app-details-section
-            *ngIf="drawing.productType > 0 && drawing.productName !== ''"
-            [type]="getProductSectionType()"
-            [rawText]="drawing.productName">
-          </app-details-section>
+              <app-details-section
+                *ngIf="drawing.productType > 0 && drawing.productName !== ''"
+                [type]="getProductSectionType()"
+                [rawText]="drawing.productName">
+              </app-details-section>
 
-          <app-details-section
-            *ngIf="drawing.modelName !== ''"
-            type="model"
-            [rawText]="drawing.modelName">
-          </app-details-section>
+              <app-details-section
+                *ngIf="drawing.modelName !== ''"
+                type="model"
+                [rawText]="drawing.modelName">
+              </app-details-section>
 
-          <app-details-section
-            *ngIf="drawing.referenceUrl !== ''"
-            type="reference">
-            <a [href]="drawing.referenceUrl" target="_blank"
-              >Abrir en nueva pestaña</a
-            >
-          </app-details-section>
+              <app-details-section
+                *ngIf="drawing.referenceUrl !== ''"
+                type="reference">
+                <a [href]="drawing.referenceUrl" target="_blank"
+                  >Abrir en nueva pestaña</a
+                >
+              </app-details-section>
 
-          <app-details-section
-            class="sm:col-span-2"
-            *ngIf="drawing.tags.length > 0"
-            [tags]="true"
-            [capitalize]="true"
-            [listTags]="drawing.tags">
-          </app-details-section>
-        </div>
+              <app-details-section
+                class="sm:col-span-2"
+                *ngIf="drawing.tags.length > 0"
+                [tags]="true"
+                [capitalize]="true"
+                [listTags]="drawing.tags">
+              </app-details-section>
+            </div>
+          </div>
+        </app-loading>
       </app-tab-panel>
     </div>
   </div>

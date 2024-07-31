@@ -11,4 +11,5 @@ import { Component, Input } from '@angular/core';
 export class TitleComponent {
   @Input() character = '';
   @Input() modelName = '';
+  @Input() loading = true;
 }

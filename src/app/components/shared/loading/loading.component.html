@@ -1,0 +1,6 @@
+<div *ngIf="loading; else loaded" class="skeleton">
+  <ng-content select="[loading]"></ng-content>
+</div>
+<ng-template #loaded>
+  <ng-content select="[content]"></ng-content>
+</ng-template>

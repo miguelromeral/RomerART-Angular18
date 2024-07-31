@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { ScoreBoardComponent } from '../score-board/score-board.component';
@@ -10,6 +10,7 @@ import { DrawingScoreComponent } from '../../drawing-score/drawing-score.compone
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 
 @Component({
   selector: 'app-art-details-image',
@@ -17,16 +18,20 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
   imports: [
     NgIf,
     NgClass,
+    CommonModule,
     ScoreBoardComponent,
     DrawingScoreComponent,
     TranslateModule,
     CustomTranslatePipe,
+    LoadingComponent,
   ],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
 })
 export class ImageComponent extends LanguageComponent {
   private _drawing!: Drawing;
+
+  @Input() loading = true;
 
   @Input()
   public get drawing() {
@@ -66,7 +71,7 @@ export class ImageComponent extends LanguageComponent {
 
     this.drawingService.cheerDrawing(this.drawing.id).subscribe({
       next: () => {
-        this.submittedCheer.emit(this.drawing.likes + 1);
+        this.submittedCheer.emit(this.drawing?.likes + 1);
       },
       error: err => console.error('Error al enviar cheer:', err),
       complete: () => {

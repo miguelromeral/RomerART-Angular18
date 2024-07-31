@@ -14,10 +14,15 @@
 </div> -->
 
 <div class="flex flex-col gap-1">
-  <h3>
-    {{ character }}
-  </h3>
-  <h5 class="mr-image-detail-subtitle">
-    {{ modelName }}
-  </h5>
+  <div *ngIf="loading; else loaded" class="skeleton">
+    <div class="h-4 w-40"></div>
+  </div>
+  <ng-template #loaded>
+    <h3>
+      {{ character }}
+    </h3>
+    <h5 class="mr-image-detail-subtitle">
+      {{ modelName }}
+    </h5>
+  </ng-template>
 </div>

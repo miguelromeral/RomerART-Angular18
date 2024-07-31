@@ -21,6 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { RouterModule } from '@angular/router';
+import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 
 @Component({
   selector: 'app-details',
@@ -42,16 +43,19 @@ import { RouterModule } from '@angular/router';
     TabPanelComponent,
     TranslateModule,
     CustomTranslatePipe,
+    LoadingComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
 export class DetailsComponent extends LanguageComponent implements OnInit {
   @Input() id: string | null = null;
-  drawing: Drawing | undefined;
+  drawing: Drawing = new Drawing();
   drawingNotFound: boolean | undefined;
 
   panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
+
+  loading = true;
 
   constructor(
     private logger: LoggerService,
@@ -82,6 +86,7 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
         } else {
           this.drawingNotFound = true;
         }
+        this.loading = false;
       });
     }
   }

@@ -46,3 +46,12 @@ img {
   color: var(--mr-thanks-message-text-color);
   z-index: 10000;
 }
+
+
+.skeleton {
+  @apply animate-pulse;
+}
+
+.skeleton div:not(.container) {
+  @apply bg-gray-200 dark:bg-gray-700 rounded-sm;
+}

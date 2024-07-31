@@ -4,24 +4,32 @@
     class="mr-img-full-container heart-rain relative min-h-24 w-full"
     [ngClass]="{ favorite: drawing.favorite }"
     (dblclick)="cheerDrawing($event)">
-    <img
-      id="imgFull"
-      [src]="drawing.url"
-      class="mr-img-full pointer-events-none w-full select-none"
-      (error)="errorLoadingImage(drawing.id)"
-      loading="lazy"
-      decoding="async"
-      alt="drawing" />
+    <app-loading [loading]="loading">
+      <div class="flex h-80 w-full items-center justify-center rounded" loading>
+        <i class="bi bi-image-fill text-2xl"></i>
+      </div>
 
-    <div
-      class="mr-error-load-placeholder absolute bottom-0 left-0 right-0 top-0 h-full w-full"
-      [attr.data-error-drawing-id]="drawing.id">
-      <span class="text-2xl">🙃</span>
-      <span class="text-center text-sm">Image Not Found</span>
-    </div>
+      <div content>
+        <img
+          id="imgFull"
+          [src]="drawing.url"
+          class="mr-img-full pointer-events-none w-full select-none"
+          (error)="errorLoadingImage(drawing.id)"
+          loading="lazy"
+          decoding="async"
+          alt="drawing" />
+
+        <div
+          class="mr-error-load-placeholder absolute bottom-0 left-0 right-0 top-0 h-full w-full"
+          [attr.data-error-drawing-id]="drawing.id">
+          <span class="text-2xl">🙃</span>
+          <span class="text-center text-sm">Image Not Found</span>
+        </div>
+      </div>
+    </app-loading>
 
     <i
-      *ngIf="drawing.favorite"
+      *ngIf="drawing?.favorite || false"
       id="iFavoriteIcon"
       class="bi bi-star-fill absolute right-1 top-1 block"
       title="One of my favorites drawings."></i>
@@ -39,44 +47,65 @@
         title="Cerrar la pantalla completa"></i>
     </div> -->
   </div>
-  <div class="my-2 flex flex-row flex-nowrap justify-between text-2xl">
+  <div
+    *ngIf="drawing"
+    class="my-2 flex flex-row flex-nowrap justify-between text-2xl">
     <div
       class="flex select-none flex-row flex-nowrap gap-4"
       [title]="drawing.likes + ' kudos'">
       <form id="cheerForm">
-        <div
-          class="mr-like-container flex flex-row flex-nowrap items-end gap-1">
-          <input type="hidden" name="id" [value]="drawing.id" />
+        <input type="hidden" name="id" [value]="drawing.id" />
 
+        <app-loading [loading]="loading">
+          <div class="h-10 w-10" loading></div>
+
+          <div
+            class="mr-like-container flex flex-row flex-nowrap items-end gap-1"
+            content>
+            <button
+              class="btn-image"
+              [id]="btnCheerId"
+              type="button"
+              (click)="cheerDrawing($event)">
+              <i id="iCheerIcon" class="bi bi-heart"></i>
+            </button>
+            <div id="spLikesCounter" class="text-sm">
+              {{ drawing.likesHuman }}
+            </div>
+          </div>
+        </app-loading>
+      </form>
+
+      <app-loading [loading]="loading">
+        <div class="h-10 w-10" loading></div>
+
+        <div content>
           <button
             class="btn-image"
-            [id]="btnCheerId"
-            type="button"
-            (click)="cheerDrawing($event)">
-            <i id="iCheerIcon" class="bi bi-heart"></i>
+            (click)="shareDrawing()"
+            (keypress.enter)="shareDrawing()"
+            tabindex="0"
+            title="Compartir dibujo">
+            <i class="bi bi-send"></i>
           </button>
-          <div id="spLikesCounter" class="text-sm">
-            {{ drawing.likesHuman }}
-          </div>
         </div>
-      </form>
-      <button
-        class="btn-image"
-        (click)="shareDrawing()"
-        (keypress.enter)="shareDrawing()"
-        tabindex="0"
-        title="Compartir dibujo">
-        <i class="bi bi-send"></i>
-      </button>
+      </app-loading>
     </div>
-    <div class="flex select-none flex-row flex-nowrap gap-4 text-xl font-bold">
-      <app-drawing-score
-        class="h-8 w-8"
-        [score]="drawing.scorePopularHuman"
-        [popular]="true"></app-drawing-score>
-      <app-drawing-score
-        class="h-8 w-8"
-        [score]="drawing.scoreCritic"></app-drawing-score>
-    </div>
+
+    <app-loading [loading]="loading">
+      <div class="h-10 w-10" loading></div>
+
+      <div
+        content
+        class="flex select-none flex-row flex-nowrap gap-4 text-xl font-bold">
+        <app-drawing-score
+          class="h-8 w-8"
+          [score]="drawing.scorePopularHuman"
+          [popular]="true"></app-drawing-score>
+        <app-drawing-score
+          class="h-8 w-8"
+          [score]="drawing.scoreCritic"></app-drawing-score>
+      </div>
+    </app-loading>
   </div>
 </div>
