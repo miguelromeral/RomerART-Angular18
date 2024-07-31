@@ -98,4 +98,10 @@ export class DetailsComponent implements OnInit {
       this.drawing.scorePopularHuman = results.newScoreHuman;
     }
   }
+  receiveCheer(likes: number) {
+    if (this.drawing) {
+      console.log('New likes: ' + likes);
+      this.drawing.likes = likes;
+    }
+  }
 }

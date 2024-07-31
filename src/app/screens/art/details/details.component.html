@@ -15,7 +15,9 @@
     </div>
 
     <div class="flex w-full flex-col flex-nowrap gap-2">
-      <app-art-details-image [drawing]="drawing"></app-art-details-image>
+      <app-art-details-image
+        [drawing]="drawing"
+        (submittedCheer)="receiveCheer($event)"></app-art-details-image>
     </div>
     <div class="w-full">
       <app-tab-panel [tabs]="panelTabs" selectedTab="comments">

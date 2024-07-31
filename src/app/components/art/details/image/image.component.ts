@@ -1,5 +1,5 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { ScoreBoardComponent } from '../score-board/score-board.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
@@ -26,8 +26,19 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
   styleUrl: './image.component.scss',
 })
 export class ImageComponent extends LanguageComponent {
-  @Input() drawing!: Drawing;
+  private _drawing!: Drawing;
+
+  @Input()
+  public get drawing() {
+    return this._drawing;
+  }
+  public set drawing(value: Drawing) {
+    this._drawing = value;
+  }
+
   btnCheerId = 'btnCheer';
+
+  @Output() submittedCheer = new EventEmitter<number>();
 
   constructor(private drawingService: DrawingService) {
     super('SCREENS.DRAWING-DETAILS');
@@ -55,7 +66,7 @@ export class ImageComponent extends LanguageComponent {
 
     this.drawingService.cheerDrawing(this.drawing.id).subscribe({
       next: () => {
-        this.drawing.likes += 1;
+        this.submittedCheer.emit(this.drawing.likes + 1);
       },
       error: err => console.error('Error al enviar cheer:', err),
       complete: () => {

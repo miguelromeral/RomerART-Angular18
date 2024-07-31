@@ -234,6 +234,17 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-input-border-color: var(--mr-input-border-color-light);
   --mr-switch-favorite-color: theme('colors.gold.500');
 
+  --mr-range-track-bg-color-light: theme('colors.white.300');
+  --mr-range-track-bg-color-dark: theme('colors.black.400');
+  --mr-range-track-bg-color: var(--mr-range-track-bg-color-light);
+  --mr-range-track-height: 1rem;
+  --mr-range-bubble-bg-color-light: theme('colors.main.500');
+  --mr-range-bubble-bg-color-dark: theme('colors.main.300');
+  --mr-range-bubble-bg-color: var(--mr-range-bubble-bg-color-light);
+  --mr-range-bubble-height: 1rem;
+  --mr-range-bubble-width: 1rem;
+
+
   /* Buttons */
   --mr-btn-bg-color: var(--mr-chat-color);
   --mr-btn-text-color: var(--mr-text-color-opposite);
@@ -294,7 +305,8 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-scrollbar-color: #{$mr-scrollbar-color-dark};
 
   --mr-input-border-color: var(--mr-input-border-color-dark);
-
+  --mr-range-track-bg-color: var(--mr-range-track-bg-color-dark);
+  --mr-range-bubble-bg-color: var(--mr-range-bubble-bg-color-dark);
 }
 
 
