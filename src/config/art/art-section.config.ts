@@ -26,6 +26,11 @@ export class ArtSectionConfig {
   static types: IArtSectionType[] = [
     // TODO: cambiar esto por sus codes para el idioma
     {
+      id: '',
+      icon: 'bi-emoji-heart-eyes',
+      text: 'Temática',
+    },
+    {
       id: 'date',
       icon: 'bi-calendar-event',
       text: 'Fecha',

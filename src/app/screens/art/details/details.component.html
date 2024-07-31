@@ -41,7 +41,10 @@
           *ngIf="drawing.spotifyTrackId !== ''"
           [trackId]="drawing.spotifyTrackId"></app-spotify-track>
 
-        <app-art-details-score-board tab-content-vote [drawing]="drawing">
+        <app-art-details-score-board
+          tab-content-vote
+          [drawing]="drawing"
+          (voteSubmitted)="receiveVoteSubmitted($event)">
         </app-art-details-score-board>
 
         <div

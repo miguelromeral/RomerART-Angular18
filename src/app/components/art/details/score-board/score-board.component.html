@@ -1,35 +1,38 @@
-<div class="mr-scores">
+<div class="flex w-full select-none flex-col flex-nowrap gap-2">
   <div
     class="mr-scores-form mr-score-popular mt-2"
     id="containerCollapseVoteForm">
-    <div id="cardVoteForm" class="card card-body">
-      <form id="voteForm">
-        <input type="hidden" name="id" [value]="drawing.id" />
+    <form
+      *ngIf="showVoteForm; else thxVotePanel"
+      class="flex flex-col flex-nowrap items-stretch gap-3"
+      [formGroup]="voteForm">
+      <div class="grid grid-cols-3">
+        <span class="col-span-2"> {{ text('TITLE') | mrTranslate }}</span>
+        <app-drawing-score
+          [popular]="true"
+          [score]="this.voteForm.value.score || 70">
+        </app-drawing-score>
+      </div>
 
-        <div id="divLabelVote">
-          <span>Seleccione una puntuación</span>
-          <span id="spScoreUser" class="good">70</span>
-        </div>
+      <input
+        formControlName="score"
+        type="range"
+        class="mr-custom-range form-range"
+        min="1"
+        max="100"
+        step="1"
+        id="rScoreUser" />
 
-        <input
-          type="range"
-          name="score"
-          class="mr-custom-range form-range"
-          min="1"
-          max="100"
-          step="1"
-          value="70"
-          id="rScoreUser"
-          (input)="onChangeRangeVote($event)" />
+      <button
+        type="button"
+        class="btn mr-custom-btn mt-2 flex w-fit gap-2"
+        (click)="voteDrawing()">
+        {{ text('SEND') | mrTranslate }}
+      </button>
+    </form>
 
-        <button
-          id="btnVote"
-          type="button"
-          class="btn mr-custom-btn vibrate mt-2"
-          onclick="voteDrawing($event)">
-          <i id="iCheerIcon" class="bi bi-send-plus"></i> Envia tu Voto Ahora
-        </button>
-      </form>
-    </div>
+    <ng-template #thxVotePanel>
+      {{ text('THANKS') | mrTranslate }}
+    </ng-template>
   </div>
 </div>

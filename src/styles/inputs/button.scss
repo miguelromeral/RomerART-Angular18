@@ -1,5 +1,5 @@
 .mr-custom-btn {
-  @apply flex items-center cursor-pointer;
+  @apply flex items-center justify-center cursor-pointer px-2 uppercase;
   background-color: var(--mr-btn-bg-color);
   color: var(--mr-btn-text-color);
   height: var(--mr-input-height);

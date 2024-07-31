@@ -1,39 +1,62 @@
-import { NgClass, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
-import { Customization } from 'utils/customization';
+import { DrawingScoreComponent } from '../../drawing-score/drawing-score.component';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { LanguageComponent } from '@models/components/LanguageComponent';
+import { DrawingService } from '@app/services/api/drawing/drawing.service';
+import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
 
 @Component({
   selector: 'app-art-details-score-board',
   standalone: true,
-  imports: [NgClass, NgIf],
+  imports: [
+    CommonModule,
+    NgIf,
+    DrawingScoreComponent,
+    ReactiveFormsModule,
+    TranslateModule,
+    CustomTranslatePipe,
+  ],
   templateUrl: './score-board.component.html',
   styleUrl: './score-board.component.scss',
 })
-export class ScoreBoardComponent {
-  @Input() drawing!: Drawing;
+export class ScoreBoardComponent extends LanguageComponent {
+  private _drawing!: Drawing;
 
-  getClassScore(score: number) {
-    return Customization.getClassScore(score);
+  @Input()
+  public get drawing() {
+    return this._drawing;
+  }
+  public set drawing(value: Drawing) {
+    this._drawing = value;
+    this.voteForm.controls.id.setValue(value.id);
   }
 
-  onChangeRangeVote(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    const score = parseInt(target.value, 10);
-    const spScoreUser = $('#spScoreUser');
+  @Output() voteSubmitted = new EventEmitter<IVoteDrawingResponse>();
+  showVoteForm = true;
 
-    spScoreUser.text(score.toString());
+  /* Vote Form */
+  voteForm = new FormGroup({
+    id: new FormControl(this.drawing?.id ?? ''),
+    score: new FormControl(70),
+  });
 
-    spScoreUser.removeClass('bad mild good platinum');
+  constructor(private drawingService: DrawingService) {
+    super('SCREENS.DRAWING-DETAILS.SCORE-BOARD');
+  }
 
-    if (score < 50) {
-      spScoreUser.addClass('bad');
-    } else if (score < 65) {
-      spScoreUser.addClass('mild');
-    } else if (score < 95) {
-      spScoreUser.addClass('good');
-    } else if (score < 101) {
-      spScoreUser.addClass('platinum');
+  voteDrawing() {
+    const data = this.voteForm.value;
+    if (data.id && data.score) {
+      this.drawingService.voteDrawing(data.id, data.score).subscribe(resp => {
+        if (resp) {
+          this.showVoteForm = false;
+          this.voteSubmitted.emit(resp);
+        }
+      });
     }
   }
 }

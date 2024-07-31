@@ -120,6 +120,11 @@
           "VIEWS": "{{views}} visualizaciones",
           "VOTES": "{{votes}} votos de usuarios"
         }
+      },
+      "SCORE-BOARD": {
+        "TITLE": "Tu nota será...",
+        "SEND": "Enviar Voto",
+        "THANKS": "¡Gracias por votar!"
       }
     }
   }

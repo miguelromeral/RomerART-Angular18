@@ -15,6 +15,7 @@ import { DrawingProduct } from '@models/art/drawing-product.model';
 import { DrawingCharacter } from '@models/art/drawing-character.model';
 import { DrawingFilter } from '@models/art/drawing-filter.model';
 import { Collection } from '@models/art/collection.model';
+import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -76,7 +77,16 @@ export class DrawingService {
 
     return this.http
       .post<void>(url, JSON.stringify(id), { headers })
-      .pipe(catchError(this.handleError<void>('cheer')));
+      .pipe(catchError(this.handleError<void>('cheerDrawing')));
+  }
+
+  voteDrawing(id: string, score: number): Observable<IVoteDrawingResponse> {
+    const url = `${this.apiUrl}art/vote/${id}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .post<IVoteDrawingResponse>(url, JSON.stringify(score), { headers })
+      .pipe(catchError(this.handleError<IVoteDrawingResponse>('voteDrawing')));
   }
 
   filterDrawings(filters: DrawingFilter): Observable<Drawing[]> {
