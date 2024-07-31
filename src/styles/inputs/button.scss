@@ -1,0 +1,7 @@
+.mr-custom-btn {
+  @apply flex items-center cursor-pointer;
+  background-color: var(--mr-btn-bg-color);
+  color: var(--mr-btn-text-color);
+  height: var(--mr-input-height);
+  transition: var(--mr-transition-time) ease-in-out;
+}

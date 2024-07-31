@@ -1,0 +1,19 @@
+.mr-custom-checkbox {
+  height: var(--mr-input-height);
+  width: var(--mr-input-height);
+  border-radius: 20px !important;
+  background-color: transparent;
+  border: var(--mr-border-size) solid var(--mr-chat-color);
+}
+
+.mr-custom-checkbox:active,
+.mr-custom-checkbox:focus,
+.mr-custom-checkbox:hover {
+  background-color: var(--mr-text-box-background-color);
+}
+
+.mr-custom-checkbox:checked {
+  background-color: var(--mr-chat-color);
+  color: var(--mr-text-color-opposite);
+  background-blend-mode: exclusion;
+}

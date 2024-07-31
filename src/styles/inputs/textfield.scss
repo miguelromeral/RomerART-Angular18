@@ -1,0 +1,8 @@
+input[type='text'] {
+  @apply px-2;
+  height: var(--mr-input-height);
+  border: 1px solid var(--mr-input-border-color);
+  background-color: var(--mr-input-bg-color);
+  color: var(--mr-input-text-color);
+  border-color: var(--mr-input-border-color);
+}

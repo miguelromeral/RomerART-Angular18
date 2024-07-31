@@ -4,11 +4,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '@app/services/language/language.service';
 import { Subscription } from 'rxjs';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 
 @Component({
   selector: 'app-debug',
   standalone: true,
-  imports: [TranslateModule, CustomTranslatePipe],
+  imports: [TranslateModule, CustomTranslatePipe, LayoutComponent],
   templateUrl: './debug.component.html',
   styleUrl: './debug.component.scss',
 })

@@ -1,0 +1,8 @@
+select {
+  @apply flex items-center cursor-pointer;
+  background-color: var(--mr-input-bg-color);
+  border: 1px solid var(--mr-input-border-color);
+  color: var(--mr-input-text-color);
+  height: var(--mr-input-height);
+  transition: var(--mr-transition-time) ease-in-out;
+}

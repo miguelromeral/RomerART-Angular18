@@ -11,3 +11,32 @@
 #spResultsCount {
   transition: var(--mr-transition-time) ease-in-out;
 }
+
+
+.mr-loader-container {
+  @apply relative;
+  transition: var(--mr-transition-time) ease-in-out;
+}
+
+
+
+.mr-loader {
+  @apply absolute flex flex-col items-center justify-start content-center;
+  z-index: -1;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  backdrop-filter: blur(5px);
+  text-shadow: 1px 1px 1px black;
+  transition: var(--mr-transition-time) ease-in-out;
+  z-index: 1000;
+  opacity: 1;
+}
+
+img.mr-loading-icon-pacman {
+  width: var(--mr-pacman-size);
+  height: auto;
+}
+
+span.mr-loader-subtitle {
+  @apply italic font-bold;
+}

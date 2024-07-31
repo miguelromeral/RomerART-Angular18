@@ -1,6 +1,6 @@
 <form [formGroup]="filterForm" (submit)="submitFilter()" id="formFilter">
   <div class="row">
-    <div class="mr-sort-filter-container inline-flex w-full flex-row-reverse">
+    <div class="mr-sort-filter-container flex w-full flex-row-reverse">
       <div class="mr-sort-filter flex flex-col items-end">
         <span class="text-sm">{{ text('SORTBY.TITLE') | mrTranslate }}</span>
         <select
@@ -202,8 +202,7 @@
       <div class="mr-choice-filter mr-filter-item">
         <label
           class="form-check-label choice-label"
-          for="flexSwitchCheckChecked"
-          style="font-weight: bold">
+          for="flexSwitchCheckChecked">
           {{ text('FAVORITES.TITLE') | mrTranslate }}</label
         >
         <input

@@ -1,6 +1,6 @@
 <!-- TODO: mover la imagen al comment-wrapper para que no haya un salto desde el primer comentario hasta el siguiente-->
 <div
-  class="comment grid grid-cols-10"
+  class="comment"
   [ngClass]="{
     like: type === 'like',
     dislike: type === 'dislike',
@@ -28,8 +28,8 @@
       </div>
     </div>
   </div> -->
-  <div class="mr-chat-message-container col-span-9 flex flex-col gap-2">
+  <div class="mr-chat-message-container flex flex-col gap-2">
     <div class="mr-chat-message" [innerHTML]="comment"></div>
   </div>
-  <div class="mr-chat-image hvr-wobble-horizontal"></div>
+  <!-- <div class="mr-chat-image hvr-wobble-horizontal"></div> -->
 </div>

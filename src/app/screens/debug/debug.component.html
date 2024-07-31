@@ -1,11 +1,13 @@
-<p>debug works!</p>
-<span id="debug">...</span>
-<span id="debug2">...</span>
+<app-layout>
+  <p>debug works!</p>
+  <span id="debug">...</span>
+  <span id="debug2">...</span>
 
-<h1>{{ 'TITLE' | mrTranslate }}</h1>
-<p>{{ 'DESCRIPTION' | mrTranslate }}</p>
-<label for="language-select">{{ 'SELECT_LANGUAGE' | mrTranslate }}</label>
-<select id="language-select" (change)="changeLanguage($event)">
-  <option value="en">English</option>
-  <option value="es">Español</option>
-</select>
+  <h1>{{ 'TITLE' | mrTranslate }}</h1>
+  <p>{{ 'DESCRIPTION' | mrTranslate }}</p>
+  <label for="language-select">{{ 'SELECT_LANGUAGE' | mrTranslate }}</label>
+  <select id="language-select" (change)="changeLanguage($event)">
+    <option value="en">English</option>
+    <option value="es">Español</option>
+  </select>
+</app-layout>

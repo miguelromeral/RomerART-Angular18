@@ -18,7 +18,9 @@ $mr-font-family-sans-serif: sans-serif;
 
 /* Input Background Color */
 $mr-input-bg-color-light: theme('colors.white.100');
-$mr-input-bg-color-dark: theme('colors.black.950');
+$mr-input-bg-color-dark: $mr-bg-color-dark;
+$mr-input-border-color-light: theme('colors.white.100');
+$mr-input-border-color-dark: theme('colors.main.700');
 
 
 /* Profile Pic Size */
@@ -141,6 +143,16 @@ $header-background-color-development-dark: rgba(204, 35, 72, 0.7);
 $header-color-development-light: rgb(209, 220, 255);
 $header-color-development-dark: rgb(209, 220, 255);
 
+/********************************/
+//    Scrollbar
+/********************************/
+$mr-scrollbar-width: 8px;
+$mr-scrollbar-bg-color: transparent;
+$mr-scrollbar-color-light: theme('colors.main.300');
+$mr-scrollbar-color-dark: theme('colors.main.500');
+
+
+
 
 /**************************************************************/
 
@@ -149,7 +161,6 @@ $header-color-development-dark: rgb(209, 220, 255);
   --mr-text-color: #{$mr-text-color-light};
   --mr-font-family: #{$mr-font-family-josefine};
   --mr-text-color-opposite: #{$mr-text-color-opposite-light};
-  --mr-input-bg-color: #{$mr-input-bg-color-light};
   --mr-text-color-secondary: #{$mr-text-color-secondary-light};
   --mr-profile-pic-size: #{$mr-profile-pic-size};
 
@@ -158,6 +169,10 @@ $header-color-development-dark: rgb(209, 220, 255);
   --mr-nav-text-color: #{$mr-nav-text-color-light};
   --mr-nav-bg-color-hover: #{$mr-nav-bg-color-hover-light};
   --mr-bottom-bar-icon-width: #{$mr-nav-profile-pic-size};
+  --mr-profile-pic-size-bottom-bar: #{$mr-nav-profile-pic-size};
+  --mr-border-size: 2px;
+  --mr-nav-profile-pic-border-color: var(--mr-chat-color);
+  --mr-padding-picture: 2px;
 
   /* Drawing Thumbnails */
   --mr-thumbnail-date-background-color: #{$mr-thumbnail-date-bg-color-light};
@@ -189,6 +204,8 @@ $header-color-development-dark: rgb(209, 220, 255);
   --mr-favorite-icon-color: #{$mr-favorite-icon-color};
   --mr-section-text-color: #{$mr-section-text-color-light};
   --mr-tab-panel-section-color: #{$mr-tab-panel-section-color-light};
+  --mr-thanks-message-bg-color: var(--mr-chat-color);
+  --mr-thanks-message-text-color: var(--mr-text-color-opposite);
 
   /* Drawing Search Form */
   --mr-art-search-labels-color: #{$mr-art-search-labels-color-light};
@@ -201,14 +218,33 @@ $header-color-development-dark: rgb(209, 220, 255);
   --header-color-production: #{$header-color-production-light};
   --header-background-color-development: #{$header-background-color-development-light};
   --header-color-development: #{$header-color-development-light};
-}
 
+  /* Scrollbar */
+  --mr-scrollbar-width: #{$mr-scrollbar-width};
+  --mr-scrollbar-background-color: #{$mr-scrollbar-bg-color};
+  --mr-scrollbar-color: #{$mr-scrollbar-color-light};
+
+  /* Input Controls */
+  --mr-input-bg-color: #{$mr-input-bg-color-light};
+  --mr-input-border-color: #{$mr-input-border-color-light};
+  --mr-input-height: var(--mr-control-height);
+  --mr-input-text-color: var(--mr-text-color);
+  --mr-input-border-color-light: var(--mr-input-bg-color);
+  --mr-input-border-color-dark: theme('colors.main.600');
+  --mr-input-border-color: var(--mr-input-border-color-light);
+  --mr-switch-favorite-color: theme('colors.gold.500');
+
+  /* Buttons */
+  --mr-btn-bg-color: var(--mr-chat-color);
+  --mr-btn-text-color: var(--mr-text-color-opposite);
+}
 
 .dark {
   --mr-background-color: #{$mr-bg-color-dark};
   --mr-text-color: #{$mr-text-color-dark};
   --mr-text-color-opposite: #{$mr-text-color-opposite-dark};
   --mr-input-bg-color: #{$mr-input-bg-color-dark};
+  --mr-input-border-color: #{$mr-input-border-color-dark};
 
   /* Navbar */
   --mr-nav-bg-color: #{$mr-nav-bg-color-dark};
@@ -253,6 +289,12 @@ $header-color-development-dark: rgb(209, 220, 255);
   --header-color-production: #{$header-color-production-dark};
   --header-background-color-development: #{$header-background-color-development-dark};
   --header-color-development: #{$header-color-development-dark};
+
+  /* Scrollbar */
+  --mr-scrollbar-color: #{$mr-scrollbar-color-dark};
+
+  --mr-input-border-color: var(--mr-input-border-color-dark);
+
 }
 
 
@@ -269,31 +311,15 @@ $header-color-development-dark: rgb(209, 220, 255);
   --mr-chat-color: var(--mr-chat-color-dark);
   --mr-chat-color-secondary: rgb(82 63 84);
   --mr-chat-color-terciary: #121113;
-  --mr-chat-color-likes: rgb(0 167 68);
-  --mr-chat-color-dislikes: #f25252;
-  --mr-color-red: #eb2e2e;
-  --mr-color-red-light: #e16767;
   --mr-color-gold: #ffb023;
-  --mr-color-spotify: #22b95b;
   --mr-nav-color: rgb(29 11 40);
-  --mr-profile-pic-size-bottom-bar: 30px;
-  --mr-margin-vertical: 20px;
-  --mr-border-size: 2px;
-  --mr-border-radius: 12px;
-  --mr-padding-btw-border-image: 6px;
-  --mr-border-radius-image: calc(var(--mr-border-radius) - var(--mr-padding-btw-border-image));
   --mr-transition-time: 0.3s;
-  --mr-gap-icon-text: 5px;
   --mr-carousel-max-height: 400px;
+
   --mr-pacman-size: 30%;
   --mr-control-height: 30px;
-  --mr-padding-picture: 2px;
   --mr-details-section-large-height: 150px;
   --mr-padding-powered-logos: 10px;
-  --mr-scrollbar-width: 8px;
-  --mr-scrollbar-border-radius: 0px;
-  --mr-scrollbar-color: var(--mr-chat-color);
-  --mr-scrollbar-background-color: transparent;
   --mr-bottom-bar-height: 50px;
   --mr-bottom-bar-button-color-hover: black;
   --mr-bottom-bar-width: 18vw;
@@ -304,7 +330,6 @@ $header-color-development-dark: rgb(209, 220, 255);
   --mr-development-banner-color-light: #0068ff;
   --mr-development-banner-color: var(--mr-development-banner-color-dark);
   --mr-link-color: var(--mr-chat-color);
-  --mr-thumbnail-text-likes-color: var(--mr-color-red-light);
   --mr-background-color-fullscreen-image: rgba(0, 0, 0, 0.8);
   --mr-spacing-img-buttons: 10px;
   --mr-chat-margin-vertical: 5px;
@@ -347,17 +372,4 @@ $header-color-development-dark: rgb(209, 220, 255);
   --mr-ff-materia-support-color: radial-gradient(circle at 30% 30%, white 0%, #061194 5%, #000d33 20%, #0255fd 60%, var(--mr-ff-materia-support-border) 100%);
   --mr-ff-materia-magic-border: #8cfe81;
   --mr-ff-materia-magic-color: radial-gradient(circle at 30% 30%, white 0%, #127d14 5%, #081b0b 20%, #12b408 60%, var(--mr-ff-materia-magic-border) 100%);
-}
-
-
-
-/* Settings */
-:root {
-  --mr-font-weight-light: light;
-  --mr-font-weight-medium: normal;
-  --mr-font-weight-bold: bold;
-  /* Font Size */
-  --mr-font-size-large: large;
-  --mr-font-size-default: medium;
-  --mr-font-size-small: small;
 }

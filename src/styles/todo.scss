@@ -1,0 +1,81 @@
+.mr-powered-by-logos {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  height: auto;
+  gap: var(--mr-padding-powered-logos);
+  align-items: flex-end;
+}
+
+
+.mr-powered-by-logos-azure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Links Redes Sociales en Inspiraciones */
+div.mr-social-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.dropdown-menu {
+  background-color: var(--mr-background-color);
+  border-color: var(--mr-chat-color);
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: var(--mr-background-color);
+}
+
+
+
+.mr-home-menu-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mr-home-menu-item {
+  flex-grow: 1;
+  padding: 8px;
+}
+
+
+
+.carousel-control-next,
+.carousel-control-prev {
+  background-color: var(--mr-chat-color);
+  border-radius: 50px;
+  height: fit-content;
+  padding: 10px;
+  align-content: center;
+  align-self: center;
+  width: 35px;
+  height: 35px;
+  transform: scale(0.8);
+}
+
+
+
+/* https://github.com/craftpip/jquery-confirm */
+.jconfirm-box {
+  background-color: var(--mr-background-color) !important;
+  max-width: 95vw;
+}
+
+.jconfirm-buttons [class^="btn"]:not([class*=" "]) {
+  background-color: white;
+  color: var(--mr-text-color-opposite);
+}

@@ -5,6 +5,7 @@ a.mr-bottom-bar-button {
 }
 
 .mr-bottom-profile-pic {
+  @apply lg:text-left;
   background-color: transparent;
   width: var(--mr-bottom-bar-icon-width);
   height: var(--mr-bottom-bar-icon-width);

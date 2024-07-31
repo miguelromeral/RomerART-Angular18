@@ -34,24 +34,6 @@
   }
 }
 
-.like-semaphore {
-  animation: like-semaphore 3s ease-in-out infinite;
-}
-
-@keyframes like-semaphore {
-  0% {
-    background-color: var(--mr-color-red);
-  }
-
-  50% {
-    background-color: var(--mr-color-red-light);
-  }
-
-  100% {
-    background-color: var(--mr-color-red);
-  }
-}
-
 .slide-up {
   animation: slide-up 0.5s ease-in-out;
 }
