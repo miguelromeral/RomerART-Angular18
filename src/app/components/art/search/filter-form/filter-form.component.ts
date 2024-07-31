@@ -36,6 +36,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -51,6 +52,7 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
     DrawingThumbnailComponent,
     ReactiveFormsModule,
     LayoutComponent,
+    LoadingComponent,
   ],
   templateUrl: './filter-form.component.html',
   styleUrl: './filter-form.component.scss',
@@ -66,6 +68,12 @@ export class FilterFormComponent
   @Output() fetchedResults = new EventEmitter<Drawing[]>();
   @Output() isLoading = new EventEmitter<boolean>();
   @Output() existsMoreResultsToFetch = new EventEmitter<boolean>();
+
+  /* Loading Flags */
+  loadingDrawingProducts = true;
+  loadingDrawingCharacters = true;
+  loadingDrawingModels = true;
+  loadingCollections = true;
 
   /* Filter Form Select */
   listOptionsSortBy: IArtFilterValuesSortBy[] = artFilterValuesSortBy;
@@ -225,21 +233,27 @@ export class FilterFormComponent
         // TODO: hacer que esto funcione
         this.listDrawingProducts = list.sort(sortProductsByName);
       }
+      this.loadingDrawingProducts = false;
     });
     this.drawingService.getDrawingCharacters().subscribe(list => {
       if (list) {
         this.listDrawingCharacters = list.sort(sortCharactersByName);
       }
+      this.loadingDrawingCharacters = false;
     });
     this.drawingService.getDrawingModels().subscribe(list => {
       if (list) {
         this.listDrawingModels = list.sort(sortByTextAscending);
       }
+      this.loadingDrawingModels = false;
     });
     this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
     this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
     this.drawingService.getAllCollections().subscribe(list => {
-      this.listCollections = list;
+      if (list) {
+        this.listCollections = list;
+      }
+      this.loadingCollections = false;
     });
   }
 
