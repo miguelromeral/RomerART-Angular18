@@ -5,6 +5,7 @@ import { LanguageService } from '@app/services/language/language.service';
 import { Subscription } from 'rxjs';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
+import { AuthService } from '@app/services/api/auth/auth.service';
 
 @Component({
   selector: 'app-debug',
@@ -16,7 +17,10 @@ import { LayoutComponent } from '@app/components/shared/layout/layout.component'
 export class DebugComponent implements OnInit, OnDestroy {
   private languageSub: Subscription | undefined;
 
-  constructor(private languageService: LanguageService) {}
+  constructor(
+    private languageService: LanguageService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     // Suscribirse a los cambios de idioma
@@ -38,6 +42,19 @@ export class DebugComponent implements OnInit, OnDestroy {
     if (this.languageSub) {
       this.languageSub.unsubscribe();
     }
+  }
+
+  login() {
+    this.authService
+      .login({ username: 'usuario', password: 'contraseña' })
+      .subscribe(
+        response => {
+          this.authService.saveAuthToken(response.token);
+        },
+        err => {
+          console.log('Error al recivir el token: ' + err);
+        }
+      );
   }
 
   private updateText() {
