@@ -3,20 +3,37 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Drawing } from '@models/art/drawing.model';
 import { DrawingScoreComponent } from '../drawing-score/drawing-score.component';
+import { LanguageComponent } from '@models/components/LanguageComponent';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 
 @Component({
   selector: 'app-drawing-thumbnail',
   standalone: true,
-  imports: [NgClass, NgIf, RouterLink, DrawingScoreComponent],
+  imports: [
+    NgClass,
+    NgIf,
+    RouterLink,
+    DrawingScoreComponent,
+    TranslateModule,
+    CustomTranslatePipe,
+  ],
   templateUrl: './drawing-thumbnail.component.html',
   styleUrl: './drawing-thumbnail.component.scss',
 })
-export class DrawingThumbnailComponent implements OnInit {
+export class DrawingThumbnailComponent
+  extends LanguageComponent
+  implements OnInit
+{
   @Input() drawing!: Drawing;
   @Input() fullsize = false;
   url = '';
 
   bErrorLoadingImage = false;
+
+  constructor() {
+    super('SCREENS.DRAWING-DETAILS');
+  }
 
   ngOnInit() {
     this.detectThumbnailUrl();
@@ -32,12 +49,7 @@ export class DrawingThumbnailComponent implements OnInit {
     }
   }
 
-  // TODO: llevar esta función a otro lado para reutilizarla
-  errorLoadingImage(drawingId: string) {
-    // const selector =
-    //   ".mr-error-load-placeholder[data-error-drawing-id='" + drawingId + "']";
-    // //console.log(selector);
-    // $(selector).addClass('show');
+  errorLoadingImage() {
     console.log('Error loading image');
     this.bErrorLoadingImage = true;
   }

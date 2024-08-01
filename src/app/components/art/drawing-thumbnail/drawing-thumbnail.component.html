@@ -17,14 +17,16 @@
         [src]="url"
         [alt]="drawing.title"
         *ngIf="!bErrorLoadingImage"
-        (error)="errorLoadingImage(drawing.id)"
+        (error)="errorLoadingImage()"
         loading="lazy"
         decoding="async"
         class="h-full w-full object-cover" />
 
       <div class="mr-error-load-placeholder" *ngIf="bErrorLoadingImage">
         <span class="text-2xl">🙃</span>
-        <span class="subtitle text-center text-sm">Imagen No Encontrada</span>
+        <span class="subtitle text-center text-sm">{{
+          text('NOTFOUND.IMAGE-NOT-LOADED') | mrTranslate
+        }}</span>
       </div>
 
       <span class="mr-img-thumbnail-date mr-img-thumbnail-info">
@@ -63,9 +65,9 @@
         *ngIf="drawing?.name && drawing?.modelName"
         class="mr-img-thumbnail-title mr-img-thumbnail-info">
         <span>{{ drawing.name }}</span>
-        <span class="mr-img-thumbnail-subtitle text-center text-sm italic"
-          ><span class="text-xs">por</span> {{ drawing.modelName }}</span
-        >
+        <span class="mr-img-thumbnail-subtitle text-center text-sm italic">
+          {{ text('MODEL') | mrTranslate: { model: drawing.modelName } }}
+        </span>
       </span>
 
       <span

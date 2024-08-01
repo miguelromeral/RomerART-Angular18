@@ -21,6 +21,13 @@
     }
   },
   "SCREENS": {
+    "NOT-FOUND": {
+      "TITLE": "Página no encontrada"
+    },
+    "HEADER": {
+      "TITLE": "MiguelRomeral",
+      "VERSION": "v{{ version }}"
+    },
     "NAVBAR": {
       "LINKS": {
         "HOME": "Inicio",
@@ -40,6 +47,8 @@
           "DESCRIPTION": "Cambia el idioma de la aplicación en los menús. El contenido de algunas partes de la aplicación como los dibujos no serán traducidos."
         },
         "THEME": {
+          "TITLE": "Cambiar Tema",
+          "DESCRIPTION": "Cambia la manera en la que se ve la aplicación para que haya más colores claros o colores oscuros.",
           "LIGHT": "Claro",
           "DARK": "Oscuro"
         }
@@ -48,6 +57,14 @@
     "DRAWING-SEARCH": {
       "TITLE": "Galería",
       "SUBTITLE": "Aquí están algunos de mis dibujos e ilustraciones públicas. Pulsa en cualquiera de ellos para ver los detalles",
+      "COUNT": "{{length}} imágenes",
+      "LOADING": {
+        "TITLE": "Filtrando imágenes. Por favor, espere."
+      },
+      "NOTFOUND": {
+        "TITLE": "¡Nada por aquí..!",
+        "RETRY": "Vuelve a intentarlo utilizando otros filtros."
+      },
       "FORM": {
         "TITLE": "Filtrar por...",
         "SORTBY": {
@@ -107,10 +124,12 @@
       }
     },
     "DRAWING-DETAILS": {
+      "MODEL": "por {{ model }}",
       "NOTFOUND": {
         "TITLE": "Dibujo no encontrado",
         "SUBTITLE": "No se ha encontrado ningún dibujo con el identificador '{{id}}'.",
-        "GO-TO-GALLERY": "Volver a la galería"
+        "GO-TO-GALLERY": "Volver a la galería",
+        "IMAGE-NOT-LOADED": "Imagen no encontrada"
       },
       "DETAILS": {
         "TAB-TITLES": {
@@ -121,6 +140,7 @@
           "SPOTIFY": "Spotify",
           "INFO": "Detalles"
         },
+        "OPEN-REFERENCE": "Abrir referencia en nueva pestaña",
         "SECTIONS": {
           "VIEWS": "{{views}} visualizaciones",
           "VOTES": "{{votes}} votos de usuarios"

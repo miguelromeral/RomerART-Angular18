@@ -1,58 +1,52 @@
 <app-layout>
-  <div class="container">
-    <div>
-      <h1>{{ text('TITLE') | mrTranslate }}</h1>
-      <p>{{ text('SUBTITLE') | mrTranslate }}</p>
-    </div>
+  <div>
+    <h1>{{ text('TITLE') | mrTranslate }}</h1>
+    <p>{{ text('SUBTITLE') | mrTranslate }}</p>
+  </div>
 
-    <app-art-search-filter-form
-      (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
-      (fetchedResults)="onFetchedResults($event)"
-      (isLoading)="onIsFilterFormLoading($event)">
-    </app-art-search-filter-form>
+  <app-art-search-filter-form
+    (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
+    (fetchedResults)="onFetchedResults($event)"
+    (isLoading)="onIsFilterFormLoading($event)">
+  </app-art-search-filter-form>
 
-    <div class="row mt-2" style="padding-bottom: 20px">
-      <div class="mr-loader-container">
-        <div id="divImageCounter" class="slide-right">
-          <span class="mr-suboption-filter">
-            <span id="spResultsCount">{{ listDrawings.length || 0 }}</span>
-            <span id="spTextoImagenes"> imágenes</span
-            ><span id="spTextoImagen" style="display: none">imagen</span>
-          </span>
-        </div>
-        <div id="artGalleryLoader" class="mr-loader" *ngIf="filterFormLoading">
-          <img
-            alt="Loading"
-            src=" assets/pacman-loading.svg"
-            class="mr-loading-icon-pacman" />
-          <span class="mr-loader-subtitle"
-            >Filtrando imágenes. Por favor, espere.</span
-          >
-        </div>
-        <div
-          id="artGallery"
-          class="mr-img-gallery grid h-full w-full grid-cols-3 gap-[2px] sm:grid-cols-4">
-          <app-drawing-thumbnail
-            class="h-full w-full"
-            [ngClass]="{ 'col-span-2 row-span-2': first }"
-            [drawing]="drawing"
-            *ngFor="let drawing of listDrawings; let first = first">
-          </app-drawing-thumbnail>
-          <button
-            *ngIf="!filterFormLoading && showButtonFetchMore"
-            type="button"
-            (click)="requestMoreDrawings()">
-            +
-          </button>
-        </div>
-        <div
-          id="divNoResults"
-          *ngIf="resultsNotFound"
-          class="mt-20 flex min-h-32 flex-col items-center justify-start gap-3">
-          <span> ¡Nada por aquí..! </span>
-          <h2>😔</h2>
-          <span> Vuelve a intentarlo utilizando otros filtros. </span>
-        </div>
+  <div class="row mt-2" style="padding-bottom: 20px">
+    <div class="mr-loader-container">
+      <div id="divImageCounter" class="slide-right">
+        {{ text('COUNT') | mrTranslate: { length: listDrawings.length } }}
+      </div>
+      <div id="artGalleryLoader" class="mr-loader" *ngIf="filterFormLoading">
+        <img
+          alt="Loading"
+          src=" assets/pacman-loading.svg"
+          class="mr-loading-icon-pacman" />
+        <span class="mr-loader-subtitle">{{
+          text('LOADING.TITLE') | mrTranslate
+        }}</span>
+      </div>
+      <div
+        id="artGallery"
+        class="mr-img-gallery grid h-full w-full grid-cols-3 gap-[2px] sm:grid-cols-4">
+        <app-drawing-thumbnail
+          class="h-full w-full"
+          [ngClass]="{ 'col-span-2 row-span-2': first }"
+          [drawing]="drawing"
+          *ngFor="let drawing of listDrawings; let first = first">
+        </app-drawing-thumbnail>
+        <button
+          *ngIf="!filterFormLoading && showButtonFetchMore"
+          type="button"
+          (click)="requestMoreDrawings()">
+          +
+        </button>
+      </div>
+      <div
+        id="divNoResults"
+        *ngIf="resultsNotFound"
+        class="mt-20 flex min-h-32 flex-col items-center justify-start gap-3">
+        <span>{{ text('NOTFOUND.TITLE') | mrTranslate }}</span>
+        <h2>😔</h2>
+        <span>{{ text('NOTFOUND.RETRY') | mrTranslate }}</span>
       </div>
     </div>
   </div>

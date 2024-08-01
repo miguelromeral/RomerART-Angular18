@@ -183,9 +183,9 @@
               <app-details-section
                 *ngIf="drawing.referenceUrl !== ''"
                 type="reference">
-                <a [href]="drawing.referenceUrl" target="_blank"
-                  >Abrir en nueva pestaña</a
-                >
+                <a [href]="drawing.referenceUrl" target="_blank">{{
+                  text('DETAILS.OPEN-REFERENCE') | mrTranslate
+                }}</a>
               </app-details-section>
 
               <app-details-section

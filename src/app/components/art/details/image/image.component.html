@@ -23,7 +23,9 @@
           class="mr-error-load-placeholder absolute bottom-0 left-0 right-0 top-0 h-full w-full"
           [attr.data-error-drawing-id]="drawing.id">
           <span class="text-2xl">🙃</span>
-          <span class="text-center text-sm">Image Not Found</span>
+          <span class="text-center text-sm">{{
+            text('NOTFOUND.IMAGE-NOT-LOADED')
+          }}</span>
         </div>
       </div>
     </app-loading>
