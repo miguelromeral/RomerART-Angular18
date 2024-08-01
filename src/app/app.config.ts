@@ -15,13 +15,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { JwtInterceptor } from '@app/interceptors/JWT/jwt.interceptor';
 import { environment } from 'environments/environment';
+import { localStorageKey } from 'config/auth/auth.config';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 export function tokenGetter() {
-  return localStorage.getItem('access_token');
+  return localStorage.getItem(localStorageKey);
 }
 
 export const appConfig: ApplicationConfig = {

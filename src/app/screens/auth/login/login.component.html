@@ -3,10 +3,33 @@
   <h1>LOGIN</h1>
 
   <form [formGroup]="loginForm" (submit)="login()" class="flex flex-col gap-2">
-    <label>USERNAME</label>
-    <input formControlName="username" class="mr-custom-text" type="text" />
-    <label>PASSWORD</label>
-    <input formControlName="password" class="mr-custom-text" type="password" />
+    <label for="iUsername">USERNAME</label>
+    <input
+      id="iUsername"
+      formControlName="username"
+      class="mr-custom-text"
+      type="text" />
+    <div
+      *ngIf="
+        loginForm.controls.username.touched &&
+        loginForm.controls.username.hasError('required')
+      ">
+      USERNAME IS REQUIRED
+    </div>
+
+    <label for="iPassword">PASSWORD</label>
+    <input
+      id="iPassword"
+      formControlName="password"
+      class="mr-custom-text"
+      type="password" />
+    <div
+      *ngIf="
+        loginForm.controls.password.touched &&
+        loginForm.controls.password.hasError('required')
+      ">
+      USERNAME IS REQUIRED
+    </div>
 
     <button type="submit">LOGIN</button>
   </form>

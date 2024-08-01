@@ -8,12 +8,16 @@ import { AuthService } from '@app/services/api/auth/auth.service';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-    this.authService.getInfo().subscribe(info => {
-      console.log('info', info);
-    });
+  // ngOnInit() {
+  //   this.authService.getInfo().subscribe(info => {
+  //     console.log('info', info);
+  //   });
+  // }
+
+  logout() {
+    this.authService.logout();
   }
 }

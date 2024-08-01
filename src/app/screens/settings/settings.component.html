@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <h1 class="pb-10">{{ text('TITLE') | mrTranslate }}</h1>
 
-    <h2>{{ text('SECTION.ACCESSIBILITY') | mrTranslate }}</h2>
+    <h2>{{ text('SECTIONS.ACCESSIBILITY') | mrTranslate }}</h2>
     <div class="mr-settings-subject flex flex-col gap-6">
       <app-setting-section
         [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | mrTranslate"
@@ -36,12 +36,12 @@
         </select>
       </app-setting-section>
 
-      <h2>{{ text('SECTION.ACCOUNT') | mrTranslate }}</h2>
+      <h2>{{ text('SECTIONS.ACCOUNT') | mrTranslate }}</h2>
       <div class="mr-settings-subject flex flex-col gap-6">
         <app-setting-section
           [title]="text('FORM.AUTH.TITLE') | mrTranslate"
           [description]="text('FORM.AUTH.DESCRIPTION') | mrTranslate">
-          <a [routerLink]="'/login'" ariaCurrentWhenActive="page">
+          <a [routerLink]="'/' + loginPath" ariaCurrentWhenActive="page">
             {{ text('FORM.AUTH.GO-TO-LOGIN') | mrTranslate }}
           </a>
         </app-setting-section>

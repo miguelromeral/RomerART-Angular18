@@ -8,6 +8,7 @@ import { SearchComponent } from './screens/art/search/search.component';
 import { AdminComponent } from './screens/admin/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './screens/auth/login/login.component';
+import { loginPath } from 'config/auth/auth.config';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +23,7 @@ export const routes: Routes = [
     component: DetailsComponent,
     data: { withComponentInputBinding: true },
   },
-  { path: 'login', component: LoginComponent },
+  { path: loginPath, component: LoginComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotfoundComponent },
 ];

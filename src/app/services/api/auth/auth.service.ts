@@ -2,8 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '@app/services/local-storage/local-storage.service';
+import { User } from '@models/auth/user.model';
+import {
+  localStorageKey,
+  loggedUserLocalStorageKey,
+  loginPath,
+} from 'config/auth/auth.config';
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +17,27 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = environment.api.url;
 
+  private loggedUserSubject = new BehaviorSubject<User | null>(null);
+  loggedUser$: Observable<User | null> = this.loggedUserSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private localStorageService: LocalStorageService
   ) {}
 
-  login(credentials: { username: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}auth/login`, credentials);
+  init() {
+    const loggedUserString = this.localStorageService.getItem(
+      loggedUserLocalStorageKey
+    );
+
+    if (loggedUserString !== null) {
+      this.saveLoggedUser(JSON.parse(loggedUserString));
+    }
+  }
+
+  login(credentials: { username: string; password: string }): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}auth/login`, credentials);
   }
 
   validateToken(token: string): Observable<boolean> {
@@ -32,16 +51,21 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
-    this.router.navigate(['login']);
+    localStorage.removeItem(localStorageKey);
+    this.router.navigate([loginPath]);
+    this.loggedUserSubject.next(null);
   }
 
   public get loggedIn(): boolean {
-    return localStorage.getItem('access_token') !== null;
+    return localStorage.getItem(localStorageKey) !== null;
   }
 
-  // TODO: Buscar referencias del access_token y sustituirlo por una config
-  saveAuthToken(token: string) {
-    this.localStorageService.setItem('access_token', token);
+  saveLoggedUser(newUser: User) {
+    this.loggedUserSubject.next(newUser);
+    this.localStorageService.setItem(
+      loggedUserLocalStorageKey,
+      JSON.stringify(newUser)
+    );
+    this.localStorageService.setItem(localStorageKey, newUser.token);
   }
 }

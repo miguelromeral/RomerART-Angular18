@@ -15,6 +15,7 @@ import { ThemeService } from '@app/services/theme/theme.service';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { MetadataService } from '@app/services/metadata/metadata.service';
 import { RouterLink } from '@angular/router';
+import { loginPath } from 'config/auth/auth.config';
 
 @Component({
   selector: 'app-settings',
@@ -34,6 +35,8 @@ import { RouterLink } from '@angular/router';
 })
 // implements OnInit, OnDestroy
 export class SettingsComponent extends LanguageComponent implements OnInit {
+  loginPath = loginPath;
+
   currentLanguage = settingLanguage.defaultValue;
   currentTheme = settingTheme.defaultValue;
 

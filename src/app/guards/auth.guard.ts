@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { localStorageKey, loginPath } from 'config/auth/auth.config';
 import { catchError, map, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -14,11 +15,15 @@ export class AuthGuard implements CanActivate {
     private jwtHelper: JwtHelperService
   ) {}
 
+  private redirectToLogin() {
+    this.router.navigate([loginPath]);
+  }
+
   canActivate(): Observable<boolean> | boolean {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem(localStorageKey);
 
     if (!token) {
-      this.router.navigate(['login']);
+      this.redirectToLogin();
       return false;
     }
 
@@ -27,13 +32,14 @@ export class AuthGuard implements CanActivate {
         if (valid) {
           return true;
         } else {
-          this.router.navigate(['login']);
+          console.log('El token enviado no es válido');
+          this.redirectToLogin();
           return false;
         }
       }),
       catchError(err => {
-        console.log('El token enviado no es válido: ', err);
-        this.router.navigate(['login']);
+        console.log('Error al validar el token', err);
+        this.redirectToLogin();
         return of(false);
       })
     );

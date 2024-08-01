@@ -1,6 +1,6 @@
 <header
   class="header fixed left-0 right-0 top-0 flex flex-row justify-between px-1 py-0 text-xs"
   [ngClass]="{ development: !production, production: production }">
-  <span>{{ text('TITLE') | mrTranslate }}</span>
+  <span>{{ name }}</span>
   <span>{{ text('VERSION') | mrTranslate: { version } }}</span>
 </header>

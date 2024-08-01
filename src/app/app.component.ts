@@ -15,6 +15,7 @@ import { LanguageService } from './services/language/language.service';
 import { ThemeService } from './services/theme/theme.service';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from './services/api/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit {
     private metadataService: MetadataService,
     private languageService: LanguageService,
     private localStorageService: LocalStorageService,
+    private authService: AuthService,
     private themeService: ThemeService
   ) {
     AppComponent.isBrowser.next(isPlatformBrowser(platformId));
@@ -57,6 +59,7 @@ export class AppComponent implements OnInit {
   init() {
     this.themeService.init();
     this.languageService.init();
+    this.authService.init();
 
     this.metadataService.updateMetadata(
       environment.appName,
