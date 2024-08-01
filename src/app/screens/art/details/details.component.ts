@@ -68,7 +68,6 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   ngOnInit() {
     this.loadDrawing();
   }
-
   loadDrawing() {
     if (this.id) {
       this.drawingService.getDrawingDetails(this.id).subscribe(data => {

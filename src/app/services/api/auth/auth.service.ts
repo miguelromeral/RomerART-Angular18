@@ -17,6 +17,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = environment.api.url;
 
+  redirectUrlAfterLogin = '/admin';
+
   private loggedUserSubject = new BehaviorSubject<User | null>(null);
   loggedUser$: Observable<User | null> = this.loggedUserSubject.asObservable();
 
@@ -72,5 +74,13 @@ export class AuthService {
       JSON.stringify(newUser)
     );
     this.localStorageService.setItem(localStorageKey, newUser.token);
+  }
+
+  uptadeRedirectUrl(url: string) {
+    this.redirectUrlAfterLogin = url;
+  }
+
+  getRedirectUrl() {
+    return this.redirectUrlAfterLogin;
   }
 }

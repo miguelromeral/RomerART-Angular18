@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { localStorageKey, loginPath } from 'config/auth/auth.config';
@@ -19,7 +24,11 @@ export class AuthGuard implements CanActivate {
     this.router.navigate([loginPath]);
   }
 
-  canActivate(): Observable<boolean> | boolean {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | boolean {
+    this.authService.uptadeRedirectUrl(state.url);
     const token = localStorage.getItem(localStorageKey);
 
     if (!token) {

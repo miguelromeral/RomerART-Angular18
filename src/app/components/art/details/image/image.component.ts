@@ -1,5 +1,5 @@
 import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { ScoreBoardComponent } from '../score-board/score-board.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
@@ -12,6 +12,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { TitleComponent } from '../title/title.component';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '@app/services/api/auth/auth.service';
 
 @Component({
   selector: 'app-art-details-image',
@@ -26,11 +28,12 @@ import { TitleComponent } from '../title/title.component';
     CustomTranslatePipe,
     LoadingComponent,
     TitleComponent,
+    RouterLink,
   ],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
 })
-export class ImageComponent extends LanguageComponent {
+export class ImageComponent extends LanguageComponent implements OnInit {
   private _drawing!: Drawing;
 
   @Input() loading = true;
@@ -43,12 +46,28 @@ export class ImageComponent extends LanguageComponent {
     this._drawing = value;
   }
 
+  admin = false;
+
   btnCheerId = 'btnCheer';
 
   @Output() submittedCheer = new EventEmitter<number>();
 
-  constructor(private drawingService: DrawingService) {
+  constructor(
+    private drawingService: DrawingService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     super('SCREENS.DRAWING-DETAILS');
+  }
+
+  ngOnInit() {
+    this.loadLoggedUser();
+  }
+
+  loadLoggedUser() {
+    this.authService.loggedUser$.subscribe(user => {
+      this.admin = user?.role === 'admin';
+    });
   }
 
   cheerDrawing(event: MouseEvent) {
@@ -122,5 +141,9 @@ export class ImageComponent extends LanguageComponent {
     } else {
       console.error('Web Share API not supported in your browser.');
     }
+  }
+
+  editDrawing() {
+    this.router.navigate([`/art/edit/'${this.drawing.id}`]);
   }
 }

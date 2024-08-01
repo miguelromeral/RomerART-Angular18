@@ -9,6 +9,7 @@ import { AdminComponent } from './screens/admin/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './screens/auth/login/login.component';
 import { loginPath } from 'config/auth/auth.config';
+import { DrawingFormComponent } from './screens/art/drawing-form/drawing-form.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,12 @@ export const routes: Routes = [
     path: 'art/details/:id',
     component: DetailsComponent,
     data: { withComponentInputBinding: true },
+  },
+  {
+    path: 'art/edit/:id',
+    component: DrawingFormComponent,
+    data: { withComponentInputBinding: true },
+    canActivate: [AuthGuard],
   },
   { path: loginPath, component: LoginComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },

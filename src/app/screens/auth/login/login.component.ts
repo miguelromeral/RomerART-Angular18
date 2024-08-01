@@ -46,7 +46,7 @@ export class LoginComponent {
         response => {
           if (response) {
             this.authService.saveLoggedUser(response);
-            this.router.navigate(['admin']);
+            this.router.navigate([this.authService.getRedirectUrl()]);
           } else {
             console.log('Error al recivir el usuario logado');
           }

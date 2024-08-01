@@ -98,6 +98,16 @@
           </button>
         </div>
       </app-loading>
+
+      <button
+        *ngIf="!loading && admin"
+        class="btn-image"
+        (click)="editDrawing()"
+        (keypress.enter)="editDrawing()"
+        tabindex="0"
+        title="Editar dibujo">
+        <i class="bi bi-pencil"></i>
+      </button>
     </div>
 
     <app-loading [loading]="loading">
