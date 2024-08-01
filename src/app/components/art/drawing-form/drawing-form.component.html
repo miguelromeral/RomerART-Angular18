@@ -39,20 +39,8 @@
         [placeholder]="text('INPUTS.TITLE.PLACEHOLDER') | mrTranslate" />
     </div>
     <div class="form-group">
-      <div class="mr-choice-filter">
-        <label
-          class="form-check-label choice-label"
-          for="flexSwitchCheckChecked"
-          >FAVORITE</label
-        >
-        <input
-          class="form-check-input"
-          formControlName="favorite"
-          type="checkbox"
-          role="switch"
-          value="true"
-          id="flexSwitchCheckChecked" />
-      </div>
+      <app-switch [text]="'FAVORITE'" [formControl]="form.controls.favorite">
+      </app-switch>
     </div>
     <button class="btn" type="submit">SAVE</button>
   </form>

@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
@@ -27,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     LayoutComponent,
     LoadingComponent,
     RouterLink,
+    SwitchComponent,
     ReactiveFormsModule,
   ],
   templateUrl: './drawing-form.component.html',
@@ -63,8 +65,6 @@ export class DrawingFormComponent extends LanguageComponent {
     private metadataService: MetadataService
   ) {
     super('SCREENS.DRAWING-FORM');
-
-    console.log(this.drawing);
   }
 
   setFormValues(drawing: Drawing) {

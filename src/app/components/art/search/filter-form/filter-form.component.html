@@ -221,21 +221,12 @@
         </option>
       </select>
 
-      <div class="mr-choice-filter mr-filter-item">
-        <label
-          class="form-check-label choice-label"
-          for="flexSwitchCheckChecked">
-          {{ text('FAVORITES.TITLE') | mrTranslate }}</label
-        >
-        <input
-          class="form-check-input"
-          formControlName="formFavorites"
-          type="checkbox"
-          role="switch"
-          value="true"
-          id="flexSwitchCheckChecked"
-          (change)="filterControlChange()" />
-      </div>
+      <app-switch
+        class="mr-filter-item"
+        [text]="text('FAVORITES.TITLE') | mrTranslate"
+        formControlName="formFavorites"
+        (ngModelChange)="filterControlChange()">
+      </app-switch>
     </div>
   </div>
 </form>

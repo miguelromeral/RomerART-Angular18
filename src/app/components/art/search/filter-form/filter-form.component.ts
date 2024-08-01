@@ -37,6 +37,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
+import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.component';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -53,6 +54,7 @@ import { LoadingComponent } from '@app/components/shared/loading/loading.compone
     ReactiveFormsModule,
     LayoutComponent,
     LoadingComponent,
+    SwitchComponent,
   ],
   templateUrl: './filter-form.component.html',
   styleUrl: './filter-form.component.scss',
