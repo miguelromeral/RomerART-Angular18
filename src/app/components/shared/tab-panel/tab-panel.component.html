@@ -3,7 +3,7 @@
     *ngFor="let tab of tabs; let i = index"
     (click)="changeTab(tab.id)"
     [class.active]="selectedTab === tab.id"
-    class="tab-button flex flex-nowrap gap-2 focus:outline-none">
+    class="tab-button flex h-10 flex-nowrap items-center gap-2 focus:outline-none">
     <i
       class="bi"
       [ngClass]="tab.iconSelected"

@@ -11,6 +11,7 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
+import { TitleComponent } from '../title/title.component';
 
 @Component({
   selector: 'app-art-details-image',
@@ -24,6 +25,7 @@ import { LoadingComponent } from '@app/components/shared/loading/loading.compone
     TranslateModule,
     CustomTranslatePipe,
     LoadingComponent,
+    TitleComponent,
   ],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',

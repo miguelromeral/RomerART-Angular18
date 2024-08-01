@@ -1,4 +1,10 @@
 <div class="flex flex-col flex-nowrap gap-0">
+  <app-art-details-title
+    [loading]="loading"
+    [character]="drawing.name"
+    [modelName]="drawing.modelName">
+  </app-art-details-title>
+
   <div
     id="divImgFull"
     class="mr-img-full-container heart-rain relative min-h-24 w-full"

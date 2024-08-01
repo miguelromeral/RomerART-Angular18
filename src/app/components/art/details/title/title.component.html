@@ -13,16 +13,16 @@
   </ng-template>
 </div> -->
 
-<div class="flex flex-col gap-1">
-  <div *ngIf="loading; else loaded" class="skeleton">
-    <div class="h-4 w-40"></div>
-  </div>
-  <ng-template #loaded>
+<div *ngIf="loading; else loaded" class="skeleton">
+  <div class="h-4 w-40"></div>
+</div>
+<ng-template #loaded>
+  <div class="flex h-10 flex-row items-center justify-between gap-1">
     <h3>
       {{ character }}
     </h3>
-    <h5 class="mr-image-detail-subtitle">
+    <h5 class="text-sm italic">
       {{ modelName }}
     </h5>
-  </ng-template>
-</div>
+  </div>
+</ng-template>
