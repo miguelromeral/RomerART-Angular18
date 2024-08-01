@@ -41,7 +41,7 @@ export const appConfig: ApplicationConfig = {
         config: {
           tokenGetter: tokenGetter,
           allowedDomains: [environment.api.url.replace('/api/', '')],
-          disallowedRoutes: [`${environment.api.url}account/login`],
+          disallowedRoutes: [`${environment.api.url}auth/login`],
         },
       })
     ),

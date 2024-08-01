@@ -18,7 +18,17 @@ export class AuthService {
   ) {}
 
   login(credentials: { username: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}account/login`, credentials);
+    return this.http.post(`${this.apiUrl}auth/login`, credentials);
+  }
+
+  validateToken(token: string): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}auth/validate-token`, {
+      token,
+    });
+  }
+
+  getInfo(): Observable<any> {
+    return this.http.get(`${this.apiUrl}account/info`);
   }
 
   logout() {

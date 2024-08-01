@@ -1,0 +1,13 @@
+<app-layout>
+  <!-- TODO: currarse la página de LOGIN -->
+  <h1>LOGIN</h1>
+
+  <form [formGroup]="loginForm" (submit)="login()" class="flex flex-col gap-2">
+    <label>USERNAME</label>
+    <input formControlName="username" class="mr-custom-text" type="text" />
+    <label>PASSWORD</label>
+    <input formControlName="password" class="mr-custom-text" type="password" />
+
+    <button type="submit">LOGIN</button>
+  </form>
+</app-layout>

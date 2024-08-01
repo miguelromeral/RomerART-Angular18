@@ -7,7 +7,7 @@ import { SettingsComponent } from './screens/settings/settings.component';
 import { SearchComponent } from './screens/art/search/search.component';
 import { AdminComponent } from './screens/admin/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
-import { LoginComponent } from './screens/account/login/login.component';
+import { LoginComponent } from './screens/auth/login/login.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },

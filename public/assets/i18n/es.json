@@ -44,6 +44,10 @@
     "SETTINGS": {
       "TITLE": "Ajustes",
       "DESCRIPTION": "Cambia el comportamiento y el estilo de la aplicación para personalizar tu experiencia.",
+      "SECTIONS": {
+        "ACCESSIBILITY": "Accesibilidad",
+        "ACCOUNT": "Cuenta"
+      },
       "FORM": {
         "CHANGE-LANGUAGE": {
           "TITLE": "Cambiar idioma",
@@ -54,6 +58,11 @@
           "DESCRIPTION": "Cambia la manera en la que se ve la aplicación para que haya más colores claros o colores oscuros.",
           "LIGHT": "Claro",
           "DARK": "Oscuro"
+        },
+        "AUTH": {
+          "TITLE": "Identifícarse",
+          "DESCRIPTION": "Inicia sesión como administrador y edita el contenido de la web.",
+          "GO-TO-LOGIN": "Iniciar Sesión"
         }
       }
     },
