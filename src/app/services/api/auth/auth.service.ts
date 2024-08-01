@@ -56,6 +56,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(localStorageKey);
+    localStorage.removeItem(loggedUserLocalStorageKey);
     this.router.navigate([loginPath]);
     this.loggedUserSubject.next(null);
   }
