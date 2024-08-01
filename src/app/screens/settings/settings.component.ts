@@ -13,6 +13,7 @@ import {
 import { LayoutComponent } from '../../components/shared/layout/layout.component';
 import { ThemeService } from '@app/services/theme/theme.service';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { MetadataService } from '@app/services/metadata/metadata.service';
 
 @Component({
   selector: 'app-settings',
@@ -38,6 +39,7 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
   themes: ITailwindTheme[] = settingTheme.options;
 
   constructor(
+    private metadataService: MetadataService,
     private languageService: LanguageService,
     private themeService: ThemeService
   ) {
@@ -46,16 +48,17 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
 
   ngOnInit() {
     this.initSettings();
+    this.languageService.translateText(this.text('TITLE')).subscribe(text => {
+      this.metadataService.updateTitle(text);
+    });
   }
 
   initSettings() {
-    // Restore current language
-
     this.languageService.currentLanguage$.subscribe(newLang => {
       this.currentLanguage = newLang;
     });
 
-    this.currentTheme = this.themeService.getTheme() ?? 'dark';
+    this.currentTheme = this.themeService.getTheme();
   }
 
   changeLanguage(event: Event) {

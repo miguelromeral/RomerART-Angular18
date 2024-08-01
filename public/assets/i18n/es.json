@@ -21,6 +21,9 @@
     }
   },
   "SCREENS": {
+    "HOME": {
+      "TITLE": "MiguelRomeral"
+    },
     "NOT-FOUND": {
       "TITLE": "Página no encontrada"
     },

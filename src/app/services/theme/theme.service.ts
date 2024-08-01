@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from '@ng-web-apis/storage';
 import {
   darkThemeClassTailwind,
   settingTheme,
@@ -39,8 +38,11 @@ export class ThemeService {
     this.themeSubject.next(theme);
   }
 
-  getTheme(): string | null {
-    return this.storage.getItem(settingTheme.localStorageKey);
+  getTheme(): string {
+    return (
+      this.storage.getItem(settingTheme.localStorageKey) ??
+      settingTheme.defaultValue
+    );
   }
 
   clearTheme(): void {

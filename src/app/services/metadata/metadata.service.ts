@@ -26,4 +26,8 @@ export class MetadataService {
 
     tags.forEach(tag => this.meta.addTag(tag));
   }
+
+  updateTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
 }

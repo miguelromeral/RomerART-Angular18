@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
@@ -7,6 +7,8 @@ import { FilterFormComponent } from '@app/components/art/search/filter-form/filt
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { MetadataService } from '@app/services/metadata/metadata.service';
+import { LanguageService } from '@app/services/language/language.service';
 
 @Component({
   selector: 'app-search',
@@ -24,7 +26,7 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
-export class SearchComponent extends LanguageComponent {
+export class SearchComponent extends LanguageComponent implements OnInit {
   listDrawings: Drawing[] = [];
   @ViewChild(FilterFormComponent) filterFormComponent!: FilterFormComponent;
 
@@ -36,8 +38,17 @@ export class SearchComponent extends LanguageComponent {
     return this.listDrawings.length === 0;
   }
 
-  constructor() {
+  constructor(
+    private metadataService: MetadataService,
+    private languageService: LanguageService
+  ) {
     super('SCREENS.DRAWING-SEARCH');
+  }
+
+  ngOnInit() {
+    this.languageService.translateText(this.text('TITLE')).subscribe(text => {
+      this.metadataService.updateTitle(text);
+    });
   }
 
   onFetchedResults(list: Drawing[]) {
