@@ -16,6 +16,7 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { MetadataService } from '@app/services/metadata/metadata.service';
 import { RouterLink } from '@angular/router';
 import { loginPath } from 'config/auth/auth.config';
+import { SettingOptionComponent } from '@app/components/settings/setting-option/setting-option.component';
 
 @Component({
   selector: 'app-settings',
@@ -25,6 +26,7 @@ import { loginPath } from 'config/auth/auth.config';
     CustomTranslatePipe,
     NgFor,
     SettingSectionComponent,
+    SettingOptionComponent,
     LayoutComponent,
     LayoutComponent,
     CustomTranslatePipe,

@@ -9,5 +9,4 @@ import { Component, Input } from '@angular/core';
 })
 export class SettingSectionComponent {
   @Input() title!: string;
-  @Input() description!: string;
 }

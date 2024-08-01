@@ -1,10 +1,9 @@
 <app-layout>
-  <div class="flex flex-col">
-    <h1 class="pb-10">{{ text('TITLE') | mrTranslate }}</h1>
+  <div class="flex flex-col gap-10">
+    <h1>{{ text('TITLE') | mrTranslate }}</h1>
 
-    <h2>{{ text('SECTIONS.ACCESSIBILITY') | mrTranslate }}</h2>
-    <div class="mr-settings-subject flex flex-col gap-6">
-      <app-setting-section
+    <app-setting-section [title]="text('SECTIONS.ACCESSIBILITY') | mrTranslate">
+      <app-setting-option
         [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | mrTranslate"
         [description]="text('DESCRIPTION') | mrTranslate">
         <select
@@ -18,9 +17,9 @@
             {{ lang.text }}
           </option>
         </select>
-      </app-setting-section>
+      </app-setting-option>
 
-      <app-setting-section
+      <app-setting-option
         [title]="text('FORM.THEME.TITLE') | mrTranslate"
         [description]="text('FORM.THEME.DESCRIPTION') | mrTranslate">
         <select
@@ -34,18 +33,17 @@
             {{ text(theme.textCode) | mrTranslate }}
           </option>
         </select>
-      </app-setting-section>
+      </app-setting-option>
+    </app-setting-section>
 
-      <h2>{{ text('SECTIONS.ACCOUNT') | mrTranslate }}</h2>
-      <div class="mr-settings-subject flex flex-col gap-6">
-        <app-setting-section
-          [title]="text('FORM.AUTH.TITLE') | mrTranslate"
-          [description]="text('FORM.AUTH.DESCRIPTION') | mrTranslate">
-          <a [routerLink]="'/' + loginPath" ariaCurrentWhenActive="page">
-            {{ text('FORM.AUTH.GO-TO-LOGIN') | mrTranslate }}
-          </a>
-        </app-setting-section>
-      </div>
-    </div>
+    <app-setting-section [title]="text('SECTIONS.ACCOUNT') | mrTranslate">
+      <app-setting-option
+        [title]="text('FORM.AUTH.TITLE') | mrTranslate"
+        [description]="text('FORM.AUTH.DESCRIPTION') | mrTranslate">
+        <a [routerLink]="'/' + loginPath" ariaCurrentWhenActive="page">
+          {{ text('FORM.AUTH.GO-TO-LOGIN') | mrTranslate }}
+        </a>
+      </app-setting-option>
+    </app-setting-section>
   </div>
 </app-layout>
