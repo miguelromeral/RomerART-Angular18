@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.component';
+import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
@@ -30,6 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterLink,
     SwitchComponent,
     ReactiveFormsModule,
+    TextInputComponent,
   ],
   templateUrl: './drawing-form.component.html',
   styleUrl: './drawing-form.component.scss',

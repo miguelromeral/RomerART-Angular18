@@ -38,6 +38,7 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.component';
+import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -55,6 +56,7 @@ import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.com
     LayoutComponent,
     LoadingComponent,
     SwitchComponent,
+    TextInputComponent,
   ],
   templateUrl: './filter-form.component.html',
   styleUrl: './filter-form.component.scss',
@@ -293,6 +295,7 @@ export class FilterFormComponent
     return results[0].emoji;
   }
 
+  // TODO: arreglar keydown del input
   capturarEnter(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       event.preventDefault();

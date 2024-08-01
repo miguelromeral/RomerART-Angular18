@@ -22,26 +22,21 @@
         <span>{{ drawing.id }}</span>
       </ng-template>
     </div>
-    <div class="form-group">
-      <label for="iPath">PATH</label>
-      <input
-        id="iPath"
-        formControlName="path"
-        type="text"
-        [placeholder]="text('INPUTS.PATH.PLACEHOLDER') | mrTranslate" />
-    </div>
-    <div class="form-group">
-      <label for="iTitle">TITLE</label>
-      <input
-        id="iTitle"
-        formControlName="title"
-        type="text"
-        [placeholder]="text('INPUTS.TITLE.PLACEHOLDER') | mrTranslate" />
-    </div>
-    <div class="form-group">
-      <app-switch [text]="'FAVORITE'" [formControl]="form.controls.favorite">
-      </app-switch>
-    </div>
+
+    <app-text-input
+      formControlName="path"
+      [placeholder]="text('INPUTS.PATH.PLACEHOLDER') | mrTranslate"
+      [label]="'PATH'">
+    </app-text-input>
+
+    <app-text-input
+      formControlName="title"
+      [placeholder]="text('INPUTS.TITLE.PLACEHOLDER') | mrTranslate"
+      [label]="'TITLE'">
+    </app-text-input>
+
+    <app-switch [text]="'FAVORITE'" [formControl]="form.controls.favorite">
+    </app-switch>
     <button class="btn" type="submit">SAVE</button>
   </form>
 

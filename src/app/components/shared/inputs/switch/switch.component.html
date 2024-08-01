@@ -1,13 +1,15 @@
-<div class="mr-choice-filter">
-  <label class="form-check-label choice-label" for="flexSwitchCheckChecked">{{
-    text
-  }}</label>
-  <input
-    class="form-check-input"
-    [checked]="value"
-    (change)="onInputChange($event)"
-    (blur)="onBlur()"
-    type="checkbox"
-    role="switch"
-    id="flexSwitchCheckChecked" />
+<div class="form-group">
+  <div class="mr-choice-filter">
+    <label class="form-check-label choice-label" for="flexSwitchCheckChecked">{{
+      text
+    }}</label>
+    <input
+      class="form-check-input"
+      [checked]="value"
+      (change)="onInputChange($event)"
+      (blur)="onBlur()"
+      type="checkbox"
+      role="switch"
+      id="flexSwitchCheckChecked" />
+  </div>
 </div>

@@ -39,14 +39,13 @@
         <i id="iFavoriteIcon" class="bi bi-trash"></i>
       </button>
 
-      <input
-        id="tbTags"
+      <app-text-input
+        class="form-control col-span-7 w-full sm:col-span-8 lg:col-span-7"
         formControlName="textQuery"
-        class="form-control mr-custom-text col-span-7 w-full sm:col-span-8 lg:col-span-7"
-        type="text"
         [placeholder]="text('QUERY.PLACEHOLDER') | mrTranslate"
         (change)="filterControlChange()"
-        (keydown)="capturarEnter($event)" />
+        (keyDown)="capturarEnter($event)">
+      </app-text-input>
 
       <select
         id="sFilterType"
