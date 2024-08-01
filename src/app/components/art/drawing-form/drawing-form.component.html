@@ -1,0 +1,72 @@
+<app-layout>
+  <!-- TODO: extraer strings de esta pantalla -->
+  <h1>
+    <ng-container *ngIf="newDrawing; else titleEditForm"
+      >TITLE-CREATE</ng-container
+    >
+    <ng-template #titleEditForm>TITLE-EDIT {{ drawing.id }}</ng-template>
+  </h1>
+  <form
+    class="grid grid-cols-1 gap-4"
+    (submit)="saveDrawing()"
+    [formGroup]="form">
+    <div class="form-group">
+      <label for="iId">ID</label>
+      <input
+        *ngIf="newDrawing; else idEdit"
+        id="iId"
+        formControlName="id"
+        type="text"
+        [placeholder]="text('INPUTS.ID.PLACEHOLDER') | mrTranslate" />
+      <ng-template #idEdit>
+        <span>{{ drawing.id }}</span>
+      </ng-template>
+    </div>
+    <div class="form-group">
+      <label for="iPath">PATH</label>
+      <input
+        id="iPath"
+        formControlName="path"
+        type="text"
+        [placeholder]="text('INPUTS.PATH.PLACEHOLDER') | mrTranslate" />
+    </div>
+    <div class="form-group">
+      <label for="iTitle">TITLE</label>
+      <input
+        id="iTitle"
+        formControlName="title"
+        type="text"
+        [placeholder]="text('INPUTS.TITLE.PLACEHOLDER') | mrTranslate" />
+    </div>
+    <div class="form-group">
+      <div class="mr-choice-filter">
+        <label
+          class="form-check-label choice-label"
+          for="flexSwitchCheckChecked"
+          >FAVORITE</label
+        >
+        <input
+          class="form-check-input"
+          formControlName="favorite"
+          type="checkbox"
+          role="switch"
+          value="true"
+          id="flexSwitchCheckChecked" />
+      </div>
+    </div>
+    <button class="btn" type="submit">SAVE</button>
+  </form>
+
+  <!-- TODO: llevar esto al Art/Edit component -->
+  <div *ngIf="drawingNotFound" class="flex flex-col flex-nowrap gap-3">
+    <h1>
+      {{ text('NOTFOUND.TITLE') | mrTranslate }}
+    </h1>
+    <h3>
+      {{ text('NOTFOUND.SUBTITLE') | mrTranslate: { id: drawing.id } }}
+    </h3>
+    <a routerLink="/art">
+      {{ text('NOTFOUND.GO-TO-GALLERY') | mrTranslate }}
+    </a>
+  </div>
+</app-layout>

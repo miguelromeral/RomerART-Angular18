@@ -9,6 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { MetadataService } from '@app/services/metadata/metadata.service';
 import { LanguageService } from '@app/services/language/language.service';
+import { AuthService } from '@app/services/api/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -38,9 +40,13 @@ export class SearchComponent extends LanguageComponent implements OnInit {
     return this.listDrawings.length === 0;
   }
 
+  admin = false;
+
   constructor(
     private metadataService: MetadataService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private authService: AuthService,
+    private router: Router
   ) {
     super('SCREENS.DRAWING-SEARCH');
   }
@@ -48,6 +54,9 @@ export class SearchComponent extends LanguageComponent implements OnInit {
   ngOnInit() {
     this.languageService.translateText(this.text('TITLE')).subscribe(text => {
       this.metadataService.updateTitle(text);
+    });
+    this.authService.loggedUser$.subscribe(user => {
+      this.admin = user?.role === 'admin';
     });
   }
 
@@ -64,5 +73,9 @@ export class SearchComponent extends LanguageComponent implements OnInit {
 
   existsMoreResultsToFetch(moreFound: boolean) {
     this.showButtonFetchMore = moreFound;
+  }
+
+  createNewDrawing() {
+    this.router.navigate(['/art/create']);
   }
 }

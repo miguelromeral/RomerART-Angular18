@@ -9,7 +9,12 @@
 
 
 .mr-custom-select:hover,
-.mr-custom-btn:hover {
+.mr-custom-btn:hover,
+.btn:hover {
   background-color: var(--mr-input-bg-color);
   color: var(--mr-text-color);
+}
+
+.form-group {
+  @apply flex flex-col w-full gap-2
 }

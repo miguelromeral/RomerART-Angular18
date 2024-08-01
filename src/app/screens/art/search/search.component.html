@@ -27,6 +27,13 @@
       <div
         id="artGallery"
         class="mr-img-gallery grid h-full w-full grid-cols-3 gap-[2px] sm:grid-cols-4">
+        <button
+          *ngIf="admin"
+          class="flex h-full w-full flex-col flex-nowrap items-center justify-center gap-2 border"
+          (click)="createNewDrawing()">
+          <i class="bi bi-plus-square-dotted text-2xl"></i>
+          <span>{{ text('FORM.CREATE-NEW.TITLE') | mrTranslate }}</span>
+        </button>
         <app-drawing-thumbnail
           class="h-full w-full"
           [ngClass]="{ 'col-span-2 row-span-2': first }"

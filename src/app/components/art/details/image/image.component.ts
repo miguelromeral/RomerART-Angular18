@@ -66,6 +66,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
   loadLoggedUser() {
     this.authService.loggedUser$.subscribe(user => {
+      // TODO: mover esto a una nueva funcionalidad
       this.admin = user?.role === 'admin';
     });
   }
@@ -144,6 +145,6 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   }
 
   editDrawing() {
-    this.router.navigate([`/art/edit/'${this.drawing.id}`]);
+    this.router.navigate([`/art/edit/${this.drawing.id}`]);
   }
 }

@@ -79,6 +79,9 @@
       },
       "FORM": {
         "TITLE": "Filtrar por...",
+        "CREATE-NEW": {
+          "TITLE": "Crear Nuevo"
+        },
         "SORTBY": {
           "TITLE": "Ordenar por...",
           "DATE-DESC": "Nuevos Primero",

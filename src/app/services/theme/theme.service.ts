@@ -27,7 +27,7 @@ export class ThemeService {
   }
 
   setTheme(theme: string): void {
-    console.log('Changing theme: ' + theme);
+    // console.log('Changing theme: ' + theme);
     this.storage.setItem(settingTheme.localStorageKey, theme);
     if (theme === darkThemeClassTailwind) {
       window.document.documentElement.classList.add(darkThemeClassTailwind);

@@ -9,7 +9,8 @@ import { AdminComponent } from './screens/admin/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './screens/auth/login/login.component';
 import { loginPath } from 'config/auth/auth.config';
-import { DrawingFormComponent } from './screens/art/drawing-form/drawing-form.component';
+import { EditComponent } from './screens/art/edit/edit.component';
+import { CreateComponent } from './screens/art/create/create.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,8 +27,13 @@ export const routes: Routes = [
   },
   {
     path: 'art/edit/:id',
-    component: DrawingFormComponent,
+    component: EditComponent,
     data: { withComponentInputBinding: true },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'art/create',
+    component: CreateComponent,
     canActivate: [AuthGuard],
   },
   { path: loginPath, component: LoginComponent },
