@@ -43,7 +43,6 @@ export class AppComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: object,
     private metadataService: MetadataService,
     private languageService: LanguageService,
-    private localStorageService: LocalStorageService,
     private authService: AuthService,
     private themeService: ThemeService
   ) {

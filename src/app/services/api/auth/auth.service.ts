@@ -50,6 +50,10 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}account/info`);
   }
 
+  getToken(): string | null {
+    return localStorage.getItem(localStorageKey);
+  }
+
   logout() {
     localStorage.removeItem(localStorageKey);
     this.router.navigate([loginPath]);

@@ -41,11 +41,11 @@ export class NavBarConfig {
       iconActive: 'bi-gear-fill',
       textCode: 'LINKS.SETTINGS',
     },
-    {
-      link: '/debug',
-      icon: 'bi-bug',
-      iconActive: 'bi-bug-fill',
-      textCode: 'LINKS.DEBUG',
-    },
+    // {
+    //   link: '/debug',
+    //   icon: 'bi-bug',
+    //   iconActive: 'bi-bug-fill',
+    //   textCode: 'LINKS.DEBUG',
+    // },
   ];
 }

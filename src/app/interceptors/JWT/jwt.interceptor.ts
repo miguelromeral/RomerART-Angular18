@@ -6,21 +6,37 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '@app/services/api/auth/auth.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
+  private excludedRoutes = ['/api/art/'];
+
+  constructor(private authService: AuthService) {}
+
   intercept(
-    request: HttpRequest<any>,
+    req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('access_token');
+    // Verifica si la URL está en las rutas excluidas
+    if (this.isExcludedRoute(req.url)) {
+      return next.handle(req);
+    }
+
+    const token = this.authService.getToken(); // O el método correspondiente
+
     if (token) {
-      request = request.clone({
+      req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
         },
       });
     }
-    return next.handle(request);
+
+    return next.handle(req);
+  }
+
+  private isExcludedRoute(url: string): boolean {
+    return this.excludedRoutes.some(route => url.includes(route));
   }
 }
