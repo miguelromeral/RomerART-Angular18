@@ -13,7 +13,7 @@ import { LayoutComponent } from '@app/components/shared/layout/layout.component'
 import { ScoreBoardComponent } from '@app/components/art/details/score-board/score-board.component';
 import { MetadataService } from '@app/services/metadata/metadata.service';
 import { ArtSectionType } from 'config/art/art-section.config';
-import { TabPanelComponent } from '@app/components/shared/tab-panel/tab-panel.component';
+import { TabPanelComponent } from '@app/components/art/details/tab-panel/tab-panel.component';
 import { TabPanelItem } from '@models/components/tab-panel-item.model';
 import { ArtInfoTabsConfig } from 'config/art/art-info-tabs.config';
 import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
