@@ -6,11 +6,12 @@ import { Subscription } from 'rxjs';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { AuthService } from '@app/services/api/auth/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-debug',
   standalone: true,
-  imports: [TranslateModule, CustomTranslatePipe, LayoutComponent],
+  imports: [TranslateModule, CustomTranslatePipe, LayoutComponent, RouterLink],
   templateUrl: './debug.component.html',
   styleUrl: './debug.component.scss',
 })
@@ -42,19 +43,6 @@ export class DebugComponent implements OnInit, OnDestroy {
     if (this.languageSub) {
       this.languageSub.unsubscribe();
     }
-  }
-
-  login() {
-    this.authService
-      .login({ username: 'usuario', password: 'contraseña' })
-      .subscribe(
-        response => {
-          this.authService.saveAuthToken(response.token);
-        },
-        err => {
-          console.log('Error al recivir el token: ' + err);
-        }
-      );
   }
 
   private updateText() {

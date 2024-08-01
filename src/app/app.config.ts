@@ -12,7 +12,7 @@ import {
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ReactiveFormsModule } from '@angular/forms';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { JwtInterceptor } from '@app/interceptors/JWT/jwt.interceptor';
 import { environment } from 'environments/environment';
 
@@ -47,6 +47,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideRouter(routes, withComponentInputBinding()),
     provideClientHydration(),
+    JwtHelperService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

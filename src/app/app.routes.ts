@@ -5,6 +5,9 @@ import { NotfoundComponent } from './screens/errors/notfound/notfound.component'
 import { Routes } from '@angular/router';
 import { SettingsComponent } from './screens/settings/settings.component';
 import { SearchComponent } from './screens/art/search/search.component';
+import { AdminComponent } from './screens/admin/admin/admin.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './screens/account/login/login.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,5 +22,7 @@ export const routes: Routes = [
     component: DetailsComponent,
     data: { withComponentInputBinding: true },
   },
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotfoundComponent },
 ];
