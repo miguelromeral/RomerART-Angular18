@@ -1,49 +1,42 @@
 <app-layout>
   <div class="flex flex-col gap-10">
-    <h1>{{ text('TITLE') | mrTranslate }}</h1>
+    <form [formGroup]="settingsForm">
+      <h1>{{ text('TITLE') | mrTranslate }}</h1>
 
-    <app-setting-section [title]="text('SECTIONS.ACCESSIBILITY') | mrTranslate">
-      <app-setting-option
-        [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | mrTranslate"
-        [description]="text('DESCRIPTION') | mrTranslate">
-        <select
-          id="language-select"
-          class="mr-custom-select"
-          (change)="changeLanguage($event)">
-          <option
-            *ngFor="let lang of languages"
-            [value]="lang.code"
-            [selected]="currentLanguage === lang.code">
-            {{ lang.text }}
-          </option>
-        </select>
-      </app-setting-option>
+      <app-setting-section
+        [title]="text('SECTIONS.ACCESSIBILITY') | mrTranslate">
+        <app-setting-option
+          [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | mrTranslate"
+          [description]="text('DESCRIPTION') | mrTranslate">
+          <app-select-input
+            [options]="languages"
+            formControlName="langFormControl"
+            (change)="changeLanguage($event)">
+          </app-select-input>
+        </app-setting-option>
 
-      <app-setting-option
-        [title]="text('FORM.THEME.TITLE') | mrTranslate"
-        [description]="text('FORM.THEME.DESCRIPTION') | mrTranslate">
-        <select
-          id="theme-select"
-          class="mr-custom-select"
-          (change)="changeTheme($event)">
-          <option
-            *ngFor="let theme of themes"
-            [value]="theme.value"
-            [selected]="theme.value === currentTheme">
-            {{ text(theme.textCode) | mrTranslate }}
-          </option>
-        </select>
-      </app-setting-option>
-    </app-setting-section>
+        <app-setting-option
+          [title]="text('FORM.THEME.TITLE') | mrTranslate"
+          [description]="text('FORM.THEME.DESCRIPTION') | mrTranslate">
+          <app-select-input
+            [options]="themes"
+            formControlName="themeFormControl"
+            (change)="changeTheme($event)">
+          </app-select-input>
 
-    <app-setting-section [title]="text('SECTIONS.ACCOUNT') | mrTranslate">
-      <app-setting-option
-        [title]="text('FORM.AUTH.TITLE') | mrTranslate"
-        [description]="text('FORM.AUTH.DESCRIPTION') | mrTranslate">
-        <a [routerLink]="'/' + loginPath" ariaCurrentWhenActive="page">
-          {{ text('FORM.AUTH.GO-TO-LOGIN') | mrTranslate }}
-        </a>
-      </app-setting-option>
-    </app-setting-section>
+          <!-- {{ text(theme.textCode) | mrTranslate }} -->
+        </app-setting-option>
+      </app-setting-section>
+
+      <app-setting-section [title]="text('SECTIONS.ACCOUNT') | mrTranslate">
+        <app-setting-option
+          [title]="text('FORM.AUTH.TITLE') | mrTranslate"
+          [description]="text('FORM.AUTH.DESCRIPTION') | mrTranslate">
+          <a [routerLink]="'/' + loginPath" ariaCurrentWhenActive="page">
+            {{ text('FORM.AUTH.GO-TO-LOGIN') | mrTranslate }}
+          </a>
+        </app-setting-option>
+      </app-setting-section>
+    </form>
   </div>
 </app-layout>

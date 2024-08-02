@@ -6,7 +6,9 @@
 @import 'inputs/switch.scss';
 
 
-
+select {
+  @apply w-full;
+}
 
 .mr-custom-select:hover,
 .mr-custom-btn:hover,

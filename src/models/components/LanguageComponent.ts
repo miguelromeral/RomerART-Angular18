@@ -6,6 +6,9 @@ export abstract class LanguageComponent {
   }
 
   text(suffix: string) {
+    if (this.basePath === '') {
+      return suffix;
+    }
     return this.basePath + '.' + suffix;
   }
 }

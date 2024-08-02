@@ -5,8 +5,6 @@ import { LanguageService } from '@app/services/language/language.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  IAvailableLanguage,
-  ITailwindTheme,
   settingLanguage,
   settingTheme,
 } from 'config/settings/local-storage.config';
@@ -17,6 +15,9 @@ import { MetadataService } from '@app/services/metadata/metadata.service';
 import { RouterLink } from '@angular/router';
 import { loginPath } from 'config/auth/auth.config';
 import { SettingOptionComponent } from '@app/components/settings/setting-option/setting-option.component';
+import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
+import { ICustomSelectOption } from '@models/inputs/select-option.model';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -31,6 +32,8 @@ import { SettingOptionComponent } from '@app/components/settings/setting-option/
     LayoutComponent,
     CustomTranslatePipe,
     RouterLink,
+    ReactiveFormsModule,
+    SelectInputComponent,
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
@@ -39,11 +42,13 @@ import { SettingOptionComponent } from '@app/components/settings/setting-option/
 export class SettingsComponent extends LanguageComponent implements OnInit {
   loginPath = loginPath;
 
-  currentLanguage = settingLanguage.defaultValue;
-  currentTheme = settingTheme.defaultValue;
+  languages: ICustomSelectOption[] = settingLanguage.options;
+  themes: ICustomSelectOption[] = settingTheme.options;
 
-  languages: IAvailableLanguage[] = settingLanguage.options;
-  themes: ITailwindTheme[] = settingTheme.options;
+  settingsForm = new FormGroup({
+    langFormControl: new FormControl('en'),
+    themeFormControl: new FormControl('system'),
+  });
 
   constructor(
     private metadataService: MetadataService,
@@ -62,10 +67,12 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
 
   initSettings() {
     this.languageService.currentLanguage$.subscribe(newLang => {
-      this.currentLanguage = newLang;
+      this.settingsForm.controls.langFormControl.setValue(newLang);
     });
 
-    this.currentTheme = this.themeService.getTheme();
+    this.settingsForm.controls.themeFormControl.setValue(
+      this.themeService.getTheme()
+    );
   }
 
   changeLanguage(event: Event) {

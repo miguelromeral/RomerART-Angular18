@@ -19,7 +19,7 @@ export class LanguageService {
   ) {}
 
   init() {
-    const languages = settingLanguage.options.map(lang => lang.code);
+    const languages = settingLanguage.options.map(lang => lang.value);
     this.translate.addLangs(languages);
 
     let currentLanguage = this.localStorageService.getItem(

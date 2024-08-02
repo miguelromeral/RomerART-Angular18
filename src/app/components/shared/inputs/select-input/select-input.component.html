@@ -1,0 +1,24 @@
+<div class="form-control w-full">
+  <select
+    class="mr-custom-select"
+    [value]="value"
+    (change)="onSelectChange($event)"
+    (blur)="onBlur()">
+    <option *ngIf="firstOption" [value]="firstOption.value">
+      <ng-container *ngIf="firstOption.labelCode !== ''; else literalTitle">
+        {{ text(firstOption.labelCode) | mrTranslate }}
+      </ng-container>
+      <ng-template #literalTitle>
+        {{ firstOption.label }}
+      </ng-template>
+    </option>
+    <option *ngFor="let option of options" [value]="option.value">
+      <ng-container *ngIf="option.labelCode !== ''; else literal">
+        {{ text(option.labelCode) | mrTranslate }}
+      </ng-container>
+      <ng-template #literal>
+        {{ option.label }}
+      </ng-template>
+    </option>
+  </select>
+</div>

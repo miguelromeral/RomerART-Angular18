@@ -3,20 +3,13 @@
     <div class="mr-sort-filter-container flex w-full flex-row-reverse">
       <div class="mr-sort-filter flex flex-col items-end">
         <span class="text-sm">{{ text('SORTBY.TITLE') | mrTranslate }}</span>
-        <select
-          id="sFilterSortBy"
-          class="mr-custom-select filters form-select form-select-sm"
+
+        <app-select-input
+          class="mr-filter-item"
+          [options]="listOptionsSortBy"
           formControlName="sortBy"
           (change)="filterControlChange()">
-          <ng-container *ngFor="let option of listOptionsSortBy">
-            <option
-              *ngIf="option.visible"
-              [value]="option.value"
-              [ngClass]="option.class">
-              {{ text(option.textCode) | mrTranslate }}
-            </option>
-          </ng-container>
-        </select>
+        </app-select-input>
       </div>
     </div>
   </div>
@@ -47,178 +40,144 @@
         (keyDown)="capturarEnter($event)">
       </app-text-input>
 
-      <select
-        id="sFilterType"
-        *ngIf="listDrawingStyles.length > 0"
-        class="mr-custom-select form-select form-select-sm mr-filter-item"
+      <app-select-input
+        class="mr-filter-item"
+        [firstOption]="{
+          value: '-1',
+          label: '',
+          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.STYLE.TITLE',
+        }"
+        [options]="listDrawingStyles"
         formControlName="type"
         (change)="filterControlChange()">
-        <option value="-1" selected>
-          {{ text('STYLE.TITLE') | mrTranslate }}
-        </option>
-        <option *ngFor="let style of listDrawingStyles" [value]="style.id">
-          {{ style.translatedText }}
-        </option>
-        <!-- <option value="0">(Otro Estilo)</option> -->
-      </select>
+      </app-select-input>
 
-      <select
-        id="sFilterProduct"
-        *ngIf="listDrawingProductTypes.length > 0"
+      <app-select-input
+        class="mr-filter-item"
+        [firstOption]="{
+          value: '-1',
+          label: '',
+          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT-TYPE.TITLE',
+        }"
+        [options]="listDrawingProductTypes"
         formControlName="productType"
-        class="mr-custom-select form-select form-select-sm mr-filter-item"
         (change)="filterControlChange()">
-        <option value="-1" selected>
-          {{ text('PRODUCT-TYPE.TITLE') | mrTranslate }}
-        </option>
-
-        <option *ngFor="let type of listDrawingProductTypes" [value]="type.id">
-          {{ type.emoji }} {{ type.translatedText }}
-        </option>
-        <!-- <option value="0">(Otro Tipo)</option> -->
-      </select>
+      </app-select-input>
 
       <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
 
-        <select
-          id="sFilterProductName"
-          *ngIf="listDrawingProducts.length > 0"
-          class="mr-custom-select form-select form-select-sm mr-filter-item"
+        <app-select-input
+          class="mr-filter-item"
+          [firstOption]="{
+            value: '',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT.TITLE',
+          }"
+          [options]="listDrawingProducts"
           formControlName="productName"
           (change)="filterControlChange()"
           content>
-          <option value="" selected>
-            {{ text('PRODUCT.TITLE') | mrTranslate }}
-          </option>
-
-          <option
-            *ngFor="let product of listDrawingProducts"
-            [value]="product.productName">
-            {{ getEmojiFromProductType(product.productTypeId) }}
-            {{ product.productName }}
-          </option>
-
-          <!-- <option value="none">(Ninguna Temática)</option> -->
-        </select>
+        </app-select-input>
       </app-loading>
 
-      <app-loading [loading]="loadingCollections" class="mr-filter-item">
+      <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
 
-        <select
-          id="sFilterCollection"
-          class="mr-custom-select form-select form-select-sm mr-filter-item"
-          *ngIf="listCollections.length > 0"
+        <app-select-input
+          class="mr-filter-item"
+          [firstOption]="{
+            value: '',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.COLLECTION.TITLE',
+          }"
+          [options]="listCollections"
           formControlName="collection"
           (change)="filterControlChange()"
           content>
-          <option value="" selected>
-            {{ text('COLLECTION.TITLE') | mrTranslate }}
-          </option>
-
-          <option [value]="col.id" *ngFor="let col of listCollections">
-            {{ col.name }}
-          </option>
-        </select>
+        </app-select-input>
       </app-loading>
 
       <app-loading [loading]="loadingDrawingCharacters" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
 
-        <select
-          id="sFilterCharacterName"
-          *ngIf="listDrawingCharacters.length > 0"
-          class="mr-custom-select form-select form-select-sm mr-filter-item"
+        <app-select-input
+          class="mr-filter-item"
+          [firstOption]="{
+            value: '',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE',
+          }"
+          [options]="listDrawingCharacters"
           formControlName="characterName"
           (change)="filterControlChange()"
           content>
-          <option value="" selected>
-            {{ text('CHARACTER.TITLE') | mrTranslate }}
-          </option>
-
-          <ng-container *ngFor="let character of listDrawingCharacters">
-            <option
-              *ngIf="character.characterName !== ''"
-              [value]="character.characterName">
-              {{ getEmojiFromProductType(character.productTypeId) }}
-              {{ character.characterName }}
-            </option>
-          </ng-container>
-
-          <option value="none">
-            {{ text('CHARACTER.NONE') | mrTranslate }}
-          </option>
-        </select>
+        </app-select-input>
       </app-loading>
 
       <app-loading [loading]="loadingDrawingModels" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
 
-        <select
-          id="sFilterModel"
-          *ngIf="listDrawingModels.length > 0"
-          class="mr-custom-select form-select form-select-sm mr-filter-item"
+        <app-select-input
+          class="mr-filter-item"
+          [firstOption]="{
+            value: '',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE',
+          }"
+          [options]="listDrawingModels"
           formControlName="modelName"
           (change)="filterControlChange()"
           content>
-          <option value="" selected>
-            {{ text('MODEL.TITLE') | mrTranslate }}
-          </option>
-
-          <option *ngFor="let model of listDrawingModels" [value]="model">
-            {{ model }}
-          </option>
-
-          <option value="none">{{ text('MODEL.NONE') | mrTranslate }}</option>
-        </select>
+        </app-select-input>
       </app-loading>
 
-      <select
-        id="sFilterSoftware"
-        *ngIf="listDrawingSoftwares.length > 0"
-        class="mr-custom-select form-select form-select-sm mr-filter-item"
+      <app-select-input
+        class="mr-filter-item"
+        [firstOption]="{
+          value: '0',
+          label: '',
+          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SOFTWARE.TITLE',
+        }"
+        [options]="listDrawingSoftwares"
         formControlName="software"
         (change)="filterControlChange()">
-        <option value="0" selected>
-          {{ text('SOFTWARE.TITLE') | mrTranslate }}
-        </option>
+      </app-select-input>
 
-        <option *ngFor="let sw of listDrawingSoftwares" [value]="sw.id">
-          {{ sw.name }}
-        </option>
-      </select>
-
-      <select
-        id="sFilterPaper"
-        *ngIf="listDrawingPapers.length > 0"
-        class="mr-custom-select form-select form-select-sm mr-filter-item"
+      <app-select-input
+        class="mr-filter-item"
+        [firstOption]="{
+          value: '0',
+          label: '',
+          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PAPER.TITLE',
+        }"
+        [options]="listDrawingPapers"
         formControlName="paper"
         (change)="filterControlChange()">
-        <option value="0" selected>
-          {{ text('PAPER.TITLE') | mrTranslate }}
-        </option>
+      </app-select-input>
 
-        <option *ngFor="let paper of listDrawingPapers" [value]="paper.id">
-          {{ paper.name }}
-        </option>
-      </select>
-
-      <select
-        id="sFilterSpotify"
-        class="mr-custom-select form-select form-select-sm mr-filter-item mr-spotify"
+      <app-select-input
+        class="mr-filter-item"
+        [firstOption]="{
+          value: 'null',
+          label: '',
+          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.TITLE',
+        }"
+        [options]="[
+          {
+            value: 'true',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.YES',
+          },
+          {
+            value: 'false',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.NO',
+          },
+        ]"
         formControlName="formSpotify"
         (change)="filterControlChange()">
-        <option value="null" selected>
-          {{ text('SPOTIFY.TITLE') | mrTranslate }}
-        </option>
-        <option value="true">
-          {{ text('SPOTIFY.YES') | mrTranslate }}
-        </option>
-        <option value="false">
-          {{ text('SPOTIFY.NO') | mrTranslate }}
-        </option>
-      </select>
+      </app-select-input>
 
       <app-switch
         class="mr-filter-item"

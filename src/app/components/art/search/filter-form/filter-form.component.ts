@@ -39,6 +39,8 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.component';
 import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
+import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
+import { ICustomSelectOption } from '@models/inputs/select-option.model';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -57,6 +59,7 @@ import { TextInputComponent } from '@app/components/shared/inputs/text-input/tex
     LoadingComponent,
     SwitchComponent,
     TextInputComponent,
+    SelectInputComponent,
   ],
   templateUrl: './filter-form.component.html',
   styleUrl: './filter-form.component.scss',
@@ -85,7 +88,7 @@ export class FilterFormComponent
   listDrawingProductTypes: DrawingProductType[] = [];
   listDrawingProducts: DrawingProduct[] = [];
   listDrawingCharacters: DrawingCharacter[] = [];
-  listDrawingModels: string[] = [];
+  listDrawingModels: ICustomSelectOption[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
   listCollections: Collection[] = [];
@@ -234,20 +237,30 @@ export class FilterFormComponent
     this.listDrawingProductTypes = this.drawingService.getDrawingProductTypes();
     this.drawingService.getDrawingProducts().subscribe(list => {
       if (list) {
-        // TODO: hacer que esto funcione
-        this.listDrawingProducts = list.sort(sortProductsByName);
+        this.listDrawingProducts = list
+          .map(p => new DrawingProduct(p))
+          .sort(sortProductsByName);
       }
       this.loadingDrawingProducts = false;
     });
     this.drawingService.getDrawingCharacters().subscribe(list => {
       if (list) {
-        this.listDrawingCharacters = list.sort(sortCharactersByName);
+        // TODO: añadir el option de ningúno: Value: "none", Label: "CHARACTER.NONE"
+        this.listDrawingCharacters = list
+          .map(c => new DrawingCharacter(c))
+          .filter(c => c.characterName !== '')
+          .sort(sortCharactersByName);
       }
       this.loadingDrawingCharacters = false;
     });
     this.drawingService.getDrawingModels().subscribe(list => {
       if (list) {
-        this.listDrawingModels = list.sort(sortByTextAscending);
+        // TODO: añadir el option de ningúno: Value: "none", Label: "MODEL.NONE"
+        this.listDrawingModels = list
+          .sort(sortByTextAscending)
+          .map<ICustomSelectOption>(m => {
+            return { value: m, label: m, labelCode: '' };
+          });
       }
       this.loadingDrawingModels = false;
     });
@@ -255,7 +268,7 @@ export class FilterFormComponent
     this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
     this.drawingService.getAllCollections().subscribe(list => {
       if (list) {
-        this.listCollections = list;
+        this.listCollections = list.map(c => new Collection(c));
       }
       this.loadingCollections = false;
     });
@@ -278,21 +291,6 @@ export class FilterFormComponent
         });
       });
     }
-  }
-
-  getEmojiFromProductType(id: number) {
-    const results = this.listDrawingProductTypes.filter(
-      product => product.id === id
-    );
-    if (results.length !== 1) {
-      return '';
-    }
-
-    this.listDrawingProducts.sort((a: DrawingProduct, b: DrawingProduct) => {
-      return a.productName.localeCompare(b.productName);
-    });
-
-    return results[0].emoji;
   }
 
   // TODO: arreglar keydown del input

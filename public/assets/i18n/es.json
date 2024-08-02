@@ -56,6 +56,7 @@
         "THEME": {
           "TITLE": "Cambiar Tema",
           "DESCRIPTION": "Cambia la manera en la que se ve la aplicación para que haya más colores claros o colores oscuros.",
+          "SYSTEM": "Detectar",
           "LIGHT": "Claro",
           "DARK": "Oscuro"
         },

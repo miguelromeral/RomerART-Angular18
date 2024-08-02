@@ -6,7 +6,13 @@ export function sortProductsByName(
   b: DrawingProduct
 ): number {
   // return b.productName.toLowerCase().localeCompare(a.productName.toLowerCase());
-  return a.productTypeId - b.productTypeId;
+  const prod = a.productTypeId - b.productTypeId;
+  if (prod !== 0) {
+    return prod;
+  }
+  return a.productName
+    .toLocaleLowerCase()
+    .localeCompare(b.productName.toLocaleLowerCase());
 }
 
 export function sortCharactersByName(

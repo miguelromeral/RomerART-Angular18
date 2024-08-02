@@ -33,8 +33,15 @@
       "DESCRIPTION": "Change the app's behaviour and style and custom your experience.",
       "FORM": {
         "CHANGE-LANGUAGE": {
-          "TITLE": "Change language",
+          "TITLE": "Change Language",
           "DESCRIPTION": "Change the app's language. Some content of the app (such as drawings) will not be translated."
+        },
+        "THEME": {
+          "TITLE": "Change Theme",
+          "DESCRIPTION": "Change the app's color palette, so there are lighter or darker colors.",
+          "SYSTEM": "Detect",
+          "LIGHT": "Light",
+          "DARK": "Dark"
         }
       }
     },

@@ -1,14 +1,7 @@
+import { ICustomSelectOption } from '@models/inputs/select-option.model';
+
+export const defaultThemeClassTailwind = 'system';
 export const darkThemeClassTailwind = 'dark';
-
-export interface IAvailableLanguage {
-  code: string;
-  text: string;
-}
-
-export interface ITailwindTheme {
-  value: string;
-  textCode: string;
-}
 
 export interface ISelectOption<T> {
   localStorageKey: string;
@@ -16,33 +9,41 @@ export interface ISelectOption<T> {
   options: T[];
 }
 
-export const settingLanguage: ISelectOption<IAvailableLanguage> = {
+export const settingLanguage: ISelectOption<ICustomSelectOption> = {
   defaultValue: 'es',
   localStorageKey: 'lang',
   options: [
     {
-      code: 'es',
-      text: 'Español',
+      value: 'es',
+      label: 'Español',
+      labelCode: '',
     },
     {
-      code: 'en',
-      text: 'English',
+      value: 'en',
+      label: 'English',
+      labelCode: '',
     },
   ],
 };
 
-export const settingTheme: ISelectOption<ITailwindTheme> = {
+export const settingTheme: ISelectOption<ICustomSelectOption> = {
   defaultValue: 'light',
   localStorageKey: 'theme',
   options: [
     {
-      value: 'light',
-      textCode: 'FORM.THEME.LIGHT',
+      value: defaultThemeClassTailwind,
+      labelCode: 'SCREENS.SETTINGS.FORM.THEME.SYSTEM',
+      label: '',
     },
-
+    {
+      value: 'light',
+      labelCode: 'SCREENS.SETTINGS.FORM.THEME.LIGHT',
+      label: '',
+    },
     {
       value: darkThemeClassTailwind,
-      textCode: 'FORM.THEME.DARK',
+      labelCode: 'SCREENS.SETTINGS.FORM.THEME.DARK',
+      label: '',
     },
   ],
 };

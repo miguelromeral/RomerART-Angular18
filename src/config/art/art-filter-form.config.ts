@@ -1,3 +1,5 @@
+import { ICustomSelectOption } from '@models/inputs/select-option.model';
+
 export class ArtFilterFormConfig {
   static queryParamsNames = {
     sortBy: 'sort',
@@ -20,90 +22,103 @@ export class ArtFilterFormConfig {
   };
 }
 
-export interface IArtFilterValuesSortBy {
+export interface IArtFilterValuesSortBy extends ICustomSelectOption {
   value: string;
   visible: boolean;
   class?: string | undefined;
-  textCode: string;
 }
 
 export const artFilterValuesSortBy: IArtFilterValuesSortBy[] = [
   {
     value: 'date-desc',
-    textCode: 'SORTBY.DATE-DESC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.DATE-DESC',
+    label: '',
     visible: true,
   },
   {
     value: 'date-asc',
-    textCode: 'SORTBY.DATE-ASC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.DATE-ASC',
+    label: '',
     visible: true,
   },
   {
     value: 'name-asc',
-    textCode: 'SORTBY.NAME-ASC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.NAME-ASC',
+    label: '',
     visible: true,
   },
   {
     value: 'name-desc',
-    textCode: 'SORTBY.NAME-DESC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.NAME-DESC',
+    label: '',
     visible: true,
   },
   {
     value: 'time-asc',
-    textCode: 'SORTBY.TIME-ASC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.TIME-ASC',
+    label: '',
     visible: true,
   },
   {
     value: 'time-desc',
-    textCode: 'SORTBY.TIME-DESC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.TIME-DESC',
+    label: '',
     visible: true,
   },
   {
     value: 'kudos-desc',
-    textCode: 'SORTBY.KUDOS-DESC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.KUDOS-DESC',
     class: 'kudos',
+    label: '',
     visible: true,
   },
   {
     value: 'kudos-asc',
-    textCode: 'SORTBY.KUDOS-ASC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.KUDOS-ASC',
     class: 'kudos',
+    label: '',
     visible: true,
   },
   {
     value: 'views-desc',
-    textCode: 'SORTBY.VIEWS-DESC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.VIEWS-DESC',
     class: 'views',
+    label: '',
     visible: true,
   },
   {
     value: 'views-asc',
-    textCode: 'SORTBY.VIEWS-ASC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.VIEWS-ASC',
     class: 'views',
+    label: '',
     visible: true,
   },
   {
     value: 'scorem-desc',
-    textCode: 'SORTBY.SCOREM-DESC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.SCOREM-DESC',
     class: 'mr-score-miguel',
+    label: '',
     visible: true,
   },
   {
     value: 'scorem-asc',
-    textCode: 'SORTBY.SCOREM-ASC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.SCOREM-ASC',
     class: 'mr-score-miguel',
+    label: '',
     visible: true,
   },
   {
     value: 'scoreu-desc',
-    textCode: 'SORTBY.SCOREU-DESC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.SCOREU-DESC',
     class: 'mr-score-popular',
+    label: '',
     visible: true,
   },
   {
     value: 'scoreu-asc',
-    textCode: 'SORTBY.SCOREU-ASC',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.SCOREU-ASC',
     class: 'mr-score-popular',
+    label: '',
     visible: true,
   },
 ];
