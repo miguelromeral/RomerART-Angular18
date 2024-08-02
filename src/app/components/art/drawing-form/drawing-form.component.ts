@@ -67,6 +67,7 @@ export class DrawingFormComponent extends LanguageComponent {
   @Input() newDrawing!: boolean;
 
   form = new FormGroup({
+    isEditing: new FormControl(this.newDrawing, Validators.required),
     id: new FormControl('', Validators.required),
     path: new FormControl('', Validators.required),
     pathThumbnail: new FormControl('', Validators.required),
@@ -138,6 +139,14 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);
   }
 
+  checkAzurePath(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    this.drawingService.checkAzurePath(value).subscribe(resp => {
+      console.log('Respuesta: ', resp);
+    });
+  }
+
   loadImagePath() {
     // TODO: Implementar la lógica de la subida a Azure
     console.log('Comprobando Imagen');
@@ -145,5 +154,8 @@ export class DrawingFormComponent extends LanguageComponent {
 
   saveDrawing() {
     console.log(this.form.value);
+    this.drawingService.saveDrawing(this.drawing).subscribe(resp => {
+      console.log('Respuesta: ', resp);
+    });
   }
 }

@@ -25,6 +25,7 @@
 
     <app-text-input
       formControlName="path"
+      (change)="checkAzurePath($event)"
       [placeholder]="text('INPUTS.PATH.PLACEHOLDER') | mrTranslate"
       [label]="'PATH'">
     </app-text-input>

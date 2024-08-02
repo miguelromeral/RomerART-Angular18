@@ -16,6 +16,9 @@ import { DrawingCharacter } from '@models/art/drawing-character.model';
 import { DrawingFilter } from '@models/art/drawing-filter.model';
 import { Collection } from '@models/art/collection.model';
 import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
+import { ICheckAzurePathRequest } from '@models/requests/check-azure-path-request.model';
+import { ICheckAzurePathResponse } from '@models/responses/check-azure-path-response.model';
+import { ISaveDrawingResponse } from '@models/responses/save-drawing-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -87,6 +90,29 @@ export class DrawingService {
     return this.http
       .post<IVoteDrawingResponse>(url, JSON.stringify(score), { headers })
       .pipe(catchError(this.handleError<IVoteDrawingResponse>('voteDrawing')));
+  }
+
+  checkAzurePath(path: string): Observable<ICheckAzurePathResponse> {
+    const url = `${this.apiUrl}art/checkazurepath`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    const body: ICheckAzurePathRequest = {
+      id: path,
+    };
+    return this.http
+      .post<ICheckAzurePathResponse>(url, body, { headers })
+      .pipe(
+        catchError(this.handleError<ICheckAzurePathResponse>('checkAzurePath'))
+      );
+  }
+
+  saveDrawing(drawing: Drawing): Observable<ISaveDrawingResponse> {
+    const url = `${this.apiUrl}art/save/${drawing.id}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .post<ISaveDrawingResponse>(url, drawing, { headers })
+      .pipe(catchError(this.handleError<ISaveDrawingResponse>('saveDrawing')));
   }
 
   filterDrawings(filters: DrawingFilter): Observable<Drawing[]> {

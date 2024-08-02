@@ -10,7 +10,15 @@ import { AuthService } from '@app/services/api/auth/auth.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  private excludedRoutes = ['/api/art/'];
+  private excludedRoutes = [
+    '/api/art/drawings',
+    '/api/art/select',
+    '/api/art/collections',
+    '/api/art/details',
+    '/api/art/filter',
+    '/api/art/cheer',
+    '/api/art/vote',
+  ];
 
   constructor(private authService: AuthService) {}
 
