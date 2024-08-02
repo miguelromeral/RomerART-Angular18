@@ -26,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DrawingScoreComponent } from '../drawing-score/drawing-score.component';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
 import { DrawingFormCommentsComponent } from '../drawing-form-comments/drawing-form-comments.component';
+import { DateInputComponent } from '@app/components/shared/inputs/date-input/date-input.component';
 
 @Component({
   selector: 'app-drawing-form',
@@ -43,6 +44,7 @@ import { DrawingFormCommentsComponent } from '../drawing-form-comments/drawing-f
     SelectInputComponent,
     DrawingScoreComponent,
     DrawingFormCommentsComponent,
+    DateInputComponent,
   ],
   templateUrl: './drawing-form.component.html',
   styleUrl: './drawing-form.component.scss',
@@ -75,7 +77,7 @@ export class DrawingFormComponent extends LanguageComponent {
     type: new FormControl(0, Validators.required),
     software: new FormControl(0),
     paper: new FormControl(0),
-    //
+    dateHyphen: new FormControl('', Validators.required),
     scoreCritic: new FormControl(0),
     time: new FormControl(0),
     productType: new FormControl(0, Validators.required),
@@ -126,12 +128,11 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.type.setValue(drawing.type);
     this.form.controls.software.setValue(drawing.software);
     this.form.controls.paper.setValue(drawing.paper);
-    //
+    this.form.controls.dateHyphen.setValue(drawing.dateHyphen);
     this.form.controls.scoreCritic.setValue(drawing.scoreCritic);
     this.form.controls.time.setValue(drawing.time);
     this.form.controls.productType.setValue(drawing.productType);
     this.form.controls.productName.setValue(drawing.productName);
-
     this.form.controls.tagsText.setValue(drawing.tags.join(' '));
     this.form.controls.referenceUrl.setValue(drawing.referenceUrl);
     this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);

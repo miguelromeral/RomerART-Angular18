@@ -3,6 +3,7 @@
   <div
     class="grid grid-cols-5"
     *ngFor="let comment of formArray.controls; let i = index">
+    <!-- TODO: cambiar el input text por un rich text (como por ejemplo ngx-quill)-->
     <app-text-input
       class="col-span-4 flex-1"
       [formControl]="comment"

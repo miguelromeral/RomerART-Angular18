@@ -16,6 +16,7 @@ export class Drawing {
   spotifyTrackId: string;
   title: string;
   date: string;
+  dateHyphen: string;
   software: number;
   softwareName: string;
   paper: number;
@@ -63,6 +64,7 @@ export class Drawing {
     this.spotifyTrackId = data.spotifyTrackId || '';
     this.title = data.title || '';
     this.date = data.date || '';
+    this.dateHyphen = data.dateHyphen || '';
     this.software = data.software || 0;
     this.softwareName = data.softwareName || '';
     this.paper = data.paper || 0;

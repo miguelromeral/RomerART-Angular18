@@ -1,0 +1,11 @@
+<div class="form-group">
+  <label *ngIf="label !== ''">{{ label }}</label>
+  <input
+    type="date"
+    [value]="value"
+    (input)="onInputChange($event)"
+    (keydown)="onKeyDown($event)"
+    (blur)="onBlur()"
+    [placeholder]="placeholder"
+    [formControl]="formControl" />
+</div>

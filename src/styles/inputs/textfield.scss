@@ -1,4 +1,5 @@
 input[type='text'],
+input[type='date'],
 input[type='number'],
 input[type='password'] {
   @apply px-2;
@@ -7,4 +8,8 @@ input[type='password'] {
   background-color: var(--mr-input-bg-color);
   color: var(--mr-input-text-color);
   border-color: var(--mr-input-border-color);
+}
+
+.dark input[type='date'] {
+  color-scheme: dark;
 }
