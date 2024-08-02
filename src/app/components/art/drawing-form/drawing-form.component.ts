@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {
+  FormArray,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -24,6 +25,7 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import { DrawingScoreComponent } from '../drawing-score/drawing-score.component';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
+import { DrawingFormCommentsComponent } from '../drawing-form-comments/drawing-form-comments.component';
 
 @Component({
   selector: 'app-drawing-form',
@@ -40,6 +42,7 @@ import { DrawingProductType } from '@models/art/drawing-product-type.model';
     TextInputComponent,
     SelectInputComponent,
     DrawingScoreComponent,
+    DrawingFormCommentsComponent,
   ],
   templateUrl: './drawing-form.component.html',
   styleUrl: './drawing-form.component.scss',
@@ -77,11 +80,23 @@ export class DrawingFormComponent extends LanguageComponent {
     time: new FormControl(0),
     productType: new FormControl(0, Validators.required),
     productName: new FormControl(''),
-    //
+    listComments: new FormArray<FormControl>([]),
+    listCommentPros: new FormArray<FormControl>([]),
+    listCommentCons: new FormArray<FormControl>([]),
     tagsText: new FormControl(''),
     referenceUrl: new FormControl(''),
     spotifyUrl: new FormControl(''),
   });
+
+  get listComments(): FormArray<FormControl> {
+    return this.form.controls.listComments as FormArray<FormControl>;
+  }
+  get listCommentPros(): FormArray<FormControl> {
+    return this.form.controls.listCommentPros as FormArray<FormControl>;
+  }
+  get listCommentCons(): FormArray<FormControl> {
+    return this.form.controls.listCommentCons as FormArray<FormControl>;
+  }
 
   listDrawingStyles: DrawingStyle[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
@@ -116,7 +131,7 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.time.setValue(drawing.time);
     this.form.controls.productType.setValue(drawing.productType);
     this.form.controls.productName.setValue(drawing.productName);
-    //
+
     this.form.controls.tagsText.setValue(drawing.tags.join(' '));
     this.form.controls.referenceUrl.setValue(drawing.referenceUrl);
     this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);

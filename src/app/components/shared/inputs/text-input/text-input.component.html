@@ -2,7 +2,7 @@
   <label *ngIf="label !== ''">{{ label }}</label>
   <input
     [type]="type"
-    [value]="value"
+    [formControl]="formControl"
     (input)="onInputChange($event)"
     (keydown)="onKeyDown($event)"
     (blur)="onBlur()"

@@ -112,7 +112,29 @@
       [label]="'PRODUCT-NAME'">
     </app-text-input>
 
-    <!-- TODO: añadir comentarios -->
+    <app-drawing-form-comments
+      [formArrayName]="'listComments'"
+      [formArray]="listComments"
+      [comments]="drawing.listComments"
+      [label]="'INPUTS.COMMENTS.TITLE'"
+      [placeholder]="'INPUTS.COMMENTS.PLACEHOLDER'">
+    </app-drawing-form-comments>
+
+    <app-drawing-form-comments
+      [formArrayName]="'listCommentPros'"
+      [formArray]="listCommentPros"
+      [comments]="drawing.listCommentPros"
+      [label]="'INPUTS.COMMENTS-PROS.TITLE'"
+      [placeholder]="'INPUTS.COMMENTS-PROS.PLACEHOLDER'">
+    </app-drawing-form-comments>
+
+    <app-drawing-form-comments
+      [formArrayName]="'listCommentCons'"
+      [formArray]="listCommentCons"
+      [comments]="drawing.listCommentCons"
+      [label]="'INPUTS.COMMENTS-CONS.TITLE'"
+      [placeholder]="'INPUTS.COMMENTS-CONS.PLACEHOLDER'">
+    </app-drawing-form-comments>
 
     <app-text-input
       formControlName="tagsText"

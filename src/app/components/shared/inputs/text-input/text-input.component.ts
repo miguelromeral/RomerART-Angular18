@@ -11,6 +11,7 @@ import {
   ReactiveFormsModule,
   NG_VALUE_ACCESSOR,
   ControlValueAccessor,
+  FormControl,
 } from '@angular/forms';
 
 @Component({
@@ -33,6 +34,8 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input() type: 'text' | 'number' = 'text';
   @Input() min?: number;
   @Input() max?: number;
+  @Input() formControl: FormControl = new FormControl();
+
   @Output() keyDown = new EventEmitter<KeyboardEvent>();
 
   value = '';
@@ -42,10 +45,12 @@ export class TextInputComponent implements ControlValueAccessor {
 
   writeValue(value: string): void {
     this.value = value;
+    this.formControl.setValue(value);
   }
 
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
+    this.formControl.valueChanges.subscribe(fn);
   }
 
   registerOnTouched(fn: () => void): void {
@@ -53,7 +58,11 @@ export class TextInputComponent implements ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    // Maneja el estado deshabilitado opcionalmente
+    if (isDisabled) {
+      this.formControl.disable();
+    } else {
+      this.formControl.enable();
+    }
   }
 
   onKeyDown(event: KeyboardEvent): void {
@@ -65,6 +74,7 @@ export class TextInputComponent implements ControlValueAccessor {
     const newValue = input.value;
     this.value = newValue;
     this.onChange(newValue);
+    this.formControl.setValue(newValue);
   }
 
   onBlur(): void {

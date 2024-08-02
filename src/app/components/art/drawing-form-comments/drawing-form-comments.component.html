@@ -1,0 +1,20 @@
+<div class="form-group">
+  <label>{{ label }}</label>
+  <div
+    class="grid grid-cols-5"
+    *ngFor="let comment of formArray.controls; let i = index">
+    <app-text-input
+      class="col-span-4 flex-1"
+      [formControl]="comment"
+      [placeholder]="placeholder">
+    </app-text-input>
+    <button
+      type="button"
+      class="btn m-1 flex items-center justify-center"
+      (click)="removeComment(i)">
+      <i class="bi bi-trash"></i>
+    </button>
+  </div>
+
+  <button class="btn" type="button" (click)="addComment('')">ADD</button>
+</div>
