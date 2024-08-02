@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   darkThemeClassTailwind,
   settingTheme,
+  settingThemeValues,
 } from 'config/settings/local-storage.config';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from '../local-storage/local-storage.service';
@@ -29,13 +30,36 @@ export class ThemeService {
   setTheme(theme: string): void {
     // console.log('Changing theme: ' + theme);
     this.storage.setItem(settingTheme.localStorageKey, theme);
-    if (theme === darkThemeClassTailwind) {
-      window.document.documentElement.classList.add(darkThemeClassTailwind);
-    } else {
-      window.document.documentElement.classList.remove(darkThemeClassTailwind);
+
+    switch (theme) {
+      case settingThemeValues.system:
+        if (window) {
+          if (
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+          ) {
+            this.setDarkTheme();
+          } else {
+            this.setLightTheme();
+          }
+        }
+        return;
+      case settingThemeValues.light:
+        this.setLightTheme();
+        return;
+      case settingThemeValues.dark:
+        this.setDarkTheme();
+        return;
     }
 
     this.themeSubject.next(theme);
+  }
+
+  private setDarkTheme() {
+    window.document.documentElement.classList.add(darkThemeClassTailwind);
+  }
+  private setLightTheme() {
+    window.document.documentElement.classList.remove(darkThemeClassTailwind);
   }
 
   getTheme(): string {

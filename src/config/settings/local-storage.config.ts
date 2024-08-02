@@ -1,8 +1,5 @@
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 
-export const defaultThemeClassTailwind = 'system';
-export const darkThemeClassTailwind = 'dark';
-
 export interface ISelectOption<T> {
   localStorageKey: string;
   defaultValue: string;
@@ -26,22 +23,30 @@ export const settingLanguage: ISelectOption<ICustomSelectOption> = {
   ],
 };
 
+export const darkThemeClassTailwind = 'dark';
+
+export const settingThemeValues = {
+  system: 'system',
+  light: 'light',
+  dark: darkThemeClassTailwind,
+};
+
 export const settingTheme: ISelectOption<ICustomSelectOption> = {
-  defaultValue: 'light',
+  defaultValue: settingThemeValues.system,
   localStorageKey: 'theme',
   options: [
     {
-      value: defaultThemeClassTailwind,
+      value: settingThemeValues.system,
       labelCode: 'SCREENS.SETTINGS.FORM.THEME.SYSTEM',
       label: '',
     },
     {
-      value: 'light',
+      value: settingThemeValues.light,
       labelCode: 'SCREENS.SETTINGS.FORM.THEME.LIGHT',
       label: '',
     },
     {
-      value: darkThemeClassTailwind,
+      value: settingThemeValues.dark,
       labelCode: 'SCREENS.SETTINGS.FORM.THEME.DARK',
       label: '',
     },
