@@ -38,25 +38,29 @@ export class TextInputComponent implements ControlValueAccessor {
 
   @Output() keyDown = new EventEmitter<KeyboardEvent>();
 
-  value = '';
+  internalValue = ''; // Valor interno del componente
 
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
 
+  // Actualizar el valor del componente desde el formulario
   writeValue(value: string): void {
-    this.value = value;
-    this.formControl.setValue(value);
+    if (value !== this.internalValue) {
+      this.internalValue = value;
+    }
   }
 
+  // Registrar cambios en el valor del componente
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
-    this.formControl.valueChanges.subscribe(fn);
   }
 
+  // Registrar cuando el componente ha sido tocado
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
+  // Manejar el estado deshabilitado
   setDisabledState?(isDisabled: boolean): void {
     if (isDisabled) {
       this.formControl.disable();
@@ -65,18 +69,24 @@ export class TextInputComponent implements ControlValueAccessor {
     }
   }
 
+  // Emitir eventos de tecla
   onKeyDown(event: KeyboardEvent): void {
     this.keyDown.emit(event);
   }
 
+  // Manejar cambios en la entrada del usuario
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
-    this.value = newValue;
-    this.onChange(newValue);
-    this.formControl.setValue(newValue);
+
+    if (this.internalValue !== newValue) {
+      this.internalValue = newValue;
+      this.onChange(newValue); // Notificar al formulario sobre el cambio
+      this.formControl.setValue(newValue, { emitEvent: false }); // Actualizar el control del formulario sin emitir eventos recursivos
+    }
   }
 
+  // Manejar el desenfoque del componente
   onBlur(): void {
     this.onTouched();
   }

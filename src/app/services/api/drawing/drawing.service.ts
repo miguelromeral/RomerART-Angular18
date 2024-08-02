@@ -115,6 +115,12 @@ export class DrawingService {
       .pipe(catchError(this.handleError<ISaveDrawingResponse>('saveDrawing')));
   }
 
+  checkDrawingId(id: string): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${this.apiUrl}art/checkdrawing/${id}`)
+      .pipe(catchError(this.handleError<boolean>('checkDrawingId')));
+  }
+
   filterDrawings(filters: DrawingFilter): Observable<Drawing[]> {
     const url = `${this.apiUrl}art/filter`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

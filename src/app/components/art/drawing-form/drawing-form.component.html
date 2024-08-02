@@ -1,55 +1,65 @@
 <app-layout>
   <!-- TODO: extraer strings de esta pantalla -->
   <h1>
-    <ng-container *ngIf="newDrawing; else titleEditForm"
-      >TITLE-CREATE</ng-container
-    >
-    <ng-template #titleEditForm>TITLE-EDIT {{ drawing.id }}</ng-template>
+    <ng-container *ngIf="newDrawing; else titleEditForm">
+      {{ text('TITLE.CREATE') | mrTranslate }}
+    </ng-container>
+    <ng-template #titleEditForm>
+      {{ text('TITLE.EDIT') | mrTranslate: { id: drawing.id } }}
+    </ng-template>
   </h1>
   <form
     class="grid grid-cols-1 gap-4"
     (submit)="saveDrawing()"
     [formGroup]="form">
-    <div class="form-group">
-      <label for="iId">ID</label>
-      <input
-        *ngIf="newDrawing; else idEdit"
-        id="iId"
-        formControlName="id"
-        type="text"
-        [placeholder]="text('INPUTS.ID.PLACEHOLDER') | mrTranslate" />
-      <ng-template #idEdit>
-        <span>{{ drawing.id }}</span>
-      </ng-template>
-    </div>
+    <app-text-input
+      *ngIf="newDrawing; else idEdit"
+      formControlName="id"
+      (change)="checkDrawingId($event)"
+      [placeholder]="text('FORM.ID.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.ID.TITLE') | mrTranslate">
+    </app-text-input>
+
+    <ng-template #idEdit>
+      <span>{{ drawing.id }}</span>
+    </ng-template>
+    <p *ngIf="duplicateId">
+      {{
+        text('ERRORS.DUPLICATE-ID') | mrTranslate: { id: this.form.value.id }
+      }}
+    </p>
 
     <app-text-input
       formControlName="path"
       (change)="checkAzurePath($event)"
-      [placeholder]="text('INPUTS.PATH.PLACEHOLDER') | mrTranslate"
-      [label]="'PATH'">
+      [placeholder]="text('FORM.PATH.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.PATH.TITLE') | mrTranslate">
     </app-text-input>
 
     <app-text-input
       formControlName="title"
-      [placeholder]="text('INPUTS.TITLE.PLACEHOLDER') | mrTranslate"
-      [label]="'TITLE'">
+      [placeholder]="text('FORM.TITLE.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.TITLE.TITLE') | mrTranslate">
     </app-text-input>
 
-    <app-switch [text]="'FAVORITE'" [formControl]="form.controls.favorite">
+    <app-switch
+      [text]="text('FORM.FAVORITE.TITLE') | mrTranslate"
+      [formControl]="form.controls.favorite">
     </app-switch>
 
+    <!-- <app-setting-section [title]="text('SECTIONS.NAMES') | mrTranslate"> -->
     <app-text-input
       formControlName="name"
-      [placeholder]="text('INPUTS.NAME.PLACEHOLDER') | mrTranslate"
-      [label]="'NAME'">
+      [placeholder]="text('FORM.NAME.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.NAME.TITLE') | mrTranslate">
     </app-text-input>
 
     <app-text-input
       formControlName="modelName"
-      [placeholder]="text('INPUTS.MODEL-NAME.PLACEHOLDER') | mrTranslate"
-      [label]="'MODEL-NAME'">
+      [placeholder]="text('FORM.MODEL-NAME.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.MODEL-NAME.TITLE') | mrTranslate">
     </app-text-input>
+    <!-- </app-setting-section> -->
 
     <app-select-input [options]="listDrawingStyles" formControlName="type">
     </app-select-input>
@@ -74,12 +84,9 @@
       formControlName="paper">
     </app-select-input>
 
-    <!-- TODO: añadir campo de tipo fecha -->
-
     <app-date-input
       formControlName="dateHyphen"
-      [label]="'DATE'"
-      [placeholder]="'DATE'">
+      [label]="text('FORM.DATE.TITLE') | mrTranslate">
     </app-date-input>
 
     <app-text-input
@@ -87,8 +94,8 @@
       [min]="1"
       [max]="100"
       formControlName="scoreCritic"
-      [placeholder]="text('INPUTS.SCORE-CRITIC.PLACEHOLDER') | mrTranslate"
-      [label]="'SCORE-CRITIC'">
+      [placeholder]="text('FORM.SCORE-CRITIC.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.SCORE-CRITIC.TITLE') | mrTranslate">
     </app-text-input>
 
     <app-drawing-score [score]="form.value.scoreCritic ?? 0">
@@ -98,7 +105,7 @@
       type="number"
       [min]="0"
       formControlName="time"
-      [placeholder]="text('INPUTS.TIME.PLACEHOLDER') | mrTranslate"
+      [placeholder]="text('FORM.TIME.PLACEHOLDER') | mrTranslate"
       [label]="'TIME'">
     </app-text-input>
     <!-- TODO: añadir calculo de horas a las que equivale los minutos -->
@@ -115,53 +122,64 @@
 
     <app-text-input
       formControlName="productName"
-      [placeholder]="text('INPUTS.PRODUCT-NAME.PLACEHOLDER') | mrTranslate"
-      [label]="'PRODUCT-NAME'">
+      [placeholder]="text('FORM.PRODUCT.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.PRODUCT.TITLE') | mrTranslate">
     </app-text-input>
 
     <app-drawing-form-comments
       [formArrayName]="'listComments'"
       [formArray]="listComments"
       [comments]="drawing.listComments"
-      [label]="'INPUTS.COMMENTS.TITLE'"
-      [placeholder]="'INPUTS.COMMENTS.PLACEHOLDER'">
+      [label]="text('FORM.COMMENTS.TITLE') | mrTranslate"
+      [placeholder]="text('FORM.COMMENTS.PLACEHOLDER') | mrTranslate">
     </app-drawing-form-comments>
 
     <app-drawing-form-comments
       [formArrayName]="'listCommentPros'"
       [formArray]="listCommentPros"
       [comments]="drawing.listCommentPros"
-      [label]="'INPUTS.COMMENTS-PROS.TITLE'"
-      [placeholder]="'INPUTS.COMMENTS-PROS.PLACEHOLDER'">
+      [label]="text('FORM.COMMENTS-PROS.TITLE') | mrTranslate"
+      [placeholder]="text('FORM.COMMENTS-PROS.PLACEHOLDER') | mrTranslate">
     </app-drawing-form-comments>
 
     <app-drawing-form-comments
       [formArrayName]="'listCommentCons'"
       [formArray]="listCommentCons"
       [comments]="drawing.listCommentCons"
-      [label]="'INPUTS.COMMENTS-CONS.TITLE'"
-      [placeholder]="'INPUTS.COMMENTS-CONS.PLACEHOLDER'">
+      [label]="text('FORM.COMMENTS-CONS.TITLE') | mrTranslate"
+      [placeholder]="text('FORM.COMMENTS-CONS.PLACEHOLDER') | mrTranslate">
     </app-drawing-form-comments>
 
     <app-text-input
       formControlName="tagsText"
-      [placeholder]="text('INPUTS.TAGS.PLACEHOLDER') | mrTranslate"
-      [label]="'TAGS'">
+      [placeholder]="text('FORM.TAGS.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.TAGS.TITLE') | mrTranslate">
     </app-text-input>
 
     <app-text-input
       formControlName="referenceUrl"
-      [placeholder]="text('INPUTS.REFERENCE-URL.PLACEHOLDER') | mrTranslate"
-      [label]="'REFERENCE-URL'">
+      [placeholder]="text('FORM.REFERENCE.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.REFERENCE.TITLE') | mrTranslate">
     </app-text-input>
 
     <app-text-input
       formControlName="spotifyUrl"
-      [placeholder]="text('INPUTS.SPOTIFY-URL.PLACEHOLDER') | mrTranslate"
-      [label]="'SPOTIFY-URL'">
+      [placeholder]="text('FORM.SPOTIFY.PLACEHOLDER') | mrTranslate"
+      [label]="text('FORM.SPOTIFY.TITLE') | mrTranslate">
     </app-text-input>
 
-    <button class="btn" type="submit">SAVE</button>
+    <button
+      *ngIf="validForm"
+      [disabled]="duplicateId"
+      class="btn"
+      type="submit">
+      <ng-container *ngIf="newDrawing; else btnSaveEditForm">
+        {{ text('FORM.SAVE.CREATE') | mrTranslate }}
+      </ng-container>
+      <ng-template #btnSaveEditForm>
+        {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: drawing.id } }}
+      </ng-template>
+    </button>
   </form>
 
   <!-- TODO: llevar esto al Art/Edit component -->

@@ -27,6 +27,7 @@ import { DrawingScoreComponent } from '../drawing-score/drawing-score.component'
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
 import { DrawingFormCommentsComponent } from '../drawing-form-comments/drawing-form-comments.component';
 import { DateInputComponent } from '@app/components/shared/inputs/date-input/date-input.component';
+import { SettingSectionComponent } from '@app/components/settings/setting-section/setting-section.component';
 
 @Component({
   selector: 'app-drawing-form',
@@ -45,6 +46,7 @@ import { DateInputComponent } from '@app/components/shared/inputs/date-input/dat
     DrawingScoreComponent,
     DrawingFormCommentsComponent,
     DateInputComponent,
+    SettingSectionComponent,
   ],
   templateUrl: './drawing-form.component.html',
   styleUrl: './drawing-form.component.scss',
@@ -66,6 +68,12 @@ export class DrawingFormComponent extends LanguageComponent {
   @Input() loading = true;
   @Input() newDrawing!: boolean;
 
+  duplicateId = false;
+
+  public get validForm() {
+    return !this.duplicateId;
+  }
+
   form = new FormGroup({
     isEditing: new FormControl(this.newDrawing, Validators.required),
     id: new FormControl('', Validators.required),
@@ -79,7 +87,11 @@ export class DrawingFormComponent extends LanguageComponent {
     software: new FormControl(0),
     paper: new FormControl(0),
     dateHyphen: new FormControl('', Validators.required),
-    scoreCritic: new FormControl(0),
+    scoreCritic: new FormControl(0, [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(100),
+    ]),
     time: new FormControl(0),
     productType: new FormControl(0, Validators.required),
     productName: new FormControl(''),
@@ -139,6 +151,14 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);
   }
 
+  checkDrawingId(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    this.drawingService.checkDrawingId(value).subscribe(resp => {
+      this.duplicateId = resp;
+    });
+  }
+
   checkAzurePath(event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.value;
@@ -154,8 +174,12 @@ export class DrawingFormComponent extends LanguageComponent {
 
   saveDrawing() {
     console.log(this.form.value);
-    this.drawingService.saveDrawing(this.drawing).subscribe(resp => {
-      console.log('Respuesta: ', resp);
+    const values = this.form.value;
+    const tobesaved = new Drawing({
+      id: values.id ?? '',
     });
+    // this.drawingService.saveDrawing(tobesaved).subscribe(resp => {
+    //   console.log('Respuesta: ', resp);
+    // });
   }
 }

@@ -1,8 +1,8 @@
 <div class="form-group">
   <label *ngIf="label !== ''">{{ label }}</label>
   <input
-    [type]="type"
-    [formControl]="formControl"
+    type="{{ type }}"
+    [value]="internalValue"
     (input)="onInputChange($event)"
     (keydown)="onKeyDown($event)"
     (blur)="onBlur()"

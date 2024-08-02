@@ -167,6 +167,82 @@
         "SEND": "Enviar Voto",
         "THANKS": "¡Gracias por votar!"
       }
+    },
+    "DRAWING-FORM": {
+      "TITLE": {
+        "CREATE": "Crear nuevo dibujo",
+        "EDIT": "Editar {{id}}"
+      },
+      "SECTIONS": {
+        "NAMES": "Información de Personaje"
+      },
+      "FORM": {
+        "SAVE": {
+          "CREATE": "CREAR DIBUJO",
+          "EDIT": "GUARDAR {{id}}"
+        },
+        "ID": {
+          "TITLE": "Identificador",
+          "PLACEHOLDER": "ID del Dibujo"
+        },
+        "PATH": {
+          "TITLE": "Imagen en Azure",
+          "PLACEHOLDER": "Ruta de la imagen en Azure"
+        },
+        "TITLE": {
+          "TITLE": "Título",
+          "PLACEHOLDER": "Título del Dibujo"
+        },
+        "FAVORITE": {
+          "TITLE": "Favorito"
+        },
+        "NAME": {
+          "TITLE": "Personaje",
+          "PLACEHOLDER": "Nombre del Personaje"
+        },
+        "MODEL-NAME": {
+          "TITLE": "Modelo",
+          "PLACEHOLDER": "Nombre del Modelo"
+        },
+        "DATE": {
+          "TITLE": "Fecha"
+        },
+        "SCORE-CRITIC": {
+          "TITLE": "Puntuación",
+          "PLACEHOLDER": "Puntuación del Artista"
+        },
+        "PRODUCT": {
+          "TITLE": "Producto",
+          "PLACEHOLDER": "Producto en el que aparece"
+        },
+        "COMMENTS": {
+          "TITLE": "Comentarios",
+          "PLACEHOLDER": "Comentario"
+        },
+        "COMMENTS-PROS": {
+          "TITLE": "Comentarios Positivos",
+          "PLACEHOLDER": "Comentario Positivo"
+        },
+        "COMMENTS-CONS": {
+          "TITLE": "Comentarios Negativos",
+          "PLACEHOLDER": "Comentario Negativo"
+        },
+        "TAGS": {
+          "TITLE": "Etiquetas",
+          "PLACEHOLDER": "Etiquetas separadas por espacios"
+        },
+        "REFERENCE": {
+          "TITLE": "Imagen de Referencia",
+          "PLACEHOLDER": "URL de la Imagen de Referencia"
+        },
+        "SPOTIFY": {
+          "TITLE": "Canción de Spotify",
+          "PLACEHOLDER": "URL de Canción de Spotify"
+        }
+      },
+      "ERRORS": {
+        "DUPLICATE-ID": "ERROR: el dibujo con id \"{{id}}\" ya existe"
+      }
     }
   }
 }
