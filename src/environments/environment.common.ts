@@ -81,27 +81,27 @@ export const COMMON_ENV = {
     productTypes: [
       {
         id: 1,
-        code: 'DATA.DRAWING.PRODUCTS_TYPES.VIDEOGAME',
+        labelCode: 'DATA.DRAWING.PRODUCTS_TYPES.VIDEOGAME',
         emoji: '🎮',
       },
       {
         id: 2,
-        code: 'DATA.DRAWING.PRODUCTS_TYPES.ACTOR',
+        labelCode: 'DATA.DRAWING.PRODUCTS_TYPES.ACTOR',
         emoji: '🎞',
       },
       {
         id: 3,
-        code: 'DATA.DRAWING.PRODUCTS_TYPES.SINGER',
+        labelCode: 'DATA.DRAWING.PRODUCTS_TYPES.SINGER',
         emoji: '🎙',
       },
       {
         id: 4,
-        code: 'DATA.DRAWING.PRODUCTS_TYPES.SPORTMAN',
+        labelCode: 'DATA.DRAWING.PRODUCTS_TYPES.SPORTMAN',
         emoji: '⚽',
       },
       {
         id: 5,
-        code: 'DATA.DRAWING.PRODUCTS_TYPES.INFLUENCER',
+        labelCode: 'DATA.DRAWING.PRODUCTS_TYPES.INFLUENCER',
         emoji: '📷',
       },
     ],

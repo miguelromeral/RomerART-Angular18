@@ -37,6 +37,101 @@
 
     <app-switch [text]="'FAVORITE'" [formControl]="form.controls.favorite">
     </app-switch>
+
+    <app-text-input
+      formControlName="name"
+      [placeholder]="text('INPUTS.NAME.PLACEHOLDER') | mrTranslate"
+      [label]="'NAME'">
+    </app-text-input>
+
+    <app-text-input
+      formControlName="modelName"
+      [placeholder]="text('INPUTS.MODEL-NAME.PLACEHOLDER') | mrTranslate"
+      [label]="'MODEL-NAME'">
+    </app-text-input>
+
+    <app-select-input [options]="listDrawingStyles" formControlName="type">
+    </app-select-input>
+
+    <app-select-input
+      [firstOption]="{
+        value: '0',
+        label: '',
+        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SOFTWARE.TITLE',
+      }"
+      [options]="listDrawingSoftwares"
+      formControlName="software">
+    </app-select-input>
+
+    <app-select-input
+      [firstOption]="{
+        value: '0',
+        label: '',
+        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PAPER.TITLE',
+      }"
+      [options]="listDrawingPapers"
+      formControlName="paper">
+    </app-select-input>
+
+    <!-- TODO: añadir campo de tipo fecha -->
+
+    <app-text-input
+      type="number"
+      [min]="1"
+      [max]="100"
+      formControlName="scoreCritic"
+      [placeholder]="text('INPUTS.SCORE-CRITIC.PLACEHOLDER') | mrTranslate"
+      [label]="'SCORE-CRITIC'">
+    </app-text-input>
+
+    <app-drawing-score [score]="form.value.scoreCritic ?? 0">
+    </app-drawing-score>
+
+    <app-text-input
+      type="number"
+      [min]="0"
+      formControlName="time"
+      [placeholder]="text('INPUTS.TIME.PLACEHOLDER') | mrTranslate"
+      [label]="'TIME'">
+    </app-text-input>
+    <!-- TODO: añadir calculo de horas a las que equivale los minutos -->
+
+    <app-select-input
+      [firstOption]="{
+        value: '-1',
+        label: '',
+        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT-TYPE.TITLE',
+      }"
+      [options]="listDrawingProductTypes"
+      formControlName="productType">
+    </app-select-input>
+
+    <app-text-input
+      formControlName="productName"
+      [placeholder]="text('INPUTS.PRODUCT-NAME.PLACEHOLDER') | mrTranslate"
+      [label]="'PRODUCT-NAME'">
+    </app-text-input>
+
+    <!-- TODO: añadir comentarios -->
+
+    <app-text-input
+      formControlName="tagsText"
+      [placeholder]="text('INPUTS.TAGS.PLACEHOLDER') | mrTranslate"
+      [label]="'TAGS'">
+    </app-text-input>
+
+    <app-text-input
+      formControlName="referenceUrl"
+      [placeholder]="text('INPUTS.REFERENCE-URL.PLACEHOLDER') | mrTranslate"
+      [label]="'REFERENCE-URL'">
+    </app-text-input>
+
+    <app-text-input
+      formControlName="spotifyUrl"
+      [placeholder]="text('INPUTS.SPOTIFY-URL.PLACEHOLDER') | mrTranslate"
+      [label]="'SPOTIFY-URL'">
+    </app-text-input>
+
     <button class="btn" type="submit">SAVE</button>
   </form>
 

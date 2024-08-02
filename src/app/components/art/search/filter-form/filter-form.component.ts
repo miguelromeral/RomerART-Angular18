@@ -68,7 +68,6 @@ export class FilterFormComponent
   extends LanguageComponent
   implements OnInit, OnDestroy
 {
-  private languageSub: Subscription | undefined;
   queryParamsSubscription: Subscription | undefined;
 
   /* Communication to parent */
@@ -139,12 +138,6 @@ export class FilterFormComponent
 
   ngOnInit(): void {
     this.loadSelects();
-
-    this.languageSub = this.languageService.currentLanguage$.subscribe(lang => {
-      console.log('Traduciendo cadenas en search... (' + lang + ')');
-      this.translateData();
-    });
-
     this.setValuesFromQueryParams();
   }
 
@@ -272,25 +265,6 @@ export class FilterFormComponent
       }
       this.loadingCollections = false;
     });
-  }
-
-  translateData() {
-    if (this.listDrawingStyles) {
-      this.listDrawingStyles.forEach(style => {
-        this.languageService.translateText(style.code).subscribe(newText => {
-          style.setTranslatedText(newText);
-        });
-      });
-    }
-
-    if (this.listDrawingProductTypes) {
-      this.listDrawingProductTypes.forEach(type => {
-        this.languageService.translateText(type.code).subscribe(newText => {
-          // console.log(type.code + ' --> ' + newText);
-          type.setTranslatedText(newText);
-        });
-      });
-    }
   }
 
   // TODO: arreglar keydown del input

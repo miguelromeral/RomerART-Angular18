@@ -30,6 +30,9 @@ import {
 export class TextInputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() placeholder = '';
+  @Input() type: 'text' | 'number' = 'text';
+  @Input() min?: number;
+  @Input() max?: number;
   @Output() keyDown = new EventEmitter<KeyboardEvent>();
 
   value = '';

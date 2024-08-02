@@ -1,11 +1,12 @@
 <div class="form-group">
-  <!-- Resolver lo del label -->
   <label *ngIf="label !== ''">{{ label }}</label>
   <input
-    type="text"
+    [type]="type"
     [value]="value"
     (input)="onInputChange($event)"
     (keydown)="onKeyDown($event)"
     (blur)="onBlur()"
-    [placeholder]="placeholder" />
+    [placeholder]="placeholder"
+    [attr.min]="min"
+    [attr.max]="max" />
 </div>

@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
 import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.component';
 import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
@@ -15,9 +16,14 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LoggerService } from '@app/services/logger/logger.service';
 import { MetadataService } from '@app/services/metadata/metadata.service';
+import { DrawingPaperSize } from '@models/art/drawing-paper-size.model';
+import { DrawingSoftware } from '@models/art/drawing-software.model';
+import { DrawingStyle } from '@models/art/drawing-style.model';
 import { Drawing } from '@models/art/drawing.model';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
+import { DrawingScoreComponent } from '../drawing-score/drawing-score.component';
+import { DrawingProductType } from '@models/art/drawing-product-type.model';
 
 @Component({
   selector: 'app-drawing-form',
@@ -32,6 +38,8 @@ import { TranslateModule } from '@ngx-translate/core';
     SwitchComponent,
     ReactiveFormsModule,
     TextInputComponent,
+    SelectInputComponent,
+    DrawingScoreComponent,
   ],
   templateUrl: './drawing-form.component.html',
   styleUrl: './drawing-form.component.scss',
@@ -59,7 +67,26 @@ export class DrawingFormComponent extends LanguageComponent {
     pathThumbnail: new FormControl('', Validators.required),
     title: new FormControl(''),
     favorite: new FormControl(false, Validators.required),
+    name: new FormControl(''),
+    modelName: new FormControl(''),
+    type: new FormControl(0, Validators.required),
+    software: new FormControl(0),
+    paper: new FormControl(0),
+    //
+    scoreCritic: new FormControl(0),
+    time: new FormControl(0),
+    productType: new FormControl(0, Validators.required),
+    productName: new FormControl(''),
+    //
+    tagsText: new FormControl(''),
+    referenceUrl: new FormControl(''),
+    spotifyUrl: new FormControl(''),
   });
+
+  listDrawingStyles: DrawingStyle[] = [];
+  listDrawingSoftwares: DrawingSoftware[] = [];
+  listDrawingPapers: DrawingPaperSize[] = [];
+  listDrawingProductTypes: DrawingProductType[] = [];
 
   constructor(
     private logger: LoggerService,
@@ -67,6 +94,10 @@ export class DrawingFormComponent extends LanguageComponent {
     private metadataService: MetadataService
   ) {
     super('SCREENS.DRAWING-FORM');
+    this.listDrawingStyles = this.drawingService.getDrawingStyles();
+    this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
+    this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
+    this.listDrawingProductTypes = this.drawingService.getDrawingProductTypes();
   }
 
   setFormValues(drawing: Drawing) {
@@ -75,6 +106,20 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.pathThumbnail.setValue(drawing.pathThumbnail);
     this.form.controls.title.setValue(drawing.title);
     this.form.controls.favorite.setValue(drawing.favorite);
+    this.form.controls.name.setValue(drawing.name);
+    this.form.controls.modelName.setValue(drawing.modelName);
+    this.form.controls.type.setValue(drawing.type);
+    this.form.controls.software.setValue(drawing.software);
+    this.form.controls.paper.setValue(drawing.paper);
+    //
+    this.form.controls.scoreCritic.setValue(drawing.scoreCritic);
+    this.form.controls.time.setValue(drawing.time);
+    this.form.controls.productType.setValue(drawing.productType);
+    this.form.controls.productName.setValue(drawing.productName);
+    //
+    this.form.controls.tagsText.setValue(drawing.tags.join(' '));
+    this.form.controls.referenceUrl.setValue(drawing.referenceUrl);
+    this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);
   }
 
   loadImagePath() {
