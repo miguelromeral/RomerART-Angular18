@@ -3,20 +3,31 @@
 }
 
 .mr-choice-filter {
-  @apply w-full h-full;
+  @apply w-full;
+  height: var(--mr-input-height);
   color: var(--mr-switch-favorite-color);
 }
 
 .choice-label {
   @apply cursor-pointer rounded-none relative h-full flex items-center px-2;
   // height: var(--mr-input-height);
-  color: var(--mr-switch-favorite-color);
+  color: var(--mr-input-text-color);
   background-color: var(--mr-input-bg-color);
-  border: 1px solid var(--mr-switch-favorite-color);
+  border: 1px solid var(--mr-input-border-color);
   transition: var(--mr-transition-time) ease-out;
 }
 
+.favorite .choice-label {
+  color: var(--mr-switch-favorite-color);
+  background-color: var(--mr-input-bg-color);
+  border: 1px solid var(--mr-switch-favorite-color);
+}
+
 .mr-choice-filter:has(input:checked) .choice-label {
+  background-color: var(--mr-switch-checked-bg-color);
+}
+
+.favorite .mr-choice-filter:has(input:checked) .choice-label {
   color: black;
-  background-color: var(--mr-switch-favorite-color);
+  background-color: var(--mr-switch-checked-favorite-bg-color);
 }

@@ -70,7 +70,6 @@ export class AzureImageFormComponent extends LanguageComponent {
 
   uploadImage() {
     if (!this.azureImageForm.valid) {
-      console.log('Errores Formulario: ', this.azureImageForm);
       return;
     }
 
@@ -92,7 +91,6 @@ export class AzureImageFormComponent extends LanguageComponent {
     // };
 
     this.drawingService.uploadAzureImage(formData).subscribe(resp => {
-      // console.log('Respuesta: ', resp);
       if (resp && resp.ok) {
         this.imageUploaded.emit(resp);
       }

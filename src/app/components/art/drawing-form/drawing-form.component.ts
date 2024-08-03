@@ -40,6 +40,7 @@ import { UploadAzureImageResponse } from '@models/responses/upload-azure-image.r
 import { scoreConfig } from 'config/art/art-details-form.config';
 import { getHumanTimeFromMinutes } from '@utils/customization/text-utils';
 import { getFormErrors } from '@utils/form-control.utils';
+import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model';
 
 @Component({
   selector: 'app-drawing-form',
@@ -117,6 +118,7 @@ export class DrawingFormComponent extends LanguageComponent {
     tagsText: new FormControl(''),
     referenceUrl: new FormControl(''),
     spotifyUrl: new FormControl(''),
+    visible: new FormControl(true, Validators.required),
   });
 
   get listComments(): FormArray<FormControl> {
@@ -185,6 +187,7 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.tagsText.setValue(drawing.tags.join(' '));
     this.form.controls.referenceUrl.setValue(drawing.referenceUrl);
     this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);
+    this.form.controls.visible.setValue(drawing.visible);
   }
 
   updateTime(event: Event) {
@@ -249,11 +252,34 @@ export class DrawingFormComponent extends LanguageComponent {
   saveDrawing() {
     console.log(this.form.value);
     const values = this.form.value;
-    const tobesaved = new Drawing({
-      id: values.id ?? '',
+
+    const formData: ISaveDrawingRequest = {
+      id: values.id!,
+      dateHyphen: values.dateHyphen!,
+      favorite: values.favorite!,
+      isEditing: values.isEditing!,
+      listCommentCons: values.listCommentCons!,
+      listCommentPros: values.listCommentPros!,
+      listComments: values.listComments!,
+      modelName: values.modelName!,
+      name: values.name!,
+      paper: values.paper!,
+      path: values.path!,
+      pathThumbnail: values.pathThumbnail!,
+      productName: values.productName!,
+      productType: values.productType!,
+      referenceUrl: values.referenceUrl!,
+      scoreCritic: values.scoreCritic!,
+      software: values.software!,
+      spotifyUrl: values.spotifyUrl!,
+      tagsText: values.tagsText!,
+      time: values.time!,
+      title: values.title!,
+      type: values.type!,
+      visible: values.visible!,
+    };
+    this.drawingService.saveDrawing(formData).subscribe(resp => {
+      console.log('Respuesta: ', resp);
     });
-    // this.drawingService.saveDrawing(tobesaved).subscribe(resp => {
-    //   console.log('Respuesta: ', resp);
-    // });
   }
 }

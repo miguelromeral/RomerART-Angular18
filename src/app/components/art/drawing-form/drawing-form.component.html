@@ -8,243 +8,332 @@
       {{ text('TITLE.EDIT') | mrTranslate: { id: drawing.id } }}
     </ng-template>
   </h1>
-  <form
-    class="grid grid-cols-1 gap-4"
-    (submit)="saveDrawing()"
-    [formGroup]="form">
-    <app-text-input
-      *ngIf="newDrawing; else idEdit"
-      formControlName="id"
-      (change)="checkDrawingId($event)"
-      [placeholder]="text('FORM.ID.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.ID.TITLE') | mrTranslate">
-    </app-text-input>
+  <form class="main-container" (submit)="saveDrawing()" [formGroup]="form">
+    <div class="sm:col-span-3">
+      <app-text-input
+        *ngIf="newDrawing; else idEdit"
+        formControlName="id"
+        (change)="checkDrawingId($event)"
+        [placeholder]="text('FORM.ID.PLACEHOLDER') | mrTranslate"
+        [label]="text('FORM.ID.TITLE') | mrTranslate">
+      </app-text-input>
 
-    <ng-template #idEdit>
-      <span>{{ drawing.id }}</span>
-    </ng-template>
+      <ng-template #idEdit>
+        <span>{{ drawing.id }}</span>
+      </ng-template>
 
-    <div *ngIf="duplicateId" class="form-error">
-      {{
-        text('ERRORS.DUPLICATE-ID') | mrTranslate: { id: this.form.value.id }
-      }}
+      <div *ngIf="duplicateId" class="form-error">
+        {{
+          text('ERRORS.DUPLICATE-ID') | mrTranslate: { id: this.form.value.id }
+        }}
+      </div>
+
+      <div *ngIf="form.controls.id.errors" class="form-error">
+        <p *ngIf="form.controls.id.hasError('required')">EL ID ES REQUERIDO</p>
+      </div>
     </div>
 
-    <div *ngIf="form.controls.id.errors" class="form-error">
-      <p *ngIf="form.controls.id.hasError('required')">EL ID ES REQUERIDO</p>
+    <div class="seccion">
+      <h2 class="seccion-title">{{ text('SECTIONS.IMAGE') | mrTranslate }}</h2>
+      <div class="content">
+        <div class="image-container">
+          <img
+            #image
+            [src]="drawing.url"
+            alt="Image"
+            class="col-span-2"
+            loading="lazy" />
+          <img
+            #imageThumbnail
+            [src]="drawing.urlThumbnail"
+            alt="Image"
+            loading="lazy" />
+        </div>
+        <div class="azure-container">
+          <app-text-input
+            formControlName="path"
+            (change)="checkAzurePath($event)"
+            [placeholder]="text('FORM.PATH.PLACEHOLDER') | mrTranslate"
+            [label]="text('FORM.PATH.TITLE') | mrTranslate">
+          </app-text-input>
+
+          <div *ngIf="form.controls.path.errors" class="form-error">
+            <p *ngIf="form.controls.path.hasError('required')">
+              LA RUTA DE LA IMAGEN NO ES VÁLIDA
+            </p>
+          </div>
+
+          <app-azure-image-form
+            *ngIf="showAzureForm"
+            [path]="form.value.path ?? ''"
+            (imageUploaded)="receiveUploadedImage($event)">
+          </app-azure-image-form>
+        </div>
+      </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-1">
-      <img
-        #image
-        [src]="drawing.url"
-        alt="Image"
-        class="col-span-2"
-        loading="lazy" />
-      <img
-        #imageThumbnail
-        [src]="drawing.urlThumbnail"
-        alt="Image"
-        loading="lazy" />
+    <div class="seccion">
+      <h2 class="seccion-title">
+        {{ text('FORM.TITLE.TITLE') | mrTranslate }}
+      </h2>
+      <div class="content items-end">
+        <app-text-input
+          class="col-span-1 sm:col-span-2"
+          formControlName="title"
+          [placeholder]="text('FORM.TITLE.PLACEHOLDER') | mrTranslate">
+        </app-text-input>
+
+        <div class="favorite">
+          <app-switch
+            [id]="'iSwitchFavorite'"
+            [text]="text('FORM.FAVORITE.TITLE') | mrTranslate"
+            [formControl]="form.controls.favorite">
+          </app-switch>
+        </div>
+      </div>
     </div>
 
-    <app-text-input
-      formControlName="path"
-      (change)="checkAzurePath($event)"
-      [placeholder]="text('FORM.PATH.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.PATH.TITLE') | mrTranslate">
-    </app-text-input>
+    <div class="seccion">
+      <h2 class="seccion-title">{{ text('SECTIONS.NAMES') | mrTranslate }}</h2>
+      <div class="content">
+        <app-text-input
+          formControlName="name"
+          [placeholder]="text('FORM.NAME.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.NAME.TITLE') | mrTranslate">
+        </app-text-input>
 
-    <div *ngIf="form.controls.path.errors" class="form-error">
-      <p *ngIf="form.controls.path.hasError('required')">
-        LA RUTA DE LA IMAGEN NO ES VÁLIDA
-      </p>
+        <app-text-input
+          formControlName="modelName"
+          [placeholder]="text('FORM.MODEL-NAME.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.MODEL-NAME.TITLE') | mrTranslate">
+        </app-text-input>
+      </div>
     </div>
 
-    <app-azure-image-form
-      *ngIf="showAzureForm"
-      [path]="form.value.path ?? ''"
-      (imageUploaded)="receiveUploadedImage($event)">
-    </app-azure-image-form>
+    <div class="seccion">
+      <h2 class="seccion-title">
+        {{ text('FORM.PRODUCT.TITLE') | mrTranslate }}
+      </h2>
+      <div class="content items-end">
+        <div>
+          <app-select-input
+            [options]="listDrawingProductTypes"
+            formControlName="productType">
+          </app-select-input>
 
-    <app-text-input
-      formControlName="title"
-      [placeholder]="text('FORM.TITLE.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.TITLE.TITLE') | mrTranslate">
-    </app-text-input>
+          <div *ngIf="form.controls.productType.errors" class="form-error">
+            <p *ngIf="form.controls.productType.hasError('required')">
+              EL TIPO DE PRODUCTO ES OBLIGATORIO
+            </p>
+          </div>
+        </div>
 
-    <app-switch
-      [text]="text('FORM.FAVORITE.TITLE') | mrTranslate"
-      [formControl]="form.controls.favorite">
-    </app-switch>
-
-    <!-- <app-setting-section [title]="text('SECTIONS.NAMES') | mrTranslate"> -->
-    <app-text-input
-      formControlName="name"
-      [placeholder]="text('FORM.NAME.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.NAME.TITLE') | mrTranslate">
-    </app-text-input>
-
-    <app-text-input
-      formControlName="modelName"
-      [placeholder]="text('FORM.MODEL-NAME.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.MODEL-NAME.TITLE') | mrTranslate">
-    </app-text-input>
-    <!-- </app-setting-section> -->
-
-    <app-select-input [options]="listDrawingStyles" formControlName="type">
-    </app-select-input>
-
-    <div *ngIf="form.controls.type.errors" class="form-error">
-      <p *ngIf="form.controls.type.hasError('required')">
-        EL TIPO ES REQUERIDO
-      </p>
+        <app-text-input
+          formControlName="productName"
+          [placeholder]="text('FORM.PRODUCT.PLACEHOLDER') | mrTranslate">
+        </app-text-input>
+      </div>
     </div>
 
-    <app-select-input
-      [firstOption]="{
-        value: '0',
-        label: '',
-        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SOFTWARE.TITLE',
-      }"
-      [options]="listDrawingSoftwares"
-      formControlName="software">
-    </app-select-input>
+    <div class="seccion">
+      <h2 class="seccion-title">{{ text('SECTIONS.STYLE') | mrTranslate }}</h2>
+      <div class="content">
+        <div>
+          <app-select-input
+            [options]="listDrawingStyles"
+            formControlName="type">
+          </app-select-input>
 
-    <app-select-input
-      [firstOption]="{
-        value: '0',
-        label: '',
-        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PAPER.TITLE',
-      }"
-      [options]="listDrawingPapers"
-      formControlName="paper">
-    </app-select-input>
+          <div *ngIf="form.controls.type.errors" class="form-error">
+            <p *ngIf="form.controls.type.hasError('required')">
+              EL TIPO ES REQUERIDO
+            </p>
+          </div>
+        </div>
 
-    <app-date-input
-      formControlName="dateHyphen"
-      [label]="text('FORM.DATE.TITLE') | mrTranslate">
-    </app-date-input>
+        <app-select-input
+          [firstOption]="{
+            value: '0',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SOFTWARE.TITLE',
+          }"
+          [options]="listDrawingSoftwares"
+          formControlName="software">
+        </app-select-input>
 
-    <div *ngIf="form.controls.dateHyphen.errors" class="form-error">
-      <p *ngIf="form.controls.dateHyphen.hasError('required')">
-        LA FECHA ES REQUERIDA
-      </p>
+        <app-select-input
+          [firstOption]="{
+            value: '0',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PAPER.TITLE',
+          }"
+          [options]="listDrawingPapers"
+          formControlName="paper">
+        </app-select-input>
+      </div>
     </div>
 
-    <app-text-input
-      type="number"
-      [min]="1"
-      [max]="100"
-      formControlName="scoreCritic"
-      [placeholder]="text('FORM.SCORE-CRITIC.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.SCORE-CRITIC.TITLE') | mrTranslate">
-    </app-text-input>
+    <div class="seccion">
+      <h2 class="seccion-title">
+        {{ text('SECTIONS.DETAILS') | mrTranslate }}
+      </h2>
+      <div class="content">
+        <div>
+          <app-date-input
+            formControlName="dateHyphen"
+            [label]="text('FORM.DATE.TITLE') | mrTranslate">
+          </app-date-input>
 
-    <div *ngIf="form.controls.scoreCritic.errors" class="form-error">
-      <p *ngIf="form.controls.scoreCritic.hasError('required')">
-        LA PUNTUACIÓN ES REQUERIDA
-      </p>
-      <p *ngIf="form.controls.scoreCritic.hasError('min')">
-        LA PUNTUACIÓN DEBE SER MÍNIMO {{ scoreConfig.min }}
-      </p>
-      <p *ngIf="form.controls.scoreCritic.hasError('max')">
-        LA PUNTUACIÓN DEBE SER MAXIMO {{ scoreConfig.max }}
-      </p>
+          <div *ngIf="form.controls.dateHyphen.errors" class="form-error">
+            <p *ngIf="form.controls.dateHyphen.hasError('required')">
+              LA FECHA ES REQUERIDA
+            </p>
+          </div>
+        </div>
+        <div>
+          <app-text-input
+            type="number"
+            [min]="0"
+            (change)="updateTime($event)"
+            formControlName="time"
+            [placeholder]="text('FORM.TIME.PLACEHOLDER') | mrTranslate"
+            [label]="'TIME'">
+          </app-text-input>
+
+          <span>
+            {{ timeHuman }}
+          </span>
+        </div>
+        <div>
+          <app-text-input
+            type="number"
+            [min]="1"
+            [max]="100"
+            formControlName="scoreCritic"
+            [placeholder]="text('FORM.SCORE-CRITIC.PLACEHOLDER') | mrTranslate"
+            [label]="text('FORM.SCORE-CRITIC.TITLE') | mrTranslate">
+          </app-text-input>
+
+          <div *ngIf="form.controls.scoreCritic.errors" class="form-error">
+            <p *ngIf="form.controls.scoreCritic.hasError('required')">
+              LA PUNTUACIÓN ES REQUERIDA
+            </p>
+            <p *ngIf="form.controls.scoreCritic.hasError('min')">
+              LA PUNTUACIÓN DEBE SER MÍNIMO {{ scoreConfig.min }}
+            </p>
+            <p *ngIf="form.controls.scoreCritic.hasError('max')">
+              LA PUNTUACIÓN DEBE SER MAXIMO {{ scoreConfig.max }}
+            </p>
+          </div>
+
+          <div class="h-fit">
+            <app-drawing-score [score]="form.value.scoreCritic ?? 0">
+            </app-drawing-score>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <app-drawing-score [score]="form.value.scoreCritic ?? 0">
-    </app-drawing-score>
-
-    <app-text-input
-      type="number"
-      [min]="0"
-      (change)="updateTime($event)"
-      formControlName="time"
-      [placeholder]="text('FORM.TIME.PLACEHOLDER') | mrTranslate"
-      [label]="'TIME'">
-    </app-text-input>
-
-    <span>
-      {{ timeHuman }}
-    </span>
-
-    <app-select-input
-      [options]="listDrawingProductTypes"
-      formControlName="productType">
-    </app-select-input>
-
-    <div *ngIf="form.controls.productType.errors" class="form-error">
-      <p *ngIf="form.controls.productType.hasError('required')">
-        EL TIPO DE PRODUCTO ES OBLIGATORIO
-      </p>
+    <div class="seccion">
+      <h2 class="seccion-title">
+        {{ text('FORM.COMMENTS.TITLE') | mrTranslate }}
+      </h2>
+      <div class="content">
+        <app-drawing-form-comments
+          class="col-span-1 sm:col-span-3"
+          [formArrayName]="'listComments'"
+          [formArray]="listComments"
+          [comments]="drawing.listComments"
+          [placeholder]="text('FORM.COMMENTS.PLACEHOLDER') | mrTranslate">
+        </app-drawing-form-comments>
+      </div>
     </div>
 
-    <app-text-input
-      formControlName="productName"
-      [placeholder]="text('FORM.PRODUCT.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.PRODUCT.TITLE') | mrTranslate">
-    </app-text-input>
-
-    <app-drawing-form-comments
-      [formArrayName]="'listComments'"
-      [formArray]="listComments"
-      [comments]="drawing.listComments"
-      [label]="text('FORM.COMMENTS.TITLE') | mrTranslate"
-      [placeholder]="text('FORM.COMMENTS.PLACEHOLDER') | mrTranslate">
-    </app-drawing-form-comments>
-
-    <app-drawing-form-comments
-      [formArrayName]="'listCommentPros'"
-      [formArray]="listCommentPros"
-      [comments]="drawing.listCommentPros"
-      [label]="text('FORM.COMMENTS-PROS.TITLE') | mrTranslate"
-      [placeholder]="text('FORM.COMMENTS-PROS.PLACEHOLDER') | mrTranslate">
-    </app-drawing-form-comments>
-
-    <app-drawing-form-comments
-      [formArrayName]="'listCommentCons'"
-      [formArray]="listCommentCons"
-      [comments]="drawing.listCommentCons"
-      [label]="text('FORM.COMMENTS-CONS.TITLE') | mrTranslate"
-      [placeholder]="text('FORM.COMMENTS-CONS.PLACEHOLDER') | mrTranslate">
-    </app-drawing-form-comments>
-
-    <app-text-input
-      formControlName="tagsText"
-      [placeholder]="text('FORM.TAGS.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.TAGS.TITLE') | mrTranslate">
-    </app-text-input>
-
-    <app-text-input
-      formControlName="referenceUrl"
-      [placeholder]="text('FORM.REFERENCE.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.REFERENCE.TITLE') | mrTranslate">
-    </app-text-input>
-
-    <app-text-input
-      formControlName="spotifyUrl"
-      [placeholder]="text('FORM.SPOTIFY.PLACEHOLDER') | mrTranslate"
-      [label]="text('FORM.SPOTIFY.TITLE') | mrTranslate">
-    </app-text-input>
-
-    <div *ngIf="!validForm; else formValid" class="form-error">
-      <p>Existen algunos errores en el formulario, revisalos</p>
-
-      <ul *ngIf="formErrors.length > 0">
-        <li *ngFor="let error of formErrors">{{ error }}</li>
-      </ul>
+    <div class="seccion">
+      <h2 class="seccion-title">
+        {{ text('FORM.COMMENTS-PROS.TITLE') | mrTranslate }}
+      </h2>
+      <div class="content">
+        <app-drawing-form-comments
+          class="col-span-1 sm:col-span-3"
+          [formArrayName]="'listCommentPros'"
+          [formArray]="listCommentPros"
+          [comments]="drawing.listCommentPros"
+          [placeholder]="text('FORM.COMMENTS-PROS.PLACEHOLDER') | mrTranslate">
+        </app-drawing-form-comments>
+      </div>
     </div>
-    <ng-template #formValid>
-      <button class="btn" type="submit">
-        <ng-container *ngIf="newDrawing; else btnSaveEditForm">
-          {{ text('FORM.SAVE.CREATE') | mrTranslate }}
-        </ng-container>
-        <ng-template #btnSaveEditForm>
-          {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: drawing.id } }}
-        </ng-template>
-      </button>
-    </ng-template>
+
+    <div class="seccion">
+      <h2 class="seccion-title">
+        {{ text('FORM.COMMENTS-CONS.TITLE') | mrTranslate }}
+      </h2>
+      <div class="content">
+        <app-drawing-form-comments
+          class="col-span-1 sm:col-span-3"
+          [formArrayName]="'listCommentCons'"
+          [formArray]="listCommentCons"
+          [comments]="drawing.listCommentCons"
+          [placeholder]="text('FORM.COMMENTS-CONS.PLACEHOLDER') | mrTranslate">
+        </app-drawing-form-comments>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <h2 class="seccion-title">
+        {{ text('SECTIONS.REFERENCES') | mrTranslate }}
+      </h2>
+      <div class="content items-end">
+        <app-text-input
+          formControlName="referenceUrl"
+          [placeholder]="text('FORM.REFERENCE.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.REFERENCE.TITLE') | mrTranslate">
+        </app-text-input>
+
+        <app-text-input
+          formControlName="spotifyUrl"
+          [placeholder]="text('FORM.SPOTIFY.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.SPOTIFY.TITLE') | mrTranslate">
+        </app-text-input>
+
+        <app-switch
+          [id]="'iSwitchVisible'"
+          [text]="text('FORM.VISIBLE.TITLE') | mrTranslate"
+          [formControl]="form.controls.visible">
+        </app-switch>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <h2 class="seccion-title">{{ text('FORM.TAGS.TITLE') | mrTranslate }}</h2>
+      <div class="content">
+        <app-text-input
+          class="col-span-1 sm:col-span-3"
+          formControlName="tagsText"
+          [placeholder]="text('FORM.TAGS.PLACEHOLDER') | mrTranslate">
+        </app-text-input>
+      </div>
+    </div>
+
+    <div class="col-span-1 sm:col-span-3">
+      <div *ngIf="!validForm; else formValid" class="form-error">
+        <p>Existen algunos errores en el formulario, revisalos</p>
+
+        <ul *ngIf="formErrors.length > 0">
+          <li *ngFor="let error of formErrors">{{ error }}</li>
+        </ul>
+      </div>
+      <ng-template #formValid>
+        <button class="btn" type="submit">
+          <ng-container *ngIf="newDrawing; else btnSaveEditForm">
+            {{ text('FORM.SAVE.CREATE') | mrTranslate }}
+          </ng-container>
+          <ng-template #btnSaveEditForm>
+            {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: drawing.id } }}
+          </ng-template>
+        </button>
+      </ng-template>
+    </div>
   </form>
 
   <!-- TODO: llevar esto al Art/Edit component -->

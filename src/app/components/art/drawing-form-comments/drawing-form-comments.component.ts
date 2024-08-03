@@ -17,7 +17,6 @@ import { TextInputComponent } from '@app/components/shared/inputs/text-input/tex
 })
 export class DrawingFormCommentsComponent {
   @Input() formArrayName!: string;
-  @Input() label!: string;
   @Input() placeholder = '';
   @Input() formArray!: FormArray<FormControl>;
 

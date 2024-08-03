@@ -1,8 +1,6 @@
 <div class="form-group h-full">
   <div class="mr-choice-filter">
-    <label class="form-check-label choice-label" for="flexSwitchCheckChecked">{{
-      text
-    }}</label>
+    <label class="form-check-label choice-label" [for]="id">{{ text }}</label>
     <input
       class="form-check-input"
       [checked]="value"
@@ -10,6 +8,6 @@
       (blur)="onBlur()"
       type="checkbox"
       role="switch"
-      id="flexSwitchCheckChecked" />
+      [id]="id" />
   </div>
 </div>

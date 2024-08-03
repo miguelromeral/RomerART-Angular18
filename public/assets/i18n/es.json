@@ -174,7 +174,11 @@
         "EDIT": "Editar {{id}}"
       },
       "SECTIONS": {
-        "NAMES": "Información de Personaje"
+        "NAMES": "Información de Personaje",
+        "IMAGE": "Imagen en Azure",
+        "STYLE": "Estilo",
+        "DETAILS": "Detalles",
+        "REFERENCES": "Referencias"
       },
       "FORM": {
         "SAVE": {
@@ -188,6 +192,10 @@
         "PATH": {
           "TITLE": "Imagen en Azure *",
           "PLACEHOLDER": "Ruta de la imagen en Azure"
+        },
+        "IMAGE-SIZE": {
+          "TITLE": "Tamaño Miniatura *",
+          "PLACEHOLDER": "Tamaño en Píxeles"
         },
         "TITLE": {
           "TITLE": "Título",
@@ -238,6 +246,9 @@
         "SPOTIFY": {
           "TITLE": "Canción de Spotify",
           "PLACEHOLDER": "URL de Canción de Spotify"
+        },
+        "VISIBLE": {
+          "TITLE": "Visible"
         }
       },
       "ERRORS": {

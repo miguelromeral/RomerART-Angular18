@@ -21,6 +21,7 @@ import { ICheckAzurePathResponse } from '@models/responses/check-azure-path-resp
 import { ISaveDrawingResponse } from '@models/responses/save-drawing-response.model';
 import { UploadAzureImageRequest } from '@models/requests/upload-azure-image-request.model';
 import { UploadAzureImageResponse } from '@models/responses/upload-azure-image.response';
+import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -108,7 +109,7 @@ export class DrawingService {
       );
   }
 
-  saveDrawing(drawing: Drawing): Observable<ISaveDrawingResponse> {
+  saveDrawing(drawing: ISaveDrawingRequest): Observable<ISaveDrawingResponse> {
     const url = `${this.apiUrl}art/save/${drawing.id}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 

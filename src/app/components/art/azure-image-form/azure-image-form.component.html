@@ -1,5 +1,8 @@
-<div>
-  <form [formGroup]="azureImageForm" (submit)="uploadImage()">
+<form
+  [formGroup]="azureImageForm"
+  (submit)="uploadImage()"
+  class="grid grid-cols-1 items-end sm:grid-cols-4">
+  <div>
     <app-text-input
       type="number"
       [min]="100"
@@ -7,16 +10,20 @@
       [placeholder]="text('FORM.IMAGE-SIZE.PLACEHOLDER') | mrTranslate"
       [label]="text('FORM.IMAGE-SIZE.TITLE') | mrTranslate">
     </app-text-input>
+
     <div *ngIf="azureImageForm.controls.size.errors">
       {{ azureImageForm.controls.size.errors }}
     </div>
+  </div>
 
-    <input
-      *ngIf="!isBeingUploaded"
-      type="file"
-      (change)="onFileChange($event)"
-      accept="image/*" />
+  <input
+    class="col-span-1 sm:col-span-3"
+    *ngIf="!isBeingUploaded"
+    type="file"
+    (change)="onFileChange($event)"
+    accept="image/*" />
 
-    <button type="submit" class="btn">SUBIR IMAGEN</button>
-  </form>
-</div>
+  <button type="submit" class="btn col-span-1 sm:col-span-4">
+    SUBIR IMAGEN
+  </button>
+</form>

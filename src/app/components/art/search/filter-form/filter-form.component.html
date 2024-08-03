@@ -179,12 +179,13 @@
         (change)="filterControlChange()">
       </app-select-input>
 
-      <app-switch
-        class="mr-filter-item"
-        [text]="text('FAVORITES.TITLE') | mrTranslate"
-        formControlName="formFavorites"
-        (ngModelChange)="filterControlChange()">
-      </app-switch>
+      <div class="favorite mr-filter-item">
+        <app-switch
+          [text]="text('FAVORITES.TITLE') | mrTranslate"
+          formControlName="formFavorites"
+          (ngModelChange)="filterControlChange()">
+        </app-switch>
+      </div>
     </div>
   </div>
 </form>
