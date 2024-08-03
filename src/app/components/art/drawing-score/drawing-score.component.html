@@ -9,5 +9,7 @@
   [ngClass]="
     getClassScore(score) + ' ' + (popular ? 'rounded-full' : 'rounded-sm')
   ">
-  {{ score }}
+  <span *ngIf="score >= scoreConfig.min && score <= scoreConfig.max">
+    {{ score }}
+  </span>
 </div>

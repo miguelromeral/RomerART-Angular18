@@ -19,6 +19,8 @@ import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.mo
 import { ICheckAzurePathRequest } from '@models/requests/check-azure-path-request.model';
 import { ICheckAzurePathResponse } from '@models/responses/check-azure-path-response.model';
 import { ISaveDrawingResponse } from '@models/responses/save-drawing-response.model';
+import { UploadAzureImageRequest } from '@models/requests/upload-azure-image-request.model';
+import { UploadAzureImageResponse } from '@models/responses/upload-azure-image.response';
 
 @Injectable({
   providedIn: 'root',
@@ -113,6 +115,17 @@ export class DrawingService {
     return this.http
       .post<ISaveDrawingResponse>(url, drawing, { headers })
       .pipe(catchError(this.handleError<ISaveDrawingResponse>('saveDrawing')));
+  }
+
+  uploadAzureImage(form: FormData): Observable<UploadAzureImageResponse> {
+    const url = `${this.apiUrl}art/upload`;
+    return this.http
+      .post<UploadAzureImageResponse>(url, form)
+      .pipe(
+        catchError(
+          this.handleError<UploadAzureImageResponse>('uploadAzureImage')
+        )
+      );
   }
 
   checkDrawingId(id: string): Observable<boolean> {

@@ -1,5 +1,6 @@
 export interface ICheckAzurePathResponse {
   existe: boolean;
   url: string;
-  url_tn: string;
+  urlThumbnail: string;
+  pathThumbnail: string;
 }

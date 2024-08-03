@@ -20,3 +20,8 @@ select {
 .form-group {
   @apply flex flex-col w-full gap-2
 }
+
+
+.form-error {
+  @apply bg-red-400 text-white-50 p-2;
+}

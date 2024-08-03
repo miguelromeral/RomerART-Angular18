@@ -14,3 +14,14 @@ export class TextUtils {
     }
   }
 }
+
+export function getHumanTimeFromMinutes(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const remainingMins = minutes % 60;
+
+  if (hours > 0) {
+    return `${hours}h ${remainingMins}min`;
+  } else {
+    return `${remainingMins}min`;
+  }
+}

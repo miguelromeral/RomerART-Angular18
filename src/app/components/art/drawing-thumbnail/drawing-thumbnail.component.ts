@@ -25,7 +25,17 @@ export class DrawingThumbnailComponent
   extends LanguageComponent
   implements OnInit
 {
-  @Input() drawing!: Drawing;
+  private _drawing!: Drawing;
+
+  @Input()
+  public get drawing() {
+    return this._drawing;
+  }
+  public set drawing(value: Drawing) {
+    this._drawing = value;
+    this.init();
+  }
+
   @Input() fullsize = false;
   url = '';
 
@@ -36,6 +46,11 @@ export class DrawingThumbnailComponent
   }
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
+    this.bErrorLoadingImage = false;
     this.detectThumbnailUrl();
   }
 

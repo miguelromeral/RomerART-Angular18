@@ -182,11 +182,11 @@
           "EDIT": "GUARDAR {{id}}"
         },
         "ID": {
-          "TITLE": "Identificador",
+          "TITLE": "Identificador *",
           "PLACEHOLDER": "ID del Dibujo"
         },
         "PATH": {
-          "TITLE": "Imagen en Azure",
+          "TITLE": "Imagen en Azure *",
           "PLACEHOLDER": "Ruta de la imagen en Azure"
         },
         "TITLE": {
@@ -205,7 +205,7 @@
           "PLACEHOLDER": "Nombre del Modelo"
         },
         "DATE": {
-          "TITLE": "Fecha"
+          "TITLE": "Fecha *"
         },
         "SCORE-CRITIC": {
           "TITLE": "Puntuación",

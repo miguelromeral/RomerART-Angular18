@@ -23,11 +23,30 @@
     <ng-template #idEdit>
       <span>{{ drawing.id }}</span>
     </ng-template>
-    <p *ngIf="duplicateId">
+
+    <div *ngIf="duplicateId" class="form-error">
       {{
         text('ERRORS.DUPLICATE-ID') | mrTranslate: { id: this.form.value.id }
       }}
-    </p>
+    </div>
+
+    <div *ngIf="form.controls.id.errors" class="form-error">
+      <p *ngIf="form.controls.id.hasError('required')">EL ID ES REQUERIDO</p>
+    </div>
+
+    <div class="grid grid-cols-3 gap-1">
+      <img
+        #image
+        [src]="drawing.url"
+        alt="Image"
+        class="col-span-2"
+        loading="lazy" />
+      <img
+        #imageThumbnail
+        [src]="drawing.urlThumbnail"
+        alt="Image"
+        loading="lazy" />
+    </div>
 
     <app-text-input
       formControlName="path"
@@ -35,6 +54,18 @@
       [placeholder]="text('FORM.PATH.PLACEHOLDER') | mrTranslate"
       [label]="text('FORM.PATH.TITLE') | mrTranslate">
     </app-text-input>
+
+    <div *ngIf="form.controls.path.errors" class="form-error">
+      <p *ngIf="form.controls.path.hasError('required')">
+        LA RUTA DE LA IMAGEN NO ES VÁLIDA
+      </p>
+    </div>
+
+    <app-azure-image-form
+      *ngIf="showAzureForm"
+      [path]="form.value.path ?? ''"
+      (imageUploaded)="receiveUploadedImage($event)">
+    </app-azure-image-form>
 
     <app-text-input
       formControlName="title"
@@ -64,6 +95,12 @@
     <app-select-input [options]="listDrawingStyles" formControlName="type">
     </app-select-input>
 
+    <div *ngIf="form.controls.type.errors" class="form-error">
+      <p *ngIf="form.controls.type.hasError('required')">
+        EL TIPO ES REQUERIDO
+      </p>
+    </div>
+
     <app-select-input
       [firstOption]="{
         value: '0',
@@ -89,6 +126,12 @@
       [label]="text('FORM.DATE.TITLE') | mrTranslate">
     </app-date-input>
 
+    <div *ngIf="form.controls.dateHyphen.errors" class="form-error">
+      <p *ngIf="form.controls.dateHyphen.hasError('required')">
+        LA FECHA ES REQUERIDA
+      </p>
+    </div>
+
     <app-text-input
       type="number"
       [min]="1"
@@ -98,27 +141,44 @@
       [label]="text('FORM.SCORE-CRITIC.TITLE') | mrTranslate">
     </app-text-input>
 
+    <div *ngIf="form.controls.scoreCritic.errors" class="form-error">
+      <p *ngIf="form.controls.scoreCritic.hasError('required')">
+        LA PUNTUACIÓN ES REQUERIDA
+      </p>
+      <p *ngIf="form.controls.scoreCritic.hasError('min')">
+        LA PUNTUACIÓN DEBE SER MÍNIMO {{ scoreConfig.min }}
+      </p>
+      <p *ngIf="form.controls.scoreCritic.hasError('max')">
+        LA PUNTUACIÓN DEBE SER MAXIMO {{ scoreConfig.max }}
+      </p>
+    </div>
+
     <app-drawing-score [score]="form.value.scoreCritic ?? 0">
     </app-drawing-score>
 
     <app-text-input
       type="number"
       [min]="0"
+      (change)="updateTime($event)"
       formControlName="time"
       [placeholder]="text('FORM.TIME.PLACEHOLDER') | mrTranslate"
       [label]="'TIME'">
     </app-text-input>
-    <!-- TODO: añadir calculo de horas a las que equivale los minutos -->
+
+    <span>
+      {{ timeHuman }}
+    </span>
 
     <app-select-input
-      [firstOption]="{
-        value: '-1',
-        label: '',
-        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT-TYPE.TITLE',
-      }"
       [options]="listDrawingProductTypes"
       formControlName="productType">
     </app-select-input>
+
+    <div *ngIf="form.controls.productType.errors" class="form-error">
+      <p *ngIf="form.controls.productType.hasError('required')">
+        EL TIPO DE PRODUCTO ES OBLIGATORIO
+      </p>
+    </div>
 
     <app-text-input
       formControlName="productName"
@@ -168,18 +228,23 @@
       [label]="text('FORM.SPOTIFY.TITLE') | mrTranslate">
     </app-text-input>
 
-    <button
-      *ngIf="validForm"
-      [disabled]="duplicateId"
-      class="btn"
-      type="submit">
-      <ng-container *ngIf="newDrawing; else btnSaveEditForm">
-        {{ text('FORM.SAVE.CREATE') | mrTranslate }}
-      </ng-container>
-      <ng-template #btnSaveEditForm>
-        {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: drawing.id } }}
-      </ng-template>
-    </button>
+    <div *ngIf="!validForm; else formValid" class="form-error">
+      <p>Existen algunos errores en el formulario, revisalos</p>
+
+      <ul *ngIf="formErrors.length > 0">
+        <li *ngFor="let error of formErrors">{{ error }}</li>
+      </ul>
+    </div>
+    <ng-template #formValid>
+      <button class="btn" type="submit">
+        <ng-container *ngIf="newDrawing; else btnSaveEditForm">
+          {{ text('FORM.SAVE.CREATE') | mrTranslate }}
+        </ng-container>
+        <ng-template #btnSaveEditForm>
+          {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: drawing.id } }}
+        </ng-template>
+      </button>
+    </ng-template>
   </form>
 
   <!-- TODO: llevar esto al Art/Edit component -->

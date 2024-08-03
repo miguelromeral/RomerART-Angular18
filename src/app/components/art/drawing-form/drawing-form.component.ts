@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -28,6 +34,12 @@ import { DrawingProductType } from '@models/art/drawing-product-type.model';
 import { DrawingFormCommentsComponent } from '../drawing-form-comments/drawing-form-comments.component';
 import { DateInputComponent } from '@app/components/shared/inputs/date-input/date-input.component';
 import { SettingSectionComponent } from '@app/components/settings/setting-section/setting-section.component';
+import { DrawingThumbnailComponent } from '../drawing-thumbnail/drawing-thumbnail.component';
+import { AzureImageFormComponent } from '../azure-image-form/azure-image-form.component';
+import { UploadAzureImageResponse } from '@models/responses/upload-azure-image.response';
+import { scoreConfig } from 'config/art/art-details-form.config';
+import { getHumanTimeFromMinutes } from '@utils/customization/text-utils';
+import { getFormErrors } from '@utils/form-control.utils';
 
 @Component({
   selector: 'app-drawing-form',
@@ -47,6 +59,8 @@ import { SettingSectionComponent } from '@app/components/settings/setting-sectio
     DrawingFormCommentsComponent,
     DateInputComponent,
     SettingSectionComponent,
+    DrawingThumbnailComponent,
+    AzureImageFormComponent,
   ],
   templateUrl: './drawing-form.component.html',
   styleUrl: './drawing-form.component.scss',
@@ -68,12 +82,14 @@ export class DrawingFormComponent extends LanguageComponent {
   @Input() loading = true;
   @Input() newDrawing!: boolean;
 
-  duplicateId = false;
-
   public get validForm() {
-    return !this.duplicateId;
+    return this.form.valid && !this.duplicateId;
   }
 
+  /* Config */
+  scoreConfig = scoreConfig;
+
+  /* Form */
   form = new FormGroup({
     isEditing: new FormControl(this.newDrawing, Validators.required),
     id: new FormControl('', Validators.required),
@@ -89,8 +105,8 @@ export class DrawingFormComponent extends LanguageComponent {
     dateHyphen: new FormControl('', Validators.required),
     scoreCritic: new FormControl(0, [
       Validators.required,
-      Validators.min(1),
-      Validators.max(100),
+      Validators.min(this.scoreConfig.min),
+      Validators.max(this.scoreConfig.max),
     ]),
     time: new FormControl(0),
     productType: new FormControl(0, Validators.required),
@@ -113,15 +129,29 @@ export class DrawingFormComponent extends LanguageComponent {
     return this.form.controls.listCommentCons as FormArray<FormControl>;
   }
 
+  /* List of Select Options */
   listDrawingStyles: DrawingStyle[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
   listDrawingProductTypes: DrawingProductType[] = [];
 
+  @ViewChild('image') image!: ElementRef<HTMLImageElement>;
+  @ViewChild('imageThumbnail') imageThumbnail!: ElementRef<HTMLImageElement>;
+
+  /* Form Behaviour */
+  duplicateId = false;
+  showAzureForm = true;
+  validationAzureImage = false;
+  timeHuman = '';
+
+  public get formErrors() {
+    return getFormErrors(this.form);
+  }
+
   constructor(
-    private logger: LoggerService,
     private drawingService: DrawingService,
-    private metadataService: MetadataService
+    private metadataService: MetadataService,
+    private renderer: Renderer2
   ) {
     super('SCREENS.DRAWING-FORM');
     this.listDrawingStyles = this.drawingService.getDrawingStyles();
@@ -131,9 +161,14 @@ export class DrawingFormComponent extends LanguageComponent {
   }
 
   setFormValues(drawing: Drawing) {
+    this.form.controls.isEditing.setValue(drawing.id !== '');
     this.form.controls.id.setValue(drawing.id);
-    this.form.controls.path.setValue(drawing.path);
-    this.form.controls.pathThumbnail.setValue(drawing.pathThumbnail);
+    if (drawing.path !== '') {
+      this.showAzureForm = false;
+      this.form.controls.path.setValue(drawing.path);
+      this.form.controls.pathThumbnail.setValue(drawing.pathThumbnail);
+      this.validationAzureImage = true;
+    }
     this.form.controls.title.setValue(drawing.title);
     this.form.controls.favorite.setValue(drawing.favorite);
     this.form.controls.name.setValue(drawing.name);
@@ -144,11 +179,23 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.dateHyphen.setValue(drawing.dateHyphen);
     this.form.controls.scoreCritic.setValue(drawing.scoreCritic);
     this.form.controls.time.setValue(drawing.time);
+    this.timeHuman = getHumanTimeFromMinutes(drawing.time);
     this.form.controls.productType.setValue(drawing.productType);
     this.form.controls.productName.setValue(drawing.productName);
     this.form.controls.tagsText.setValue(drawing.tags.join(' '));
     this.form.controls.referenceUrl.setValue(drawing.referenceUrl);
     this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);
+  }
+
+  updateTime(event: Event) {
+    try {
+      const input = event.target as HTMLInputElement;
+      const value = input.value;
+
+      this.timeHuman = getHumanTimeFromMinutes(parseInt(value));
+    } catch (e) {
+      this.timeHuman = '??';
+    }
   }
 
   checkDrawingId(event: Event) {
@@ -163,13 +210,40 @@ export class DrawingFormComponent extends LanguageComponent {
     const input = event.target as HTMLInputElement;
     const value = input.value;
     this.drawingService.checkAzurePath(value).subscribe(resp => {
-      console.log('Respuesta: ', resp);
+      if (resp) {
+        if (resp.existe) {
+          this.drawing.url = resp.url;
+          this.drawing.urlThumbnail = resp.urlThumbnail;
+          this.form.controls.pathThumbnail.setValue(resp.pathThumbnail);
+        } else {
+          this._drawing.url = '';
+          this._drawing.urlThumbnail = '';
+        }
+        this.showAzureForm = !resp.existe;
+      } else {
+        console.error('Error al comprobar la ruta de Azure');
+      }
     });
   }
 
-  loadImagePath() {
-    // TODO: Implementar la lógica de la subida a Azure
-    console.log('Comprobando Imagen');
+  receiveUploadedImage(event: UploadAzureImageResponse) {
+    this.drawing.url = event.url;
+    this.drawing.urlThumbnail = event.urlThumbnail;
+    this.drawing.pathThumbnail = event.pathThumbnail;
+
+    this.form.controls.pathThumbnail.setValue(event.pathThumbnail);
+    this.showAzureForm = false;
+
+    this.renderer.setAttribute(this.image.nativeElement, 'src', '');
+    this.renderer.setAttribute(this.imageThumbnail.nativeElement, 'src', '');
+    setTimeout(() => {
+      this.renderer.setAttribute(this.image.nativeElement, 'src', event.url);
+      this.renderer.setAttribute(
+        this.imageThumbnail.nativeElement,
+        'src',
+        event.urlThumbnail
+      );
+    });
   }
 
   saveDrawing() {
