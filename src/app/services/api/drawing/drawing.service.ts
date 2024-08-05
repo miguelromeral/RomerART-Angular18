@@ -109,13 +109,13 @@ export class DrawingService {
       );
   }
 
-  saveDrawing(drawing: ISaveDrawingRequest): Observable<ISaveDrawingResponse> {
+  saveDrawing(drawing: ISaveDrawingRequest): Observable<Drawing> {
     const url = `${this.apiUrl}art/save/${drawing.id}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http
-      .post<ISaveDrawingResponse>(url, drawing, { headers })
-      .pipe(catchError(this.handleError<ISaveDrawingResponse>('saveDrawing')));
+      .post<Drawing>(url, drawing, { headers })
+      .pipe(catchError(this.handleError<Drawing>('saveDrawing')));
   }
 
   uploadAzureImage(form: FormData): Observable<UploadAzureImageResponse> {

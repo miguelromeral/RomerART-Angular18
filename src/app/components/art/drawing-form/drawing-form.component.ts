@@ -280,6 +280,14 @@ export class DrawingFormComponent extends LanguageComponent {
     };
     this.drawingService.saveDrawing(formData).subscribe(resp => {
       console.log('Respuesta: ', resp);
+      if (resp) {
+        console.log('DIBUJO GUARDADO!', resp);
+        this.newDrawing = false;
+        this.form.controls.isEditing.setValue(true);
+        this.form.controls.tagsText.setValue(resp.tagsText);
+      } else {
+        console.log('No se pudo guardar el dibujo');
+      }
     });
   }
 }
