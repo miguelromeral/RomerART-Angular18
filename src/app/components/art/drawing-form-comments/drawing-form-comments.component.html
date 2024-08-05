@@ -16,5 +16,7 @@
     </button>
   </div>
 
-  <button class="btn" type="button" (click)="addComment('')">ADD</button>
+  <button class="btn" type="button" (click)="addComment('')">
+    {{ text('ADD-COMMENT') | mrTranslate }}
+  </button>
 </div>

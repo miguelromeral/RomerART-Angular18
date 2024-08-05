@@ -78,12 +78,6 @@
       "TITLE": "Galería",
       "SUBTITLE": "Aquí están algunos de mis dibujos e ilustraciones públicas. Pulsa en cualquiera de ellos para ver los detalles",
       "COUNT": "{{length}} imágenes",
-      "ALERTS": {
-        "DUPLICATE-ID": {
-          "TITLE": "ID Duplicado",
-          "MESSAGE": "El ID \"{{id}}\" ya está utilizado. Pruebe con otro valor"
-        }
-      },
       "LOADING": {
         "TITLE": "Filtrando imágenes. Por favor, espere."
       },
@@ -184,7 +178,7 @@
     "DRAWING-FORM": {
       "TITLE": {
         "CREATE": "Crear nuevo dibujo",
-        "EDIT": "Editar {{id}}"
+        "EDIT": "Editar \"{{id}}\""
       },
       "SECTIONS": {
         "NAMES": "Información de Personaje",
@@ -238,7 +232,8 @@
         },
         "COMMENTS": {
           "TITLE": "Comentarios",
-          "PLACEHOLDER": "Comentario"
+          "PLACEHOLDER": "Comentario",
+          "ADD-COMMENT": "Nuevo Comentario"
         },
         "COMMENTS-PROS": {
           "TITLE": "Comentarios Positivos",
@@ -266,6 +261,28 @@
       },
       "ERRORS": {
         "DUPLICATE-ID": "ERROR: el dibujo con id \"{{id}}\" ya existe"
+      },
+      "ALERTS": {
+        "DUPLICATE-ID": {
+          "TITLE": "ID Duplicado",
+          "MESSAGE": "El ID \"{{id}}\" ya está utilizado. Pruebe con otro valor"
+        },
+        "IMAGE-NOT-FOUND": {
+          "TITLE": "Imagen No Encontrada",
+          "MESSAGE": "No se ha encontrado la imagen en la ruta \"{{path}}\". Puede cambiar la ruta si es una ya existente o subir una nueva imagen a esa ubicación"
+        },
+        "ERROR-CHECK-AZURE-PATH": {
+          "TITLE": "Error",
+          "MESSAGE": "Error al comprobar la ruta de la imagen. Pruebe de nuevo"
+        },
+        "SAVED": {
+          "TITLE": "¡Guardado!",
+          "MESSAGE": "El dibujo \"{{id}}\" ha sido guardado con éxito"
+        },
+        "ERROR-ON-SAVE": {
+          "TITLE": "Error",
+          "MESSAGE": "Ha ocurrido un error al guardar el dibujo \"{{values.id}}\". Inténtelo de nuevo"
+        }
       }
     }
   }

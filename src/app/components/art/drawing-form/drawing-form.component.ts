@@ -168,11 +168,14 @@ export class DrawingFormComponent extends LanguageComponent {
   setFormValues(drawing: Drawing) {
     this.form.controls.isEditing.setValue(drawing.id !== '');
     this.form.controls.id.setValue(drawing.id);
-    if (this.drawing.id !== '') {
-      this.metadataService.updateTitle(`Editando "${drawing.id}"`);
-    } else {
-      this.metadataService.updateTitle(`Creando nuevo dibujo`);
-    }
+    this.metadataService.updateTitle(
+      this.customTranslate.transform(
+        this.text(this.drawing.id !== '' ? 'TITLE.EDIT' : 'TITLE.CREATE'),
+        {
+          id: drawing.id,
+        }
+      )
+    );
     if (drawing.path !== '') {
       this.showAzureForm = false;
       this.form.controls.path.setValue(drawing.path);
@@ -216,12 +219,10 @@ export class DrawingFormComponent extends LanguageComponent {
     this.drawingService.checkDrawingId(value).subscribe(resp => {
       this.duplicateId = resp;
       if (this.duplicateId) {
-        const tmp = this.customTranslate.transform(
-          this.text('ALERTS.DUPLICATE-ID.TITLE')
-        );
-        console.log();
         this.alertService.showAlert(
-          tmp,
+          this.customTranslate.transform(
+            this.text('ALERTS.DUPLICATE-ID.TITLE')
+          ),
           this.customTranslate.transform(
             this.text('ALERTS.DUPLICATE-ID.MESSAGE'),
             {
@@ -247,17 +248,24 @@ export class DrawingFormComponent extends LanguageComponent {
           this._drawing.urlThumbnail = '';
 
           this.alertService.showAlert(
-            'Imagen No Encontrada',
-            `No se ha encontrado la imagen en la ruta "${value}". Puede cambiar la ruta si es una ya existente o subir una nueva imagen a esa ubicación`
+            this.customTranslate.transform(
+              this.text('ALERTS.IMAGE-NOT-FOUND.TITLE')
+            ),
+            this.customTranslate.transform(
+              this.text('ALERTS.IMAGE-NOT-FOUND.MESSAGE'),
+              { path: value }
+            )
           );
         }
         this.showAzureForm = !resp.existe;
       } else {
-        console.error('Error al comprobar la ruta de Azure');
-
         this.alertService.showAlert(
-          'Error',
-          `Error al comprobar la ruta de la imagen. Pruebe de nuevo`
+          this.customTranslate.transform(
+            this.text('ALERTS.ERROR-CHECK-AZURE-PATH.TITLE')
+          ),
+          this.customTranslate.transform(
+            this.text('ALERTS.ERROR-CHECK-AZURE-PATH.MESSAGE')
+          )
         );
       }
     });
@@ -315,19 +323,25 @@ export class DrawingFormComponent extends LanguageComponent {
     this.drawingService.saveDrawing(formData).subscribe(resp => {
       // console.log('Respuesta: ', resp);
       if (resp) {
-        // console.log('DIBUJO GUARDADO!', resp);
         this.newDrawing = false;
         this.form.controls.isEditing.setValue(true);
         this.form.controls.tagsText.setValue(resp.tagsText);
 
         this.alertService.showAlert(
-          '¡Guardado!',
-          `El dibujo "${values.id}" ha sido guardado con éxito`
+          this.customTranslate.transform(this.text('ALERTS.SAVED.TITLE')),
+          this.customTranslate.transform(this.text('ALERTS.SAVED.MESSAGE'), {
+            id: values.id,
+          })
         );
       } else {
         this.alertService.showAlert(
-          'Error',
-          `Ha ocurrido un error al guardar el dibujo "${values.id}". Inténtelo de nuevo`
+          this.customTranslate.transform(
+            this.text('ALERTS.ERROR-ON-SAVE.TITLE')
+          ),
+          this.customTranslate.transform(
+            this.text('ALERTS.ERROR-ON-SAVE.MESSAGE'),
+            { id: values.id }
+          )
         );
       }
     });
