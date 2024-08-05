@@ -152,7 +152,8 @@
         "TITLE": "Dibujo no encontrado",
         "SUBTITLE": "No se ha encontrado ningún dibujo con el identificador '{{id}}'.",
         "GO-TO-GALLERY": "Volver a la galería",
-        "IMAGE-NOT-LOADED": "Imagen no encontrada"
+        "IMAGE-NOT-LOADED": "Imagen no encontrada",
+        "SPOTIFY": "Este dibujo no tiene ninguna pista de Spotify"
       },
       "DETAILS": {
         "TAB-TITLES": {
