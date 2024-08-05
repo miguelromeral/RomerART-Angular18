@@ -16,6 +16,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { JwtInterceptor } from '@app/interceptors/JWT/jwt.interceptor';
 import { environment } from 'environments/environment';
 import { localStorageKey } from 'config/auth/auth.config';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -53,6 +54,6 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true,
-    },
+    }, provideAnimationsAsync(),
   ],
 };

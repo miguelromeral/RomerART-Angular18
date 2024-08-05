@@ -7,6 +7,7 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { RouterLink } from '@angular/router';
+import { AlertService } from '@app/services/alerts/alert.service';
 
 @Component({
   selector: 'app-debug',
@@ -20,7 +21,8 @@ export class DebugComponent implements OnInit, OnDestroy {
 
   constructor(
     private languageService: LanguageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -49,5 +51,9 @@ export class DebugComponent implements OnInit, OnDestroy {
     this.languageService.translateText('TITLE').subscribe((res: string) => {
       $('#debug').text(res);
     });
+  }
+
+  showAlert(): void {
+    this.alertService.openDialog();
   }
 }
