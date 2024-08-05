@@ -80,7 +80,7 @@
               *ngIf="drawing.spotifyTrackId !== ''; else noSpotifyTrack"
               [trackId]="drawing.spotifyTrackId"></app-spotify-track>
             <ng-template #noSpotifyTrack>
-              <p>{{ text('NOTFOUND.SPOTIFY') | mrTranslate }}</p>
+              <p>{{ text('NOSPOTIFY') | mrTranslate }}</p>
             </ng-template>
           </div>
         </app-loading>

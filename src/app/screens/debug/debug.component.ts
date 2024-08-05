@@ -8,11 +8,18 @@ import { LayoutComponent } from '@app/components/shared/layout/layout.component'
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { AlertService } from '@app/services/alerts/alert.service';
+import { InstagramPostComponent } from '@app/components/shared/social/instagram-post/instagram-post.component';
 
 @Component({
   selector: 'app-debug',
   standalone: true,
-  imports: [TranslateModule, CustomTranslatePipe, LayoutComponent, RouterLink],
+  imports: [
+    TranslateModule,
+    CustomTranslatePipe,
+    LayoutComponent,
+    RouterLink,
+    InstagramPostComponent,
+  ],
   templateUrl: './debug.component.html',
   styleUrl: './debug.component.scss',
 })

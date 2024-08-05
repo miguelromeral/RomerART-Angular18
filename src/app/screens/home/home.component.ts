@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
+import { InstagramPostComponent } from '@app/components/shared/social/instagram-post/instagram-post.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageService } from '@app/services/language/language.service';
 import { MetadataService } from '@app/services/metadata/metadata.service';
@@ -9,7 +10,12 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [LayoutComponent, TranslateModule, CustomTranslatePipe],
+  imports: [
+    LayoutComponent,
+    TranslateModule,
+    CustomTranslatePipe,
+    InstagramPostComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
