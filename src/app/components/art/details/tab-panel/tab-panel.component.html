@@ -1,41 +1,53 @@
 <div class="flex w-full overflow-x-auto">
   <button
     *ngFor="let tab of tabs; let i = index"
-    (click)="changeTab(tab.id)"
-    [class.active]="selectedTab === tab.id"
+    (click)="slideTo(i)"
+    [class.active]="currentTabIndex === i"
     class="tab-button flex h-10 flex-nowrap items-center gap-2 focus:outline-none">
     <i
       class="bi"
       [ngClass]="tab.iconSelected"
-      *ngIf="selectedTab === tab.id; else iconNotSelected"></i>
+      *ngIf="currentTabIndex === i; else iconNotSelected"></i>
     <ng-template #iconNotSelected>
       <i class="bi" [ngClass]="tab.icon"></i>
     </ng-template>
-    <span *ngIf="selectedTab === tab.id">
+    <span *ngIf="currentTabIndex === i">
       {{ text(tab.textCode) | mrTranslate }}
     </span>
   </button>
 </div>
-<div class="tab-content">
-  <ng-container *ngIf="selectedTab === panelsId.comments">
-    <ng-content select="[tab-content-comments]"></ng-content>
-  </ng-container>
-  <!-- <ng-content
-    *ngIf="selectedTab === panelsId.comments"
-    select="[tab-content-comments]"></ng-content> -->
-  <ng-content
-    *ngIf="selectedTab === panelsId.likes"
-    select="[tab-content-likes]"></ng-content>
-  <ng-content
-    *ngIf="selectedTab === panelsId.dislikes"
-    select="[tab-content-dislikes]"></ng-content>
-  <ng-content
-    *ngIf="selectedTab === panelsId.spotify"
-    select="[tab-content-spotify]"></ng-content>
-  <ng-content
-    *ngIf="selectedTab === panelsId.details"
-    select="[tab-content-details]"></ng-content>
-  <ng-content
-    *ngIf="selectedTab === panelsId.vote"
-    select="[tab-content-vote]"></ng-content>
+
+<div class="swiper-container" #swiperContainer>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <ng-content
+        class="swiper-content"
+        select="[tab-content-comments]"></ng-content>
+    </div>
+    <div class="swiper-slide">
+      <ng-content
+        class="swiper-content"
+        select="[tab-content-likes]"></ng-content>
+    </div>
+    <div class="swiper-slide">
+      <ng-content
+        class="swiper-content"
+        select="[tab-content-dislikes]"></ng-content>
+    </div>
+    <div class="swiper-slide">
+      <ng-content
+        class="swiper-content"
+        select="[tab-content-vote]"></ng-content>
+    </div>
+    <div class="swiper-slide">
+      <ng-content
+        class="swiper-content"
+        select="[tab-content-spotify]"></ng-content>
+    </div>
+    <div class="swiper-slide">
+      <ng-content
+        class="swiper-content"
+        select="[tab-content-details]"></ng-content>
+    </div>
+  </div>
 </div>

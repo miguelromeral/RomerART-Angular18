@@ -1,13 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TabPanelItem } from '@models/components/tab-panel-item.model';
 import { TranslateModule } from '@ngx-translate/core';
+import Swiper from 'swiper';
+
 import {
   artTabInfoIds,
   IArtInfoTabsConfigId,
 } from 'config/art/art-info-tabs.config';
+import { SwiperOptions } from 'swiper/types';
 
 @Component({
   selector: 'app-tab-panel',
@@ -16,22 +25,48 @@ import {
   templateUrl: './tab-panel.component.html',
   styleUrl: './tab-panel.component.scss',
 })
-export class TabPanelComponent extends LanguageComponent {
+export class TabPanelComponent
+  extends LanguageComponent
+  implements AfterViewInit
+{
   @Input() tabs: TabPanelItem[] = [];
   panelsId: IArtInfoTabsConfigId = artTabInfoIds;
-  @Input() selectedTab = '';
+  @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
+
+  swiper!: Swiper;
+  currentTabIndex = 0; // Variable para el índice de la pestaña actual
 
   constructor() {
     super('SCREENS.DRAWING-DETAILS');
   }
 
-  // ngOnInit() {
-  //   if (this.tabs.length > 0) {
-  //     this.selectTab(0);
-  //   }
-  // }
+  ngAfterViewInit() {
+    this.initSwiper();
+  }
 
-  changeTab(id: string) {
-    this.selectedTab = id;
+  initSwiper() {
+    this.swiper = new Swiper(this.swiperContainer.nativeElement, {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on: {
+        slideChange: () => this.onSlideChange(),
+      },
+    } as SwiperOptions);
+  }
+
+  slideTo(index: number) {
+    this.swiper.slideTo(index);
+  }
+
+  onSlideChange() {
+    this.currentTabIndex = this.swiper.activeIndex; // Actualiza el índice de la pestaña actual
   }
 }
