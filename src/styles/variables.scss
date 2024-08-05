@@ -250,6 +250,23 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   /* Buttons */
   --mr-btn-bg-color: var(--mr-chat-color);
   --mr-btn-text-color: var(--mr-text-color-opposite);
+
+  /* Alerts */
+  --mr-alert-border-color-light: theme('colors.main.600');
+  --mr-alert-border-color-dark: theme('colors.main.400');
+  --mr-alert-border-color: var(--mr-alert-border-color-light);
+  --mr-alert-title-bg-color-light: theme('colors.main.200');
+  --mr-alert-title-bg-color-dark: theme('colors.main.400');
+  --mr-alert-title-bg-color: var(--mr-alert-title-bg-color-light);
+  --mr-alert-title-text-color-light: theme('colors.black.900');
+  --mr-alert-title-text-color-dark: theme('colors.black.900');
+  --mr-alert-title-text-color: var(--mr-alert-title-text-color-light);
+  --mr-alert-bg-color-light: theme('colors.white.200');
+  --mr-alert-bg-color-dark: theme('colors.black.500');
+  --mr-alert-bg-color: var(--mr-alert-bg-color-light);
+  --mr-alert-text-color-light: theme('colors.black.900');
+  --mr-alert-text-color-dark: theme('colors.white.100');
+  --mr-alert-text-color: var(--mr-alert-text-color-light);
 }
 
 .dark {
@@ -309,6 +326,14 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-input-border-color: var(--mr-input-border-color-dark);
   --mr-range-track-bg-color: var(--mr-range-track-bg-color-dark);
   --mr-range-bubble-bg-color: var(--mr-range-bubble-bg-color-dark);
+
+  /* Alerts */
+
+  --mr-alert-border-color: var(--mr-alert-border-color-dark);
+  --mr-alert-title-bg-color: var(--mr-alert-title-bg-color-dark);
+  --mr-alert-title-text-color: var(--mr-alert-title-text-color-dark);
+  --mr-alert-bg-color: var(--mr-alert-bg-color-dark);
+  --mr-alert-text-color: var(--mr-alert-text-color-dark);
 }
 
 

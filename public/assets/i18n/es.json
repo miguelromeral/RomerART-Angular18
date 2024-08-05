@@ -20,6 +20,13 @@
       }
     }
   },
+  "COMPONENTS": {
+    "ALERTS": {
+      "BUTTONS": {
+        "OK": "Vale"
+      }
+    }
+  },
   "SCREENS": {
     "HOME": {
       "TITLE": "MiguelRomeral"
@@ -71,6 +78,12 @@
       "TITLE": "Galería",
       "SUBTITLE": "Aquí están algunos de mis dibujos e ilustraciones públicas. Pulsa en cualquiera de ellos para ver los detalles",
       "COUNT": "{{length}} imágenes",
+      "ALERTS": {
+        "DUPLICATE-ID": {
+          "TITLE": "ID Duplicado",
+          "MESSAGE": "El ID \"{{id}}\" ya está utilizado. Pruebe con otro valor"
+        }
+      },
       "LOADING": {
         "TITLE": "Filtrando imágenes. Por favor, espere."
       },

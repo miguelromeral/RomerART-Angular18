@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@app/components/shared/confirm-dialog/confirm-dialog.component';
+import { IConfirmDialogData } from '@models/alert/confirm-dialog.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,17 +9,50 @@ import { ConfirmDialogComponent } from '@app/components/shared/confirm-dialog/co
 export class AlertService {
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
+  showAlert(
+    title: string,
+    message: string
+  ): MatDialogRef<ConfirmDialogComponent, IConfirmDialogData> {
+    const data: IConfirmDialogData = {
+      title,
+      message,
+    };
+    return this.sendDialog(data);
+  }
+
+  showConfirmDialog(
+    title: string,
+    message: string,
+    okText: string,
+    okCallback: () => void
+  ): MatDialogRef<ConfirmDialogComponent, IConfirmDialogData> {
+    const data: IConfirmDialogData = {
+      title,
+      message,
+      okText,
+      okCallback,
+    };
+
+    return this.sendDialog(data);
+  }
+
+  sendDialog(
+    data: IConfirmDialogData
+  ): MatDialogRef<ConfirmDialogComponent, IConfirmDialogData> {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '250px',
-      data: { title: 'Confirmación', message: '¿Estás seguro?' },
-      disableClose: true,
+      data,
+      disableClose: false,
       autoFocus: true,
+      closeOnNavigation: true,
+      hasBackdrop: true,
+      minWidth: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('El diálogo se cerró');
-      console.log(`Resultado: ${result}`);
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('El diálogo se cerró');
+    //   console.log(`Resultado: ${result}`);
+    // });
+
+    return dialogRef;
   }
 }

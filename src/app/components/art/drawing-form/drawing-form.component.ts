@@ -21,7 +21,6 @@ import { LayoutComponent } from '@app/components/shared/layout/layout.component'
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
-import { LoggerService } from '@app/services/logger/logger.service';
 import { MetadataService } from '@app/services/metadata/metadata.service';
 import { DrawingPaperSize } from '@models/art/drawing-paper-size.model';
 import { DrawingSoftware } from '@models/art/drawing-software.model';
@@ -41,6 +40,7 @@ import { scoreConfig } from 'config/art/art-details-form.config';
 import { getHumanTimeFromMinutes } from '@utils/customization/text-utils';
 import { getFormErrors } from '@utils/form-control.utils';
 import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model';
+import { AlertService } from '@app/services/alerts/alert.service';
 
 @Component({
   selector: 'app-drawing-form',
@@ -63,6 +63,7 @@ import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model
     DrawingThumbnailComponent,
     AzureImageFormComponent,
   ],
+  providers: [CustomTranslatePipe],
   templateUrl: './drawing-form.component.html',
   styleUrl: './drawing-form.component.scss',
 })
@@ -75,7 +76,7 @@ export class DrawingFormComponent extends LanguageComponent {
   }
   public set drawing(value: Drawing) {
     this._drawing = value;
-    console.log('Drawing:', value);
+    // console.log('Drawing:', value);
     this.setFormValues(value);
   }
 
@@ -152,7 +153,9 @@ export class DrawingFormComponent extends LanguageComponent {
 
   constructor(
     private drawingService: DrawingService,
+    private alertService: AlertService,
     private metadataService: MetadataService,
+    private customTranslate: CustomTranslatePipe,
     private renderer: Renderer2
   ) {
     super('SCREENS.DRAWING-FORM');
@@ -165,6 +168,11 @@ export class DrawingFormComponent extends LanguageComponent {
   setFormValues(drawing: Drawing) {
     this.form.controls.isEditing.setValue(drawing.id !== '');
     this.form.controls.id.setValue(drawing.id);
+    if (this.drawing.id !== '') {
+      this.metadataService.updateTitle(`Editando "${drawing.id}"`);
+    } else {
+      this.metadataService.updateTitle(`Creando nuevo dibujo`);
+    }
     if (drawing.path !== '') {
       this.showAzureForm = false;
       this.form.controls.path.setValue(drawing.path);
@@ -197,6 +205,7 @@ export class DrawingFormComponent extends LanguageComponent {
 
       this.timeHuman = getHumanTimeFromMinutes(parseInt(value));
     } catch (e) {
+      console.error('Could not calculate time: ' + e);
       this.timeHuman = '??';
     }
   }
@@ -206,6 +215,21 @@ export class DrawingFormComponent extends LanguageComponent {
     const value = input.value;
     this.drawingService.checkDrawingId(value).subscribe(resp => {
       this.duplicateId = resp;
+      if (this.duplicateId) {
+        const tmp = this.customTranslate.transform(
+          this.text('ALERTS.DUPLICATE-ID.TITLE')
+        );
+        console.log();
+        this.alertService.showAlert(
+          tmp,
+          this.customTranslate.transform(
+            this.text('ALERTS.DUPLICATE-ID.MESSAGE'),
+            {
+              id: value,
+            }
+          )
+        );
+      }
     });
   }
 
@@ -221,10 +245,20 @@ export class DrawingFormComponent extends LanguageComponent {
         } else {
           this._drawing.url = '';
           this._drawing.urlThumbnail = '';
+
+          this.alertService.showAlert(
+            'Imagen No Encontrada',
+            `No se ha encontrado la imagen en la ruta "${value}". Puede cambiar la ruta si es una ya existente o subir una nueva imagen a esa ubicación`
+          );
         }
         this.showAzureForm = !resp.existe;
       } else {
         console.error('Error al comprobar la ruta de Azure');
+
+        this.alertService.showAlert(
+          'Error',
+          `Error al comprobar la ruta de la imagen. Pruebe de nuevo`
+        );
       }
     });
   }
@@ -279,14 +313,22 @@ export class DrawingFormComponent extends LanguageComponent {
       visible: values.visible!,
     };
     this.drawingService.saveDrawing(formData).subscribe(resp => {
-      console.log('Respuesta: ', resp);
+      // console.log('Respuesta: ', resp);
       if (resp) {
-        console.log('DIBUJO GUARDADO!', resp);
+        // console.log('DIBUJO GUARDADO!', resp);
         this.newDrawing = false;
         this.form.controls.isEditing.setValue(true);
         this.form.controls.tagsText.setValue(resp.tagsText);
+
+        this.alertService.showAlert(
+          '¡Guardado!',
+          `El dibujo "${values.id}" ha sido guardado con éxito`
+        );
       } else {
-        console.log('No se pudo guardar el dibujo');
+        this.alertService.showAlert(
+          'Error',
+          `Ha ocurrido un error al guardar el dibujo "${values.id}". Inténtelo de nuevo`
+        );
       }
     });
   }

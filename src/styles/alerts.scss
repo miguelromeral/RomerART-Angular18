@@ -1,0 +1,63 @@
+// Importar las herramientas de theming de Angular Material
+// @import '@angular/material/theming';
+
+// @import "../../node_modules/@angular/material/prebuilt-themes/magenta-violet.css";
+
+
+
+
+// .cdk-overlay-container,
+// .cdk-overlay-backdrop,
+// .cdk-global-overlay-wrapper {
+//   @apply absolute top-0 left-0 right-0 bottom-0 py-10 h-full w-full flex justify-center items-center;
+//   z-index: -1000;
+// }
+
+// .cdk-overlay-backdrop {
+//   transition: var(--mr-transition-time);
+//   background-color: black;
+//   opacity: 0.7;
+// }
+
+
+// .cdk-overlay-container:has(.cdk-overlay-pane) {
+//   z-index: 1000000;
+// }
+
+// .cdk-overlay-pane {
+//   z-index: 1000000;
+// }
+
+// // Dialog Panel
+// .mat-mdc-dialog-surface {
+//   @apply border;
+//   border-color: var(--mr-alert-border-color);
+// }
+
+// // Title
+// .mat-mdc-dialog-title {
+//   @apply border-none font-bold;
+//   background-color: var(--mr-alert-title-bg-color);
+//   color: var(--mr-alert-title-text-color) !important;
+//   margin: 0px !important;
+// }
+
+// .mat-mdc-dialog-content {
+//   padding-top: 10px !important;
+// }
+
+// .mat-mdc-dialog-title,
+// .mat-mdc-dialog-content,
+// .mat-mdc-dialog-actions {
+//   padding: 10px !important;
+// }
+
+// .mat-mdc-dialog-content,
+// .mat-mdc-dialog-actions {
+//   background-color: var(--mr-alert-bg-color);
+//   color: var(--mr-alert-text-color) !important;
+// }
+
+// .mat-mdc-dialog-actions button {
+//   @apply btn rounded-sm;
+// }

@@ -54,6 +54,6 @@ export class DebugComponent implements OnInit, OnDestroy {
   }
 
   showAlert(): void {
-    this.alertService.openDialog();
+    this.alertService.showAlert('Alerta', 'Mensaje');
   }
 }

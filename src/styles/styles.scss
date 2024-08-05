@@ -9,6 +9,7 @@
 @import './scrollbar.scss';
 @import './settings.scss';
 @import './todo.scss';
+@import './alerts.scss';
 
 html {
   position: relative;
@@ -54,24 +55,4 @@ img {
 
 .skeleton div:not(.container) {
   @apply bg-gray-200 dark:bg-gray-700 rounded-sm;
-}
-
-.cdk-overlay-container,
-.cdk-global-overlay-wrapper {
-  @apply absolute top-0 left-0 right-0 bottom-0 py-10 h-full w-full flex justify-center items-center;
-  z-index: -1000;
-}
-
-
-.cdk-overlay-container:has(.cdk-overlay-pane) {
-  z-index: 10000;
-}
-
-.cdk-overlay-pane {
-  color: black;
-  z-index: 10000;
-}
-
-.mr-dialog {
-  @apply absolute h-full w-full;
 }
