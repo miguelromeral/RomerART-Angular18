@@ -41,6 +41,7 @@ import { getHumanTimeFromMinutes } from '@utils/customization/text-utils';
 import { getFormErrors } from '@utils/form-control.utils';
 import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model';
 import { AlertService } from '@app/services/alerts/alert.service';
+import { notValidValueValidator } from '@app/validators/not-valid-value.validator';
 
 @Component({
   selector: 'app-drawing-form',
@@ -101,7 +102,7 @@ export class DrawingFormComponent extends LanguageComponent {
     favorite: new FormControl(false, Validators.required),
     name: new FormControl(''),
     modelName: new FormControl(''),
-    type: new FormControl(0, Validators.required),
+    type: new FormControl(0, [Validators.required, notValidValueValidator(0)]),
     software: new FormControl(0),
     paper: new FormControl(0),
     dateHyphen: new FormControl('', Validators.required),
@@ -111,7 +112,10 @@ export class DrawingFormComponent extends LanguageComponent {
       Validators.max(this.scoreConfig.max),
     ]),
     time: new FormControl(0),
-    productType: new FormControl(0, Validators.required),
+    productType: new FormControl(0, [
+      Validators.required,
+      notValidValueValidator(0),
+    ]),
     productName: new FormControl(''),
     listComments: new FormArray<FormControl>([]),
     listCommentPros: new FormArray<FormControl>([]),

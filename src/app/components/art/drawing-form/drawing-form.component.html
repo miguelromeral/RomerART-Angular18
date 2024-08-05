@@ -117,12 +117,21 @@
       <div class="content items-end">
         <div>
           <app-select-input
+            [firstOption]="{
+              value: '0',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT-TYPE.TITLE',
+            }"
             [options]="listDrawingProductTypes"
             formControlName="productType">
           </app-select-input>
 
           <div *ngIf="form.controls.productType.errors" class="form-error">
-            <p *ngIf="form.controls.productType.hasError('required')">
+            <p
+              *ngIf="
+                form.controls.productType.hasError('required') ||
+                form.controls.productType.hasError('notValidValue')
+              ">
               EL TIPO DE PRODUCTO ES OBLIGATORIO
             </p>
           </div>
@@ -140,12 +149,21 @@
       <div class="content">
         <div>
           <app-select-input
+            [firstOption]="{
+              value: '0',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.STYLE.TITLE',
+            }"
             [options]="listDrawingStyles"
             formControlName="type">
           </app-select-input>
 
           <div *ngIf="form.controls.type.errors" class="form-error">
-            <p *ngIf="form.controls.type.hasError('required')">
+            <p
+              *ngIf="
+                form.controls.type.hasError('required') ||
+                form.controls.type.hasError('notValidValue')
+              ">
               EL TIPO ES REQUERIDO
             </p>
           </div>
