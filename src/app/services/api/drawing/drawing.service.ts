@@ -18,10 +18,12 @@ import { Collection } from '@models/art/collection.model';
 import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
 import { ICheckAzurePathRequest } from '@models/requests/check-azure-path-request.model';
 import { ICheckAzurePathResponse } from '@models/responses/check-azure-path-response.model';
-import { ISaveDrawingResponse } from '@models/responses/save-drawing-response.model';
-import { UploadAzureImageRequest } from '@models/requests/upload-azure-image-request.model';
 import { UploadAzureImageResponse } from '@models/responses/upload-azure-image.response';
 import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model';
+import { drawingStyles } from 'config/data/drawing-styles.config';
+import { drawingProductTypes } from 'config/data/drawing-product-types.config';
+import { drawingSoftwares } from 'config/data/drawing-softwares.config';
+import { drawingPaperSizes } from 'config/data/drawing-paper-sizes.config';
 
 @Injectable({
   providedIn: 'root',
@@ -32,16 +34,16 @@ export class DrawingService {
   constructor(private http: HttpClient) {}
 
   getDrawingStyles = (): DrawingStyle[] =>
-    environment.data.styles.map(style => new DrawingStyle(style));
+    drawingStyles.map(style => new DrawingStyle(style));
 
   getDrawingProductTypes = (): DrawingProductType[] =>
-    environment.data.productTypes.map(type => new DrawingProductType(type));
+    drawingProductTypes.map(type => new DrawingProductType(type));
 
   getDrawingSoftwares = (): DrawingSoftware[] =>
-    environment.data.softwares.map(sw => new DrawingSoftware(sw));
+    drawingSoftwares.map(sw => new DrawingSoftware(sw));
 
   getDrawingPaperSizes = (): DrawingPaperSize[] =>
-    environment.data.paperSizes.map(paper => new DrawingPaperSize(paper));
+    drawingPaperSizes.map(paper => new DrawingPaperSize(paper));
 
   getDrawingDetails(id: string): Observable<Drawing> {
     return this.http

@@ -14,6 +14,7 @@ import { LoadingComponent } from '@app/components/shared/loading/loading.compone
 import { TitleComponent } from '../title/title.component';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@app/services/api/auth/auth.service';
+import { heartsAnimationConfig } from 'config/customization/heart-animation.config';
 
 @Component({
   selector: 'app-art-details-image',
@@ -87,7 +88,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
     setTimeout(() => {
       element.remove();
-    }, environment.utils.hearts.duration.max * 1000);
+    }, heartsAnimationConfig.duration.max * 1000);
 
     HeartUtils.showHearts();
 

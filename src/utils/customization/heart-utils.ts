@@ -1,8 +1,8 @@
-import { environment } from 'environments/environment';
+import { heartsAnimationConfig } from 'config/customization/heart-animation.config';
 
 export class HeartUtils {
   private static mensajesAgradecimiento: string[] =
-    environment.utils.hearts.messages;
+    heartsAnimationConfig.messages;
 
   static obtenerMensajeAleatorio(): string {
     const indiceAleatorio = Math.floor(
@@ -13,21 +13,19 @@ export class HeartUtils {
 
   static generateHeartSize(): string {
     const size =
-      Math.random() * environment.utils.hearts.size.max +
-      environment.utils.hearts.size.min +
+      Math.random() * heartsAnimationConfig.size.max +
+      heartsAnimationConfig.size.min +
       'rem';
     return size;
   }
 
   static generateRedTone(): string {
-    const red = Math.floor(
-      Math.random() * environment.utils.hearts.maxColor.red
-    );
+    const red = Math.floor(Math.random() * heartsAnimationConfig.maxColor.red);
     const green = Math.floor(
-      Math.random() * environment.utils.hearts.maxColor.green
+      Math.random() * heartsAnimationConfig.maxColor.green
     );
     const blue = Math.floor(
-      Math.random() * environment.utils.hearts.maxColor.blue
+      Math.random() * heartsAnimationConfig.maxColor.blue
     );
     return `rgb(${red}, ${green}, ${blue})`;
   }
@@ -40,12 +38,12 @@ export class HeartUtils {
     }
 
     const heart = document.createElement('div');
-    heart.className = `bi ${environment.utils.hearts.bootstrapIcon} heart-kudos`;
+    heart.className = `bi ${heartsAnimationConfig.bootstrapIcon} heart-kudos`;
     heart.style.left = Math.random() * 100 + 'vw';
     heart.style.color = HeartUtils.generateRedTone();
     heart.style.animationDuration =
-      Math.random() * environment.utils.hearts.duration.max +
-      environment.utils.hearts.duration.min +
+      Math.random() * heartsAnimationConfig.duration.max +
+      heartsAnimationConfig.duration.min +
       's';
     heart.style.fontSize = HeartUtils.generateHeartSize();
 
@@ -64,6 +62,6 @@ export class HeartUtils {
     setTimeout(() => {
       clearInterval(i1);
       clearInterval(i2);
-    }, environment.utils.hearts.duration.max * 1000);
+    }, heartsAnimationConfig.duration.max * 1000);
   }
 }
