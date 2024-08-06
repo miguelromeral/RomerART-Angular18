@@ -1,57 +1,78 @@
 <form [formGroup]="filterForm" (submit)="submitFilter()" id="formFilter">
-  <div class="row">
-    <div class="mr-sort-filter-container flex w-full flex-row-reverse">
-      <div class="mr-sort-filter flex flex-col items-end">
-        <span class="text-sm">{{ text('SORTBY.TITLE') | mrTranslate }}</span>
-
-        <app-select-input
-          class="mr-filter-item"
-          [options]="listOptionsSortBy"
-          formControlName="sortBy"
-          (change)="filterControlChange()">
-        </app-select-input>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div
-      id="formFilterAlert"
-      class="alert alert-danger"
-      style="display: none"
-      role="alert"></div>
-
-    <span class="mr-suboption-filter text-sm">{{
-      text('TITLE') | mrTranslate
-    }}</span>
-    <div
-      class="mr-filter-container grid w-full grid-cols-8 items-center gap-1 sm:grid-cols-9 lg:grid-cols-8">
+  <app-section [title]="text('SORTBY.TITLE') | mrTranslate">
+    <app-select-input
+      class="mr-filter-item"
+      [options]="listOptionsSortBy"
+      formControlName="sortBy"
+      (change)="filterControlChange()">
+    </app-select-input>
+  </app-section>
+  <app-section [title]="text('TITLE') | mrTranslate">
+    <div class="mr-filter-container">
       <button
-        class="btn btn-dark mr-custom-btn flex items-center justify-center"
+        class="btn mr-custom-btn mr-filter-item-trash"
         (click)="resetFilters()">
         <i id="iFavoriteIcon" class="bi bi-trash"></i>
       </button>
 
       <app-text-input
-        class="form-control col-span-7 w-full sm:col-span-8 lg:col-span-7"
+        class="form-control mr-filter-item-query"
         formControlName="textQuery"
         [placeholder]="text('QUERY.PLACEHOLDER') | mrTranslate"
         (change)="filterControlChange()"
         (keyDown)="capturarEnter($event)">
       </app-text-input>
 
-      <app-select-input
-        class="mr-filter-item"
-        [firstOption]="{
-          value: '-1',
-          label: '',
-          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.STYLE.TITLE',
-        }"
-        [options]="listDrawingStyles"
-        formControlName="type"
-        (change)="filterControlChange()">
-      </app-select-input>
+      <div class="favorite mr-filter-item">
+        <app-switch
+          [text]="text('FAVORITES.TITLE') | mrTranslate"
+          formControlName="formFavorites"
+          (ngModelChange)="filterControlChange()">
+        </app-switch>
+      </div>
+    </div>
+  </app-section>
 
+  <app-section [title]="text('FILTER-TITLES.CHARACTER') | mrTranslate">
+    <div class="mr-filter-container">
+      <app-loading [loading]="loadingDrawingCharacters" class="mr-filter-item">
+        <div class="h-8 w-full" loading></div>
+
+        <app-select-input
+          class="mr-filter-item"
+          [firstOption]="{
+            value: '',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE',
+          }"
+          [options]="listDrawingCharacters"
+          formControlName="characterName"
+          (change)="filterControlChange()"
+          content>
+        </app-select-input>
+      </app-loading>
+
+      <app-loading [loading]="loadingDrawingModels" class="mr-filter-item">
+        <div class="h-8 w-full" loading></div>
+
+        <app-select-input
+          class="mr-filter-item"
+          [firstOption]="{
+            value: '',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE',
+          }"
+          [options]="listDrawingModels"
+          formControlName="modelName"
+          (change)="filterControlChange()"
+          content>
+        </app-select-input>
+      </app-loading>
+    </div>
+  </app-section>
+
+  <app-section [title]="text('FILTER-TITLES.THEME') | mrTranslate">
+    <div class="mr-filter-container">
       <app-select-input
         class="mr-filter-item"
         [firstOption]="{
@@ -97,41 +118,22 @@
           content>
         </app-select-input>
       </app-loading>
+    </div>
+  </app-section>
 
-      <app-loading [loading]="loadingDrawingCharacters" class="mr-filter-item">
-        <div class="h-8 w-full" loading></div>
-
-        <app-select-input
-          class="mr-filter-item"
-          [firstOption]="{
-            value: '',
-            label: '',
-            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE',
-          }"
-          [options]="listDrawingCharacters"
-          formControlName="characterName"
-          (change)="filterControlChange()"
-          content>
-        </app-select-input>
-      </app-loading>
-
-      <app-loading [loading]="loadingDrawingModels" class="mr-filter-item">
-        <div class="h-8 w-full" loading></div>
-
-        <app-select-input
-          class="mr-filter-item"
-          [firstOption]="{
-            value: '',
-            label: '',
-            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE',
-          }"
-          [options]="listDrawingModels"
-          formControlName="modelName"
-          (change)="filterControlChange()"
-          content>
-        </app-select-input>
-      </app-loading>
-
+  <app-section [title]="text('FILTER-TITLES.STYLE') | mrTranslate">
+    <div class="mr-filter-container">
+      <app-select-input
+        class="mr-filter-item"
+        [firstOption]="{
+          value: '-1',
+          label: '',
+          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.STYLE.TITLE',
+        }"
+        [options]="listDrawingStyles"
+        formControlName="type"
+        (change)="filterControlChange()">
+      </app-select-input>
       <app-select-input
         class="mr-filter-item"
         [firstOption]="{
@@ -155,37 +157,30 @@
         formControlName="paper"
         (change)="filterControlChange()">
       </app-select-input>
-
-      <app-select-input
-        class="mr-filter-item"
-        [firstOption]="{
-          value: 'null',
-          label: '',
-          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.TITLE',
-        }"
-        [options]="[
-          {
-            value: 'true',
-            label: '',
-            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.YES',
-          },
-          {
-            value: 'false',
-            label: '',
-            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.NO',
-          },
-        ]"
-        formControlName="formSpotify"
-        (change)="filterControlChange()">
-      </app-select-input>
-
-      <div class="favorite mr-filter-item">
-        <app-switch
-          [text]="text('FAVORITES.TITLE') | mrTranslate"
-          formControlName="formFavorites"
-          (ngModelChange)="filterControlChange()">
-        </app-switch>
-      </div>
     </div>
-  </div>
+  </app-section>
+
+  <!--
+    <app-select-input
+    class="mr-filter-item"
+    [firstOption]="{
+      value: 'null',
+      label: '',
+      labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.TITLE',
+    }"
+    [options]="[
+      {
+        value: 'true',
+        label: '',
+        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.YES',
+      },
+      {
+        value: 'false',
+        label: '',
+        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SPOTIFY.NO',
+      },
+    ]"
+    formControlName="formSpotify"
+    (change)="filterControlChange()">
+  </app-select-input> -->
 </form>

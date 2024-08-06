@@ -41,6 +41,7 @@ import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.com
 import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
 import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
+import { SectionComponent } from '@app/components/shared/section/section.component';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -60,6 +61,7 @@ import { ICustomSelectOption } from '@models/inputs/select-option.model';
     SwitchComponent,
     TextInputComponent,
     SelectInputComponent,
+    SectionComponent,
   ],
   templateUrl: './filter-form.component.html',
   styleUrl: './filter-form.component.scss',

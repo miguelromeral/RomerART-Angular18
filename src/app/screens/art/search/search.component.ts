@@ -41,6 +41,7 @@ export class SearchComponent extends LanguageComponent implements OnInit {
   }
 
   admin = false;
+  showFilters = false;
 
   constructor(
     private metadataService: MetadataService,
@@ -58,6 +59,10 @@ export class SearchComponent extends LanguageComponent implements OnInit {
     this.authService.loggedUser$.subscribe(user => {
       this.admin = user?.role === 'admin';
     });
+  }
+
+  showHideFilters() {
+    this.showFilters = !this.showFilters;
   }
 
   onFetchedResults(list: Drawing[]) {

@@ -1,8 +1,25 @@
+#formFilter {
+  @apply bg-white-200 dark:bg-black-700 p-2 rounded-bl-md rounded-br-md flex flex-col gap-4;
+}
+
 .mr-sort-filter-container .mr-sort-filter span,
 span.mr-suboption-filter {
   color: var(--mr-art-search-labels-color);
 }
 
+
+.mr-filter-container {
+  @apply grid w-full grid-cols-4 items-center gap-1 sm:grid-cols-9 lg:grid-cols-8;
+}
+
 .mr-filter-item {
   @apply w-full col-span-4 sm:col-span-3 lg:col-span-2 h-8;
+}
+
+.mr-filter-item-trash {
+  @apply flex items-center justify-center col-span-1;
+}
+
+.mr-filter-item-query {
+  @apply col-span-3 w-full sm:col-span-8 lg:col-span-5;
 }

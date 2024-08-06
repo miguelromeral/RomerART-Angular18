@@ -109,9 +109,14 @@
         "RETRY": "Vuelve a intentarlo utilizando otros filtros."
       },
       "FORM": {
-        "TITLE": "Filtrar por...",
+        "TITLE": "Filtrar",
         "CREATE-NEW": {
-          "TITLE": "Crear Nuevo"
+          "TITLE": "Crear"
+        },
+        "FILTER-TITLES": {
+          "CHARACTER": "Personaje",
+          "THEME": "Temática",
+          "STYLE": "Estilo"
         },
         "SORTBY": {
           "TITLE": "Ordenar por...",
@@ -131,7 +136,7 @@
           "SCOREU-ASC": "Peor Puntuación Popular"
         },
         "QUERY": {
-          "PLACEHOLDER": "Personaje | Modelo | Producto"
+          "PLACEHOLDER": "Personaje | Modelo | Producto | Etiquetas"
         },
         "STYLE": {
           "TITLE": "🖌 ESTILO"

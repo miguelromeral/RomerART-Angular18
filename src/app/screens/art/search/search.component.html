@@ -4,25 +4,39 @@
     <p>{{ text('SUBTITLE') | mrTranslate }}</p>
   </div>
 
+  <div class="flex flex-nowrap justify-between">
+    <div class="flex items-center gap-4">
+      <button
+        class="btn flex flex-row items-center gap-2"
+        (click)="showHideFilters()"
+        tabindex="0"
+        (keydown.f)="showHideFilters()">
+        <i class="bi bi-funnel"></i
+        ><span>{{ text('FORM.TITLE') | mrTranslate }}</span>
+      </button>
+      <div id="divImageCounter" class="slide-right">
+        {{ text('COUNT') | mrTranslate: { length: listDrawings.length } }}
+      </div>
+    </div>
+
+    <button
+      *ngIf="admin"
+      class="btn flex flex-row items-center gap-2"
+      (click)="createNewDrawing()">
+      <i class="bi bi-plus"></i>
+      <span>{{ text('FORM.CREATE-NEW.TITLE') | mrTranslate }}</span>
+    </button>
+  </div>
+
   <app-art-search-filter-form
+    [ngClass]="{ hidden: !showFilters }"
     (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
     (fetchedResults)="onFetchedResults($event)"
     (isLoading)="onIsFilterFormLoading($event)">
   </app-art-search-filter-form>
 
-  <button
-    *ngIf="admin"
-    class="btn flex flex-row gap-2"
-    (click)="createNewDrawing()">
-    <i class="bi bi-plus-square-dotted"></i>
-    <span>{{ text('FORM.CREATE-NEW.TITLE') | mrTranslate }}</span>
-  </button>
-
   <div class="row mt-2" style="padding-bottom: 20px">
     <div class="mr-loader-container">
-      <div id="divImageCounter" class="slide-right">
-        {{ text('COUNT') | mrTranslate: { length: listDrawings.length } }}
-      </div>
       <div id="artGalleryLoader" class="mr-loader" *ngIf="filterFormLoading">
         <img
           alt="Loading"
