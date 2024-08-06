@@ -132,10 +132,11 @@
         }"
         [options]="listDrawingStyles"
         formControlName="type"
-        (change)="filterControlChange()">
+        (change)="onChangeStyle($event); filterControlChange()">
       </app-select-input>
       <app-select-input
         class="mr-filter-item"
+        [ngClass]="{ hidden: !showSoftware }"
         [firstOption]="{
           value: '0',
           label: '',
@@ -148,6 +149,7 @@
 
       <app-select-input
         class="mr-filter-item"
+        [ngClass]="{ hidden: !showPaper }"
         [firstOption]="{
           value: '0',
           label: '',

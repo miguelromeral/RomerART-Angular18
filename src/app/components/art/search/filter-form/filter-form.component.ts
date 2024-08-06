@@ -129,6 +129,10 @@ export class FilterFormComponent
     pageNumber: new FormControl(ArtFilterFormConfig.pagination.firstPage),
   });
 
+  /* Filter Behaviour */
+  showSoftware = true;
+  showPaper = true;
+
   constructor(
     private drawingService: DrawingService,
     private languageService: LanguageService,
@@ -149,6 +153,22 @@ export class FilterFormComponent
         ArtFilterFormConfig.pagination.firstPage
     );
     this.submitFilter();
+  }
+
+  onChangeStyle(event: Event) {
+    const input = event.target as HTMLSelectElement;
+    const value = input.value;
+
+    const selectedType = this.listDrawingStyles.find(
+      style => style.id.toString() === value
+    );
+    if (selectedType) {
+      this.showSoftware = selectedType.showSoftware;
+      this.showPaper = selectedType.showPaper;
+    } else {
+      this.showSoftware = true;
+      this.showPaper = true;
+    }
   }
 
   resetFilters() {
