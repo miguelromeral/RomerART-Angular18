@@ -22,14 +22,6 @@
         (change)="filterControlChange()"
         (keyDown)="capturarEnter($event)">
       </app-text-input>
-
-      <div class="favorite mr-filter-item">
-        <app-switch
-          [text]="text('FAVORITES.TITLE') | mrTranslate"
-          formControlName="formFavorites"
-          (ngModelChange)="filterControlChange()">
-        </app-switch>
-      </div>
     </div>
   </app-section>
 
@@ -68,6 +60,14 @@
           content>
         </app-select-input>
       </app-loading>
+
+      <div class="favorite mr-filter-item">
+        <app-switch
+          [text]="text('FAVORITES.TITLE') | mrTranslate"
+          formControlName="formFavorites"
+          (ngModelChange)="filterControlChange()">
+        </app-switch>
+      </div>
     </div>
   </app-section>
 
@@ -82,7 +82,7 @@
         }"
         [options]="listDrawingProductTypes"
         formControlName="productType"
-        (change)="filterControlChange()">
+        (change)="onChangeProductType($event); filterControlChange()">
       </app-select-input>
 
       <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
@@ -95,7 +95,7 @@
             label: '',
             labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT.TITLE',
           }"
-          [options]="listDrawingProducts"
+          [options]="filteredDrawingProducts"
           formControlName="productName"
           (change)="filterControlChange()"
           content>

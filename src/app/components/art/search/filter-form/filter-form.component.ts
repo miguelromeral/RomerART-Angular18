@@ -88,6 +88,7 @@ export class FilterFormComponent
   listDrawingStyles: DrawingStyle[] = [];
   listDrawingProductTypes: DrawingProductType[] = [];
   listDrawingProducts: DrawingProduct[] = [];
+  filteredDrawingProducts: DrawingProduct[] = [];
   listDrawingCharacters: DrawingCharacter[] = [];
   listDrawingModels: ICustomSelectOption[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
@@ -157,10 +158,10 @@ export class FilterFormComponent
 
   onChangeStyle(event: Event) {
     const input = event.target as HTMLSelectElement;
-    const value = input.value;
+    const value = parseInt(input.value);
 
     const selectedType = this.listDrawingStyles.find(
-      style => style.id.toString() === value
+      style => style.id === value
     );
     if (selectedType) {
       this.showSoftware = selectedType.showSoftware;
@@ -169,6 +170,28 @@ export class FilterFormComponent
       this.showSoftware = true;
       this.showPaper = true;
     }
+  }
+
+  onChangeProductType(event: Event) {
+    const input = event.target as HTMLSelectElement;
+    const value = parseInt(input.value);
+    this.filterProducts(value);
+  }
+
+  filterProducts(productTypeId: number | null) {
+    if (productTypeId !== null) {
+      const selectedProductType = this.listDrawingProductTypes.find(
+        style => style.id === productTypeId
+      );
+      if (selectedProductType) {
+        this.filterForm.controls.productName.setValue('');
+        this.filteredDrawingProducts = this.listDrawingProducts.filter(
+          product => product.productTypeId === productTypeId
+        );
+        return;
+      }
+    }
+    this.filteredDrawingProducts = this.listDrawingProducts;
   }
 
   resetFilters() {
@@ -182,9 +205,11 @@ export class FilterFormComponent
     this.filterForm.controls.productType.setValue(
       environment.forms.drawingFilter.default.productType
     );
+    this.filterProducts(null);
     this.filterForm.controls.productName.setValue(
       environment.forms.drawingFilter.default.productName
     );
+    this.filteredDrawingProducts = this.listDrawingProducts;
     this.filterForm.controls.collection.setValue(
       environment.forms.drawingFilter.default.collection
     );
@@ -255,6 +280,7 @@ export class FilterFormComponent
         this.listDrawingProducts = list
           .map(p => new DrawingProduct(p))
           .sort(sortProductsByName);
+        this.filteredDrawingProducts = this.listDrawingProducts;
       }
       this.loadingDrawingProducts = false;
     });
