@@ -1,0 +1,29 @@
+/* Contenedor de Final Fantasy */
+.mr-ff-container {
+  color: var(--mr-ff-text-color);
+  border: var(--mr-ff-border-size) solid var(--mr-ff-border-color);
+  border-radius: var(--mr-ff-border-radius);
+  background: linear-gradient(135deg, #0b0cae, black);
+  padding: 6px 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 14px;
+  font-family: monospace;
+  position: relative;
+  text-shadow: 1px 1px black;
+  font-size: var(--mr-font-size-large);
+  z-index: 10;
+}
+
+.mr-ff-container:not(.mr-ff-title-corner) {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.mr-ff-title-corner {
+  position: absolute;
+  top: calc(0px - var(--mr-ff-border-size));
+  right: calc(0px - var(--mr-ff-border-size));
+}

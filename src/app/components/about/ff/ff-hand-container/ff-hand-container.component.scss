@@ -1,0 +1,31 @@
+.ff-hand-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+div.hide-hand:has(> .ff-hand-icon) {
+  opacity: 0;
+}
+
+
+div:has(> .ff-hand-icon) {
+  position: absolute;
+  left: -32px;
+  top: -2px;
+}
+
+
+div.flicker:has(> .hide-hand) .ff-hand-icon {
+  animation: flicker var(--mr-ff-hand-animation-time) infinite;
+}
+
+.ff-hand-container:hover div:has(> .ff-hand-icon) {
+  opacity: 1;
+}
+
+.ff-hand-icon {
+  width: var(--mr-ff-hand-width);
+}

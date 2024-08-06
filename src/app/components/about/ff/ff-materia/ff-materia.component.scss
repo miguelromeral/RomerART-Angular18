@@ -1,0 +1,29 @@
+.ff-materia {
+  width: var(--mr-ff-materia-size);
+  height: var(--mr-ff-materia-size);
+  min-width: var(--mr-ff-materia-size);
+  max-width: var(--mr-ff-materia-size);
+  min-height: var(--mr-ff-materia-size);
+  max-height: var(--mr-ff-materia-size);
+  border-radius: var(--mr-ff-materia-size);
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #000000 60%, white 100%);
+  background-size: cover;
+  background-position: center;
+  background-position-x: -20%;
+  border: 1px solid black;
+}
+
+.ff-materia.summon {
+  background: var(--mr-ff-materia-summon-color);
+  border-color: var(--mr-ff-materia-summon-border);
+}
+
+.ff-materia.support {
+  background: var(--mr-ff-materia-support-color);
+  border-color: var(--mr-ff-materia-support-border);
+}
+
+.ff-materia.magic {
+  background: var(--mr-ff-materia-magic-color);
+  border-color: var(--mr-ff-materia-magic-border);
+}

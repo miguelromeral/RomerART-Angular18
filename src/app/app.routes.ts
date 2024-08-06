@@ -11,6 +11,7 @@ import { LoginComponent } from './screens/auth/login/login.component';
 import { loginPath } from 'config/auth/auth.config';
 import { EditComponent } from './screens/art/edit/edit.component';
 import { CreateComponent } from './screens/art/create/create.component';
+import { MeComponent } from './screens/about/me/me.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,10 @@ export const routes: Routes = [
   {
     path: 'art',
     component: SearchComponent,
+  },
+  {
+    path: 'about',
+    component: MeComponent,
   },
   {
     path: 'art/details/:id',

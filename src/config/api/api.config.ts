@@ -7,4 +7,5 @@ export const routesWithoutAuth = [
   '/api/art/cheer',
   '/api/art/vote',
   '/api/art/checkDrawing',
+  '/api/about',
 ];

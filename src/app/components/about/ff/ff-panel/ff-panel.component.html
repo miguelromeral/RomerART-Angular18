@@ -1,0 +1,8 @@
+<div class="mr-ff-container">
+  <div *ngIf="title !== ''" class="mr-ff-container mr-ff-title-corner">
+    {{ title }}
+  </div>
+  <div class="w-full" [ngClass]="{ 'mt-6': margin }">
+    <ng-content></ng-content>
+  </div>
+</div>

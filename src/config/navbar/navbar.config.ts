@@ -21,13 +21,13 @@ export class NavBarConfig {
       iconActive: 'bi-easel-fill',
       textCode: 'LINKS.ART',
     },
-    {
-      link: '/playlist',
-      icon: 'bi-cassette',
-      iconActive: 'bi-cassette-fill',
-      textCode: 'LINKS.PLAYLIST',
-      customClass: 'mr-spotify',
-    },
+    // {
+    //   link: '/playlist',
+    //   icon: 'bi-cassette',
+    //   iconActive: 'bi-cassette-fill',
+    //   textCode: 'LINKS.PLAYLIST',
+    //   customClass: 'mr-spotify',
+    // },
     {
       link: '/about',
       icon: '',

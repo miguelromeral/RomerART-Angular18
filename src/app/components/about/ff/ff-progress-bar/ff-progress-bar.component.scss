@@ -1,0 +1,25 @@
+.ff-progress-container {
+  position: relative;
+}
+
+.ff-progress-container div {
+  height: var(--mr-ff-progress-bar-height);
+  position: absolute;
+  width: var(--mr-ff-progress-bar-width);
+}
+
+.ff-progress-total {
+  background: var(--mr-ff-progress-bar-total-color);
+  width: 100%;
+  z-index: 1;
+}
+
+.ff-progress-health {
+  background: var(--mr-ff-progress-bar-total-health);
+  z-index: 2;
+}
+
+.ff-progress-magic {
+  background: var(--mr-ff-progress-bar-total-magic);
+  z-index: 2;
+}

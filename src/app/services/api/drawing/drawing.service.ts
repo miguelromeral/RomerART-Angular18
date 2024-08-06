@@ -154,16 +154,6 @@ export class DrawingService {
       .pipe(catchError(this.handleError<Collection[]>('getAllCollections')));
   }
 
-  // // Método para enviar datos
-  // updateArtDetails(details: any): Observable<any> {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  //   };
-  //   return this.http
-  //     .put<any>(this.apiUrl, details, httpOptions)
-  //     .pipe(catchError(this.handleError<any>('updateArtDetails')));
-  // }
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: HttpErrorResponse): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);

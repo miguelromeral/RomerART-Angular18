@@ -1,0 +1,12 @@
+<div>
+  <span class="value">{{ points }}/{{ maxPoints }}</span>
+  <div class="ff-progress-container">
+    <div class="ff-progress-total"></div>
+    <div
+      [ngClass]="{
+        'ff-progress-health': type === 'health',
+        'ff-progress-magic': type === 'magic',
+      }"
+      [style.width]="(points / maxPoints) * 100 + '%'"></div>
+  </div>
+</div>
