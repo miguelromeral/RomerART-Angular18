@@ -89,3 +89,12 @@ div.mr-social-links {
   border-radius: 0px;
   height: 100px;
 }
+
+.mr-ff-container a {
+  color: var(--mr-ff-title-color) !important;
+}
+
+
+.mr-ff-container a:hover {
+  color: white !important;
+}
