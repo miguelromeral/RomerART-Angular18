@@ -1,22 +1,26 @@
 <app-layout>
   <div>
-    <app-ff-panel [title]="'Datos Básicos'">
+    <app-ff-panel [title]="text('PERSONAL.TITLE') | mrTranslate">
       <div class="flex flex-nowrap gap-2">
         <div class="mr-ff-image">
           <img src="assets/images/miguel.jpeg" alt="Me" />
         </div>
         <div class="mr-ff-stats">
           <div class="mr-ff-stats-basic">
-            <span>Miguel Romeral</span>
+            <span>{{ text('PERSONAL.NAME') | mrTranslate }}</span>
             <div class="mr-ff-stats-item basic">
               <app-ff-hand-container>
-                <span class="title">LV</span>
+                <span class="title">{{
+                  text('PERSONAL.LV') | mrTranslate
+                }}</span>
                 <span class="value">{{ age }}</span>
               </app-ff-hand-container>
             </div>
             <div class="mr-ff-stats-item helath">
               <app-ff-hand-container>
-                <span class="title">HP</span>
+                <span class="title">{{
+                  text('PERSONAL.HP') | mrTranslate
+                }}</span>
                 <app-ff-progress-bar
                   [maxPoints]="maxHealth"
                   [points]="healthPoints"
@@ -26,7 +30,9 @@
             </div>
             <div class="mr-ff-stats-item magic">
               <app-ff-hand-container>
-                <span class="title">MP</span>
+                <span class="title">{{
+                  text('PERSONAL.MP') | mrTranslate
+                }}</span>
                 <app-ff-progress-bar
                   [maxPoints]="maxMagic"
                   [points]="magicPoints"
@@ -43,7 +49,7 @@
                   <a
                     href="https://www.humanmetrics.com/personalidad/istj"
                     target="_blank">
-                    ISTJ
+                    {{ text('PERSONAL.PERSONALITY') | mrTranslate }}
                   </a></span
                 >
               </app-ff-hand-container>
@@ -53,7 +59,9 @@
                 <span class="title">
                   <i class="bi bi-briefcase"></i>
                 </span>
-                <span class="value">Software Developer</span>
+                <span class="value">{{
+                  text('PERSONAL.JOB') | mrTranslate
+                }}</span>
               </app-ff-hand-container>
             </div>
             <div class="mr-ff-stats-item basic">
@@ -61,13 +69,17 @@
                 <span class="title">
                   <i class="bi bi-cake2"></i>
                 </span>
-                <span class="value">Enero de 1996 🐐</span>
+                <span class="value">{{
+                  text('PERSONAL.BIRTHDAY') | mrTranslate
+                }}</span>
               </app-ff-hand-container>
             </div>
             <div class="mr-ff-stats-item basic">
               <app-ff-hand-container>
                 <span class="title"> <i class="bi bi-award"></i></span>
-                <span class="value">Universidad de Alcalá</span>
+                <span class="value">{{
+                  text('PERSONAL.COLLEGE') | mrTranslate
+                }}</span>
               </app-ff-hand-container>
             </div>
             <div class="mr-ff-stats-item basic">
@@ -89,28 +101,26 @@
       </div>
     </app-ff-panel>
 
-    <app-ff-panel [title]="'Sobre Mí'" [margin]="true">
+    <app-ff-panel
+      [title]="text('DESCRIPTION.TITLE') | mrTranslate"
+      [margin]="true">
       <div class="flex flex-col gap-2">
         <app-ff-hand-container>
           <p>
-            Hola, soy Miguel, un chico tímido cuyo gran entretenimiento es estar
-            a los mandos de un buen videojuego (desde Horizon hasta Crash
-            Bandicoot, TLOU, GoW, Hollow Knight y muchos otros).
+            {{ text('DESCRIPTION.1') | mrTranslate }}
           </p>
         </app-ff-hand-container>
         <app-ff-hand-container>
           <p>
-            Cuando no estoy jugando trato de dibujar, desde mis personajes
-            favoritos de los juegos hasta actores cuyas interpretaciones me
-            hagan sentir vivo. Dibujo cualquier personaje que me haga sentir
-            bien, que me emocione, que pudiera respetar o por su belleza
-            cautivadora.
+            {{ text('DESCRIPTION.2') | mrTranslate }}
           </p>
         </app-ff-hand-container>
       </div>
     </app-ff-panel>
 
-    <app-ff-panel [title]="'Artistas de Referencia'" [margin]="true">
+    <app-ff-panel
+      [title]="text('REFERENCES.TITLE') | mrTranslate"
+      [margin]="true">
       <div class="md:gird-cols-4 grid w-full grid-cols-1 gap-3 sm:grid-cols-3">
         <div *ngFor="let inspiration of listInspirations">
           <app-ff-hand-container [behaviour]="'flicker'">

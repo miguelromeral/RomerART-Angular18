@@ -13,6 +13,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { yearsDifference } from '@utils/customization/date-utils';
 import { getRandomNumber } from '@utils/number-utils';
 import {
+  healthConfig,
+  magicConfig,
+  myBirthday,
+} from 'config/data/about.config';
+import {
   ISocialLink,
   socialLinksConfig,
 } from 'config/data/social-links.config';
@@ -36,12 +41,12 @@ import {
 export class MeComponent extends LanguageComponent implements OnInit {
   listInspirations: Inspiration[] = [];
 
-  birthday = new Date(1996, 0, 12);
+  birthday = myBirthday;
   age = 0;
-  maxHealth = 3315;
   healthPoints = 0;
-  maxMagic = 112;
+  maxHealth = healthConfig.max;
   magicPoints = 0;
+  maxMagic = magicConfig.max;
 
   socialLinks: ISocialLink[] = socialLinksConfig;
 
@@ -52,10 +57,9 @@ export class MeComponent extends LanguageComponent implements OnInit {
   ngOnInit() {
     this.apiService.getInspirations().subscribe(list => {
       this.listInspirations = list;
-      console.log('Inspirations', this.listInspirations);
     });
     this.age = yearsDifference(this.birthday, new Date(Date.now()));
-    this.healthPoints = getRandomNumber(1000, 3315);
-    this.magicPoints = getRandomNumber(10, 112);
+    this.healthPoints = getRandomNumber(healthConfig.min, healthConfig.max);
+    this.magicPoints = getRandomNumber(magicConfig.min, magicConfig.max);
   }
 }

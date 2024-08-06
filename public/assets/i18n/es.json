@@ -34,6 +34,29 @@
     "NOT-FOUND": {
       "TITLE": "Página no encontrada"
     },
+    "ABOUT": {
+      "ME": {
+        "PERSONAL": {
+          "TITLE": "Datos Básicos",
+          "NAME": "Miguel Romeral",
+          "JOB": "Desarrollador de Software",
+          "LV": "NV",
+          "HP": "PS",
+          "MP": "PM",
+          "PERSONALITY": "ISTJ",
+          "BIRTHDAY": "Enero de 1996",
+          "COLLEGE": "Universidad de Alcalá"
+        },
+        "DESCRIPTION": {
+          "TITLE": "Sobre Mí",
+          "1": "Hola, soy Miguel, un chico tímido cuyo gran entretenimiento es estar a los mandos de un buen videojuego (desde Horizon hasta Crash Bandicoot, TLOU, GoW, Hollow Knight y muchos otros).",
+          "2": "Cuando no estoy jugando trato de dibujar, desde mis personajes favoritos de los juegos hasta actores cuyas interpretaciones me hagan sentir vivo. Dibujo cualquier personaje que me haga sentir bien, que me emocione, que pudiera respetar o por su belleza cautivadora."
+        },
+        "REFERENCES": {
+          "TITLE": "Artistas de Referencia"
+        }
+      }
+    },
     "HEADER": {
       "TITLE": "MiguelRomeral",
       "VERSION": "v{{ version }}"
