@@ -1,5 +1,10 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  ChildrenOutletContexts,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import {
   CommonModule,
@@ -13,9 +18,9 @@ import { environment } from 'environments/environment';
 import { MetadataService } from './services/metadata/metadata.service';
 import { LanguageService } from './services/language/language.service';
 import { ThemeService } from './services/theme/theme.service';
-import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from './services/api/auth/auth.service';
+import { slideInAnimation } from './animations/animations';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +38,7 @@ import { AuthService } from './services/api/auth/auth.service';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  animations: [slideInAnimation],
 })
 export class AppComponent implements OnInit {
   title = environment.appName;
@@ -44,7 +50,8 @@ export class AppComponent implements OnInit {
     private metadataService: MetadataService,
     private languageService: LanguageService,
     private authService: AuthService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private contexts: ChildrenOutletContexts
   ) {
     AppComponent.isBrowser.next(isPlatformBrowser(platformId));
   }
@@ -66,5 +73,11 @@ export class AppComponent implements OnInit {
       ''
       // window?.location?.origin + '/assets/images/miguel.jpeg'
     );
+  }
+
+  getRouteAnimationData() {
+    return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
+      'animation'
+    ];
   }
 }
