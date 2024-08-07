@@ -1,5 +1,6 @@
 #formFilter {
-  @apply bg-white-200 dark:bg-black-700 p-2 rounded-bl-md rounded-br-md flex flex-col gap-4;
+  @apply p-2 rounded-bl-md rounded-br-md flex flex-col gap-4;
+  background-color: var(--mr-art-search-bg-color);
 }
 
 .mr-sort-filter-container .mr-sort-filter span,

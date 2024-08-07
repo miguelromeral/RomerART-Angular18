@@ -100,7 +100,10 @@
     "DRAWING-SEARCH": {
       "TITLE": "Galería",
       "SUBTITLE": "Aquí están algunos de mis dibujos e ilustraciones públicas. Pulsa en cualquiera de ellos para ver los detalles",
-      "COUNT": "{{length}} imágenes",
+      "COUNT": {
+        "ONE": "{{length}} imagen",
+        "MANY": "{{length}} imágenes"
+      },
       "LOADING": {
         "TITLE": "Filtrando imágenes. Por favor, espere."
       },

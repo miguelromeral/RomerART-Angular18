@@ -17,10 +17,12 @@ $mr-font-family-josefine:
 $mr-font-family-sans-serif: sans-serif;
 
 /* Input Background Color */
-$mr-input-bg-color-light: theme('colors.white.100');
-$mr-input-bg-color-dark: $mr-bg-color-dark;
-$mr-input-border-color-light: theme('colors.white.100');
-$mr-input-border-color-dark: theme('colors.main.700');
+$mr-input-bg-color-light: theme('colors.white.200');
+$mr-input-bg-color-dark: theme('colors.black.700');
+$mr-input-border-color-light: $mr-input-bg-color-light;
+$mr-input-border-color-dark: $mr-input-bg-color-dark;
+$mr-input-placeholder-color-light: theme('colors.white.800');
+$mr-input-placeholder-color-dark: theme('colors.white.950');
 
 
 /* Profile Pic Size */
@@ -122,6 +124,8 @@ $mr-tab-panel-section-color-dark: theme('colors.main.300');
 /********************************/
 //    Drawing Search Form
 /********************************/
+$mr-art-search-bg-color-light: theme('colors.white.100');
+$mr-art-search-bg-color-dark: theme('colors.black.900');
 $mr-art-search-labels-color-light: theme('colors.main.500');
 $mr-art-search-labels-color-dark: theme('colors.main.300');
 
@@ -208,6 +212,7 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-thanks-message-text-color: var(--mr-text-color-opposite);
 
   /* Drawing Search Form */
+  --mr-art-search-bg-color: #{$mr-art-search-bg-color-light};
   --mr-art-search-labels-color: #{$mr-art-search-labels-color-light};
 
   /* Settings Screen */
@@ -229,9 +234,7 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-input-border-color: #{$mr-input-border-color-light};
   --mr-input-height: var(--mr-control-height);
   --mr-input-text-color: var(--mr-text-color);
-  --mr-input-border-color-light: var(--mr-input-bg-color);
-  --mr-input-border-color-dark: theme('colors.main.600');
-  --mr-input-border-color: var(--mr-input-border-color-light);
+  --mr-input-placeholder-color: #{$mr-input-placeholder-color-light};
   --mr-switch-favorite-color: theme('colors.gold.500');
   --mr-switch-checked-bg-color: theme('colors.main.600');
   --mr-switch-checked-favorite-bg-color: theme('colors.gold.500');
@@ -275,6 +278,7 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-text-color-opposite: #{$mr-text-color-opposite-dark};
   --mr-input-bg-color: #{$mr-input-bg-color-dark};
   --mr-input-border-color: #{$mr-input-border-color-dark};
+  --mr-input-placeholder-color: #{$mr-input-placeholder-color-dark};
 
   /* Navbar */
   --mr-nav-bg-color: #{$mr-nav-bg-color-dark};
@@ -309,6 +313,7 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-tab-panel-section-color: #{$mr-tab-panel-section-color-dark};
 
   /* Drawing Search Form */
+  --mr-art-search-bg-color: #{$mr-art-search-bg-color-dark};
   --mr-art-search-labels-color: #{$mr-art-search-labels-color-dark};
 
   /* Settings Screen */
@@ -323,7 +328,6 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   /* Scrollbar */
   --mr-scrollbar-color: #{$mr-scrollbar-color-dark};
 
-  --mr-input-border-color: var(--mr-input-border-color-dark);
   --mr-range-track-bg-color: var(--mr-range-track-bg-color-dark);
   --mr-range-bubble-bg-color: var(--mr-range-bubble-bg-color-dark);
 

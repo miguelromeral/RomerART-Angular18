@@ -15,7 +15,10 @@
         ><span>{{ text('FORM.TITLE') | mrTranslate }}</span>
       </button>
       <div id="divImageCounter" #divImageCounter>
-        {{ text('COUNT') | mrTranslate: { length: listDrawings.length } }}
+        {{
+          text(listDrawings.length === 1 ? 'COUNT.ONE' : 'COUNT.MANY')
+            | mrTranslate: { length: listDrawings.length }
+        }}
       </div>
     </div>
 
