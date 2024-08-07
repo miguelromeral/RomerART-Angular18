@@ -4,15 +4,10 @@ input[type='number'],
 input[type='password'] {
   @apply px-2;
   height: var(--mr-input-height);
-  border: 1px solid var(--mr-input-border-color);
   background-color: var(--mr-input-bg-color);
   color: var(--mr-input-text-color);
 }
 
 input::placeholder {
   color: var(--mr-input-placeholder-color);
-}
-
-.dark input {
-  color-scheme: dark;
 }

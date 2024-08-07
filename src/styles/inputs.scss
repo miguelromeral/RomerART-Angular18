@@ -25,3 +25,27 @@ select {
 .form-error {
   @apply bg-red-400 text-white-50 p-2;
 }
+
+
+.dark input {
+  color-scheme: dark;
+}
+
+input,
+select,
+label.choice-label {
+  border: 1px solid var(--mr-input-border-color);
+  transition: 0.2s ease-in-out;
+}
+
+input:hover,
+select:hover,
+label.choice-label:hover {
+  border-color: theme('colors.main.400') !important;
+}
+
+.dark input:hover,
+.dark select:hover,
+.dark label.choice-label:hover {
+  border-color: theme('colors.main.500') !important;
+}
