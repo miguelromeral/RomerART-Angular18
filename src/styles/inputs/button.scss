@@ -11,6 +11,10 @@ button {
   border: 1px solid var(--mr-btn-bg-color);
 }
 
+.btn:hover {
+  color: var(--mr-btn-bg-color);
+}
+
 .btn-image:hover {
   color: theme('colors.main.400');
 }

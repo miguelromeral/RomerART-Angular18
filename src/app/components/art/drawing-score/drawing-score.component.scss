@@ -1,5 +1,6 @@
-.mr-score-miguel {
-  transition: var(--mr-transition-time) ease-in-out;
+.mr-score-miguel,
+.mr-score-miguel * {
+  transition: var(--mr-transition-time) ease-in-out !important;
 }
 
 .mr-score-bad {
