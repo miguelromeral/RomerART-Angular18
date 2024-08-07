@@ -14,7 +14,8 @@ select {
 .mr-custom-btn:hover,
 .btn:hover {
   background-color: var(--mr-input-bg-color);
-  color: var(--mr-text-color);
+  border-color: var(--mr-btn-bg-color);
+  color: var(--mr-btn-bg-color);
 }
 
 .form-group {

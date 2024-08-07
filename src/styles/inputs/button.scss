@@ -1,8 +1,20 @@
+button {
+  transition: var(--mr-transition-time) ease-in-out;
+}
+
 .btn,
 .mr-custom-btn {
   @apply flex items-center justify-center cursor-pointer px-2 uppercase;
   background-color: var(--mr-btn-bg-color);
   color: var(--mr-btn-text-color);
   height: var(--mr-input-height);
-  transition: var(--mr-transition-time) ease-in-out;
+  border: 1px solid var(--mr-btn-bg-color);
+}
+
+.btn-image:hover {
+  color: theme('colors.main.400');
+}
+
+.favorite .btn-image:hover {
+  color: theme('colors.gold.500');
 }

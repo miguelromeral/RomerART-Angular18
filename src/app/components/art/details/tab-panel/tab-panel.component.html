@@ -3,7 +3,7 @@
     *ngFor="let tab of tabs; let i = index"
     (click)="slideTo(i)"
     [class.active]="currentTabIndex === i"
-    class="tab-button flex h-10 flex-nowrap items-center gap-2 focus:outline-none">
+    class="btn-image tab-button flex h-10 flex-nowrap items-center gap-2 focus:outline-none">
     <i
       class="bi"
       [ngClass]="tab.iconSelected"
