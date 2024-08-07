@@ -48,12 +48,12 @@ span.mr-loader-subtitle {
 
 @keyframes image-count-animation {
   0% {
-    transform: scale(0.7);
+    transform: scale(1);
   }
 
   50% {
     @apply text-main-600 dark:text-main-400;
-    transform: scale(1.5);
+    transform: scale(1.1);
   }
 
   100% {

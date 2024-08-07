@@ -10,11 +10,11 @@ span.mr-suboption-filter {
 
 
 .mr-filter-container {
-  @apply grid w-full grid-cols-4 items-center gap-1 sm:grid-cols-9 lg:grid-cols-8;
+  @apply grid w-full grid-cols-4 items-center gap-1 sm:grid-cols-9 lg:grid-cols-4 xl:grid-cols-9;
 }
 
 .mr-filter-item {
-  @apply w-full col-span-4 sm:col-span-3 lg:col-span-2 h-8;
+  @apply w-full col-span-4 sm:col-span-3 lg:col-span-2 xl:col-span-3 h-8;
 }
 
 .mr-filter-item-trash {
@@ -22,5 +22,5 @@ span.mr-suboption-filter {
 }
 
 .mr-filter-item-query {
-  @apply col-span-3 w-full sm:col-span-8 lg:col-span-5;
+  @apply col-span-3 w-full sm:col-span-8 xl:col-span-8 lg:col-span-3;
 }

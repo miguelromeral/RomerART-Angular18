@@ -1,79 +1,85 @@
 <app-layout>
-  <div class="mb-10">
-    <h1>{{ text('TITLE') | mrTranslate }}</h1>
-    <p>{{ text('SUBTITLE') | mrTranslate }}</p>
-  </div>
-
-  <div class="flex flex-nowrap justify-between">
-    <div class="flex items-center gap-4">
-      <button
-        class="btn flex flex-row items-center gap-2"
-        (click)="showHideFilters()"
-        tabindex="0"
-        (keydown.f)="showHideFilters()">
-        <i class="bi bi-funnel"></i
-        ><span>{{ text('FORM.TITLE') | mrTranslate }}</span>
-      </button>
-      <div id="divImageCounter" #divImageCounter>
-        {{
-          text(listDrawings.length === 1 ? 'COUNT.ONE' : 'COUNT.MANY')
-            | mrTranslate: { length: listDrawings.length }
-        }}
-      </div>
+  <div class="grid grid-cols-1 gap-2 lg:grid-cols-3">
+    <div class="mb-10 lg:col-span-2">
+      <h1>{{ text('TITLE') | mrTranslate }}</h1>
+      <p>{{ text('SUBTITLE') | mrTranslate }}</p>
     </div>
 
-    <button
-      *ngIf="admin"
-      class="btn flex flex-row items-center gap-2"
-      (click)="createNewDrawing()">
-      <i class="bi bi-plus"></i>
-      <span>{{ text('FORM.CREATE-NEW.TITLE') | mrTranslate }}</span>
-    </button>
-  </div>
+    <div class="lg:row-span-2">
+      <div class="flex flex-nowrap items-start justify-between">
+        <div class="flex items-center gap-4">
+          <button
+            class="btn flex flex-row items-center gap-2"
+            (click)="showHideFilters()"
+            tabindex="0"
+            (keydown.f)="showHideFilters()">
+            <i class="bi bi-funnel"></i
+            ><span>{{ text('FORM.TITLE') | mrTranslate }}</span>
+          </button>
+          <div id="divImageCounter" #divImageCounter>
+            {{
+              text(listDrawings.length === 1 ? 'COUNT.ONE' : 'COUNT.MANY')
+                | mrTranslate: { length: listDrawings.length }
+            }}
+          </div>
+        </div>
 
-  <!-- <div class="h-full w-full overflow-hidden"> -->
-  <app-art-search-filter-form
-    [@filterFormAnimation]="showFilters ? 'open' : 'closed'"
-    (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
-    (fetchedResults)="onFetchedResults($event)"
-    (isLoading)="onIsFilterFormLoading($event)">
-  </app-art-search-filter-form>
-  <!-- </div> -->
-
-  <div class="row mt-2" style="padding-bottom: 20px">
-    <div class="mr-loader-container">
-      <div id="artGalleryLoader" class="mr-loader" *ngIf="filterFormLoading">
-        <img
-          alt="Loading"
-          src=" assets/pacman-loading.svg"
-          class="mr-loading-icon-pacman" />
-        <span class="mr-loader-subtitle">{{
-          text('LOADING.TITLE') | mrTranslate
-        }}</span>
-      </div>
-      <div
-        id="artGallery"
-        class="mr-img-gallery grid h-full w-full grid-cols-3 gap-[2px] sm:grid-cols-4">
-        <app-drawing-thumbnail
-          class="h-full w-full"
-          [ngClass]="{ 'col-span-2 row-span-2': first }"
-          [drawing]="drawing"
-          *ngFor="let drawing of listDrawings; let first = first">
-        </app-drawing-thumbnail>
         <button
-          *ngIf="!filterFormLoading && showButtonFetchMore"
-          type="button"
-          (click)="requestMoreDrawings()">
-          +
+          *ngIf="admin"
+          class="btn flex flex-row items-center gap-2"
+          (click)="createNewDrawing()">
+          <i class="bi bi-plus"></i>
+          <span>{{ text('FORM.CREATE-NEW.TITLE') | mrTranslate }}</span>
         </button>
       </div>
-      <div
-        id="divNoResults"
-        *ngIf="resultsNotFound"
-        class="mt-20 flex min-h-32 flex-col items-center justify-start gap-3">
-        <span>{{ text('NOTFOUND.TITLE') | mrTranslate }}</span>
-        <h2>😔</h2>
-        <span>{{ text('NOTFOUND.RETRY') | mrTranslate }}</span>
+
+      <app-art-search-filter-form
+        [@filterFormAnimation]="showFilters ? 'open' : 'closed'"
+        (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
+        (fetchedResults)="onFetchedResults($event)"
+        (isLoading)="onIsFilterFormLoading($event)">
+      </app-art-search-filter-form>
+    </div>
+    <div class="lg:col-span-2">
+      <div class="row mt-2" style="padding-bottom: 20px">
+        <div class="mr-loader-container">
+          <div
+            id="artGalleryLoader"
+            class="mr-loader"
+            *ngIf="filterFormLoading">
+            <img
+              alt="Loading"
+              src=" assets/pacman-loading.svg"
+              class="mr-loading-icon-pacman" />
+            <span class="mr-loader-subtitle">{{
+              text('LOADING.TITLE') | mrTranslate
+            }}</span>
+          </div>
+          <div
+            id="artGallery"
+            class="mr-img-gallery grid h-full w-full grid-cols-3 gap-[2px] sm:grid-cols-4">
+            <app-drawing-thumbnail
+              class="h-full w-full"
+              [ngClass]="{ 'col-span-2 row-span-2': first }"
+              [drawing]="drawing"
+              *ngFor="let drawing of listDrawings; let first = first">
+            </app-drawing-thumbnail>
+            <button
+              *ngIf="!filterFormLoading && showButtonFetchMore"
+              type="button"
+              (click)="requestMoreDrawings()">
+              +
+            </button>
+          </div>
+          <div
+            id="divNoResults"
+            *ngIf="resultsNotFound"
+            class="mt-20 flex min-h-32 flex-col items-center justify-start gap-3">
+            <span>{{ text('NOTFOUND.TITLE') | mrTranslate }}</span>
+            <h2>😔</h2>
+            <span>{{ text('NOTFOUND.RETRY') | mrTranslate }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
