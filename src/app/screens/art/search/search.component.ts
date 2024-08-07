@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
@@ -11,6 +11,7 @@ import { MetadataService } from '@app/services/metadata/metadata.service';
 import { LanguageService } from '@app/services/language/language.service';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { Router } from '@angular/router';
+import { filterFormAnimation } from '@app/animations/art/filter-form.animations';
 
 @Component({
   selector: 'app-search',
@@ -27,10 +28,12 @@ import { Router } from '@angular/router';
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
+  animations: [filterFormAnimation],
 })
 export class SearchComponent extends LanguageComponent implements OnInit {
   listDrawings: Drawing[] = [];
   @ViewChild(FilterFormComponent) filterFormComponent!: FilterFormComponent;
+  @ViewChild('divImageCounter') divImageCounter!: ElementRef<HTMLDivElement>;
 
   showButtonFetchMore = false;
   // showButtonFetchMore = true;
@@ -39,6 +42,8 @@ export class SearchComponent extends LanguageComponent implements OnInit {
   get resultsNotFound(): boolean {
     return this.listDrawings.length === 0;
   }
+
+  imageCounterAnimationClass = 'image-count-animation';
 
   admin = false;
   showFilters = false;
@@ -67,9 +72,17 @@ export class SearchComponent extends LanguageComponent implements OnInit {
 
   onFetchedResults(list: Drawing[]) {
     this.listDrawings = list;
+    this.divImageCounter.nativeElement.classList.add(
+      this.imageCounterAnimationClass
+    );
   }
   onIsFilterFormLoading(loading: boolean) {
     this.filterFormLoading = loading;
+    if (loading && this.divImageCounter?.nativeElement) {
+      this.divImageCounter.nativeElement.classList.remove(
+        this.imageCounterAnimationClass
+      );
+    }
   }
 
   requestMoreDrawings() {

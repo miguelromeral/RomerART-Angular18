@@ -40,3 +40,23 @@ img.mr-loading-icon-pacman {
 span.mr-loader-subtitle {
   @apply italic font-bold;
 }
+
+
+.image-count-animation {
+  animation: image-count-animation 1.5s ease-in-out;
+}
+
+@keyframes image-count-animation {
+  0% {
+    transform: scale(0.7);
+  }
+
+  50% {
+    @apply text-main-600 dark:text-main-400;
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

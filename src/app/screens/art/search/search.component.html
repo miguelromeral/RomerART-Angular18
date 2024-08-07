@@ -1,5 +1,5 @@
 <app-layout>
-  <div>
+  <div class="mb-10">
     <h1>{{ text('TITLE') | mrTranslate }}</h1>
     <p>{{ text('SUBTITLE') | mrTranslate }}</p>
   </div>
@@ -14,7 +14,7 @@
         <i class="bi bi-funnel"></i
         ><span>{{ text('FORM.TITLE') | mrTranslate }}</span>
       </button>
-      <div id="divImageCounter" class="slide-right">
+      <div id="divImageCounter" #divImageCounter>
         {{ text('COUNT') | mrTranslate: { length: listDrawings.length } }}
       </div>
     </div>
@@ -28,12 +28,14 @@
     </button>
   </div>
 
+  <!-- <div class="h-full w-full overflow-hidden"> -->
   <app-art-search-filter-form
-    [ngClass]="{ hidden: !showFilters }"
+    [@filterFormAnimation]="showFilters ? 'open' : 'closed'"
     (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
     (fetchedResults)="onFetchedResults($event)"
     (isLoading)="onIsFilterFormLoading($event)">
   </app-art-search-filter-form>
+  <!-- </div> -->
 
   <div class="row mt-2" style="padding-bottom: 20px">
     <div class="mr-loader-container">
