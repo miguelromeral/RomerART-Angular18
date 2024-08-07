@@ -14,7 +14,6 @@ export const filterFormAnimation = trigger('filterFormAnimation', [
       height: '0px',
       overflow: 'hidden',
       opacity: 0,
-      display: 'block',
     })
   ),
   state(
@@ -23,7 +22,6 @@ export const filterFormAnimation = trigger('filterFormAnimation', [
       height: '*',
       overflow: 'hidden',
       opacity: 1,
-      display: 'block',
     })
   ),
   transition('closed => open', [animate('300ms ease-out')]),
