@@ -7,7 +7,7 @@
 
     <div class="lg:row-span-2">
       <div class="flex flex-nowrap items-start justify-between">
-        <div class="flex items-center gap-4">
+        <div class="flex flex-wrap items-end gap-4">
           <button
             class="btn flex flex-row items-center gap-2"
             (click)="showHideFilters()"
@@ -18,8 +18,8 @@
           </button>
           <div id="divImageCounter" #divImageCounter>
             {{
-              text(listDrawings.length === 1 ? 'COUNT.ONE' : 'COUNT.MANY')
-                | mrTranslate: { length: listDrawings.length }
+              text(resultsLength === 1 ? 'COUNT.ONE' : 'COUNT.MANY')
+                | mrTranslate: { length: resultsLength }
             }}
           </div>
         </div>

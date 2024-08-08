@@ -40,9 +40,19 @@ export class SearchComponent extends LanguageComponent implements OnInit {
 
   filterFormLoading = true;
   get resultsNotFound(): boolean {
-    return this.listDrawings.length === 0;
+    if (this.listDrawings) {
+      return this.listDrawings.length === 0;
+    } else {
+      return true;
+    }
   }
-
+  get resultsLength(): number {
+    if (this.listDrawings) {
+      return this.listDrawings.length;
+    } else {
+      return 0;
+    }
+  }
   imageCounterAnimationClass = 'image-count-animation';
 
   admin = false;
