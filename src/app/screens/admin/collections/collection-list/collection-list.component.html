@@ -1,0 +1,9 @@
+<app-layout>
+  <h1>COLLECTIONS</h1>
+  <div class="flex flex-col gap-10">
+    <app-collection-thumbnail
+      *ngFor="let collection of listCollections"
+      [collection]="collection">
+    </app-collection-thumbnail>
+  </div>
+</app-layout>

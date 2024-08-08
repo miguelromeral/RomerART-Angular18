@@ -12,6 +12,8 @@ import { loginPath } from 'config/auth/auth.config';
 import { EditComponent } from './screens/art/edit/edit.component';
 import { CreateComponent } from './screens/art/create/create.component';
 import { MeComponent } from './screens/about/me/me.component';
+import { CollectionListComponent } from './screens/admin/collections/collection-list/collection-list.component';
+import { EditCollectionComponent } from './screens/admin/collections/edit-collection/edit-collection.component';
 
 export const routes: Routes = [
   {
@@ -85,6 +87,20 @@ export const routes: Routes = [
     data: {
       animation: 'AdminPage',
     },
+  },
+  {
+    path: 'admin/collections',
+    component: CollectionListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      animation: 'CollectionListPage',
+    },
+  },
+  {
+    path: 'admin/collections/edit/:id',
+    component: EditCollectionComponent,
+    data: { withComponentInputBinding: true, animation: 'CollectionEditPage' },
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

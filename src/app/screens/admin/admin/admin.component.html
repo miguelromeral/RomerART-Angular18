@@ -1,3 +1,9 @@
-<p>admin works!</p>
+<app-layout>
+  <app-section [title]="'EDIT COLLECTIONS'">
+    <a routerLink="/admin/collections">
+      {{ text('GO-TO-COLLECTIONS') | mrTranslate }}
+    </a>
+  </app-section>
 
-<button (click)="logout()">LOG OUT</button>
+  <button class="btn" (click)="logout()">LOG OUT</button>
+</app-layout>

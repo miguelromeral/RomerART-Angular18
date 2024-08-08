@@ -11,6 +11,7 @@
   ">
   <div
     class="flex h-full w-full items-center justify-center"
+    [ngClass]="popular ? 'rounded-full' : 'rounded-sm'"
     *ngIf="score >= scoreConfig.min && score <= scoreConfig.max">
     {{ score }}
   </div>

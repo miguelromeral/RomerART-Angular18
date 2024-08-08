@@ -148,6 +148,11 @@ export class DrawingService {
       .pipe(catchError(this.handleError<Drawing[]>('filterDrawings')));
   }
 
+  getAllDrawingsOfCollection(collectionId: string): Observable<Drawing[]> {
+    const filters = new DrawingFilter({ collection: collectionId });
+    return this.filterDrawings(filters);
+  }
+
   getAllCollections(): Observable<Collection[]> {
     return this.http
       .get<Collection[]>(`${this.apiUrl}art/collections`)
