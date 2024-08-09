@@ -112,6 +112,15 @@ export class DrawingService {
       );
   }
 
+  removeCollection(id: string): Observable<void> {
+    const url = `${this.apiUrl}art/collection/remove`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .post<void>(url, JSON.stringify(id), { headers })
+      .pipe(catchError(this.handleError<void>('removeCollection')));
+  }
+
   saveDrawing(drawing: ISaveDrawingRequest): Observable<Drawing> {
     const url = `${this.apiUrl}art/save/${drawing.id}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -145,6 +154,12 @@ export class DrawingService {
     return this.http
       .get<boolean>(`${this.apiUrl}art/checkdrawing/${id}`)
       .pipe(catchError(this.handleError<boolean>('checkDrawingId')));
+  }
+
+  checkCollectionId(id: string): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${this.apiUrl}art/check/collection/${id}`)
+      .pipe(catchError(this.handleError<boolean>('checkCollectionId')));
   }
 
   filterDrawings(filters: DrawingFilter): Observable<Drawing[]> {

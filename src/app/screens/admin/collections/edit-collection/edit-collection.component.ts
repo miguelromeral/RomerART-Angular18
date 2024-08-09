@@ -1,189 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
-import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { Collection } from '@models/art/collection.model';
-import { Drawing } from '@models/art/drawing.model';
-import { LanguageComponent } from '@models/components/LanguageComponent';
-import { TranslateModule } from '@ngx-translate/core';
-import {
-  CdkDragDrop,
-  DragDropModule,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { SectionComponent } from '@app/components/shared/section/section.component';
-import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
-import { CollectionDrawingListComponent } from '@app/components/collections/collection-drawing-list/collection-drawing-list.component';
-import { ISaveCollectionRequest } from '@models/requests/save-collection-request.model';
-import { AlertService } from '@app/services/alerts/alert.service';
+import { MetadataService } from '@app/services/metadata/metadata.service';
+import { CollectionFormComponent } from '@app/components/collections/collection-form/collection-form.component';
 
 @Component({
   selector: 'app-edit-collection',
   standalone: true,
-  imports: [
-    TranslateModule,
-    CustomTranslatePipe,
-    LayoutComponent,
-    CommonModule,
-    DragDropModule,
-    ReactiveFormsModule,
-    SectionComponent,
-    TextInputComponent,
-    CollectionDrawingListComponent,
-  ],
+  imports: [LayoutComponent, CommonModule, CollectionFormComponent],
   templateUrl: './edit-collection.component.html',
   styleUrl: './edit-collection.component.scss',
 })
-export class EditCollectionComponent extends LanguageComponent {
-  private _id!: string;
-
-  @Input() newCollection!: boolean;
-  @Input()
-  public get id() {
-    return this._id;
-  }
-  public set id(value: string) {
-    this._id = value;
-    this.loadForm();
-  }
-
-  private _collection!: Collection;
-
-  @Input()
-  public get collection() {
-    return this._collection;
-  }
-  public set collection(value: Collection) {
-    this._collection = value;
-    this.setFormValues(this.collection);
-  }
-
-  drawings: Drawing[] = [];
-
-  listAll: Drawing[] = [];
-  listUsed: Drawing[] = [];
-
-  /* Form */
-  form = new FormGroup({
-    isEditing: new FormControl(this.newCollection, Validators.required),
-    id: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
-    name: new FormControl('', Validators.required),
-    order: new FormControl(0),
-    drawingsIds: new FormControl<string[]>([], Validators.required),
-  });
-
-  /* Form Behaviour */
-  loadingCollection = true;
+export class EditCollectionComponent implements OnInit {
+  @Input() id: string | null = null;
+  collection: Collection = new Collection();
+  notFound: boolean | undefined;
+  loading = true;
 
   constructor(
     private drawingService: DrawingService,
-    private alertService: AlertService
-    // private customTranslate: CustomTranslatePipe
-  ) {
-    super('SCREENS.ADMIN.COLLECTIONS.EDIT');
+    private metadataService: MetadataService
+  ) {}
+
+  ngOnInit() {
+    this.loadCollection();
   }
 
-  loadForm() {
-    // TODO: crear acción para recuperar solo una colección por su ID
-    this.drawingService.getCollectionDetails(this.id).subscribe(col => {
-      this.collection = col;
-      this.loadingCollection = false;
-      this.setFormValues(this.collection);
-
-      this.drawingService.getAllDrawings().subscribe(list => {
-        this.drawings = list;
-        this.listUsed = this.drawings.filter(drawing =>
-          this.collection?.drawingsId.find(id => id === drawing.id)
-        );
-        this.listAll = this.drawings.filter(
-          drawing => this.listUsed.filter(x => x.id === drawing.id).length === 0
-        );
+  loadCollection() {
+    if (this.id) {
+      this.drawingService.getCollectionDetails(this.id).subscribe(data => {
+        if (data) {
+          this.collection = new Collection(data);
+          this.metadataService.updateMetadata(
+            this.collection.name,
+            this.collection.name,
+            ''
+          );
+        } else {
+          this.notFound = true;
+        }
+        this.loading = false;
       });
-    });
-  }
-
-  setFormValues(col: Collection) {
-    if (col && col.id) {
-      this.form.controls.isEditing.setValue(col.id !== '');
-      this.form.controls.id.setValue(col.id);
-      this.form.controls.description.setValue(col.description);
-      this.form.controls.name.setValue(col.name);
-      this.form.controls.order.setValue(col.order);
     }
-  }
-
-  drop(event: CdkDragDrop<Drawing[]>, listType: 'all' | 'used') {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-
-      if (listType === 'all') {
-        this.listAll = event.container.data;
-        this.listUsed = event.previousContainer.data;
-      } else {
-        this.listUsed = event.container.data;
-        this.listAll = event.previousContainer.data;
-      }
-      // Actualizar los dibujos en el formulario
-      this.form.controls.drawingsIds.setValue(this.listUsed.map(d => d.id));
-    }
-  }
-
-  saveCollection() {
-    console.log(this.form.value);
-    const values = this.form.value;
-
-    const formData: ISaveCollectionRequest = {
-      id: values.id!,
-      isEditing: values.isEditing!,
-      description: values.description!,
-      drawingsIds: values.drawingsIds!,
-      name: values.name!,
-      order: values.order!,
-    };
-
-    this.drawingService.saveCollection(formData).subscribe(resp => {
-      // console.log('Respuesta: ', resp);
-      if (resp) {
-        this.newCollection = false;
-        this.form.controls.isEditing.setValue(true);
-
-        // this.alertService.showAlert(
-        //   this.customTranslate.transform(this.text('ALERTS.SAVED.TITLE')),
-        //   this.customTranslate.transform(this.text('ALERTS.SAVED.MESSAGE'), {
-        //     id: values.id,
-        //   })
-        // );
-      } else {
-        // this.alertService.showAlert(
-        // this.customTranslate.transform(
-        //   this.text('ALERTS.ERROR-ON-SAVE.TITLE')
-        // ),
-        // this.customTranslate.transform(
-        //   this.text('ALERTS.ERROR-ON-SAVE.MESSAGE'),
-        //   { id: values.id }
-        // )
-        // );
-      }
-    });
   }
 }

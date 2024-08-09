@@ -1,6 +1,6 @@
 <h3>{{ title }}</h3>
 <div
-  class="flex max-h-screen flex-col gap-4 overflow-y-scroll p-2"
+  class="relative flex max-h-screen min-h-96 flex-col gap-4 overflow-y-scroll p-2"
   cdkDropList
   [cdkDropListConnectedTo]="connectedTo"
   [cdkDropListData]="drawings"
@@ -26,5 +26,11 @@
       </div>
       <span class="text-sm text-main-400">{{ drawing.title }}</span>
     </div>
+  </div>
+  <div
+    *ngIf="drawings.length === 0"
+    class="absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center border border-main-300 dark:text-white-950">
+    <i class="bi bi-arrow-right-square text-2xl"></i>
+    <span> SOLTAR AQUÍ </span>
   </div>
 </div>

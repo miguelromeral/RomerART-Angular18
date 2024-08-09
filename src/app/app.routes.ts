@@ -14,6 +14,7 @@ import { CreateComponent } from './screens/art/create/create.component';
 import { MeComponent } from './screens/about/me/me.component';
 import { CollectionListComponent } from './screens/admin/collections/collection-list/collection-list.component';
 import { EditCollectionComponent } from './screens/admin/collections/edit-collection/edit-collection.component';
+import { CreateCollectionComponent } from './screens/admin/collections/create-collection/create-collection.component';
 
 export const routes: Routes = [
   {
@@ -100,6 +101,14 @@ export const routes: Routes = [
     path: 'admin/collections/edit/:id',
     component: EditCollectionComponent,
     data: { withComponentInputBinding: true, animation: 'CollectionEditPage' },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin/collections/create',
+    component: CreateCollectionComponent,
+    data: {
+      animation: 'CollectionCreatePage',
+    },
     canActivate: [AuthGuard],
   },
   {

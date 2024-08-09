@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CollectionThumbnailComponent } from '@app/components/collections/collection-thumbnail/collection-thumbnail.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
@@ -27,7 +28,10 @@ export class CollectionListComponent
 {
   listCollections: Collection[] = [];
 
-  constructor(private drawingService: DrawingService) {
+  constructor(
+    private drawingService: DrawingService,
+    private router: Router
+  ) {
     super('SCREENS.ADMIN.COLLECTIONS.LIST');
   }
 
@@ -37,5 +41,9 @@ export class CollectionListComponent
         .map(c => new Collection(c))
         .sort((a, b) => b.order - a.order);
     });
+  }
+
+  createNewCollection() {
+    this.router.navigate(['admin/collections/create']);
   }
 }

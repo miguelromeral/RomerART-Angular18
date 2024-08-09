@@ -1,0 +1,74 @@
+<form
+  [formGroup]="form"
+  (submit)="saveCollection()"
+  class="flex flex-col gap-10">
+  <app-section [title]="'DATOS-BASICOS'">
+    <div class="grid grid-cols-3 gap-5">
+      <app-text-input
+        *ngIf="newCollection; else idEdit"
+        class="col-span-2"
+        [label]="'ID'"
+        [placeholder]="'ID'"
+        (change)="checkCollectionId($event)"
+        formControlName="id">
+      </app-text-input>
+
+      <ng-template #idEdit>
+        <span class="col-span-2" *ngIf="collection">{{ collection.id }}</span>
+      </ng-template>
+
+      <app-text-input
+        [label]="'ORDER'"
+        [type]="'number'"
+        [placeholder]="'ORDER'"
+        formControlName="order">
+      </app-text-input>
+      <app-text-input
+        [label]="'NAME'"
+        class="col-span-3"
+        [placeholder]="'NAME'"
+        formControlName="name">
+      </app-text-input>
+
+      <app-text-input
+        [label]="'DESCRIPTION'"
+        class="col-span-3"
+        [placeholder]="'DESCRIPTION'"
+        formControlName="description">
+      </app-text-input>
+
+      <button type="button mr-custom-btn" (click)="deleteCollection()">
+        DELETE
+      </button>
+
+      <div></div>
+
+      <button class="btn" type="submit">
+        <ng-container *ngIf="newCollection; else btnSaveEditForm">
+          {{ text('FORM.SAVE.CREATE') | mrTranslate }}
+        </ng-container>
+        <ng-template #btnSaveEditForm>
+          {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: collection?.id } }}
+        </ng-template>
+      </button>
+    </div>
+  </app-section>
+
+  <app-section [title]="'DIBUJOS'">
+    <div class="grid grid-cols-2 gap-10" cdkDropListGroup>
+      <app-collection-drawing-list
+        [drawings]="listAll"
+        class="opacity-40 transition-all hover:opacity-100"
+        [title]="'RESTANTES'"
+        [connectedTo]="['listUsed']"
+        (requestDrop)="drop($event, 'all')">
+      </app-collection-drawing-list>
+      <app-collection-drawing-list
+        [drawings]="listUsed"
+        [title]="'ELEGIDOS'"
+        [connectedTo]="['listAll']"
+        (requestDrop)="drop($event, 'used')">
+      </app-collection-drawing-list>
+    </div>
+  </app-section>
+</form>

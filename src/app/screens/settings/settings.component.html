@@ -32,8 +32,8 @@
         <app-setting-option
           [title]="text('FORM.AUTH.TITLE') | mrTranslate"
           [description]="text('FORM.AUTH.DESCRIPTION') | mrTranslate">
-          <a [routerLink]="'/' + loginPath" ariaCurrentWhenActive="page">
-            {{ text('FORM.AUTH.GO-TO-LOGIN') | mrTranslate }}
+          <a [routerLink]="'/admin'" ariaCurrentWhenActive="page">
+            {{ text('FORM.AUTH.GO-TO-ADMIN') | mrTranslate }}
           </a>
         </app-setting-option>
       </app-setting-section>

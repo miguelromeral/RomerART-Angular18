@@ -327,6 +327,7 @@ export class DrawingFormComponent extends LanguageComponent {
     this.drawingService.saveDrawing(formData).subscribe(resp => {
       // console.log('Respuesta: ', resp);
       if (resp) {
+        this._drawing.id = resp.id;
         this.newDrawing = false;
         this.form.controls.isEditing.setValue(true);
         this.form.controls.tagsText.setValue(resp.tagsText);
