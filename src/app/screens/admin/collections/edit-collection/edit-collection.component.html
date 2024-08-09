@@ -49,7 +49,7 @@
       <div class="grid grid-cols-2 gap-10" cdkDropListGroup>
         <app-collection-drawing-list
           [drawings]="listAll"
-          class="opacity-40"
+          class="opacity-40 transition-all hover:opacity-100"
           [title]="'RESTANTES'"
           [connectedTo]="['listUsed']"
           (requestDrop)="drop($event, 'all')">

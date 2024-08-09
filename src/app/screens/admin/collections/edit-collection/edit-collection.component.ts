@@ -22,6 +22,8 @@ import {
 import { SectionComponent } from '@app/components/shared/section/section.component';
 import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
 import { CollectionDrawingListComponent } from '@app/components/collections/collection-drawing-list/collection-drawing-list.component';
+import { ISaveCollectionRequest } from '@models/requests/save-collection-request.model';
+import { AlertService } from '@app/services/alerts/alert.service';
 
 @Component({
   selector: 'app-edit-collection',
@@ -82,7 +84,11 @@ export class EditCollectionComponent extends LanguageComponent {
   /* Form Behaviour */
   loadingCollection = true;
 
-  constructor(private drawingService: DrawingService) {
+  constructor(
+    private drawingService: DrawingService,
+    private alertService: AlertService
+    // private customTranslate: CustomTranslatePipe
+  ) {
     super('SCREENS.ADMIN.COLLECTIONS.EDIT');
   }
 
@@ -106,10 +112,13 @@ export class EditCollectionComponent extends LanguageComponent {
   }
 
   setFormValues(col: Collection) {
-    this.form.controls.id.setValue(col.id);
-    this.form.controls.description.setValue(col.description);
-    this.form.controls.name.setValue(col.name);
-    this.form.controls.order.setValue(col.order);
+    if (col && col.id) {
+      this.form.controls.isEditing.setValue(col.id !== '');
+      this.form.controls.id.setValue(col.id);
+      this.form.controls.description.setValue(col.description);
+      this.form.controls.name.setValue(col.name);
+      this.form.controls.order.setValue(col.order);
+    }
   }
 
   drop(event: CdkDragDrop<Drawing[]>, listType: 'all' | 'used') {
@@ -143,55 +152,38 @@ export class EditCollectionComponent extends LanguageComponent {
     console.log(this.form.value);
     const values = this.form.value;
 
-    // const formData: ISaveDrawingRequest = {
-    //   id: values.id!,
-    //   dateHyphen: values.dateHyphen!,
-    //   favorite: values.favorite!,
-    //   isEditing: values.isEditing!,
-    //   listCommentCons: values.listCommentCons!,
-    //   listCommentPros: values.listCommentPros!,
-    //   listComments: values.listComments!,
-    //   modelName: values.modelName!,
-    //   name: values.name!,
-    //   paper: values.paper!,
-    //   path: values.path!,
-    //   pathThumbnail: values.pathThumbnail!,
-    //   productName: values.productName!,
-    //   productType: values.productType!,
-    //   referenceUrl: values.referenceUrl!,
-    //   scoreCritic: values.scoreCritic!,
-    //   software: values.software!,
-    //   spotifyUrl: values.spotifyUrl!,
-    //   tagsText: values.tagsText!,
-    //   time: values.time!,
-    //   title: values.title!,
-    //   type: values.type!,
-    //   visible: values.visible!,
-    // };
-    // this.drawingService.saveDrawing(formData).subscribe(resp => {
-    //   // console.log('Respuesta: ', resp);
-    //   if (resp) {
-    //     this.newDrawing = false;
-    //     this.form.controls.isEditing.setValue(true);
-    //     this.form.controls.tagsText.setValue(resp.tagsText);
+    const formData: ISaveCollectionRequest = {
+      id: values.id!,
+      isEditing: values.isEditing!,
+      description: values.description!,
+      drawingsIds: values.drawingsIds!,
+      name: values.name!,
+      order: values.order!,
+    };
 
-    //     this.alertService.showAlert(
-    //       this.customTranslate.transform(this.text('ALERTS.SAVED.TITLE')),
-    //       this.customTranslate.transform(this.text('ALERTS.SAVED.MESSAGE'), {
-    //         id: values.id,
-    //       })
-    //     );
-    //   } else {
-    //     this.alertService.showAlert(
-    //       this.customTranslate.transform(
-    //         this.text('ALERTS.ERROR-ON-SAVE.TITLE')
-    //       ),
-    //       this.customTranslate.transform(
-    //         this.text('ALERTS.ERROR-ON-SAVE.MESSAGE'),
-    //         { id: values.id }
-    //       )
-    //     );
-    //   }
-    // });
+    this.drawingService.saveCollection(formData).subscribe(resp => {
+      // console.log('Respuesta: ', resp);
+      if (resp) {
+        this.newCollection = false;
+        this.form.controls.isEditing.setValue(true);
+
+        // this.alertService.showAlert(
+        //   this.customTranslate.transform(this.text('ALERTS.SAVED.TITLE')),
+        //   this.customTranslate.transform(this.text('ALERTS.SAVED.MESSAGE'), {
+        //     id: values.id,
+        //   })
+        // );
+      } else {
+        // this.alertService.showAlert(
+        // this.customTranslate.transform(
+        //   this.text('ALERTS.ERROR-ON-SAVE.TITLE')
+        // ),
+        // this.customTranslate.transform(
+        //   this.text('ALERTS.ERROR-ON-SAVE.MESSAGE'),
+        //   { id: values.id }
+        // )
+        // );
+      }
+    });
   }
 }

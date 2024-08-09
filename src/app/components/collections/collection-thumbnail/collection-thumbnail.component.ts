@@ -21,30 +21,18 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './collection-thumbnail.component.html',
   styleUrl: './collection-thumbnail.component.scss',
 })
-export class CollectionThumbnailComponent
-  extends LanguageComponent
-  implements OnInit
-{
+export class CollectionThumbnailComponent extends LanguageComponent {
   @Input() collection!: Collection;
-  listDrawings: Drawing[] = [];
 
   get hasDrawings() {
-    return this.listDrawings?.length > 0;
+    return this.collection.drawings?.length > 0;
+  }
+  get drawings() {
+    return this.collection.drawings;
   }
 
-  constructor(
-    private drawingService: DrawingService,
-    private router: Router
-  ) {
+  constructor(private router: Router) {
     super('SCREENS.ADMIN.COLLECTIONS.LIST');
-  }
-
-  ngOnInit() {
-    this.drawingService
-      .getAllDrawingsOfCollection(this.collection.id)
-      .subscribe(list => {
-        this.listDrawings = list;
-      });
   }
 
   goToEdit() {

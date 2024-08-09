@@ -12,9 +12,7 @@
     </div>
   </div>
   <div class="grid grid-cols-6 gap-[2px]" *ngIf="hasDrawings">
-    <app-drawing-thumbnail
-      *ngFor="let drawing of listDrawings"
-      [drawing]="drawing">
+    <app-drawing-thumbnail *ngFor="let drawing of drawings" [drawing]="drawing">
     </app-drawing-thumbnail>
   </div>
 </div>

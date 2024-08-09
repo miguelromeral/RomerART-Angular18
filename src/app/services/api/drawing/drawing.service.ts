@@ -24,6 +24,7 @@ import { drawingStyles } from 'config/data/drawing-styles.config';
 import { drawingProductTypes } from 'config/data/drawing-product-types.config';
 import { drawingSoftwares } from 'config/data/drawing-softwares.config';
 import { drawingPaperSizes } from 'config/data/drawing-paper-sizes.config';
+import { ISaveCollectionRequest } from '@models/requests/save-collection-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -118,6 +119,15 @@ export class DrawingService {
     return this.http
       .post<Drawing>(url, drawing, { headers })
       .pipe(catchError(this.handleError<Drawing>('saveDrawing')));
+  }
+
+  saveCollection(collection: ISaveCollectionRequest): Observable<Collection> {
+    const url = `${this.apiUrl}art/save/collection/${collection.id}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .post<Collection>(url, collection, { headers })
+      .pipe(catchError(this.handleError<Collection>('saveCollection')));
   }
 
   uploadAzureImage(form: FormData): Observable<UploadAzureImageResponse> {

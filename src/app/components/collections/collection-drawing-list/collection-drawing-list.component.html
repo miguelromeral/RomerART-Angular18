@@ -7,15 +7,16 @@
   (cdkDropListDropped)="dropItem($event)">
   <div
     *ngFor="let drawing of drawings; let i = index"
+    [cdkDragStartDelay]="{ touch: 200, mouse: 0 }"
     cdkDrag
-    class="grid h-full w-full cursor-grabbing grid-cols-3 gap-2 rounded-md bg-black-700">
+    class="relative grid h-full w-full cursor-grabbing grid-cols-3 gap-2 rounded-md bg-black-700">
     <img
       class="aspect-square rounded-md object-cover"
       [src]="drawing.urlThumbnail"
       [alt]="drawing.name" />
-    <div class="relative col-span-2 flex flex-col gap-3 overflow-hidden">
+    <div class="col-span-2 flex flex-col gap-3">
       <span
-        class="absolute right-0 top-0 rounded-md bg-black-300 px-4 text-xs"
+        class="absolute -left-1 -top-1 rounded-md bg-black-300 px-2 text-xs"
         [ngClass]="{ 'bg-gold-500 text-black-900': drawing.favorite }"
         >{{ i + 1 }}º</span
       >
