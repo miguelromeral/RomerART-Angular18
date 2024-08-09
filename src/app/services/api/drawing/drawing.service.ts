@@ -159,6 +159,12 @@ export class DrawingService {
       .pipe(catchError(this.handleError<Collection[]>('getAllCollections')));
   }
 
+  getCollectionDetails(id: string): Observable<Collection> {
+    return this.http
+      .get<Collection>(`${this.apiUrl}art/collection/details/${id}`)
+      .pipe(catchError(this.handleError<Collection>('getCollectionDetails')));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: HttpErrorResponse): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
