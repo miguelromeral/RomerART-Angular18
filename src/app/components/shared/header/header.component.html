@@ -1,8 +1,8 @@
 <header
-  class="header fixed left-0 right-0 top-0 flex h-3 flex-row justify-between py-0 text-xs"
+  class="header fixed left-0 right-0 top-0 flex h-3 flex-row-reverse justify-between py-0 text-xs"
   [ngClass]="{ development: !production, production: production }">
-  <span class="rounded-br-lg">{{ name }}</span>
   <span class="rounded-bl-lg">{{
     text('VERSION') | mrTranslate: { version }
   }}</span>
+  <span *ngIf="name !== ''" class="rounded-br-lg">{{ name }}</span>
 </header>

@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { AuthService } from '@app/services/api/auth/auth.service';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgClass, TranslateModule, CustomTranslatePipe],
+  imports: [NgClass, NgIf, TranslateModule, CustomTranslatePipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

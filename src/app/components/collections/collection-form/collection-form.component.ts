@@ -189,9 +189,10 @@ export class CollectionFormComponent
         this.listUsed = event.container.data;
         this.listAll = event.previousContainer.data;
       }
-      // Actualizar los dibujos en el formulario
-      this.form.controls.drawingsIds.setValue(this.listUsed.map(d => d.id));
     }
+    // Actualizar los dibujos en el formulario
+    this.form.controls.drawingsIds.setValue(this.listUsed.map(d => d.id));
+    console.log('Used:', this.form.controls.drawingsIds.value);
   }
 
   saveCollection() {

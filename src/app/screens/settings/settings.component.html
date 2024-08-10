@@ -41,7 +41,7 @@
         <div class="flex w-full flex-row flex-wrap justify-center gap-6">
           <div
             *ngFor="let provider of providers"
-            class="provider-card"
+            class="provider-card opacity-40 transition-all hover:opacity-100"
             [ngClass]="provider.class"
             [title]="provider.title">
             <img [src]="provider.img" [alt]="provider.title" />
