@@ -141,6 +141,7 @@ export class FilterFormComponent
     private route: ActivatedRoute
   ) {
     super('SCREENS.DRAWING-SEARCH.FORM');
+    this.setValuesFromQueryParams();
   }
 
   ngOnInit(): void {
@@ -247,7 +248,7 @@ export class FilterFormComponent
     this.isLoading.emit(true);
 
     const filters = new DrawingFilter(this.filterForm.value);
-
+    console.log('Filters: ', filters);
     // Prevent resubmitting the form when updating URL query params
     this.queryParamsSubscription?.unsubscribe();
     this.changeBasicArtUrl();
@@ -428,6 +429,7 @@ export class FilterFormComponent
 
   setValuesFromQueryParams() {
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+      // console.log('Reading Query Params', this.route.queryParams);
       this.setValueFromQueryParamsIntoForm(
         this.filterForm.controls.textQuery,
         params[ArtFilterFormConfig.queryParamsNames.textQuery]
@@ -464,13 +466,13 @@ export class FilterFormComponent
         this.filterForm.controls.paper,
         params[ArtFilterFormConfig.queryParamsNames.paper]
       );
-      this.setValueFromQueryParamsIntoForm(
+      this.setValueFromQueryParamsIntoFormBoolean(
         this.filterForm.controls.formSpotify,
-        params[ArtFilterFormConfig.queryParamsNames.spotify]
+        params[ArtFilterFormConfig.queryParamsNames.spotify] === 'true'
       );
-      this.setValueFromQueryParamsIntoForm(
+      this.setValueFromQueryParamsIntoFormBoolean(
         this.filterForm.controls.formFavorites,
-        params[ArtFilterFormConfig.queryParamsNames.favorites]
+        params[ArtFilterFormConfig.queryParamsNames.favorites] === 'true'
       );
       // console.log('Filtering from query params');
       this.submitFilter();
@@ -483,6 +485,15 @@ export class FilterFormComponent
       parameter !== '' &&
       parameter !== 'false'
     ) {
+      formControl.setValue(parameter);
+    }
+  }
+  setValueFromQueryParamsIntoFormBoolean(
+    formControl: FormControl,
+    parameter: boolean
+  ) {
+    console.log('form control: ', parameter);
+    if (parameter !== null && parameter !== undefined && parameter !== false) {
       formControl.setValue(parameter);
     }
   }
