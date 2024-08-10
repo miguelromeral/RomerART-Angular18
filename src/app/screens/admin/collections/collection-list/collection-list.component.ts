@@ -32,7 +32,7 @@ export class CollectionListComponent
     private drawingService: DrawingService,
     private router: Router
   ) {
-    super('SCREENS.ADMIN.COLLECTIONS.LIST');
+    super('SCREENS.MANAGE-COLLECTIONS');
   }
 
   ngOnInit() {

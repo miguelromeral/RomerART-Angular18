@@ -1,36 +1,38 @@
 <h3>{{ title }}</h3>
 <div
-  class="relative flex max-h-screen min-h-96 flex-col gap-4 overflow-y-scroll p-2"
+  class="relative flex max-h-screen min-h-96 flex-col gap-4 overflow-y-scroll border border-dashed border-main-200 py-2 dark:border-main-600"
   cdkDropList
   [cdkDropListConnectedTo]="connectedTo"
   [cdkDropListData]="drawings"
   (cdkDropListDropped)="dropItem($event)">
   <div
     *ngFor="let drawing of drawings; let i = index"
-    [cdkDragStartDelay]="{ touch: 200, mouse: 0 }"
+    [cdkDragStartDelay]="{ touch: 175, mouse: 0 }"
     cdkDrag
-    class="relative grid h-full w-full cursor-grabbing grid-cols-3 gap-2 rounded-md bg-black-700">
+    class="relative grid h-full w-full cursor-grabbing grid-cols-1 gap-2 rounded-md bg-white-100 dark:bg-black-700 sm:grid-cols-3">
     <img
-      class="aspect-square rounded-md object-cover"
+      class="aspect-square w-full rounded-md object-cover"
       [src]="drawing.urlThumbnail"
       [alt]="drawing.name" />
     <div class="col-span-2 flex flex-col gap-3">
       <span
-        class="absolute -left-1 -top-1 rounded-md bg-black-300 px-2 text-xs"
+        class="absolute -left-1 -top-1 rounded-md bg-white-500 px-2 text-xs dark:bg-black-300"
         [ngClass]="{ 'bg-gold-500 text-black-900': drawing.favorite }"
         >{{ i + 1 }}º</span
       >
       <div class="flex flex-col gap-1">
         <span>{{ drawing.name }}</span>
-        <span class="text-xs text-white-950">{{ drawing.modelName }}</span>
+        <span class="text-xs dark:text-black-100">{{ drawing.modelName }}</span>
       </div>
-      <span class="text-sm text-main-400">{{ drawing.title }}</span>
+      <span class="text-sm text-main-700 dark:text-main-400">{{
+        drawing.title
+      }}</span>
     </div>
   </div>
   <div
     *ngIf="drawings.length === 0"
-    class="absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center border border-main-300 dark:text-white-950">
+    class="absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center border-dashed border-main-300 text-black-100 dark:text-white-950">
     <i class="bi bi-arrow-right-square text-2xl"></i>
-    <span> SOLTAR AQUÍ </span>
+    <span> {{ text('FORM.DRAWINGS.DROP-HERE') | mrTranslate }} </span>
   </div>
 </div>

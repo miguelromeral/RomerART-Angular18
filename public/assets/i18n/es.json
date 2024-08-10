@@ -93,7 +93,8 @@
         "AUTH": {
           "TITLE": "Identifícarse",
           "DESCRIPTION": "Inicia sesión como administrador y edita el contenido de la web.",
-          "GO-TO-LOGIN": "Iniciar Sesión"
+          "GO-TO-LOGIN": "Iniciar Sesión",
+          "GO-TO-ADMIN": "Administración"
         }
       }
     },
@@ -314,6 +315,67 @@
         "ERROR-ON-SAVE": {
           "TITLE": "Error",
           "MESSAGE": "Ha ocurrido un error al guardar el dibujo \"{{values.id}}\". Inténtelo de nuevo"
+        }
+      }
+    },
+    "ADMIN": {
+      "SECTIONS": {
+        "COLLECTIONS": "Colecciones"
+      },
+      "LINKS": {
+        "COLLECTIONS": "Administrar Colecciones",
+        "LOGOUT": "Cerrar Sesión"
+      }
+    },
+    "MANAGE-COLLECTIONS": {
+      "TITLE": "Colecciones",
+      "FORM": {
+        "CREATE": "Crear",
+        "EDIT": "Editar"
+      }
+    },
+    "COLLECTION-FORM": {
+      "SECTIONS": {
+        "MAIN-DATA": "Datos Principales",
+        "DRAWINGS": "Dibujos"
+      },
+      "FORM": {
+        "ID": {
+          "TITLE": "ID",
+          "PLACEHOLDER": "Identificador Único"
+        },
+        "ORDER": {
+          "TITLE": "Orden",
+          "PLACEHOLDER": "Orden en el que debería aparecer"
+        },
+        "NAME": {
+          "TITLE": "Nombre",
+          "PLACEHOLDER": "Nombre con el que se mostrará"
+        },
+        "DESCRIPTION": {
+          "TITLE": "Descripción",
+          "PLACEHOLDER": "Descripción de la colección"
+        },
+        "DELETE": "Eliminar Colección",
+        "SAVE": "Guardar",
+        "DRAWINGS": {
+          "NOT-USED": "Restantes",
+          "USED": "Seleccionados",
+          "DROP-HERE": "Soltar Aquí"
+        }
+      },
+      "ALERTS": {
+        "DUPLICATE-ID": {
+          "TITLE": "ID Duplicado",
+          "MESSAGE": "La colección con ese ID ya existe. Pruebe con otro ID"
+        },
+        "SAVED": {
+          "TITLE": "¡Guardado!",
+          "MESSAGE": "Colección guardada con éxito"
+        },
+        "ERROR-ON-SAVE": {
+          "TITLE": "Error al guardar",
+          "MESSAGE": "Ha ocurrido un error al guardar la colección"
         }
       }
     }

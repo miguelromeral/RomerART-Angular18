@@ -41,6 +41,7 @@ import { Router } from '@angular/router';
     CollectionDrawingListComponent,
     CollectionFormComponent,
   ],
+  providers: [CustomTranslatePipe],
   templateUrl: './collection-form.component.html',
   styleUrl: './collection-form.component.scss',
 })
@@ -94,10 +95,10 @@ export class CollectionFormComponent
   constructor(
     private drawingService: DrawingService,
     private alertService: AlertService,
-    private router: Router
-    // private customTranslate: CustomTranslatePipe
+    private router: Router,
+    private customTranslate: CustomTranslatePipe
   ) {
-    super('SCREENS.ADMIN.COLLECTIONS.EDIT');
+    super('SCREENS.COLLECTION-FORM');
   }
 
   ngOnInit() {
@@ -130,17 +131,15 @@ export class CollectionFormComponent
       this.duplicateId = resp;
       if (this.duplicateId) {
         this.alertService.showAlert(
-          // this.customTranslate.transform(
-          //   this.text('ALERTS.DUPLICATE-ID.TITLE')
-          // ),
-          // this.customTranslate.transform(
-          //   this.text('ALERTS.DUPLICATE-ID.MESSAGE'),
-          //   {
-          //     id: value,
-          //   }
-          // ),
-          'MAL',
-          'DUPLCIADO'
+          this.customTranslate.transform(
+            this.text('ALERTS.DUPLICATE-ID.TITLE')
+          ),
+          this.customTranslate.transform(
+            this.text('ALERTS.DUPLICATE-ID.MESSAGE'),
+            {
+              id: value,
+            }
+          )
         );
       }
     });
@@ -194,7 +193,6 @@ export class CollectionFormComponent
   }
 
   saveCollection() {
-    console.log(this.form.value);
     const values = this.form.value;
 
     const formData: ISaveCollectionRequest = {
@@ -207,28 +205,27 @@ export class CollectionFormComponent
     };
 
     this.drawingService.saveCollection(formData).subscribe(resp => {
-      // console.log('Respuesta: ', resp);
       if (resp) {
         this._collection.id = resp.id;
         this.newCollection = false;
         this.form.controls.isEditing.setValue(true);
 
-        // this.alertService.showAlert(
-        //   this.customTranslate.transform(this.text('ALERTS.SAVED.TITLE')),
-        //   this.customTranslate.transform(this.text('ALERTS.SAVED.MESSAGE'), {
-        //     id: values.id,
-        //   })
-        // );
+        this.alertService.showAlert(
+          this.customTranslate.transform(this.text('ALERTS.SAVED.TITLE')),
+          this.customTranslate.transform(this.text('ALERTS.SAVED.MESSAGE'), {
+            id: values.id,
+          })
+        );
       } else {
-        // this.alertService.showAlert(
-        // this.customTranslate.transform(
-        //   this.text('ALERTS.ERROR-ON-SAVE.TITLE')
-        // ),
-        // this.customTranslate.transform(
-        //   this.text('ALERTS.ERROR-ON-SAVE.MESSAGE'),
-        //   { id: values.id }
-        // )
-        // );
+        this.alertService.showAlert(
+          this.customTranslate.transform(
+            this.text('ALERTS.ERROR-ON-SAVE.TITLE')
+          ),
+          this.customTranslate.transform(
+            this.text('ALERTS.ERROR-ON-SAVE.MESSAGE'),
+            { id: values.id }
+          )
+        );
       }
     });
   }

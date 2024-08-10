@@ -2,13 +2,13 @@
   [formGroup]="form"
   (submit)="saveCollection()"
   class="flex flex-col gap-10">
-  <app-section [title]="'DATOS-BASICOS'">
+  <app-section [title]="text('SECTIONS.MAIN-DATA') | mrTranslate">
     <div class="grid grid-cols-3 gap-5">
       <app-text-input
         *ngIf="newCollection; else idEdit"
         class="col-span-2"
-        [label]="'ID'"
-        [placeholder]="'ID'"
+        [label]="text('FORM.ID.TITLE') | mrTranslate"
+        [placeholder]="text('FORM.ID.LABEL') | mrTranslate"
         (change)="checkCollectionId($event)"
         formControlName="id">
       </app-text-input>
@@ -18,57 +18,52 @@
       </ng-template>
 
       <app-text-input
-        [label]="'ORDER'"
+        [label]="text('FORM.ORDER.TITLE') | mrTranslate"
         [type]="'number'"
-        [placeholder]="'ORDER'"
+        [placeholder]="text('FORM.ORDER.PLACEHOLDER') | mrTranslate"
         formControlName="order">
       </app-text-input>
       <app-text-input
-        [label]="'NAME'"
+        [label]="text('FORM.NAME.TITLE') | mrTranslate"
         class="col-span-3"
-        [placeholder]="'NAME'"
+        [placeholder]="text('FORM.NAME.PLACEHOLDER') | mrTranslate"
         formControlName="name">
       </app-text-input>
 
       <app-text-input
-        [label]="'DESCRIPTION'"
+        [label]="text('FORM.DESCRIPTION.TITLE') | mrTranslate"
         class="col-span-3"
-        [placeholder]="'DESCRIPTION'"
+        [placeholder]="text('FORM.DESCRIPTION.PLACEHOLDER') | mrTranslate"
         formControlName="description">
       </app-text-input>
 
-      <button type="button mr-custom-btn" (click)="deleteCollection()">
-        DELETE
-      </button>
-
-      <div></div>
+      <div class="col-span-2"></div>
 
       <button class="btn" type="submit">
-        <ng-container *ngIf="newCollection; else btnSaveEditForm">
-          {{ text('FORM.SAVE.CREATE') | mrTranslate }}
-        </ng-container>
-        <ng-template #btnSaveEditForm>
-          {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: collection?.id } }}
-        </ng-template>
+        {{ text('FORM.SAVE') | mrTranslate }}
       </button>
     </div>
   </app-section>
 
-  <app-section [title]="'DIBUJOS'">
-    <div class="grid grid-cols-2 gap-10" cdkDropListGroup>
+  <app-section [title]="text('SECTIONS.DRAWINGS') | mrTranslate">
+    <div class="grid grid-cols-2 gap-2" cdkDropListGroup>
       <app-collection-drawing-list
         [drawings]="listAll"
         class="opacity-40 transition-all hover:opacity-100"
-        [title]="'RESTANTES'"
+        [title]="text('FORM.DRAWINGS.NOT-USED') | mrTranslate"
         [connectedTo]="['listUsed']"
         (requestDrop)="drop($event, 'all')">
       </app-collection-drawing-list>
       <app-collection-drawing-list
         [drawings]="listUsed"
-        [title]="'ELEGIDOS'"
+        [title]="text('FORM.DRAWINGS.USED') | mrTranslate"
         [connectedTo]="['listAll']"
         (requestDrop)="drop($event, 'used')">
       </app-collection-drawing-list>
     </div>
   </app-section>
 </form>
+
+<button type="button mr-custom-btn" (click)="deleteCollection()">
+  {{ text('FORM.DELETE') | mrTranslate }}
+</button>

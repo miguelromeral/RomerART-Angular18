@@ -1,9 +1,13 @@
 <app-layout>
-  <app-section [title]="'EDIT COLLECTIONS'">
+  <app-section [title]="text('SECTIONS.COLLECTIONS') | mrTranslate">
     <a routerLink="/admin/collections">
-      {{ text('GO-TO-COLLECTIONS') | mrTranslate }}
+      {{ text('LINKS.COLLECTIONS') | mrTranslate }}
     </a>
   </app-section>
 
-  <button class="btn" (click)="logout()">LOG OUT</button>
+  <div class="mt-20 flex justify-end">
+    <button class="btn" (click)="logout()">
+      {{ text('LINKS.LOGOUT') | mrTranslate }}
+    </button>
+  </div>
 </app-layout>

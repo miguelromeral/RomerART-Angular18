@@ -10,7 +10,6 @@ import { TextInputComponent } from '@app/components/shared/inputs/text-input/tex
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
-import { UploadAzureImageRequest } from '@models/requests/upload-azure-image-request.model';
 import { UploadAzureImageResponse } from '@models/responses/upload-azure-image.response';
 import { TranslateModule } from '@ngx-translate/core';
 

@@ -5,10 +5,15 @@
       {{ collection.name }}
     </h2>
     <div class="flex flex-row items-end gap-3">
-      <h6>
+      <h6 class="dark:text-white-950">
         {{ collection.id }}
       </h6>
-      <button class="btn" (click)="goToEdit()">EDIT</button>
+      <h6 class="dark:text-main-400">
+        {{ collection.order }}
+      </h6>
+      <button class="btn" (click)="goToEdit()">
+        {{ text('FORM.EDIT') | mrTranslate }}
+      </button>
     </div>
   </div>
   <div class="grid grid-cols-6 gap-[2px]" *ngIf="hasDrawings">
