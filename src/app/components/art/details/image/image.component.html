@@ -59,7 +59,7 @@
     *ngIf="drawing"
     class="my-2 flex flex-row flex-nowrap justify-between text-2xl">
     <div
-      class="flex select-none flex-row flex-nowrap gap-4"
+      class="flex select-none flex-row flex-nowrap items-center gap-4"
       [title]="drawing.likes + ' kudos'">
       <form id="cheerForm">
         <input type="hidden" name="id" [value]="drawing.id" />
@@ -98,6 +98,22 @@
           </button>
         </div>
       </app-loading>
+
+      <a
+        *ngIf="drawing.twitterUrl !== ''"
+        [href]="drawing.twitterUrl"
+        target="_blank"
+        class="btn-image">
+        <i class="bi bi-twitter-x"></i>
+      </a>
+
+      <a
+        *ngIf="drawing.instagramUrl !== ''"
+        [href]="drawing.instagramUrl"
+        target="_blank"
+        class="btn-image">
+        <i class="bi bi-instagram"></i>
+      </a>
 
       <button
         *ngIf="!loading && admin"

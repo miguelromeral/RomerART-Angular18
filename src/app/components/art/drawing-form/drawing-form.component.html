@@ -323,6 +323,25 @@
     </div>
 
     <div class="seccion">
+      <h2 class="seccion-title">
+        {{ text('SECTIONS.SOCIAL') | mrTranslate }}
+      </h2>
+      <div class="content">
+        <app-text-input
+          formControlName="twitterUrl"
+          [placeholder]="text('FORM.TWITTER.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.TWITTER.TITLE') | mrTranslate">
+        </app-text-input>
+
+        <app-text-input
+          formControlName="instagramUrl"
+          [placeholder]="text('FORM.INSTAGRAM.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.INSTAGRAM.TITLE') | mrTranslate">
+        </app-text-input>
+      </div>
+    </div>
+
+    <div class="seccion">
       <h2 class="seccion-title">{{ text('FORM.TAGS.TITLE') | mrTranslate }}</h2>
       <div class="content">
         <app-text-input

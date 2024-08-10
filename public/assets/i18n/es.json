@@ -218,7 +218,8 @@
         "IMAGE": "Imagen en Azure",
         "STYLE": "Estilo",
         "DETAILS": "Detalles",
-        "REFERENCES": "Referencias"
+        "REFERENCES": "Referencias",
+        "SOCIAL": "Redes Sociales"
       },
       "FORM": {
         "SAVE": {
@@ -288,6 +289,14 @@
           "TITLE": "Canción de Spotify",
           "PLACEHOLDER": "URL de Canción de Spotify"
         },
+        "INSTAGRAM": {
+          "TITLE": "Instagram",
+          "PLACEHOLDER": "URL de la publicación en Instagram"
+        },
+        "TWITTER": {
+          "TITLE": "Twitter",
+          "PLACEHOLDER": "URL de la publicación en Twitter"
+        },
         "VISIBLE": {
           "TITLE": "Visible"
         }
@@ -314,7 +323,7 @@
         },
         "ERROR-ON-SAVE": {
           "TITLE": "Error",
-          "MESSAGE": "Ha ocurrido un error al guardar el dibujo \"{{values.id}}\". Inténtelo de nuevo"
+          "MESSAGE": "Ha ocurrido un error al guardar el dibujo \"{{id}}\". Inténtelo de nuevo"
         }
       }
     },

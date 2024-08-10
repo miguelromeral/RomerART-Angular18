@@ -4,7 +4,6 @@ import { Drawing } from '@models/art/drawing.model';
 import { ScoreBoardComponent } from '../score-board/score-board.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { HeartUtils } from 'utils/customization/heart-utils';
-import { environment } from 'environments/environment';
 import { TextUtils } from 'utils/customization/text-utils';
 import { DrawingScoreComponent } from '../../drawing-score/drawing-score.component';
 import { LanguageComponent } from '@models/components/LanguageComponent';

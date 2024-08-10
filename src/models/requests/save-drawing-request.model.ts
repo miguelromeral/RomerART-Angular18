@@ -9,6 +9,8 @@ export interface ISaveDrawingRequest {
   name: string;
   modelName: string;
   spotifyUrl: string;
+  twitterUrl: string;
+  instagramUrl: string;
   title: string;
   dateHyphen: string;
   software: number;

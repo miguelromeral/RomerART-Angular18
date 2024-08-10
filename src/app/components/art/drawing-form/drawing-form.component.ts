@@ -123,6 +123,8 @@ export class DrawingFormComponent extends LanguageComponent {
     tagsText: new FormControl(''),
     referenceUrl: new FormControl(''),
     spotifyUrl: new FormControl(''),
+    instagramUrl: new FormControl(''),
+    twitterUrl: new FormControl(''),
     visible: new FormControl(true, Validators.required),
   });
 
@@ -203,6 +205,8 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.referenceUrl.setValue(drawing.referenceUrl);
     this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);
     this.form.controls.visible.setValue(drawing.visible);
+    this.form.controls.twitterUrl.setValue(drawing.twitterUrl);
+    this.form.controls.instagramUrl.setValue(drawing.instagramUrl);
   }
 
   updateTime(event: Event) {
@@ -323,6 +327,8 @@ export class DrawingFormComponent extends LanguageComponent {
       title: values.title!,
       type: values.type!,
       visible: values.visible!,
+      twitterUrl: values.twitterUrl!,
+      instagramUrl: values.instagramUrl!,
     };
     this.drawingService.saveDrawing(formData).subscribe(resp => {
       // console.log('Respuesta: ', resp);

@@ -47,6 +47,8 @@ export class Drawing {
   isTraditional: boolean;
   formattedDate: string;
   formattedDateMini: string;
+  instagramUrl: string;
+  twitterUrl: string;
 
   constructor(data: Partial<Drawing> = {}) {
     this.id = data.id || '';
@@ -95,6 +97,8 @@ export class Drawing {
     this.isTraditional = data.isTraditional || false;
     this.formattedDate = data.formattedDate || '';
     this.formattedDateMini = data.formattedDateMini || '';
+    this.instagramUrl = data.instagramUrl || '';
+    this.twitterUrl = data.twitterUrl || '';
   }
 
   pageTitle(): string {
