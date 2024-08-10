@@ -1,14 +1,18 @@
 header {
-  backdrop-filter: blur(5px);
   z-index: 1000000;
 }
 
-.header.development {
+header span {
+  @apply px-3 text-xs;
+  backdrop-filter: blur(5px);
+}
+
+.header.development span {
   background-color: var(--header-background-color-development);
   color: var(--header-color-development);
 }
 
-.header.production {
+.header.production span {
   background-color: var(--header-background-color-production);
   color: var(--header-color-production);
 }
