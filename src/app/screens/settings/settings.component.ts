@@ -1,6 +1,5 @@
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { SettingSectionComponent } from '@app/components/settings/setting-section/setting-section.component';
 import { LanguageService } from '@app/services/language/language.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
@@ -18,6 +17,8 @@ import { SettingOptionComponent } from '@app/components/settings/setting-option/
 import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { SectionComponent } from '@app/components/shared/section/section.component';
+import { providersConfigList } from 'config/data/providers.config';
 
 @Component({
   selector: 'app-settings',
@@ -26,14 +27,15 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
     TranslateModule,
     CustomTranslatePipe,
     NgFor,
-    SettingSectionComponent,
     SettingOptionComponent,
     LayoutComponent,
     LayoutComponent,
     CustomTranslatePipe,
+    NgClass,
     RouterLink,
     ReactiveFormsModule,
     SelectInputComponent,
+    SectionComponent,
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
@@ -44,6 +46,8 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
 
   languages: ICustomSelectOption[] = settingLanguage.options;
   themes: ICustomSelectOption[] = settingTheme.options;
+
+  providers = providersConfigList;
 
   settingsForm = new FormGroup({
     langFormControl: new FormControl('en'),

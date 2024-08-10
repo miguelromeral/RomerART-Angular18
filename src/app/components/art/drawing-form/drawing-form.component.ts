@@ -13,7 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
 import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.component';
 import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
@@ -32,7 +32,6 @@ import { DrawingScoreComponent } from '../drawing-score/drawing-score.component'
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
 import { DrawingFormCommentsComponent } from '../drawing-form-comments/drawing-form-comments.component';
 import { DateInputComponent } from '@app/components/shared/inputs/date-input/date-input.component';
-import { SettingSectionComponent } from '@app/components/settings/setting-section/setting-section.component';
 import { DrawingThumbnailComponent } from '../drawing-thumbnail/drawing-thumbnail.component';
 import { AzureImageFormComponent } from '../azure-image-form/azure-image-form.component';
 import { UploadAzureImageResponse } from '@models/responses/upload-azure-image.response';
@@ -42,6 +41,7 @@ import { getFormErrors } from '@utils/form-control.utils';
 import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model';
 import { AlertService } from '@app/services/alerts/alert.service';
 import { notValidValueValidator } from '@app/validators/not-valid-value.validator';
+import { SectionComponent } from '@app/components/shared/section/section.component';
 
 @Component({
   selector: 'app-drawing-form',
@@ -58,9 +58,9 @@ import { notValidValueValidator } from '@app/validators/not-valid-value.validato
     TextInputComponent,
     SelectInputComponent,
     DrawingScoreComponent,
+    SectionComponent,
     DrawingFormCommentsComponent,
     DateInputComponent,
-    SettingSectionComponent,
     DrawingThumbnailComponent,
     AzureImageFormComponent,
   ],
@@ -162,7 +162,8 @@ export class DrawingFormComponent extends LanguageComponent {
     private alertService: AlertService,
     private metadataService: MetadataService,
     private customTranslate: CustomTranslatePipe,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private router: Router
   ) {
     super('SCREENS.DRAWING-FORM');
     this.listDrawingStyles = this.drawingService.getDrawingStyles();
@@ -344,6 +345,7 @@ export class DrawingFormComponent extends LanguageComponent {
             id: values.id,
           })
         );
+        this.router.navigate([`art/details/${resp.id}`]);
       } else {
         this.alertService.showAlert(
           this.customTranslate.transform(

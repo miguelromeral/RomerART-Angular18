@@ -76,7 +76,8 @@
       "DESCRIPTION": "Cambia el comportamiento y el estilo de la aplicación para personalizar tu experiencia.",
       "SECTIONS": {
         "ACCESSIBILITY": "Accesibilidad",
-        "ACCOUNT": "Cuenta"
+        "ACCOUNT": "Cuenta",
+        "PROVIDERS": "Proveedores"
       },
       "FORM": {
         "CHANGE-LANGUAGE": {

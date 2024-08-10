@@ -33,9 +33,8 @@
       </div>
     </div>
 
-    <div class="seccion">
-      <h2 class="seccion-title">{{ text('SECTIONS.IMAGE') | mrTranslate }}</h2>
-      <div class="content">
+    <app-section [title]="text('SECTIONS.IMAGE') | mrTranslate">
+      <div class="seccion-content">
         <div class="image-container">
           <img
             #image
@@ -70,13 +69,9 @@
           </app-azure-image-form>
         </div>
       </div>
-    </div>
-
-    <div class="seccion">
-      <h2 class="seccion-title">
-        {{ text('FORM.TITLE.TITLE') | mrTranslate }}
-      </h2>
-      <div class="content items-end">
+    </app-section>
+    <app-section [title]="text('FORM.TITLE.TITLE') | mrTranslate">
+      <div class="seccion-content items-end">
         <app-text-input
           class="col-span-1 sm:col-span-2"
           formControlName="title"
@@ -91,11 +86,9 @@
           </app-switch>
         </div>
       </div>
-    </div>
-
-    <div class="seccion">
-      <h2 class="seccion-title">{{ text('SECTIONS.NAMES') | mrTranslate }}</h2>
-      <div class="content">
+    </app-section>
+    <app-section [title]="text('SECTIONS.NAMES') | mrTranslate">
+      <div class="seccion-content">
         <app-text-input
           formControlName="name"
           [placeholder]="text('FORM.NAME.PLACEHOLDER') | mrTranslate"
@@ -108,13 +101,10 @@
           [label]="text('FORM.MODEL-NAME.TITLE') | mrTranslate">
         </app-text-input>
       </div>
-    </div>
+    </app-section>
 
-    <div class="seccion">
-      <h2 class="seccion-title">
-        {{ text('FORM.PRODUCT.TITLE') | mrTranslate }}
-      </h2>
-      <div class="content">
+    <app-section [title]="text('FORM.PRODUCT.TITLE') | mrTranslate">
+      <div class="seccion-content">
         <div>
           <app-select-input
             [firstOption]="{
@@ -142,11 +132,9 @@
           [placeholder]="text('FORM.PRODUCT.PLACEHOLDER') | mrTranslate">
         </app-text-input>
       </div>
-    </div>
-
-    <div class="seccion">
-      <h2 class="seccion-title">{{ text('SECTIONS.STYLE') | mrTranslate }}</h2>
-      <div class="content">
+    </app-section>
+    <app-section [title]="text('SECTIONS.STYLE') | mrTranslate">
+      <div class="seccion-content">
         <div>
           <app-select-input
             [firstOption]="{
@@ -189,13 +177,10 @@
           formControlName="paper">
         </app-select-input>
       </div>
-    </div>
+    </app-section>
 
-    <div class="seccion">
-      <h2 class="seccion-title">
-        {{ text('SECTIONS.DETAILS') | mrTranslate }}
-      </h2>
-      <div class="content">
+    <app-section [title]="text('SECTIONS.DETAILS') | mrTranslate">
+      <div class="seccion-content">
         <div>
           <app-date-input
             formControlName="dateHyphen"
@@ -250,13 +235,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </app-section>
 
-    <div class="seccion">
-      <h2 class="seccion-title">
-        {{ text('FORM.COMMENTS.TITLE') | mrTranslate }}
-      </h2>
-      <div class="content">
+    <app-section [title]="text('FORM.COMMENTS.TITLE') | mrTranslate">
+      <div class="seccion-content">
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
           [formArrayName]="'listComments'"
@@ -265,13 +247,10 @@
           [placeholder]="text('FORM.COMMENTS.PLACEHOLDER') | mrTranslate">
         </app-drawing-form-comments>
       </div>
-    </div>
+    </app-section>
 
-    <div class="seccion">
-      <h2 class="seccion-title">
-        {{ text('FORM.COMMENTS-PROS.TITLE') | mrTranslate }}
-      </h2>
-      <div class="content">
+    <app-section [title]="text('FORM.COMMENTS-PROS.TITLE') | mrTranslate">
+      <div class="seccion-content">
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
           [formArrayName]="'listCommentPros'"
@@ -280,13 +259,9 @@
           [placeholder]="text('FORM.COMMENTS-PROS.PLACEHOLDER') | mrTranslate">
         </app-drawing-form-comments>
       </div>
-    </div>
-
-    <div class="seccion">
-      <h2 class="seccion-title">
-        {{ text('FORM.COMMENTS-CONS.TITLE') | mrTranslate }}
-      </h2>
-      <div class="content">
+    </app-section>
+    <app-section [title]="text('FORM.COMMENTS-CONS.TITLE') | mrTranslate">
+      <div class="seccion-content">
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
           [formArrayName]="'listCommentCons'"
@@ -295,13 +270,10 @@
           [placeholder]="text('FORM.COMMENTS-CONS.PLACEHOLDER') | mrTranslate">
         </app-drawing-form-comments>
       </div>
-    </div>
+    </app-section>
 
-    <div class="seccion">
-      <h2 class="seccion-title">
-        {{ text('SECTIONS.REFERENCES') | mrTranslate }}
-      </h2>
-      <div class="content items-end">
+    <app-section [title]="text('SECTIONS.REFERENCES') | mrTranslate">
+      <div class="seccion-content items-end">
         <app-text-input
           formControlName="referenceUrl"
           [placeholder]="text('FORM.REFERENCE.PLACEHOLDER') | mrTranslate"
@@ -320,13 +292,10 @@
           [formControl]="form.controls.visible">
         </app-switch>
       </div>
-    </div>
+    </app-section>
 
-    <div class="seccion">
-      <h2 class="seccion-title">
-        {{ text('SECTIONS.SOCIAL') | mrTranslate }}
-      </h2>
-      <div class="content">
+    <app-section [title]="text('SECTIONS.SOCIAL') | mrTranslate">
+      <div class="seccion-content">
         <app-text-input
           formControlName="twitterUrl"
           [placeholder]="text('FORM.TWITTER.PLACEHOLDER') | mrTranslate"
@@ -339,18 +308,16 @@
           [label]="text('FORM.INSTAGRAM.TITLE') | mrTranslate">
         </app-text-input>
       </div>
-    </div>
-
-    <div class="seccion">
-      <h2 class="seccion-title">{{ text('FORM.TAGS.TITLE') | mrTranslate }}</h2>
-      <div class="content">
+    </app-section>
+    <app-section [title]="text('FORM.TAGS.TITLE') | mrTranslate">
+      <div class="seccion-content">
         <app-text-input
           class="col-span-1 sm:col-span-3"
           formControlName="tagsText"
           [placeholder]="text('FORM.TAGS.PLACEHOLDER') | mrTranslate">
         </app-text-input>
       </div>
-    </div>
+    </app-section>
 
     <div class="col-span-1 sm:col-span-3">
       <div *ngIf="!validForm; else formValid" class="form-error">

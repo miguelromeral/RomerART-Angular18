@@ -1,0 +1,7 @@
+.provider-card {
+  @apply w-24 h-12 rounded-md flex flex-col items-center justify-center py-1 px-2;
+
+  img {
+    @apply w-full h-full object-contain;
+  }
+}
