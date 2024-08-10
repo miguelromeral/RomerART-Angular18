@@ -8,7 +8,7 @@
         *ngIf="newCollection; else idEdit"
         class="col-span-2"
         [label]="text('FORM.ID.TITLE') | mrTranslate"
-        [placeholder]="text('FORM.ID.LABEL') | mrTranslate"
+        [placeholder]="text('FORM.ID.PLACEHOLDER') | mrTranslate"
         (change)="checkCollectionId($event)"
         formControlName="id">
       </app-text-input>

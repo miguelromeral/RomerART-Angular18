@@ -367,7 +367,7 @@
       "ALERTS": {
         "DUPLICATE-ID": {
           "TITLE": "ID Duplicado",
-          "MESSAGE": "La colección con ese ID ya existe. Pruebe con otro ID"
+          "MESSAGE": "La colección con ID \"{{id}}\" ya existe. Pruebe con otro ID"
         },
         "SAVED": {
           "TITLE": "¡Guardado!",
