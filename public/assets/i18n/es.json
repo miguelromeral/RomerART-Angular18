@@ -30,7 +30,7 @@
   "SCREENS": {
     "HOME": {
       "TITLE": "RomerART",
-      "SUBTITLE": "Bienvenido a mi galería de arte",
+      "SUBTITLE": "¡Bienvenido a mi galería de arte!",
       "DRAWINGS": {
         "NEW-UPLOADS": "Echa un vistazo a algunos de los dibujos subidos",
         "GO-TO-GALLERY": "Ver Galería Completa"

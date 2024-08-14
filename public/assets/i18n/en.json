@@ -1,6 +1,4 @@
 {
-  "TITLE": "Hello",
-  "DESCRIPTION": "This is an example.",
   "DATA": {
     "DRAWING": {
       "STYLES": {
@@ -31,7 +29,18 @@
   },
   "SCREENS": {
     "HOME": {
-      "TITLE": "MiguelRomeral"
+      "TITLE": "RomerART",
+      "SUBTITLE": "Welcome to my art gallery!",
+      "DRAWINGS": {
+        "NEW-UPLOADS": "Take a look to a few uploaded drawings",
+        "GO-TO-GALLERY": "View Full Gallery"
+      },
+      "ABOUT": {
+        "GO-TO-ABOUT": "About Me"
+      },
+      "LINKS": {
+        "TITLE": "Other Links"
+      }
     },
     "NOT-FOUND": {
       "TITLE": "Page not found"
@@ -269,66 +278,127 @@
         },
         "COMMENTS": {
           "TITLE": "Comments",
-          "PLACEHOLDER": "Comments for the drawing"
+          "PLACEHOLDER": "Comments for the drawing",
+          "ADD-COMMENT": "Add Comment"
         },
-        "SOFTWARE": {
-          "TITLE": "Software",
-          "PLACEHOLDER": "Software used"
+        "COMMENTS-PROS": {
+          "TITLE": "Positive Comments",
+          "PLACEHOLDER": "Positive Comment"
         },
-        "PAPER": {
-          "TITLE": "Paper Size",
-          "PLACEHOLDER": "Size of the paper"
+        "COMMENTS-CONS": {
+          "TITLE": "Negative Comments",
+          "PLACEHOLDER": "Negative Comment"
+        },
+        "TAGS": {
+          "TITLE": "Tags",
+          "PLACEHOLDER": "Tags separated by spaces"
+        },
+        "REFERENCE": {
+          "TITLE": "Reference Image",
+          "PLACEHOLDER": "URL Reference Image"
         },
         "SPOTIFY": {
           "TITLE": "Spotify Track",
-          "PLACEHOLDER": "Spotify Track"
+          "PLACEHOLDER": "URL de Canción de Spotify"
         },
-        "LINK-REFERENCE": {
-          "TITLE": "Link Reference",
-          "PLACEHOLDER": "URL"
+        "INSTAGRAM": {
+          "TITLE": "Instagram",
+          "PLACEHOLDER": "URL Instagram Post"
         },
-        "LINK-VIDEO": {
-          "TITLE": "Video URL",
-          "PLACEHOLDER": "URL"
+        "TWITTER": {
+          "TITLE": "Twitter",
+          "PLACEHOLDER": "URL Twitter Post"
         },
-        "LINK-INSTAGRAM": {
-          "TITLE": "Instagram URL",
-          "PLACEHOLDER": "URL"
+        "VISIBLE": {
+          "TITLE": "Visible"
+        }
+      },
+      "ERRORS": {
+        "DUPLICATE-ID": "ERROR: the drawing with ID \"{{id}}\" already exists"
+      },
+      "ALERTS": {
+        "DUPLICATE-ID": {
+          "TITLE": "Duplicated ID",
+          "MESSAGE": "The ID \"{{id}}\" is already used. Try again with other value"
         },
-        "LINK-TWITTER": {
-          "TITLE": "Twitter URL",
-          "PLACEHOLDER": "URL"
+        "IMAGE-NOT-FOUND": {
+          "TITLE": "Image Not Fouund",
+          "MESSAGE": "No image was found on path \"{{path}}\". You can change the path if already exists or upload a new image in this path"
         },
-        "LINK-ARTSTATION": {
-          "TITLE": "Artstation URL",
-          "PLACEHOLDER": "URL"
+        "ERROR-CHECK-AZURE-PATH": {
+          "TITLE": "Error",
+          "MESSAGE": "Error when checking the image path. Try again"
         },
-        "LINK-PIXIV": {
-          "TITLE": "Pixiv URL",
-          "PLACEHOLDER": "URL"
+        "SAVED": {
+          "TITLE": "Saved!",
+          "MESSAGE": "The drawing \"{{id}}\" has been successfully saved"
         },
-        "LINK-DEVIANTART": {
-          "TITLE": "DeviantArt URL",
-          "PLACEHOLDER": "URL"
+        "ERROR-ON-SAVE": {
+          "TITLE": "Error",
+          "MESSAGE": "Error when saving drawing \"{{id}}\". Try again"
+        }
+      }
+    },
+    "ADMIN": {
+      "SECTIONS": {
+        "COLLECTIONS": "Collections"
+      },
+      "LINKS": {
+        "COLLECTIONS": "Manage Collections",
+        "LOGOUT": "Log Out"
+      }
+    },
+    "MANAGE-COLLECTIONS": {
+      "TITLE": "Collections",
+      "FORM": {
+        "CREATE": "Create",
+        "EDIT": "Edit"
+      }
+    },
+    "COLLECTION-FORM": {
+      "SECTIONS": {
+        "MAIN-DATA": "Main Data",
+        "DRAWINGS": "Drawings"
+      },
+      "FORM": {
+        "ID": {
+          "TITLE": "ID",
+          "PLACEHOLDER": "Unique Identifier"
         },
-        "LINK-YOUTUBE": {
-          "TITLE": "YouTube URL",
-          "PLACEHOLDER": "URL"
+        "ORDER": {
+          "TITLE": "Order",
+          "PLACEHOLDER": "Order in which it should be shown"
         },
-        "LINK-TUMBLR": {
-          "TITLE": "Tumblr URL",
-          "PLACEHOLDER": "URL"
+        "NAME": {
+          "TITLE": "Name",
+          "PLACEHOLDER": "Name to display"
         },
-        "SAVE-ON-DB": {
-          "TITLE": "Save Drawing on DB"
+        "DESCRIPTION": {
+          "TITLE": "Description",
+          "PLACEHOLDER": "Collection's description"
+        },
+        "DELETE": "Delete Collection",
+        "SAVE": "Save",
+        "DRAWINGS": {
+          "NOT-USED": "Remaining",
+          "USED": "Selected",
+          "DROP-HERE": "Drop Here"
+        }
+      },
+      "ALERTS": {
+        "DUPLICATE-ID": {
+          "TITLE": "Duplicated ID",
+          "MESSAGE": "The collection with ID \"{{id}}\" already exists. Try again with other value"
+        },
+        "SAVED": {
+          "TITLE": "Saved!",
+          "MESSAGE": "Collection successfully saved"
+        },
+        "ERROR-ON-SAVE": {
+          "TITLE": "Error",
+          "MESSAGE": "Error when saving collection"
         }
       }
     }
-  },
-  "FOOTER": {
-    "DEVELOPED-BY": "Developed by Miguel Romeral"
-  },
-  "LOADING": {
-    "TITLE": "Loading..."
   }
 }
