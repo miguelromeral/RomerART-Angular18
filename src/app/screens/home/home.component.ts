@@ -1,11 +1,22 @@
+import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { InstagramPostComponent } from '@app/components/shared/social/instagram-post/instagram-post.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LanguageService } from '@app/services/language/language.service';
 import { MetadataService } from '@app/services/metadata/metadata.service';
+import { Collection } from '@models/art/collection.model';
+import { Drawing } from '@models/art/drawing.model';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
+import { homeCollectionConfig } from 'config/data/home.config';
+import {
+  ISocialLink,
+  socialLinksConfig,
+} from 'config/data/social-links.config';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +26,23 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     CustomTranslatePipe,
     InstagramPostComponent,
+    DrawingThumbnailComponent,
+    CommonModule,
+    NgIf,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent extends LanguageComponent implements OnInit {
+  listDrawings: Drawing[] = [];
+  collection: Collection | undefined;
+  socialLinks: ISocialLink[] = socialLinksConfig;
+
   constructor(
     private metadataService: MetadataService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private drawingService: DrawingService,
+    private router: Router
   ) {
     super('SCREENS.HOME');
   }
@@ -31,5 +51,18 @@ export class HomeComponent extends LanguageComponent implements OnInit {
     this.languageService.translateText(this.text('TITLE')).subscribe(text => {
       this.metadataService.updateTitle(text);
     });
+    this.drawingService
+      .getCollectionDetails(homeCollectionConfig)
+      .subscribe(col => {
+        this.collection = col;
+      });
+  }
+
+  goToGallery() {
+    this.router.navigate(['/art']);
+  }
+
+  goToAbout() {
+    this.router.navigate(['/about']);
   }
 }

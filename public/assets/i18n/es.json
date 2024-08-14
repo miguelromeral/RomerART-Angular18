@@ -29,7 +29,18 @@
   },
   "SCREENS": {
     "HOME": {
-      "TITLE": "MiguelRomeral"
+      "TITLE": "RomerART",
+      "SUBTITLE": "Bienvenido a mi galería de arte",
+      "DRAWINGS": {
+        "NEW-UPLOADS": "Echa un vistazo a algunos de los dibujos subidos",
+        "GO-TO-GALLERY": "Ver Galería Completa"
+      },
+      "ABOUT": {
+        "GO-TO-ABOUT": "Sobre Mí"
+      },
+      "LINKS": {
+        "TITLE": "Enlaces de Interés"
+      }
     },
     "NOT-FOUND": {
       "TITLE": "Página no encontrada"

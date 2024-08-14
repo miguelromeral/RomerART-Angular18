@@ -4,20 +4,65 @@
   "DATA": {
     "DRAWING": {
       "STYLES": {
+        "OTHER": "Other",
         "PENCILS": "Graphite Pencils",
-        "DIGITAL": "Digital Art"
+        "DIGITAL": "Digital Art",
+        "SKETCH": "Sketch",
+        "MARKERS": "Markers",
+        "COLORED": "Colored Pencils",
+        "PEN": "Pen"
       },
       "PRODUCTS_TYPES": {
         "OTHER": "Other",
         "VIDEOGAME": "Videogame",
         "ACTOR": "Actor / Actress",
         "SINGER": "Singer",
-        "SPORTMAN": "Sportman",
+        "SPORTMAN": "Sportsperson",
         "INFLUENCER": "Influencer"
       }
     }
   },
+  "COMPONENTS": {
+    "ALERTS": {
+      "BUTTONS": {
+        "OK": "OK"
+      }
+    }
+  },
   "SCREENS": {
+    "HOME": {
+      "TITLE": "MiguelRomeral"
+    },
+    "NOT-FOUND": {
+      "TITLE": "Page not found"
+    },
+    "ABOUT": {
+      "ME": {
+        "PERSONAL": {
+          "TITLE": "Basic Information",
+          "NAME": "Miguel Romeral",
+          "JOB": "Software Developer",
+          "LV": "LV",
+          "HP": "HP",
+          "MP": "MP",
+          "PERSONALITY": "ISTJ",
+          "BIRTHDAY": "January 1996",
+          "COLLEGE": "University of Alcalá"
+        },
+        "DESCRIPTION": {
+          "TITLE": "About Me",
+          "1": "Hi, I'm Miguel, a shy guy whose main hobby is playing a good video game (from Horizon to Crash Bandicoot, TLOU, GoW, Hollow Knight, and many others).",
+          "2": "When I'm not playing, I try to draw, from my favorite characters in games to actors whose performances make me feel alive. I draw any character that makes me feel good, that excites me, that I could respect, or for their captivating beauty."
+        },
+        "REFERENCES": {
+          "TITLE": "Reference Artists"
+        }
+      }
+    },
+    "HEADER": {
+      "TITLE": "MiguelRomeral",
+      "VERSION": "v{{ version }}"
+    },
     "NAVBAR": {
       "LINKS": {
         "HOME": "Home",
@@ -31,6 +76,11 @@
     "SETTINGS": {
       "TITLE": "Settings",
       "DESCRIPTION": "Change the app's behaviour and style and custom your experience.",
+      "SECTIONS": {
+        "ACCESSIBILITY": "Accessibility",
+        "ACCOUNT": "Account",
+        "PROVIDERS": "Providers"
+      },
       "FORM": {
         "CHANGE-LANGUAGE": {
           "TITLE": "Change Language",
@@ -42,14 +92,39 @@
           "SYSTEM": "Detect",
           "LIGHT": "Light",
           "DARK": "Dark"
+        },
+        "AUTH": {
+          "TITLE": "Sign In",
+          "DESCRIPTION": "Log in as an administrator and edit the content of the site.",
+          "GO-TO-LOGIN": "Sign In",
+          "GO-TO-ADMIN": "Admin"
         }
       }
     },
     "DRAWING-SEARCH": {
       "TITLE": "Gallery",
       "SUBTITLE": "Here there are a few of my public drawings and illustrations. Touch any of them to see details",
+      "COUNT": {
+        "ONE": "{{length}} image",
+        "MANY": "{{length}} images"
+      },
+      "LOADING": {
+        "TITLE": "Filtering images. Please wait."
+      },
+      "NOTFOUND": {
+        "TITLE": "Nothing here..!",
+        "RETRY": "Try again using other filters."
+      },
       "FORM": {
-        "TITLE": "Filter by...",
+        "TITLE": "Filter",
+        "CREATE-NEW": {
+          "TITLE": "Create"
+        },
+        "FILTER-TITLES": {
+          "CHARACTER": "Character",
+          "THEME": "Theme",
+          "STYLE": "Style"
+        },
         "SORTBY": {
           "TITLE": "Sort by...",
           "DATE-DESC": "Latest",
@@ -68,7 +143,7 @@
           "SCOREU-ASC": "Worst Popular Score"
         },
         "QUERY": {
-          "PLACEHOLDER": "Character | Model | Product"
+          "PLACEHOLDER": "Character | Model | Product | Tags"
         },
         "STYLE": {
           "TITLE": "🖌 STYLE"
@@ -105,6 +180,155 @@
           "TITLE": "⭐ FAVORITES"
         }
       }
+    },
+    "DRAWING-DETAILS": {
+      "MODEL": "by {{ model }}",
+      "NOTFOUND": {
+        "TITLE": "Drawing not found",
+        "SUBTITLE": "No drawing was found with the identifier '{{id}}'.",
+        "GO-TO-GALLERY": "Go back to gallery",
+        "IMAGE-NOT-LOADED": "Image not found",
+        "SPOTIFY": "This drawing does not have any Spotify track"
+      },
+      "DETAILS": {
+        "TAB-TITLES": {
+          "COMMENTS": "Comments",
+          "LIKES": "Likes",
+          "DISLIKES": "Dislikes",
+          "VOTE": "Vote",
+          "SPOTIFY": "Spotify",
+          "INFO": "Details"
+        },
+        "OPEN-REFERENCE": "Open reference in new tab",
+        "SECTIONS": {
+          "VIEWS": "{{views}} views",
+          "VOTES": "{{votes}} user votes"
+        }
+      },
+      "SCORE-BOARD": {
+        "TITLE": "Your score will be...",
+        "SEND": "Send Vote",
+        "THANKS": "Thanks for voting!"
+      }
+    },
+    "DRAWING-FORM": {
+      "TITLE": {
+        "CREATE": "Create new drawing",
+        "EDIT": "Edit \"{{id}}\""
+      },
+      "SECTIONS": {
+        "NAMES": "Character Information",
+        "IMAGE": "Image on Azure",
+        "STYLE": "Style",
+        "DETAILS": "Details",
+        "REFERENCES": "References",
+        "SOCIAL": "Social Media"
+      },
+      "FORM": {
+        "SAVE": {
+          "CREATE": "CREATE DRAWING",
+          "EDIT": "SAVE {{id}}"
+        },
+        "ID": {
+          "TITLE": "Identifier *",
+          "PLACEHOLDER": "Drawing ID"
+        },
+        "PATH": {
+          "TITLE": "Image on Azure *",
+          "PLACEHOLDER": "Image path on Azure"
+        },
+        "IMAGE-SIZE": {
+          "TITLE": "Thumbnail Size *",
+          "PLACEHOLDER": "Size in Pixels"
+        },
+        "TITLE": {
+          "TITLE": "Title",
+          "PLACEHOLDER": "Drawing Title"
+        },
+        "FAVORITE": {
+          "TITLE": "Favorite"
+        },
+        "NAME": {
+          "TITLE": "Character",
+          "PLACEHOLDER": "Character Name"
+        },
+        "MODEL-NAME": {
+          "TITLE": "Model",
+          "PLACEHOLDER": "Model Name"
+        },
+        "DATE": {
+          "TITLE": "Date *"
+        },
+        "SCORE-CRITIC": {
+          "TITLE": "Score",
+          "PLACEHOLDER": "Artist Score"
+        },
+        "PRODUCT": {
+          "TITLE": "Product",
+          "PLACEHOLDER": "Product it appears on"
+        },
+        "COMMENTS": {
+          "TITLE": "Comments",
+          "PLACEHOLDER": "Comments for the drawing"
+        },
+        "SOFTWARE": {
+          "TITLE": "Software",
+          "PLACEHOLDER": "Software used"
+        },
+        "PAPER": {
+          "TITLE": "Paper Size",
+          "PLACEHOLDER": "Size of the paper"
+        },
+        "SPOTIFY": {
+          "TITLE": "Spotify Track",
+          "PLACEHOLDER": "Spotify Track"
+        },
+        "LINK-REFERENCE": {
+          "TITLE": "Link Reference",
+          "PLACEHOLDER": "URL"
+        },
+        "LINK-VIDEO": {
+          "TITLE": "Video URL",
+          "PLACEHOLDER": "URL"
+        },
+        "LINK-INSTAGRAM": {
+          "TITLE": "Instagram URL",
+          "PLACEHOLDER": "URL"
+        },
+        "LINK-TWITTER": {
+          "TITLE": "Twitter URL",
+          "PLACEHOLDER": "URL"
+        },
+        "LINK-ARTSTATION": {
+          "TITLE": "Artstation URL",
+          "PLACEHOLDER": "URL"
+        },
+        "LINK-PIXIV": {
+          "TITLE": "Pixiv URL",
+          "PLACEHOLDER": "URL"
+        },
+        "LINK-DEVIANTART": {
+          "TITLE": "DeviantArt URL",
+          "PLACEHOLDER": "URL"
+        },
+        "LINK-YOUTUBE": {
+          "TITLE": "YouTube URL",
+          "PLACEHOLDER": "URL"
+        },
+        "LINK-TUMBLR": {
+          "TITLE": "Tumblr URL",
+          "PLACEHOLDER": "URL"
+        },
+        "SAVE-ON-DB": {
+          "TITLE": "Save Drawing on DB"
+        }
+      }
     }
+  },
+  "FOOTER": {
+    "DEVELOPED-BY": "Developed by Miguel Romeral"
+  },
+  "LOADING": {
+    "TITLE": "Loading..."
   }
 }
