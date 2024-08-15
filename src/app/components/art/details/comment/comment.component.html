@@ -29,7 +29,9 @@
     </div>
   </div> -->
   <div class="mr-chat-message-container flex flex-col gap-2">
-    <div class="mr-chat-message" [innerHTML]="comment"></div>
+    <app-translatable [originalText]="comment || ''">
+      <!-- <div class="mr-chat-message" [innerHTML]="comment"></div> -->
+    </app-translatable>
   </div>
   <!-- <div class="mr-chat-image hvr-wobble-horizontal"></div> -->
 </div>

@@ -25,6 +25,10 @@
       "BUTTONS": {
         "OK": "Vale"
       }
+    },
+    "TRANSLATABLE": {
+      "FROM": "Traducido desde...",
+      "TITLE": "Traducir"
     }
   },
   "SCREENS": {

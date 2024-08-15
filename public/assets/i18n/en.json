@@ -25,6 +25,10 @@
       "BUTTONS": {
         "OK": "OK"
       }
+    },
+    "TRANSLATABLE": {
+      "FROM": "Translated from...",
+      "TITLE": "Translate"
     }
   },
   "SCREENS": {

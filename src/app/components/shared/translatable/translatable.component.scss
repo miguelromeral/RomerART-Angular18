@@ -1,0 +1,13 @@
+.translation-container:has(* :hover) .btn-translate {
+  // display: block;
+  // gap: 4px
+}
+
+.btn-translate {
+  @apply transition-all hover:text-blue-500;
+}
+
+.btn-translate.active {
+  @apply text-blue-500;
+  text-shadow: 0px 0px 8px theme('colors.blue.500');
+}

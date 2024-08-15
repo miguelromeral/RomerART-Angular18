@@ -6,7 +6,8 @@
       <h1 class="mr-image-page-title">
         <app-loading [loading]="loading">
           <span content>
-            {{ drawing.title }}
+            <app-translatable [originalText]="drawing.title">
+            </app-translatable>
           </span>
           <div loading class="h-8 w-full"></div>
         </app-loading>

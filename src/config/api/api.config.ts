@@ -9,4 +9,5 @@ export const routesWithoutAuth = [
   '/api/art/checkDrawing',
   '/api/about',
   'art/collection/details',
+  'microsofttranslator',
 ];

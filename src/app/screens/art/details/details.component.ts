@@ -22,6 +22,7 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
+import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
 
 @Component({
   selector: 'app-details',
@@ -44,6 +45,7 @@ import { LoadingComponent } from '@app/components/shared/loading/loading.compone
     TranslateModule,
     CustomTranslatePipe,
     LoadingComponent,
+    TranslatableComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
