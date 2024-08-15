@@ -1,5 +1,9 @@
 import { NgClass, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import {
+  translateAnimation,
+  translateTextAnimation,
+} from '@app/animations/translate.animation';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageService } from '@app/services/language/language.service';
 import { SettingsService } from '@app/services/settings/settings.service';
@@ -17,6 +21,7 @@ import {
   imports: [NgIf, TranslateModule, CustomTranslatePipe, NgClass],
   templateUrl: './translatable.component.html',
   styleUrl: './translatable.component.scss',
+  animations: [translateAnimation, translateTextAnimation],
 })
 export class TranslatableComponent extends LanguageComponent implements OnInit {
   private _originalText!: string;
@@ -25,6 +30,8 @@ export class TranslatableComponent extends LanguageComponent implements OnInit {
   bShowTranslation = false;
 
   bSettingEnabled = settingTranslations.defaultValue;
+
+  state = 'original';
 
   @Input()
   public get originalText() {
@@ -57,19 +64,28 @@ export class TranslatableComponent extends LanguageComponent implements OnInit {
   translate() {
     if (this.originalText !== '') {
       if (this.translation === '') {
+        this.state = 'loading';
         this.translateService
           .translate(this.originalText, this.destionationLanguage)
           .subscribe(res => {
+            // const res: ITranslateResponse[] = [
+            //   {
+            //     detectedLanguage: { language: 'es', score: 1 },
+            //     translations: [{ text: 'translated!', to: 'es' }],
+            //   },
+            // ];
             if (res && res.length > 0) {
               const translations = res[0].translations;
               if (translations && translations.length > 0) {
                 this.translation = translations[0].text;
                 this.bShowTranslation = true;
+                this.state = 'translated';
               }
             }
           });
       } else {
         this.bShowTranslation = !this.bShowTranslation;
+        this.state = this.state === 'original' ? 'translated' : 'original';
       }
     }
   }
