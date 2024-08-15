@@ -21,6 +21,7 @@ import { ThemeService } from './services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from './services/api/auth/auth.service';
 import { slideInAnimation } from './animations/animations';
+import { SettingsService } from './services/settings/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -51,7 +52,8 @@ export class AppComponent implements OnInit {
     private languageService: LanguageService,
     private authService: AuthService,
     private themeService: ThemeService,
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private settingsService: SettingsService
   ) {
     AppComponent.isBrowser.next(isPlatformBrowser(platformId));
   }
@@ -73,6 +75,8 @@ export class AppComponent implements OnInit {
       ''
       // window?.location?.origin + '/assets/images/miguel.jpeg'
     );
+
+    this.settingsService.init();
   }
 
   getRouteAnimationData() {

@@ -1,8 +1,11 @@
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 
-export interface ISelectOption<T> {
+export interface ILocalStorageOption {
   localStorageKey: string;
   defaultValue: string;
+}
+
+export interface ISelectOption<T> extends ILocalStorageOption {
   options: T[];
 }
 
@@ -51,4 +54,9 @@ export const settingTheme: ISelectOption<ICustomSelectOption> = {
       label: '',
     },
   ],
+};
+
+export const settingTranslations = {
+  defaultValue: true,
+  localStorageKey: 'translations',
 };

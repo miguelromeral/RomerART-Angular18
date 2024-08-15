@@ -1,6 +1,13 @@
 <div class="form-group h-full">
   <div class="mr-choice-filter">
-    <label class="form-check-label choice-label" [for]="id">{{ text }}</label>
+    <label class="form-check-label choice-label" [for]="id">
+      <ng-container *ngIf="!value && textDisabled !== ''; else textEnabled">
+        {{ textDisabled }}
+      </ng-container>
+      <ng-template #textEnabled>
+        {{ text }}
+      </ng-template>
+    </label>
     <input
       class="form-check-input"
       [checked]="value"

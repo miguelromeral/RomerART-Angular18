@@ -2,10 +2,14 @@ import { NgClass, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageService } from '@app/services/language/language.service';
+import { SettingsService } from '@app/services/settings/settings.service';
 import { TranslateService } from '@app/services/translate/translate.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
-import { settingLanguage } from 'config/settings/local-storage.config';
+import {
+  settingLanguage,
+  settingTranslations,
+} from 'config/settings/local-storage.config';
 
 @Component({
   selector: 'app-translatable',
@@ -20,6 +24,8 @@ export class TranslatableComponent extends LanguageComponent implements OnInit {
   destionationLanguage = settingLanguage.defaultValue;
   bShowTranslation = false;
 
+  bSettingEnabled = settingTranslations.defaultValue;
+
   @Input()
   public get originalText() {
     return this._originalText;
@@ -30,7 +36,8 @@ export class TranslatableComponent extends LanguageComponent implements OnInit {
 
   constructor(
     private translateService: TranslateService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private settingsService: SettingsService
   ) {
     super('COMPONENTS.TRANSLATABLE');
   }
@@ -39,6 +46,12 @@ export class TranslatableComponent extends LanguageComponent implements OnInit {
     this.languageService.currentLanguage$.subscribe(newLang => {
       this.destionationLanguage = newLang;
     });
+
+    this.settingsService.translations$.subscribe(value => {
+      this.bSettingEnabled = value;
+    });
+
+    // this.bSettingEnabled = this.settingsService.translations$;
   }
 
   translate() {

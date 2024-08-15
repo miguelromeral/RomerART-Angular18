@@ -23,6 +23,7 @@ import {
 })
 export class SwitchComponent implements ControlValueAccessor {
   @Input() text!: string;
+  @Input() textDisabled = '';
   @Input() id!: string;
 
   value = false;

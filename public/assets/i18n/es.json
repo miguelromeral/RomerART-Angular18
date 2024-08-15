@@ -92,12 +92,19 @@
       "SECTIONS": {
         "ACCESSIBILITY": "Accesibilidad",
         "ACCOUNT": "Cuenta",
-        "PROVIDERS": "Proveedores"
+        "PROVIDERS": "Proveedores",
+        "LANGUAGE": "Idioma"
       },
       "FORM": {
         "CHANGE-LANGUAGE": {
           "TITLE": "Cambiar idioma",
           "DESCRIPTION": "Cambia el idioma de la aplicación en los menús. El contenido de algunas partes de la aplicación como los dibujos no serán traducidos."
+        },
+        "TRANSLATIONS": {
+          "TITLE": "Traducir contenido",
+          "DESCRIPTION": "Muestra un botón para traducir tanto el título de los dibujos como los comentarios.",
+          "SHOW": "Mostrar",
+          "HIDE": "Esconder"
         },
         "THEME": {
           "TITLE": "Cambiar Tema",

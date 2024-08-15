@@ -3,17 +3,9 @@
     <div class="flex flex-col gap-10">
       <h1>{{ text('TITLE') | mrTranslate }}</h1>
 
-      <app-section [title]="text('SECTIONS.ACCESSIBILITY') | mrTranslate">
-        <app-setting-option
-          [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | mrTranslate"
-          [description]="text('DESCRIPTION') | mrTranslate">
-          <app-select-input
-            [options]="languages"
-            formControlName="langFormControl"
-            (change)="changeLanguage($event)">
-          </app-select-input>
-        </app-setting-option>
-
+      <app-section
+        [title]="text('SECTIONS.ACCESSIBILITY') | mrTranslate"
+        icon="translate">
         <app-setting-option
           [title]="text('FORM.THEME.TITLE') | mrTranslate"
           [description]="text('FORM.THEME.DESCRIPTION') | mrTranslate">
@@ -27,7 +19,34 @@
         </app-setting-option>
       </app-section>
 
-      <app-section [title]="text('SECTIONS.ACCOUNT') | mrTranslate">
+      <app-section
+        [title]="text('SECTIONS.LANGUAGE') | mrTranslate"
+        icon="universal-access-circle">
+        <app-setting-option
+          [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | mrTranslate"
+          [description]="text('DESCRIPTION') | mrTranslate">
+          <app-select-input
+            [options]="languages"
+            formControlName="langFormControl"
+            (change)="changeLanguage($event)">
+          </app-select-input>
+        </app-setting-option>
+
+        <app-setting-option
+          [title]="text('FORM.TRANSLATIONS.TITLE') | mrTranslate"
+          [description]="text('FORM.TRANSLATIONS.DESCRIPTION') | mrTranslate">
+          <app-switch
+            [text]="text('FORM.TRANSLATIONS.SHOW') | mrTranslate"
+            [textDisabled]="text('FORM.TRANSLATIONS.HIDE') | mrTranslate"
+            formControlName="translateFormControl"
+            (change)="changeTranslations($event)">
+          </app-switch>
+        </app-setting-option>
+      </app-section>
+
+      <app-section
+        [title]="text('SECTIONS.ACCOUNT') | mrTranslate"
+        icon="person-gear">
         <app-setting-option
           [title]="text('FORM.AUTH.TITLE') | mrTranslate"
           [description]="text('FORM.AUTH.DESCRIPTION') | mrTranslate">
@@ -37,7 +56,9 @@
         </app-setting-option>
       </app-section>
 
-      <app-section [title]="text('SECTIONS.PROVIDERS') | mrTranslate">
+      <app-section
+        [title]="text('SECTIONS.PROVIDERS') | mrTranslate"
+        icon="cloud">
         <div class="flex w-full flex-row flex-wrap justify-center gap-6">
           <div
             *ngFor="let provider of providers"

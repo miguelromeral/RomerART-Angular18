@@ -92,12 +92,19 @@
       "SECTIONS": {
         "ACCESSIBILITY": "Accessibility",
         "ACCOUNT": "Account",
-        "PROVIDERS": "Providers"
+        "PROVIDERS": "Providers",
+        "LANGUAGE": "Language"
       },
       "FORM": {
         "CHANGE-LANGUAGE": {
           "TITLE": "Change Language",
           "DESCRIPTION": "Change the app's language. Some content of the app (such as drawings) will not be translated."
+        },
+        "TRANSLATIONS": {
+          "TITLE": "Translate content",
+          "DESCRIPTION": "Shows a button to translate drawing's title and comments.",
+          "SHOW": "Show",
+          "HIDE": "Hide"
         },
         "THEME": {
           "TITLE": "Change Theme",
