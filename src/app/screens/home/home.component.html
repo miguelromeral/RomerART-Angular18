@@ -1,14 +1,14 @@
 <app-layout [padding]="false">
   <div
-    class="section grid grid-cols-1 bg-main-200 dark:bg-main-800 sm:grid-cols-2">
+    class="grid grid-cols-2 gap-4 bg-main-200 px-4 dark:bg-main-800 sm:grid-cols-3">
     <div class="flex flex-col items-center justify-center">
       <img
-        class="h-32 w-32 rounded-full"
-        src="assets/images/miguel.jpeg"
+        class="bottom-0 h-fit pt-2"
+        src="assets/images/me/karting.png"
         alt="me" />
     </div>
-    <div class="flex flex-col">
-      <h1>{{ text('TITLE') | mrTranslate }}</h1>
+    <div class="flex flex-col py-10 sm:col-span-2">
+      <h1 style="text-transform: unset">{{ text('TITLE') | mrTranslate }}</h1>
       <h3>{{ text('SUBTITLE') | mrTranslate }}</h3>
       <div class="mt-10 flex w-full justify-end">
         <button class="btn" (click)="goToAbout()">

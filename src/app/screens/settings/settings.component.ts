@@ -23,6 +23,7 @@ import { providersConfigList } from 'config/data/providers.config';
 import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.component';
 import { SettingsService } from '@app/services/settings/settings.service';
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-settings',
@@ -50,6 +51,7 @@ import { TranslatableComponent } from '@app/components/shared/translatable/trans
 export class SettingsComponent extends LanguageComponent implements OnInit {
   loginPath = loginPath;
 
+  version = environment.appVersion;
   languages: ICustomSelectOption[] = settingLanguage.options;
   themes: ICustomSelectOption[] = settingTheme.options;
 

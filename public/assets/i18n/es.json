@@ -119,6 +119,10 @@
           "GO-TO-LOGIN": "Iniciar Sesión",
           "GO-TO-ADMIN": "Administración"
         }
+      },
+      "FOOTER": {
+        "DEVELOPEDBY": "Desarrollado por MiguelRomeral",
+        "VERSION": "v{{ version }}"
       }
     },
     "DRAWING-SEARCH": {

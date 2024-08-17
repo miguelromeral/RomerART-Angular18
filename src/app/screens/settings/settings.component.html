@@ -69,6 +69,12 @@
           </div>
         </div>
       </app-section>
+
+      <div
+        class="flex justify-between text-xs text-black-100 dark:text-white-950">
+        <span>{{ text('FOOTER.DEVELOPEDBY') | mrTranslate }}</span>
+        <span>{{ text('FOOTER.VERSION') | mrTranslate: { version } }}</span>
+      </div>
     </div>
   </form>
 </app-layout>

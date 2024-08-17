@@ -33,7 +33,7 @@ export class NavBarConfig {
       icon: '',
       iconActive: '',
       textCode: 'LINKS.ABOUT',
-      image: 'assets/images/miguel.jpeg',
+      image: 'assets/images/me/smile.png',
     },
     {
       link: '/settings',
