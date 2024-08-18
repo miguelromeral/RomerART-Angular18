@@ -42,7 +42,6 @@ import { TextInputComponent } from '@app/components/shared/inputs/text-input/tex
 import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { SectionComponent } from '@app/components/shared/section/section.component';
-import { countUnique } from '@utils/number-utils';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -87,13 +86,19 @@ export class FilterFormComponent
   /* Filter Form Select */
   listOptionsSortBy: IArtFilterValuesSortBy[] = artFilterValuesSortBy;
   listDrawingStyles: DrawingStyle[] = [];
+  filteredDrawingStyles: DrawingStyle[] = [];
   listDrawingProductTypes: DrawingProductType[] = [];
+  filteredDrawingProductTypes: DrawingProductType[] = [];
   listDrawingProducts: DrawingProduct[] = [];
   filteredDrawingProducts: DrawingProduct[] = [];
   listDrawingCharacters: DrawingCharacter[] = [];
+  filteredDrawingCharacters: DrawingCharacter[] = [];
   listDrawingModels: ICustomSelectOption[] = [];
+  filteredDrawingModels: ICustomSelectOption[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
+  filteredDrawingSoftwares: DrawingSoftware[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
+  filteredDrawingPapers: DrawingPaperSize[] = [];
   listCollections: Collection[] = [];
 
   /* Filter Results */
@@ -275,7 +280,6 @@ export class FilterFormComponent
       filters.textQuery !== '' ||
       filters.type != '-1'
     ) {
-      console.log('Filtering... ', filters);
       this.filtering = true;
     }
 
@@ -294,21 +298,48 @@ export class FilterFormComponent
       // }
       this.fetchedResults.emit(this.listDrawings);
 
-      this.nDrawingCharacters = countUnique(this.listDrawings.map(x => x.name));
-      this.nDrawingModels = countUnique(
-        this.listDrawings.map(x => x.modelName)
+      this.filteredDrawingCharacters = this.listDrawingCharacters.filter(
+        c => this.listDrawings.filter(d => d.name == c.characterName).length > 0
       );
-      this.nDrawingTypes = countUnique(this.listDrawings.map(x => x.type));
-      this.nDrawingProductTypes = countUnique(
-        this.listDrawings.map(x => x.productType)
+      this.nDrawingCharacters = this.filteredDrawingCharacters.length;
+
+      this.filteredDrawingModels = this.listDrawingModels.filter(
+        m => this.listDrawings.filter(d => d.modelName == m.value).length > 0
       );
-      this.nDrawingProducts = countUnique(
-        this.listDrawings.map(x => x.productName)
+      this.nDrawingModels = this.filteredDrawingModels.length;
+
+      this.filteredDrawingStyles = this.listDrawingStyles.filter(
+        s =>
+          this.listDrawings.filter(d => d.type.toString() == s.value).length > 0
       );
-      this.nDrawingSoftwares = countUnique(
-        this.listDrawings.map(x => x.software)
+      this.nDrawingTypes = this.filteredDrawingStyles.length;
+
+      this.filteredDrawingProductTypes = this.listDrawingProductTypes.filter(
+        pt =>
+          this.listDrawings.filter(d => d.productType.toString() == pt.value)
+            .length > 0
       );
-      this.nDrawingPapers = countUnique(this.listDrawings.map(x => x.paper));
+      this.nDrawingProductTypes = this.filteredDrawingProductTypes.length;
+
+      this.filteredDrawingProducts = this.listDrawingProducts.filter(
+        p => this.listDrawings.filter(d => d.productName == p.value).length > 0
+      );
+      this.nDrawingProducts = this.filteredDrawingProducts.length;
+
+      this.filteredDrawingSoftwares = this.listDrawingSoftwares.filter(
+        s =>
+          this.listDrawings.filter(d => d.software.toString() == s.value)
+            .length > 0
+      );
+      this.nDrawingSoftwares = this.filteredDrawingSoftwares.length;
+
+      this.filteredDrawingPapers = this.listDrawingPapers.filter(
+        p =>
+          this.listDrawings.filter(d => d.paper.toString() == p.value).length >
+          0
+      );
+      this.nDrawingPapers = this.filteredDrawingPapers.length;
+
       this.nDrawingFavorites = this.listDrawings.filter(x => x.favorite).length;
 
       // console.log('Results: ' + results.map(d => d.id));

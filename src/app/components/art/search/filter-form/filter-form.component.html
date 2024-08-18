@@ -38,7 +38,7 @@
               label: '',
               labelCode: 'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE',
             }"
-            [options]="listDrawingCharacters"
+            [options]="filteredDrawingCharacters"
             formControlName="characterName"
             (change)="filterControlChange()">
           </app-select-input>
@@ -58,7 +58,7 @@
               label: '',
               labelCode: 'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE',
             }"
-            [options]="listDrawingModels"
+            [options]="filteredDrawingModels"
             formControlName="modelName"
             (change)="filterControlChange()"
             content>
@@ -92,7 +92,7 @@
               label: '',
               labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT-TYPE.TITLE',
             }"
-            [options]="listDrawingProductTypes"
+            [options]="filteredDrawingProductTypes"
             formControlName="productType"
             (change)="onChangeProductType($event); filterControlChange()">
           </app-select-input>
@@ -152,7 +152,7 @@
               label: '',
               labelCode: 'SCREENS.DRAWING-SEARCH.FORM.STYLE.TITLE',
             }"
-            [options]="listDrawingStyles"
+            [options]="filteredDrawingStyles"
             formControlName="type"
             (change)="onChangeStyle($event); filterControlChange()">
           </app-select-input>
@@ -170,7 +170,7 @@
               label: '',
               labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SOFTWARE.TITLE',
             }"
-            [options]="listDrawingSoftwares"
+            [options]="filteredDrawingSoftwares"
             formControlName="software"
             (change)="filterControlChange()">
           </app-select-input>
@@ -188,7 +188,7 @@
               label: '',
               labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PAPER.TITLE',
             }"
-            [options]="listDrawingPapers"
+            [options]="filteredDrawingPapers"
             formControlName="paper"
             (change)="filterControlChange()">
           </app-select-input>
