@@ -32,6 +32,7 @@ import { heartsAnimationConfig } from 'config/customization/heart-animation.conf
   ],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
+  providers: [CustomTranslatePipe],
 })
 export class ImageComponent extends LanguageComponent implements OnInit {
   private _drawing!: Drawing;
@@ -55,7 +56,8 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   constructor(
     private drawingService: DrawingService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private customTranslate: CustomTranslatePipe
   ) {
     super('SCREENS.DRAWING-DETAILS');
   }
@@ -66,8 +68,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
   loadLoggedUser() {
     this.authService.loggedUser$.subscribe(user => {
-      // TODO: mover esto a una nueva funcionalidad
-      this.admin = user?.role === 'admin';
+      this.admin = user ? this.authService.isAdmin(user) : false;
     });
   }
 
@@ -124,13 +125,19 @@ export class ImageComponent extends LanguageComponent implements OnInit {
     $(selector).addClass('show');
   }
 
-  // TODO: cambiar el texto de esto
   shareDrawing() {
     if (navigator.share) {
+      // TODO: Revisar esto en móviles, a ver si funciona
+      const title = this.drawing.pageTitle();
+      const text = this.customTranslate.transform(this.text('SHARE.TEXT'), {
+        title: this.drawing.pageTitle(),
+      });
+      console.log('Title', title);
+      console.log('Text', text);
       navigator
         .share({
-          title: document.title,
-          text: 'Check out this awesome site!',
+          title: title,
+          text: text,
           url: window.location.href,
         })
         .then(() => {

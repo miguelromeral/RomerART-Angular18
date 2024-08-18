@@ -76,6 +76,10 @@ export class AuthService {
     this.localStorageService.setItem(localStorageKey, newUser.token);
   }
 
+  isAdmin(user: User) {
+    return user?.role === 'admin';
+  }
+
   uptadeRedirectUrl(url: string) {
     this.redirectUrlAfterLogin = url;
   }

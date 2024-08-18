@@ -2,8 +2,6 @@
   class="art-section flex flex-row flex-wrap gap-1"
   *ngIf="tags; else noTags">
   <span class="tag text-xs italic" *ngFor="let tag of listTags">
-    <!-- TODO: añadir este replace?? -->
-    <!-- @tag.Replace(" ", "") -->
     #{{ tag.toLowerCase() }}
   </span>
 </div>

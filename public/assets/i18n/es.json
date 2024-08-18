@@ -214,6 +214,9 @@
         "IMAGE-NOT-LOADED": "Imagen no encontrada",
         "SPOTIFY": "Este dibujo no tiene ninguna pista de Spotify"
       },
+      "SHARE": {
+        "TEXT": "Echa un vistazo a este dibujo: {{title}}."
+      },
       "DETAILS": {
         "TAB-TITLES": {
           "COMMENTS": "Comentarios",
