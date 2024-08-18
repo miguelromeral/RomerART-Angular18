@@ -332,7 +332,24 @@
         }
       },
       "ERRORS": {
-        "DUPLICATE-ID": "ERROR: the drawing with ID \"{{id}}\" already exists"
+        "TITLE": "There are some errors in the form",
+        "DUPLICATE-ID": "ERROR: the drawing with ID \"{{id}}\" already exists",
+        "REQUIRED-ID": "The ID is required",
+        "PATH-NOT-VALID": "The image path is not valid",
+        "PRODUCT-TYPE-REQUIRED": "The product type is required",
+        "TYPE-REQUIRED": "The type is required",
+        "DATE-REQUIRED": "The date is required",
+        "SCORE": {
+          "REQUIRED": "The score is required",
+          "MIN": "The minimum score is {{value}}",
+          "MAX": "The maximum score is {{value}}"
+        },
+        "GENERAL": {
+          "REQUIRED": "{{value}} is required",
+          "MINLENGTH": "{{key}} must have at least {{value}} characters.",
+          "MIN": "{{key}} value must be at least {{value}}.",
+          "MAX": "{{key}} value must not exceed {{value}}."
+        }
       },
       "ALERTS": {
         "DUPLICATE-ID": {

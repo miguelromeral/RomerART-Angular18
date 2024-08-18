@@ -154,7 +154,11 @@ export class DrawingFormComponent extends LanguageComponent {
   timeHuman = '';
 
   public get formErrors() {
-    return getFormErrors(this.form);
+    return getFormErrors(
+      this.form,
+      'SCREENS.DRAWING-FORM.ERRORS.GENERAL',
+      this.customTranslate
+    );
   }
 
   constructor(

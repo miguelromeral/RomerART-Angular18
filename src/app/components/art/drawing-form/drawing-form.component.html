@@ -29,7 +29,9 @@
       </div>
 
       <div *ngIf="form.controls.id.errors" class="form-error">
-        <p *ngIf="form.controls.id.hasError('required')">EL ID ES REQUERIDO</p>
+        <p *ngIf="form.controls.id.hasError('required')">
+          {{ text('ERRORS.REQUIRED-ID') | mrTranslate }}
+        </p>
       </div>
     </div>
 
@@ -58,7 +60,7 @@
 
           <div *ngIf="form.controls.path.errors" class="form-error">
             <p *ngIf="form.controls.path.hasError('required')">
-              LA RUTA DE LA IMAGEN NO ES VÁLIDA
+              {{ text('ERRORS.PATH-NOT-VALID') | mrTranslate }}
             </p>
           </div>
 
@@ -122,7 +124,7 @@
                 form.controls.productType.hasError('required') ||
                 form.controls.productType.hasError('notValidValue')
               ">
-              EL TIPO DE PRODUCTO ES OBLIGATORIO
+              {{ text('ERRORS.PRODUCT-TYPE-REQUIRED') | mrTranslate }}
             </p>
           </div>
         </div>
@@ -152,7 +154,7 @@
                 form.controls.type.hasError('required') ||
                 form.controls.type.hasError('notValidValue')
               ">
-              EL TIPO ES REQUERIDO
+              {{ text('ERRORS.TYPE-REQUIRED') | mrTranslate }}
             </p>
           </div>
         </div>
@@ -189,7 +191,7 @@
 
           <div *ngIf="form.controls.dateHyphen.errors" class="form-error">
             <p *ngIf="form.controls.dateHyphen.hasError('required')">
-              LA FECHA ES REQUERIDA
+              {{ text('ERRORS.DATE-REQUIRED') | mrTranslate }}
             </p>
           </div>
         </div>
@@ -219,13 +221,19 @@
 
           <div *ngIf="form.controls.scoreCritic.errors" class="form-error">
             <p *ngIf="form.controls.scoreCritic.hasError('required')">
-              LA PUNTUACIÓN ES REQUERIDA
+              {{ text('ERRORS.SCORE.REQUIRED') | mrTranslate }}
             </p>
             <p *ngIf="form.controls.scoreCritic.hasError('min')">
-              LA PUNTUACIÓN DEBE SER MÍNIMO {{ scoreConfig.min }}
+              {{
+                text('ERRORS.SCORE.MIN')
+                  | mrTranslate: { value: scoreConfig.min }
+              }}
             </p>
             <p *ngIf="form.controls.scoreCritic.hasError('max')">
-              LA PUNTUACIÓN DEBE SER MAXIMO {{ scoreConfig.max }}
+              {{
+                text('ERRORS.SCORE.MAX')
+                  | mrTranslate: { value: scoreConfig.max }
+              }}
             </p>
           </div>
 
@@ -321,7 +329,7 @@
 
     <div class="col-span-1 sm:col-span-3">
       <div *ngIf="!validForm; else formValid" class="form-error">
-        <p>Existen algunos errores en el formulario, revisalos</p>
+        <p>{{ text('ERRORS.TITLE') }}</p>
 
         <ul *ngIf="formErrors.length > 0">
           <li *ngFor="let error of formErrors">{{ error }}</li>

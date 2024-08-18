@@ -332,7 +332,24 @@
         }
       },
       "ERRORS": {
-        "DUPLICATE-ID": "ERROR: el dibujo con id \"{{id}}\" ya existe"
+        "TITLE": "Existen algunos errores en el formulario",
+        "DUPLICATE-ID": "ERROR: el dibujo con id \"{{id}}\" ya existe",
+        "REQUIRED-ID": "El identificador es obligatorio",
+        "PATH-NOT-VALID": "La ruta de la imagen no es válida",
+        "PRODUCT-TYPE-REQUIRED": "El tipo de producto es obligatorio",
+        "TYPE-REQUIRED": "El estilo es obligatorio",
+        "DATE-REQUIRED": "La fecha es obligatoria",
+        "SCORE": {
+          "REQUIRED": "La puntuación es obligatoria",
+          "MIN": "La nota mínima es {{value}}",
+          "MAX": "La nota máxima es {{value}}"
+        },
+        "GENERAL": {
+          "REQUIRED": "{{key}} es obligatorio",
+          "MINLENGTH": "{{key}} debe tener al menos {{value}} caracteres.",
+          "MIN": "{{key}} debe ser al menos {{value}}.",
+          "MAX": "{{key}} debe ser como mucho {{value}}."
+        }
       },
       "ALERTS": {
         "DUPLICATE-ID": {

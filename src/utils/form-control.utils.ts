@@ -1,6 +1,11 @@
 import { FormGroup } from '@angular/forms';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 
-export function getFormErrors(form: FormGroup): string[] {
+export function getFormErrors(
+  form: FormGroup,
+  suffixError: string,
+  pipe: CustomTranslatePipe
+): string[] {
   const errores: string[] = [];
   Object.keys(form.controls).forEach(key => {
     const controlErrors = form.get(key)?.errors;
@@ -8,24 +13,30 @@ export function getFormErrors(form: FormGroup): string[] {
       Object.keys(controlErrors).forEach(errorKey => {
         switch (errorKey) {
           case 'required':
-            errores.push(`${key} es requerido.`);
+            errores.push(pipe.transform(`${suffixError}.REQUIRED`, { key }));
             break;
           case 'minlength':
             errores.push(
-              `${key} debe tener al menos ${controlErrors['minlength'].requiredLength} caracteres.`
+              pipe.transform(`${suffixError}.REQUIRED`, {
+                key,
+                value: controlErrors['minlength'].requiredLength,
+              })
             );
-            break;
-          case 'email':
-            errores.push(`${key} debe ser un email válido.`);
             break;
           case 'min':
             errores.push(
-              `${key} debe ser al menos ${controlErrors['min'].min}.`
+              pipe.transform(`${suffixError}.MIN`, {
+                key,
+                value: controlErrors['min'].min,
+              })
             );
             break;
           case 'max':
             errores.push(
-              `${key} debe ser como mucho ${controlErrors['max'].max}.`
+              pipe.transform(`${suffixError}.MAX`, {
+                key,
+                value: controlErrors['max'].max,
+              })
             );
             break;
         }
