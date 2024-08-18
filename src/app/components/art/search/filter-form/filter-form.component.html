@@ -30,76 +30,96 @@
       <app-loading [loading]="loadingDrawingCharacters" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
 
-        <app-select-input
-          class="mr-filter-item"
-          [firstOption]="{
-            value: '',
-            label: '',
-            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE',
-          }"
-          [options]="listDrawingCharacters"
-          formControlName="characterName"
-          (change)="filterControlChange()"
-          content>
-        </app-select-input>
+        <div class="filter-input-container" content>
+          <app-select-input
+            class="mr-filter-item"
+            [firstOption]="{
+              value: '',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE',
+            }"
+            [options]="listDrawingCharacters"
+            formControlName="characterName"
+            (change)="filterControlChange()">
+          </app-select-input>
+
+          <span class="filter-results-count">{{ nDrawingCharacters }}</span>
+        </div>
       </app-loading>
 
       <app-loading [loading]="loadingDrawingModels" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
 
-        <app-select-input
-          class="mr-filter-item"
-          [firstOption]="{
-            value: '',
-            label: '',
-            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE',
-          }"
-          [options]="listDrawingModels"
-          formControlName="modelName"
-          (change)="filterControlChange()"
-          content>
-        </app-select-input>
+        <div class="filter-input-container" content>
+          <app-select-input
+            class="mr-filter-item"
+            [firstOption]="{
+              value: '',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE',
+            }"
+            [options]="listDrawingModels"
+            formControlName="modelName"
+            (change)="filterControlChange()"
+            content>
+          </app-select-input>
+
+          <span class="filter-results-count">{{ nDrawingModels }}</span>
+        </div>
       </app-loading>
 
-      <div class="favorite mr-filter-item">
-        <app-switch
-          [text]="text('FAVORITES.TITLE') | mrTranslate"
-          formControlName="formFavorites"
-          (ngModelChange)="filterControlChange()">
-        </app-switch>
+      <div class="favorite mr-filter-item" content>
+        <div class="filter-input-container">
+          <app-switch
+            [text]="text('FAVORITES.TITLE') | mrTranslate"
+            formControlName="formFavorites"
+            (ngModelChange)="filterControlChange()">
+          </app-switch>
+          <span class="filter-results-count">{{ nDrawingFavorites }}</span>
+        </div>
       </div>
     </div>
   </app-section>
 
   <app-section [title]="text('FILTER-TITLES.THEME') | mrTranslate">
     <div class="mr-filter-container">
-      <app-select-input
-        class="mr-filter-item"
-        [firstOption]="{
-          value: '-1',
-          label: '',
-          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT-TYPE.TITLE',
-        }"
-        [options]="listDrawingProductTypes"
-        formControlName="productType"
-        (change)="onChangeProductType($event); filterControlChange()">
-      </app-select-input>
+      <div class="mr-filter-item">
+        <div class="filter-input-container">
+          <app-select-input
+            class="mr-filter-item"
+            [firstOption]="{
+              value: '-1',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT-TYPE.TITLE',
+            }"
+            [options]="listDrawingProductTypes"
+            formControlName="productType"
+            (change)="onChangeProductType($event); filterControlChange()">
+          </app-select-input>
+
+          <span class="filter-results-count">{{ nDrawingProductTypes }}</span>
+        </div>
+      </div>
 
       <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
 
-        <app-select-input
-          class="mr-filter-item"
-          [firstOption]="{
-            value: '',
-            label: '',
-            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT.TITLE',
-          }"
-          [options]="filteredDrawingProducts"
-          formControlName="productName"
-          (change)="filterControlChange()"
-          content>
-        </app-select-input>
+        <div class="filter-input-container" content>
+          <app-select-input
+            class="mr-filter-item"
+            [firstOption]="{
+              value: '',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT.TITLE',
+            }"
+            [options]="filteredDrawingProducts"
+            formControlName="productName"
+            (change)="filterControlChange()"
+            content>
+          </app-select-input>
+
+          <span class="filter-results-count">{{ nDrawingProducts }}</span>
+        </div>
       </app-loading>
 
       <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
@@ -123,42 +143,59 @@
 
   <app-section [title]="text('FILTER-TITLES.STYLE') | mrTranslate">
     <div class="mr-filter-container">
-      <app-select-input
-        class="mr-filter-item"
-        [firstOption]="{
-          value: '-1',
-          label: '',
-          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.STYLE.TITLE',
-        }"
-        [options]="listDrawingStyles"
-        formControlName="type"
-        (change)="onChangeStyle($event); filterControlChange()">
-      </app-select-input>
-      <app-select-input
-        class="mr-filter-item"
-        [ngClass]="{ hidden: !showSoftware }"
-        [firstOption]="{
-          value: '0',
-          label: '',
-          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SOFTWARE.TITLE',
-        }"
-        [options]="listDrawingSoftwares"
-        formControlName="software"
-        (change)="filterControlChange()">
-      </app-select-input>
+      <div class="mr-filter-item">
+        <div class="filter-input-container" content>
+          <app-select-input
+            class="mr-filter-item"
+            [firstOption]="{
+              value: '-1',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.STYLE.TITLE',
+            }"
+            [options]="listDrawingStyles"
+            formControlName="type"
+            (change)="onChangeStyle($event); filterControlChange()">
+          </app-select-input>
 
-      <app-select-input
-        class="mr-filter-item"
-        [ngClass]="{ hidden: !showPaper }"
-        [firstOption]="{
-          value: '0',
-          label: '',
-          labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PAPER.TITLE',
-        }"
-        [options]="listDrawingPapers"
-        formControlName="paper"
-        (change)="filterControlChange()">
-      </app-select-input>
+          <span class="filter-results-count">{{ nDrawingTypes }}</span>
+        </div>
+      </div>
+
+      <div class="mr-filter-item" [ngClass]="{ hidden: !showSoftware }">
+        <div class="filter-input-container" content>
+          <app-select-input
+            class="mr-filter-item"
+            [firstOption]="{
+              value: '0',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SOFTWARE.TITLE',
+            }"
+            [options]="listDrawingSoftwares"
+            formControlName="software"
+            (change)="filterControlChange()">
+          </app-select-input>
+
+          <span class="filter-results-count">{{ nDrawingSoftwares }}</span>
+        </div>
+      </div>
+
+      <div class="mr-filter-item" [ngClass]="{ hidden: !showPaper }">
+        <div class="filter-input-container" content>
+          <app-select-input
+            class="mr-filter-item"
+            [firstOption]="{
+              value: '0',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PAPER.TITLE',
+            }"
+            [options]="listDrawingPapers"
+            formControlName="paper"
+            (change)="filterControlChange()">
+          </app-select-input>
+
+          <span class="filter-results-count">{{ nDrawingPapers }}</span>
+        </div>
+      </div>
     </div>
   </app-section>
 

@@ -42,6 +42,7 @@ import { TextInputComponent } from '@app/components/shared/inputs/text-input/tex
 import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { SectionComponent } from '@app/components/shared/section/section.component';
+import { countUnique } from '@utils/number-utils';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -94,7 +95,19 @@ export class FilterFormComponent
   listDrawingSoftwares: DrawingSoftware[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
   listCollections: Collection[] = [];
+
+  /* Filter Results */
   listDrawings: Drawing[] = [];
+  nDrawingCharacters = 0;
+  nDrawingModels = 0;
+  nDrawingTypes = 0;
+  nDrawingProductTypes = 0;
+  nDrawingProducts = 0;
+  nDrawingCollections = 0;
+  nDrawingSoftwares = 0;
+  nDrawingPapers = 0;
+  nDrawingFavorites = 0;
+  filtering = false;
 
   /* Filter Form */
   filterForm = new FormGroup({
@@ -234,6 +247,7 @@ export class FilterFormComponent
     );
     this.filterForm.controls.pageNumber.setValue(1);
     this.listDrawings = [];
+    this.filtering = false;
     this.changeBasicArtUrl();
   }
 
@@ -248,6 +262,23 @@ export class FilterFormComponent
     this.isLoading.emit(true);
 
     const filters = new DrawingFilter(this.filterForm.value);
+
+    if (
+      filters.characterName !== '' ||
+      filters.collection !== '' ||
+      filters.favorites ||
+      filters.modelName !== '' ||
+      filters.paper !== '0' ||
+      filters.productName !== '' ||
+      filters.productType != '-1' ||
+      filters.software != '0' ||
+      filters.textQuery !== '' ||
+      filters.type != '-1'
+    ) {
+      console.log('Filtering... ', filters);
+      this.filtering = true;
+    }
+
     // Prevent resubmitting the form when updating URL query params
     this.queryParamsSubscription?.unsubscribe();
     this.changeBasicArtUrl();
@@ -262,6 +293,24 @@ export class FilterFormComponent
       //   this.listDrawings = [...this.listDrawings, ...results];
       // }
       this.fetchedResults.emit(this.listDrawings);
+
+      this.nDrawingCharacters = countUnique(this.listDrawings.map(x => x.name));
+      this.nDrawingModels = countUnique(
+        this.listDrawings.map(x => x.modelName)
+      );
+      this.nDrawingTypes = countUnique(this.listDrawings.map(x => x.type));
+      this.nDrawingProductTypes = countUnique(
+        this.listDrawings.map(x => x.productType)
+      );
+      this.nDrawingProducts = countUnique(
+        this.listDrawings.map(x => x.productName)
+      );
+      this.nDrawingSoftwares = countUnique(
+        this.listDrawings.map(x => x.software)
+      );
+      this.nDrawingPapers = countUnique(this.listDrawings.map(x => x.paper));
+      this.nDrawingFavorites = this.listDrawings.filter(x => x.favorite).length;
+
       // console.log('Results: ' + results.map(d => d.id));
       // }
       // this.existsMoreResultsToFetch.emit(

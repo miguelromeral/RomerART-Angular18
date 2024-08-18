@@ -10,11 +10,11 @@ span.mr-suboption-filter {
 
 
 .mr-filter-container {
-  @apply grid w-full grid-cols-4 items-center gap-1 sm:grid-cols-9 lg:grid-cols-4 xl:grid-cols-9;
+  @apply grid w-full grid-cols-4 items-start gap-1 sm:grid-cols-9 lg:grid-cols-4 xl:grid-cols-9;
 }
 
 .mr-filter-item {
-  @apply w-full col-span-4 sm:col-span-3 lg:col-span-2 xl:col-span-3 h-8;
+  @apply w-full col-span-4 sm:col-span-3 lg:col-span-2 xl:col-span-3 min-h-8 justify-start;
 }
 
 .mr-filter-item-trash {
@@ -23,4 +23,13 @@ span.mr-suboption-filter {
 
 .mr-filter-item-query {
   @apply col-span-3 w-full sm:col-span-8 xl:col-span-8 lg:col-span-3;
+}
+
+.filter-input-container {
+  // @apply flex flex-col gap-1;
+  @apply relative;
+}
+
+.filter-results-count {
+  @apply text-xs text-black-100 px-2 select-none dark:text-white-300 ml-2 absolute right-0 -top-2 rounded-full bg-main-300 dark:bg-main-600 flex items-center justify-center;
 }

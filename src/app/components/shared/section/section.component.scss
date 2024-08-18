@@ -1,5 +1,6 @@
 .seccion {
   // @apply col-span-1 sm:col-span-3 flex flex-col gap-2;
+  @apply h-fit;
 }
 
 .content {
