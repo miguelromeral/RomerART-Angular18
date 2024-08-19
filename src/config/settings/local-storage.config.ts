@@ -60,3 +60,8 @@ export const settingTranslations = {
   defaultValue: true,
   localStorageKey: 'translations',
 };
+
+export const settingFilterCount = {
+  defaultValue: true,
+  localStorageKey: 'filterCount',
+};

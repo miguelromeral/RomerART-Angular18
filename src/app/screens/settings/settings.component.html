@@ -36,10 +36,29 @@
           [title]="text('FORM.TRANSLATIONS.TITLE') | mrTranslate"
           [description]="text('FORM.TRANSLATIONS.DESCRIPTION') | mrTranslate">
           <app-switch
+            [id]="'iSwitchTranslations'"
             [text]="text('FORM.TRANSLATIONS.SHOW') | mrTranslate"
             [textDisabled]="text('FORM.TRANSLATIONS.HIDE') | mrTranslate"
             formControlName="translateFormControl"
             (change)="changeTranslations($event)">
+          </app-switch>
+        </app-setting-option>
+      </app-section>
+
+      <app-section
+        [title]="text('SECTIONS.DRAWINGS') | mrTranslate"
+        icon="easel">
+        <app-setting-option
+          [title]="text('FORM.SHOW-FILTER-COUNT.TITLE') | mrTranslate"
+          [description]="
+            text('FORM.SHOW-FILTER-COUNT.DESCRIPTION') | mrTranslate
+          ">
+          <app-switch
+            [id]="'iSwitchFilterCount'"
+            [text]="text('FORM.SHOW-FILTER-COUNT.SHOW') | mrTranslate"
+            [textDisabled]="text('FORM.SHOW-FILTER-COUNT.HIDE') | mrTranslate"
+            formControlName="filterCountFormControl"
+            (change)="changeFilterCount($event)">
           </app-switch>
         </app-setting-option>
       </app-section>

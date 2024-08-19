@@ -43,7 +43,9 @@
             (change)="filterControlChange()">
           </app-select-input>
 
-          <span class="filter-results-count">{{ nDrawingCharacters }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingCharacters
+          }}</span>
         </div>
       </app-loading>
 
@@ -64,18 +66,23 @@
             content>
           </app-select-input>
 
-          <span class="filter-results-count">{{ nDrawingModels }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingModels
+          }}</span>
         </div>
       </app-loading>
 
       <div class="favorite mr-filter-item" content>
         <div class="filter-input-container">
           <app-switch
+            [id]="'iSwitchFavorite'"
             [text]="text('FAVORITES.TITLE') | mrTranslate"
             formControlName="formFavorites"
             (ngModelChange)="filterControlChange()">
           </app-switch>
-          <span class="filter-results-count">{{ nDrawingFavorites }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingFavorites
+          }}</span>
         </div>
       </div>
     </div>
@@ -97,7 +104,9 @@
             (change)="onChangeProductType($event); filterControlChange()">
           </app-select-input>
 
-          <span class="filter-results-count">{{ nDrawingProductTypes }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingProductTypes
+          }}</span>
         </div>
       </div>
 
@@ -118,7 +127,9 @@
             content>
           </app-select-input>
 
-          <span class="filter-results-count">{{ nDrawingProducts }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingProducts
+          }}</span>
         </div>
       </app-loading>
 
@@ -138,7 +149,9 @@
             (change)="filterControlChange()">
           </app-select-input>
 
-          <span class="filter-results-count">{{ nDrawingCollections }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingCollections
+          }}</span>
         </div>
       </app-loading>
     </div>
@@ -160,7 +173,9 @@
             (change)="onChangeStyle($event); filterControlChange()">
           </app-select-input>
 
-          <span class="filter-results-count">{{ nDrawingTypes }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingTypes
+          }}</span>
         </div>
       </div>
 
@@ -178,7 +193,9 @@
             (change)="filterControlChange()">
           </app-select-input>
 
-          <span class="filter-results-count">{{ nDrawingSoftwares }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingSoftwares
+          }}</span>
         </div>
       </div>
 
@@ -196,7 +213,9 @@
             (change)="filterControlChange()">
           </app-select-input>
 
-          <span class="filter-results-count">{{ nDrawingPapers }}</span>
+          <span class="filter-results-count" *ngIf="showFilterCount">{{
+            nDrawingPapers
+          }}</span>
         </div>
       </div>
     </div>

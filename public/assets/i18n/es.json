@@ -93,7 +93,8 @@
         "ACCESSIBILITY": "Accesibilidad",
         "ACCOUNT": "Cuenta",
         "PROVIDERS": "Proveedores",
-        "LANGUAGE": "Idioma"
+        "LANGUAGE": "Idioma",
+        "DRAWINGS": "Dibujos"
       },
       "FORM": {
         "CHANGE-LANGUAGE": {
@@ -118,6 +119,12 @@
           "DESCRIPTION": "Inicia sesión como administrador y edita el contenido de la web.",
           "GO-TO-LOGIN": "Iniciar Sesión",
           "GO-TO-ADMIN": "Administración"
+        },
+        "SHOW-FILTER-COUNT": {
+          "TITLE": "Contador de Resultados",
+          "DESCRIPTION": "Contar la cantidad de opciones disponibles en un filtro en concreto en el formulario de filtrar dibujos",
+          "SHOW": "Mostrar",
+          "HIDE": "Esconder"
         }
       },
       "FOOTER": {

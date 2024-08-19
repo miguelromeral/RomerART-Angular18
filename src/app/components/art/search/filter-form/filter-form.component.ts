@@ -42,6 +42,8 @@ import { TextInputComponent } from '@app/components/shared/inputs/text-input/tex
 import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { SectionComponent } from '@app/components/shared/section/section.component';
+import { settingFilterCount } from 'config/settings/local-storage.config';
+import { SettingsService } from '@app/services/settings/settings.service';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -114,6 +116,7 @@ export class FilterFormComponent
   nDrawingPapers = 0;
   nDrawingFavorites = 0;
   filtering = false;
+  showFilterCount = settingFilterCount.defaultValue;
 
   /* Filter Form */
   filterForm = new FormGroup({
@@ -157,7 +160,8 @@ export class FilterFormComponent
     private drawingService: DrawingService,
     private languageService: LanguageService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private settingsService: SettingsService
   ) {
     super('SCREENS.DRAWING-SEARCH.FORM');
     this.setValuesFromQueryParams();
@@ -166,6 +170,10 @@ export class FilterFormComponent
   ngOnInit(): void {
     this.loadSelects();
     this.setValuesFromQueryParams();
+
+    this.settingsService.filterCount$.subscribe(show => {
+      this.showFilterCount = show;
+    });
   }
 
   requestMoreDrawings() {

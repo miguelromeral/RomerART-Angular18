@@ -93,7 +93,8 @@
         "ACCESSIBILITY": "Accessibility",
         "ACCOUNT": "Account",
         "PROVIDERS": "Providers",
-        "LANGUAGE": "Language"
+        "LANGUAGE": "Language",
+        "DRAWINGS": "Drawings"
       },
       "FORM": {
         "CHANGE-LANGUAGE": {
@@ -118,6 +119,12 @@
           "DESCRIPTION": "Log in as an administrator and edit the content of the site.",
           "GO-TO-LOGIN": "Sign In",
           "GO-TO-ADMIN": "Admin"
+        },
+        "SHOW-FILTER-COUNT": {
+          "TITLE": "Count Results",
+          "DESCRIPTION": "Count the amount of options availables in a filter in the filter drawings form",
+          "SHOW": "Show",
+          "HIDE": "Hide"
         }
       },
       "FOOTER": {

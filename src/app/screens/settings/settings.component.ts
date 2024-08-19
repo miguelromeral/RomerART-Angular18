@@ -4,6 +4,7 @@ import { LanguageService } from '@app/services/language/language.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  settingFilterCount,
   settingLanguage,
   settingTheme,
   settingTranslations,
@@ -61,6 +62,7 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
     langFormControl: new FormControl(settingLanguage.defaultValue),
     themeFormControl: new FormControl(settingTheme.defaultValue),
     translateFormControl: new FormControl(settingTranslations.defaultValue),
+    filterCountFormControl: new FormControl(settingFilterCount.defaultValue),
   });
 
   constructor(
@@ -91,6 +93,10 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
     this.settingsService.translations$.subscribe(value => {
       this.settingsForm.controls.translateFormControl.patchValue(value);
     });
+
+    this.settingsService.filterCount$.subscribe(value => {
+      this.settingsForm.controls.filterCountFormControl.patchValue(value);
+    });
   }
 
   changeLanguage(event: Event) {
@@ -111,5 +117,11 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     const translate = target.checked;
     this.settingsService.setTranslations(translate);
+  }
+
+  changeFilterCount(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const show = target.checked;
+    this.settingsService.setFilterCount(show);
   }
 }
