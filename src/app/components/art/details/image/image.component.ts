@@ -1,5 +1,13 @@
 import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { ScoreBoardComponent } from '../score-board/score-board.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
@@ -48,6 +56,12 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   }
 
   admin = false;
+
+  @ViewChild('imageElement') imageElement!: ElementRef;
+  initialDistance = 0;
+  lastScale = 1;
+  transform = '';
+  initialTouchPosition = { x: 0, y: 0 }; // Declaración de la propiedad
 
   btnCheerId = 'btnCheer';
 
@@ -131,8 +145,6 @@ export class ImageComponent extends LanguageComponent implements OnInit {
       const text = this.customTranslate.transform(this.text('SHARE.TEXT'), {
         title: this.drawing.pageTitle(),
       });
-      console.log('Title', title);
-      console.log('Text', text);
       navigator
         .share({
           title: title,
@@ -152,5 +164,78 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
   editDrawing() {
     this.router.navigate([`/art/edit/${this.drawing.id}`]);
+  }
+
+  onTouchStart(event: TouchEvent) {
+    if (event.touches.length === 2) {
+      this.initialDistance = this.getDistance(event.touches);
+
+      const rect = this.imageElement.nativeElement.getBoundingClientRect();
+      const centerX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
+      const centerY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
+
+      this.initialTouchPosition = {
+        x: (centerX - rect.left) / rect.width,
+        y: (centerY - rect.top) / rect.height,
+      };
+
+      // Set the transform-origin to the center of the pinch
+      this.imageElement.nativeElement.style.transformOrigin = `${this.initialTouchPosition.x * 100}% ${this.initialTouchPosition.y * 100}%`;
+    }
+  }
+  onTouchMove(event: TouchEvent) {
+    if (event.touches.length === 2) {
+      event.preventDefault();
+
+      const currentDistance = this.getDistance(event.touches);
+      let scale = (currentDistance / this.initialDistance) * this.lastScale;
+
+      // Limitar la escala mínima a 1
+      if (scale < 1) {
+        scale = 1;
+      }
+
+      // Use requestAnimationFrame for smoother rendering
+      requestAnimationFrame(() => {
+        this.transform = `scale(${scale})`;
+        this.imageElement.nativeElement.style.transform = this.transform;
+      });
+    }
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    if (event.touches.length < 2) {
+      this.lastScale = 1;
+      this.transform = 'scale(1)';
+      // this.lastScale = this.getCurrentScale();
+    }
+  }
+
+  getDistance(touches: TouchList): number {
+    const [touch1, touch2] = [touches[0], touches[1]];
+    const deltaX = touch2.clientX - touch1.clientX;
+    const deltaY = touch2.clientY - touch1.clientY;
+    const res = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    return res;
+  }
+  getCurrentScale(): number {
+    const transformMatrix = window
+      .getComputedStyle(this.imageElement.nativeElement)
+      .getPropertyValue('transform');
+
+    if (transformMatrix === 'none') {
+      return 1;
+    }
+
+    const matrixMatch = transformMatrix.match(/matrix\((.+)\)/);
+
+    if (matrixMatch && matrixMatch[1]) {
+      const matrixValues = matrixMatch[1].split(', ');
+      const scaleX = parseFloat(matrixValues[0]);
+
+      return isNaN(scaleX) ? 1 : scaleX;
+    }
+
+    return 1;
   }
 }
