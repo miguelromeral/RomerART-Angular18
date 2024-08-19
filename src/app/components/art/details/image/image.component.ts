@@ -7,6 +7,7 @@ import {
   OnInit,
   ElementRef,
   ViewChild,
+  Renderer2,
 } from '@angular/core';
 import { Drawing } from '@models/art/drawing.model';
 import { ScoreBoardComponent } from '../score-board/score-board.component';
@@ -61,6 +62,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   initialDistance = 0;
   lastScale = 1;
   transform = '';
+  private maxScale = 2;
   initialTouchPosition = { x: 0, y: 0 }; // Declaración de la propiedad
 
   btnCheerId = 'btnCheer';
@@ -71,7 +73,8 @@ export class ImageComponent extends LanguageComponent implements OnInit {
     private drawingService: DrawingService,
     private authService: AuthService,
     private router: Router,
-    private customTranslate: CustomTranslatePipe
+    private customTranslate: CustomTranslatePipe,
+    private renderer: Renderer2
   ) {
     super('SCREENS.DRAWING-DETAILS');
   }
@@ -166,8 +169,59 @@ export class ImageComponent extends LanguageComponent implements OnInit {
     this.router.navigate([`/art/edit/${this.drawing.id}`]);
   }
 
+  onMouseEnter(event: MouseEvent) {
+    // Cuando el ratón entra, se hace zoom sobre la imagen
+    this.renderer.setStyle(
+      this.imageElement.nativeElement,
+      'transition',
+      'transform 0.3s ease-in-out'
+    );
+    this.scaleImage(event, this.maxScale);
+  }
+
+  onMouseLeave() {
+    // Resetea el zoom al salir
+    this.resetImageScale();
+  }
+
+  onMouseMove(event: MouseEvent) {
+    // Permite mover el zoom entre la imagen
+    this.scaleImage(event, this.maxScale);
+  }
+
+  // Escala la imagen basada en la posición del ratón
+  private scaleImage(event: MouseEvent, scale: number) {
+    const rect = this.imageElement.nativeElement.getBoundingClientRect();
+    const offsetX = event.clientX - rect.left;
+    const offsetY = event.clientY - rect.top;
+
+    const originX = (offsetX / rect.width) * 100;
+    const originY = (offsetY / rect.height) * 100;
+
+    this.renderer.setStyle(
+      this.imageElement.nativeElement,
+      'transform-origin',
+      `${originX}% ${originY}%`
+    );
+    this.renderer.setStyle(
+      this.imageElement.nativeElement,
+      'transform',
+      `scale(${scale})`
+    );
+  }
+
+  // Restablece la escala de la imagen
+  private resetImageScale() {
+    this.renderer.setStyle(
+      this.imageElement.nativeElement,
+      'transform',
+      'scale(1)'
+    );
+  }
+
   onTouchStart(event: TouchEvent) {
     if (event.touches.length === 2) {
+      // si se está pellizcando la imagen, capturamos las coordenadas y calculamos el zoom
       this.initialDistance = this.getDistance(event.touches);
 
       const rect = this.imageElement.nativeElement.getBoundingClientRect();
@@ -181,6 +235,9 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
       // Set the transform-origin to the center of the pinch
       this.imageElement.nativeElement.style.transformOrigin = `${this.initialTouchPosition.x * 100}% ${this.initialTouchPosition.y * 100}%`;
+
+      // Disable transition for immediate response
+      this.imageElement.nativeElement.style.transition = 'none';
     }
   }
   onTouchMove(event: TouchEvent) {
@@ -195,7 +252,20 @@ export class ImageComponent extends LanguageComponent implements OnInit {
         scale = 1;
       }
 
-      // Use requestAnimationFrame for smoother rendering
+      // Calcular la nueva posición media entre los dos dedos
+      const rect = this.imageElement.nativeElement.getBoundingClientRect();
+      const centerX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
+      const centerY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
+
+      const newTouchPosition = {
+        x: (centerX - rect.left) / rect.width,
+        y: (centerY - rect.top) / rect.height,
+      };
+
+      // Actualizar el origen de la transformación para seguir los dedos
+      this.imageElement.nativeElement.style.transformOrigin = `${newTouchPosition.x * 100}% ${newTouchPosition.y * 100}%`;
+
+      // Immediate transformation during pinch
       requestAnimationFrame(() => {
         this.transform = `scale(${scale})`;
         this.imageElement.nativeElement.style.transform = this.transform;
@@ -207,7 +277,9 @@ export class ImageComponent extends LanguageComponent implements OnInit {
     if (event.touches.length < 2) {
       this.lastScale = 1;
       this.transform = 'scale(1)';
-      // this.lastScale = this.getCurrentScale();
+
+      // Restore smooth transition after pinch ends
+      this.imageElement.nativeElement.style.transition = 'transform 0.1s ease';
     }
   }
 
@@ -218,6 +290,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
     const res = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     return res;
   }
+
   getCurrentScale(): number {
     const transformMatrix = window
       .getComputedStyle(this.imageElement.nativeElement)

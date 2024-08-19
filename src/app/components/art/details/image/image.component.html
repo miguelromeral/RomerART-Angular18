@@ -9,7 +9,10 @@
     id="divImgFull"
     class="mr-img-full-container heart-rain relative min-h-24 w-full"
     [ngClass]="{ favorite: drawing.favorite }"
-    (dblclick)="cheerDrawing($event)">
+    (dblclick)="cheerDrawing($event)"
+    (mouseenter)="onMouseEnter($event)"
+    (mouseleave)="onMouseLeave()"
+    (mousemove)="onMouseMove($event)">
     <app-loading [loading]="loading">
       <div class="flex h-80 w-full items-center justify-center rounded" loading>
         <i class="bi bi-image-fill text-2xl"></i>
