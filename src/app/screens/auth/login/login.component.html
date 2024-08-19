@@ -1,36 +1,48 @@
 <app-layout>
-  <!-- TODO: currarse la página de LOGIN -->
-  <h1>LOGIN</h1>
+  <div>
+    <h1>{{ text('TITLE') | mrTranslate }}</h1>
 
-  <form [formGroup]="loginForm" (submit)="login()" class="flex flex-col gap-2">
-    <label for="iUsername">USERNAME</label>
-    <input
-      id="iUsername"
-      formControlName="username"
-      class="mr-custom-text"
-      type="text" />
-    <div
-      *ngIf="
-        loginForm.controls.username.touched &&
-        loginForm.controls.username.hasError('required')
-      ">
-      USERNAME IS REQUIRED
-    </div>
+    <form
+      [formGroup]="loginForm"
+      (submit)="login()"
+      class="flex flex-col gap-2">
+      <label for="iUsername">{{
+        text('FORM.USERNAME.TITLE') | mrTranslate
+      }}</label>
+      <input
+        id="iUsername"
+        formControlName="username"
+        class="mr-custom-text"
+        type="text" />
+      <div
+        class="form-error"
+        *ngIf="
+          loginForm.controls.username.touched &&
+          loginForm.controls.username.hasError('required')
+        ">
+        {{ text('ERRORS.USERNAME-REQUIRED') | mrTranslate }}
+      </div>
 
-    <label for="iPassword">PASSWORD</label>
-    <input
-      id="iPassword"
-      formControlName="password"
-      class="mr-custom-text"
-      type="password" />
-    <div
-      *ngIf="
-        loginForm.controls.password.touched &&
-        loginForm.controls.password.hasError('required')
-      ">
-      USERNAME IS REQUIRED
-    </div>
+      <label for="iPassword">{{
+        text('FORM.PASSWORD.TITLE') | mrTranslate
+      }}</label>
+      <input
+        id="iPassword"
+        formControlName="password"
+        class="mr-custom-text"
+        type="password" />
+      <div
+        class="form-error"
+        *ngIf="
+          loginForm.controls.password.touched &&
+          loginForm.controls.password.hasError('required')
+        ">
+        {{ text('ERRORS.PASSWORD-REQUIRED') | mrTranslate }}
+      </div>
 
-    <button class="btn" type="submit">LOGIN</button>
-  </form>
+      <button class="btn" type="submit">
+        {{ text('FORM.LOGIN') | mrTranslate }}
+      </button>
+    </form>
+  </div>
 </app-layout>

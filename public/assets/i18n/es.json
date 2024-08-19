@@ -49,6 +49,24 @@
     "NOT-FOUND": {
       "TITLE": "Página no encontrada"
     },
+    "LOGIN": {
+      "TITLE": "Iniciar Sesión",
+      "FORM": {
+        "USERNAME": {
+          "TITLE": "Nombre de Usuario",
+          "PLACEHOLDER": "Nombre de usuario"
+        },
+        "PASSWORD": {
+          "TITLE": "Contraseña",
+          "PLACEHOLDER": "Contraseña"
+        },
+        "LOGIN": "Iniciar Sesión"
+      },
+      "ERRORS": {
+        "USERNAME-REQUIRED": "El nombre de usuario es obligatorio",
+        "PASSWORD-REQUIRED": "Escriba alguna contraseña"
+      }
+    },
     "ABOUT": {
       "ME": {
         "PERSONAL": {

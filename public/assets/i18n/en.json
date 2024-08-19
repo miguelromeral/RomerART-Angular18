@@ -49,6 +49,24 @@
     "NOT-FOUND": {
       "TITLE": "Page not found"
     },
+    "LOGIN": {
+      "TITLE": "Log In",
+      "FORM": {
+        "USERNAME": {
+          "TITLE": "Username",
+          "PLACEHOLDER": "Username"
+        },
+        "PASSWORD": {
+          "TITLE": "Password",
+          "PLACEHOLDER": "Password"
+        },
+        "LOGIN": "Log In"
+      },
+      "ERRORS": {
+        "USERNAME-REQUIRED": "Username is required",
+        "PASSWORD-REQUIRED": "Provide a password"
+      }
+    },
     "ABOUT": {
       "ME": {
         "PERSONAL": {

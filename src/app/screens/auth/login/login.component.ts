@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { AuthService } from '@app/services/api/auth/auth.service';
+import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -25,7 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent extends LanguageComponent {
   /* Filter Form */
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -35,7 +36,9 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    super('SCREENS.LOGIN');
+  }
 
   login() {
     if (this.loginForm.valid) {

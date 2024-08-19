@@ -422,7 +422,6 @@ export class FilterFormComponent
     const filters = new DrawingFilter(this.filterForm.value);
     const queryParams: Record<string, string> = {};
 
-    // TODO: arreglar que el sortby como queryparams no funciona bien
     // this.changeBasicArtUrlParameter(
     //   queryParams,
     //   ArtFilterFormConfig.queryParamsNames.sortBy,
