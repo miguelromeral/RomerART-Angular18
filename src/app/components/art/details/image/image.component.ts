@@ -127,7 +127,6 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
   shareDrawing() {
     if (navigator.share) {
-      // TODO: Revisar esto en móviles, a ver si funciona
       const title = this.drawing.pageTitle();
       const text = this.customTranslate.transform(this.text('SHARE.TEXT'), {
         title: this.drawing.pageTitle(),
