@@ -125,18 +125,21 @@
       <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
 
-        <app-select-input
-          class="mr-filter-item"
-          [firstOption]="{
-            value: '',
-            label: '',
-            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.COLLECTION.TITLE',
-          }"
-          [options]="listCollections"
-          formControlName="collection"
-          (change)="filterControlChange()"
-          content>
-        </app-select-input>
+        <div class="filter-input-container" content>
+          <app-select-input
+            class="mr-filter-item"
+            [firstOption]="{
+              value: '',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.COLLECTION.TITLE',
+            }"
+            [options]="filteredCollections"
+            formControlName="collection"
+            (change)="filterControlChange()">
+          </app-select-input>
+
+          <span class="filter-results-count">{{ nDrawingCollections }}</span>
+        </div>
       </app-loading>
     </div>
   </app-section>

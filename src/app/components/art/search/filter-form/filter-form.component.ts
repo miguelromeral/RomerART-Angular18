@@ -100,6 +100,7 @@ export class FilterFormComponent
   listDrawingPapers: DrawingPaperSize[] = [];
   filteredDrawingPapers: DrawingPaperSize[] = [];
   listCollections: Collection[] = [];
+  filteredCollections: Collection[] = [];
 
   /* Filter Results */
   listDrawings: Drawing[] = [];
@@ -341,6 +342,12 @@ export class FilterFormComponent
       this.nDrawingPapers = this.filteredDrawingPapers.length;
 
       this.nDrawingFavorites = this.listDrawings.filter(x => x.favorite).length;
+
+      const ids = this.listDrawings.map(x => x.id);
+      this.filteredCollections = this.listCollections.filter(
+        c => c.drawingsId.filter(cd => ids.find(id => id === cd)).length > 0
+      );
+      this.nDrawingCollections = this.filteredCollections.length;
 
       // console.log('Results: ' + results.map(d => d.id));
       // }
