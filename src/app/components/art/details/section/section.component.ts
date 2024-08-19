@@ -27,7 +27,7 @@ export class SectionComponent extends LanguageComponent implements OnInit {
   @Input() tags = false;
   @Input() capitalize = false;
 
-  selectedType: IArtSectionType = { id: '', icon: '', text: '' };
+  selectedType: IArtSectionType = { id: '', icon: '' };
 
   constructor() {
     super('SCREENS.DRAWING-DETAILS.DETAILS.SECTIONS');

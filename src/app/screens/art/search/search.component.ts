@@ -12,6 +12,7 @@ import { LanguageService } from '@app/services/language/language.service';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { Router } from '@angular/router';
 import { filterFormAnimation } from '@app/animations/art/filter-form.animations';
+import { getHumanTimeFromMinutes } from '@utils/customization/text-utils';
 
 @Component({
   selector: 'app-search',
@@ -57,6 +58,9 @@ export class SearchComponent extends LanguageComponent implements OnInit {
 
   admin = false;
   showFilters = false;
+  nTotalMinutes = 0;
+  nTotalMinutesHuman = '';
+  nTotalMinutesNotDefined = false;
 
   constructor(
     private metadataService: MetadataService,
@@ -82,6 +86,12 @@ export class SearchComponent extends LanguageComponent implements OnInit {
 
   onFetchedResults(list: Drawing[]) {
     this.listDrawings = list;
+    this.nTotalMinutes = this.listDrawings.reduce((accumulator, current) => {
+      return accumulator + current.time;
+    }, 0);
+    this.nTotalMinutesNotDefined =
+      this.listDrawings.filter(d => d.time === 0).length > 0;
+    this.nTotalMinutesHuman = `${this.nTotalMinutesNotDefined ? '+' : ''}${getHumanTimeFromMinutes(this.nTotalMinutes)}`;
     this.divImageCounter.nativeElement.classList.add(
       this.imageCounterAnimationClass
     );
