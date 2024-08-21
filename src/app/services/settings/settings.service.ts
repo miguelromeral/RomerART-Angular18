@@ -4,7 +4,7 @@ import { LanguageService } from '../language/language.service';
 import { ThemeService } from '../theme/theme.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { booleanSettings } from 'config/settings/local-storage.config';
-import { ISettingOption, Setting } from '@models/settings/settings.model';
+import { ISetting, Setting } from '@models/settings/settings.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class SettingsService {
   ) {
     const bolSet: Setting<boolean>[] = [];
     booleanSettings.forEach(setting => {
-      bolSet.push(Setting.getSettingFromInterface(setting));
+      bolSet.push(new Setting(setting));
     });
     this.booleanSettings = bolSet;
   }
@@ -41,7 +41,7 @@ export class SettingsService {
     this.setBooleanSetting(setting, value);
   }
 
-  setBooleanSetting(opt: ISettingOption<boolean>, value: boolean): void {
+  setBooleanSetting(opt: ISetting<boolean>, value: boolean): void {
     const setting = this.getBooleanSetting(opt.key);
     if (setting) {
       this.storage.setItem(setting.key, value.toString());
@@ -49,18 +49,7 @@ export class SettingsService {
     }
   }
 
-  booleanSetting$(setting: ISettingOption<boolean>): Observable<boolean> {
+  booleanSetting$(setting: ISetting<boolean>): Observable<boolean> {
     return this.getBooleanSetting(setting.key)!.subject.asObservable();
   }
-
-  // get translations$() {
-  //   return this.getBooleanSetting(settingTranslations.localStorageKey)!.subject;
-  // }
-
-  // get filterCount$() {
-  //   return this.getBooleanSetting(settingFilterCount.localStorageKey)!.subject;
-  // }
-  // get zoomImage$() {
-  //   return this.getBooleanSetting(settingZoomImage.localStorageKey)!.subject;
-  // }
 }

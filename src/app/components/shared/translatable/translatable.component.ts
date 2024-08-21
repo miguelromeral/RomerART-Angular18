@@ -10,10 +10,8 @@ import { SettingsService } from '@app/services/settings/settings.service';
 import { TranslateService } from '@app/services/translate/translate.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  settingLanguage,
-  settingTranslations,
-} from 'config/settings/local-storage.config';
+import { settingLanguage } from 'config/settings/language.config';
+import { settingTranslations } from 'config/settings/local-storage.config';
 
 @Component({
   selector: 'app-translatable',

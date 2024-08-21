@@ -5,8 +5,6 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   settingFilterCount,
-  settingLanguage,
-  settingTheme,
   settingTranslations,
   settingZoomImage,
 } from 'config/settings/local-storage.config';
@@ -26,6 +24,8 @@ import { SwitchComponent } from '@app/components/shared/inputs/switch/switch.com
 import { SettingsService } from '@app/services/settings/settings.service';
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
 import { environment } from 'environments/environment';
+import { settingLanguage } from 'config/settings/language.config';
+import { settingTheme } from 'config/settings/theme.config';
 
 @Component({
   selector: 'app-settings',

@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
+import { LocalStorageService } from '../local-storage/local-storage.service';
+import { SettingSelect } from '@models/settings/settings.model';
 import {
   darkThemeClassTailwind,
   settingTheme,
   settingThemeValues,
-} from 'config/settings/local-storage.config';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+} from 'config/settings/theme.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  private themeSubject = new BehaviorSubject<string>(settingTheme.defaultValue);
-  currentTheme$: Observable<string> = this.themeSubject.asObservable();
+  private setting: SettingSelect;
 
-  constructor(private storage: LocalStorageService) {}
+  get currentTheme$() {
+    return this.setting.subject;
+  }
+
+  constructor(private storage: LocalStorageService) {
+    this.setting = new SettingSelect(settingTheme);
+  }
 
   init() {
-    // console.log("Storage Service: "+)
-    let currentTheme = this.storage.getItem(settingTheme.localStorageKey);
+    let currentTheme = this.storage.getItem(settingTheme.key);
 
     if (currentTheme === null) {
       currentTheme = settingTheme.defaultValue;
@@ -28,7 +32,7 @@ export class ThemeService {
   }
 
   setTheme(theme: string): void {
-    this.storage.setItem(settingTheme.localStorageKey, theme);
+    this.storage.setItem(settingTheme.key, theme);
 
     switch (theme) {
       case settingThemeValues.system:
@@ -42,7 +46,7 @@ export class ThemeService {
         return;
     }
 
-    this.themeSubject.next(theme);
+    this.setting.subject.next(theme);
   }
 
   private setSystemTheme() {
@@ -55,27 +59,24 @@ export class ThemeService {
       } else {
         this.setLightTheme();
       }
-      this.themeSubject.next(settingThemeValues.system);
+      this.setting.subject.next(settingThemeValues.system);
     }
   }
 
   private setDarkTheme() {
-    this.themeSubject.next(settingThemeValues.dark);
+    this.setting.subject.next(settingThemeValues.dark);
     window.document.documentElement.classList.add(darkThemeClassTailwind);
   }
   private setLightTheme() {
-    this.themeSubject.next(settingThemeValues.light);
+    this.setting.subject.next(settingThemeValues.light);
     window.document.documentElement.classList.remove(darkThemeClassTailwind);
   }
 
   getTheme(): string {
-    return (
-      this.storage.getItem(settingTheme.localStorageKey) ??
-      settingTheme.defaultValue
-    );
+    return this.storage.getItem(settingTheme.key) ?? settingTheme.defaultValue;
   }
 
   clearTheme(): void {
-    this.storage.removeItem(settingTheme.localStorageKey);
+    this.storage.removeItem(settingTheme.key);
   }
 }

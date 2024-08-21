@@ -1,8 +1,13 @@
+import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { BehaviorSubject } from 'rxjs';
 
-export interface ISettingOption<T> {
+export interface ISetting<T> {
   key: string;
   defaultValue: T;
+}
+
+export interface ISettingSelect extends ISetting<string> {
+  options: ICustomSelectOption[];
 }
 
 export class Setting<T> {
@@ -10,13 +15,18 @@ export class Setting<T> {
   defaultValue: T;
   subject: BehaviorSubject<T>;
 
-  constructor(key: string, defaultValue: T) {
-    this.key = key;
-    this.defaultValue = defaultValue;
-    this.subject = new BehaviorSubject<T>(defaultValue);
+  constructor(setting: ISetting<T>) {
+    this.key = setting.key;
+    this.defaultValue = setting.defaultValue;
+    this.subject = new BehaviorSubject<T>(this.defaultValue);
   }
+}
 
-  static getSettingFromInterface<T>(option: ISettingOption<T>): Setting<T> {
-    return new Setting<T>(option.key, option.defaultValue);
+export class SettingSelect extends Setting<string> {
+  options: ICustomSelectOption[];
+
+  constructor(setting: ISettingSelect) {
+    super(setting);
+    this.options = setting.options;
   }
 }

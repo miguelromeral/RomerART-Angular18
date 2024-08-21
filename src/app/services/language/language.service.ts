@@ -1,30 +1,32 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LocalStorageService } from '../local-storage/local-storage.service';
-import { settingLanguage } from 'config/settings/local-storage.config';
+import { SettingSelect } from '@models/settings/settings.model';
+import { settingLanguage } from 'config/settings/language.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LanguageService {
-  private languageSubject = new BehaviorSubject<string>(
-    settingLanguage.defaultValue
-  );
-  currentLanguage$: Observable<string> = this.languageSubject.asObservable();
+  private setting: SettingSelect;
+
+  get currentLanguage$() {
+    return this.setting.subject;
+  }
 
   constructor(
     private translate: TranslateService,
     private localStorageService: LocalStorageService
-  ) {}
+  ) {
+    this.setting = new SettingSelect(settingLanguage);
+  }
 
   init() {
     const languages = settingLanguage.options.map(lang => lang.value);
     this.translate.addLangs(languages);
 
-    let currentLanguage = this.localStorageService.getItem(
-      settingLanguage.localStorageKey
-    );
+    let currentLanguage = this.localStorageService.getItem(settingLanguage.key);
 
     if (currentLanguage === null) {
       currentLanguage =
@@ -41,8 +43,8 @@ export class LanguageService {
     // Change HTML lang attribute
     document.documentElement.lang = lang;
     this.translate.use(lang);
-    this.languageSubject.next(lang); // Emitir el nuevo idioma
-    this.localStorageService.setItem(settingLanguage.localStorageKey, lang);
+    this.setting.subject.next(lang); // Emitir el nuevo idioma
+    this.localStorageService.setItem(settingLanguage.key, lang);
   }
 
   translateText(key: string): Observable<string> {

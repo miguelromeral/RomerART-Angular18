@@ -1,4 +1,4 @@
-import { settingLanguage } from 'config/settings/local-storage.config';
+import { settingLanguage } from 'config/settings/language.config';
 
 export function yearsDifference(fechaInicio: Date, fechaFin: Date): number {
   let diferenciaEnAnios = fechaFin.getFullYear() - fechaInicio.getFullYear();
@@ -29,6 +29,7 @@ export function formattedDate(
   return `${day} ${month} ${year}`;
 }
 
+// TODO: pasarle este valor, hacerlo obligatorio
 export function formattedDateMini(
   date: Date,
   locale: string = settingLanguage.defaultValue
