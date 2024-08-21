@@ -507,7 +507,7 @@
         "SAVE": "Guardar",
         "DRAWINGS": {
           "NOT-USED": "Restantes",
-          "USED": "Seleccionados",
+          "USED": "Seleccionados ({{count}})",
           "DROP-HERE": "Soltar Aquí"
         }
       },

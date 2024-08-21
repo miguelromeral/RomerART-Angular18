@@ -62,6 +62,7 @@
             class="mr-img-gallery grid h-full w-full grid-cols-3 gap-[2px] sm:grid-cols-4">
             <app-drawing-thumbnail
               class="h-full w-full"
+              [fullsize]="first"
               [ngClass]="{ 'col-span-2 row-span-2': first }"
               [drawing]="drawing"
               *ngFor="let drawing of listDrawings; let first = first">

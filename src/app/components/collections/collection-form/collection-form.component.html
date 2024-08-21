@@ -56,7 +56,9 @@
       </app-collection-drawing-list>
       <app-collection-drawing-list
         [drawings]="listUsed"
-        [title]="text('FORM.DRAWINGS.USED') | mrTranslate"
+        [title]="
+          text('FORM.DRAWINGS.USED') | mrTranslate: { count: listUsed.length }
+        "
         [connectedTo]="['listAll']"
         (requestDrop)="drop($event, 'used')">
       </app-collection-drawing-list>
