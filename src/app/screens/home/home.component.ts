@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
+import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { InstagramPostComponent } from '@app/components/shared/social/instagram-post/instagram-post.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
@@ -28,6 +29,7 @@ import {
     InstagramPostComponent,
     DrawingThumbnailComponent,
     CommonModule,
+    LoadingComponent,
     NgIf,
   ],
   templateUrl: './home.component.html',
@@ -36,7 +38,8 @@ import {
 export class HomeComponent extends LanguageComponent implements OnInit {
   listDrawings: Drawing[] = [];
   collection: Collection | undefined;
-  socialLinks: ISocialLink[] = socialLinksConfig;
+  socialLinks: ISocialLink[] = socialLinksConfig.filter(x => x.showInAbout);
+  loadingCollection = true;
 
   constructor(
     private metadataService: MetadataService,
@@ -55,6 +58,7 @@ export class HomeComponent extends LanguageComponent implements OnInit {
       .getCollectionDetails(homeCollectionConfig)
       .subscribe(col => {
         this.collection = col;
+        this.loadingCollection = false;
       });
   }
 
@@ -63,6 +67,10 @@ export class HomeComponent extends LanguageComponent implements OnInit {
   }
 
   goToAbout() {
-    this.router.navigate(['/about']);
+    this.router.navigate(['/about/me']);
+  }
+
+  goToCV() {
+    this.router.navigate(['/about/hire']);
   }
 }

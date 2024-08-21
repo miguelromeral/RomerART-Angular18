@@ -40,10 +40,76 @@
         "GO-TO-GALLERY": "Ver Galería Completa"
       },
       "ABOUT": {
-        "GO-TO-ABOUT": "Sobre Mí"
+        "GO-TO-ABOUT": "Sobre Mí",
+        "GO-TO-CV": "Contratar"
       },
       "LINKS": {
         "TITLE": "Enlaces de Interés"
+      }
+    },
+    "CV": {
+      "SECTIONS": {
+        "PERSONAL": "Datos Personales",
+        "EXPERIENCE": "Experiencia Profesional",
+        "LANGUAGES": "Idiomas",
+        "TECNOLOGY": "Tecnología Utilizada",
+        "CERTIFICATIONS": "Certificaciones",
+        "PROJECTS": "Proyectos Personales Destacados",
+        "ABOUT": "Sobre Mí"
+      },
+      "PERSONAL": {
+        "NAME": "Nombre",
+        "AGE": "Edad",
+        "BIRTHPLACE": "📅 Nacimiento",
+        "HOMEPLACE": "🏠 Residencia",
+        "COLLEGE": "🎓 Universidad"
+      },
+      "EXPERIENCE": {
+        "REMOTE": "Remoto 100%",
+        "PRESENTIAL": "Presencial 100%"
+      },
+      "TECNOLOGY": {
+        "ISSUES": "⚠ Gestión de Incidencias",
+        "VERSIONS": "📌 Control de Versiones",
+        "CLOUD": "☁ Computación en la Nube",
+        "QUALITY": "🔍 Calidad de Código",
+        "FRAMEWORKS": "🖼 Frameworks",
+        "SERVERS": "⚙ Servidores",
+        "CODING": {
+          "CODING": "🤖 Lenguajes de Programación",
+          "ADVANCED": "Avanzado",
+          "MILD": "Intermedio",
+          "BASIC": "Básico",
+          "OTHER": "Otros"
+        },
+        "ENTERPRISE": "🖥 Sistemas Empresariales",
+        "OFFICE": "🖨 Ofimática",
+        "IDE": "🛠 Entornos de Desarrollo",
+        "OS": "💾 Sistemas Operativos"
+      },
+      "STRENGTHS": {
+        "STRENGTHS": "Fortalezas",
+        "CLIFTON": "(CliftonStrengths® Gallup Report)",
+        "CAREFULL": {
+          "TITLE": "Prudente",
+          "DESCRIPTION": "\"Cuidadoso, percibe numerosos riesgos que existen, los identifica y evalúa para minimizarlos.\""
+        },
+        "ANALYTIC": {
+          "TITLE": "Analítico",
+          "DESCRIPTION": "\"Le gustan los datos porque representan información objetiva. Con ellos, busca modelos y conexiones, desea comprender cómo ciertos patrones o modelos interactúan. Algunos le consideran lógico y riguroso.\""
+        },
+        "RESTORER": {
+          "TITLE": "Restaurador",
+          "DESCRIPTION": "\"Le encanta resolver problemas. Le entusiasma el desafío de analizar los síntomas, identificar qué está mal y encontrar la solución. Disfruta haciendo que las cosas vuelvan a cobrar vida.\""
+        },
+        "EQUITY": {
+          "TITLE": "Equidad",
+          "DESCRIPTION": "\"Es plenamiente consciente de la necesidad de tratar a todos por igual. Considera que la gente se desempeña mejor en un ambiente coherente, en que las normas son claras y se aplican a todos por igual.\""
+        },
+        "RELATION": {
+          "TITLE": "Relación",
+          "DESCRIPTION": "\"Le atrae la gente que ya conoce. Una vez establecido el contacto inicial deliberadamente trata de profundizar esa relación. Cuanto más compartan entre sí, más se arriesgan juntos.\""
+        }
       }
     },
     "NOT-FOUND": {

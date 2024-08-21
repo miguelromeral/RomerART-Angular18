@@ -15,6 +15,7 @@ import { MeComponent } from './screens/about/me/me.component';
 import { CollectionListComponent } from './screens/admin/collections/collection-list/collection-list.component';
 import { EditCollectionComponent } from './screens/admin/collections/edit-collection/edit-collection.component';
 import { CreateCollectionComponent } from './screens/admin/collections/create-collection/create-collection.component';
+import { CvComponent } from './screens/about/cv/cv.component';
 
 export const routes: Routes = [
   {
@@ -48,10 +49,17 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'about',
+    path: 'about/me',
     component: MeComponent,
     data: {
       animation: 'AboutPage',
+    },
+  },
+  {
+    path: 'about/hire',
+    component: CvComponent,
+    data: {
+      animation: 'CVPage',
     },
   },
   {

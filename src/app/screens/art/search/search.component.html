@@ -22,9 +22,7 @@
                 | mrTranslate: { length: resultsLength }
             }}
           </div>
-          <div *ngIf="nTotalMinutes > 0">
-            {{ nTotalMinutesHuman }}
-          </div>
+          <div *ngIf="nTotalMinutes > 0">({{ nTotalMinutesHuman }})</div>
         </div>
 
         <button

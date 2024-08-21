@@ -48,7 +48,7 @@ export class MeComponent extends LanguageComponent implements OnInit {
   magicPoints = 0;
   maxMagic = magicConfig.max;
 
-  socialLinks: ISocialLink[] = socialLinksConfig;
+  socialLinks: ISocialLink[] = socialLinksConfig.filter(x => x.showInAbout);
 
   constructor(private apiService: AboutService) {
     super('SCREENS.ABOUT.ME');

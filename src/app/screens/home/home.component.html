@@ -10,37 +10,59 @@
     <div class="flex flex-col py-10 sm:col-span-2">
       <h1 style="text-transform: unset">{{ text('TITLE') | mrTranslate }}</h1>
       <h3>{{ text('SUBTITLE') | mrTranslate }}</h3>
-      <div class="mt-10 flex w-full justify-end">
+      <div class="mt-10 flex w-full justify-end gap-2">
         <button class="btn" (click)="goToAbout()">
           {{ text('ABOUT.GO-TO-ABOUT') | mrTranslate }}
+        </button>
+        <button class="btn" (click)="goToCV()">
+          {{ text('ABOUT.GO-TO-CV') | mrTranslate }}
         </button>
       </div>
     </div>
   </div>
   <div class="section flex flex-col">
-    <ng-container *ngIf="collection">
+    <div>
       <h2>
         {{ text('DRAWINGS.NEW-UPLOADS') | mrTranslate }}
       </h2>
       <div class="my-5">
-        <h3>
-          {{ collection.name }}
-        </h3>
-        <h6>
-          {{ collection.description }}
-        </h6>
+        <app-loading [loading]="loadingCollection">
+          <div class="h-4 w-20" loading></div>
+
+          <h3 content *ngIf="collection">
+            {{ collection.name }}
+          </h3>
+        </app-loading>
+
+        <app-loading [loading]="loadingCollection">
+          <div class="h-4 w-full" loading></div>
+
+          <h6 content *ngIf="collection">
+            {{ collection.description }}
+          </h6>
+        </app-loading>
       </div>
-      <div class="flex flex-nowrap gap-6 overflow-x-auto">
-        <div
-          *ngFor="let drawing of collection.drawings"
-          class="contents h-full w-fit rounded-md border-main-900 bg-white-600 px-2">
-          <app-drawing-thumbnail
-            class="aspect-square h-48 w-48"
-            [drawing]="drawing">
-          </app-drawing-thumbnail>
-        </div>
+      <div class="flex flex-row flex-nowrap gap-6 overflow-x-auto">
+        <ng-container *ngIf="!loadingCollection; else skDrawings">
+          <div
+            *ngFor="let drawing of collection?.drawings"
+            class="contents h-full w-fit rounded-md border-main-900 bg-white-600 px-2">
+            <app-drawing-thumbnail
+              class="aspect-square h-48 w-48"
+              [drawing]="drawing">
+            </app-drawing-thumbnail>
+          </div>
+        </ng-container>
+        <ng-template #skDrawings>
+          <app-loading
+            [loading]="loadingCollection"
+            *ngFor="let number of [0, 1, 2]">
+            <div class="h-48 w-48" loading></div>
+            <div content></div>
+          </app-loading>
+        </ng-template>
       </div>
-    </ng-container>
+    </div>
     <div class="flex w-full justify-end">
       <button class="btn" (click)="goToGallery()">
         {{ text('DRAWINGS.GO-TO-GALLERY') | mrTranslate }}

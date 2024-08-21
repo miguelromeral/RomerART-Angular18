@@ -1,0 +1,326 @@
+<app-layout>
+  <div class="body">
+    <!-- <div class="alert alert-primary noprint" role="alert">
+      <i class="bi bi-printer"></i> Esta página está
+      <strong>optmizada para ser impresa</strong>. Pulsa
+      <kbd><kbd>Ctrl</kbd> + <kbd>P</kbd></kbd> para imprimir.
+    </div> -->
+    <div>
+      <img id="profile" src="assets/images/me/cv.jpeg" alt="MiguelRomeral" />
+    </div>
+    <div class="seccion datosPersonalesContainer">
+      <h2>{{ text('SECTIONS.PERSONAL') | mrTranslate }}</h2>
+      <div class="datoPersonal containerHoverable">
+        <span class="dato-personal-titulo">
+          {{ text('PERSONAL.NAME') | mrTranslate }}
+        </span>
+        <div>
+          <span
+            class="underline-dotted"
+            [attr.data-tooltip]="personalInfo.fullName">
+            {{ personalInfo.name }}
+          </span>
+        </div>
+      </div>
+
+      <div class="datoPersonal containerHoverable">
+        <span class="dato-personal-titulo">
+          {{ text('PERSONAL.AGE') | mrTranslate }}</span
+        >
+        <div>
+          <span>{{ age }}</span>
+        </div>
+      </div>
+      <div class="datoPersonal">
+        <span class="dato-personal-titulo">
+          {{ text('PERSONAL.BIRTHPLACE') | mrTranslate }}</span
+        >
+        <span>{{ personalInfo.birthplace }}</span>
+      </div>
+      <div class="datoPersonal">
+        <span class="dato-personal-titulo">
+          {{ text('PERSONAL.HOMEPLACE') | mrTranslate }}</span
+        >
+        <span>{{ personalInfo.homeplace }}</span>
+      </div>
+      <div class="datoPersonal">
+        <span class="dato-personal-titulo">
+          {{ text('PERSONAL.COLLEGE') | mrTranslate }}</span
+        >
+        <span>
+          <span
+            class="underline-dotted"
+            [attr.data-tooltip]="personalInfo.fullDecree"
+            >{{ personalInfo.decree }}</span
+          >
+          <a [href]="personalInfo.collegeUrl" target="_blank">{{
+            personalInfo.college
+          }}</a>
+        </span>
+      </div>
+    </div>
+    <div class="seccion">
+      <h2>{{ text('SECTIONS.EXPERIENCE') | mrTranslate }}</h2>
+      <div class="experienciaContainer">
+        <app-experience-project
+          *ngFor="let project of experience"
+          [project]="project">
+        </app-experience-project>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <h2>{{ text('SECTIONS.LANGUAGES') | mrTranslate }}</h2>
+      <div class="idiomasContainer">
+        <div class="idioma" *ngFor="let language of languages">
+          <span class="titulo">{{ language.language }}</span>
+          <span class="nivel">{{ language.level }}</span>
+          <div class="banderaContainer">
+            <img
+              class="bandera"
+              [alt]="language.language"
+              [src]="language.flag" />
+          </div>
+
+          <span class="fecha" *ngIf="language.date">{{
+            formattedDateMini(language.date)
+          }}</span>
+
+          <span
+            class="certificado"
+            *ngIf="language.certificate && language.urlCertificate">
+            <a [href]="language.urlCertificate" target="_blank">
+              {{ language.certificate }}
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <h2>{{ text('SECTIONS.TECNOLOGY') | mrTranslate }}</h2>
+      <div class="tecnologiaContainer">
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.ISSUES') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.issues">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.VERSIONS') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.version">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.CLOUD') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.cloud">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.QUALITY') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.quality">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.FRAMEWORKS') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.frameworks">{{
+              item.name
+            }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.SERVERS') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.servers">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.CODING.CODING') | mrTranslate }}</h4>
+          <div class="coding">
+            <span class="nivel">{{
+              text('TECNOLOGY.CODING.ADVANCED') | mrTranslate
+            }}</span>
+            <div class="tecnologiaItemsContainer avanzado">
+              <span *ngFor="let item of getCodingByLevel(3)">{{
+                item.name
+              }}</span>
+            </div>
+          </div>
+          <div class="coding">
+            <span class="nivel">{{
+              text('TECNOLOGY.CODING.MILD') | mrTranslate
+            }}</span>
+            <div class="tecnologiaItemsContainer intermedio">
+              <span *ngFor="let item of getCodingByLevel(2)">{{
+                item.name
+              }}</span>
+            </div>
+          </div>
+          <div class="coding">
+            <span class="nivel">{{
+              text('TECNOLOGY.CODING.BASIC') | mrTranslate
+            }}</span>
+            <div class="tecnologiaItemsContainer basico">
+              <span *ngFor="let item of getCodingByLevel(1)">{{
+                item.name
+              }}</span>
+            </div>
+          </div>
+          <div class="coding">
+            <span class="nivel">{{
+              text('TECNOLOGY.CODING.OTHER') | mrTranslate
+            }}</span>
+            <div class="tecnologiaItemsContainer otros">
+              <span *ngFor="let item of getCodingByLevel(undefined)">{{
+                item.name
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.ENTERPRISE') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.enterprise">{{
+              item.name
+            }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.OFFICE') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.office">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.IDE') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.ides">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="tecnologia">
+          <h4>{{ text('TECNOLOGY.OS') | mrTranslate }}</h4>
+          <div class="tecnologiaItemsContainer">
+            <span *ngFor="let item of tecnology.os">{{ item.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="seccion">
+      <h2>{{ text('SECTIONS.CERTIFICATIONS') | mrTranslate }}</h2>
+      <div>
+        <div class="certificacionesContainer">
+          <div class="certificacion" *ngFor="let item of certifications">
+            <img [alt]="item.name" [src]="item.badge" />
+            <span class="fecha">{{ formattedDateMini(item.date) }}</span>
+            <span class="titulo">
+              <a [href]="item.url" target="_blank">
+                {{ item.name }}
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="seccion">
+      <h2>{{ text('SECTIONS.PROJECTS') | mrTranslate }}</h2>
+      <div class="proyectosContainer">
+        <div
+          class="proyecto flex flex-col flex-nowrap gap-2"
+          *ngFor="let item of projects">
+          <h3>
+            <a
+              [href]="item.url"
+              target="_blank"
+              class="flex items-center gap-1">
+              <img
+                [alt]="item.name"
+                *ngIf="item.image"
+                [src]="item.image"
+                class="logo" />
+              <span>
+                {{ item.name }}
+              </span>
+            </a>
+          </h3>
+          <div class="download-row">
+            <a *ngIf="item.android" [href]="item.android" target="_blank">
+              <img
+                alt="Google Play"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/320px-Google_Play_Store_badge_EN.svg.png" />
+            </a>
+
+            <a *ngIf="item.microsoft" [href]="item.microsoft" target="_blank">
+              <img
+                alt="Microsoft Store"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/512px-Get_it_from_Microsoft_Badge.svg.png" />
+            </a>
+          </div>
+          <div class="descripcion text-sm">
+            {{ item.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="seccion flex flex-col gap-3">
+      <h2>{{ text('SECTIONS.ABOUT') | mrTranslate }}</h2>
+
+      <div>
+        <h5>
+          {{ text('STRENGTHS.STRENGTHS') | mrTranslate }}
+          <a
+            href="https://www.gallup.com/cliftonstrengths/en/home.aspx"
+            target="_blank">
+            {{ text('STRENGTHS.CLIFTON') | mrTranslate }}
+          </a>
+        </h5>
+        <div class="lista-fortalezas">
+          <div
+            class="fortaleza bg-green-100 dark:bg-green-800"
+            *ngFor="let item of strengths">
+            <h5>{{ text(item.titleCode) | mrTranslate }}</h5>
+            <div class="descripcion">
+              {{ text(item.descriptionCode) | mrTranslate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h6>Otros Enlaces de Interés</h6>
+        <div class="enlacesContainer">
+          <h6 class="enlace-interes" *ngFor="let item of links">
+            <a [href]="item.link" target="_blank">
+              <i *ngIf="item.icon !== ''" [ngClass]="'bi ' + item.icon"></i>
+              <span>
+                {{ item.name }}
+              </span>
+            </a>
+          </h6>
+        </div>
+      </div>
+      <!-- <div class="random-facts">
+        <h5>Datos Aleatorios Sobre Mí</h5>
+        <div class="random-facts-list">
+          <div class="fact">
+            Si me siento cómodo, suelo parafrasear mucho a Los Simpsons.
+          </div>
+          <div class="fact">
+            Cuando se me ocurre una idea tonta para una app, suelo hacerla en mi
+            tiempo libre, p.e.: calculadora para las oposiciones.
+          </div>
+          <div class="fact">
+            No suelo tomar mucho café, prefiero un chocolate o vainilla. Aunque
+            mi preferido es el de avellana.
+          </div>
+          <div class="fact">
+            En mi armario tengo una corbata de patitos como la de Barney
+            Stinson.
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</app-layout>

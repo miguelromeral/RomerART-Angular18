@@ -1,0 +1,158 @@
+:root {
+  /* Común */
+  --mr-a-color: #9235d4;
+  --mr-a-hover-color: #ca81ff;
+  --mr-main-color: rgb(156, 156, 254);
+  --mr-seccion-margin-bottom: 20px;
+  --mr-padding-body: 10px;
+  --mr-profile-size: 100px;
+  --mr-profile-border-size: 3px;
+  --mr-font-size: 14px;
+  --mr-font-size-title-section: 30px;
+  --mr-text-not-important-color: grey;
+  --mr-text-not-important-size: smaller;
+  --mr-background-title-color: var(--mr-main-color);
+  --mr-title-padding: 2px 0px 2px 10px;
+  --mr-title-border-size: 2px;
+  --mr-title-padding-left-hover: 20px;
+  --mr-padding-content: 8px;
+  --mr-circle-border-radius: 100px;
+  --mr-list-item-margin-left: 20px;
+  --mr-block-border-radius: 8px;
+  /* Datos Personales */
+  --mr-dato-width: 200px;
+  --mr-dato-padding-left: 10px;
+  /* Experiencia */
+  --mr-experiencia-logo-height: 20px;
+  --mr-experiencia-logo-border: 1px;
+  --mr-experiencia-logo-height-half: calc(var(--mr-experiencia-logo-height) / 2);
+  --mr-experiencia-fecha-color: var(--mr-text-not-important-color);
+  --mr-experiencia-fecha-size: var(--mr-text-not-important-size);
+  --mr-experiencia-empleo-margin-left: 20px;
+  --mr-experiencia-empleo-border-radius: 4px;
+  --mr-custom-color: var(--mr-main-color);
+  --mr-empresa-border-size: 1px;
+  --mr-empresa-magin: 10px;
+  --mr-color-prodware: #198cc9;
+  --mr-color-macsa: #ec0420;
+  --mr-color-openbank: #ff0b4e;
+  --mr-color-sopra: #f28106;
+  --mr-color-airbus: #071a3d;
+  --mr-color-sas: #006219;
+  /* Certificaciones */
+  --mr-badge-size: 40px;
+  --mr-badge-margin: -2px;
+  --mr-badge-background-color: #0078d7;
+  --mr-badge-border-color: #0078d7;
+  --mr-badge-border-size: 1px;
+  --mr-badge-date-color: #ffb900;
+  --mr-badge-width: 33%;
+  --mr-badge-border-radius: 8px;
+  --mr-badge-title-margin-top: calc(var(--mr-badge-size) - var(--mr-font-size));
+  /* Idiomas */
+  --mr-idioma-gap: 60px;
+  --mr-idioma-bandera-height: 30px;
+  --mr-idioma-bandera-width: 45px;
+  --mr-idioma-bandera-border: 6px;
+  --mr-idioma-nivel-color: var(--mr-text-not-important-color);
+  /* Tecnologia */
+  --mr-tecnologia-gap: 15px;
+  --mr-tecnologia-items-gap: 10px;
+  --mr-tecnologia-programacion-avanzado-color: rgb(1, 83, 43);
+  --mr-tecnologia-programacion-avanzado-background-color: rgb(88, 216, 154);
+  --mr-tecnologia-programacion-intermedio-color: rgb(1, 83, 43);
+  --mr-tecnologia-programacion-intermedio-background-color: rgb(169, 237, 204);
+  --mr-tecnologia-programacion-basico-color: rgb(1, 83, 43);
+  --mr-tecnologia-programacion-basico-background-color: rgb(208, 245, 227);
+  --mr-tecnologia-programacion-otros-color: rgb(101, 101, 101);
+  --mr-tecnologia-programacion-otros-background-color: rgb(245, 245, 245);
+  /* Proyectos */
+  --mr-proyecto-gap: var(--mr-padding-content);
+  --mr-proyecto-logo-height: 20px;
+  --mr-proyecto-download-banner-height: 20px;
+  /* Sobre mí */
+  --mr-strengths-gap: var(--mr-padding-content);
+  --mr-strengths-background-color: #ecf4de;
+  --mr-drawing-size: 150px;
+  --mr-drawing-border-radius: 8px;
+  --mr-fact-background-color: rgb(248, 228, 255);
+}
+
+
+/* Tecnología */
+
+.tecnologiaContainer:not(.apartado) {
+  @apply flex flex-col gap-2 flex-nowrap;
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  justify-content: left;
+  align-content: flex-start;
+  align-items: flex-start;
+  gap: var(--mr-tecnologia-gap);
+}
+
+.tecnologiaContainer .tecnologia,
+span.tecnologia {
+  font-size: smaller;
+}
+
+.tecnologiaContainer .tecnologia .tecnologiaItemsContainer {
+  @apply ml-4;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--mr-tecnologia-items-gap);
+}
+
+.tecnologia .coding {
+  @apply ml-4;
+}
+
+.tecnologiaContainer .tecnologia .tecnologiaItemsContainer span,
+.tecnologiaContainer div.tecnologia span:not(.nivel),
+span.tecnologia {
+  @apply bg-gray-200 hover:bg-gray-300 text-black-100 dark:bg-gray-800 dark:text-white-800 transition-all hover:dark:bg-black-600;
+  padding: 0px var(--mr-padding-content);
+  border-radius: var(--mr-circle-border-radius);
+  position: relative;
+}
+
+.tecnologiaContainer .tecnologia .tecnologiaItemsContainer.avanzado span,
+.tecnologiaContainer div.tecnologia span.avanzado,
+span.tecnologia.avanzado {
+  @apply bg-green-400 hover:bg-green-500 text-black-100 dark:bg-green-500 dark:text-black-800 transition-all hover:dark:bg-green-400;
+}
+
+.tecnologiaContainer .tecnologia .tecnologiaItemsContainer.intermedio span,
+.tecnologiaContainer div.tecnologia span.intermedio,
+span.tecnologia.intermedio {
+  @apply bg-green-300 hover:bg-green-400 text-black-100 dark:bg-green-700 dark:text-black-800 transition-all hover:dark:bg-green-600;
+}
+
+.tecnologiaContainer .tecnologia .tecnologiaItemsContainer.basico span,
+.tecnologiaContainer div.tecnologia span.basico,
+span.tecnologia.basico {
+  @apply bg-green-200 hover:bg-green-300 text-black-100 dark:bg-green-900 dark:text-white-800 transition-all hover:dark:bg-green-800;
+}
+
+/* .avaznado::after{
+  opacity: 0;
+  display: block;
+  z-index: -1;
+  content: '-';
+  transition: 0.5s ease-in-out;
+}
+
+.avanzado:hover::after{
+  opacity: 1;
+  z-index: 10;
+  content: 'Not used to';
+  position: absolute;
+  max-width: 300px;
+  min-width: 100px;
+  bottom: -15px;
+  left: var(--mr-tecnologia-items-gap);
+  border: 1px solid black;
+  background-color: white;
+} */

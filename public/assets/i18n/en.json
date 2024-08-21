@@ -40,7 +40,8 @@
         "GO-TO-GALLERY": "View Full Gallery"
       },
       "ABOUT": {
-        "GO-TO-ABOUT": "About Me"
+        "GO-TO-ABOUT": "About Me",
+        "GO-TO-CV": "Hire"
       },
       "LINKS": {
         "TITLE": "Other Links"
