@@ -1,0 +1,44 @@
+<app-layout>
+  <div class="grid h-full grid-cols-1 gap-4 md:grid-cols-2">
+    <div class="section">
+      <div>
+        <img
+          src="assets/images/me/formula1.jpg"
+          [alt]="text('PERSONAL.TITLE') | mrTranslate" />
+      </div>
+      <div class="content">
+        <h1>
+          {{ text('PERSONAL.TITLE') | mrTranslate }}
+        </h1>
+        <p>
+          {{ text('PERSONAL.DESCRIPTION') | mrTranslate }}
+        </p>
+        <div class="button-row">
+          <button class="btn" (click)="goToAbout()">
+            {{ text('PERSONAL.GO') | mrTranslate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div>
+        <img
+          src="assets/images/me/playbanner.png"
+          [alt]="text('HIRE.TITLE') | mrTranslate" />
+      </div>
+      <div class="content">
+        <h1>
+          {{ text('HIRE.TITLE') | mrTranslate }}
+        </h1>
+        <p>
+          {{ text('HIRE.DESCRIPTION') | mrTranslate }}
+        </p>
+        <div class="button-row">
+          <button class="btn" (click)="goToCV()">
+            {{ text('HIRE.GO') | mrTranslate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-layout>

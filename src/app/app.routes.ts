@@ -16,6 +16,7 @@ import { CollectionListComponent } from './screens/admin/collections/collection-
 import { EditCollectionComponent } from './screens/admin/collections/edit-collection/edit-collection.component';
 import { CreateCollectionComponent } from './screens/admin/collections/create-collection/create-collection.component';
 import { CvComponent } from './screens/about/cv/cv.component';
+import { AboutComponent } from './screens/about/about/about.component';
 
 export const routes: Routes = [
   {
@@ -49,10 +50,17 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'about',
+    component: AboutComponent,
+    data: {
+      animation: 'AboutPage',
+    },
+  },
+  {
     path: 'about/me',
     component: MeComponent,
     data: {
-      animation: 'AboutPage',
+      animation: 'AboutMePage',
     },
   },
   {

@@ -146,6 +146,18 @@
       }
     },
     "ABOUT": {
+      "WELCOME": {
+        "PERSONAL": {
+          "TITLE": "Conóceme",
+          "DESCRIPTION": "Aquí puedes ver una breve descripción de quién soy, gustos varios y artistas de referencias",
+          "GO": "Curiosear"
+        },
+        "HIRE": {
+          "TITLE": "Contrátame",
+          "DESCRIPTION": "Resumen con mi currículo actualizado hasta la última versión de la aplicación",
+          "GO": "CV"
+        }
+      },
       "ME": {
         "PERSONAL": {
           "TITLE": "Datos Básicos",

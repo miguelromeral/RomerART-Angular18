@@ -67,10 +67,6 @@ export class HomeComponent extends LanguageComponent implements OnInit {
   }
 
   goToAbout() {
-    this.router.navigate(['/about/me']);
-  }
-
-  goToCV() {
-    this.router.navigate(['/about/hire']);
+    this.router.navigate(['/about']);
   }
 }

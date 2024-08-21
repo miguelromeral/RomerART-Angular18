@@ -1,0 +1,23 @@
+.section {
+  @apply rounded-lg dark:bg-black-800 bg-white-200 overflow-hidden m-6 sm:m-8 md:m-4 lg:m-8;
+}
+
+h1 {
+  @apply text-main-600 dark:text-main-400 mb-4;
+}
+
+.section img {
+  @apply w-full h-40 aspect-auto object-cover transition-all duration-300 overflow-hidden;
+}
+
+.section:hover img {
+  @apply scale-110;
+}
+
+.section .content {
+  @apply p-6 sm:p-8 md:p-10 lg:p-14 h-fit;
+}
+
+.button-row {
+  @apply flex flex-row h-20 justify-end relative items-end;
+}
