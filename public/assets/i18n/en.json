@@ -18,6 +18,14 @@
         "SPORTMAN": "Sportsperson",
         "INFLUENCER": "Influencer"
       }
+    },
+    "CV": {
+      "PRODWARE": "<p><strong>Functional and Technical Consultant</strong> in systems <a href=\"https://dynamics.microsoft.com/es-es/crm/\" target=\"_blank\">Microsoft Dynamics 365 CRM</a> with Support <a href=\"https://learn.microsoft.com/es-es/dynamics365/unified-service-desk/admin/overview-unified-service-desk?view=dynamics-usd-4.2\" target=\"_blank\">Unified Service Desk</a>.</p>",
+      "MACSA": "<p><strong>Incident management</strong> in <a href=\"https://dynamics.microsoft.com/es-es/crm/\"target=\"_blank\">Microsoft Dynamics 365 CRM</a>, generally of <strong>a functional type</strong> on the application and very occasionally small developments to add scripts with new functionalities in the application. </p>",
+      "OPENBANK": "<p><strong>Incident management and monitoring</strong>, providing active support in various face-to-face locations such as the central offices or the main call center. Collaboration with other providers such as BT or Accenture for the business call integration environment through <a href=\"https://learn.microsoft.com/es-es/dynamics365/unified-service-desk/admin/-unified-service-desk?view=dynamics-usd-4.2\" target=\"_blank\">Unified Service Desk</a> allowing to operate in the CRM application and that of the bank for the operations requested by the client.</p><p>In addition to actively supporting users who requested help at the time (follow-up meetings or phone calls), I was mainly in charge of reviewing the application's activity and its logs to find the reasons why an operation could not be carried out by the telephone assistants.</p>",
+      "SOPRA": "<p><strong>Junior developer specialized in web applications</strong>, maintenance, including new functionalities, deployment and management of database integrity.</p>",
+      "AIRBUS": "<p><strong>myWorkload+: Internal web application for workload management</strong>. The planned hours for each department during the fiscal year are recorded and translated into allocated budgets.</p><p>Proposals for offers to various customers are also recorded, keeping track of the point at which the offer is <i>(draft, proposal to customer, approved by customer, etc.)</i> and its variations in tasks to be carried out and prices.</p><p>Users also have a parallel processing system in which they can send their Excel files with the different operations of the graphical interface through the web for massive data processing.</p><p>The application is built on .NET Framework Standard 4.5 MVC and deployed on multiple instances on Windows Server for different departments by changing the appropriate settings.</p>",
+      "SAS": "<p><strong>AviSAS: User notification system</strong> in a microservices environment where events are received from medical systems and processed according to the configuration of each user for the sending of notifications notifying about the health appointments they have pending.</p><p>A web management application is included in Node.js and Angular for the monitoring of received and processed events, allowing the web administrator to configure the notification rules based on certain criteria <i>(e.g.: if a hospitalization event is received from a minor, send notification to their parents).</i></p><p>The database is managed in PL/SQL, with a daily load of ~600,000 messages received and ~5,000 notifications sent to users.</p><p>The entire application is sent and managed to the SAS IT team, which manages the Docker containers of the microservices that make up the solution using the deployment steps indicated by our team in a HELM. Instances were deployed in Jenkins and code went through SonarQube</p>"
     }
   },
   "COMPONENTS": {
@@ -146,6 +154,18 @@
       }
     },
     "ABOUT": {
+      "WELCOME": {
+        "PERSONAL": {
+          "TITLE": "Know Me",
+          "DESCRIPTION": "Here you can see a brief description of who I am, various tastes and reference artists",
+          "GO": "Take a look"
+        },
+        "HIRE": {
+          "TITLE": "Hire Me",
+          "DESCRIPTION": "Summary with my resume updated to the latest version of the application",
+          "GO": "CV"
+        }
+      },
       "ME": {
         "PERSONAL": {
           "TITLE": "Basic Information",

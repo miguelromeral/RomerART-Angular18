@@ -31,8 +31,7 @@ export const experienceConfig: IExperience[] = [
     endDate: new Date(2019, 8, 13),
     address: 'Av. del General Perón, 38, Tetuán, 28020 Madrid',
     remoto: false,
-    roleDescription:
-      '<p><strong>Consultor Funcional y Técnico</strong> en sistemas <a href="https://dynamics.microsoft.com/es-es/crm/" target="_blank">Microsoft Dynamics 365 CRM</a> con Soporte <a href="https://learn.microsoft.com/es-es/dynamics365/unified-service-desk/admin/overview-unified-service-desk?view=dynamics-usd-4.2" target="_blank">Unified Service Desk</a>.</p>',
+    roleDescriptionCode: 'DATA.CV.PRODWARE',
     tecnology: undefined,
     references: undefined,
     colorVariable: 'var(--mr-color-prodware)',
@@ -45,8 +44,7 @@ export const experienceConfig: IExperience[] = [
         logo: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwEBAQEIAQgKCgkBDRYPDQEMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzg3NTc3Nzc3Nzc3Nzc3Ky03Nzc3Nzc3Nzc3NzItK//AABEIABAAEAMBEQACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAABBQD/xAAmEAAABAQFBQEAAAAAAAAAAAABAgYHAwUIEQASITEyExhBYXEE/8QAGAEAAgMAAAAAAAAAAAAAAAAAAAMCBQf/xAAeEQACAgICAwAAAAAAAAAAAAABAgARAwQxcSFCof/aAAwDAQACEQMRAD8AhSiRObUq1FQ/6m3Eo9upSmMix5HAb7fAARxXKhYEiaJl2kwZER/aM5kblUpJ1gDuQYmd+IXUBJBuTXYfeBkK1cdrbabDOE4U13CUzpa03tqtYbZXJHUceFFKuQHjkzaW83vgVio8ReTUXO4L8URXdTTGZq+pBLtcVf3NFQoxBMrhHmJzZsRZ75j8GsuFmK8Gvgqf/9k=',
         name: 'Macsa Id',
         projects: undefined,
-        roleDescription:
-          '<p><strong>Gestión de incidencias</strong> en <a href="https://dynamics.microsoft.com/es-es/crm/"target="_blank">Microsoft Dynamics 365 CRM</a>, generalmente <strong>de tipo funcionales</strong> sobre la aplicación y muy ocasionalmente pequeños desarrollos para añadir scripts con nuevas funcionalidades en la aplicación. </p>',
+        roleDescriptionCode: 'DATA.CV.MACSA',
         tecnology: [
           {
             level: 1,
@@ -76,8 +74,7 @@ export const experienceConfig: IExperience[] = [
         colorVariable: 'var(--mr-color-openbank)',
         address: undefined,
         projects: undefined,
-        roleDescription:
-          '<p><strong>Gestión y seguimiento de incidencias</strong>, dando soporte activo en varias ubicaciones presenciales tales como las oficinas centrales o el call center principal. Coolaboración con otros proveedores como BT o Accenture para el entorno de integración de llamadas comerciales a través de <a href="https://learn.microsoft.com/es-es/dynamics365/unified-service-desk/admin/-unified-service-desk?view=dynamics-usd-4.2" target="_blank">Unified Service Desk</a> permitiendo operar en la aplicación de CRM y la del banco para las operaciones solicitadas por el cliente.</p><p>Además del soporte activo a los usuarios que solicitaban la ayuda en el momento (reuniones de seguimiento o llamadas telefónicas), principalmente me encargaba de revisar la actividad de la aplicación y sus logs para buscar los motivos por los que una operación no pudo ser realizada por los asistentes telefónicos.</p>',
+        roleDescriptionCode: 'DATA.CV.OPENBANK',
         tecnology: [
           {
             level: 1,
@@ -126,8 +123,7 @@ export const experienceConfig: IExperience[] = [
     logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAES0lEQVR4Ae1WA9QjSRis6Zxt25Oes23btm3GOdu2bdu+UbC2Fa45V9/b+bNZ74+HQ71Xg6C7+jP+Ffgf3wLzFaEXy2HjpWfkX9hyEXQkAsDIw1rXiejjXKVv8pR+1TGiv7qG7sv3kjMzu3uG9TnvtznzmbugrbAXsExfWdfnDf2do8xRRWUFfdQmQQ+yq9o46MT3wizYmd91J+W3eaUnO8p6jNZaAM0oJ3HwmAzuqyTwYTmBT0sJPFuKI1u7GSd1W3/tXVzod2SDQWqzoKcsxGdf6cBtJUVQX7WpPF+DFnCzzMQbEQS3Iph8E4JJZHALeTeCUhrv9N5pxW0dbHImN3zKVrpLjov0oggR5LVBhFiEFhzyG9ZecaqAGCoTsgh4+gYnUVA1gbffOBoRNOEvrLJIfj5rH49mdNRG/cX0PUKLzKsAj+wmIiLmyQ0BNH9j85EpBLUExldvwBaYA37HRst6EevknKHf58LjxCpduPC8uKb3VDfcB0EljqeC26YJGJ1GMCKG0vDbsTjmEc78elNXWTdRTFFcI3FSmIOL+L3cn4dgSBor8MSOxEA1tMCIOMaRJloJyXk/oo/k5m/YKloX93Qn8zOIYUaIpR6elgXXYo1aHD+IiFG0wMSbKCKBa9AO5LDBOtz08rxhfcn7GPG7uEkowuyIeTiaMeQqLFpJ4X5xQXA7rRFD79AN7YYNy6RFzs2r6KNFQ3/EbLoMswNrwv4U4Uga8vmh9lRMtBVdrsHi1QxijIk6A/O0NglIQ/G/V3CNc9BWlK5HlFlySFtPU09ge3Lk+Jvw+ZAYtsPcIN3rc2yyKDoQI67HqcEdCOpp1pYUbh+WxmIzmxwbLu6o6BvMYXYvswfT5iW+n/c7Nlwb7YcUuy+k1kiJryfx+6AYtkIzXGVe0J/ViQLIjaVQSAdjzkZrbKXvuhF9qlQ+tBFscCeMy8rmFHGzFDuMYJ3Zq0mA9UxvtclMNZsFpdFuaZl+jtKP5NjTWxsTrKyrluOoS4pLtZXmx3pTGZHGNqEA/SRPPccG0iksJHye7HMmYEM6z8cmq2EewK66BE9cbhEgFHdQ1LcQ8GTZPg0Bc6a0427hkMH34Tmln/Xn0/t9i7UWwmwwPIkDeeLJ9VRDAC1AATGMheCviHVgsZVDhkfyP40BxTN0QUY0tusdfsFqCzdSMY4NWdC6iNmrCZJxUCPFAkzx/o0+/5faqBieqtX0KaBL6CJaJJB4sbHx0902Xe2I4Wn8KEOOBKEMPMLxfB6XQV+65bDmen2QZIGI8FthhVw4+7U0m7y8G6bvInpVT73OGqUHsNrwOHYrJXE60/Eymv+SahrH9LoUK87cTiP6BDaLLlyw0blEULcmdg/TtE/4nZzeVmZFAtNW1s3efHqnb7HbfO2Y8fViXGRfBuZ1PruXy4nHlrHaiH5mG+bnrmF+yCL1NE9/G+8XezKiYYNV21qu/8f/+BucWW4MzoYIwAAAAABJRU5ErkJggg==',
     url: 'https://www.soprasteria.es/',
     address: 'Av. de Manoteras, 48, Hortaleza, 28050 Madrid',
-    roleDescription:
-      '<p><strong>Desarrollador Jr. especializado en aplicaciones web</strong>, mantenimiento, incluir nuevas funcionalidades, despliegue y administración de la integridad de la base de datos.</p>',
+    roleDescriptionCode: 'DATA.CV.SOPRA',
     references: undefined,
     presencial: false,
     tecnology: undefined,
@@ -153,8 +149,7 @@ export const experienceConfig: IExperience[] = [
           },
         ],
         presencial: true,
-        roleDescription:
-          '<p><strong>myWorkload+: Aplicación web interna para la administración de carga de trabajo</strong>. Se registran las horas previstas para cada departamento durante el ejercicio fiscal y se traducen en presupuestos asignados.</p><p>También se registran propuestas de ofertas a diversos clientes, manteniendo el seguimiento del punto en el que se encuentra la oferta <i>(borrador, propuesta a cliente, aprobada por cliente, etc.)</i> y sus variaciones en tareas a realizar y precios.</p><p>Los usuarios también disponen de un sistema de procesamiento paralelo en el que a través de la web pueden enviar sus ficheros Excel con las diferentes operaciones de la interfaz gráfica para un procesamiento masivo de los datos.</p><p>La aplicación está construida en .NET Framework Standard4.5 MVC y desplegada en varios instancias en Windows Server para diferentes departamentos cambiando la configuración apropiada.</p>',
+        roleDescriptionCode: 'DATA.CV.AIRBUS',
         tecnology: [
           {
             level: 3,
@@ -202,8 +197,7 @@ export const experienceConfig: IExperience[] = [
         presencial: false,
         projects: undefined,
         references: undefined,
-        roleDescription:
-          '<p><strong>AviSAS: Sistema de notificaciones a usuarios</strong> en un entorno de microservicios donde se reciben eventos de sistemas médicos y se procesan acorde a la configuración de cada usuario para el envío de notificaciones avisando sobre las citas sanitarias que tienen pendiente.</p><p>Se incluye una aplicación de gestión web en Node.js y Angular para el seguimiento de los eventos recibidos y procesados, permitiendo al administrador de la web configurar las reglas de notificación en base a ciertos criterios <i>(p. e.: si se recibe un evento de hospitalización de un menor de edad, enviar notificación a sus padres)</i>.</p><p>La base de datos está gestionada en PL/SQL, con una carga diaria de ~600.000 mensajes recibidos y ~5.000 notificaciones enviadas a usuarios.</p><p>Toda la aplicación es enviada y gestionada al equipo de IT del SAS, el cual administra los contenedores Docker de los microservicios que componen la solución utilizando los pasos de despliegue indicados por nuestro equipo en un HELM. Las instancias se desplegaban en Jenkins y el código pasaba por SonarQube</p>',
+        roleDescriptionCode: 'DATA.CV.SAS',
         tecnology: [
           {
             level: 3,

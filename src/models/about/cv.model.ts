@@ -18,7 +18,7 @@ export interface IExperience {
   beginDate: Date | undefined;
   endDate: Date | undefined;
   address: string | undefined;
-  roleDescription: string;
+  roleDescriptionCode: string;
   presencial: boolean;
   remoto: boolean;
   references: IExperienceReference[] | undefined;
