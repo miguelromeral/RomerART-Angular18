@@ -11,6 +11,7 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { SettingsService } from '@app/services/settings/settings.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
+import { zoomImageConfig } from 'config/customization/zoom-image-config';
 import { settingZoomImage } from 'config/settings/local-storage.config';
 
 @Component({
@@ -39,7 +40,6 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
   initialDistance = 0;
   lastScale = 1;
   transform = '';
-  private maxScale = 2;
   initialTouchPosition = { x: 0, y: 0 };
   error = false;
 
@@ -63,7 +63,6 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
   errorLoading() {
     this.error = true;
     this.enableZoom = false;
-    console.log('Disabling zoom');
   }
 
   onMouseEnter(event: MouseEvent) {
@@ -76,7 +75,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       'transition',
       'transform 0.3s ease-in-out'
     );
-    this.scaleImage(event, this.maxScale);
+    this.scaleImage(event, zoomImageConfig.maxScaleOnHover);
   }
 
   onMouseLeave() {
@@ -92,7 +91,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       return;
     }
     // Permite mover el zoom entre la imagen
-    this.scaleImage(event, this.maxScale);
+    this.scaleImage(event, zoomImageConfig.maxScaleOnHover);
   }
 
   // Escala la imagen basada en la posición del ratón
