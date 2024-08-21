@@ -61,33 +61,3 @@ img.mr-img-full {
     color: rgba(255, 255, 255, 0.5);
     text-shadow: 0px 0px 5px #ffffff85;
 }*/
-
-/* Placeholder shown before the own image if error */
-.mr-img-full-container .mr-error-load-placeholder {
-  z-index: 1;
-}
-
-/* Placeholder when the image couldn't be loaded */
-.mr-error-load-placeholder {
-  display: none;
-  transition: var(--mr-transition-time) ease-out;
-}
-
-/* Show the placeholder when error */
-.mr-error-load-placeholder.show {
-  @apply flex items-center justify-center flex-col flex-wrap content-center;
-}
-
-
-.image-container {
-  overflow: visible;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-img {
-  width: 100%;
-  height: auto;
-  transition: transform 0.1s ease;
-}

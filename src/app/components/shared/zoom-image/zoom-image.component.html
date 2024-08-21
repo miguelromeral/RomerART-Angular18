@@ -1,0 +1,30 @@
+<div
+  class="image-container"
+  #imageElement
+  [style.transform]="transform"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd($event)"
+  (mouseenter)="onMouseEnter($event)"
+  (mouseleave)="onMouseLeave()"
+  (mousemove)="onMouseMove($event)"
+  content>
+  <img
+    *ngIf="!error"
+    id="imgFull"
+    [src]="url"
+    class="mr-img-full pointer-events-none w-full select-none"
+    (error)="errorLoading()"
+    loading="lazy"
+    decoding="async"
+    alt="drawing" />
+
+  <div
+    *ngIf="error"
+    class="absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full flex-col flex-wrap content-center items-center justify-center">
+    <span class="text-2xl">🙃</span>
+    <span class="text-center text-sm">
+      {{ text('NOTFOUND') | mrTranslate }}</span
+    >
+  </div>
+</div>

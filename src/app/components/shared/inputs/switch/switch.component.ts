@@ -30,9 +30,14 @@ export class SwitchComponent implements ControlValueAccessor {
 
   private onChange: (value: boolean) => void = () => {};
   private onTouched: () => void = () => {};
-
   writeValue(value: boolean): void {
-    this.value = value;
+    if (value !== undefined && value !== this.value) {
+      this.value = value;
+    }
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    // Opcionalmente, maneja el estado deshabilitado
   }
 
   registerOnChange(fn: (value: boolean) => void): void {
@@ -41,10 +46,6 @@ export class SwitchComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    // Opcionalmente, maneja el estado deshabilitado
   }
 
   onInputChange(event: Event): void {

@@ -65,3 +65,8 @@ export const settingFilterCount = {
   defaultValue: true,
   localStorageKey: 'filterCount',
 };
+
+export const settingZoomImage = {
+  defaultValue: true,
+  localStorageKey: 'zoomImages',
+};

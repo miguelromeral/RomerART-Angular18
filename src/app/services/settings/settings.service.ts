@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {
   settingFilterCount,
   settingTranslations,
+  settingZoomImage,
 } from 'config/settings/local-storage.config';
 
 @Injectable({
@@ -22,6 +23,11 @@ export class SettingsService {
   );
   filterCount$: Observable<boolean> = this.filterCountSubject.asObservable();
 
+  private zoomImageSubject = new BehaviorSubject<boolean>(
+    settingZoomImage.defaultValue
+  );
+  zoomImage$: Observable<boolean> = this.zoomImageSubject.asObservable();
+
   constructor(
     private languageService: LanguageService,
     private themeService: ThemeService,
@@ -31,6 +37,7 @@ export class SettingsService {
   init() {
     this.initTranslations();
     this.initFilterCount();
+    this.initZoomImage();
   }
 
   private initTranslations() {
@@ -65,5 +72,20 @@ export class SettingsService {
   setFilterCount(show: boolean): void {
     this.storage.setItem(settingFilterCount.localStorageKey, show.toString());
     this.filterCountSubject.next(show);
+  }
+
+  private initZoomImage() {
+    const value = this.storage.getItem(settingZoomImage.localStorageKey);
+
+    if (value === null) {
+      this.setZoomImage(settingZoomImage.defaultValue);
+    } else {
+      this.setZoomImage(value === 'true');
+    }
+  }
+
+  setZoomImage(show: boolean): void {
+    this.storage.setItem(settingZoomImage.localStorageKey, show.toString());
+    this.zoomImageSubject.next(show);
   }
 }

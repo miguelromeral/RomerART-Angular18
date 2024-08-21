@@ -61,6 +61,18 @@
             (change)="changeFilterCount($event)">
           </app-switch>
         </app-setting-option>
+
+        <app-setting-option
+          [title]="text('FORM.IMAGE-ZOOM.TITLE') | mrTranslate"
+          [description]="text('FORM.IMAGE-ZOOM.DESCRIPTION') | mrTranslate">
+          <app-switch
+            [id]="'iSwitchZoomImage'"
+            [text]="text('FORM.IMAGE-ZOOM.SHOW') | mrTranslate"
+            [textDisabled]="text('FORM.IMAGE-ZOOM.HIDE') | mrTranslate"
+            formControlName="zoomImage"
+            (change)="changeZoomImage($event)">
+          </app-switch>
+        </app-setting-option>
       </app-section>
 
       <app-section

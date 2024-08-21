@@ -8,6 +8,7 @@ import {
   settingLanguage,
   settingTheme,
   settingTranslations,
+  settingZoomImage,
 } from 'config/settings/local-storage.config';
 import { LayoutComponent } from '../../components/shared/layout/layout.component';
 import { ThemeService } from '@app/services/theme/theme.service';
@@ -63,6 +64,7 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
     themeFormControl: new FormControl(settingTheme.defaultValue),
     translateFormControl: new FormControl(settingTranslations.defaultValue),
     filterCountFormControl: new FormControl(settingFilterCount.defaultValue),
+    zoomImage: new FormControl(settingZoomImage.defaultValue),
   });
 
   constructor(
@@ -97,6 +99,10 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
     this.settingsService.filterCount$.subscribe(value => {
       this.settingsForm.controls.filterCountFormControl.patchValue(value);
     });
+
+    this.settingsService.zoomImage$.subscribe(value => {
+      this.settingsForm.controls.zoomImage.patchValue(value);
+    });
   }
 
   changeLanguage(event: Event) {
@@ -123,5 +129,11 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     const show = target.checked;
     this.settingsService.setFilterCount(show);
+  }
+
+  changeZoomImage(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const show = target.checked;
+    this.settingsService.setZoomImage(show);
   }
 }

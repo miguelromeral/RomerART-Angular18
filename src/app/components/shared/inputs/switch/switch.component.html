@@ -10,7 +10,7 @@
     </label>
     <input
       class="form-check-input"
-      [checked]="value"
+      [(ngModel)]="value"
       (change)="onInputChange($event)"
       (blur)="onBlur()"
       type="checkbox"

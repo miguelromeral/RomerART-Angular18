@@ -37,6 +37,9 @@
     "TRANSLATABLE": {
       "FROM": "Traducido desde...",
       "TITLE": "Traducir"
+    },
+    "IMAGE": {
+      "NOTFOUND": "Imagen No Encontrada"
     }
   },
   "SCREENS": {
@@ -241,6 +244,12 @@
           "DESCRIPTION": "Contar la cantidad de opciones disponibles en un filtro en concreto en el formulario de filtrar dibujos",
           "SHOW": "Mostrar",
           "HIDE": "Esconder"
+        },
+        "IMAGE-ZOOM": {
+          "TITLE": "Habilitar Zoom en Imágenes",
+          "DESCRIPTION": "Habilitar el zoom en imágenes al pasar el ratón por encima o pellizar la imagen con dos dedos",
+          "SHOW": "Habilitado",
+          "HIDE": "Deshabilitado"
         }
       },
       "FOOTER": {
