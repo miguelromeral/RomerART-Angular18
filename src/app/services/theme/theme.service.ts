@@ -28,7 +28,6 @@ export class ThemeService {
   }
 
   setTheme(theme: string): void {
-    // console.log('Changing theme: ' + theme);
     this.storage.setItem(settingTheme.localStorageKey, theme);
 
     switch (theme) {
@@ -56,9 +55,11 @@ export class ThemeService {
   }
 
   private setDarkTheme() {
+    this.themeSubject.next(settingThemeValues.dark);
     window.document.documentElement.classList.add(darkThemeClassTailwind);
   }
   private setLightTheme() {
+    this.themeSubject.next(settingThemeValues.light);
     window.document.documentElement.classList.remove(darkThemeClassTailwind);
   }
 

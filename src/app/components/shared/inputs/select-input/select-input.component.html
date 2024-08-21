@@ -1,7 +1,7 @@
 <div class="form-control w-full">
   <select
     class="mr-custom-select"
-    [value]="value"
+    [(ngModel)]="value"
     (change)="onSelectChange($event)"
     (blur)="onBlur()">
     <option *ngIf="firstOption" [value]="firstOption.value">

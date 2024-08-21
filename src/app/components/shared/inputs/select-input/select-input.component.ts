@@ -55,19 +55,20 @@ export class SelectInputComponent
   private onTouched: () => void = () => {};
 
   writeValue(value: string): void {
-    this.value = value;
+    if (value !== undefined) {
+      this.value = value;
+    }
   }
 
+  setDisabledState?(isDisabled: boolean): void {
+    // Maneja el estado deshabilitado opcionalmente
+  }
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    // Maneja el estado deshabilitado opcionalmente
   }
 
   onSelectChange(event: Event): void {

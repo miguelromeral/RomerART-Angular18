@@ -83,12 +83,12 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
 
   initSettings() {
     this.languageService.currentLanguage$.subscribe(newLang => {
-      this.settingsForm.controls.langFormControl.setValue(newLang);
+      this.settingsForm.controls.langFormControl.patchValue(newLang);
     });
 
-    this.settingsForm.controls.themeFormControl.setValue(
-      this.themeService.getTheme()
-    );
+    this.themeService.currentTheme$.subscribe(theme => {
+      this.settingsForm.controls.themeFormControl.patchValue(theme);
+    });
 
     this.settingsService.translations$.subscribe(value => {
       this.settingsForm.controls.translateFormControl.patchValue(value);
