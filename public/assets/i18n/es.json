@@ -48,6 +48,9 @@
       }
     },
     "CV": {
+      "PRINT": {
+        "ALERT": "Esta página está <strong>optmizada para ser impresa</strong>. Pulsa <kbd><kbd>Ctrl</kbd> + <kbd>P</kbd></kbd> para imprimir."
+      },
       "SECTIONS": {
         "PERSONAL": "Datos Personales",
         "EXPERIENCE": "Experiencia Profesional",

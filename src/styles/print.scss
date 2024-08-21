@@ -1,0 +1,148 @@
+@media print {
+  @page {
+    margin: 1cm;
+  }
+
+  main {
+    height: auto !important;
+    min-height: auto !important;
+    /* Permitir que el `main` ocupe la altura que necesite */
+    overflow: visible;
+    /* Asegurar que el contenido no se recorte */
+    page-break-inside: avoid;
+    /* Evitar saltos de página dentro del elemento */
+  }
+
+  /* Asegurar que otros contenedores dentro de main se ajusten al contenido */
+  main>* {
+    height: auto;
+    overflow: visible;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
+  /* Asegurar que el contenido largo no cause un salto de página intermedio */
+  .section {
+    page-break-inside: avoid;
+  }
+
+
+  nav,
+  header,
+  .hideOnHover {
+    display: none !important;
+  }
+
+  .showOnHover {
+    display: block !important;
+  }
+
+  a {
+    color: var(--mr-text-color);
+    font-style: normal;
+    text-decoration: none !important;
+  }
+
+  .underline-dotted::before {
+    border-bottom: none;
+  }
+
+  .salto-de-pagina {
+    page-break-before: always;
+  }
+
+  /* Común */
+
+  .noprint {
+    display: none !important;
+  }
+
+  /* Experiencia */
+
+  .direccion {
+    display: none;
+  }
+
+  .empresa {
+    border: none;
+  }
+
+  .empresa:hover {
+    box-shadow: none !important;
+  }
+
+
+  .empresa>.titulo {
+    background: none;
+    border-bottom: 2px solid var(--mr-custom-color);
+    border-top: none;
+  }
+
+  .empresa .info {
+    border-left: 2px solid var(--mr-custom-color);
+    padding-left: var(--mr-padding-content);
+  }
+
+  .experienciaContainer .titulo .logo {
+    position: relative !important;
+    top: 0px;
+    left: 0px;
+  }
+
+  .fecha {
+    color: var(--mr-text-not-important-color) !important;
+  }
+
+  .apartado::before {
+    /* position: absolute; */
+    top: -30px;
+    font-size: medium;
+    font-weight: 600;
+    opacity: 1;
+    z-index: 1;
+  }
+
+  /* Certificaciones */
+
+  .certificacionesContainer .certificacion .fecha {
+    right: 0px;
+  }
+
+  .certificacion .titulo {
+    margin-top: 0px;
+  }
+
+  /* Tecnología */
+
+  .tecnologiaContainer .tecnologia .tecnologiaItemsContainer span,
+  span.tecnologia {
+    border: 1px solid var(--mr-tecnologia-programacion-otros-color) !important;
+  }
+
+  .tecnologiaContainer .tecnologia .tecnologiaItemsContainer.avanzado span,
+  .tecnologiaContainer div.tecnologia span.avanzado {
+    border: 1px solid var(--mr-tecnologia-programacion-avanzado-background-color) !important;
+  }
+
+  .tecnologiaContainer .tecnologia .tecnologiaItemsContainer.intermedio span,
+  .tecnologiaContainer div.tecnologia span.intermedio {
+    border: 1px solid var(--mr-tecnologia-programacion-intermedio-background-color) !important;
+  }
+
+  .tecnologiaContainer .tecnologia .tecnologiaItemsContainer.basico span,
+  .tecnologiaContainer div.tecnologia span.basico {
+    border: 1px solid var(--mr-tecnologia-programacion-basico-background-color) !important;
+  }
+
+  /* Sobre mí */
+  .fortaleza {
+    border: 1px solid var(--mr-strengths-background-color);
+  }
+
+  .random-facts-list .fact {
+    border: 1px solid var(--mr-fact-background-color);
+  }
+}

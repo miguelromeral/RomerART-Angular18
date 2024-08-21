@@ -1,10 +1,15 @@
 <app-layout>
+  <div class="noprint fixed bottom-4 right-4" style="z-index: 100">
+    <button
+      class="mb-12 flex h-10 w-10 items-center justify-center rounded-full bg-blue-400 transition-all hover:bg-blue-500 dark:bg-blue-900 dark:hover:bg-blue-800 lg:mb-0"
+      (click)="printDocument()">
+      <i class="bi bi-printer text-lg"></i>
+    </button>
+  </div>
   <div class="body">
-    <!-- <div class="alert alert-primary noprint" role="alert">
-      <i class="bi bi-printer"></i> Esta página está
-      <strong>optmizada para ser impresa</strong>. Pulsa
-      <kbd><kbd>Ctrl</kbd> + <kbd>P</kbd></kbd> para imprimir.
-    </div> -->
+    <div class="noprint my-4 rounded-md bg-blue-400 p-2 dark:bg-blue-900">
+      <span [innerHTML]="text('PRINT.ALERT') | mrTranslate"></span>
+    </div>
     <div>
       <img id="profile" src="assets/images/me/cv.jpeg" alt="MiguelRomeral" />
     </div>

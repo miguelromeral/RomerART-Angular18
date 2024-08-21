@@ -55,4 +55,8 @@ export class CvComponent extends LanguageComponent {
   formattedDateMini(date: Date) {
     return formattedDateMini(date);
   }
+
+  printDocument(): void {
+    window.print();
+  }
 }
