@@ -32,16 +32,7 @@ export class ThemeService {
 
     switch (theme) {
       case settingThemeValues.system:
-        if (window) {
-          if (
-            window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-          ) {
-            this.setDarkTheme();
-          } else {
-            this.setLightTheme();
-          }
-        }
+        this.setSystemTheme();
         return;
       case settingThemeValues.light:
         this.setLightTheme();
@@ -52,6 +43,20 @@ export class ThemeService {
     }
 
     this.themeSubject.next(theme);
+  }
+
+  private setSystemTheme() {
+    if (window) {
+      if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        this.setDarkTheme();
+      } else {
+        this.setLightTheme();
+      }
+      this.themeSubject.next(settingThemeValues.system);
+    }
   }
 
   private setDarkTheme() {

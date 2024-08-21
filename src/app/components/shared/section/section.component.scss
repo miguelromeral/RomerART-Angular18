@@ -1,13 +1,13 @@
 .seccion {
-  // @apply col-span-1 sm:col-span-3 flex flex-col gap-2;
   @apply h-fit;
 }
 
 .content {
-  @apply my-1 flex flex-col gap-4;
+  @apply my-3 flex flex-col gap-4;
 }
 
 .seccion>div.content {
+  @apply flex flex-col gap-6;
   // @apply grid grid-cols-1 gap-4 sm:grid-cols-3;
 }
 
