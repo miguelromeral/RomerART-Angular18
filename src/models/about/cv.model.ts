@@ -70,7 +70,7 @@ export interface IPersonalProject {
   name: string;
   url: string;
   image: string | undefined;
-  description: string;
+  descriptionCode: string;
   android: string | undefined;
   microsoft: string | undefined;
 }

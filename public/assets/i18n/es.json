@@ -55,7 +55,8 @@
         "TECNOLOGY": "Tecnología Utilizada",
         "CERTIFICATIONS": "Certificaciones",
         "PROJECTS": "Proyectos Personales Destacados",
-        "ABOUT": "Sobre Mí"
+        "ABOUT": "Sobre Mí",
+        "LINKS": "Otros enlaces de interés"
       },
       "PERSONAL": {
         "NAME": "Nombre",
@@ -86,6 +87,14 @@
         "OFFICE": "🖨 Ofimática",
         "IDE": "🛠 Entornos de Desarrollo",
         "OS": "💾 Sistemas Operativos"
+      },
+      "PROJECTS": {
+        "ROMERART": "Página web en Azure para mostrar los dibujos que subo a las redes sociales.",
+        "SHARETHETRACK": "Aplicación en Flutter para Android que funcinoa como una red social para compartir música de Spotify.",
+        "FORMULAGP": "Aplicación en Xamarin para ver datos y estadísticas sobre las carreras de Fórmula 1 consumiendo una API de externos.",
+        "SECRETMANAGER": "Aplicación en Kotlin para Android para encriptar y desencriptar cadenas de texto.",
+        "FACTORYCHAOS": "Minijuego en Unity (C#) para aprender sobre el framework.",
+        "F1TELEMETRY": "Aplicación en Java para realizar el seguimiento de las carreras a las que jugábamos mis hermanos y yo en el videojuego F1 2018."
       },
       "STRENGTHS": {
         "STRENGTHS": "Fortalezas",

@@ -47,6 +47,80 @@
         "TITLE": "Other Links"
       }
     },
+    "CV": {
+      "SECTIONS": {
+        "PERSONAL": "Personal Info",
+        "EXPERIENCE": "Professional Experience",
+        "LANGUAGES": "Languages",
+        "TECNOLOGY": "Technology",
+        "CERTIFICATIONS": "Certifications",
+        "PROJECTS": "Personal Projects",
+        "ABOUT": "About Me",
+        "LINKS": "Other Links"
+      },
+      "PERSONAL": {
+        "NAME": "Name",
+        "AGE": "Age",
+        "BIRTHPLACE": "📅 Birthplace",
+        "HOMEPLACE": "🏠 Homeplace",
+        "COLLEGE": "🎓 College"
+      },
+      "EXPERIENCE": {
+        "REMOTE": "Remote 100%",
+        "PRESENTIAL": "Presential 100%"
+      },
+      "TECNOLOGY": {
+        "ISSUES": "⚠ Issue Management",
+        "VERSIONS": "📌 Version History",
+        "CLOUD": "☁ Cloud Computing",
+        "QUALITY": "🔍 Quality of Code",
+        "FRAMEWORKS": "🖼 Frameworks",
+        "SERVERS": "⚙ Servers",
+        "CODING": {
+          "CODING": "🤖 Coding Languages",
+          "ADVANCED": "Advanced",
+          "MILD": "Intermediate",
+          "BASIC": "Basic",
+          "OTHER": "Others"
+        },
+        "ENTERPRISE": "🖥 Enterprise Systems",
+        "OFFICE": "🖨 Office",
+        "IDE": "🛠 IDEs",
+        "OS": "💾 OS"
+      },
+      "PROJECTS": {
+        "ROMERART": "Web page in Azure to display the drawings I upload to social media.",
+        "SHARETHETRACK": "Flutter app for Android that doubles as a social network for sharing Spotify music.",
+        "FORMULAGP": "Application in Xamarin to view data and statistics about Formula 1 races by consuming an API from third parties.",
+        "SECRETMANAGER": "Kotlin app for Android to encrypt and decrypt text strings.",
+        "FACTORYCHAOS": "Mini-game in Unity (C#) to learn about the framework.",
+        "F1TELEMETRY": "Java application to track the races my brothers and I played in the F1 2018 video game."
+      },
+      "STRENGTHS": {
+        "STRENGTHS": "Strengths",
+        "CLIFTON": "(CliftonStrengths® Gallup Report)",
+        "CAREFULL": {
+          "TITLE": "Prudent",
+          "DESCRIPTION": "\"Careful, it perceives numerous risks that exist, identifies and evaluates them to minimize them.\""
+        },
+        "ANALYTIC": {
+          "TITLE": "Analytic",
+          "DESCRIPTION": "\"He likes data because it represents objective information. With them, you look for models and connections, you want to understand how certain patterns or models interact. Some consider it logical and rigorous.\""
+        },
+        "RESTORER": {
+          "TITLE": "Restorer",
+          "DESCRIPTION": "\"He loves solving problems. He is excited by the challenge of analyzing the symptoms, identifying what is wrong, and finding the solution. Enjoy making things come back to life.\""
+        },
+        "EQUITY": {
+          "TITLE": "Equity",
+          "DESCRIPTION": "\"He is fully aware of the need to treat everyone equally. He believes that people perform better in a consistent environment, where the rules are clear and apply to everyone equally.\""
+        },
+        "RELATION": {
+          "TITLE": "Relation",
+          "DESCRIPTION": "\"He is attracted to people he already knows. Once the initial contact is established, he deliberately tries to deepen that relationship. The more they share with each other, the more they take risks together.\""
+        }
+      }
+    },
     "NOT-FOUND": {
       "TITLE": "Page not found"
     },

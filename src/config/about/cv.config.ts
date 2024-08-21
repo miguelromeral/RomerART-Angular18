@@ -513,8 +513,7 @@ export const certificationsConfig: ICertfication[] = [
 export const personalProjectsConfig: IPersonalProject[] = [
   {
     name: '🎨 RomerART',
-    description:
-      'Página web en Azure para mostrar los dibujos que subo a las redes sociales.',
+    descriptionCode: 'SCREENS.CV.PROJECTS.ROMERART',
     image: undefined,
     url: 'https://miguelromeral.azurewebsites.net/',
     android: undefined,
@@ -522,8 +521,7 @@ export const personalProjectsConfig: IPersonalProject[] = [
   },
   {
     name: 'ShareTheTrack',
-    description:
-      'Aplicación en Flutter para Android que funcinoa como una red social para compartir música de Spotify.',
+    descriptionCode: 'SCREENS.CV.PROJECTS.SHARETHETRACK',
     image:
       'https://raw.githubusercontent.com/miguelromeral/spotify_app/master/android/app/src/main/res/drawable/ic_launcher_round.png',
     url: 'https://github.com/miguelromeral/spotify_app',
@@ -533,8 +531,7 @@ export const personalProjectsConfig: IPersonalProject[] = [
   },
   {
     name: 'Formula GP',
-    description:
-      'Aplicación en Xamarin para ver datos y estadísticas sobre las carreras de Fórmula 1 consumiendo una API de externos.',
+    descriptionCode: 'SCREENS.CV.PROJECTS.FORMULAGP',
     image:
       'https://raw.githubusercontent.com/miguelromeral/ErgastAPP/master/ErgastAPP/ErgastAPP/ErgastApp.ico',
     url: 'https://github.com/miguelromeral/ErgastAPP',
@@ -545,8 +542,7 @@ export const personalProjectsConfig: IPersonalProject[] = [
   },
   {
     name: 'Secret Manager',
-    description:
-      'Aplicación en Kotlin para Android para encriptar y desencriptar cadenas de texto.',
+    descriptionCode: 'SCREENS.CV.PROJECTS.SECRETMANAGER',
     image:
       'https://github.com/miguelromeral/SecretManager/raw/master/app/src/main/ic_launcher_sm_v2-web.png',
     url: 'https://github.com/miguelromeral/SecretManager',
@@ -556,7 +552,7 @@ export const personalProjectsConfig: IPersonalProject[] = [
   },
   {
     name: 'Factory Chaos',
-    description: 'Minijuego en Unity (C#) para aprender sobre el framework.',
+    descriptionCode: 'SCREENS.CV.PROJECTS.FACTORYCHAOS',
     image:
       'https://raw.githubusercontent.com/miguelromeral/FactoryGame/master/Assets/Pictures/FactoryChaosIcon512.png',
     url: 'https://github.com/miguelromeral/FactoryGame',
@@ -566,8 +562,7 @@ export const personalProjectsConfig: IPersonalProject[] = [
   },
   {
     name: '🏎 F1 2018 Telemetry App',
-    description:
-      'Aplicación en Java para realizar el seguimiento de las carreras a las que jugábamos mis hermanos y yo en el videojuego F1 2018.',
+    descriptionCode: 'SCREENS.CV.PROJECTS.F1TELEMETRY',
     image: undefined,
     url: 'https://github.com/miguelromeral/f12018_telemetry?tab=readme-ov-file',
     android: undefined,

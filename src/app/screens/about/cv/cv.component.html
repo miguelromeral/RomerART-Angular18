@@ -260,7 +260,7 @@
             </a>
           </div>
           <div class="descripcion text-sm">
-            {{ item.description }}
+            {{ item.descriptionCode | mrTranslate }}
           </div>
         </div>
       </div>
@@ -289,7 +289,7 @@
         </div>
       </div>
       <div>
-        <h6>Otros Enlaces de Interés</h6>
+        <h6>{{ text('SECTIONS.LINKS') | mrTranslate }}</h6>
         <div class="enlacesContainer">
           <h6 class="enlace-interes" *ngFor="let item of links">
             <a [href]="item.link" target="_blank">
