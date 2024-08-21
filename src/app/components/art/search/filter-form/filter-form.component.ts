@@ -171,7 +171,7 @@ export class FilterFormComponent
     this.loadSelects();
     this.setValuesFromQueryParams();
 
-    this.settingsService.filterCount$.subscribe(show => {
+    this.settingsService.booleanSetting$(settingFilterCount).subscribe(show => {
       this.showFilterCount = show;
     });
   }

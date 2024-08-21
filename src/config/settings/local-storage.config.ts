@@ -1,4 +1,5 @@
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
+import { ISettingOption } from '@models/settings/settings.model';
 
 export interface ILocalStorageOption {
   localStorageKey: string;
@@ -56,17 +57,23 @@ export const settingTheme: ISelectOption<ICustomSelectOption> = {
   ],
 };
 
-export const settingTranslations = {
+export const settingTranslations: ISettingOption<boolean> = {
   defaultValue: true,
-  localStorageKey: 'translations',
+  key: 'translations',
 };
 
-export const settingFilterCount = {
+export const settingFilterCount: ISettingOption<boolean> = {
   defaultValue: true,
-  localStorageKey: 'filterCount',
+  key: 'filterCount',
 };
 
-export const settingZoomImage = {
+export const settingZoomImage: ISettingOption<boolean> = {
   defaultValue: true,
-  localStorageKey: 'zoomImages',
+  key: 'zoomImages',
 };
+
+export const booleanSettings: ISettingOption<boolean>[] = [
+  settingTranslations,
+  settingFilterCount,
+  settingZoomImage,
+];

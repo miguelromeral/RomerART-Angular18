@@ -1,91 +1,66 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LanguageService } from '../language/language.service';
 import { ThemeService } from '../theme/theme.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import {
-  settingFilterCount,
-  settingTranslations,
-  settingZoomImage,
-} from 'config/settings/local-storage.config';
+import { booleanSettings } from 'config/settings/local-storage.config';
+import { ISettingOption, Setting } from '@models/settings/settings.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SettingsService {
-  private translationsSubject = new BehaviorSubject<boolean>(
-    settingTranslations.defaultValue
-  );
-  translations$: Observable<boolean> = this.translationsSubject.asObservable();
-
-  private filterCountSubject = new BehaviorSubject<boolean>(
-    settingFilterCount.defaultValue
-  );
-  filterCount$: Observable<boolean> = this.filterCountSubject.asObservable();
-
-  private zoomImageSubject = new BehaviorSubject<boolean>(
-    settingZoomImage.defaultValue
-  );
-  zoomImage$: Observable<boolean> = this.zoomImageSubject.asObservable();
+  private booleanSettings: Setting<boolean>[] = [];
 
   constructor(
     private languageService: LanguageService,
     private themeService: ThemeService,
     private storage: LocalStorageService
-  ) {}
+  ) {
+    const bolSet: Setting<boolean>[] = [];
+    booleanSettings.forEach(setting => {
+      bolSet.push(Setting.getSettingFromInterface(setting));
+    });
+    this.booleanSettings = bolSet;
+  }
 
   init() {
-    this.initTranslations();
-    this.initFilterCount();
-    this.initZoomImage();
+    this.booleanSettings.forEach(setting => {
+      this.initBooleanSetting(setting);
+    });
   }
 
-  private initTranslations() {
-    const translations = this.storage.getItem(
-      settingTranslations.localStorageKey
-    );
+  private getBooleanSetting(key: string): Setting<boolean> | undefined {
+    return this.booleanSettings.find(x => x.key === key);
+  }
 
-    if (translations === null) {
-      this.setTranslations(settingTranslations.defaultValue);
-    } else {
-      this.setTranslations(translations === 'true');
+  private initBooleanSetting(setting: Setting<boolean>) {
+    const storedValue = this.storage.getItem(setting.key);
+    const value =
+      storedValue !== null ? storedValue === 'true' : setting.defaultValue;
+    this.setBooleanSetting(setting, value);
+  }
+
+  setBooleanSetting(opt: ISettingOption<boolean>, value: boolean): void {
+    const setting = this.getBooleanSetting(opt.key);
+    if (setting) {
+      this.storage.setItem(setting.key, value.toString());
+      setting.subject.next(value);
     }
   }
 
-  setTranslations(theme: boolean): void {
-    this.storage.setItem(settingTranslations.localStorageKey, theme.toString());
-    this.translationsSubject.next(theme);
+  booleanSetting$(setting: ISettingOption<boolean>): Observable<boolean> {
+    return this.getBooleanSetting(setting.key)!.subject.asObservable();
   }
 
-  private initFilterCount() {
-    const filterCount = this.storage.getItem(
-      settingFilterCount.localStorageKey
-    );
+  // get translations$() {
+  //   return this.getBooleanSetting(settingTranslations.localStorageKey)!.subject;
+  // }
 
-    if (filterCount === null) {
-      this.setFilterCount(settingFilterCount.defaultValue);
-    } else {
-      this.setFilterCount(filterCount === 'true');
-    }
-  }
-
-  setFilterCount(show: boolean): void {
-    this.storage.setItem(settingFilterCount.localStorageKey, show.toString());
-    this.filterCountSubject.next(show);
-  }
-
-  private initZoomImage() {
-    const value = this.storage.getItem(settingZoomImage.localStorageKey);
-
-    if (value === null) {
-      this.setZoomImage(settingZoomImage.defaultValue);
-    } else {
-      this.setZoomImage(value === 'true');
-    }
-  }
-
-  setZoomImage(show: boolean): void {
-    this.storage.setItem(settingZoomImage.localStorageKey, show.toString());
-    this.zoomImageSubject.next(show);
-  }
+  // get filterCount$() {
+  //   return this.getBooleanSetting(settingFilterCount.localStorageKey)!.subject;
+  // }
+  // get zoomImage$() {
+  //   return this.getBooleanSetting(settingZoomImage.localStorageKey)!.subject;
+  // }
 }

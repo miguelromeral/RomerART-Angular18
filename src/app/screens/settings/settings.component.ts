@@ -92,15 +92,19 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
       this.settingsForm.controls.themeFormControl.patchValue(theme);
     });
 
-    this.settingsService.translations$.subscribe(value => {
-      this.settingsForm.controls.translateFormControl.patchValue(value);
-    });
+    this.settingsService
+      .booleanSetting$(settingTranslations)
+      .subscribe(value => {
+        this.settingsForm.controls.translateFormControl.patchValue(value);
+      });
 
-    this.settingsService.filterCount$.subscribe(value => {
-      this.settingsForm.controls.filterCountFormControl.patchValue(value);
-    });
+    this.settingsService
+      .booleanSetting$(settingFilterCount)
+      .subscribe(value => {
+        this.settingsForm.controls.filterCountFormControl.patchValue(value);
+      });
 
-    this.settingsService.zoomImage$.subscribe(value => {
+    this.settingsService.booleanSetting$(settingZoomImage).subscribe(value => {
       this.settingsForm.controls.zoomImage.patchValue(value);
     });
   }
@@ -122,18 +126,18 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
   changeTranslations(event: Event) {
     const target = event.target as HTMLInputElement;
     const translate = target.checked;
-    this.settingsService.setTranslations(translate);
+    this.settingsService.setBooleanSetting(settingTranslations, translate);
   }
 
   changeFilterCount(event: Event) {
     const target = event.target as HTMLInputElement;
     const show = target.checked;
-    this.settingsService.setFilterCount(show);
+    this.settingsService.setBooleanSetting(settingFilterCount, show);
   }
 
   changeZoomImage(event: Event) {
     const target = event.target as HTMLInputElement;
     const show = target.checked;
-    this.settingsService.setZoomImage(show);
+    this.settingsService.setBooleanSetting(settingZoomImage, show);
   }
 }

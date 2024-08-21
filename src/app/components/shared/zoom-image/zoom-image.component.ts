@@ -55,9 +55,11 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
   }
 
   initZoom() {
-    this.settingsService.zoomImage$.subscribe(enabled => {
-      this.enableZoom = enabled;
-    });
+    this.settingsService
+      .booleanSetting$(settingZoomImage)
+      .subscribe(enabled => {
+        this.enableZoom = enabled;
+      });
   }
 
   errorLoading() {

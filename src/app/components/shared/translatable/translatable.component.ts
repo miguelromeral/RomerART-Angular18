@@ -54,9 +54,11 @@ export class TranslatableComponent extends LanguageComponent implements OnInit {
       this.destionationLanguage = newLang;
     });
 
-    this.settingsService.translations$.subscribe(value => {
-      this.bSettingEnabled = value;
-    });
+    this.settingsService
+      .booleanSetting$(settingTranslations)
+      .subscribe(value => {
+        this.bSettingEnabled = value;
+      });
 
     // this.bSettingEnabled = this.settingsService.translations$;
   }
