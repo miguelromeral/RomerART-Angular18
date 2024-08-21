@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExperienceProjectComponent } from '@app/components/about/experience-project/experience-project.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { LanguageService } from '@app/services/language/language.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -19,6 +20,7 @@ import {
   personalProjectsConfig,
   personalStrengthsConfig,
 } from 'config/about/cv.config';
+import { settingLanguage } from 'config/settings/language.config';
 
 @Component({
   selector: 'app-cv',
@@ -33,7 +35,7 @@ import {
   templateUrl: './cv.component.html',
   styleUrl: './cv.component.scss',
 })
-export class CvComponent extends LanguageComponent {
+export class CvComponent extends LanguageComponent implements OnInit {
   personalInfo = personalInfoConfig;
   age = yearsDifference(this.personalInfo.birthday, new Date(Date.now()));
   experience = experienceConfig;
@@ -43,9 +45,16 @@ export class CvComponent extends LanguageComponent {
   projects = personalProjectsConfig;
   strengths = personalStrengthsConfig;
   links = experienceLinksConfig;
+  currentLanguage: string = settingLanguage.defaultValue;
 
-  constructor() {
+  constructor(private languageService: LanguageService) {
     super('SCREENS.CV');
+  }
+
+  ngOnInit() {
+    this.languageService.currentLanguage$.subscribe(lang => {
+      this.currentLanguage = lang;
+    });
   }
 
   getCodingByLevel(level: undefined | 1 | 2 | 3) {
@@ -53,7 +62,7 @@ export class CvComponent extends LanguageComponent {
   }
 
   formattedDateMini(date: Date) {
-    return formattedDateMini(date);
+    return formattedDateMini(date, this.currentLanguage);
   }
 
   printDocument(): void {

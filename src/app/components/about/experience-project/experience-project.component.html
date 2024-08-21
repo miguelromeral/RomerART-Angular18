@@ -61,7 +61,8 @@
     <div class="proyectos">
       <app-experience-project
         *ngFor="let subproject of project.projects"
-        [project]="subproject">
+        [project]="subproject"
+        [currentLanguage]="currentLanguage">
       </app-experience-project>
     </div>
   </div>

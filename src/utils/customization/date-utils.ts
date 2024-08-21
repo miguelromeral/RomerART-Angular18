@@ -1,5 +1,3 @@
-import { settingLanguage } from 'config/settings/language.config';
-
 export function yearsDifference(fechaInicio: Date, fechaFin: Date): number {
   let diferenciaEnAnios = fechaFin.getFullYear() - fechaInicio.getFullYear();
   const mesFin = fechaFin.getMonth();
@@ -16,10 +14,7 @@ export function yearsDifference(fechaInicio: Date, fechaFin: Date): number {
   return diferenciaEnAnios;
 }
 
-export function formattedDate(
-  date: Date,
-  locale: string = settingLanguage.defaultValue
-): string {
+export function formattedDate(date: Date, locale: string): string {
   if (!date) return '';
 
   const day = date.getDate().toString().padStart(2, '0');
@@ -29,11 +24,7 @@ export function formattedDate(
   return `${day} ${month} ${year}`;
 }
 
-// TODO: pasarle este valor, hacerlo obligatorio
-export function formattedDateMini(
-  date: Date,
-  locale: string = settingLanguage.defaultValue
-): string {
+export function formattedDateMini(date: Date, locale: string): string {
   if (!date) return '';
 
   const month = date.toLocaleString(locale, { month: 'long' });

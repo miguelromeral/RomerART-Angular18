@@ -69,7 +69,8 @@
       <div class="experienciaContainer">
         <app-experience-project
           *ngFor="let project of experience"
-          [project]="project">
+          [project]="project"
+          [currentLanguage]="currentLanguage">
         </app-experience-project>
       </div>
     </div>

@@ -15,6 +15,7 @@ import { formattedDateMini } from '@utils/customization/date-utils';
 })
 export class ExperienceProjectComponent extends LanguageComponent {
   @Input() project!: IExperience;
+  @Input() currentLanguage!: string;
 
   constructor() {
     super('SCREENS.CV.EXPERIENCE');
@@ -27,6 +28,6 @@ export class ExperienceProjectComponent extends LanguageComponent {
   }
 
   formatDateMini(date: Date) {
-    return formattedDateMini(date);
+    return formattedDateMini(date, this.currentLanguage);
   }
 }

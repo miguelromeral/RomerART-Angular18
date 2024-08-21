@@ -6,6 +6,9 @@ import { DrawingScoreComponent } from '../drawing-score/drawing-score.component'
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { LanguageService } from '@app/services/language/language.service';
+import { settingLanguage } from 'config/settings/language.config';
+import { formattedDateMini } from '@utils/customization/date-utils';
 
 @Component({
   selector: 'app-drawing-thumbnail',
@@ -38,10 +41,11 @@ export class DrawingThumbnailComponent
 
   @Input() fullsize = false;
   url = '';
+  currentLanguage = settingLanguage.defaultValue;
 
   bErrorLoadingImage = false;
 
-  constructor() {
+  constructor(private languageService: LanguageService) {
     super('SCREENS.DRAWING-DETAILS');
   }
 
@@ -52,6 +56,9 @@ export class DrawingThumbnailComponent
   init() {
     this.bErrorLoadingImage = false;
     this.detectThumbnailUrl();
+    this.languageService.currentLanguage$.subscribe(lang => {
+      this.currentLanguage = lang;
+    });
   }
 
   detectThumbnailUrl() {
@@ -62,6 +69,10 @@ export class DrawingThumbnailComponent
     if (this.url.length === 0) {
       this.url = this.drawing.url;
     }
+  }
+
+  formatDateMini(date: Date) {
+    return formattedDateMini(date, this.currentLanguage);
   }
 
   errorLoadingImage() {

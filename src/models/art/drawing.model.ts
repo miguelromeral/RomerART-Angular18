@@ -16,6 +16,7 @@ export class Drawing {
   spotifyTrackId: string;
   title: string;
   date: string;
+  dateTS: Date;
   dateHyphen: string;
   software: number;
   softwareName: string;
@@ -66,6 +67,8 @@ export class Drawing {
     this.spotifyTrackId = data.spotifyTrackId || '';
     this.title = data.title || '';
     this.date = data.date || '';
+    const [year, day, month] = this.date.split('/').map(x => parseInt(x));
+    this.dateTS = new Date(year, month - 1, day);
     this.dateHyphen = data.dateHyphen || '';
     this.software = data.software || 0;
     this.softwareName = data.softwareName || '';

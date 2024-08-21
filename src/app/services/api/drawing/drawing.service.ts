@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Drawing } from '../../../../models/art/drawing.model';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
@@ -53,9 +53,12 @@ export class DrawingService {
   }
 
   getAllDrawings(): Observable<Drawing[]> {
-    return this.http
-      .get<Drawing[]>(`${this.apiUrl}art/drawings`)
-      .pipe(catchError(this.handleError<Drawing[]>('getAllDrawings')));
+    return this.http.get<Drawing[]>(`${this.apiUrl}art/drawings`).pipe(
+      map((drawings: Drawing[]) =>
+        drawings.map(drawing => new Drawing(drawing))
+      ),
+      catchError(this.handleError<Drawing[]>('getAllDrawings'))
+    );
   }
 
   getDrawingProducts(): Observable<DrawingProduct[]> {
@@ -168,9 +171,12 @@ export class DrawingService {
 
     // console.log('Filters', filters);
     // console.log('Page Number', filters.pageNumber);
-    return this.http
-      .post<Drawing[]>(url, filters, { headers })
-      .pipe(catchError(this.handleError<Drawing[]>('filterDrawings')));
+    return this.http.post<Drawing[]>(url, filters, { headers }).pipe(
+      map((drawings: Drawing[]) =>
+        drawings.map(drawing => new Drawing(drawing))
+      ),
+      catchError(this.handleError<Drawing[]>('filterDrawings'))
+    );
   }
 
   getAllDrawingsOfCollection(collectionId: string): Observable<Drawing[]> {
@@ -179,15 +185,21 @@ export class DrawingService {
   }
 
   getAllCollections(): Observable<Collection[]> {
-    return this.http
-      .get<Collection[]>(`${this.apiUrl}art/collections`)
-      .pipe(catchError(this.handleError<Collection[]>('getAllCollections')));
+    return this.http.get<Collection[]>(`${this.apiUrl}art/collections`).pipe(
+      map((collections: Collection[]) =>
+        collections.map(collection => new Collection(collection))
+      ),
+      catchError(this.handleError<Collection[]>('getAllCollections'))
+    );
   }
 
   getCollectionDetails(id: string): Observable<Collection> {
     return this.http
       .get<Collection>(`${this.apiUrl}art/collection/details/${id}`)
-      .pipe(catchError(this.handleError<Collection>('getCollectionDetails')));
+      .pipe(
+        map((collection: Collection) => new Collection(collection)),
+        catchError(this.handleError<Collection>('getCollectionDetails'))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
