@@ -65,6 +65,7 @@ export class SettingsComponent
   version = environment.appVersion;
   languages: ICustomSelectOption[] = settingLanguage.options;
   themes: ICustomSelectOption[] = settingTheme.options;
+  collapsable = environment.settings.autoCollapsed;
 
   providers = providersConfigList;
 
@@ -119,9 +120,7 @@ export class SettingsComponent
         }
         if (this.isSettingSelect(setting)) {
           setting.subject$.subscribe(value => {
-            console.log('Select Setting (' + value + '): ', setting);
             const control = this.findControlByName(setting.formControlName);
-            console.log('Control: ', control);
             control?.patchValue(value);
           });
         }

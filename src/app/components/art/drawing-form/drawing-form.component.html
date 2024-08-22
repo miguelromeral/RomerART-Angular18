@@ -34,7 +34,9 @@
       </div>
     </div>
 
-    <app-section [title]="text('SECTIONS.IMAGE') | mrTranslate">
+    <app-section
+      [title]="text('SECTIONS.IMAGE') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <div class="image-container">
           <img
@@ -71,7 +73,9 @@
         </div>
       </div>
     </app-section>
-    <app-section [title]="text('FORM.TITLE.TITLE') | mrTranslate">
+    <app-section
+      [title]="text('FORM.TITLE.TITLE') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content items-end">
         <app-text-input
           class="col-span-1 sm:col-span-2"
@@ -88,7 +92,9 @@
         </div>
       </div>
     </app-section>
-    <app-section [title]="text('SECTIONS.NAMES') | mrTranslate">
+    <app-section
+      [title]="text('SECTIONS.NAMES') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <app-text-input
           formControlName="name"
@@ -104,7 +110,9 @@
       </div>
     </app-section>
 
-    <app-section [title]="text('FORM.PRODUCT.TITLE') | mrTranslate">
+    <app-section
+      [title]="text('FORM.PRODUCT.TITLE') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <div>
           <app-select-input
@@ -134,7 +142,9 @@
         </app-text-input>
       </div>
     </app-section>
-    <app-section [title]="text('SECTIONS.STYLE') | mrTranslate">
+    <app-section
+      [title]="text('SECTIONS.STYLE') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <div>
           <app-select-input
@@ -180,7 +190,9 @@
       </div>
     </app-section>
 
-    <app-section [title]="text('SECTIONS.DETAILS') | mrTranslate">
+    <app-section
+      [title]="text('SECTIONS.DETAILS') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <div>
           <app-date-input
@@ -244,7 +256,9 @@
       </div>
     </app-section>
 
-    <app-section [title]="text('FORM.COMMENTS.TITLE') | mrTranslate">
+    <app-section
+      [title]="text('FORM.COMMENTS.TITLE') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
@@ -256,7 +270,9 @@
       </div>
     </app-section>
 
-    <app-section [title]="text('FORM.COMMENTS-PROS.TITLE') | mrTranslate">
+    <app-section
+      [title]="text('FORM.COMMENTS-PROS.TITLE') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
@@ -267,7 +283,9 @@
         </app-drawing-form-comments>
       </div>
     </app-section>
-    <app-section [title]="text('FORM.COMMENTS-CONS.TITLE') | mrTranslate">
+    <app-section
+      [title]="text('FORM.COMMENTS-CONS.TITLE') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
@@ -279,7 +297,9 @@
       </div>
     </app-section>
 
-    <app-section [title]="text('SECTIONS.REFERENCES') | mrTranslate">
+    <app-section
+      [title]="text('SECTIONS.REFERENCES') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content items-end">
         <app-text-input
           formControlName="referenceUrl"
@@ -301,7 +321,9 @@
       </div>
     </app-section>
 
-    <app-section [title]="text('SECTIONS.SOCIAL') | mrTranslate">
+    <app-section
+      [title]="text('SECTIONS.SOCIAL') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <app-text-input
           formControlName="twitterUrl"
@@ -316,7 +338,9 @@
         </app-text-input>
       </div>
     </app-section>
-    <app-section [title]="text('FORM.TAGS.TITLE') | mrTranslate">
+    <app-section
+      [title]="text('FORM.TAGS.TITLE') | mrTranslate"
+      [collapsable]="true">
       <div class="seccion-content">
         <app-text-input
           class="col-span-1 sm:col-span-3"

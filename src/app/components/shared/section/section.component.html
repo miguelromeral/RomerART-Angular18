@@ -1,10 +1,21 @@
 <div class="seccion">
-  <h2 *ngIf="type === 'h2'" class="seccion-title">
-    <i *ngIf="icon !== ''" class="bi" [ngClass]="'bi-' + icon"></i>
-    {{ title }}
-  </h2>
-  <h3 *ngIf="type === 'h3'" class="seccion-title">{{ title }}</h3>
-  <div class="content">
+  <div
+    class="seccion-title flex flex-row flex-nowrap justify-between"
+    [ngClass]="{ 'cursor-pointer': collapsable }"
+    (click)="collapse()">
+    <div>
+      <h2 *ngIf="type === 'h2'">
+        <i *ngIf="icon !== ''" class="bi" [ngClass]="'bi-' + icon"></i>
+        {{ title }}
+      </h2>
+      <h3 *ngIf="type === 'h3'">{{ title }}</h3>
+    </div>
+    <div *ngIf="collapsable">
+      <i *ngIf="isCollapsed" class="bi bi-caret-right"></i>
+      <i *ngIf="!isCollapsed" class="bi bi-caret-down-fill"></i>
+    </div>
+  </div>
+  <div class="content" [@filterFormAnimation]="isCollapsed ? 'closed' : 'open'">
     <ng-content></ng-content>
   </div>
 </div>

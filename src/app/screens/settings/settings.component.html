@@ -1,11 +1,13 @@
 <app-layout>
   <form [formGroup]="settingsForm">
-    <div class="flex flex-col gap-10">
+    <div class="flex flex-col gap-6">
       <h1>{{ text('TITLE') | mrTranslate }}</h1>
 
       <app-section
         *ngFor="let section of settings"
         [title]="section.titleCode | mrTranslate"
+        [collapsable]="true"
+        [isCollapsed]="collapsable"
         [icon]="section.icon">
         <ng-container *ngFor="let subSetting of section.settings">
           <app-setting-option
@@ -33,6 +35,8 @@
 
       <app-section
         [title]="text('SECTIONS.ACCOUNT') | mrTranslate"
+        [collapsable]="true"
+        [isCollapsed]="collapsable"
         icon="person-gear">
         <app-setting-option
           [title]="text('FORM.AUTH.TITLE') | mrTranslate"
