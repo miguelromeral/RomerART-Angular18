@@ -29,7 +29,7 @@ export class EditComponent implements OnInit {
 
   loadDrawing() {
     if (this.id) {
-      this.drawingService.getDrawingDetails(this.id).subscribe(data => {
+      this.drawingService.getDrawingDetailsAdmin(this.id).subscribe(data => {
         if (data) {
           this.drawing = new Drawing(data);
           this.metadataService.updateMetadata(

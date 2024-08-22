@@ -51,6 +51,11 @@ export class DrawingService {
       .get<Drawing>(`${this.apiUrl}art/details/${id}`)
       .pipe(catchError(this.handleError<Drawing>('getArtDetails')));
   }
+  getDrawingDetailsAdmin(id: string): Observable<Drawing> {
+    return this.http
+      .get<Drawing>(`${this.apiUrl}art/details-admin/${id}`)
+      .pipe(catchError(this.handleError<Drawing>('getDrawingDetailsAdmin')));
+  }
 
   getAllDrawings(): Observable<Drawing[]> {
     return this.http.get<Drawing[]>(`${this.apiUrl}art/drawings`).pipe(
@@ -166,7 +171,7 @@ export class DrawingService {
   }
 
   filterDrawings(filters: DrawingFilter): Observable<Drawing[]> {
-    const url = `${this.apiUrl}art/filter`;
+    const url = `${this.apiUrl}art/filter-public`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // console.log('Filters', filters);
@@ -176,6 +181,20 @@ export class DrawingService {
         drawings.map(drawing => new Drawing(drawing))
       ),
       catchError(this.handleError<Drawing[]>('filterDrawings'))
+    );
+  }
+
+  filterDrawingsAdmin(filters: DrawingFilter): Observable<Drawing[]> {
+    const url = `${this.apiUrl}art/filter-admin`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    // console.log('Filters', filters);
+    // console.log('Page Number', filters.pageNumber);
+    return this.http.post<Drawing[]>(url, filters, { headers }).pipe(
+      map((drawings: Drawing[]) =>
+        drawings.map(drawing => new Drawing(drawing))
+      ),
+      catchError(this.handleError<Drawing[]>('filterDrawingsAdmin'))
     );
   }
 

@@ -11,7 +11,7 @@ import { DrawingFilter } from '@models/art/drawing-filter.model';
 import { DrawingThumbnailComponent } from '../../drawing-thumbnail/drawing-thumbnail.component';
 import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
 import { DrawingProduct } from '@models/art/drawing-product.model';
@@ -44,6 +44,8 @@ import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { SectionComponent } from '@app/components/shared/section/section.component';
 import { settingFilterCount } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
+import { AuthService } from '@app/services/api/auth/auth.service';
+import { User } from '@models/auth/user.model';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -156,18 +158,30 @@ export class FilterFormComponent
   showSoftware = true;
   showPaper = true;
 
+  filterMethod: (filters: DrawingFilter) => Observable<Drawing[]>;
+
+  fetchedResultsFromAdmin = false;
+  currentUser: User | null = null;
+
   constructor(
     private drawingService: DrawingService,
     private languageService: LanguageService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private settingsService: SettingsService
   ) {
     super('SCREENS.DRAWING-SEARCH.FORM');
     this.setValuesFromQueryParams();
+    this.filterMethod = this.drawingService.filterDrawings;
   }
 
   ngOnInit(): void {
+    this.fetchedResultsFromAdmin = false;
+    this.authService.loggedUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+
     this.loadSelects();
     this.setValuesFromQueryParams();
 
@@ -295,76 +309,94 @@ export class FilterFormComponent
     // Prevent resubmitting the form when updating URL query params
     this.queryParamsSubscription?.unsubscribe();
     this.changeBasicArtUrl();
-    this.drawingService.filterDrawings(filters).subscribe(results => {
-      // if (results.length > 1) {
-      //   if (
-      //     (this.filterForm.value.pageNumber ??
-      //       ArtFilterFormConfig.pagination.firstPage) <= 1
-      //   ) {
-      this.listDrawings = results;
-      // } else {
-      //   this.listDrawings = [...this.listDrawings, ...results];
-      // }
-      this.fetchedResults.emit(this.listDrawings);
 
-      this.filteredDrawingCharacters = this.listDrawingCharacters.filter(
-        c => this.listDrawings.filter(d => d.name == c.characterName).length > 0
-      );
-      this.nDrawingCharacters = this.filteredDrawingCharacters.length;
+    if (this.currentUser && this.authService.isAdmin(this.currentUser)) {
+      this.drawingService.filterDrawingsAdmin(filters).subscribe(results => {
+        this.processFilteredDrawings(results, true);
+      });
+    } else {
+      this.drawingService.filterDrawings(filters).subscribe(results => {
+        this.processFilteredDrawings(results, false);
+      });
+    }
+  }
 
-      this.filteredDrawingModels = this.listDrawingModels.filter(
-        m => this.listDrawings.filter(d => d.modelName == m.value).length > 0
-      );
-      this.nDrawingModels = this.filteredDrawingModels.length;
+  processFilteredDrawings(results: Drawing[], fromAdmin: boolean) {
+    if (
+      results === undefined ||
+      results === null ||
+      (!fromAdmin && this.fetchedResultsFromAdmin)
+    ) {
+      return;
+    }
+    if (fromAdmin) this.fetchedResultsFromAdmin = true;
+    // if (results.length > 1) {
+    //   if (
+    //     (this.filterForm.value.pageNumber ??
+    //       ArtFilterFormConfig.pagination.firstPage) <= 1
+    //   ) {
+    this.listDrawings = results;
+    // } else {
+    //   this.listDrawings = [...this.listDrawings, ...results];
+    // }
+    this.fetchedResults.emit(this.listDrawings);
 
-      this.filteredDrawingStyles = this.listDrawingStyles.filter(
-        s =>
-          this.listDrawings.filter(d => d.type.toString() == s.value).length > 0
-      );
-      this.nDrawingTypes = this.filteredDrawingStyles.length;
+    this.filteredDrawingCharacters = this.listDrawingCharacters.filter(
+      c => this.listDrawings.filter(d => d.name == c.characterName).length > 0
+    );
+    this.nDrawingCharacters = this.filteredDrawingCharacters.length;
 
-      this.filteredDrawingProductTypes = this.listDrawingProductTypes.filter(
-        pt =>
-          this.listDrawings.filter(d => d.productType.toString() == pt.value)
-            .length > 0
-      );
-      this.nDrawingProductTypes = this.filteredDrawingProductTypes.length;
+    this.filteredDrawingModels = this.listDrawingModels.filter(
+      m => this.listDrawings.filter(d => d.modelName == m.value).length > 0
+    );
+    this.nDrawingModels = this.filteredDrawingModels.length;
 
-      this.filteredDrawingProducts = this.listDrawingProducts.filter(
-        p => this.listDrawings.filter(d => d.productName == p.value).length > 0
-      );
-      this.nDrawingProducts = this.filteredDrawingProducts.length;
+    this.filteredDrawingStyles = this.listDrawingStyles.filter(
+      s =>
+        this.listDrawings.filter(d => d.type.toString() == s.value).length > 0
+    );
+    this.nDrawingTypes = this.filteredDrawingStyles.length;
 
-      this.filteredDrawingSoftwares = this.listDrawingSoftwares.filter(
-        s =>
-          this.listDrawings.filter(d => d.software.toString() == s.value)
-            .length > 0
-      );
-      this.nDrawingSoftwares = this.filteredDrawingSoftwares.length;
+    this.filteredDrawingProductTypes = this.listDrawingProductTypes.filter(
+      pt =>
+        this.listDrawings.filter(d => d.productType.toString() == pt.value)
+          .length > 0
+    );
+    this.nDrawingProductTypes = this.filteredDrawingProductTypes.length;
 
-      this.filteredDrawingPapers = this.listDrawingPapers.filter(
-        p =>
-          this.listDrawings.filter(d => d.paper.toString() == p.value).length >
-          0
-      );
-      this.nDrawingPapers = this.filteredDrawingPapers.length;
+    this.filteredDrawingProducts = this.listDrawingProducts.filter(
+      p => this.listDrawings.filter(d => d.productName == p.value).length > 0
+    );
+    this.nDrawingProducts = this.filteredDrawingProducts.length;
 
-      this.nDrawingFavorites = this.listDrawings.filter(x => x.favorite).length;
+    this.filteredDrawingSoftwares = this.listDrawingSoftwares.filter(
+      s =>
+        this.listDrawings.filter(d => d.software.toString() == s.value).length >
+        0
+    );
+    this.nDrawingSoftwares = this.filteredDrawingSoftwares.length;
 
-      const ids = this.listDrawings.map(x => x.id);
-      this.filteredCollections = this.listCollections.filter(
-        c => c.drawingsId.filter(cd => ids.find(id => id === cd)).length > 0
-      );
-      this.nDrawingCollections = this.filteredCollections.length;
+    this.filteredDrawingPapers = this.listDrawingPapers.filter(
+      p =>
+        this.listDrawings.filter(d => d.paper.toString() == p.value).length > 0
+    );
+    this.nDrawingPapers = this.filteredDrawingPapers.length;
 
-      // console.log('Results: ' + results.map(d => d.id));
-      // }
-      // this.existsMoreResultsToFetch.emit(
-      //   results.length === ArtFilterFormConfig.pagination.resultsPerPage
-      // );
+    this.nDrawingFavorites = this.listDrawings.filter(x => x.favorite).length;
 
-      this.isLoading.emit(false);
-    });
+    const ids = this.listDrawings.map(x => x.id);
+    this.filteredCollections = this.listCollections.filter(
+      c => c.drawingsId.filter(cd => ids.find(id => id === cd)).length > 0
+    );
+    this.nDrawingCollections = this.filteredCollections.length;
+
+    // console.log('Results: ' + results.map(d => d.id));
+    // }
+    // this.existsMoreResultsToFetch.emit(
+    //   results.length === ArtFilterFormConfig.pagination.resultsPerPage
+    // );
+
+    this.isLoading.emit(false);
   }
 
   loadSelects() {

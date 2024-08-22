@@ -23,6 +23,8 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
 import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
+import { AuthService } from '@app/services/api/auth/auth.service';
+import { User } from '@models/auth/user.model';
 
 @Component({
   selector: 'app-details',
@@ -58,38 +60,53 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
 
   loading = true;
+  currentUser: User | null = null;
 
   constructor(
     private logger: LoggerService,
     private drawingService: DrawingService,
+    private authService: AuthService,
     private metadataService: MetadataService
   ) {
     super('SCREENS.DRAWING-DETAILS');
   }
 
   ngOnInit() {
+    this.authService.loggedUser$.subscribe(user => {
+      this.currentUser = user;
+    });
     this.loadDrawing();
   }
   loadDrawing() {
     if (this.id) {
-      this.drawingService.getDrawingDetails(this.id).subscribe(data => {
-        if (data) {
-          // this.logger.log(data);
-          this.drawing = new Drawing(data);
-          this.metadataService.updateMetadata(
-            this.drawing.pageTitle(),
-            this.drawing.title,
-            this.drawing.urlThumbnail
-          );
-
-          this.panelTabs = ArtInfoTabsConfig.getTabs(/*this.drawing*/);
-          // this.logger.log(this.drawing);
-        } else {
-          this.drawingNotFound = true;
-        }
-        this.loading = false;
-      });
+      if (this.currentUser && this.authService.isAdmin(this.currentUser)) {
+        this.drawingService.getDrawingDetailsAdmin(this.id).subscribe(data => {
+          this.processresult(data);
+        });
+      } else {
+        this.drawingService.getDrawingDetails(this.id).subscribe(data => {
+          this.processresult(data);
+        });
+      }
     }
+  }
+
+  processresult(data: Drawing) {
+    if (data) {
+      // this.logger.log(data);
+      this.drawing = new Drawing(data);
+      this.metadataService.updateMetadata(
+        this.drawing.pageTitle(),
+        this.drawing.title,
+        this.drawing.urlThumbnail
+      );
+
+      this.panelTabs = ArtInfoTabsConfig.getTabs(/*this.drawing*/);
+      // this.logger.log(this.drawing);
+    } else {
+      this.drawingNotFound = true;
+    }
+    this.loading = false;
   }
 
   getProductSectionType(): ArtSectionType {
