@@ -4,75 +4,31 @@
       <h1>{{ text('TITLE') | mrTranslate }}</h1>
 
       <app-section
-        [title]="text('SECTIONS.ACCESSIBILITY') | mrTranslate"
-        icon="universal-access-circle">
-        <app-setting-option
-          [title]="text('FORM.THEME.TITLE') | mrTranslate"
-          [description]="text('FORM.THEME.DESCRIPTION') | mrTranslate">
-          <app-select-input
-            [options]="themes"
-            formControlName="themeFormControl"
-            (change)="changeTheme($event)">
-          </app-select-input>
-
-          <!-- {{ text(theme.textCode) | mrTranslate }} -->
-        </app-setting-option>
-      </app-section>
-
-      <app-section
-        [title]="text('SECTIONS.LANGUAGE') | mrTranslate"
-        icon="translate">
-        <app-setting-option
-          [title]="text('FORM.CHANGE-LANGUAGE.TITLE') | mrTranslate"
-          [description]="text('DESCRIPTION') | mrTranslate">
-          <app-select-input
-            [options]="languages"
-            formControlName="langFormControl"
-            (change)="changeLanguage($event)">
-          </app-select-input>
-        </app-setting-option>
-
-        <app-setting-option
-          [title]="text('FORM.TRANSLATIONS.TITLE') | mrTranslate"
-          [description]="text('FORM.TRANSLATIONS.DESCRIPTION') | mrTranslate">
-          <app-switch
-            [id]="'iSwitchTranslations'"
-            [text]="text('FORM.TRANSLATIONS.SHOW') | mrTranslate"
-            [textDisabled]="text('FORM.TRANSLATIONS.HIDE') | mrTranslate"
-            formControlName="translateFormControl"
-            (change)="changeTranslations($event)">
-          </app-switch>
-        </app-setting-option>
-      </app-section>
-
-      <app-section
-        [title]="text('SECTIONS.DRAWINGS') | mrTranslate"
-        icon="easel">
-        <app-setting-option
-          [title]="text('FORM.SHOW-FILTER-COUNT.TITLE') | mrTranslate"
-          [description]="
-            text('FORM.SHOW-FILTER-COUNT.DESCRIPTION') | mrTranslate
-          ">
-          <app-switch
-            [id]="'iSwitchFilterCount'"
-            [text]="text('FORM.SHOW-FILTER-COUNT.SHOW') | mrTranslate"
-            [textDisabled]="text('FORM.SHOW-FILTER-COUNT.HIDE') | mrTranslate"
-            formControlName="filterCountFormControl"
-            (change)="changeFilterCount($event)">
-          </app-switch>
-        </app-setting-option>
-
-        <app-setting-option
-          [title]="text('FORM.IMAGE-ZOOM.TITLE') | mrTranslate"
-          [description]="text('FORM.IMAGE-ZOOM.DESCRIPTION') | mrTranslate">
-          <app-switch
-            [id]="'iSwitchZoomImage'"
-            [text]="text('FORM.IMAGE-ZOOM.SHOW') | mrTranslate"
-            [textDisabled]="text('FORM.IMAGE-ZOOM.HIDE') | mrTranslate"
-            formControlName="zoomImage"
-            (change)="changeZoomImage($event)">
-          </app-switch>
-        </app-setting-option>
+        *ngFor="let section of settings"
+        [title]="section.titleCode | mrTranslate"
+        [icon]="section.icon">
+        <ng-container *ngFor="let subSetting of section.settings">
+          <app-setting-option
+            [title]="subSetting.titleCode | mrTranslate"
+            [description]="subSetting.descriptionCode | mrTranslate">
+            <ng-container *ngIf="isSettingSwitch(subSetting)">
+              <app-switch
+                [id]="subSetting.inputId"
+                [text]="subSetting.showCode | mrTranslate"
+                [textDisabled]="subSetting.hideCode | mrTranslate"
+                [formControlName]="subSetting.formControlName"
+                (change)="setBooleanSetting($event, subSetting.key)">
+              </app-switch>
+            </ng-container>
+            <ng-container *ngIf="isSettingSelect(subSetting)">
+              <app-select-input
+                [options]="subSetting.options"
+                [formControlName]="subSetting.formControlName"
+                (change)="setSelectSetting($event, subSetting.key)">
+              </app-select-input>
+            </ng-container>
+          </app-setting-option>
+        </ng-container>
       </app-section>
 
       <app-section

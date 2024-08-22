@@ -10,7 +10,11 @@ export const settingThemeValues = {
 
 export const settingTheme: ISettingSelect = {
   defaultValue: settingThemeValues.system,
+  formControlName: 'themeFormControl',
   key: 'theme',
+  type: 'select',
+  titleCode: 'SCREENS.SETTINGS.FORM.THEME.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.THEME.DESCRIPTION',
   options: [
     {
       value: settingThemeValues.system,

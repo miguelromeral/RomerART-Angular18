@@ -1,28 +1,71 @@
+import { FormControl } from '@angular/forms';
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface ISetting<T> {
+export type SettingType = 'switch' | 'select';
+
+export interface ISettingBase<T> {
   key: string;
+  titleCode: string;
+  descriptionCode: string;
+  type: SettingType;
   defaultValue: T;
+  formControlName: string;
 }
 
-export interface ISettingSelect extends ISetting<string> {
+export interface ISettingSwitch extends ISettingBase<boolean> {
+  inputId: string;
+  showCode: string;
+  hideCode: string;
+}
+
+export interface ISettingSelect extends ISettingBase<string> {
   options: ICustomSelectOption[];
 }
 
-export class Setting<T> {
+export type ISetting = ISettingSwitch | ISettingSelect;
+
+export class SettingBase<T> implements ISettingBase<T> {
   key: string;
   defaultValue: T;
+  titleCode: string;
+  descriptionCode: string;
+  type: SettingType;
   subject: BehaviorSubject<T>;
+  subject$: Observable<T | null>;
+  formControlName: string;
+  formControl: FormControl | undefined;
 
-  constructor(setting: ISetting<T>) {
+  constructor(setting: ISettingBase<T>) {
     this.key = setting.key;
+    this.type = setting.type;
     this.defaultValue = setting.defaultValue;
+    this.titleCode = setting.titleCode;
+    this.descriptionCode = setting.descriptionCode;
+    this.formControlName = setting.formControlName;
     this.subject = new BehaviorSubject<T>(this.defaultValue);
+    this.subject$ = this.subject.asObservable();
+  }
+
+  setFormControl(formControl: FormControl) {
+    this.formControl = formControl;
   }
 }
 
-export class SettingSelect extends Setting<string> {
+export class SettingSwitch extends SettingBase<boolean> {
+  inputId: string;
+  showCode: string;
+  hideCode: string;
+
+  constructor(setting: ISettingSwitch) {
+    super(setting);
+    this.inputId = setting.inputId;
+    this.showCode = setting.showCode;
+    this.hideCode = setting.hideCode;
+  }
+}
+
+export class SettingSelect extends SettingBase<string> {
   options: ICustomSelectOption[];
 
   constructor(setting: ISettingSelect) {
@@ -30,3 +73,5 @@ export class SettingSelect extends Setting<string> {
     this.options = setting.options;
   }
 }
+
+export type Setting = SettingSwitch | SettingSelect;

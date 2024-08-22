@@ -1,5 +1,5 @@
-import { NgClass, NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, NgClass, NgFor } from '@angular/common';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { LanguageService } from '@app/services/language/language.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
@@ -26,6 +26,11 @@ import { TranslatableComponent } from '@app/components/shared/translatable/trans
 import { environment } from 'environments/environment';
 import { settingLanguage } from 'config/settings/language.config';
 import { settingTheme } from 'config/settings/theme.config';
+import {
+  Setting,
+  SettingSelect,
+  SettingSwitch,
+} from '@models/settings/settings.model';
 
 @Component({
   selector: 'app-settings',
@@ -45,12 +50,16 @@ import { settingTheme } from 'config/settings/theme.config';
     SectionComponent,
     TranslatableComponent,
     SwitchComponent,
+    CommonModule,
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })
 // implements OnInit, OnDestroy
-export class SettingsComponent extends LanguageComponent implements OnInit {
+export class SettingsComponent
+  extends LanguageComponent
+  implements OnInit, AfterViewInit
+{
   loginPath = loginPath;
 
   version = environment.appVersion;
@@ -76,68 +85,67 @@ export class SettingsComponent extends LanguageComponent implements OnInit {
     super('SCREENS.SETTINGS');
   }
 
+  get settings() {
+    return this.settingsService.getSettings();
+  }
+
   ngOnInit() {
-    this.initSettings();
     this.languageService.translateText(this.text('TITLE')).subscribe(text => {
       this.metadataService.updateTitle(text);
     });
   }
 
+  ngAfterViewInit() {
+    this.initSettings();
+  }
+
+  findControlByName(name: string) {
+    if (this.settingsForm.contains(name)) {
+      return this.settingsForm.get(name) as FormControl;
+    }
+    return undefined;
+  }
+
   initSettings() {
-    this.languageService.currentLanguage$.subscribe(newLang => {
-      this.settingsForm.controls.langFormControl.patchValue(newLang);
-    });
+    // this.settingsService.setFormControls(this.settingsForm)
+    this.settingsService.init();
 
-    this.themeService.currentTheme$.subscribe(theme => {
-      this.settingsForm.controls.themeFormControl.patchValue(theme);
-    });
-
-    this.settingsService
-      .booleanSetting$(settingTranslations)
-      .subscribe(value => {
-        this.settingsForm.controls.translateFormControl.patchValue(value);
+    this.settings.forEach(section => {
+      section.settings.forEach(setting => {
+        if (this.isSettingSwitch(setting)) {
+          setting.subject$.subscribe(value => {
+            this.findControlByName(setting.formControlName)?.patchValue(value);
+          });
+        }
+        if (this.isSettingSelect(setting)) {
+          setting.subject$.subscribe(value => {
+            console.log('Select Setting (' + value + '): ', setting);
+            const control = this.findControlByName(setting.formControlName);
+            console.log('Control: ', control);
+            control?.patchValue(value);
+          });
+        }
       });
-
-    this.settingsService
-      .booleanSetting$(settingFilterCount)
-      .subscribe(value => {
-        this.settingsForm.controls.filterCountFormControl.patchValue(value);
-      });
-
-    this.settingsService.booleanSetting$(settingZoomImage).subscribe(value => {
-      this.settingsForm.controls.zoomImage.patchValue(value);
     });
   }
 
-  changeLanguage(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    const lang = target.value;
-
-    this.languageService.changeLanguage(lang);
-  }
-
-  changeTheme(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    const theme = target.value;
-
-    this.themeService.setTheme(theme);
-  }
-
-  changeTranslations(event: Event) {
-    const target = event.target as HTMLInputElement;
-    const translate = target.checked;
-    this.settingsService.setBooleanSetting(settingTranslations, translate);
-  }
-
-  changeFilterCount(event: Event) {
+  setBooleanSetting(event: Event, key: string) {
     const target = event.target as HTMLInputElement;
     const show = target.checked;
-    this.settingsService.setBooleanSetting(settingFilterCount, show);
+    this.settingsService.setBooleanSetting(key, show);
   }
 
-  changeZoomImage(event: Event) {
-    const target = event.target as HTMLInputElement;
-    const show = target.checked;
-    this.settingsService.setBooleanSetting(settingZoomImage, show);
+  setSelectSetting(event: Event, key: string) {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    this.settingsService.setSelectSetting(key, value);
+  }
+
+  isSettingSwitch(setting: Setting): setting is SettingSwitch {
+    return setting.type === 'switch';
+  }
+
+  isSettingSelect(setting: Setting): setting is SettingSelect {
+    return setting.type === 'select';
   }
 }

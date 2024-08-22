@@ -3,53 +3,143 @@ import { Observable } from 'rxjs';
 import { LanguageService } from '../language/language.service';
 import { ThemeService } from '../theme/theme.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
-import { booleanSettings } from 'config/settings/local-storage.config';
-import { ISetting, Setting } from '@models/settings/settings.model';
+import {
+  ISettingSelect,
+  ISettingSwitch,
+  Setting,
+  SettingSelect,
+  SettingSwitch,
+} from '@models/settings/settings.model';
+import { SettingSection } from '@models/settings/settings-sections.model';
+import { settingsConfig } from 'config/settings/settings.config';
+import { FormControl, FormGroup } from '@angular/forms';
+import { settingLanguage } from 'config/settings/language.config';
+import { settingTheme } from 'config/settings/theme.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SettingsService {
-  private booleanSettings: Setting<boolean>[] = [];
+  private settings: SettingSection[] = settingsConfig;
 
   constructor(
     private languageService: LanguageService,
     private themeService: ThemeService,
     private storage: LocalStorageService
-  ) {
-    const bolSet: Setting<boolean>[] = [];
-    booleanSettings.forEach(setting => {
-      bolSet.push(new Setting(setting));
-    });
-    this.booleanSettings = bolSet;
-  }
+  ) {}
 
   init() {
-    this.booleanSettings.forEach(setting => {
-      this.initBooleanSetting(setting);
+    this.settings.forEach(section => {
+      section.settings.forEach(setting => {
+        if (this.isSettingSwitch(setting)) {
+          this.initBooleanSetting(setting);
+        }
+        if (this.isSettingSelect(setting)) {
+          this.initSelectSetting(setting);
+        }
+      });
     });
   }
 
-  private getBooleanSetting(key: string): Setting<boolean> | undefined {
-    return this.booleanSettings.find(x => x.key === key);
+  getSettings() {
+    return this.settings;
   }
 
-  private initBooleanSetting(setting: Setting<boolean>) {
+  setFormControls(fg: FormGroup) {
+    this.settings.forEach(section => {
+      section.settings.forEach(setting => {
+        if (fg.contains(setting.key)) {
+          setting.formControlName = setting.key;
+          const formControl = fg.get(setting.key) as FormControl;
+          setting.setFormControl(formControl);
+        }
+      });
+    });
+  }
+
+  private getBooleanSetting(key: string): SettingSwitch | undefined {
+    const allSettings: Setting[] = [];
+    this.settings.forEach(section => {
+      allSettings.push(...section.settings);
+    });
+    const found = allSettings.find(x => x.key === key);
+    if (found && this.isSettingSwitch(found)) {
+      return found;
+    }
+    return undefined;
+  }
+
+  private getSelectSetting(key: string): SettingSelect | undefined {
+    const allSettings: Setting[] = [];
+    this.settings.forEach(section => {
+      allSettings.push(...section.settings);
+    });
+    const found = allSettings.find(x => x.key === key);
+    if (found && this.isSettingSelect(found)) {
+      return found;
+    }
+    return undefined;
+  }
+
+  private initBooleanSetting(setting: SettingSwitch) {
     const storedValue = this.storage.getItem(setting.key);
     const value =
       storedValue !== null ? storedValue === 'true' : setting.defaultValue;
-    this.setBooleanSetting(setting, value);
+    this.setBooleanSetting(setting.key, value);
   }
 
-  setBooleanSetting(opt: ISetting<boolean>, value: boolean): void {
-    const setting = this.getBooleanSetting(opt.key);
+  private initSelectSetting(setting: SettingSelect) {
+    const value = this.storage.getItem(setting.key);
+    switch (setting.key) {
+      case settingLanguage.key:
+        {
+          this.languageService.init();
+          this.setSelectSetting(setting.key, value ?? '');
+        }
+        break;
+      case settingTheme.key:
+        {
+          this.themeService.init();
+          this.setSelectSetting(setting.key, value ?? '');
+        }
+        break;
+    }
+  }
+
+  setBooleanSetting(key: string, value: boolean): void {
+    const setting = this.getBooleanSetting(key);
     if (setting) {
       this.storage.setItem(setting.key, value.toString());
       setting.subject.next(value);
     }
   }
 
-  booleanSetting$(setting: ISetting<boolean>): Observable<boolean> {
+  setSelectSetting(key: string, value: string) {
+    const setting = this.getSelectSetting(key);
+    switch (key) {
+      case settingLanguage.key:
+        this.languageService.changeLanguage(value);
+        break;
+      case settingTheme.key:
+        this.themeService.setTheme(value);
+        break;
+    }
+    setting?.subject.next(value);
+  }
+
+  booleanSetting$(setting: ISettingSwitch): Observable<boolean> {
     return this.getBooleanSetting(setting.key)!.subject.asObservable();
+  }
+
+  selectSetting$(setting: ISettingSelect): Observable<string> {
+    return this.getSelectSetting(setting.key)!.subject.asObservable();
+  }
+
+  isSettingSwitch(setting: Setting): setting is SettingSwitch {
+    return setting instanceof SettingSwitch;
+  }
+
+  isSettingSelect(setting: Setting): setting is SettingSelect {
+    return setting instanceof SettingSelect;
   }
 }
