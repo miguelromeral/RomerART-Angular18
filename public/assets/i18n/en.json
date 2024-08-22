@@ -287,8 +287,8 @@
           "DATE-ASC": "Oldest",
           "NAME-ASC": "Name (ascending)",
           "NAME-DESC": "Name (descending)",
-          "TIME-ASC": "Fastest",
-          "TIME-DESC": "Slowest",
+          "TIME-ASC": "Fastest Time",
+          "TIME-DESC": "Slowest Time",
           "KUDOS-DESC": "More Kudos",
           "KUDOS-ASC": "Less Kudos",
           "VIEWS-DESC": "More Viewed",
@@ -547,7 +547,7 @@
         "DELETE": "Delete Collection",
         "SAVE": "Save",
         "DRAWINGS": {
-          "NOT-USED": "Remaining",
+          "NOT-USED": "Remaining ({{count}})",
           "USED": "Selected ({{count}})",
           "DROP-HERE": "Drop Here"
         }

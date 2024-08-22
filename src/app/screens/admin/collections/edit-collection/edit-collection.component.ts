@@ -30,7 +30,7 @@ export class EditCollectionComponent implements OnInit {
 
   loadCollection() {
     if (this.id) {
-      this.drawingService.getCollectionDetails(this.id).subscribe(data => {
+      this.drawingService.getCollectionDetailsAdmin(this.id).subscribe(data => {
         if (data) {
           this.collection = new Collection(data);
           this.metadataService.updateMetadata(

@@ -50,7 +50,10 @@
       <app-collection-drawing-list
         [drawings]="listAll"
         class="opacity-40 transition-all hover:opacity-100"
-        [title]="text('FORM.DRAWINGS.NOT-USED') | mrTranslate"
+        [title]="
+          text('FORM.DRAWINGS.NOT-USED')
+            | mrTranslate: { count: listAll.length }
+        "
         [connectedTo]="['listUsed']"
         (requestDrop)="drop($event, 'all')">
       </app-collection-drawing-list>

@@ -25,6 +25,7 @@ import { CollectionDrawingListComponent } from '@app/components/collections/coll
 import { ISaveCollectionRequest } from '@models/requests/save-collection-request.model';
 import { AlertService } from '@app/services/alerts/alert.service';
 import { Router } from '@angular/router';
+import { DrawingFilter } from '@models/art/drawing-filter.model';
 
 @Component({
   selector: 'app-collection-form',
@@ -106,7 +107,8 @@ export class CollectionFormComponent
   }
 
   loadDrawings() {
-    this.drawingService.getAllDrawings().subscribe(list => {
+    const defaultFilters: DrawingFilter = new DrawingFilter({});
+    this.drawingService.filterDrawingsAdmin(defaultFilters).subscribe(list => {
       this.drawings = list;
       this.loadUsedDrawings();
     });
@@ -192,7 +194,6 @@ export class CollectionFormComponent
     }
     // Actualizar los dibujos en el formulario
     this.form.controls.drawingsIds.setValue(this.listUsed.map(d => d.id));
-    console.log('Used:', this.form.controls.drawingsIds.value);
   }
 
   saveCollection() {

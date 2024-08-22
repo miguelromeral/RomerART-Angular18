@@ -10,10 +10,19 @@
     [cdkDragStartDelay]="{ touch: 175, mouse: 0 }"
     cdkDrag
     class="relative grid h-full w-full cursor-grabbing grid-cols-1 gap-2 rounded-md bg-white-100 dark:bg-black-700 sm:grid-cols-3">
-    <img
-      class="aspect-square w-full rounded-md object-cover"
-      [src]="drawing.urlThumbnail"
-      [alt]="drawing.name" />
+    <div class="relative w-full rounded-md">
+      <img
+        class="aspect-square w-full object-cover"
+        [ngClass]="{ 'opacity-40': !drawing.visible }"
+        [src]="drawing.urlThumbnail"
+        [alt]="drawing.name" />
+      <ng-container *ngIf="!drawing.visible">
+        <div
+          class="absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full flex-col items-center justify-center text-white">
+          <i class="bi bi-eye-slash-fill text-lg"></i>
+        </div>
+      </ng-container>
+    </div>
     <div class="col-span-2 flex flex-col gap-3">
       <span
         class="absolute -left-1 -top-1 rounded-md bg-white-500 px-2 text-xs dark:bg-black-300"

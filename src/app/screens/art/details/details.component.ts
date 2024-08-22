@@ -23,8 +23,6 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
 import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
-import { AuthService } from '@app/services/api/auth/auth.service';
-import { User } from '@models/auth/user.model';
 
 @Component({
   selector: 'app-details',
@@ -60,34 +58,23 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
 
   loading = true;
-  currentUser: User | null = null;
 
   constructor(
     private logger: LoggerService,
     private drawingService: DrawingService,
-    private authService: AuthService,
     private metadataService: MetadataService
   ) {
     super('SCREENS.DRAWING-DETAILS');
   }
 
   ngOnInit() {
-    this.authService.loggedUser$.subscribe(user => {
-      this.currentUser = user;
-    });
     this.loadDrawing();
   }
   loadDrawing() {
     if (this.id) {
-      if (this.currentUser && this.authService.isAdmin(this.currentUser)) {
-        this.drawingService.getDrawingDetailsAdmin(this.id).subscribe(data => {
-          this.processresult(data);
-        });
-      } else {
-        this.drawingService.getDrawingDetails(this.id).subscribe(data => {
-          this.processresult(data);
-        });
-      }
+      this.drawingService.getDrawingDetails(this.id).subscribe(data => {
+        this.processresult(data);
+      });
     }
   }
 

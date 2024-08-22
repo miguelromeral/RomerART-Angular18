@@ -25,6 +25,8 @@ import { drawingProductTypes } from 'config/data/drawing-product-types.config';
 import { drawingSoftwares } from 'config/data/drawing-softwares.config';
 import { drawingPaperSizes } from 'config/data/drawing-paper-sizes.config';
 import { ISaveCollectionRequest } from '@models/requests/save-collection-request.model';
+import { AuthService } from '../auth/auth.service';
+import { User } from '@models/auth/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +34,21 @@ import { ISaveCollectionRequest } from '@models/requests/save-collection-request
 export class DrawingService {
   private apiUrl = environment.api.url;
 
-  constructor(private http: HttpClient) {}
+  user: User | null = null;
+
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {
+    this.authService.loggedUser$.subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  adminAccess(): boolean {
+    if (this.user) return this.authService.isAdmin(this.user);
+    return false;
+  }
 
   getDrawingStyles = (): DrawingStyle[] =>
     drawingStyles.map(style => new DrawingStyle(style));
@@ -47,24 +63,30 @@ export class DrawingService {
     drawingPaperSizes.map(paper => new DrawingPaperSize(paper));
 
   getDrawingDetails(id: string): Observable<Drawing> {
+    return this.adminAccess()
+      ? this.getDrawingDetailsAdmin(id)
+      : this.getDrawingDetailsPublic(id);
+  }
+
+  private getDrawingDetailsPublic(id: string): Observable<Drawing> {
     return this.http
       .get<Drawing>(`${this.apiUrl}art/details/${id}`)
       .pipe(catchError(this.handleError<Drawing>('getArtDetails')));
   }
-  getDrawingDetailsAdmin(id: string): Observable<Drawing> {
+  private getDrawingDetailsAdmin(id: string): Observable<Drawing> {
     return this.http
       .get<Drawing>(`${this.apiUrl}art/details-admin/${id}`)
       .pipe(catchError(this.handleError<Drawing>('getDrawingDetailsAdmin')));
   }
 
-  getAllDrawings(): Observable<Drawing[]> {
-    return this.http.get<Drawing[]>(`${this.apiUrl}art/drawings`).pipe(
-      map((drawings: Drawing[]) =>
-        drawings.map(drawing => new Drawing(drawing))
-      ),
-      catchError(this.handleError<Drawing[]>('getAllDrawings'))
-    );
-  }
+  // getAllDrawings(): Observable<Drawing[]> {
+  //   return this.http.get<Drawing[]>(`${this.apiUrl}art/drawings`).pipe(
+  //     map((drawings: Drawing[]) =>
+  //       drawings.map(drawing => new Drawing(drawing))
+  //     ),
+  //     catchError(this.handleError<Drawing[]>('getAllDrawings'))
+  //   );
+  // }
 
   getDrawingProducts(): Observable<DrawingProduct[]> {
     return this.http
@@ -171,6 +193,12 @@ export class DrawingService {
   }
 
   filterDrawings(filters: DrawingFilter): Observable<Drawing[]> {
+    return this.adminAccess()
+      ? this.filterDrawingsAdmin(filters)
+      : this.filterDrawingsPublic(filters);
+  }
+
+  private filterDrawingsPublic(filters: DrawingFilter): Observable<Drawing[]> {
     const url = `${this.apiUrl}art/filter-public`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -204,17 +232,51 @@ export class DrawingService {
   }
 
   getAllCollections(): Observable<Collection[]> {
-    return this.http.get<Collection[]>(`${this.apiUrl}art/collections`).pipe(
-      map((collections: Collection[]) =>
-        collections.map(collection => new Collection(collection))
-      ),
-      catchError(this.handleError<Collection[]>('getAllCollections'))
-    );
+    return this.adminAccess()
+      ? this.getAllCollectionsAdmin()
+      : this.getAllCollectionsPublic();
+  }
+
+  getAllCollectionsPublic(): Observable<Collection[]> {
+    return this.http
+      .get<Collection[]>(`${this.apiUrl}art/collections-public`)
+      .pipe(
+        map((collections: Collection[]) =>
+          collections.map(collection => new Collection(collection))
+        ),
+        catchError(this.handleError<Collection[]>('getAllCollections'))
+      );
+  }
+
+  getAllCollectionsAdmin(): Observable<Collection[]> {
+    return this.http
+      .get<Collection[]>(`${this.apiUrl}art/collections-admin`)
+      .pipe(
+        map((collections: Collection[]) =>
+          collections.map(collection => new Collection(collection))
+        ),
+        catchError(this.handleError<Collection[]>('getAllCollections'))
+      );
   }
 
   getCollectionDetails(id: string): Observable<Collection> {
+    return this.adminAccess()
+      ? this.getCollectionDetailsAdmin(id)
+      : this.getCollectionDetailsPublic(id);
+  }
+
+  getCollectionDetailsPublic(id: string): Observable<Collection> {
     return this.http
-      .get<Collection>(`${this.apiUrl}art/collection/details/${id}`)
+      .get<Collection>(`${this.apiUrl}art/collection/details-public/${id}`)
+      .pipe(
+        map((collection: Collection) => new Collection(collection)),
+        catchError(this.handleError<Collection>('getCollectionDetails'))
+      );
+  }
+
+  getCollectionDetailsAdmin(id: string): Observable<Collection> {
+    return this.http
+      .get<Collection>(`${this.apiUrl}art/collection/details-admin/${id}`)
       .pipe(
         map((collection: Collection) => new Collection(collection)),
         catchError(this.handleError<Collection>('getCollectionDetails'))

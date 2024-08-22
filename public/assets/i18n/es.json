@@ -287,8 +287,8 @@
           "DATE-ASC": "Viejos Primero",
           "NAME-ASC": "Nombre (ascendente)",
           "NAME-DESC": "Nombre (descendente)",
-          "TIME-ASC": "Más Rápidos",
-          "TIME-DESC": "Más Largos",
+          "TIME-ASC": "Menos Tiempo",
+          "TIME-DESC": "Más Tiempo",
           "KUDOS-DESC": "Más Kudos",
           "KUDOS-ASC": "Menos Kudos",
           "VIEWS-DESC": "Más Vistos",
@@ -547,7 +547,7 @@
         "DELETE": "Eliminar Colección",
         "SAVE": "Guardar",
         "DRAWINGS": {
-          "NOT-USED": "Restantes",
+          "NOT-USED": "Restantes ({{count}})",
           "USED": "Seleccionados ({{count}})",
           "DROP-HERE": "Soltar Aquí"
         }

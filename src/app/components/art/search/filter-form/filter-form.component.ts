@@ -11,7 +11,7 @@ import { DrawingFilter } from '@models/art/drawing-filter.model';
 import { DrawingThumbnailComponent } from '../../drawing-thumbnail/drawing-thumbnail.component';
 import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
 import { DrawingProduct } from '@models/art/drawing-product.model';
@@ -44,8 +44,6 @@ import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { SectionComponent } from '@app/components/shared/section/section.component';
 import { settingFilterCount } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
-import { AuthService } from '@app/services/api/auth/auth.service';
-import { User } from '@models/auth/user.model';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -158,30 +156,18 @@ export class FilterFormComponent
   showSoftware = true;
   showPaper = true;
 
-  filterMethod: (filters: DrawingFilter) => Observable<Drawing[]>;
-
-  fetchedResultsFromAdmin = false;
-  currentUser: User | null = null;
-
   constructor(
     private drawingService: DrawingService,
     private languageService: LanguageService,
-    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private settingsService: SettingsService
   ) {
     super('SCREENS.DRAWING-SEARCH.FORM');
     this.setValuesFromQueryParams();
-    this.filterMethod = this.drawingService.filterDrawings;
   }
 
   ngOnInit(): void {
-    this.fetchedResultsFromAdmin = false;
-    this.authService.loggedUser$.subscribe(user => {
-      this.currentUser = user;
-    });
-
     this.loadSelects();
     this.setValuesFromQueryParams();
 
@@ -310,26 +296,12 @@ export class FilterFormComponent
     this.queryParamsSubscription?.unsubscribe();
     this.changeBasicArtUrl();
 
-    if (this.currentUser && this.authService.isAdmin(this.currentUser)) {
-      this.drawingService.filterDrawingsAdmin(filters).subscribe(results => {
-        this.processFilteredDrawings(results, true);
-      });
-    } else {
-      this.drawingService.filterDrawings(filters).subscribe(results => {
-        this.processFilteredDrawings(results, false);
-      });
-    }
+    this.drawingService.filterDrawings(filters).subscribe(results => {
+      this.processFilteredDrawings(results);
+    });
   }
 
-  processFilteredDrawings(results: Drawing[], fromAdmin: boolean) {
-    if (
-      results === undefined ||
-      results === null ||
-      (!fromAdmin && this.fetchedResultsFromAdmin)
-    ) {
-      return;
-    }
-    if (fromAdmin) this.fetchedResultsFromAdmin = true;
+  processFilteredDrawings(results: Drawing[]) {
     // if (results.length > 1) {
     //   if (
     //     (this.filterForm.value.pageNumber ??
