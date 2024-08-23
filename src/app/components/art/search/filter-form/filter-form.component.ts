@@ -303,6 +303,9 @@ export class FilterFormComponent
   }
 
   processFilteredDrawings(results: FilterResultsDrawing) {
+    if (results === undefined || results === null) {
+      return;
+    }
     if (results.fetchedCount > 1) {
       if (
         (this.filterForm.value.pageNumber ??
