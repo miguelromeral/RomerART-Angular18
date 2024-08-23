@@ -302,15 +302,16 @@ export class FilterFormComponent
   }
 
   processFilteredDrawings(results: Drawing[]) {
-    // if (results.length > 1) {
-    //   if (
-    //     (this.filterForm.value.pageNumber ??
-    //       ArtFilterFormConfig.pagination.firstPage) <= 1
-    //   ) {
-    this.listDrawings = results;
-    // } else {
-    //   this.listDrawings = [...this.listDrawings, ...results];
-    // }
+    if (results.length > 1) {
+      if (
+        (this.filterForm.value.pageNumber ??
+          ArtFilterFormConfig.pagination.firstPage) <= 1
+      ) {
+        this.listDrawings = results;
+      } else {
+        this.listDrawings = [...this.listDrawings, ...results];
+      }
+    }
     this.fetchedResults.emit(this.listDrawings);
 
     this.filteredDrawingCharacters = this.listDrawingCharacters.filter(
@@ -363,10 +364,10 @@ export class FilterFormComponent
     this.nDrawingCollections = this.filteredCollections.length;
 
     // console.log('Results: ' + results.map(d => d.id));
-    // }
-    // this.existsMoreResultsToFetch.emit(
-    //   results.length === ArtFilterFormConfig.pagination.resultsPerPage
-    // );
+
+    this.existsMoreResultsToFetch.emit(
+      results.length === ArtFilterFormConfig.pagination.resultsPerPage
+    );
 
     this.isLoading.emit(false);
   }

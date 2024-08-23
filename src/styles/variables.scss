@@ -58,8 +58,8 @@ $mr-thumbnail-date-text-color-dark: theme('colors.black.DEFAULT');
 /* Thumbnail Background on Hover */
 $mr-thumbnail-bg-hover-light: linear-gradient(160deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, #{$mr-bg-color-light} 100%);
 $mr-thumbnail-bg-hover-dark: linear-gradient(160deg, transparent 0%, rgba(0, 0, 0, 0.6) 50%, #{$mr-bg-color-dark} 100%);
-$mr-thumbnail-bg-hover-favorite-light: linear-gradient(160deg, transparent 0%, #ffb023 50%, #{$mr-bg-color-light} 100%); // TODO: resolver esto del alpha y tailwind
-$mr-thumbnail-bg-hover-favorite-dark: linear-gradient(160deg, transparent 0%, #ffb023 50%, #{$mr-bg-color-dark} 100%); // TODO: resolver esto del alpha y tailwind
+$mr-thumbnail-bg-hover-favorite-light: linear-gradient(160deg, transparent 0%, rgba(255, 174, 35, 0.8) 50%, #{$mr-bg-color-light} 100%); // TODO: resolver esto del alpha y tailwind
+$mr-thumbnail-bg-hover-favorite-dark: linear-gradient(160deg, transparent 0%, rgba(255, 174, 35, 0.8) 50%, #{$mr-bg-color-dark} 100%); // TODO: resolver esto del alpha y tailwind
 /* Thumbnail Text Color */
 $mr-thumbnail-text-color-light: theme('colors.black.DEFAULT');
 $mr-thumbnail-text-color-dark: theme('colors.white.DEFAULT');

@@ -36,8 +36,8 @@ export class SearchComponent extends LanguageComponent implements OnInit {
   @ViewChild(FilterFormComponent) filterFormComponent!: FilterFormComponent;
   @ViewChild('divImageCounter') divImageCounter!: ElementRef<HTMLDivElement>;
 
-  showButtonFetchMore = false;
-  // showButtonFetchMore = true;
+  // showButtonFetchMore = false;
+  showButtonFetchMore = true;
 
   filterFormLoading = true;
   get resultsNotFound(): boolean {

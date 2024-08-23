@@ -265,7 +265,8 @@
         "MANY": "{{length}} imágenes"
       },
       "LOADING": {
-        "TITLE": "Filtrando imágenes. Por favor, espere."
+        "TITLE": "Filtrando imágenes. Por favor, espere.",
+        "LOADMORE": "Buscar Más"
       },
       "NOTFOUND": {
         "TITLE": "¡Nada por aquí..!",
