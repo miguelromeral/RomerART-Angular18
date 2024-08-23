@@ -44,6 +44,7 @@ import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { SectionComponent } from '@app/components/shared/section/section.component';
 import { settingFilterCount } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
+import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
 
 @Component({
   selector: 'app-art-search-filter-form',
@@ -75,7 +76,7 @@ export class FilterFormComponent
   queryParamsSubscription: Subscription | undefined;
 
   /* Communication to parent */
-  @Output() fetchedResults = new EventEmitter<Drawing[]>();
+  @Output() fetchedResults = new EventEmitter<FilterResultsDrawing>();
   @Output() isLoading = new EventEmitter<boolean>();
   @Output() existsMoreResultsToFetch = new EventEmitter<boolean>();
 
@@ -301,72 +302,77 @@ export class FilterFormComponent
     });
   }
 
-  processFilteredDrawings(results: Drawing[]) {
-    if (results.length > 1) {
+  processFilteredDrawings(results: FilterResultsDrawing) {
+    if (results.fetchedCount > 1) {
       if (
         (this.filterForm.value.pageNumber ??
           ArtFilterFormConfig.pagination.firstPage) <= 1
       ) {
-        this.listDrawings = results;
+        this.listDrawings = results.filteredDrawings;
       } else {
-        this.listDrawings = [...this.listDrawings, ...results];
+        this.listDrawings = [...this.listDrawings, ...results.filteredDrawings];
       }
     }
-    this.fetchedResults.emit(this.listDrawings);
+    results.totalDrawings = this.listDrawings;
+    this.fetchedResults.emit(results);
 
     this.filteredDrawingCharacters = this.listDrawingCharacters.filter(
-      c => this.listDrawings.filter(d => d.name == c.characterName).length > 0
+      c =>
+        results.filteredDrawingCharacters.filter(d => d == c.characterName)
+          .length > 0
     );
-    this.nDrawingCharacters = this.filteredDrawingCharacters.length;
+    this.nDrawingCharacters = results.nDrawingCharacters;
 
     this.filteredDrawingModels = this.listDrawingModels.filter(
-      m => this.listDrawings.filter(d => d.modelName == m.value).length > 0
+      m => results.filteredDrawingModels.filter(d => d == m.value).length > 0
     );
-    this.nDrawingModels = this.filteredDrawingModels.length;
+    this.nDrawingModels = results.nDrawingModels;
 
     this.filteredDrawingStyles = this.listDrawingStyles.filter(
       s =>
-        this.listDrawings.filter(d => d.type.toString() == s.value).length > 0
+        results.filteredDrawingStyles.filter(d => d.toString() == s.value)
+          .length > 0
     );
-    this.nDrawingTypes = this.filteredDrawingStyles.length;
+    this.nDrawingTypes = results.nDrawingTypes;
 
     this.filteredDrawingProductTypes = this.listDrawingProductTypes.filter(
       pt =>
-        this.listDrawings.filter(d => d.productType.toString() == pt.value)
-          .length > 0
+        results.filteredDrawingProductTypes.filter(
+          d => d.toString() == pt.value
+        ).length > 0
     );
-    this.nDrawingProductTypes = this.filteredDrawingProductTypes.length;
+    this.nDrawingProductTypes = results.nDrawingProductTypes;
 
     this.filteredDrawingProducts = this.listDrawingProducts.filter(
-      p => this.listDrawings.filter(d => d.productName == p.value).length > 0
+      p => results.filteredDrawingProducts.filter(d => d == p.value).length > 0
     );
-    this.nDrawingProducts = this.filteredDrawingProducts.length;
+    this.nDrawingProducts = results.nDrawingProducts;
 
     this.filteredDrawingSoftwares = this.listDrawingSoftwares.filter(
       s =>
-        this.listDrawings.filter(d => d.software.toString() == s.value).length >
-        0
+        results.filteredDrawingSoftwares.filter(d => d.toString() == s.value)
+          .length > 0
     );
-    this.nDrawingSoftwares = this.filteredDrawingSoftwares.length;
+    this.nDrawingSoftwares = results.nDrawingSoftwares;
 
     this.filteredDrawingPapers = this.listDrawingPapers.filter(
       p =>
-        this.listDrawings.filter(d => d.paper.toString() == p.value).length > 0
+        results.filteredDrawingPapers.filter(d => d.toString() == p.value)
+          .length > 0
     );
-    this.nDrawingPapers = this.filteredDrawingPapers.length;
+    this.nDrawingPapers = results.nDrawingPapers;
 
-    this.nDrawingFavorites = this.listDrawings.filter(x => x.favorite).length;
+    this.nDrawingFavorites = results.nDrawingFavorites;
 
-    const ids = this.listDrawings.map(x => x.id);
     this.filteredCollections = this.listCollections.filter(
-      c => c.drawingsId.filter(cd => ids.find(id => id === cd)).length > 0
+      c => results.filteredCollections.filter(id => id == c.id).length > 0
     );
-    this.nDrawingCollections = this.filteredCollections.length;
+    this.nDrawingCollections = results.nDrawingCollections;
 
     // console.log('Results: ' + results.map(d => d.id));
 
     this.existsMoreResultsToFetch.emit(
-      results.length === ArtFilterFormConfig.pagination.resultsPerPage
+      this.listDrawings.length < results.totalCount
     );
 
     this.isLoading.emit(false);

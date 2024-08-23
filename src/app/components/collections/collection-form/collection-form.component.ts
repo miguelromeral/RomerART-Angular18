@@ -108,10 +108,12 @@ export class CollectionFormComponent
 
   loadDrawings() {
     const defaultFilters: DrawingFilter = new DrawingFilter({});
-    this.drawingService.filterDrawingsAdmin(defaultFilters).subscribe(list => {
-      this.drawings = list;
-      this.loadUsedDrawings();
-    });
+    this.drawingService
+      .filterDrawingsAdmin(defaultFilters)
+      .subscribe(results => {
+        this.drawings = results.filteredDrawings;
+        this.loadUsedDrawings();
+      });
   }
 
   loadUsedDrawings() {

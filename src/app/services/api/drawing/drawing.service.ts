@@ -27,6 +27,7 @@ import { drawingPaperSizes } from 'config/data/drawing-paper-sizes.config';
 import { ISaveCollectionRequest } from '@models/requests/save-collection-request.model';
 import { AuthService } from '../auth/auth.service';
 import { User } from '@models/auth/user.model';
+import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -192,41 +193,43 @@ export class DrawingService {
       .pipe(catchError(this.handleError<boolean>('checkCollectionId')));
   }
 
-  filterDrawings(filters: DrawingFilter): Observable<Drawing[]> {
+  filterDrawings(filters: DrawingFilter): Observable<FilterResultsDrawing> {
     return this.adminAccess()
       ? this.filterDrawingsAdmin(filters)
       : this.filterDrawingsPublic(filters);
   }
 
-  private filterDrawingsPublic(filters: DrawingFilter): Observable<Drawing[]> {
+  private filterDrawingsPublic(
+    filters: DrawingFilter
+  ): Observable<FilterResultsDrawing> {
     const url = `${this.apiUrl}art/filter-public`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // console.log('Filters', filters);
     // console.log('Page Number', filters.pageNumber);
-    return this.http.post<Drawing[]>(url, filters, { headers }).pipe(
-      map((drawings: Drawing[]) =>
-        drawings.map(drawing => new Drawing(drawing))
-      ),
-      catchError(this.handleError<Drawing[]>('filterDrawings'))
+    return this.http.post<FilterResultsDrawing>(url, filters, { headers }).pipe(
+      map((results: FilterResultsDrawing) => new FilterResultsDrawing(results)),
+      catchError(this.handleError<FilterResultsDrawing>('filterDrawingsPublic'))
     );
   }
 
-  filterDrawingsAdmin(filters: DrawingFilter): Observable<Drawing[]> {
+  filterDrawingsAdmin(
+    filters: DrawingFilter
+  ): Observable<FilterResultsDrawing> {
     const url = `${this.apiUrl}art/filter-admin`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // console.log('Filters', filters);
     // console.log('Page Number', filters.pageNumber);
-    return this.http.post<Drawing[]>(url, filters, { headers }).pipe(
-      map((drawings: Drawing[]) =>
-        drawings.map(drawing => new Drawing(drawing))
-      ),
-      catchError(this.handleError<Drawing[]>('filterDrawingsAdmin'))
+    return this.http.post<FilterResultsDrawing>(url, filters, { headers }).pipe(
+      map((results: FilterResultsDrawing) => new FilterResultsDrawing(results)),
+      catchError(this.handleError<FilterResultsDrawing>('filterDrawingsAdmin'))
     );
   }
 
-  getAllDrawingsOfCollection(collectionId: string): Observable<Drawing[]> {
+  getAllDrawingsOfCollection(
+    collectionId: string
+  ): Observable<FilterResultsDrawing> {
     const filters = new DrawingFilter({ collection: collectionId });
     return this.filterDrawings(filters);
   }

@@ -16,13 +16,17 @@
             <i class="bi bi-funnel"></i
             ><span>{{ text('FORM.TITLE') | mrTranslate }}</span>
           </button>
-          <div id="divImageCounter" #divImageCounter>
+          <div id="divImageCounter" *ngIf="lastFilterResults" #divImageCounter>
             {{
-              text(resultsLength === 1 ? 'COUNT.ONE' : 'COUNT.MANY')
-                | mrTranslate: { length: resultsLength }
+              text('COUNT.FETCHED')
+                | mrTranslate
+                  : {
+                      length: listDrawings.length,
+                      total: lastFilterResults.totalCount,
+                    }
             }}
           </div>
-          <div *ngIf="nTotalMinutes > 0">({{ nTotalMinutesHuman }})</div>
+          <div *ngIf="lastFilterResults">({{ nTotalMinutesHuman }})</div>
         </div>
 
         <button

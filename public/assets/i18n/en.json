@@ -262,7 +262,8 @@
       "SUBTITLE": "Here there are a few of my public drawings and illustrations. Touch any of them to see details",
       "COUNT": {
         "ONE": "{{length}} image",
-        "MANY": "{{length}} images"
+        "MANY": "{{length}} images",
+        "FETCHED": "{{length}} / {{total}} images"
       },
       "LOADING": {
         "TITLE": "Filtering images. Please wait.",
