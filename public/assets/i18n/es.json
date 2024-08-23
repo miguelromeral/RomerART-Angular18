@@ -263,7 +263,8 @@
       "COUNT": {
         "ONE": "{{length}} imagen",
         "MANY": "{{length}} imágenes",
-        "FETCHED": "{{length}} / {{total}} imágenes"
+        "FETCHED": "{{length}} imágenes",
+        "FETCHED-MANY": "{{length}} / {{total}} imágenes"
       },
       "LOADING": {
         "TITLE": "Filtrando imágenes. Por favor, espere.",

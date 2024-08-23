@@ -18,7 +18,11 @@
           </button>
           <div id="divImageCounter" *ngIf="lastFilterResults" #divImageCounter>
             {{
-              text('COUNT.FETCHED')
+              text(
+                listDrawings.length === lastFilterResults.totalCount
+                  ? 'COUNT.FETCHED'
+                  : 'COUNT.FETCHED-MANY'
+              )
                 | mrTranslate
                   : {
                       length: listDrawings.length,
