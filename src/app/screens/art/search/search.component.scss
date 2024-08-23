@@ -60,3 +60,22 @@ span.mr-loader-subtitle {
     transform: scale(1);
   }
 }
+
+.btn-fetch-more {
+  @apply flex aspect-square h-full max-h-96 w-full flex-col flex-nowrap items-center justify-center border-dashed border-white-200 bg-white-200 transition-all duration-200 hover:bg-white-50 dark:border-black-100 dark:bg-black-700 dark:hover:bg-black-800;
+  animation: btn-fetch-more-animation 3s infinite;
+}
+
+@keyframes btn-fetch-more-animation {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
