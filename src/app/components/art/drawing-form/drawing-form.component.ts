@@ -305,7 +305,7 @@ export class DrawingFormComponent extends LanguageComponent {
   }
 
   saveDrawing() {
-    console.log(this.form.value);
+    // console.log(this.form.value);
     const values = this.form.value;
 
     const formData: ISaveDrawingRequest = {

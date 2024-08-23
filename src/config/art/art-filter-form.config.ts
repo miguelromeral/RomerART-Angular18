@@ -17,7 +17,7 @@ export class ArtFilterFormConfig {
   };
 
   static pagination = {
-    resultsPerPage: 10,
+    resultsPerPage: 20,
     firstPage: 1,
   };
 }

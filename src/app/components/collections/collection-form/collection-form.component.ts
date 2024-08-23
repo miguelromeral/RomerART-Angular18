@@ -211,7 +211,6 @@ export class CollectionFormComponent
     };
 
     this.drawingService.saveCollection(formData).subscribe(resp => {
-      console.log('Server Response: ', resp);
       if (resp) {
         this._collection.id = resp.id;
         this.newCollection = false;
@@ -223,6 +222,8 @@ export class CollectionFormComponent
             id: values.id,
           })
         );
+
+        this.router.navigate([`admin/collections`]);
       } else {
         this.alertService.showAlert(
           this.customTranslate.transform(

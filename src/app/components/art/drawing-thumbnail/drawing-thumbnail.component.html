@@ -13,6 +13,7 @@
     <a
       class="mr-img-thumbnail-container slide-right h-full w-full"
       [routerLink]="'/art/details/' + drawing.id">
+      <!-- TODO: poner indicador de que la imagen no es visible todavía -->
       <img
         [src]="url"
         [alt]="drawing.title"
@@ -32,6 +33,13 @@
       <span class="mr-img-thumbnail-date mr-img-thumbnail-info">
         {{ formatDateMini(drawing.dateTS) }}
       </span>
+
+      <div
+        *ngIf="!drawing.visible"
+        style="z-index: 1"
+        class="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col items-center justify-start bg-white bg-opacity-70 pt-8 text-black dark:bg-black dark:bg-opacity-70 dark:text-white">
+        <i class="bi bi-eye-slash text-2xl"></i>
+      </div>
 
       <div
         class="mr-img-thumbnail-details-container mr-img-thumbnail-info relative flex h-8 w-full flex-row flex-nowrap items-center justify-between p-1">

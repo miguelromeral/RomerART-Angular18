@@ -4,15 +4,15 @@
     class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2"
     [ngClass]="{ favorite: drawing.favorite }">
     <div class="flex w-full flex-col gap-2 sm:col-span-2">
-      <h1 class="mr-image-page-title">
-        <app-loading [loading]="loading">
-          <span content>
+      <app-loading [loading]="loading">
+        <h1 class="mr-image-page-title" content *ngIf="drawing.title !== ''">
+          <span>
             <app-translatable [originalText]="drawing.title">
             </app-translatable>
           </span>
-          <div loading class="h-8 w-full"></div>
-        </app-loading>
-      </h1>
+        </h1>
+        <div loading class="h-8 w-full"></div>
+      </app-loading>
     </div>
 
     <div class="flex w-full flex-col flex-nowrap gap-2">

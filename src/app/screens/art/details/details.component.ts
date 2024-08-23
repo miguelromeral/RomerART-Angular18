@@ -120,7 +120,7 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   }
   receiveCheer(likes: number) {
     if (this.drawing) {
-      console.log('New likes: ' + likes);
+      // console.log('New likes: ' + likes);
       this.drawing.likes = likes;
     }
   }

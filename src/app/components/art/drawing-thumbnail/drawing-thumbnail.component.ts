@@ -76,7 +76,7 @@ export class DrawingThumbnailComponent
   }
 
   errorLoadingImage() {
-    console.log('Error loading image');
+    // console.log('Error loading image');
     this.bErrorLoadingImage = true;
   }
 }

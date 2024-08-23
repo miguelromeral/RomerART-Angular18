@@ -9,6 +9,7 @@ import {
   loginPath,
 } from 'config/auth/auth.config';
 import { environment } from 'environments/environment';
+import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -35,6 +36,31 @@ export class AuthService {
 
     if (loggedUserString !== null) {
       this.saveLoggedUser(JSON.parse(loggedUserString));
+    }
+
+    const token = this.getToken(); // O el método correspondiente
+
+    if (token) {
+      const isTokenExpired = this.isTokenExpired(token);
+
+      if (isTokenExpired) {
+        this.logout();
+      }
+    }
+  }
+
+  isTokenExpired(token: string): boolean {
+    try {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000; // Tiempo actual en segundos
+
+      if (decodedToken?.exp !== undefined) {
+        return decodedToken.exp < currentTime;
+      }
+      return false;
+    } catch (e) {
+      console.error('Error decoding token', e);
+      return true; // En caso de error, consideramos el token como caducado
     }
   }
 
