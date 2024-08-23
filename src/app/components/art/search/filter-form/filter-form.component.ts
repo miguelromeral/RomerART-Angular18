@@ -306,7 +306,7 @@ export class FilterFormComponent
     if (results === undefined || results === null) {
       return;
     }
-    if (results.fetchedCount > 1) {
+    if (results.fetchedCount > 0) {
       if (
         (this.filterForm.value.pageNumber ??
           ArtFilterFormConfig.pagination.firstPage) <= 1
