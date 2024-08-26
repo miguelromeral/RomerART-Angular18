@@ -17,6 +17,7 @@ import { EditCollectionComponent } from './screens/admin/collections/edit-collec
 import { CreateCollectionComponent } from './screens/admin/collections/create-collection/create-collection.component';
 import { CvComponent } from './screens/about/cv/cv.component';
 import { AboutComponent } from './screens/about/about/about.component';
+import { SearchCollectionComponent } from './screens/collections/search-collection/search-collection.component';
 
 export const routes: Routes = [
   {
@@ -26,19 +27,27 @@ export const routes: Routes = [
       animation: 'HomePage',
     },
   },
-  {
-    path: 'debug',
-    component: DebugComponent,
-    data: {
-      animation: 'DebugPage',
-    },
-  },
+  // {
+  //   path: 'debug',
+  //   component: DebugComponent,
+  //   data: {
+  //     animation: 'DebugPage',
+  //   },
+  // },
   {
     path: 'settings',
     component: SettingsComponent,
 
     data: {
       animation: 'SettingsPage',
+    },
+  },
+  {
+    path: 'collections',
+    component: SearchCollectionComponent,
+
+    data: {
+      animation: 'CollectionsPage',
     },
   },
   {

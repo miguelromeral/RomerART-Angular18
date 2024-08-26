@@ -60,7 +60,8 @@
     },
     "COLLECTIONS": {
       "TITLE": "Colecciones",
-      "DESCRIPTION": "Listado de colecciones"
+      "DESCRIPTION": "Listado de colecciones",
+      "DRAWING-COUNT": "{{count}} dibujos"
     },
     "CV": {
       "PRINT": {

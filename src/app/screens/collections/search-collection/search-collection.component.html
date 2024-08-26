@@ -1,0 +1,66 @@
+<app-layout [padding]="false">
+  <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-4">
+      <div class="px-2 py-2">
+        <h1>
+          {{ text('TITLE') | mrTranslate }}
+        </h1>
+        <h3>
+          {{ text('DESCRIPTION') | mrTranslate }}
+        </h3>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4">
+      <app-loading [loading]="loadingCollections" class="container-collections">
+        <div class="container-collections container" loading>
+          <div class="h-20 w-96"></div>
+          <div class="h-20 w-96"></div>
+          <div class="h-20 w-96"></div>
+        </div>
+
+        <div
+          *ngFor="let collection of listCollections"
+          class="collection-card"
+          [ngClass]="{ selected: isCollectionSelected(collection.id) }"
+          (click)="selectCollection(collection.id)"
+          (keydown)="selectCollection(collection.id)"
+          tabindex="0"
+          content>
+          <h2>
+            {{ collection.name }}
+          </h2>
+          <h6 class="text-black-100 dark:text-white-950">
+            {{
+              text('DRAWING-COUNT')
+                | mrTranslate: { count: collection.drawingsId.length }
+            }}
+          </h6>
+        </div>
+      </app-loading>
+    </div>
+    <div class="px-2 py-2">
+      <div *ngIf="selectedCollection" class="flex flex-col gap-4">
+        <h1 class="border-b dark:border-b-main-300 dark:text-main-300">
+          <app-translatable [originalText]="selectedCollection.name">
+          </app-translatable>
+        </h1>
+        <h3>
+          <app-translatable [originalText]="selectedCollection.description">
+          </app-translatable>
+        </h3>
+        <div class="slider">
+          <div
+            *ngFor="let drawing of selectedCollection.drawings; let i = index"
+            class="item"
+            [ngStyle]="getDrawingStyle(i)"
+            [ngClass]="{ selected: i === activeIndex }">
+            <app-drawing-thumbnail [drawing]="drawing" [fullsize]="true">
+            </app-drawing-thumbnail>
+          </div>
+          <button id="prev" (click)="prevSlide()">&#60;</button>
+          <button id="next" (click)="nextSlide()">&#62;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-layout>

@@ -1,0 +1,59 @@
+.container-collections {
+  @apply flex flex-row flex-nowrap gap-5 overflow-scroll p-4 dark:bg-black-700 bg-white-100;
+}
+
+.collection-card {
+  @apply min-h-20 w-full min-w-48 max-w-96 rounded-md p-2 dark:bg-black-900 bg-white-200 cursor-pointer transition-all duration-300 dark:border-black-700 border hover:dark:bg-main-800 hover:bg-main-100;
+}
+
+.collection-card.selected {
+  @apply dark:border-main-300 dark:text-main-300 border-main-800 text-main-800 bg-main-200 dark:bg-main-800;
+}
+
+
+.slider,
+.item {
+  @apply w-full;
+}
+
+.slider {
+  @apply w-full overflow-hidden relative py-5 mb-10 h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[80vh];
+  // max-height: 60vh;
+}
+
+.item {
+  @apply rounded-md dark:bg-black-700 duration-500 overflow-hidden h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[80vh] lg:max-h-[80vh] lg:min-h-[80vh];
+  position: absolute;
+  width: 50vw;
+  text-align: justify;
+  left: calc(50% - 25vw);
+  top: 0;
+}
+
+.item img {
+  @apply aspect-square object-cover;
+}
+
+.item.selected {
+  opacity: 1 !important;
+}
+
+#next,
+#prev {
+  @apply absolute h-full bg-transparent;
+  top: 0px;
+  width: 25vw;
+  bottom: 0px;
+  border: none;
+  font-size: xxx-large;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+#prev {
+  left: 0px;
+}
+
+#next {
+  right: 0px;
+}

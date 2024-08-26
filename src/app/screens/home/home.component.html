@@ -39,7 +39,7 @@
           </h6>
         </app-loading>
       </div>
-      <div class="flex flex-row flex-nowrap gap-6 overflow-x-auto">
+      <div class="flex flex-row flex-nowrap gap-6 overflow-x-auto pb-4">
         <ng-container *ngIf="!loadingCollection; else skDrawings">
           <div
             *ngFor="let drawing of collection?.drawings"

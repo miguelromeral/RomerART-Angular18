@@ -21,6 +21,12 @@ export class NavBarConfig {
       iconActive: 'bi-easel-fill',
       textCode: 'LINKS.ART',
     },
+    {
+      link: '/collections',
+      icon: 'bi-collection',
+      iconActive: 'bi-collection-fill',
+      textCode: 'LINKS.COLLECTIONS',
+    },
     // {
     //   link: '/playlist',
     //   icon: 'bi-cassette',
