@@ -17,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { sortCollectionsByOrder } from '@utils/sorting/sort-utils';
 import { Subscription } from 'rxjs';
 import { DrawingScoreComponent } from '../../../components/art/drawing-score/drawing-score.component';
+import { CollectionThumbnailComponent } from '@app/components/collections/collection-thumbnail/collection-thumbnail.component';
 
 @Component({
   selector: 'app-search-collection',
@@ -31,6 +32,7 @@ import { DrawingScoreComponent } from '../../../components/art/drawing-score/dra
     DrawingThumbnailComponent,
     DrawingSliderComponent,
     DrawingScoreComponent,
+    CollectionThumbnailComponent,
   ],
   templateUrl: './search-collection.component.html',
   styleUrl: './search-collection.component.scss',

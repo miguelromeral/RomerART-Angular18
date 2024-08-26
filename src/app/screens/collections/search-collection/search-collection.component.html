@@ -17,17 +17,24 @@
       </div>
     </div>
     <div class="flex flex-col gap-4">
-      <app-loading [loading]="loadingCollections" class="container-collections">
+      <app-loading [loading]="loadingCollections">
         <div class="container-collections container" loading>
-          <div class="h-56 w-48"></div>
-          <div class="h-56 w-48"></div>
-          <div class="h-56 w-48"></div>
-          <div class="h-56 w-48"></div>
           <div class="h-56 w-48"></div>
           <div class="h-56 w-48"></div>
         </div>
 
-        <div
+        <div class="container-collections h-full w-full" content>
+          <app-collection-thumbnail
+            *ngFor="let collection of listCollections"
+            [collection]="collection"
+            [selectedStyle]="isCollectionSelected(collection.id)"
+            class="h-full w-full"
+            (cardClicked)="selectCollection($event)"
+            content>
+          </app-collection-thumbnail>
+        </div>
+
+        <!-- <div
           *ngFor="let collection of listCollections"
           class="collection-card"
           [ngClass]="{ selected: isCollectionSelected(collection.id) }"
@@ -50,7 +57,7 @@
               {{ text('ORDER') | mrTranslate: { order: collection.order } }}
             </span>
           </div>
-        </div>
+        </div> -->
       </app-loading>
     </div>
     <div class="px-2 py-2">
