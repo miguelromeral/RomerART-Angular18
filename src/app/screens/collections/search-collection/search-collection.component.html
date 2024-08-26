@@ -26,15 +26,16 @@
           (keydown)="selectCollection(collection.id)"
           tabindex="0"
           content>
-          <h2>
-            {{ collection.name }}
-          </h2>
-          <h6 class="text-black-100 dark:text-white-950">
-            {{
-              text('DRAWING-COUNT')
-                | mrTranslate: { count: collection.drawingsId.length }
-            }}
-          </h6>
+          <img
+            *ngIf="collection.drawings.length > 0"
+            [src]="collection.drawings[0].urlThumbnail"
+            [alt]="collection.drawings[0].pageTitle()" />
+          <span class="count">{{ collection.drawingsId.length }}</span>
+          <div class="content">
+            <h2>
+              {{ collection.name }}
+            </h2>
+          </div>
         </div>
       </app-loading>
     </div>
@@ -48,7 +49,11 @@
           <app-translatable [originalText]="selectedCollection.description">
           </app-translatable>
         </h3>
-        <div class="slider">
+        <div
+          class="slider"
+          (touchstart)="onTouchStart($event)"
+          (touchmove)="onTouchMove($event)"
+          (touchend)="onTouchEnd($event)">
           <div
             *ngFor="let drawing of selectedCollection.drawings; let i = index"
             class="item"

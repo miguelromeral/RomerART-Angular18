@@ -44,6 +44,9 @@ export class SearchCollectionComponent
   milisToChangeSlide = 5000;
   manualChangeSlide = false;
 
+  private touchStartX = 0;
+  private touchEndX = 0;
+
   constructor(
     private drawingService: DrawingService,
     @Inject(PLATFORM_ID) private platformId: any
@@ -127,5 +130,31 @@ export class SearchCollectionComponent
 
   ngOnDestroy() {
     if (this.intervalSubscription) this.intervalSubscription.unsubscribe();
+  }
+
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchMove(event: TouchEvent) {
+    // Puedes opcionalmente manejar el evento touchmove aquí si quieres más control
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipeGesture();
+  }
+
+  handleSwipeGesture() {
+    const swipeThreshold = 50; // Ajusta este valor según sea necesario
+    const swipeDistance = this.touchEndX - this.touchStartX;
+
+    if (swipeDistance > swipeThreshold) {
+      // Deslizó a la derecha
+      this.prevSlide();
+    } else if (swipeDistance < -swipeThreshold) {
+      // Deslizó a la izquierda
+      this.nextSlide();
+    }
   }
 }
