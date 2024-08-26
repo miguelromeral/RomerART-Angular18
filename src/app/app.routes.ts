@@ -123,13 +123,13 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'admin/collections/edit/:id',
+    path: 'collections/edit/:id',
     component: EditCollectionComponent,
     data: { withComponentInputBinding: true, animation: 'CollectionEditPage' },
     canActivate: [AuthGuard],
   },
   {
-    path: 'admin/collections/create',
+    path: 'collections/create',
     component: CreateCollectionComponent,
     data: {
       animation: 'CollectionCreatePage',

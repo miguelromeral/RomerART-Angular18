@@ -154,7 +154,7 @@ export class CollectionFormComponent
     this.alertService.showConfirmDialog('ELIMINAR?', 'SEGURO?', 'SÍ', () => {
       this.drawingService.removeCollection(this.collection.id).subscribe(() => {
         this.alertService.showAlert('ELIMINADO', 'ELIMINADO');
-        this.router.navigate(['admin/collections']);
+        this.router.navigate([`/collections`]);
       });
     });
   }
@@ -223,7 +223,7 @@ export class CollectionFormComponent
           })
         );
 
-        this.router.navigate([`admin/collections`]);
+        this.router.navigate([`/collections`]);
       } else {
         this.alertService.showAlert(
           this.customTranslate.transform(

@@ -8,6 +8,12 @@
         <h3>
           {{ text('DESCRIPTION') | mrTranslate }}
         </h3>
+        <div *ngIf="admin" class="flex flex-row flex-nowrap justify-end">
+          <button class="btn" (click)="createNewCollection()">
+            <i class="bi bi-plus"></i>
+            {{ text('FORM.CREATE') | mrTranslate }}
+          </button>
+        </div>
       </div>
     </div>
     <div class="flex flex-col gap-4">
@@ -35,6 +41,11 @@
             <h2>
               {{ collection.name }}
             </h2>
+            <span
+              *ngIf="admin"
+              class="text-sm text-black-100 dark:text-white-950">
+              {{ text('ORDER') | mrTranslate: { order: collection.order } }}
+            </span>
           </div>
         </div>
       </app-loading>
@@ -49,6 +60,12 @@
           <app-translatable [originalText]="selectedCollection.description">
           </app-translatable>
         </h3>
+        <div *ngIf="admin" class="flex flex-row flex-nowrap justify-end">
+          <button class="btn" (click)="editCollection(selectedCollection.id)">
+            <i class="bi bi-pencil"></i>
+            {{ text('FORM.EDIT') | mrTranslate }}
+          </button>
+        </div>
         <div
           class="slider"
           (touchstart)="onTouchStart($event)"

@@ -61,7 +61,12 @@
     "COLLECTIONS": {
       "TITLE": "Collections",
       "DESCRIPTION": "List of collections",
-      "DRAWING-COUNT": "{{count}} drawings"
+      "DRAWING-COUNT": "{{count}} drawings",
+      "ORDER": "Order: {{order}}",
+      "FORM": {
+        "CREATE": "Create",
+        "EDIT": "Edit"
+      }
     },
     "CV": {
       "PRINT": {

@@ -1,3 +1,4 @@
+import { Collection } from '@models/art/collection.model';
 import { DrawingCharacter } from '@models/art/drawing-character.model';
 import { DrawingProduct } from '@models/art/drawing-product.model';
 
@@ -24,4 +25,8 @@ export function sortCharactersByName(
 
 export function sortByTextAscending(a: string, b: string): number {
   return a.toLowerCase().localeCompare(b.toLowerCase());
+}
+
+export function sortCollectionsByOrder(a: Collection, b: Collection): number {
+  return b.order - a.order;
 }
