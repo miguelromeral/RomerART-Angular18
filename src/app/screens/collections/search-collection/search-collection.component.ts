@@ -14,6 +14,8 @@ import { TranslatableComponent } from '@app/components/shared/translatable/trans
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
+import { LanguageService } from '@app/services/language/language.service';
+import { MetadataService } from '@app/services/metadata/metadata.service';
 import { Collection } from '@models/art/collection.model';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
@@ -55,6 +57,8 @@ export class SearchCollectionComponent
   constructor(
     private drawingService: DrawingService,
     private authService: AuthService,
+    private metadataService: MetadataService,
+    private languageService: LanguageService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
@@ -64,6 +68,7 @@ export class SearchCollectionComponent
   private intervalSubscription: Subscription | undefined;
 
   ngOnInit() {
+    this.setPageTitle(this.metadataService, this.languageService);
     this.authService.loggedUser$.subscribe(user => {
       this.admin = user ? this.authService.isAdmin(user) : false;
     });

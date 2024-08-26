@@ -168,6 +168,7 @@
     },
     "ABOUT": {
       "WELCOME": {
+        "TITLE": "About Me",
         "PERSONAL": {
           "TITLE": "Know Me",
           "DESCRIPTION": "Here you can see a brief description of who I am, various tastes and reference artists",
@@ -538,6 +539,7 @@
       }
     },
     "COLLECTION-FORM": {
+      "TITLE": "Create Colection",
       "SECTIONS": {
         "MAIN-DATA": "Main Data",
         "DRAWINGS": "Drawings"

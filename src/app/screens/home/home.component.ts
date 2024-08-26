@@ -51,9 +51,7 @@ export class HomeComponent extends LanguageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.languageService.translateText(this.text('TITLE')).subscribe(text => {
-      this.metadataService.updateTitle(text);
-    });
+    this.setPageTitle(this.metadataService, this.languageService);
     this.drawingService
       .getCollectionDetails(homeCollectionConfig)
       .subscribe(col => {

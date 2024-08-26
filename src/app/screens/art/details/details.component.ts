@@ -23,6 +23,7 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
 import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
+import { LanguageService } from '@app/services/language/language.service';
 
 @Component({
   selector: 'app-details',
@@ -62,6 +63,7 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   constructor(
     private logger: LoggerService,
     private drawingService: DrawingService,
+    private languageService: LanguageService,
     private metadataService: MetadataService
   ) {
     super('SCREENS.DRAWING-DETAILS');
@@ -82,6 +84,13 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
     if (data) {
       // this.logger.log(data);
       this.drawing = new Drawing(data);
+
+      this.setPageTitle(
+        this.metadataService,
+        this.languageService,
+        this.drawing.pageTitle()
+      );
+
       this.metadataService.updateMetadata(
         this.drawing.pageTitle(),
         this.drawing.title,

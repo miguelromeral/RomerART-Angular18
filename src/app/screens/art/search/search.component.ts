@@ -72,9 +72,7 @@ export class SearchComponent extends LanguageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.languageService.translateText(this.text('TITLE')).subscribe(text => {
-      this.metadataService.updateTitle(text);
-    });
+    this.setPageTitle(this.metadataService, this.languageService);
     this.authService.loggedUser$.subscribe(user => {
       this.admin = user?.role === 'admin';
     });

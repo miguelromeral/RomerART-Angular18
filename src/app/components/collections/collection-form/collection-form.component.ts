@@ -118,9 +118,12 @@ export class CollectionFormComponent
 
   loadUsedDrawings() {
     if (this.collection) {
-      this.listUsed = this.drawings.filter(drawing =>
-        this.collection?.drawingsId.find(id => id === drawing.id)
-      );
+      const used: Drawing[] = [];
+      this.collection.drawingsId.forEach(id => {
+        const found = this.drawings.find(drawing => drawing.id === id);
+        if (found) used.push(found);
+      });
+      this.listUsed = used;
       this.listAll = this.drawings.filter(
         drawing => this.listUsed.filter(x => x.id === drawing.id).length === 0
       );
