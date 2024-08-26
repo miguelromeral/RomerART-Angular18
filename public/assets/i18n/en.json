@@ -58,6 +58,7 @@
         "TITLE": "Other Links"
       }
     },
+    "COLLECTIONS": {},
     "CV": {
       "PRINT": {
         "ALERT": "This page is <strong>optimized for printing</strong>. Press <kbd><kbd>Ctrl</kbd> + <kbd>P</kbd></kbd> to print."
@@ -202,7 +203,8 @@
         "PLAYLIST": "Playlist",
         "ABOUT": "About",
         "SETTINGS": "Settings",
-        "DEBUG": "Debug"
+        "DEBUG": "Debug",
+        "COLLECTIONS": "Collections"
       }
     },
     "SETTINGS": {
@@ -286,6 +288,7 @@
         },
         "SORTBY": {
           "TITLE": "Sort by...",
+          "POPULARITY": "Popularity",
           "DATE-DESC": "Latest",
           "DATE-ASC": "Oldest",
           "NAME-ASC": "Name (ascending)",

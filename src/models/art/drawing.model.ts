@@ -16,7 +16,7 @@ export class Drawing {
   spotifyTrackId: string;
   title: string;
   date: string;
-  dateTS: Date;
+  dateObject: Date;
   dateHyphen: string;
   software: number;
   softwareName: string;
@@ -50,6 +50,7 @@ export class Drawing {
   formattedDateMini: string;
   instagramUrl: string;
   twitterUrl: string;
+  popularity: number;
 
   constructor(data: Partial<Drawing> = {}) {
     this.id = data.id || '';
@@ -67,8 +68,9 @@ export class Drawing {
     this.spotifyTrackId = data.spotifyTrackId || '';
     this.title = data.title || '';
     this.date = data.date || '';
-    const [year, day, month] = this.date.split('/').map(x => parseInt(x));
-    this.dateTS = new Date(year, month - 1, day);
+    // const [year, day, month] = this.date.split('/').map(x => parseInt(x));
+    // this.dateTS = new Date(year, month - 1, day);
+    this.dateObject = new Date(data.dateObject || '');
     this.dateHyphen = data.dateHyphen || '';
     this.software = data.software || 0;
     this.softwareName = data.softwareName || '';
@@ -102,6 +104,7 @@ export class Drawing {
     this.formattedDateMini = data.formattedDateMini || '';
     this.instagramUrl = data.instagramUrl || '';
     this.twitterUrl = data.twitterUrl || '';
+    this.popularity = data.popularity || 0;
   }
 
   pageTitle(): string {

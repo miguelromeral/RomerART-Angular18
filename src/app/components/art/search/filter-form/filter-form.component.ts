@@ -279,16 +279,20 @@ export class FilterFormComponent
     const filters = new DrawingFilter(this.filterForm.value);
 
     if (
-      filters.characterName !== '' ||
-      filters.collection !== '' ||
+      filters.characterName !==
+        environment.forms.drawingFilter.default.characterName ||
+      filters.collection !==
+        environment.forms.drawingFilter.default.collection ||
       filters.favorites ||
-      filters.modelName !== '' ||
-      filters.paper !== '0' ||
-      filters.productName !== '' ||
-      filters.productType != '-1' ||
-      filters.software != '0' ||
-      filters.textQuery !== '' ||
-      filters.type != '-1'
+      filters.modelName !== environment.forms.drawingFilter.default.modelName ||
+      filters.paper !== environment.forms.drawingFilter.default.paper ||
+      filters.productName !==
+        environment.forms.drawingFilter.default.productName ||
+      filters.productType !=
+        environment.forms.drawingFilter.default.productType ||
+      filters.software != environment.forms.drawingFilter.default.software ||
+      filters.textQuery !== environment.forms.drawingFilter.default.textQuery ||
+      filters.type != environment.forms.drawingFilter.default.type
     ) {
       this.filtering = true;
     }

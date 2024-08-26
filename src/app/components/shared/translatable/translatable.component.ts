@@ -37,6 +37,8 @@ export class TranslatableComponent extends LanguageComponent implements OnInit {
   }
   public set originalText(value: string) {
     this._originalText = value;
+    this.bShowTranslation = false;
+    this.translation = '';
   }
 
   constructor(

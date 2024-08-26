@@ -9,7 +9,7 @@ export const COMMON_ENV = {
   forms: {
     drawingFilter: {
       default: {
-        sortBy: 'date-desc',
+        sortBy: '',
         textQuery: '',
         type: '-1',
         productType: '-1',

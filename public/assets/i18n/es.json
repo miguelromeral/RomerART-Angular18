@@ -58,6 +58,10 @@
         "TITLE": "Enlaces de Interés"
       }
     },
+    "COLLECTIONS": {
+      "TITLE": "Colecciones",
+      "DESCRIPTION": "Listado de colecciones"
+    },
     "CV": {
       "PRINT": {
         "ALERT": "Esta página está <strong>optmizada para ser impresa</strong>. Pulsa <kbd><kbd>Ctrl</kbd> + <kbd>P</kbd></kbd> para imprimir."
@@ -202,7 +206,8 @@
         "PLAYLIST": "Playlist",
         "ABOUT": "Sobre Mí",
         "SETTINGS": "Ajustes",
-        "DEBUG": "Debug"
+        "DEBUG": "Debug",
+        "COLLECTIONS": "Colecciones"
       }
     },
     "SETTINGS": {
@@ -286,6 +291,7 @@
         },
         "SORTBY": {
           "TITLE": "Ordenar por...",
+          "POPULARITY": "Popularidad",
           "DATE-DESC": "Nuevos Primero",
           "DATE-ASC": "Viejos Primero",
           "NAME-ASC": "Nombre (ascendente)",
