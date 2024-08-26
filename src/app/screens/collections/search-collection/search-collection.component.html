@@ -69,22 +69,8 @@
             {{ text('FORM.EDIT') | mrTranslate }}
           </button>
         </div>
-        <div
-          class="slider"
-          (touchstart)="onTouchStart($event)"
-          (touchmove)="onTouchMove($event)"
-          (touchend)="onTouchEnd($event)">
-          <div
-            *ngFor="let drawing of selectedCollection.drawings; let i = index"
-            class="item"
-            [ngStyle]="getDrawingStyle(i)"
-            [ngClass]="{ selected: i === activeIndex }">
-            <app-drawing-thumbnail [drawing]="drawing" [fullsize]="true">
-            </app-drawing-thumbnail>
-          </div>
-          <button id="prev" (click)="prevSlide()">&#60;</button>
-          <button id="next" (click)="nextSlide()">&#62;</button>
-        </div>
+        <app-drawing-slider [drawings]="selectedCollection.drawings">
+        </app-drawing-slider>
       </div>
     </div>
   </div>

@@ -41,14 +41,11 @@
       </div>
       <div class="flex flex-row flex-nowrap gap-6 overflow-x-auto pb-4">
         <ng-container *ngIf="!loadingCollection; else skDrawings">
-          <div
-            *ngFor="let drawing of collection?.drawings"
-            class="contents h-full w-fit rounded-md border-main-900 bg-white-600 px-2">
-            <app-drawing-thumbnail
-              class="aspect-square h-48 w-48"
-              [drawing]="drawing">
-            </app-drawing-thumbnail>
-          </div>
+          <app-drawing-slider
+            class="w-full"
+            *ngIf="collection"
+            [drawings]="collection.drawings">
+          </app-drawing-slider>
         </ng-container>
         <ng-template #skDrawings>
           <app-loading

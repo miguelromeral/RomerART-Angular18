@@ -2,6 +2,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
+import { DrawingSliderComponent } from '@app/components/collections/drawing-slider/drawing-slider.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { InstagramPostComponent } from '@app/components/shared/social/instagram-post/instagram-post.component';
@@ -31,6 +32,7 @@ import {
     CommonModule,
     LoadingComponent,
     NgIf,
+    DrawingSliderComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
