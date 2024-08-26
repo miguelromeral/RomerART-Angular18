@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
 import { DrawingSliderComponent } from '@app/components/collections/drawing-slider/drawing-slider.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
@@ -45,6 +45,7 @@ export class SearchCollectionComponent
   loadingCollections = true;
 
   selectedCollection: Collection | undefined;
+  selectedQueryParameter = 'details';
 
   admin = false;
 
@@ -53,6 +54,7 @@ export class SearchCollectionComponent
     private authService: AuthService,
     private metadataService: MetadataService,
     private languageService: LanguageService,
+    private route: ActivatedRoute,
     private router: Router
   ) {
     super('SCREENS.COLLECTIONS');
@@ -70,10 +72,32 @@ export class SearchCollectionComponent
         this.listCollections = list
           .filter(c => c.drawingsId.length > 0)
           .sort(sortCollectionsByOrder);
-        if (list.length > 0) this.selectCollection(this.listCollections[0].id);
+        // if (list.length > 0) this.selectCollection(this.listCollections[0].id);
+        this.loadQueryParameters();
         this.loadingCollections = false;
       }
     });
+    this.loadQueryParameters();
+  }
+
+  loadQueryParameters() {
+    this.route.queryParams.subscribe(params => {
+      const selected = params[this.selectedQueryParameter];
+      if (selected) {
+        this.selectCollection(selected);
+      } else {
+        if (this.listCollections.length > 0)
+          this.selectCollection(this.listCollections[0].id);
+      }
+    });
+  }
+
+  changeQueryParameters() {
+    if (this.selectedCollection) {
+      const queryParams: Record<string, string> = {};
+      queryParams[this.selectedQueryParameter] = this.selectedCollection.id;
+      this.router.navigate(['/collections'], { queryParams });
+    }
   }
 
   createNewCollection() {
@@ -90,5 +114,14 @@ export class SearchCollectionComponent
 
   selectCollection(id: string) {
     this.selectedCollection = this.listCollections.find(x => x.id === id);
+    if (!this.selectedCollection) {
+      this.selectCollection(this.listCollections[0].id);
+    }
+    this.setPageTitle(
+      this.metadataService,
+      this.languageService,
+      this.selectedCollection?.name
+    );
+    this.changeQueryParameters();
   }
 }

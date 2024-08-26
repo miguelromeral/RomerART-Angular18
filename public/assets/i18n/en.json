@@ -60,7 +60,7 @@
     },
     "COLLECTIONS": {
       "TITLE": "Collections",
-      "DESCRIPTION": "List of collections",
+      "DESCRIPTION": "Here you will find several groups of drawings united by a common theme",
       "DRAWING-COUNT": "{{count}} drawings",
       "ORDER": "Order: {{order}}",
       "FORM": {
