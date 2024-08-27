@@ -355,6 +355,7 @@
     },
     "DRAWING-DETAILS": {
       "MODEL": "by {{ model }}",
+      "NOSPOTIFY": "There's no Spotify track related to this drawing.",
       "NOTFOUND": {
         "TITLE": "Drawing not found",
         "SUBTITLE": "No drawing was found with the identifier '{{id}}'.",

@@ -86,8 +86,11 @@ export class DrawingSliderComponent implements OnInit, OnDestroy {
       rotateY = '-1deg'; // Rotación para los elementos a la derecha
     }
 
+    let scale = 1 - 0.2 * Math.abs(stt);
+    if (scale < 0) scale = 0;
+
     return {
-      transform: `translateX(${120 * stt}px) scale(${1 - 0.2 * Math.abs(stt)}) perspective(16px) rotateY(${rotateY})`,
+      transform: `translateX(${120 * stt}px) scale(${scale}) perspective(16px) rotateY(${rotateY})`,
       zIndex: -Math.abs(stt),
       filter: stt === 0 ? 'none' : 'blur(5px)',
       // opacity: Math.abs(stt) > 2 ? 1 : 0.6,

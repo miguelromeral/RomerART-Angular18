@@ -1,20 +1,61 @@
+@tailwind utilities;
+
 .slider,
 .item {
   @apply w-full;
 }
 
+
+@layer utilities {
+  .left-50-minus-25vw {
+    left: calc(50% - 25vw);
+  }
+
+  @screen sm {
+    .left-50-minus-60vw {
+      left: calc(50% - 30vw);
+    }
+  }
+
+  @screen md {
+    .left-50-minus-60vh {
+      left: calc(50% - 30vh);
+    }
+  }
+
+  @screen lg {
+    .left-50-minus-80vh {
+      left: calc(50% - 40vh);
+    }
+  }
+}
+
 .slider {
-  @apply w-full overflow-hidden relative py-5 mb-10 h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[80vh];
+  @apply w-full overflow-hidden relative py-5 mb-10 h-[50vw] sm:h-[60vw] md:h-[60vh] lg:h-[80vh] flex items-center justify-center flex-row flex-nowrap;
   // max-height: 60vh;
 }
 
 .item {
-  @apply rounded-md dark:bg-black-700 duration-500 overflow-hidden h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[80vh] lg:max-h-[80vh] lg:min-h-[80vh];
+  @apply rounded-md dark:bg-black-700 duration-500 w-[50vw] overflow-hidden h-[50vw] max-h-[50vw] sm:h-[60vw] sm:max-h-[60vw] sm:w-[60vw] md:w-[60vh] md:h-[60vh] md:max-h-[60vh] md:max-w-[60vh] lg:h-[80vh] lg:max-h-[80vh] lg:max-w-[80vh] lg:w-[80vh];
   position: absolute;
-  width: 50vw;
+  justify-content: center;
   text-align: justify;
-  left: calc(50% - 25vw);
   top: 0;
+
+  @apply left-50-minus-25vw;
+
+  /* Modifica según el tamaño de pantalla */
+  @screen sm {
+    @apply left-50-minus-60vw;
+  }
+
+  @screen md {
+    @apply left-50-minus-60vh;
+  }
+
+  @screen lg {
+    @apply left-50-minus-80vh;
+  }
 }
 
 .item img {
@@ -27,7 +68,7 @@
 
 #next,
 #prev {
-  @apply absolute h-full bg-transparent;
+  @apply absolute h-full bg-transparent border border-main-500 border-dotted;
   top: 0px;
   width: 25vw;
   bottom: 0px;

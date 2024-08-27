@@ -355,6 +355,7 @@
     },
     "DRAWING-DETAILS": {
       "MODEL": "por {{ model }}",
+      "NOSPOTIFY": "No existe ninguna canción de Spotify relacionada con este dibujo.",
       "NOTFOUND": {
         "TITLE": "Dibujo no encontrado",
         "SUBTITLE": "No se ha encontrado ningún dibujo con el identificador '{{id}}'.",
