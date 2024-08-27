@@ -319,6 +319,10 @@ export class FilterFormComponent
       } else {
         this.listDrawings = [...this.listDrawings, ...results.filteredDrawings];
       }
+    } else {
+      if (results.totalCount === 0) {
+        this.listDrawings = [];
+      }
     }
     results.totalDrawings = this.listDrawings;
     this.fetchedResults.emit(results);
@@ -386,45 +390,47 @@ export class FilterFormComponent
   }
 
   loadSelects() {
-    this.listDrawingStyles = this.drawingService.getDrawingStyles();
-    this.listDrawingProductTypes = this.drawingService.getDrawingProductTypes();
-    this.drawingService.getDrawingProducts().subscribe(list => {
-      if (list) {
-        this.listDrawingProducts = list
-          .map(p => new DrawingProduct(p))
-          .sort(sortProductsByName);
-        this.filteredDrawingProducts = this.listDrawingProducts;
-      }
-      this.loadingDrawingProducts = false;
-    });
-    this.drawingService.getDrawingCharacters().subscribe(list => {
-      if (list) {
-        // TODO: añadir el option de ningúno: Value: "none", Label: "CHARACTER.NONE"
-        this.listDrawingCharacters = list
-          .map(c => new DrawingCharacter(c))
-          .filter(c => c.characterName !== '')
-          .sort(sortCharactersByName);
-      }
-      this.loadingDrawingCharacters = false;
-    });
-    this.drawingService.getDrawingModels().subscribe(list => {
-      if (list) {
-        // TODO: añadir el option de ningúno: Value: "none", Label: "MODEL.NONE"
-        this.listDrawingModels = list
-          .sort(sortByTextAscending)
-          .map<ICustomSelectOption>(m => {
-            return { value: m, label: m, labelCode: '' };
-          });
-      }
-      this.loadingDrawingModels = false;
-    });
-    this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
-    this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
     this.drawingService.getAllCollections().subscribe(list => {
       if (list) {
         this.listCollections = list.map(c => new Collection(c));
       }
       this.loadingCollections = false;
+
+      this.listDrawingStyles = this.drawingService.getDrawingStyles();
+      this.listDrawingProductTypes =
+        this.drawingService.getDrawingProductTypes();
+      this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
+      this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
+      this.drawingService.getDrawingProducts().subscribe(list => {
+        if (list) {
+          this.listDrawingProducts = list
+            .map(p => new DrawingProduct(p))
+            .sort(sortProductsByName);
+          this.filteredDrawingProducts = this.listDrawingProducts;
+        }
+        this.loadingDrawingProducts = false;
+      });
+      this.drawingService.getDrawingCharacters().subscribe(list => {
+        if (list) {
+          // TODO: añadir el option de ningúno: Value: "none", Label: "CHARACTER.NONE"
+          this.listDrawingCharacters = list
+            .map(c => new DrawingCharacter(c))
+            .filter(c => c.characterName !== '')
+            .sort(sortCharactersByName);
+        }
+        this.loadingDrawingCharacters = false;
+      });
+      this.drawingService.getDrawingModels().subscribe(list => {
+        if (list) {
+          // TODO: añadir el option de ningúno: Value: "none", Label: "MODEL.NONE"
+          this.listDrawingModels = list
+            .sort(sortByTextAscending)
+            .map<ICustomSelectOption>(m => {
+              return { value: m, label: m, labelCode: '' };
+            });
+        }
+        this.loadingDrawingModels = false;
+      });
     });
   }
 
