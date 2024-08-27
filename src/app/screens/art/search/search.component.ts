@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { filterFormAnimation } from '@app/animations/art/filter-form.animations';
 import { getHumanTimeFromMinutes } from '@utils/customization/text-utils';
 import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
+import { LoadingComponent } from '../../../components/shared/loading/loading.component';
+import { ArtFilterFormConfig } from 'config/art/art-filter-form.config';
 
 @Component({
   selector: 'app-search',
@@ -27,6 +29,7 @@ import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.
     FilterFormComponent,
     TranslateModule,
     CustomTranslatePipe,
+    LoadingComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -61,6 +64,10 @@ export class SearchComponent extends LanguageComponent implements OnInit {
   showFilters = false;
   nTotalMinutesHuman = '';
   lastFilterResults: FilterResultsDrawing | undefined;
+  placeholderResults = ArtFilterFormConfig.pagination.resultsPerPage;
+  placeholderDrawings = Array(this.placeholderResults)
+    .fill(0)
+    .map((_, i) => i + 1);
 
   constructor(
     private metadataService: MetadataService,
@@ -87,15 +94,6 @@ export class SearchComponent extends LanguageComponent implements OnInit {
     const list = results.totalDrawings;
     this.listDrawings = list;
     this.nTotalMinutesHuman = getHumanTimeFromMinutes(results.totalTime);
-    // this.nTotalMinutes = this.listDrawings.reduce((accumulator, current) => {
-    //   return accumulator + current.time;
-    // }, 0);
-    // this.nTotalMinutesNotDefined =
-    //   this.listDrawings.filter(d => d.time === 0).length > 0;
-    // this.nTotalMinutesHuman = `${this.nTotalMinutesNotDefined ? '+' : ''}${}`;
-    // this.divImageCounter.nativeElement.classList.add(
-    //   this.imageCounterAnimationClass
-    // );
   }
   onIsFilterFormLoading(loading: boolean) {
     this.filterFormLoading = loading;

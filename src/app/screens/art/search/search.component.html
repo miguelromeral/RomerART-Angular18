@@ -75,6 +75,21 @@
               [drawing]="drawing"
               *ngFor="let drawing of listDrawings; let first = first">
             </app-drawing-thumbnail>
+
+            <ng-container *ngIf="filterFormLoading">
+              <app-loading
+                [loading]="filterFormLoading"
+                class="aspect-square h-full w-full"
+                [ngClass]="{
+                  'col-span-2 row-span-2': first && resultsLength === 0,
+                }"
+                *ngFor="let i of placeholderDrawings; let first = first">
+                <div class="h-full w-full" loading>
+                  <i class="h-full w-full"></i>
+                </div>
+              </app-loading>
+            </ng-container>
+
             <button
               *ngIf="
                 !filterFormLoading && showButtonFetchMore && !resultsNotFound
@@ -88,7 +103,7 @@
           </div>
           <div
             id="divNoResults"
-            *ngIf="resultsNotFound"
+            *ngIf="!filterFormLoading && resultsNotFound"
             class="mt-20 flex min-h-32 flex-col items-center justify-start gap-3">
             <span>{{ text('NOTFOUND.TITLE') | mrTranslate }}</span>
             <h2>😔</h2>
