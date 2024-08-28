@@ -1,8 +1,7 @@
-<div *ngIf="loading; else loaded" class="skeleton">
-  <div class="h-4 w-40"></div>
-</div>
-<ng-template #loaded>
-  <div class="flex h-10 flex-row items-center justify-between gap-1">
+<app-loading [loading]="loading">
+  <div class="h-4 w-40" loading></div>
+
+  <div class="flex h-10 flex-row items-center justify-between gap-1" content>
     <h3>
       {{ character }}
     </h3>
@@ -10,4 +9,4 @@
       {{ modelName }}
     </h5>
   </div>
-</ng-template>
+</app-loading>
