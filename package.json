@@ -7,7 +7,7 @@
     "build": "ng build && copyfiles web.config dist/romerart-angular18/",
     "watch": "ng build --watch --configuration development",
     "prod": "ng build --configuration production && copyfiles web.config dist/romerart-angular18/",
-    "test": "ng test",
+    "test": "ng test --code-coverage --browsers=ChromeHeadless",
     "serve:ssr:romerart-angular18": "node dist/romerart-angular18/server/server.mjs",
     "lint": "ng lint --fix",
     "postbuild": "copyfiles web.config dist/romerart-angular18/",

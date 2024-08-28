@@ -4,33 +4,7 @@
     like: type === 'like',
     dislike: type === 'dislike',
   }">
-  <!-- <div class="flex w-full items-start justify-start">
-    <div *ngIf="first">
-      <img
-        alt="Miguel"
-        *ngIf="type === ''"
-        src="assets/images/me/smile.png"
-        class="mr-chat-image-miguel" />
-
-      <div
-        *ngIf="type === 'like'"
-        class="mr-chat-icon"
-        title="Puntos buenos y cosas que me gustan">
-        <i class="bi bi-hand-thumbs-up"></i>
-      </div>
-
-      <div
-        *ngIf="type === 'dislike'"
-        class="mr-chat-icon"
-        title="Puntos negativos y cosas a mejorar">
-        <i class="bi bi-hand-thumbs-down"></i>
-      </div>
-    </div>
-  </div> -->
   <div class="mr-chat-message-container flex flex-col gap-2">
-    <app-translatable [originalText]="comment || ''">
-      <!-- <div class="mr-chat-message" [innerHTML]="comment"></div> -->
-    </app-translatable>
+    <app-translatable [originalText]="comment || ''"> </app-translatable>
   </div>
-  <!-- <div class="mr-chat-image hvr-wobble-horizontal"></div> -->
 </div>

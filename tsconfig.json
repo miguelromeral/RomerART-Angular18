@@ -19,7 +19,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "lib": ["ES2022", "dom"],
-    "types": ["jquery"],
+    "types": ["jquery", "jasmine", "node"],
     "baseUrl": "src",
     "paths": {
       "@app/*": ["app/*"],
@@ -27,7 +27,8 @@
       "@services/*": ["app/services/*"],
       "@models/*": ["models/*"],
       "@assets/*": ["../public/assets/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@e2e/*": ["e2e/*"]
     }
   },
   "angularCompilerOptions": {
