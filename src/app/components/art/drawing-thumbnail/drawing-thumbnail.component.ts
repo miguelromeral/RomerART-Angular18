@@ -1,5 +1,5 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Drawing } from '@models/art/drawing.model';
 import { DrawingScoreComponent } from '../drawing-score/drawing-score.component';
@@ -9,6 +9,7 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageService } from '@app/services/language/language.service';
 import { settingLanguage } from 'config/settings/language.config';
 import { formattedDateMini } from '@utils/customization/date-utils';
+import { drawingThumbnailAnimation } from '@app/animations/art/drawing-thumbnail.animation';
 
 @Component({
   selector: 'app-drawing-thumbnail',
@@ -23,11 +24,13 @@ import { formattedDateMini } from '@utils/customization/date-utils';
   ],
   templateUrl: './drawing-thumbnail.component.html',
   styleUrl: './drawing-thumbnail.component.scss',
+  animations: [drawingThumbnailAnimation],
 })
 export class DrawingThumbnailComponent
   extends LanguageComponent
   implements OnInit
 {
+  @HostBinding('@fadeInOut') fadeInOut = true;
   private _drawing!: Drawing;
 
   @Input()

@@ -16,6 +16,7 @@ import { getHumanTimeFromMinutes } from '@utils/customization/text-utils';
 import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
 import { LoadingComponent } from '../../../components/shared/loading/loading.component';
 import { ArtFilterFormConfig } from 'config/art/art-filter-form.config';
+import { artGalleryAnimation } from '@app/animations/art/drawing-thumbnail.animation';
 
 @Component({
   selector: 'app-search',
@@ -33,7 +34,7 @@ import { ArtFilterFormConfig } from 'config/art/art-filter-form.config';
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
-  animations: [filterFormAnimation],
+  animations: [filterFormAnimation, artGalleryAnimation],
 })
 export class SearchComponent extends LanguageComponent implements OnInit {
   listDrawings: Drawing[] = [];
