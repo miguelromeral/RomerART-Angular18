@@ -64,3 +64,15 @@ export const settingFormatDate: ISettingSelect = {
     },
   ],
 };
+
+export const settingShowSpotify: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  inputId: 'iSwitchShowSpotify',
+  key: 'showSpotify',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-SPOTIFY.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-SPOTIFY.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-SPOTIFY.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-SPOTIFY.HIDE',
+  formControlName: 'showSpotify',
+};

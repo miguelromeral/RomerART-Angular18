@@ -5,7 +5,7 @@
   [ngClass]="{ favorite: drawing.favorite }">
   <div class="contenido relative h-full w-full overflow-hidden object-contain">
     <div
-      *ngIf="drawing.spotifyTrackId"
+      *ngIf="showSpotify && drawing.spotifyTrackId !== ''"
       class="mr-thumbnail-spotify-icon mr-img-thumbnail-info mr-spotify absolute right-1 top-1 h-5">
       <a [href]="drawing.spotifyUrl" target="_blank" class="relative">
         <i class="bi bi-spotify"></i>

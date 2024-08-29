@@ -10,7 +10,10 @@ import { LanguageService } from '@app/services/language/language.service';
 import { settingLanguage } from 'config/settings/language.config';
 import { formattedDateMini } from '@utils/customization/date-utils';
 import { drawingThumbnailAnimation } from '@app/animations/art/drawing-thumbnail.animation';
-import { settingFormatDate } from 'config/settings/local-storage.config';
+import {
+  settingFormatDate,
+  settingShowSpotify,
+} from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
 
 @Component({
@@ -48,6 +51,7 @@ export class DrawingThumbnailComponent
   url = '';
   currentLanguage = settingLanguage.defaultValue;
   currentFormatDate = settingFormatDate.defaultValue;
+  showSpotify = settingShowSpotify.defaultValue;
 
   bErrorLoadingImage = false;
 
@@ -70,6 +74,9 @@ export class DrawingThumbnailComponent
     });
     this.settingsService.selectSetting$(settingFormatDate).subscribe(format => {
       this.currentFormatDate = format;
+    });
+    this.settingsService.booleanSetting$(settingShowSpotify).subscribe(show => {
+      this.showSpotify = show;
     });
   }
 

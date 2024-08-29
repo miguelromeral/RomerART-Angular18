@@ -1,6 +1,7 @@
 import {
   settingFilterCount,
   settingFormatDate,
+  settingShowSpotify,
   settingTranslations,
   settingZoomImage,
 } from './local-storage.config';
@@ -34,6 +35,7 @@ export const settingsConfig: SettingSection[] = [
     settings: [
       new SettingSwitch(settingFilterCount),
       new SettingSwitch(settingZoomImage),
+      new SettingSwitch(settingShowSpotify),
     ],
   }),
 ];

@@ -22,7 +22,10 @@
         (submittedCheer)="receiveCheer($event)"></app-art-details-image>
     </div>
     <div class="w-full" *ngIf="drawing">
-      <app-tab-panel [tabs]="panelTabs" selectedTab="comments">
+      <app-tab-panel
+        [tabs]="getPanelTabs()"
+        selectedTab="comments"
+        [showSpotify]="showSpotify && drawing.spotifyTrackId !== ''">
         <app-loading [loading]="loading" tab-content-comments>
           <div class="container flex flex-col gap-3" loading>
             <div class="container flex flex-col gap-1">
@@ -75,7 +78,10 @@
           </div>
         </app-loading>
 
-        <app-loading [loading]="loading" tab-content-spotify>
+        <app-loading
+          *ngIf="showSpotify && drawing.spotifyTrackId !== ''"
+          [loading]="loading"
+          tab-content-spotify>
           <div class="h-32 w-full" loading></div>
           <div content>
             <app-spotify-track

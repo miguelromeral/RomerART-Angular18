@@ -26,6 +26,8 @@ import { TranslatableComponent } from '@app/components/shared/translatable/trans
 import { LanguageService } from '@app/services/language/language.service';
 import { formattedDate } from '@utils/customization/date-utils';
 import { settingLanguage } from 'config/settings/language.config';
+import { settingShowSpotify } from 'config/settings/local-storage.config';
+import { SettingsService } from '@app/services/settings/settings.service';
 
 @Component({
   selector: 'app-details',
@@ -60,20 +62,33 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
 
   panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
   currentLanguage: string = settingLanguage.defaultValue;
+  showSpotify = settingShowSpotify.defaultValue;
 
   loading = true;
+
+  getPanelTabs(): TabPanelItem[] {
+    if (this.showSpotify && this.drawing.spotifyTrackId !== '') {
+      return ArtInfoTabsConfig.tabs;
+    } else {
+      return ArtInfoTabsConfig.tabs.filter(x => x.id !== 'spotify');
+    }
+  }
 
   constructor(
     private logger: LoggerService,
     private drawingService: DrawingService,
     private languageService: LanguageService,
-    private metadataService: MetadataService
+    private metadataService: MetadataService,
+    private settingsService: SettingsService
   ) {
     super('SCREENS.DRAWING-DETAILS');
   }
 
   ngOnInit() {
     this.loadDrawing();
+    this.settingsService.booleanSetting$(settingShowSpotify).subscribe(show => {
+      this.showSpotify = show;
+    });
     this.languageService.currentLanguage$.subscribe(lang => {
       this.currentLanguage = lang;
     });

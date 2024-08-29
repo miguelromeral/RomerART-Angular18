@@ -30,6 +30,7 @@ export class TabPanelComponent
   implements AfterViewInit
 {
   @Input() tabs: TabPanelItem[] = [];
+  @Input() showSpotify!: boolean;
   panelsId: IArtInfoTabsConfigId = artTabInfoIds;
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
 
@@ -63,10 +64,15 @@ export class TabPanelComponent
   }
 
   slideTo(index: number) {
+    if (index >= this.tabs.length) return;
+
     this.swiper.slideTo(index);
   }
 
   onSlideChange() {
+    if (this.swiper.activeIndex >= this.tabs.length) {
+      this.swiper.slideTo(this.tabs.length - 1);
+    }
     this.currentTabIndex = this.swiper.activeIndex; // Actualiza el índice de la pestaña actual
   }
 }

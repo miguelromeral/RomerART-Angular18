@@ -3,12 +3,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { LanguageService } from '@app/services/language/language.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  settingFilterCount,
-  settingFormatDate,
-  settingTranslations,
-  settingZoomImage,
-} from 'config/settings/local-storage.config';
 import { LayoutComponent } from '../../components/shared/layout/layout.component';
 import { ThemeService } from '@app/services/theme/theme.service';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
@@ -70,14 +64,7 @@ export class SettingsComponent
 
   providers = providersConfigList;
 
-  settingsForm = new FormGroup({
-    langFormControl: new FormControl(settingLanguage.defaultValue),
-    themeFormControl: new FormControl(settingTheme.defaultValue),
-    translateFormControl: new FormControl(settingTranslations.defaultValue),
-    filterCountFormControl: new FormControl(settingFilterCount.defaultValue),
-    zoomImage: new FormControl(settingZoomImage.defaultValue),
-    formatDate: new FormControl(settingFormatDate.defaultValue),
-  });
+  settingsForm = new FormGroup({});
 
   constructor(
     private metadataService: MetadataService,
@@ -86,6 +73,15 @@ export class SettingsComponent
     private settingsService: SettingsService
   ) {
     super('SCREENS.SETTINGS');
+
+    this.settingsService.getSettings().forEach(section => {
+      section.settings.forEach(set => {
+        this.settingsForm.addControl(
+          set.formControlName,
+          new FormControl(set.defaultValue)
+        );
+      });
+    });
   }
 
   get settings() {
@@ -110,7 +106,6 @@ export class SettingsComponent
   }
 
   initSettings() {
-    // this.settingsService.setFormControls(this.settingsForm)
     this.settingsService.init();
 
     this.settings.forEach(section => {

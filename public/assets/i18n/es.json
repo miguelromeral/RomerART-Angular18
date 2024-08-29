@@ -270,6 +270,12 @@
           "MONTH-YY": "MES 'AA",
           "MM-YY": "MM/AA",
           "YY-MM": "AA/MM"
+        },
+        "SHOW-SPOTIFY": {
+          "TITLE": "Spotify",
+          "DESCRIPTION": "Mostrar enlaces de canciones a Spotify en los dibujos que sí dispongan de una canción enlazada.",
+          "SHOW": "Mostrar",
+          "HIDE": "Ocultar"
         }
       },
       "FOOTER": {

@@ -270,6 +270,12 @@
           "MONTH-YY": "MONTH 'YY",
           "MM-YY": "MM/YY",
           "YY-MM": "YY/MM"
+        },
+        "SHOW-SPOTIFY": {
+          "TITLE": "Spotify",
+          "DESCRIPTION": "Show Spotify links in those drawings which have a Spotify track linked.",
+          "SHOW": "Show",
+          "HIDE": "Hide"
         }
       },
       "FOOTER": {

@@ -107,10 +107,8 @@ export class SettingsService {
 
   setBooleanSetting(key: string, value: boolean): void {
     const setting = this.getBooleanSetting(key);
-    if (setting) {
-      this.storage.setItem(setting.key, value.toString());
-      setting.subject.next(value);
-    }
+    this.storage.setItem(key, value.toString());
+    setting?.subject.next(value);
   }
 
   setSelectSetting(key: string, value: string) {
@@ -131,9 +129,15 @@ export class SettingsService {
   booleanSetting$(setting: ISettingSwitch): Observable<boolean> {
     return this.getBooleanSetting(setting.key)!.subject.asObservable();
   }
+  booleanSettingValue(setting: ISettingSwitch): boolean {
+    return this.getBooleanSetting(setting.key)!.subject.getValue();
+  }
 
   selectSetting$(setting: ISettingSelect): Observable<string> {
     return this.getSelectSetting(setting.key)!.subject.asObservable();
+  }
+  selectSettingValue(setting: ISettingSelect): string {
+    return this.getSelectSetting(setting.key)!.subject.getValue();
   }
 
   isSettingSwitch(setting: Setting): setting is SettingSwitch {
