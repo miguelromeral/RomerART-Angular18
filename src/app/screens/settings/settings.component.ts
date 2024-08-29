@@ -5,6 +5,7 @@ import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   settingFilterCount,
+  settingFormatDate,
   settingTranslations,
   settingZoomImage,
 } from 'config/settings/local-storage.config';
@@ -75,6 +76,7 @@ export class SettingsComponent
     translateFormControl: new FormControl(settingTranslations.defaultValue),
     filterCountFormControl: new FormControl(settingFilterCount.defaultValue),
     zoomImage: new FormControl(settingZoomImage.defaultValue),
+    formatDate: new FormControl(settingFormatDate.defaultValue),
   });
 
   constructor(

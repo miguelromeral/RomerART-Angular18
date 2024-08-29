@@ -1,4 +1,7 @@
-import { ISettingSwitch } from '@models/settings/settings.model';
+import {
+  ISettingSelect,
+  ISettingSwitch,
+} from '@models/settings/settings.model';
 
 export const settingTranslations: ISettingSwitch = {
   defaultValue: true,
@@ -34,4 +37,30 @@ export const settingZoomImage: ISettingSwitch = {
   showCode: 'SCREENS.SETTINGS.FORM.IMAGE-ZOOM.SHOW',
   hideCode: 'SCREENS.SETTINGS.FORM.IMAGE-ZOOM.HIDE',
   formControlName: 'zoomImage',
+};
+
+export const settingFormatDate: ISettingSelect = {
+  defaultValue: 'month-yy',
+  type: 'select',
+  key: 'format-date',
+  formControlName: 'formatDate',
+  titleCode: 'SCREENS.SETTINGS.FORM.FORMAT-DATE.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.FORMAT-DATE.DESCRIPTION',
+  options: [
+    {
+      value: 'month-yy',
+      label: '',
+      labelCode: 'SCREENS.SETTINGS.FORM.FORMAT-DATE.MONTH-YY',
+    },
+    {
+      value: 'mm/yy',
+      label: '',
+      labelCode: 'SCREENS.SETTINGS.FORM.FORMAT-DATE.MM-YY',
+    },
+    {
+      value: 'yy/mm',
+      label: '',
+      labelCode: 'SCREENS.SETTINGS.FORM.FORMAT-DATE.YY-MM',
+    },
+  ],
 };

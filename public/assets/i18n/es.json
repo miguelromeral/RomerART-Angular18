@@ -225,7 +225,8 @@
         "ACCOUNT": "Cuenta",
         "PROVIDERS": "Proveedores",
         "LANGUAGE": "Idioma",
-        "DRAWINGS": "Dibujos"
+        "DRAWINGS": "Dibujos",
+        "CUSTOMIZATION": "Personalización"
       },
       "FORM": {
         "CHANGE-LANGUAGE": {
@@ -262,6 +263,13 @@
           "DESCRIPTION": "Habilitar el zoom en imágenes al pasar el ratón por encima o pellizar la imagen con dos dedos",
           "SHOW": "Habilitado",
           "HIDE": "Deshabilitado"
+        },
+        "FORMAT-DATE": {
+          "TITLE": "Formato de Fecha",
+          "DESCRIPTION": "Cambia el formato en que se muestran las fechas en la aplicación.",
+          "MONTH-YY": "MES 'AA",
+          "MM-YY": "MM/AA",
+          "YY-MM": "AA/MM"
         }
       },
       "FOOTER": {

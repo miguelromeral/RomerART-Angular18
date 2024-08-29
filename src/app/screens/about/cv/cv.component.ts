@@ -4,6 +4,7 @@ import { ExperienceProjectComponent } from '@app/components/about/experience-pro
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageService } from '@app/services/language/language.service';
+import { SettingsService } from '@app/services/settings/settings.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -21,6 +22,7 @@ import {
   personalStrengthsConfig,
 } from 'config/about/cv.config';
 import { settingLanguage } from 'config/settings/language.config';
+import { settingFormatDate } from 'config/settings/local-storage.config';
 
 @Component({
   selector: 'app-cv',
@@ -46,14 +48,21 @@ export class CvComponent extends LanguageComponent implements OnInit {
   strengths = personalStrengthsConfig;
   links = experienceLinksConfig;
   currentLanguage: string = settingLanguage.defaultValue;
+  currentFormatDate: string = settingFormatDate.defaultValue;
 
-  constructor(private languageService: LanguageService) {
+  constructor(
+    private languageService: LanguageService,
+    private settingsService: SettingsService
+  ) {
     super('SCREENS.CV');
   }
 
   ngOnInit() {
     this.languageService.currentLanguage$.subscribe(lang => {
       this.currentLanguage = lang;
+    });
+    this.settingsService.selectSetting$(settingFormatDate).subscribe(format => {
+      this.currentFormatDate = format;
     });
   }
 
@@ -62,7 +71,11 @@ export class CvComponent extends LanguageComponent implements OnInit {
   }
 
   formattedDateMini(date: Date) {
-    return formattedDateMini(date, this.currentLanguage);
+    return formattedDateMini(
+      date,
+      this.currentLanguage,
+      this.currentFormatDate
+    );
   }
 
   printDocument(): void {

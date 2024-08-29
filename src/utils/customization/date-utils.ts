@@ -17,18 +17,35 @@ export function yearsDifference(fechaInicio: Date, fechaFin: Date): number {
 export function formattedDate(date: Date, locale: string): string {
   if (!date) return '';
 
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = date.toLocaleString(locale, { month: 'long' });
-  const year = date.getFullYear();
-
-  return `${day} ${month} ${year}`;
+  return `${date.toLocaleString(locale, { month: 'long', year: 'numeric', day: 'numeric' })}`;
 }
 
-export function formattedDateMini(date: Date, locale: string): string {
+export function formattedDateMini(
+  date: Date,
+  locale: string,
+  format: string
+): string {
   if (!date) return '';
 
-  const month = date.toLocaleString(locale, { month: 'long' });
-  const year = date.getFullYear().toString().slice(-2); // Últimos 2 dígitos del año
+  switch (format) {
+    case 'month-yy': {
+      const month = date.toLocaleString(locale, { month: 'long' });
+      const year = date.getFullYear().toString().slice(-2);
 
-  return `${month} '${year}`;
+      return `${month} '${year}`;
+    }
+    case 'mm/yy': {
+      const month = date.toLocaleString(locale, { month: '2-digit' });
+      const year = date.getFullYear().toString().slice(-2);
+
+      return `${month}/'${year}`;
+    }
+    case 'yy/mm': {
+      const month = date.toLocaleString(locale, { month: '2-digit' });
+      const year = date.getFullYear().toString().slice(-2);
+
+      return `${year}/${month}`;
+    }
+  }
+  return '';
 }

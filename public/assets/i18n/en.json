@@ -225,7 +225,8 @@
         "ACCOUNT": "Account",
         "PROVIDERS": "Providers",
         "LANGUAGE": "Language",
-        "DRAWINGS": "Drawings"
+        "DRAWINGS": "Drawings",
+        "CUSTOMIZATION": "Customization"
       },
       "FORM": {
         "CHANGE-LANGUAGE": {
@@ -262,6 +263,13 @@
           "DESCRIPTION": "Enable zooming in on images by hovering over or mirroring the image with two fingers",
           "SHOW": "Enabled",
           "HIDE": "Disabled"
+        },
+        "FORMAT-DATE": {
+          "TITLE": "Date Format",
+          "DESCRIPTION": "Change the way dates are displayed throughout the app.",
+          "MONTH-YY": "MONTH 'YY",
+          "MM-YY": "MM/YY",
+          "YY-MM": "YY/MM"
         }
       },
       "FOOTER": {

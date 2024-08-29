@@ -10,6 +10,8 @@ import { LanguageService } from '@app/services/language/language.service';
 import { settingLanguage } from 'config/settings/language.config';
 import { formattedDateMini } from '@utils/customization/date-utils';
 import { drawingThumbnailAnimation } from '@app/animations/art/drawing-thumbnail.animation';
+import { settingFormatDate } from 'config/settings/local-storage.config';
+import { SettingsService } from '@app/services/settings/settings.service';
 
 @Component({
   selector: 'app-drawing-thumbnail',
@@ -45,10 +47,14 @@ export class DrawingThumbnailComponent
   @Input() fullsize = false;
   url = '';
   currentLanguage = settingLanguage.defaultValue;
+  currentFormatDate = settingFormatDate.defaultValue;
 
   bErrorLoadingImage = false;
 
-  constructor(private languageService: LanguageService) {
+  constructor(
+    private languageService: LanguageService,
+    private settingsService: SettingsService
+  ) {
     super('SCREENS.DRAWING-DETAILS');
   }
 
@@ -61,6 +67,9 @@ export class DrawingThumbnailComponent
     this.detectThumbnailUrl();
     this.languageService.currentLanguage$.subscribe(lang => {
       this.currentLanguage = lang;
+    });
+    this.settingsService.selectSetting$(settingFormatDate).subscribe(format => {
+      this.currentFormatDate = format;
     });
   }
 
@@ -75,7 +84,11 @@ export class DrawingThumbnailComponent
   }
 
   formatDateMini(date: Date) {
-    return formattedDateMini(date, this.currentLanguage);
+    return formattedDateMini(
+      date,
+      this.currentLanguage,
+      this.currentFormatDate
+    );
   }
 
   errorLoadingImage() {

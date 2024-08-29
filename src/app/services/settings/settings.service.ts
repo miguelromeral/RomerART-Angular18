@@ -94,16 +94,15 @@ export class SettingsService {
       case settingLanguage.key:
         {
           this.languageService.init();
-          this.setSelectSetting(setting.key, value ?? '');
         }
         break;
       case settingTheme.key:
         {
           this.themeService.init();
-          this.setSelectSetting(setting.key, value ?? '');
         }
         break;
     }
+    this.setSelectSetting(setting.key, value ?? setting.defaultValue);
   }
 
   setBooleanSetting(key: string, value: boolean): void {
@@ -123,6 +122,8 @@ export class SettingsService {
       case settingTheme.key:
         this.themeService.setTheme(value);
         break;
+      default:
+        this.storage.setItem(key, value);
     }
     setting?.subject.next(value);
   }

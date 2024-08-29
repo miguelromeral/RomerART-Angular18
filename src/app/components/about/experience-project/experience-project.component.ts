@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageService } from '@app/services/language/language.service';
+import { SettingsService } from '@app/services/settings/settings.service';
 import { IExperience } from '@models/about/cv.model';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import { formattedDateMini } from '@utils/customization/date-utils';
 import { sortTechnologyByLevel } from '@utils/sorting/sort-utils';
 import { settingLanguage } from 'config/settings/language.config';
+import { settingFormatDate } from 'config/settings/local-storage.config';
 
 @Component({
   selector: 'app-experience-project',
@@ -22,14 +24,21 @@ export class ExperienceProjectComponent
 {
   @Input() project!: IExperience;
   currentLanguage: string = settingLanguage.defaultValue;
+  currentFormatDate: string = settingFormatDate.defaultValue;
 
-  constructor(private languageService: LanguageService) {
+  constructor(
+    private languageService: LanguageService,
+    private settingsService: SettingsService
+  ) {
     super('SCREENS.CV.EXPERIENCE');
   }
 
   ngOnInit() {
     this.languageService.currentLanguage$.subscribe(lang => {
       this.currentLanguage = lang;
+    });
+    this.settingsService.selectSetting$(settingFormatDate).subscribe(format => {
+      this.currentFormatDate = format;
     });
   }
 
@@ -38,6 +47,10 @@ export class ExperienceProjectComponent
   }
 
   formatDateMini(date: Date) {
-    return formattedDateMini(date, this.currentLanguage);
+    return formattedDateMini(
+      date,
+      this.currentLanguage,
+      this.currentFormatDate
+    );
   }
 }

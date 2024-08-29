@@ -24,6 +24,8 @@ import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
 import { LanguageService } from '@app/services/language/language.service';
+import { formattedDate } from '@utils/customization/date-utils';
+import { settingLanguage } from 'config/settings/language.config';
 
 @Component({
   selector: 'app-details',
@@ -57,6 +59,7 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   drawingNotFound: boolean | undefined;
 
   panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
+  currentLanguage: string = settingLanguage.defaultValue;
 
   loading = true;
 
@@ -71,6 +74,9 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
 
   ngOnInit() {
     this.loadDrawing();
+    this.languageService.currentLanguage$.subscribe(lang => {
+      this.currentLanguage = lang;
+    });
   }
   loadDrawing() {
     if (this.id) {
@@ -132,5 +138,9 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
       // console.log('New likes: ' + likes);
       this.drawing.likes = likes;
     }
+  }
+
+  formattedDate(date: Date) {
+    return formattedDate(date, this.currentLanguage);
   }
 }
