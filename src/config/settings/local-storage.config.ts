@@ -19,7 +19,7 @@ export const settingTranslations: ISettingSwitch = {
 export const settingFilterCount: ISettingSwitch = {
   defaultValue: true,
   type: 'switch',
-  icon: '5-circle',
+  icon: 'app-indicator',
   inputId: 'iSwitchFilterCount',
   key: 'filterCount',
   titleCode: 'SCREENS.SETTINGS.FORM.SHOW-FILTER-COUNT.TITLE',
@@ -93,4 +93,17 @@ export const settingShowKudos: ISettingSwitch = {
   showCode: 'SCREENS.SETTINGS.FORM.SHOW-KUDOS.SHOW',
   hideCode: 'SCREENS.SETTINGS.FORM.SHOW-KUDOS.HIDE',
   formControlName: 'showKudos',
+};
+
+export const settingShowViews: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  icon: 'eye',
+  inputId: 'iSwitchShowViews',
+  key: 'show-views',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-VIEWS.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-VIEWS.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-VIEWS.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-VIEWS.HIDE',
+  formControlName: 'showViews',
 };

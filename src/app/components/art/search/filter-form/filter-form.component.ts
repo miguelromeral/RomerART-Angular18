@@ -45,6 +45,7 @@ import { SectionComponent } from '@app/components/shared/section/section.compone
 import {
   settingFilterCount,
   settingShowKudos,
+  settingShowViews,
 } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
 import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
@@ -94,6 +95,9 @@ export class FilterFormComponent
     let list = artFilterValuesSortBy;
     if (!this.showKudos) {
       list = list.filter(x => x.class !== 'kudos');
+    }
+    if (!this.showViews) {
+      list = list.filter(x => x.class !== 'views');
     }
     return list;
   }
@@ -167,6 +171,7 @@ export class FilterFormComponent
   showSoftware = true;
   showPaper = true;
   showKudos = settingShowKudos.defaultValue;
+  showViews = settingShowViews.defaultValue;
 
   constructor(
     private drawingService: DrawingService,
@@ -185,6 +190,9 @@ export class FilterFormComponent
     });
     this.settingsService.booleanSetting$(settingShowKudos).subscribe(show => {
       this.showKudos = show;
+    });
+    this.settingsService.booleanSetting$(settingShowViews).subscribe(show => {
+      this.showViews = show;
     });
 
     this.loadSelects();

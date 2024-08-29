@@ -282,6 +282,12 @@
           "DESCRIPTION": "Show how many kudos (or likes) a drawing has.",
           "SHOW": "Show",
           "HIDE": "Hide"
+        },
+        "SHOW-VIEWS": {
+          "TITLE": "Views",
+          "DESCRIPTION": "Show visualizations of a drawing.",
+          "SHOW": "Show",
+          "HIDE": "Hide"
         }
       },
       "FOOTER": {

@@ -137,6 +137,7 @@
             <div
               class="col-span-1 flex flex-col flex-nowrap gap-2 sm:col-span-2">
               <app-details-section
+                *ngIf="showViews"
                 type="views"
                 [rawText]="drawing.views.toString()">
               </app-details-section>

@@ -26,7 +26,10 @@ import { TranslatableComponent } from '@app/components/shared/translatable/trans
 import { LanguageService } from '@app/services/language/language.service';
 import { formattedDate } from '@utils/customization/date-utils';
 import { settingLanguage } from 'config/settings/language.config';
-import { settingShowSpotify } from 'config/settings/local-storage.config';
+import {
+  settingShowSpotify,
+  settingShowViews,
+} from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
 
 @Component({
@@ -63,6 +66,7 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
   currentLanguage: string = settingLanguage.defaultValue;
   showSpotify = settingShowSpotify.defaultValue;
+  showViews = settingShowViews.defaultValue;
 
   loading = true;
 
@@ -88,6 +92,9 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
     this.loadDrawing();
     this.settingsService.booleanSetting$(settingShowSpotify).subscribe(show => {
       this.showSpotify = show;
+    });
+    this.settingsService.booleanSetting$(settingShowViews).subscribe(show => {
+      this.showViews = show;
     });
     this.languageService.currentLanguage$.subscribe(lang => {
       this.currentLanguage = lang;
