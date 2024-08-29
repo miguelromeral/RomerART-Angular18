@@ -59,7 +59,7 @@
               (click)="cheerDrawing($event)">
               <i id="iCheerIcon" class="bi bi-heart"></i>
             </button>
-            <div id="spLikesCounter" class="text-sm">
+            <div *ngIf="showKudos" id="spLikesCounter" class="text-sm">
               {{ drawing.likesHuman }}
             </div>
           </div>

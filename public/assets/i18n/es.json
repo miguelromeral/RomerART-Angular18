@@ -276,6 +276,12 @@
           "DESCRIPTION": "Mostrar enlaces de canciones a Spotify en los dibujos que sí dispongan de una canción enlazada.",
           "SHOW": "Mostrar",
           "HIDE": "Ocultar"
+        },
+        "SHOW-KUDOS": {
+          "TITLE": "Kudos",
+          "DESCRIPTION": "Mostrar la cantidad de kudos (o likes) que un dibujo tiene.",
+          "SHOW": "Mostrar",
+          "HIDE": "Ocultar"
         }
       },
       "FOOTER": {

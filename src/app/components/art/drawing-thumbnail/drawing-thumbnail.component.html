@@ -46,11 +46,9 @@
         class="mr-img-thumbnail-details-container mr-img-thumbnail-info relative flex h-8 w-full flex-row flex-nowrap items-center justify-between p-1">
         <div
           class="mr-img-thumbnail-stats mr-img-thumbnail-info bottom-0 -z-10 flex flex-row flex-nowrap items-center justify-around text-sm">
-          <!-- <div class="mr-img-thumbnail-stats-item">
-                <i class="bi bi-eye"></i>
-                <span>drawing.views</span>
-            </div> -->
-          <div class="mr-img-thumbnail-stats-item likes kudos">
+          <div
+            class="mr-img-thumbnail-stats-item likes kudos"
+            *ngIf="showKudos">
             <i class="bi bi-heart"></i>
             <span> {{ drawing.likesHuman }}</span>
           </div>

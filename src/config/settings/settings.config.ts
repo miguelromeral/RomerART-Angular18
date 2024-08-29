@@ -1,6 +1,7 @@
 import {
   settingFilterCount,
   settingFormatDate,
+  settingShowKudos,
   settingShowSpotify,
   settingTranslations,
   settingZoomImage,
@@ -35,6 +36,7 @@ export const settingsConfig: SettingSection[] = [
     settings: [
       new SettingSwitch(settingFilterCount),
       new SettingSwitch(settingZoomImage),
+      new SettingSwitch(settingShowKudos),
       new SettingSwitch(settingShowSpotify),
     ],
   }),

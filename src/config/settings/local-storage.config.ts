@@ -81,3 +81,16 @@ export const settingShowSpotify: ISettingSwitch = {
   hideCode: 'SCREENS.SETTINGS.FORM.SHOW-SPOTIFY.HIDE',
   formControlName: 'showSpotify',
 };
+
+export const settingShowKudos: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  icon: 'heart',
+  inputId: 'iSwitchShowKudos',
+  key: 'show-kudos',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-KUDOS.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-KUDOS.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-KUDOS.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-KUDOS.HIDE',
+  formControlName: 'showKudos',
+};

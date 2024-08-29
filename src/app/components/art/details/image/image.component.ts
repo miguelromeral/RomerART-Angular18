@@ -22,6 +22,8 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { heartsAnimationConfig } from 'config/customization/heart-animation.config';
 import { ZoomImageComponent } from '@app/components/shared/zoom-image/zoom-image.component';
+import { settingShowKudos } from 'config/settings/local-storage.config';
+import { SettingsService } from '@app/services/settings/settings.service';
 
 @Component({
   selector: 'app-art-details-image',
@@ -57,6 +59,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   }
 
   admin = false;
+  showKudos = settingShowKudos.defaultValue;
 
   btnCheerId = 'btnCheer';
 
@@ -67,6 +70,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private customTranslate: CustomTranslatePipe,
+    private settingsService: SettingsService,
     private renderer: Renderer2
   ) {
     super('SCREENS.DRAWING-DETAILS');
@@ -74,6 +78,9 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
   ngOnInit() {
     this.loadLoggedUser();
+    this.settingsService.booleanSetting$(settingShowKudos).subscribe(show => {
+      this.showKudos = show;
+    });
   }
 
   loadLoggedUser() {

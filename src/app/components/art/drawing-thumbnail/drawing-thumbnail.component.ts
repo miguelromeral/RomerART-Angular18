@@ -12,6 +12,7 @@ import { formattedDateMini } from '@utils/customization/date-utils';
 import { drawingThumbnailAnimation } from '@app/animations/art/drawing-thumbnail.animation';
 import {
   settingFormatDate,
+  settingShowKudos,
   settingShowSpotify,
 } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
@@ -52,6 +53,7 @@ export class DrawingThumbnailComponent
   currentLanguage = settingLanguage.defaultValue;
   currentFormatDate = settingFormatDate.defaultValue;
   showSpotify = settingShowSpotify.defaultValue;
+  showKudos = settingShowKudos.defaultValue;
 
   bErrorLoadingImage = false;
 
@@ -77,6 +79,9 @@ export class DrawingThumbnailComponent
     });
     this.settingsService.booleanSetting$(settingShowSpotify).subscribe(show => {
       this.showSpotify = show;
+    });
+    this.settingsService.booleanSetting$(settingShowKudos).subscribe(show => {
+      this.showKudos = show;
     });
   }
 

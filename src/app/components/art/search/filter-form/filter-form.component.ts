@@ -42,7 +42,10 @@ import { TextInputComponent } from '@app/components/shared/inputs/text-input/tex
 import { SelectInputComponent } from '@app/components/shared/inputs/select-input/select-input.component';
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { SectionComponent } from '@app/components/shared/section/section.component';
-import { settingFilterCount } from 'config/settings/local-storage.config';
+import {
+  settingFilterCount,
+  settingShowKudos,
+} from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
 import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
 
@@ -87,7 +90,14 @@ export class FilterFormComponent
   loadingCollections = true;
 
   /* Filter Form Select */
-  listOptionsSortBy: IArtFilterValuesSortBy[] = artFilterValuesSortBy;
+  get listOptionsSortBy(): IArtFilterValuesSortBy[] {
+    let list = artFilterValuesSortBy;
+    if (!this.showKudos) {
+      list = list.filter(x => x.class !== 'kudos');
+    }
+    return list;
+  }
+
   listDrawingStyles: DrawingStyle[] = [];
   filteredDrawingStyles: DrawingStyle[] = [];
   listDrawingProductTypes: DrawingProductType[] = [];
@@ -156,6 +166,7 @@ export class FilterFormComponent
   /* Filter Behaviour */
   showSoftware = true;
   showPaper = true;
+  showKudos = settingShowKudos.defaultValue;
 
   constructor(
     private drawingService: DrawingService,
@@ -169,12 +180,15 @@ export class FilterFormComponent
   }
 
   ngOnInit(): void {
-    this.loadSelects();
-    this.setValuesFromQueryParams();
-
     this.settingsService.booleanSetting$(settingFilterCount).subscribe(show => {
       this.showFilterCount = show;
     });
+    this.settingsService.booleanSetting$(settingShowKudos).subscribe(show => {
+      this.showKudos = show;
+    });
+
+    this.loadSelects();
+    this.setValuesFromQueryParams();
   }
 
   requestMoreDrawings() {
