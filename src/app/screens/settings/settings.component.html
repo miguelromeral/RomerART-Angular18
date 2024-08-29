@@ -11,6 +11,7 @@
         [icon]="section.icon">
         <ng-container *ngFor="let subSetting of section.settings">
           <app-setting-option
+            [icon]="subSetting.icon"
             [title]="subSetting.titleCode | mrTranslate"
             [description]="subSetting.descriptionCode | mrTranslate">
             <ng-container *ngIf="isSettingSwitch(subSetting)">

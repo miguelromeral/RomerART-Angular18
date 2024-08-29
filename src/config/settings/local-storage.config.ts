@@ -7,6 +7,7 @@ export const settingTranslations: ISettingSwitch = {
   defaultValue: true,
   inputId: 'iSwitchTranslations',
   type: 'switch',
+  icon: 'translate',
   key: 'translations',
   titleCode: 'SCREENS.SETTINGS.FORM.TRANSLATIONS.TITLE',
   descriptionCode: 'SCREENS.SETTINGS.FORM.TRANSLATIONS.DESCRIPTION',
@@ -18,6 +19,7 @@ export const settingTranslations: ISettingSwitch = {
 export const settingFilterCount: ISettingSwitch = {
   defaultValue: true,
   type: 'switch',
+  icon: '5-circle',
   inputId: 'iSwitchFilterCount',
   key: 'filterCount',
   titleCode: 'SCREENS.SETTINGS.FORM.SHOW-FILTER-COUNT.TITLE',
@@ -30,6 +32,7 @@ export const settingFilterCount: ISettingSwitch = {
 export const settingZoomImage: ISettingSwitch = {
   defaultValue: true,
   type: 'switch',
+  icon: 'zoom-in',
   inputId: 'iSwitchZoomImage',
   key: 'zoomImages',
   titleCode: 'SCREENS.SETTINGS.FORM.IMAGE-ZOOM.TITLE',
@@ -43,6 +46,7 @@ export const settingFormatDate: ISettingSelect = {
   defaultValue: 'month-yy',
   type: 'select',
   key: 'format-date',
+  icon: 'calendar-date',
   formControlName: 'formatDate',
   titleCode: 'SCREENS.SETTINGS.FORM.FORMAT-DATE.TITLE',
   descriptionCode: 'SCREENS.SETTINGS.FORM.FORMAT-DATE.DESCRIPTION',
@@ -68,6 +72,7 @@ export const settingFormatDate: ISettingSelect = {
 export const settingShowSpotify: ISettingSwitch = {
   defaultValue: true,
   type: 'switch',
+  icon: 'spotify',
   inputId: 'iSwitchShowSpotify',
   key: 'showSpotify',
   titleCode: 'SCREENS.SETTINGS.FORM.SHOW-SPOTIFY.TITLE',

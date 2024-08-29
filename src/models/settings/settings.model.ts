@@ -6,6 +6,7 @@ export type SettingType = 'switch' | 'select';
 
 export interface ISettingBase<T> {
   key: string;
+  icon?: string;
   titleCode: string;
   descriptionCode: string;
   type: SettingType;
@@ -28,6 +29,7 @@ export type ISetting = ISettingSwitch | ISettingSelect;
 export class SettingBase<T> implements ISettingBase<T> {
   key: string;
   defaultValue: T;
+  icon: string;
   titleCode: string;
   descriptionCode: string;
   type: SettingType;
@@ -39,6 +41,7 @@ export class SettingBase<T> implements ISettingBase<T> {
   constructor(setting: ISettingBase<T>) {
     this.key = setting.key;
     this.type = setting.type;
+    this.icon = setting.icon ?? '';
     this.defaultValue = setting.defaultValue;
     this.titleCode = setting.titleCode;
     this.descriptionCode = setting.descriptionCode;

@@ -4,6 +4,7 @@ export const settingLanguage: ISettingSelect = {
   defaultValue: 'es',
   type: 'select',
   key: 'lang',
+  icon: 'flag',
   formControlName: 'langFormControl',
   titleCode: 'SCREENS.SETTINGS.FORM.CHANGE-LANGUAGE.TITLE',
   descriptionCode: 'SCREENS.SETTINGS.FORM.CHANGE-LANGUAGE.DESCRIPTION',

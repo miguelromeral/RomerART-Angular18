@@ -13,6 +13,7 @@ export const settingTheme: ISettingSelect = {
   formControlName: 'themeFormControl',
   key: 'theme',
   type: 'select',
+  icon: 'moon',
   titleCode: 'SCREENS.SETTINGS.FORM.THEME.TITLE',
   descriptionCode: 'SCREENS.SETTINGS.FORM.THEME.DESCRIPTION',
   options: [
