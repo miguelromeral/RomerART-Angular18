@@ -23,9 +23,11 @@ import { settingLanguage } from 'config/settings/language.config';
 import { settingTheme } from 'config/settings/theme.config';
 import {
   Setting,
+  SettingNumber,
   SettingSelect,
   SettingSwitch,
 } from '@models/settings/settings.model';
+import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
 
 @Component({
   selector: 'app-settings',
@@ -46,6 +48,7 @@ import {
     TranslatableComponent,
     SwitchComponent,
     CommonModule,
+    TextInputComponent,
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
@@ -121,6 +124,12 @@ export class SettingsComponent
             control?.patchValue(value);
           });
         }
+        if (this.isSettingNumber(setting)) {
+          setting.subject$.subscribe(value => {
+            const control = this.findControlByName(setting.formControlName);
+            control?.patchValue(value);
+          });
+        }
       });
     });
   }
@@ -137,11 +146,21 @@ export class SettingsComponent
     this.settingsService.setSelectSetting(key, value);
   }
 
+  setNumberSetting(event: Event, key: string) {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    this.settingsService.setNumberSetting(key, parseFloat(value));
+  }
+
   isSettingSwitch(setting: Setting): setting is SettingSwitch {
     return setting.type === 'switch';
   }
 
   isSettingSelect(setting: Setting): setting is SettingSelect {
     return setting.type === 'select';
+  }
+
+  isSettingNumber(setting: Setting): setting is SettingNumber {
+    return setting.type === 'number';
   }
 }

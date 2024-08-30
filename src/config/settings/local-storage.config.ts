@@ -1,4 +1,5 @@
 import {
+  ISettingNumber,
   ISettingSelect,
   ISettingSwitch,
 } from '@models/settings/settings.model';
@@ -132,4 +133,18 @@ export const settingShowScorePopular: ISettingSwitch = {
   showCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-POPULAR.SHOW',
   hideCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-POPULAR.HIDE',
   formControlName: 'showScorePopular',
+};
+
+// TODO: ponerlo como dependiente de settingShowZoom
+export const settingMaxZoom: ISettingNumber = {
+  defaultValue: 2,
+  step: 0.1,
+  minValue: 1,
+  maxValue: 5,
+  type: 'number',
+  icon: 'zoom-in',
+  key: 'max-zoom',
+  titleCode: 'SCREENS.SETTINGS.FORM.MAX-ZOOM.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.MAX-ZOOM.DESCRIPTION',
+  formControlName: 'maxZoom',
 };

@@ -267,6 +267,10 @@
           "SHOW": "Enabled",
           "HIDE": "Disabled"
         },
+        "MAX-ZOOM": {
+          "TITLE": "Maximum Zoom",
+          "DESCRIPTION": "Indicate the maximum zoom the image will get when hovering over"
+        },
         "FORMAT-DATE": {
           "TITLE": "Date Format",
           "DESCRIPTION": "Change the way dates are displayed throughout the app.",

@@ -267,6 +267,10 @@
           "SHOW": "Habilitado",
           "HIDE": "Deshabilitado"
         },
+        "MAX-ZOOM": {
+          "TITLE": "Zoom Máximo",
+          "DESCRIPTION": "Indica la cantidad máxima de zoom al pasar el ratón por encima."
+        },
         "FORMAT-DATE": {
           "TITLE": "Formato de Fecha",
           "DESCRIPTION": "Cambia el formato en que se muestran las fechas en la aplicación.",

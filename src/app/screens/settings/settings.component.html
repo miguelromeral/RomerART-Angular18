@@ -30,6 +30,16 @@
                 (change)="setSelectSetting($event, subSetting.key)">
               </app-select-input>
             </ng-container>
+            <ng-container *ngIf="isSettingNumber(subSetting)">
+              <app-text-input
+                [type]="'number'"
+                [step]="subSetting.step"
+                [min]="subSetting.minValue"
+                [max]="subSetting.maxValue"
+                [formControlName]="subSetting.formControlName"
+                (change)="setNumberSetting($event, subSetting.key)">
+              </app-text-input>
+            </ng-container>
           </app-setting-option>
         </ng-container>
       </app-section>

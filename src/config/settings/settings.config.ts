@@ -1,6 +1,7 @@
 import {
   settingFilterCount,
   settingFormatDate,
+  settingMaxZoom,
   settingShowKudos,
   settingShowScoreCritic,
   settingShowScorePopular,
@@ -9,7 +10,11 @@ import {
   settingTranslations,
   settingZoomImage,
 } from './local-storage.config';
-import { SettingSelect, SettingSwitch } from '@models/settings/settings.model';
+import {
+  SettingNumber,
+  SettingSelect,
+  SettingSwitch,
+} from '@models/settings/settings.model';
 import { settingLanguage } from './language.config';
 import { settingTheme } from './theme.config';
 import { SettingSection } from '@models/settings/settings-sections.model';
@@ -39,6 +44,7 @@ export const settingsConfig: SettingSection[] = [
     settings: [
       new SettingSwitch(settingFilterCount),
       new SettingSwitch(settingZoomImage),
+      new SettingNumber(settingMaxZoom),
       new SettingSwitch(settingShowKudos),
       new SettingSwitch(settingShowViews),
       new SettingSwitch(settingShowScoreCritic),

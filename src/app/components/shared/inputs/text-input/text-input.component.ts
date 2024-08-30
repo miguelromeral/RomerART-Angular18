@@ -32,6 +32,7 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() placeholder = '';
   @Input() type: 'text' | 'number' = 'text';
+  @Input() step = 1;
   @Input() min?: number;
   @Input() max?: number;
   @Input() formControl: FormControl = new FormControl();

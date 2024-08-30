@@ -11,8 +11,10 @@ import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { SettingsService } from '@app/services/settings/settings.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
-import { zoomImageConfig } from 'config/customization/zoom-image-config';
-import { settingZoomImage } from 'config/settings/local-storage.config';
+import {
+  settingMaxZoom,
+  settingZoomImage,
+} from 'config/settings/local-storage.config';
 
 @Component({
   selector: 'app-zoom-image',
@@ -23,6 +25,7 @@ import { settingZoomImage } from 'config/settings/local-storage.config';
 })
 export class ZoomImageComponent extends LanguageComponent implements OnInit {
   enableZoom = settingZoomImage.defaultValue;
+  maxZoom = settingMaxZoom.defaultValue;
 
   private _url = '';
 
@@ -60,6 +63,10 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       .subscribe(enabled => {
         this.enableZoom = enabled;
       });
+
+    this.settingsService.numberSetting$(settingMaxZoom).subscribe(value => {
+      this.maxZoom = value;
+    });
   }
 
   errorLoading() {
@@ -77,7 +84,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       'transition',
       'transform 0.3s ease-in-out'
     );
-    this.scaleImage(event, zoomImageConfig.maxScaleOnHover);
+    this.scaleImage(event, this.maxZoom);
   }
 
   onMouseLeave() {
@@ -93,7 +100,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       return;
     }
     // Permite mover el zoom entre la imagen
-    this.scaleImage(event, zoomImageConfig.maxScaleOnHover);
+    this.scaleImage(event, this.maxZoom);
   }
 
   // Escala la imagen basada en la posición del ratón
@@ -168,6 +175,9 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       // Limitar la escala mínima a 1
       if (scale < 1) {
         scale = 1;
+      }
+      if (scale > this.maxZoom) {
+        scale = this.maxZoom;
       }
 
       // Calcular la nueva posición media entre los dos dedos

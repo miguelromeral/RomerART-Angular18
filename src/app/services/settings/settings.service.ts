@@ -4,9 +4,11 @@ import { LanguageService } from '../language/language.service';
 import { ThemeService } from '../theme/theme.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import {
+  ISettingNumber,
   ISettingSelect,
   ISettingSwitch,
   Setting,
+  SettingNumber,
   SettingSelect,
   SettingSwitch,
 } from '@models/settings/settings.model';
@@ -36,6 +38,9 @@ export class SettingsService {
         }
         if (this.isSettingSelect(setting)) {
           this.initSelectSetting(setting);
+        }
+        if (this.isSettingNumber(setting)) {
+          this.initNumberSetting(setting);
         }
       });
     });
@@ -81,6 +86,18 @@ export class SettingsService {
     return undefined;
   }
 
+  private getNumberSetting(key: string): SettingNumber | undefined {
+    const allSettings: Setting[] = [];
+    this.settings.forEach(section => {
+      allSettings.push(...section.settings);
+    });
+    const found = allSettings.find(x => x.key === key);
+    if (found && this.isSettingNumber(found)) {
+      return found;
+    }
+    return undefined;
+  }
+
   private initBooleanSetting(setting: SettingSwitch) {
     const storedValue = this.storage.getItem(setting.key);
     const value =
@@ -105,6 +122,12 @@ export class SettingsService {
     this.setSelectSetting(setting.key, value ?? setting.defaultValue);
   }
 
+  private initNumberSetting(setting: SettingNumber) {
+    const storedValue = this.storage.getItem(setting.key);
+    const value = storedValue ? parseFloat(storedValue) : setting.defaultValue;
+    this.setNumberSetting(setting.key, value);
+  }
+
   setBooleanSetting(key: string, value: boolean): void {
     const setting = this.getBooleanSetting(key);
     this.storage.setItem(key, value.toString());
@@ -126,6 +149,12 @@ export class SettingsService {
     setting?.subject.next(value);
   }
 
+  setNumberSetting(key: string, value: number): void {
+    const setting = this.getNumberSetting(key);
+    this.storage.setItem(key, value.toString());
+    setting?.subject.next(value);
+  }
+
   booleanSetting$(setting: ISettingSwitch): Observable<boolean> {
     return this.getBooleanSetting(setting.key)!.subject.asObservable();
   }
@@ -140,11 +169,22 @@ export class SettingsService {
     return this.getSelectSetting(setting.key)!.subject.getValue();
   }
 
+  numberSetting$(setting: ISettingNumber): Observable<number> {
+    return this.getNumberSetting(setting.key)!.subject.asObservable();
+  }
+  numberSettingValue(setting: ISettingSelect): number {
+    return this.getNumberSetting(setting.key)!.subject.getValue();
+  }
+
   isSettingSwitch(setting: Setting): setting is SettingSwitch {
     return setting instanceof SettingSwitch;
   }
 
   isSettingSelect(setting: Setting): setting is SettingSelect {
     return setting instanceof SettingSelect;
+  }
+
+  isSettingNumber(setting: Setting): setting is SettingNumber {
+    return setting instanceof SettingNumber;
   }
 }

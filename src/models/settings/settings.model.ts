@@ -2,7 +2,7 @@ import { FormControl } from '@angular/forms';
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export type SettingType = 'switch' | 'select';
+export type SettingType = 'switch' | 'select' | 'number';
 
 export interface ISettingBase<T> {
   key: string;
@@ -24,7 +24,13 @@ export interface ISettingSelect extends ISettingBase<string> {
   options: ICustomSelectOption[];
 }
 
-export type ISetting = ISettingSwitch | ISettingSelect;
+export interface ISettingNumber extends ISettingBase<number> {
+  minValue: number | undefined;
+  maxValue: number | undefined;
+  step: number;
+}
+
+export type ISetting = ISettingSwitch | ISettingSelect | ISettingNumber;
 
 export class SettingBase<T> implements ISettingBase<T> {
   key: string;
@@ -77,4 +83,17 @@ export class SettingSelect extends SettingBase<string> {
   }
 }
 
-export type Setting = SettingSwitch | SettingSelect;
+export class SettingNumber extends SettingBase<number> {
+  minValue: number | undefined;
+  maxValue: number | undefined;
+  step: number;
+
+  constructor(setting: ISettingNumber) {
+    super(setting);
+    this.minValue = setting.minValue;
+    this.maxValue = setting.maxValue;
+    this.step = setting.step;
+  }
+}
+
+export type Setting = SettingSwitch | SettingSelect | SettingNumber;
