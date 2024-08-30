@@ -7,6 +7,9 @@ import { MetadataService } from '@app/services/metadata/metadata.service';
 import { CollectionFormComponent } from '@app/components/collections/collection-form/collection-form.component';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { LanguageService } from '@app/services/language/language.service';
+import { Observable } from 'rxjs';
+import { CanComponentDeactivate } from '@app/guards/can-deactivate.guard';
+import { AlertService } from '@app/services/alerts/alert.service';
 
 @Component({
   selector: 'app-edit-collection',
@@ -17,7 +20,7 @@ import { LanguageService } from '@app/services/language/language.service';
 })
 export class EditCollectionComponent
   extends LanguageComponent
-  implements OnInit
+  implements OnInit, CanComponentDeactivate
 {
   @Input() id: string | null = null;
   collection: Collection = new Collection();
@@ -27,9 +30,19 @@ export class EditCollectionComponent
   constructor(
     private drawingService: DrawingService,
     private metadataService: MetadataService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private alertService: AlertService
   ) {
     super('SCREENS.COLLECTION-FORM');
+  }
+
+  canDeactivate(): boolean | Observable<boolean> {
+    return this.alertService.showConfirmDialog(
+      '¿Salir?',
+      '¿Desea salir? Perderá todos los cambios sin guardar',
+      'Salir',
+      'Quedarme'
+    );
   }
 
   ngOnInit() {

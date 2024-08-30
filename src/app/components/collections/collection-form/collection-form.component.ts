@@ -154,12 +154,12 @@ export class CollectionFormComponent
   }
 
   deleteCollection() {
-    this.alertService.showConfirmDialog('ELIMINAR?', 'SEGURO?', 'SÍ', () => {
+    if (this.alertService.showConfirmDialog('ELIMINAR?', 'SEGURO?', 'SÍ')) {
       this.drawingService.removeCollection(this.collection.id).subscribe(() => {
         this.alertService.showAlert('ELIMINADO', 'ELIMINADO');
         this.router.navigate([`/collections`]);
       });
-    });
+    }
   }
 
   setFormValues(col: Collection) {

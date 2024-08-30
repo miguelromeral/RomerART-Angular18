@@ -33,13 +33,13 @@ export class ConfirmDialogComponent extends LanguageComponent {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   okAndclose(): void {
     if (this.data.okCallback) {
       this.data.okCallback();
     }
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 }

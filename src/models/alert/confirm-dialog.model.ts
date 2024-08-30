@@ -5,4 +5,6 @@ export interface IConfirmDialogData {
   // Confirm
   okText?: string | undefined;
   okCallback?: () => void | undefined;
+
+  cancelText: string | undefined;
 }

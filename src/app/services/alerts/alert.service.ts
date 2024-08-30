@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@app/components/shared/confirm-dialog/confirm-dialog.component';
 import { IConfirmDialogData } from '@models/alert/confirm-dialog.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -12,10 +14,11 @@ export class AlertService {
   showAlert(
     title: string,
     message: string
-  ): MatDialogRef<ConfirmDialogComponent, IConfirmDialogData> {
+  ): MatDialogRef<ConfirmDialogComponent, boolean> {
     const data: IConfirmDialogData = {
       title,
       message,
+      cancelText: undefined,
     };
     return this.sendDialog(data);
   }
@@ -23,22 +26,30 @@ export class AlertService {
   showConfirmDialog(
     title: string,
     message: string,
-    okText: string,
-    okCallback: () => void
-  ): MatDialogRef<ConfirmDialogComponent, IConfirmDialogData> {
+    okText = 'OK',
+    cancelText = 'Cancel'
+  ): Observable<boolean> {
     const data: IConfirmDialogData = {
       title,
       message,
       okText,
-      okCallback,
+      cancelText,
     };
 
-    return this.sendDialog(data);
+    const dialogRef = this.sendDialog(data);
+
+    return dialogRef.afterClosed().pipe(
+      map(result => {
+        // console.log('Result: ', result);
+        return result === true; // Devuelve true si el usuario confirma, false en caso contrario
+      })
+    );
   }
 
-  sendDialog(
+  private sendDialog(
     data: IConfirmDialogData
-  ): MatDialogRef<ConfirmDialogComponent, IConfirmDialogData> {
+  ): MatDialogRef<ConfirmDialogComponent, boolean> {
+    // console.log('Mostrando dialog');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data,
       disableClose: false,
@@ -47,11 +58,6 @@ export class AlertService {
       hasBackdrop: true,
       minWidth: '300px',
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('El diálogo se cerró');
-    //   console.log(`Resultado: ${result}`);
-    // });
 
     return dialogRef;
   }

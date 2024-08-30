@@ -17,6 +17,7 @@ import { CreateCollectionComponent } from './screens/admin/collections/create-co
 import { CvComponent } from './screens/about/cv/cv.component';
 import { AboutComponent } from './screens/about/about/about.component';
 import { SearchCollectionComponent } from './screens/collections/search-collection/search-collection.component';
+import { CanDeactivateGuard } from './guards/can-deactivate.guard';
 
 export const routes: Routes = [
   {
@@ -88,12 +89,13 @@ export const routes: Routes = [
     component: EditComponent,
     data: { withComponentInputBinding: true, animation: 'ArtEditPage' },
     canActivate: [AuthGuard],
+    canDeactivate: [CanDeactivateGuard],
   },
   {
     path: 'art/create',
     component: CreateComponent,
     canActivate: [AuthGuard],
-
+    canDeactivate: [CanDeactivateGuard],
     data: {
       animation: 'ArtCreatePage',
     },
@@ -118,6 +120,7 @@ export const routes: Routes = [
     component: EditCollectionComponent,
     data: { withComponentInputBinding: true, animation: 'CollectionEditPage' },
     canActivate: [AuthGuard],
+    canDeactivate: [CanDeactivateGuard],
   },
   {
     path: 'collections/create',
@@ -126,6 +129,7 @@ export const routes: Routes = [
       animation: 'CollectionCreatePage',
     },
     canActivate: [AuthGuard],
+    canDeactivate: [CanDeactivateGuard],
   },
   {
     path: '**',
