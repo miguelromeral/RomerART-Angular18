@@ -183,6 +183,8 @@ export class FilterFormComponent
   showScoreCritic = settingShowScoreCritic.defaultValue;
   showScorePopular = settingShowScorePopular.defaultValue;
 
+  lastResult: FilterResultsDrawing | null = null;
+
   constructor(
     private drawingService: DrawingService,
     private languageService: LanguageService,
@@ -348,6 +350,31 @@ export class FilterFormComponent
     });
   }
 
+  processDrawingCharacters() {
+    if (this.listDrawingCharacters.length > 0 && this.lastResult !== null) {
+      this.filteredDrawingCharacters = this.listDrawingCharacters.filter(
+        c =>
+          this.lastResult &&
+          this.lastResult.filteredDrawingCharacters.filter(
+            d => d == c.characterName
+          ).length > 0
+      );
+      this.nDrawingCharacters = this.lastResult.nDrawingCharacters;
+    }
+  }
+
+  processDrawingModels() {
+    if (this.listDrawingModels.length > 0 && this.lastResult !== null) {
+      this.filteredDrawingModels = this.listDrawingModels.filter(
+        m =>
+          this.lastResult &&
+          this.lastResult.filteredDrawingModels.filter(d => d == m.value)
+            .length > 0
+      );
+      this.nDrawingModels = this.lastResult.nDrawingModels;
+    }
+  }
+
   processFilteredDrawings(results: FilterResultsDrawing) {
     if (results === undefined || results === null) {
       return;
@@ -367,19 +394,11 @@ export class FilterFormComponent
       }
     }
     results.totalDrawings = this.listDrawings;
+    this.lastResult = results;
     this.fetchedResults.emit(results);
 
-    this.filteredDrawingCharacters = this.listDrawingCharacters.filter(
-      c =>
-        results.filteredDrawingCharacters.filter(d => d == c.characterName)
-          .length > 0
-    );
-    this.nDrawingCharacters = results.nDrawingCharacters;
-
-    this.filteredDrawingModels = this.listDrawingModels.filter(
-      m => results.filteredDrawingModels.filter(d => d == m.value).length > 0
-    );
-    this.nDrawingModels = results.nDrawingModels;
+    this.processDrawingCharacters();
+    this.processDrawingModels();
 
     this.filteredDrawingStyles = this.listDrawingStyles.filter(
       s =>
@@ -459,6 +478,7 @@ export class FilterFormComponent
             .map(c => new DrawingCharacter(c))
             .filter(c => c.characterName !== '')
             .sort(sortCharactersByName);
+          this.processDrawingCharacters();
         }
         this.loadingDrawingCharacters = false;
       });

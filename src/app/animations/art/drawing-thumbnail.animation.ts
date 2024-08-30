@@ -1,17 +1,10 @@
-import {
-  trigger,
-  style,
-  transition,
-  animate,
-  query,
-  animateChild,
-} from '@angular/animations';
+import { trigger, style, transition, animate } from '@angular/animations';
 
 export const drawingThumbnailAnimation = trigger('fadeInOut', [
   transition(':enter', [
     style({ opacity: 0, transform: 'rotate3d(2, 5, 0, 90deg)' }),
     animate(
-      '300ms',
+      '700ms cubic-bezier(.08,.72,.58,.71)',
       style({ opacity: 1, transform: 'rotate3d(0, 0, 0, 0deg)' })
     ),
   ]),

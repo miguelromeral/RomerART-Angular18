@@ -11,4 +11,8 @@ export const drawingSoftwares = [
     id: 3,
     name: 'Adobe Photoshop',
   },
+  {
+    id: 4,
+    name: 'GIMP',
+  },
 ];

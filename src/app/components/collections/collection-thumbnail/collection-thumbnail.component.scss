@@ -10,6 +10,12 @@
   @apply p-2 flex flex-col justify-between;
 }
 
+.collection-card:hover,
+.collection-card.selected {
+  transform: scale(1.1);
+  animation: ease-in-out;
+}
+
 .collection-card.selected {
   @apply dark:border-main-300 dark:text-main-300 border-main-800 text-main-800 bg-main-200 dark:bg-main-800;
 }
