@@ -70,10 +70,24 @@
           <app-translatable [originalText]="selectedCollection.description">
           </app-translatable>
         </h3>
-        <div *ngIf="admin" class="flex flex-row flex-nowrap justify-end">
-          <button class="btn" (click)="editCollection(selectedCollection.id)">
+        <div class="flex flex-row gap-2">
+          <button
+            class="btn-image"
+            (click)="shareCollection()"
+            (keypress.enter)="shareCollection()"
+            tabindex="0"
+            title="Compartir Colección">
+            <i class="bi bi-send"></i>
+          </button>
+
+          <button
+            *ngIf="admin"
+            class="btn-image"
+            (click)="editCollection(selectedCollection.id)"
+            (keypress.enter)="editCollection(selectedCollection.id)"
+            tabindex="0"
+            title="Editar Colección">
             <i class="bi bi-pencil"></i>
-            {{ text('FORM.EDIT') | mrTranslate }}
           </button>
         </div>
         <app-drawing-slider [drawings]="selectedCollection.drawings">

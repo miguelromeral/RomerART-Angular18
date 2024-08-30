@@ -36,6 +36,7 @@ import { CollectionThumbnailComponent } from '@app/components/collections/collec
   ],
   templateUrl: './search-collection.component.html',
   styleUrl: './search-collection.component.scss',
+  providers: [CustomTranslatePipe],
 })
 export class SearchCollectionComponent
   extends LanguageComponent
@@ -55,7 +56,8 @@ export class SearchCollectionComponent
     private metadataService: MetadataService,
     private languageService: LanguageService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private customTranslate: CustomTranslatePipe
   ) {
     super('SCREENS.COLLECTIONS');
   }
@@ -123,5 +125,28 @@ export class SearchCollectionComponent
       this.selectedCollection?.name
     );
     this.changeQueryParameters();
+  }
+
+  shareCollection() {
+    if (navigator.share && this.selectedCollection) {
+      const title = this.selectedCollection.name;
+      const text = this.customTranslate.transform(this.text('SHARE.TEXT'), {
+        title,
+      });
+      navigator
+        .share({
+          title: title,
+          text: text,
+          url: window.location.href,
+        })
+        .then(() => {
+          console.log('Thanks for sharing!');
+        })
+        .catch(error => {
+          console.error('Error sharing', error);
+        });
+    } else {
+      console.error('Web Share API not supported in your browser.');
+    }
   }
 }

@@ -66,6 +66,9 @@
       "FORM": {
         "CREATE": "Create",
         "EDIT": "Edit"
+      },
+      "SHARE": {
+        "TEXT": "Take a look to this collection: {{title}}."
       }
     },
     "CV": {
