@@ -4,7 +4,7 @@
     <i *ngIf="icon !== ''" class="bi mr-1" [ngClass]="'bi-' + icon"></i>
     {{ title }}
   </h3>
-  <div class="flex flex-row">
+  <div class="flex flex-row gap-1">
     <p class="w-3/4 text-sm">{{ description }}</p>
     <div class="flex w-1/4 justify-end">
       <ng-content></ng-content>

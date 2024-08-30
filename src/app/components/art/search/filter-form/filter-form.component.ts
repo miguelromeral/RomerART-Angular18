@@ -45,6 +45,8 @@ import { SectionComponent } from '@app/components/shared/section/section.compone
 import {
   settingFilterCount,
   settingShowKudos,
+  settingShowScoreCritic,
+  settingShowScorePopular,
   settingShowViews,
 } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
@@ -98,6 +100,12 @@ export class FilterFormComponent
     }
     if (!this.showViews) {
       list = list.filter(x => x.class !== 'views');
+    }
+    if (!this.showScoreCritic) {
+      list = list.filter(x => x.class !== 'mr-score-miguel');
+    }
+    if (!this.showScorePopular) {
+      list = list.filter(x => x.class !== 'mr-score-popular');
     }
     return list;
   }
@@ -172,6 +180,8 @@ export class FilterFormComponent
   showPaper = true;
   showKudos = settingShowKudos.defaultValue;
   showViews = settingShowViews.defaultValue;
+  showScoreCritic = settingShowScoreCritic.defaultValue;
+  showScorePopular = settingShowScorePopular.defaultValue;
 
   constructor(
     private drawingService: DrawingService,
@@ -194,6 +204,16 @@ export class FilterFormComponent
     this.settingsService.booleanSetting$(settingShowViews).subscribe(show => {
       this.showViews = show;
     });
+    this.settingsService
+      .booleanSetting$(settingShowScoreCritic)
+      .subscribe(show => {
+        this.showScoreCritic = show;
+      });
+    this.settingsService
+      .booleanSetting$(settingShowScorePopular)
+      .subscribe(show => {
+        this.showScorePopular = show;
+      });
 
     this.loadSelects();
     this.setValuesFromQueryParams();

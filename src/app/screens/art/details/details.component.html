@@ -25,6 +25,7 @@
       <app-tab-panel
         [tabs]="getPanelTabs()"
         selectedTab="comments"
+        [showScorePopular]="showScorePopular"
         [showSpotify]="showSpotify && drawing.spotifyTrackId !== ''">
         <app-loading [loading]="loading" tab-content-comments>
           <div class="container flex flex-col gap-3" loading>
@@ -93,7 +94,10 @@
           </div>
         </app-loading>
 
-        <app-loading [loading]="loading" tab-content-vote>
+        <app-loading
+          *ngIf="showScorePopular"
+          [loading]="loading"
+          tab-content-vote>
           <div class="container flex flex-col gap-2" loading>
             <div class="container flex justify-between">
               <div class="h-4 w-2/5"></div>
@@ -143,6 +147,7 @@
               </app-details-section>
 
               <app-details-section
+                *ngIf="showScorePopular"
                 type="votes"
                 [rawText]="drawing.votesPopular.toString()">
               </app-details-section>

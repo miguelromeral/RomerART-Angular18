@@ -107,3 +107,29 @@ export const settingShowViews: ISettingSwitch = {
   hideCode: 'SCREENS.SETTINGS.FORM.SHOW-VIEWS.HIDE',
   formControlName: 'showViews',
 };
+
+export const settingShowScoreCritic: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  icon: '9-square',
+  inputId: 'iSwitchShowScoreCritic',
+  key: 'show-score-critic',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-CRITIC.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-CRITIC.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-CRITIC.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-CRITIC.HIDE',
+  formControlName: 'showScoreCritic',
+};
+
+export const settingShowScorePopular: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  icon: '9-circle',
+  inputId: 'iSwitchShowScorePopular',
+  key: 'show-score-popular',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-POPULAR.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-POPULAR.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-POPULAR.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-SCORE-POPULAR.HIDE',
+  formControlName: 'showScorePopular',
+};

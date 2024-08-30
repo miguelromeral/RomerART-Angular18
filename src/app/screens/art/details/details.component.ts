@@ -15,7 +15,10 @@ import { MetadataService } from '@app/services/metadata/metadata.service';
 import { ArtSectionType } from 'config/art/art-section.config';
 import { TabPanelComponent } from '@app/components/art/details/tab-panel/tab-panel.component';
 import { TabPanelItem } from '@models/components/tab-panel-item.model';
-import { ArtInfoTabsConfig } from 'config/art/art-info-tabs.config';
+import {
+  ArtInfoTabsConfig,
+  artTabInfoIds,
+} from 'config/art/art-info-tabs.config';
 import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
@@ -27,6 +30,7 @@ import { LanguageService } from '@app/services/language/language.service';
 import { formattedDate } from '@utils/customization/date-utils';
 import { settingLanguage } from 'config/settings/language.config';
 import {
+  settingShowScorePopular,
   settingShowSpotify,
   settingShowViews,
 } from 'config/settings/local-storage.config';
@@ -67,15 +71,20 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   currentLanguage: string = settingLanguage.defaultValue;
   showSpotify = settingShowSpotify.defaultValue;
   showViews = settingShowViews.defaultValue;
+  showScorePopular = settingShowScorePopular.defaultValue;
 
   loading = true;
 
   getPanelTabs(): TabPanelItem[] {
-    if (this.showSpotify && this.drawing.spotifyTrackId !== '') {
-      return ArtInfoTabsConfig.tabs;
-    } else {
-      return ArtInfoTabsConfig.tabs.filter(x => x.id !== 'spotify');
+    let tabs = ArtInfoTabsConfig.tabs;
+
+    if (!this.showSpotify || this.drawing.spotifyTrackId === '') {
+      tabs = tabs.filter(x => x.id !== artTabInfoIds.spotify);
     }
+    if (!this.showScorePopular) {
+      tabs = tabs.filter(x => x.id !== artTabInfoIds.vote);
+    }
+    return tabs;
   }
 
   constructor(
@@ -96,10 +105,16 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
     this.settingsService.booleanSetting$(settingShowViews).subscribe(show => {
       this.showViews = show;
     });
+    this.settingsService
+      .booleanSetting$(settingShowScorePopular)
+      .subscribe(show => {
+        this.showScorePopular = show;
+      });
     this.languageService.currentLanguage$.subscribe(lang => {
       this.currentLanguage = lang;
     });
   }
+
   loadDrawing() {
     if (this.id) {
       this.drawingService.getDrawingDetails(this.id).subscribe(data => {

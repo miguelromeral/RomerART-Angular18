@@ -22,7 +22,11 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { heartsAnimationConfig } from 'config/customization/heart-animation.config';
 import { ZoomImageComponent } from '@app/components/shared/zoom-image/zoom-image.component';
-import { settingShowKudos } from 'config/settings/local-storage.config';
+import {
+  settingShowKudos,
+  settingShowScoreCritic,
+  settingShowScorePopular,
+} from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
 
 @Component({
@@ -60,6 +64,8 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
   admin = false;
   showKudos = settingShowKudos.defaultValue;
+  showScoreCritic = settingShowScoreCritic.defaultValue;
+  showScorePopular = settingShowScorePopular.defaultValue;
 
   btnCheerId = 'btnCheer';
 
@@ -81,6 +87,16 @@ export class ImageComponent extends LanguageComponent implements OnInit {
     this.settingsService.booleanSetting$(settingShowKudos).subscribe(show => {
       this.showKudos = show;
     });
+    this.settingsService
+      .booleanSetting$(settingShowScoreCritic)
+      .subscribe(show => {
+        this.showScoreCritic = show;
+      });
+    this.settingsService
+      .booleanSetting$(settingShowScorePopular)
+      .subscribe(show => {
+        this.showScorePopular = show;
+      });
   }
 
   loadLoggedUser() {

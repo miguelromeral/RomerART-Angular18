@@ -288,6 +288,18 @@
           "DESCRIPTION": "Mostrar la cantidad de visualizaciones que un dibujo ha tenido.",
           "SHOW": "Mostrar",
           "HIDE": "Ocultar"
+        },
+        "SHOW-SCORE-CRITIC": {
+          "TITLE": "Puntuación del Artista",
+          "DESCRIPTION": "Mostrar la nota asignada por el artista a los dibujos.",
+          "SHOW": "Mostrar",
+          "HIDE": "Ocultar"
+        },
+        "SHOW-SCORE-POPULAR": {
+          "TITLE": "Puntuación Popular",
+          "DESCRIPTION": "Mostrar la nota media asignada por los usuarios.",
+          "SHOW": "Mostrar",
+          "HIDE": "Ocultar"
         }
       },
       "FOOTER": {

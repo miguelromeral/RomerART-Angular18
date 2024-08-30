@@ -115,10 +115,12 @@
         content
         class="flex select-none flex-row flex-nowrap gap-4 text-xl font-bold">
         <app-drawing-score
+          *ngIf="showScorePopular"
           class="h-8 w-8"
           [score]="drawing.scorePopularHuman"
           [popular]="true"></app-drawing-score>
         <app-drawing-score
+          *ngIf="showScoreCritic"
           class="h-8 w-8"
           [score]="drawing.scoreCritic"></app-drawing-score>
       </div>

@@ -13,6 +13,8 @@ import { drawingThumbnailAnimation } from '@app/animations/art/drawing-thumbnail
 import {
   settingFormatDate,
   settingShowKudos,
+  settingShowScoreCritic,
+  settingShowScorePopular,
   settingShowSpotify,
 } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
@@ -54,6 +56,8 @@ export class DrawingThumbnailComponent
   currentFormatDate = settingFormatDate.defaultValue;
   showSpotify = settingShowSpotify.defaultValue;
   showKudos = settingShowKudos.defaultValue;
+  showScoreCritic = settingShowScoreCritic.defaultValue;
+  showScorePopular = settingShowScorePopular.defaultValue;
 
   bErrorLoadingImage = false;
 
@@ -83,6 +87,16 @@ export class DrawingThumbnailComponent
     this.settingsService.booleanSetting$(settingShowKudos).subscribe(show => {
       this.showKudos = show;
     });
+    this.settingsService
+      .booleanSetting$(settingShowScoreCritic)
+      .subscribe(show => {
+        this.showScoreCritic = show;
+      });
+    this.settingsService
+      .booleanSetting$(settingShowScorePopular)
+      .subscribe(show => {
+        this.showScorePopular = show;
+      });
   }
 
   detectThumbnailUrl() {

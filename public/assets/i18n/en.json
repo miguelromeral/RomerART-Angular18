@@ -288,6 +288,18 @@
           "DESCRIPTION": "Show visualizations of a drawing.",
           "SHOW": "Show",
           "HIDE": "Hide"
+        },
+        "SHOW-SCORE-CRITIC": {
+          "TITLE": "Artist Score",
+          "DESCRIPTION": "Show the drawing score assigned by the artist.",
+          "SHOW": "Show",
+          "HIDE": "Hide"
+        },
+        "SHOW-SCORE-POPULAR": {
+          "TITLE": "Popular Score",
+          "DESCRIPTION": "Show the drawing score assigned by the users.",
+          "SHOW": "Show",
+          "HIDE": "Hide"
         }
       },
       "FOOTER": {

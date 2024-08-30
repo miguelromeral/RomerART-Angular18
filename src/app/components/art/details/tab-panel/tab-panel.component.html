@@ -35,7 +35,7 @@
         class="swiper-content"
         select="[tab-content-dislikes]"></ng-content>
     </div>
-    <div class="swiper-slide">
+    <div class="swiper-slide" *ngIf="showScorePopular">
       <ng-content
         class="swiper-content"
         select="[tab-content-vote]"></ng-content>
