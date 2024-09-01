@@ -151,6 +151,9 @@ export class SettingsService {
 
   setNumberSetting(key: string, value: number): void {
     const setting = this.getNumberSetting(key);
+    if (setting?.minValue && value < setting?.minValue)
+      value = setting?.minValue;
+    if (setting?.maxValue && value > setting.maxValue) value = setting.maxValue;
     this.storage.setItem(key, value.toString());
     setting?.subject.next(value);
   }
