@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+// @layer base {
+//   @import '~quill/dist/quill.snow.css';
+//   @import '~quill/dist/quill.core.css';
+// }
+
+
 @import './variables.scss';
 @import './normalize.scss';
 @import './inputs.scss';
@@ -12,11 +19,6 @@
 @import './alerts.scss';
 @import './cv.scss';
 @import './print.scss';
-
-@layer base {
-  @import '~quill/dist/quill.snow.css';
-  @import '~quill/dist/quill.core.css';
-}
 
 
 html {
@@ -72,8 +74,4 @@ blockquote {
 
 pre {
   @apply font-mono bg-white-500 dark:bg-black-500 p-2 rounded-md text-sm;
-}
-
-.ql-formats svg {
-  @apply dark:invert;
 }

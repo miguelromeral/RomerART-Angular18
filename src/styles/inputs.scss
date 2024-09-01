@@ -4,7 +4,7 @@
 @import 'inputs/textfield.scss';
 @import 'inputs/range.scss';
 @import 'inputs/switch.scss';
-
+@import 'variables.scss';
 
 select {
   @apply w-full;
@@ -33,28 +33,49 @@ select {
 
 input,
 select,
-label.choice-label {
+label.choice-label,
+quill-editor {
   border: 1px solid var(--mr-input-border-color);
   transition: 0.2s ease-in-out;
 }
 
 input:hover,
 select:hover,
-label.choice-label:hover {
+label.choice-label:hover,
+quill-editor:hover {
   border-color: theme('colors.main.400') !important;
 }
 
 .dark input:hover,
 .dark select:hover,
-.dark label.choice-label:hover {
+.dark label.choice-label:hover,
+.dark quill-editor:hover {
   border-color: theme('colors.main.500') !important;
 }
 
 
-.quill {
-  @apply border-none border-gray-300 dark:text-white;
+quill-editor {
+  @apply dark:text-white;
+  border: none !important;
+  background-color: var(--mr-input-bg-color);
 }
 
-.quill-editor .ql-toolbar.ql-snow {
-  @apply dark:bg-red-500;
+quill-editor * {
+  border: none !important;
+}
+
+quill-editor .ql-toolbar.ql-snow {
+  @apply bg-white-300 dark:bg-black-900;
+  border: none;
+}
+
+
+quill-editor .ql-toolbar.ql-snow svg {
+  @apply contrast-0;
+}
+
+
+quill-editor .ql-container * {
+  font-family: var(--mr-font-family) !important;
+  font-size: 16px;
 }
