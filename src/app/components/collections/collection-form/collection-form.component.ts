@@ -107,7 +107,9 @@ export class CollectionFormComponent
   }
 
   loadDrawings() {
-    const defaultFilters: DrawingFilter = new DrawingFilter({});
+    const defaultFilters: DrawingFilter = new DrawingFilter({
+      sortBy: 'date-desc',
+    });
     this.drawingService
       .filterDrawingsAdmin(defaultFilters)
       .subscribe(results => {
