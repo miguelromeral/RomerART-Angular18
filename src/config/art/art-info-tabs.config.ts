@@ -2,6 +2,7 @@ import { TabPanelItem } from '@models/components/tab-panel-item.model';
 
 export interface IArtInfoTabsConfigId {
   comments: string;
+  style: string;
   likes: string;
   dislikes: string;
   spotify: string;
@@ -11,6 +12,7 @@ export interface IArtInfoTabsConfigId {
 
 export const artTabInfoIds: IArtInfoTabsConfigId = {
   comments: 'comments',
+  style: 'style',
   likes: 'likes',
   dislikes: 'dislikes',
   spotify: 'spotify',
@@ -30,6 +32,13 @@ export class ArtInfoTabsConfig {
       icon: 'bi-chat',
       textCode: 'DETAILS.TAB-TITLES.COMMENTS',
       iconSelected: 'bi-chat-fill',
+      // visible: (drawing: Drawing) => drawing.comment !== '',
+    },
+    {
+      id: artTabInfoIds.style,
+      icon: 'bi-patch-exclamation',
+      textCode: 'DETAILS.TAB-TITLES.STYLE',
+      iconSelected: 'bi-patch-exclamation-fill',
       // visible: (drawing: Drawing) => drawing.comment !== '',
     },
     {

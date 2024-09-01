@@ -5,3 +5,7 @@
 .comment.dislike {
   color: var(--mr-comment-dislike-color);
 }
+
+.comment.style {
+  @apply text-main-700 dark:text-main-300;
+}

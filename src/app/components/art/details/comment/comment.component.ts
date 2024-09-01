@@ -2,7 +2,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
 
-export type CommentType = '' | 'like' | 'dislike';
+export type CommentType = '' | 'style' | 'like' | 'dislike';
 
 @Component({
   selector: 'app-art-details-comment',

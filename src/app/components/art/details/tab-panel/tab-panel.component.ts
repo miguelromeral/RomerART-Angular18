@@ -30,6 +30,11 @@ export class TabPanelComponent
   implements AfterViewInit
 {
   @Input() tabs: TabPanelItem[] = [];
+  @Input() showComments = true;
+  @Input() showCommentsStyle!: boolean;
+  @Input() showCommentsPro = true;
+  @Input() showCommentsCons = true;
+  @Input() showDetails = true;
   @Input() showSpotify!: boolean;
   @Input() showScorePopular!: boolean;
   panelsId: IArtInfoTabsConfigId = artTabInfoIds;

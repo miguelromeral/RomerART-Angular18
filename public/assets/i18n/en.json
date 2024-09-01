@@ -414,6 +414,7 @@
       "DETAILS": {
         "TAB-TITLES": {
           "COMMENTS": "Comments",
+          "STYLE": "Style",
           "LIKES": "Likes",
           "DISLIKES": "Dislikes",
           "VOTE": "Vote",
@@ -492,6 +493,10 @@
           "TITLE": "Comments",
           "PLACEHOLDER": "Comments for the drawing",
           "ADD-COMMENT": "Add Comment"
+        },
+        "COMMENTS-STYLE": {
+          "TITLE": "Style Comments",
+          "PLACEHOLDER": "Style Comment"
         },
         "COMMENTS-PROS": {
           "TITLE": "Positive Comments",

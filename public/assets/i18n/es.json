@@ -414,6 +414,7 @@
       "DETAILS": {
         "TAB-TITLES": {
           "COMMENTS": "Comentarios",
+          "STYLE": "Estilo",
           "LIKES": "Positivo",
           "DISLIKES": "Negativo",
           "VOTE": "Vota",
@@ -492,6 +493,10 @@
           "TITLE": "Comentarios",
           "PLACEHOLDER": "Comentario",
           "ADD-COMMENT": "Nuevo Comentario"
+        },
+        "COMMENTS-STYLE": {
+          "TITLE": "Comentarios sobre el Estilo",
+          "PLACEHOLDER": "Comentario sobre el estilo"
         },
         "COMMENTS-PROS": {
           "TITLE": "Comentarios Positivos",

@@ -269,6 +269,19 @@
         </app-drawing-form-comments>
       </div>
     </app-section>
+    <app-section
+      [title]="text('FORM.COMMENTS-STYLE.TITLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <app-drawing-form-comments
+          class="col-span-1 sm:col-span-3"
+          [formArrayName]="'listComments'"
+          [formArray]="listCommentStyle"
+          [comments]="drawing.listCommentsStyle"
+          [placeholder]="text('FORM.COMMENTS-STYLE.PLACEHOLDER') | mrTranslate">
+        </app-drawing-form-comments>
+      </div>
+    </app-section>
 
     <app-section
       [title]="text('FORM.COMMENTS-PROS.TITLE') | mrTranslate"

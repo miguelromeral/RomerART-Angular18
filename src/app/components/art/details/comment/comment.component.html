@@ -1,6 +1,7 @@
 <div
   class="comment"
   [ngClass]="{
+    style: type === 'style',
     like: type === 'like',
     dislike: type === 'dislike',
   }">

@@ -43,6 +43,7 @@ export class Drawing {
   listCommentPros: string[];
   commentCons: string;
   listCommentCons: string[];
+  listCommentsStyle: string[];
   url: string;
   urlThumbnail: string;
   isTraditional: boolean;
@@ -97,6 +98,7 @@ export class Drawing {
     this.listCommentPros = data.listCommentPros || [];
     this.commentCons = data.commentCons || '';
     this.listCommentCons = data.listCommentCons || [];
+    this.listCommentsStyle = data.listCommentsStyle || [];
     this.url = data.url || '';
     this.urlThumbnail = data.urlThumbnail || '';
     this.isTraditional = data.isTraditional || false;

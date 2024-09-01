@@ -78,6 +78,9 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   getPanelTabs(): TabPanelItem[] {
     let tabs = ArtInfoTabsConfig.tabs;
 
+    if (this.drawing.listCommentsStyle.length === 0) {
+      tabs = tabs.filter(x => x.id !== artTabInfoIds.style);
+    }
     if (!this.showSpotify || this.drawing.spotifyTrackId === '') {
       tabs = tabs.filter(x => x.id !== artTabInfoIds.spotify);
     }

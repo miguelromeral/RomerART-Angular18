@@ -20,17 +20,22 @@
 
 <div class="swiper-container" #swiperContainer>
   <div class="swiper-wrapper">
-    <div class="swiper-slide">
+    <div class="swiper-slide" *ngIf="showComments">
       <ng-content
         class="swiper-content"
         select="[tab-content-comments]"></ng-content>
     </div>
-    <div class="swiper-slide">
+    <div class="swiper-slide" *ngIf="showCommentsStyle">
+      <ng-content
+        class="swiper-content"
+        select="[tab-content-style]"></ng-content>
+    </div>
+    <div class="swiper-slide" *ngIf="showCommentsPro">
       <ng-content
         class="swiper-content"
         select="[tab-content-likes]"></ng-content>
     </div>
-    <div class="swiper-slide">
+    <div class="swiper-slide" *ngIf="showCommentsCons">
       <ng-content
         class="swiper-content"
         select="[tab-content-dislikes]"></ng-content>
@@ -45,7 +50,7 @@
         class="swiper-content"
         select="[tab-content-spotify]"></ng-content>
     </div>
-    <div class="swiper-slide">
+    <div class="swiper-slide" *ngIf="showDetails">
       <ng-content
         class="swiper-content"
         select="[tab-content-details]"></ng-content>

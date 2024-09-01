@@ -118,6 +118,7 @@ export class DrawingFormComponent extends LanguageComponent {
     ]),
     productName: new FormControl(''),
     listComments: new FormArray<FormControl>([]),
+    listCommentStyle: new FormArray<FormControl>([]),
     listCommentPros: new FormArray<FormControl>([]),
     listCommentCons: new FormArray<FormControl>([]),
     tagsText: new FormControl(''),
@@ -130,6 +131,9 @@ export class DrawingFormComponent extends LanguageComponent {
 
   get listComments(): FormArray<FormControl> {
     return this.form.controls.listComments as FormArray<FormControl>;
+  }
+  get listCommentStyle(): FormArray<FormControl> {
+    return this.form.controls.listCommentStyle as FormArray<FormControl>;
   }
   get listCommentPros(): FormArray<FormControl> {
     return this.form.controls.listCommentPros as FormArray<FormControl>;
@@ -315,6 +319,7 @@ export class DrawingFormComponent extends LanguageComponent {
       isEditing: values.isEditing!,
       listCommentCons: values.listCommentCons!,
       listCommentPros: values.listCommentPros!,
+      listCommentStyle: values.listCommentStyle!,
       listComments: values.listComments!,
       modelName: values.modelName!,
       name: values.name!,

@@ -24,6 +24,7 @@ export interface ISaveDrawingRequest {
   listComments: string[];
   listCommentPros: string[];
   listCommentCons: string[];
+  listCommentStyle: string[];
 
   // constructor(data: Partial<SaveDrawingRequest> = {}) {
   //   this.id = data.id || '';

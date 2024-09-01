@@ -25,6 +25,7 @@
       <app-tab-panel
         [tabs]="getPanelTabs()"
         selectedTab="comments"
+        [showCommentsStyle]="drawing.listCommentsStyle.length > 0"
         [showScorePopular]="showScorePopular"
         [showSpotify]="showSpotify && drawing.spotifyTrackId !== ''">
         <app-loading [loading]="loading" tab-content-comments>
@@ -48,6 +49,23 @@
             <app-art-details-comment-wrapper
               [comments]="drawing.listComments"
               [type]="''">
+            </app-art-details-comment-wrapper>
+          </div>
+        </app-loading>
+
+        <app-loading
+          [loading]="loading"
+          tab-content-style
+          *ngIf="drawing.listCommentsStyle.length > 0">
+          <div class="container flex flex-col gap-1" loading>
+            <div class="h-4 w-full"></div>
+            <div class="h-4 w-full"></div>
+            <div class="h-4 w-4/5"></div>
+          </div>
+          <div content>
+            <app-art-details-comment-wrapper
+              [comments]="drawing.listCommentsStyle"
+              [type]="'style'">
             </app-art-details-comment-wrapper>
           </div>
         </app-loading>
