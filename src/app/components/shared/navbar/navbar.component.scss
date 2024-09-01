@@ -1,6 +1,6 @@
 .mr-bottom-bar {
+  @apply bg-main-50 dark:bg-black-800 fixed bottom-0 left-0 right-0 rounded-full gap-1 lg:rounded-md overflow-hidden flex h-12 flex-row flex-nowrap items-center justify-around p-1 my-2 lg:top-0 lg:h-fit max-h-screen lg:w-48 lg:flex-col lg:items-start lg:gap-1 lg:p-2;
   backdrop-filter: blur(5px);
-  background-color: var(--mr-nav-bg-color);
+  // background-color: var(--mr-nav-bg-color);
   z-index: 100;
-  // animation: slide-up .5s ease-out;
 }
