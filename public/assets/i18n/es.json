@@ -34,6 +34,9 @@
         "OK": "Vale"
       }
     },
+    "RICH-TEXT": {
+      "LENGTH-COUNT": "{{count}} caracteres"
+    },
     "TRANSLATABLE": {
       "FROM": "Traducido desde...",
       "TITLE": "Traducir"

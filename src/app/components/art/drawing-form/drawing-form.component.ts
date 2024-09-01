@@ -42,6 +42,7 @@ import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model
 import { AlertService } from '@app/services/alerts/alert.service';
 import { notValidValueValidator } from '@app/validators/not-valid-value.validator';
 import { SectionComponent } from '@app/components/shared/section/section.component';
+import { RichTextInputComponent } from '@app/components/shared/inputs/rich-text-input/rich-text-input.component';
 
 @Component({
   selector: 'app-drawing-form',

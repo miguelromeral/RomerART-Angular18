@@ -1,19 +1,19 @@
 <div class="form-group">
   <div
-    class="grid grid-cols-5"
+    class="flex flex-col gap-1"
     *ngFor="let comment of formArray.controls; let i = index">
     <!-- TODO: cambiar el input text por un rich text (como por ejemplo ngx-quill)-->
-    <app-text-input
+    <app-rich-text-input
       class="col-span-4 flex-1"
       [formControl]="comment"
       [placeholder]="placeholder">
-    </app-text-input>
-    <button
-      type="button"
-      class="btn m-1 flex items-center justify-center"
-      (click)="removeComment(i)">
-      <i class="bi bi-trash"></i>
-    </button>
+      <button
+        type="button"
+        class="btn flex items-center justify-center"
+        (click)="removeComment(i)">
+        <i class="bi bi-trash"></i>
+      </button>
+    </app-rich-text-input>
   </div>
 
   <button class="btn" type="button" (click)="addComment('')">

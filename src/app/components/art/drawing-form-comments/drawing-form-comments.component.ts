@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RichTextInputComponent } from '@app/components/shared/inputs/rich-text-input/rich-text-input.component';
 import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageComponent } from '@models/components/LanguageComponent';
@@ -19,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     TextInputComponent,
     TranslateModule,
+    RichTextInputComponent,
     CustomTranslatePipe,
   ],
   templateUrl: './drawing-form-comments.component.html',

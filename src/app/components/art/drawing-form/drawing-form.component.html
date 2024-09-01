@@ -365,7 +365,7 @@
 
     <div class="col-span-1 sm:col-span-3">
       <div *ngIf="!validForm; else formValid" class="form-error">
-        <p>{{ text('ERRORS.TITLE') }}</p>
+        <p>{{ text('ERRORS.TITLE') | mrTranslate }}</p>
 
         <ul *ngIf="formErrors.length > 0">
           <li *ngFor="let error of formErrors">{{ error }}</li>

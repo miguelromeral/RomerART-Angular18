@@ -1,0 +1,33 @@
+<div class="form-group">
+  <label *ngIf="label !== ''">{{ label }}</label>
+  <div class="flex flex-col gap-0">
+    <quill-editor
+      [theme]="'snow'"
+      [modules]="editorModules"
+      [(ngModel)]="internalValue"
+      [formControl]="formControl"
+      (blur)="onBlur()"
+      (keydown)="onKeyDown($event)"
+      (ngModelChange)="onInputChange($event)"
+      [placeholder]="placeholder">
+    </quill-editor>
+    <div
+      class="relative -top-[1px] flex flex-row justify-between gap-1 border p-2 dark:border-white">
+      <div class="flex flex-row items-center gap-2">
+        <button class="btn-image" type="button" (click)="toggleHtml()">
+          <i class="bi bi-filetype-html"></i>
+        </button>
+        <span>{{
+          'COMPONENTS.RICH-TEXT.LENGTH-COUNT'
+            | mrTranslate: { count: internalValue?.length ?? 0 }
+        }}</span>
+      </div>
+      <div>
+        <ng-content></ng-content>
+      </div>
+    </div>
+    <pre *ngIf="showHtml" class="text-sm">
+      {{ internalValue }}
+    </pre>
+  </div>
+</div>

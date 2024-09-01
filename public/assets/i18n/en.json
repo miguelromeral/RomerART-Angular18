@@ -34,6 +34,9 @@
         "OK": "OK"
       }
     },
+    "RICH-TEXT": {
+      "LENGTH-COUNT": "{{count}} characters"
+    },
     "TRANSLATABLE": {
       "FROM": "Translated from...",
       "TITLE": "Translate"

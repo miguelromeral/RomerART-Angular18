@@ -4,17 +4,17 @@
   <div class="flex flex-col gap-3">
     <div [@translateTextAnimation]="state">
       <ng-container *ngIf="bShowTranslation; else showOriginal">
-        <span [innerHTML]="translation"> </span>
+        <div [innerHTML]="translation"></div>
       </ng-container>
       <ng-template #showOriginal>
-        <span [innerHTML]="originalText"> </span>
+        <div [innerHTML]="sanitizedOriginalText"></div>
       </ng-template>
     </div>
     <div
       class="flex flex-col gap-1 text-xs opacity-80"
       [@translateAnimation]="bShowTranslation ? 'translation' : 'original'">
       <span class="lowercase">{{ text('FROM') | mrTranslate }}</span>
-      <span [innerHTML]="originalText"></span>
+      <div [innerHTML]="sanitizedOriginalText"></div>
     </div>
   </div>
 
@@ -28,5 +28,5 @@
 </div>
 
 <ng-template #noTranslated>
-  <span [innerHTML]="originalText"></span>
+  <div [innerHTML]="sanitizedOriginalText"></div>
 </ng-template>

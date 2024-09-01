@@ -49,3 +49,12 @@ label.choice-label:hover {
 .dark label.choice-label:hover {
   border-color: theme('colors.main.500') !important;
 }
+
+
+.quill {
+  @apply border-none border-gray-300 dark:text-white;
+}
+
+.quill-editor .ql-toolbar.ql-snow {
+  @apply dark:bg-red-500;
+}

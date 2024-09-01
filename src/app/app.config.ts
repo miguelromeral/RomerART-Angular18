@@ -17,6 +17,7 @@ import { JwtInterceptor } from '@app/interceptors/JWT/jwt.interceptor';
 import { environment } from 'environments/environment';
 import { localStorageKey } from 'config/auth/auth.config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { QuillModule } from 'ngx-quill';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(
       HttpClientModule,
+      QuillModule.forRoot(),
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
@@ -54,6 +56,7 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true,
-    }, provideAnimationsAsync(),
+    },
+    provideAnimationsAsync(),
   ],
 };

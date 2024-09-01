@@ -13,6 +13,12 @@
 @import './cv.scss';
 @import './print.scss';
 
+@layer base {
+  @import '~quill/dist/quill.snow.css';
+  @import '~quill/dist/quill.core.css';
+}
+
+
 html {
   position: relative;
   min-height: 100%;
@@ -57,4 +63,17 @@ img {
 
 .skeleton div:not(.container) {
   @apply bg-gray-200 dark:bg-gray-700 rounded-sm;
+}
+
+
+blockquote {
+  @apply border-l-4 border-solid border-main-700 dark:border-main-300 my-2 pl-4;
+}
+
+pre {
+  @apply font-mono bg-white-500 dark:bg-black-500 p-2 rounded-md text-sm;
+}
+
+.ql-formats svg {
+  @apply dark:invert;
 }
