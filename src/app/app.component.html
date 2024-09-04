@@ -1,7 +1,8 @@
 <app-header></app-header>
 <main
-  class="relative flex h-full w-full flex-1 flex-col overflow-x-hidden pt-0 lg:mb-0"
+  class="relative flex h-full w-full flex-col flex-nowrap overflow-x-hidden pt-0 lg:flex-row-reverse"
   [@routeAnimations]="getRouteAnimationData()">
-  <router-outlet></router-outlet>
-  <app-navbar></app-navbar>
+  <router-outlet class="flex-1"></router-outlet>
+  <app-navbar
+    class="bottom-0 left-0 right-0 lg:right-2 lg:top-0 lg:w-0"></app-navbar>
 </main>
