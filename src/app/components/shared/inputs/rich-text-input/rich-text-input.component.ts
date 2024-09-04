@@ -66,6 +66,12 @@ export class RichTextInputComponent implements ControlValueAccessor {
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
 
+  length(): number {
+    if (!this.internalValue) return 0;
+
+    return this.internalValue.length;
+  }
+
   toggleHtml() {
     this.showHtml = !this.showHtml;
   }

@@ -4,7 +4,7 @@
     id="containerCollapseVoteForm">
     <form
       *ngIf="showVoteForm; else thxVotePanel"
-      class="flex flex-col flex-nowrap items-stretch gap-3"
+      class="flex flex-col flex-nowrap gap-8"
       [formGroup]="voteForm">
       <div class="grid grid-cols-3">
         <span class="col-span-2"> {{ text('TITLE') | mrTranslate }}</span>
@@ -26,7 +26,7 @@
 
       <button
         type="button"
-        class="btn mr-custom-btn mt-2 flex w-fit gap-2"
+        class="btn mr-custom-btn flex w-fit gap-2"
         (click)="voteDrawing()">
         {{ text('SEND') | mrTranslate }}
       </button>

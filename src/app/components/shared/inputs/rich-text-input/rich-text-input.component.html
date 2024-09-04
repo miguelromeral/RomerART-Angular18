@@ -18,8 +18,7 @@
           <i class="bi bi-filetype-html"></i>
         </button>
         <span>{{
-          'COMPONENTS.RICH-TEXT.LENGTH-COUNT'
-            | mrTranslate: { count: internalValue?.length || 0 }
+          'COMPONENTS.RICH-TEXT.LENGTH-COUNT' | mrTranslate: { count: length() }
         }}</span>
       </div>
       <div>

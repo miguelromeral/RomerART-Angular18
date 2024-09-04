@@ -242,12 +242,14 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-range-track-bg-color-light: theme('colors.white.300');
   --mr-range-track-bg-color-dark: theme('colors.black.400');
   --mr-range-track-bg-color: var(--mr-range-track-bg-color-light);
-  --mr-range-track-height: 1rem;
+  --mr-range-track-height: 0.5rem;
   --mr-range-bubble-bg-color-light: theme('colors.main.500');
   --mr-range-bubble-bg-color-dark: theme('colors.main.300');
   --mr-range-bubble-bg-color: var(--mr-range-bubble-bg-color-light);
-  --mr-range-bubble-height: 1rem;
-  --mr-range-bubble-width: 1rem;
+  --mr-range-track-margin-top: calc(calc(var(--mr-range-bubble-height) - var(--mr-range-track-height)) / 2);
+  // --mr-range-track-margin-top: 0.25rem;
+  --mr-range-bubble-height: 1.5rem;
+  --mr-range-bubble-width: 1.5rem;
 
 
   /* Buttons */
