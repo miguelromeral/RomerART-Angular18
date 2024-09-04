@@ -87,7 +87,7 @@ export class DrawingInfoComponent
   @Input() loading!: boolean;
   @Output() voteSubmitted = new EventEmitter<IVoteDrawingResponse>();
 
-  panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
+  panelTabs: TabPanelItem[] = [];
   panelTabsId: IArtInfoTabsConfigId = artTabInfoIds;
   currentLanguage: string = settingLanguage.defaultValue;
   showSpotify = settingShowSpotify.defaultValue;
@@ -133,11 +133,14 @@ export class DrawingInfoComponent
   }
 
   loadTabs() {
+    // TODO: arreglar el orden de las tabs
+    this.panelTabs = [];
     this.panelTabs = ArtInfoTabsConfig.getTabs(
       this.drawing,
       this.showScorePopular,
       this.showSpotify
     );
+    // console.log('Panel Tabs: ', this.panelTabs);
   }
 
   isTabVisible(id: string): boolean {

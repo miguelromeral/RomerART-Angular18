@@ -27,24 +27,27 @@ export class ArtInfoTabsConfig {
     showScorePopular: boolean,
     showSpotify: boolean
   ): TabPanelItem[] {
-    return ArtInfoTabsConfig.tabs.filter(tab => {
-      switch (tab.id) {
-        case artTabInfoIds.vote:
-          return tab.visible(drawing, showScorePopular);
-          break;
-        case artTabInfoIds.spotify:
-          return tab.visible(drawing, showSpotify);
+    return ArtInfoTabsConfig.tabs
+      .filter(tab => {
+        switch (tab.id) {
+          case artTabInfoIds.vote:
+            return tab.visible(drawing, showScorePopular);
+            break;
+          case artTabInfoIds.spotify:
+            return tab.visible(drawing, showSpotify);
 
-          break;
-        default:
-          return tab.visible(drawing);
-      }
-    });
+            break;
+          default:
+            return tab.visible(drawing);
+        }
+      })
+      .sort((a: TabPanelItem, b: TabPanelItem) => a.order - b.order);
   }
 
   static tabs: TabPanelItem[] = [
     {
       id: artTabInfoIds.comments,
+      order: 100,
       icon: 'bi-chat',
       textCode: 'DETAILS.TAB-TITLES.COMMENTS',
       iconSelected: 'bi-chat-fill',
@@ -52,6 +55,7 @@ export class ArtInfoTabsConfig {
     },
     {
       id: artTabInfoIds.style,
+      order: 200,
       icon: 'bi-patch-exclamation',
       textCode: 'DETAILS.TAB-TITLES.STYLE',
       iconSelected: 'bi-patch-exclamation-fill',
@@ -60,12 +64,14 @@ export class ArtInfoTabsConfig {
     {
       id: artTabInfoIds.likes,
       icon: 'bi-hand-thumbs-up',
+      order: 300,
       textCode: 'DETAILS.TAB-TITLES.LIKES',
       iconSelected: 'bi-hand-thumbs-up-fill',
       visible: (drawing: Drawing) => drawing.commentPros !== '',
     },
     {
       id: artTabInfoIds.dislikes,
+      order: 400,
       textCode: 'DETAILS.TAB-TITLES.DISLIKES',
       icon: 'bi-hand-thumbs-down',
       iconSelected: 'bi-hand-thumbs-down-fill',
@@ -73,6 +79,7 @@ export class ArtInfoTabsConfig {
     },
     {
       id: artTabInfoIds.vote,
+      order: 500,
       textCode: 'DETAILS.TAB-TITLES.VOTE',
       icon: 'bi-9-circle',
       iconSelected: 'bi-9-circle-fill',
@@ -80,6 +87,7 @@ export class ArtInfoTabsConfig {
     },
     {
       id: artTabInfoIds.spotify,
+      order: 600,
       textCode: 'DETAILS.TAB-TITLES.SPOTIFY',
       icon: 'bi-spotify',
       iconSelected: 'bi-spotify',
@@ -88,6 +96,7 @@ export class ArtInfoTabsConfig {
     },
     {
       id: artTabInfoIds.details,
+      order: 700,
       textCode: 'DETAILS.TAB-TITLES.INFO',
       icon: 'bi-info-circle',
       iconSelected: 'bi-info-circle-fill',

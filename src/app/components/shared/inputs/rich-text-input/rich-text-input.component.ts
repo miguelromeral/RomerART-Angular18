@@ -58,6 +58,7 @@ export class RichTextInputComponent implements ControlValueAccessor {
 
       // [{ color: [] }, { background: [] }], // Color de texto y de fondo
 
+      ['link'],
       ['clean'], // Botón para limpiar el formato
       [{ showHtml: 'Show HTML' }], // Botón personalizado para mostrar HTML
     ],

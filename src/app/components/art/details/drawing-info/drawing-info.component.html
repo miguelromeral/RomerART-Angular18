@@ -1,4 +1,6 @@
-<div class="flex w-full select-none overflow-x-auto">
+<div
+  class="flex w-full select-none overflow-x-auto"
+  *ngIf="panelTabs.length > 0">
   <ng-container *ngFor="let tab of panelTabs; let i = index">
     <button
       (click)="slideTo(i)"
