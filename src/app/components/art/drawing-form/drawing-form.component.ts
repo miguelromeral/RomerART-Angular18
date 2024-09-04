@@ -42,7 +42,7 @@ import { ISaveDrawingRequest } from '@models/requests/save-drawing-request.model
 import { AlertService } from '@app/services/alerts/alert.service';
 import { notValidValueValidator } from '@app/validators/not-valid-value.validator';
 import { SectionComponent } from '@app/components/shared/section/section.component';
-import { RichTextInputComponent } from '@app/components/shared/inputs/rich-text-input/rich-text-input.component';
+import { DrawingFilterEffect } from '@models/art/drawing-filter-effect.model';
 
 @Component({
   selector: 'app-drawing-form',
@@ -106,6 +106,7 @@ export class DrawingFormComponent extends LanguageComponent {
     type: new FormControl(0, [Validators.required, notValidValueValidator(0)]),
     software: new FormControl(0),
     paper: new FormControl(0),
+    filter: new FormControl(0),
     dateHyphen: new FormControl('', Validators.required),
     scoreCritic: new FormControl(0, [
       Validators.required,
@@ -146,6 +147,7 @@ export class DrawingFormComponent extends LanguageComponent {
   /* List of Select Options */
   listDrawingStyles: DrawingStyle[] = [];
   listDrawingSoftwares: DrawingSoftware[] = [];
+  listDrawingFilters: DrawingFilterEffect[] = [];
   listDrawingPapers: DrawingPaperSize[] = [];
   listDrawingProductTypes: DrawingProductType[] = [];
 
@@ -177,6 +179,7 @@ export class DrawingFormComponent extends LanguageComponent {
     super('SCREENS.DRAWING-FORM');
     this.listDrawingStyles = this.drawingService.getDrawingStyles();
     this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
+    this.listDrawingFilters = this.drawingService.getDrawingFilterEffects();
     this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
     this.listDrawingProductTypes = this.drawingService.getDrawingProductTypes();
   }
@@ -203,6 +206,7 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.name.setValue(drawing.name);
     this.form.controls.modelName.setValue(drawing.modelName);
     this.form.controls.type.setValue(drawing.type);
+    this.form.controls.filter.setValue(drawing.filter);
     this.form.controls.software.setValue(drawing.software);
     this.form.controls.paper.setValue(drawing.paper);
     this.form.controls.dateHyphen.setValue(drawing.dateHyphen);
@@ -337,6 +341,7 @@ export class DrawingFormComponent extends LanguageComponent {
       time: values.time!,
       title: values.title!,
       type: values.type!,
+      filter: values.filter!,
       visible: values.visible!,
       twitterUrl: values.twitterUrl!,
       instagramUrl: values.instagramUrl!,

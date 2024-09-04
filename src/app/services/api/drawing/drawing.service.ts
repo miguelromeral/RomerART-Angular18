@@ -28,6 +28,8 @@ import { ISaveCollectionRequest } from '@models/requests/save-collection-request
 import { AuthService } from '../auth/auth.service';
 import { User } from '@models/auth/user.model';
 import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
+import { DrawingFilterEffect } from '@models/art/drawing-filter-effect.model';
+import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +61,9 @@ export class DrawingService {
 
   getDrawingSoftwares = (): DrawingSoftware[] =>
     drawingSoftwares.map(sw => new DrawingSoftware(sw));
+
+  getDrawingFilterEffects = (): DrawingFilterEffect[] =>
+    drawingFilterEffects.map(f => new DrawingFilterEffect(f));
 
   getDrawingPaperSizes = (): DrawingPaperSize[] =>
     drawingPaperSizes.map(paper => new DrawingPaperSize(paper));

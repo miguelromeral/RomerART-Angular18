@@ -8,7 +8,8 @@
         "SKETCH": "Boceto",
         "MARKERS": "Rotuladores",
         "COLORED": "Lápices de Colores",
-        "PEN": "Bolígrafo"
+        "PEN": "Bolígrafo",
+        "LINEART": "Line Art"
       },
       "PRODUCTS_TYPES": {
         "OTHER": "Otros",
@@ -17,6 +18,14 @@
         "SINGER": "Cantante",
         "SPORTMAN": "Deportista",
         "INFLUENCER": "Influencer"
+      },
+      "FILTERS": {
+        "TITLE": "Filtros",
+        "NONE": "Ningún Filtro",
+        "SNAPSEED": "Snapseed",
+        "PHOTOSHOP": "Adobe Photoshop",
+        "INSTAGRAM": "Instagram",
+        "SAMSUNG": "Samsung"
       }
     },
     "CV": {

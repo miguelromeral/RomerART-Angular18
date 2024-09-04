@@ -35,6 +35,8 @@ import {
   settingShowViews,
 } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
+import { drawingStyles } from 'config/data/drawing-styles.config';
+import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
 
 @Component({
   selector: 'app-details',
@@ -61,6 +63,7 @@ import { SettingsService } from '@app/services/settings/settings.service';
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
+  providers: [CustomTranslatePipe],
 })
 export class DetailsComponent extends LanguageComponent implements OnInit {
   @Input() id: string | null = null;
@@ -95,7 +98,8 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
     private drawingService: DrawingService,
     private languageService: LanguageService,
     private metadataService: MetadataService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private customTranslate: CustomTranslatePipe
   ) {
     super('SCREENS.DRAWING-DETAILS');
   }
@@ -182,5 +186,21 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
 
   formattedDate(date: Date) {
     return formattedDate(date, this.currentLanguage);
+  }
+
+  getTextStyle(id: number) {
+    const style = drawingStyles.find(x => x.id === id);
+    if (style) {
+      return this.customTranslate.transform(style.code);
+    }
+    return '';
+  }
+
+  getTextFilter(id: number) {
+    const filter = drawingFilterEffects.find(x => x.id === id);
+    if (filter) {
+      return this.customTranslate.transform(filter.labelCode);
+    }
+    return '';
   }
 }

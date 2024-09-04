@@ -52,6 +52,8 @@ export class Drawing {
   instagramUrl: string;
   twitterUrl: string;
   popularity: number;
+  filter: number;
+  filterName: string;
 
   constructor(data: Partial<Drawing> = {}) {
     this.id = data.id || '';
@@ -107,6 +109,8 @@ export class Drawing {
     this.instagramUrl = data.instagramUrl || '';
     this.twitterUrl = data.twitterUrl || '';
     this.popularity = data.popularity || 0;
+    this.filter = data.filter || 0;
+    this.filterName = data.filterName || '';
   }
 
   pageTitle(): string {

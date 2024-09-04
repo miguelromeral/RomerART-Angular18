@@ -49,4 +49,11 @@ export const drawingStyles: IDrawingStyle[] = [
     showSoftware: false,
     showPaper: true,
   },
+  {
+    id: 7,
+    code: 'DATA.DRAWING.STYLES.LINEART',
+    text: 'Line Art',
+    showSoftware: true,
+    showPaper: true,
+  },
 ];

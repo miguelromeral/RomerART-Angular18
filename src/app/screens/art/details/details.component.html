@@ -178,7 +178,15 @@
               <app-details-section type="time" [rawText]="drawing.timeHuman">
               </app-details-section>
 
-              <app-details-section type="style" [rawText]="drawing.typeName">
+              <app-details-section
+                type="style"
+                [rawText]="getTextStyle(drawing.type)">
+              </app-details-section>
+
+              <app-details-section
+                *ngIf="drawing.filter !== 0"
+                type="filter"
+                [rawText]="getTextFilter(drawing.filter)">
               </app-details-section>
 
               <app-details-section

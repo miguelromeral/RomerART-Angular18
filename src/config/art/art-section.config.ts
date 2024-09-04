@@ -13,7 +13,8 @@ export type ArtSectionType =
   | 'views'
   | 'votes'
   | 'likes'
-  | 'sportman';
+  | 'sportman'
+  | 'filter';
 
 export interface IArtSectionType {
   id: ArtSectionType;
@@ -50,10 +51,6 @@ export class ArtSectionConfig {
       icon: 'bi-heart',
     },
     {
-      id: 'style',
-      icon: 'bi-easel',
-    },
-    {
       id: 'paper',
       icon: 'bi-aspect-ratio',
     },
@@ -85,6 +82,14 @@ export class ArtSectionConfig {
     {
       id: 'sportman',
       icon: 'bi-dribbble',
+    },
+    {
+      id: 'style',
+      icon: 'bi-vector-pen',
+    },
+    {
+      id: 'filter',
+      icon: 'bi-stars',
     },
   ];
 }

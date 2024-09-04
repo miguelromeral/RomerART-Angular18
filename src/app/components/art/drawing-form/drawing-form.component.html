@@ -187,6 +187,16 @@
           [options]="listDrawingPapers"
           formControlName="paper">
         </app-select-input>
+
+        <app-select-input
+          [firstOption]="{
+            value: '0',
+            label: '',
+            labelCode: 'DATA.DRAWING.FILTERS.NONE',
+          }"
+          [options]="listDrawingFilters"
+          formControlName="filter">
+        </app-select-input>
       </div>
     </app-section>
 
@@ -372,13 +382,17 @@
         </ul>
       </div>
       <ng-template #formValid>
-        <button class="btn" type="submit">
+        <button
+          class="btn-rounded fixed bottom-20 right-4 flex w-10 flex-row items-center justify-center rounded-full text-xl lg:bottom-4"
+          type="submit">
+          <i class="bi bi-floppy"></i>
+          <!--
           <ng-container *ngIf="newDrawing; else btnSaveEditForm">
             {{ text('FORM.SAVE.CREATE') | mrTranslate }}
           </ng-container>
           <ng-template #btnSaveEditForm>
             {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: drawing.id } }}
-          </ng-template>
+          </ng-template> -->
         </button>
       </ng-template>
     </div>

@@ -5,6 +5,7 @@ export interface ISaveDrawingRequest {
   pathThumbnail: string;
   visible: boolean;
   type: number;
+  filter: number;
   tagsText: string;
   name: string;
   modelName: string;

@@ -8,7 +8,8 @@
         "SKETCH": "Sketch",
         "MARKERS": "Markers",
         "COLORED": "Colored Pencils",
-        "PEN": "Pen"
+        "PEN": "Pen",
+        "LINEART": "Line Art"
       },
       "PRODUCTS_TYPES": {
         "OTHER": "Other",
@@ -17,6 +18,14 @@
         "SINGER": "Singer",
         "SPORTMAN": "Sportsperson",
         "INFLUENCER": "Influencer"
+      },
+      "FILTERS": {
+        "TITLE": "Filters",
+        "NONE": "No Filter",
+        "SNAPSEED": "Snapseed",
+        "PHOTOSHOP": "Adobe Photoshop",
+        "INSTAGRAM": "Instagram",
+        "SAMSUNG": "Samsung"
       }
     },
     "CV": {

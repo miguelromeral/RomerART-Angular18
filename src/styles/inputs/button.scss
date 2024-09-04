@@ -11,7 +11,17 @@ button {
   border: 1px solid var(--mr-btn-bg-color);
 }
 
-.btn:hover {
+
+.btn-rounded {
+  @apply flex items-center justify-center cursor-pointer px-2 uppercase;
+  @apply text-2xl w-10 h-10 rounded-full;
+  background-color: var(--mr-btn-bg-color);
+  color: var(--mr-btn-text-color);
+  border: 1px solid var(--mr-btn-bg-color);
+}
+
+.btn:hover,
+.btn-rounded:hover {
   color: var(--mr-btn-bg-color);
 }
 
