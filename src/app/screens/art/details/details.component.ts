@@ -12,13 +12,7 @@ import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { ScoreBoardComponent } from '@app/components/art/details/score-board/score-board.component';
 import { MetadataService } from '@app/services/metadata/metadata.service';
-import { ArtSectionType } from 'config/art/art-section.config';
 import { TabPanelComponent } from '@app/components/art/details/tab-panel/tab-panel.component';
-import { TabPanelItem } from '@models/components/tab-panel-item.model';
-import {
-  ArtInfoTabsConfig,
-  artTabInfoIds,
-} from 'config/art/art-info-tabs.config';
 import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
@@ -27,16 +21,7 @@ import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
 import { LanguageService } from '@app/services/language/language.service';
-import { formattedDate } from '@utils/customization/date-utils';
-import { settingLanguage } from 'config/settings/language.config';
-import {
-  settingShowScorePopular,
-  settingShowSpotify,
-  settingShowViews,
-} from 'config/settings/local-storage.config';
-import { SettingsService } from '@app/services/settings/settings.service';
-import { drawingStyles } from 'config/data/drawing-styles.config';
-import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
+import { DrawingInfoComponent } from '@app/components/art/details/drawing-info/drawing-info.component';
 
 @Component({
   selector: 'app-details',
@@ -60,6 +45,7 @@ import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
     CustomTranslatePipe,
     LoadingComponent,
     TranslatableComponent,
+    DrawingInfoComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -68,62 +54,26 @@ import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
 export class DetailsComponent extends LanguageComponent implements OnInit {
   @Input() id: string | null = null;
   drawing: Drawing = new Drawing();
-  drawingNotFound: boolean | undefined;
-
-  panelTabs: TabPanelItem[] = ArtInfoTabsConfig.tabs;
-  currentLanguage: string = settingLanguage.defaultValue;
-  showSpotify = settingShowSpotify.defaultValue;
-  showViews = settingShowViews.defaultValue;
-  showScorePopular = settingShowScorePopular.defaultValue;
+  drawingNotFound = false;
 
   loading = true;
-
-  getPanelTabs(): TabPanelItem[] {
-    let tabs = ArtInfoTabsConfig.tabs;
-
-    if (this.drawing.listCommentsStyle.length === 0) {
-      tabs = tabs.filter(x => x.id !== artTabInfoIds.style);
-    }
-    if (!this.showSpotify || this.drawing.spotifyTrackId === '') {
-      tabs = tabs.filter(x => x.id !== artTabInfoIds.spotify);
-    }
-    if (!this.showScorePopular) {
-      tabs = tabs.filter(x => x.id !== artTabInfoIds.vote);
-    }
-    return tabs;
-  }
 
   constructor(
     private logger: LoggerService,
     private drawingService: DrawingService,
     private languageService: LanguageService,
-    private metadataService: MetadataService,
-    private settingsService: SettingsService,
-    private customTranslate: CustomTranslatePipe
+    private metadataService: MetadataService
   ) {
     super('SCREENS.DRAWING-DETAILS');
   }
 
   ngOnInit() {
     this.loadDrawing();
-    this.settingsService.booleanSetting$(settingShowSpotify).subscribe(show => {
-      this.showSpotify = show;
-    });
-    this.settingsService.booleanSetting$(settingShowViews).subscribe(show => {
-      this.showViews = show;
-    });
-    this.settingsService
-      .booleanSetting$(settingShowScorePopular)
-      .subscribe(show => {
-        this.showScorePopular = show;
-      });
-    this.languageService.currentLanguage$.subscribe(lang => {
-      this.currentLanguage = lang;
-    });
   }
 
   loadDrawing() {
     if (this.id) {
+      this.loading = true;
       this.drawingService.getDrawingDetails(this.id).subscribe(data => {
         this.processresult(data);
       });
@@ -132,6 +82,7 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
 
   processresult(data: Drawing) {
     if (data) {
+      this.drawingNotFound = false;
       // this.logger.log(data);
       this.drawing = new Drawing(data);
 
@@ -147,27 +98,11 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
         this.drawing.urlThumbnail
       );
 
-      this.panelTabs = ArtInfoTabsConfig.getTabs(/*this.drawing*/);
       // this.logger.log(this.drawing);
     } else {
       this.drawingNotFound = true;
     }
     this.loading = false;
-  }
-
-  getProductSectionType(): ArtSectionType {
-    switch (this.drawing?.productType) {
-      case 1:
-        return 'game';
-      case 2:
-        return 'actor';
-      case 3:
-        return 'singer';
-      case 4:
-        return 'sportman';
-      default:
-        return '';
-    }
   }
 
   receiveVoteSubmitted(results: IVoteDrawingResponse) {
@@ -182,25 +117,5 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
       // console.log('New likes: ' + likes);
       this.drawing.likes = likes;
     }
-  }
-
-  formattedDate(date: Date) {
-    return formattedDate(date, this.currentLanguage);
-  }
-
-  getTextStyle(id: number) {
-    const style = drawingStyles.find(x => x.id === id);
-    if (style) {
-      return this.customTranslate.transform(style.code);
-    }
-    return '';
-  }
-
-  getTextFilter(id: number) {
-    const filter = drawingFilterEffects.find(x => x.id === id);
-    if (filter) {
-      return this.customTranslate.transform(filter.labelCode);
-    }
-    return '';
   }
 }

@@ -1,0 +1,26 @@
+.tab-button {
+  @apply py-2 px-4 text-sm font-medium cursor-pointer;
+}
+
+.tab-button.active {
+  @apply border-b-2;
+  border-color: var(--mr-tab-panel-section-color);
+  color: var(--mr-tab-panel-section-color);
+  transition: var(--mr-transition-time) ease-in-out;
+}
+
+.tab-content {
+  @apply pt-4;
+}
+
+.swiper-container {
+  @apply h-full py-4 overflow-hidden select-none;
+}
+
+.swiper-slide {
+  @apply h-full w-full px-4;
+}
+
+.swiper-content {
+  @apply h-full;
+}

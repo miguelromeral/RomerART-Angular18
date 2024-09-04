@@ -1,6 +1,6 @@
 {
   "name": "miguelromeral",
-  "version": "2.10.50",
+  "version": "2.10.51",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
