@@ -1,7 +1,39 @@
+.mr-details-container {
+  @apply flex flex-col flex-nowrap gap-2;
+  // @apply sm:grid sm:grid-cols-2;
+  @apply lg:max-h-[96vh];
+}
+
+.mr-main-details-container {
+  @apply flex-grow w-full;
+  @apply flex flex-col flex-wrap gap-2;
+  @apply sm:flex-row flex-nowrap;
+}
+
 /* Title of the Drawing */
 .mr-image-page-title {
   @apply border-b italic;
   transition: var(--mr-transition-time) ease-in-out;
   color: var(--mr-drawing-details-title-color) !important;
   border-color: var(--mr-drawing-details-title-color) !important;
+}
+
+
+
+.mr-detail-grid-cell,
+.mr-detail-grid-cell-details {
+  border: 1px solid grey;
+  @apply lg:max-h-[90vh];
+}
+
+
+.mr-detail-grid-cell {
+  @apply w-fit;
+  @apply lg:max-h-[90vh];
+}
+
+.mr-detail-grid-cell-details {
+  @apply flex-grow;
+  width: -webkit-fill-available;
+  overflow-x: auto;
 }

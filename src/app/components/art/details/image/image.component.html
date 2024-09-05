@@ -1,5 +1,7 @@
-<div class="flex flex-col flex-nowrap gap-0">
+<div
+  class="flex h-full flex-col flex-nowrap items-center gap-0 border border-yellow-500 object-contain">
   <app-art-details-title
+    class="row"
     [loading]="loading"
     [character]="drawing.name"
     [modelName]="drawing.modelName">
@@ -7,7 +9,7 @@
 
   <div
     id="divImgFull"
-    class="mr-img-full-container heart-rain relative min-h-24 w-full"
+    class="mr-img-full-container heart-rain"
     [ngClass]="{ favorite: drawing.favorite }"
     (dblclick)="cheerDrawing($event)">
     <app-loading [loading]="loading">
@@ -15,7 +17,8 @@
         <i class="bi bi-image-fill text-2xl"></i>
       </div>
 
-      <app-zoom-image [url]="drawing.url" content> </app-zoom-image>
+      <app-zoom-image [url]="drawing.url" content class="lg:max-w-[20vw]">
+      </app-zoom-image>
     </app-loading>
 
     <i
@@ -39,7 +42,7 @@
   </div>
   <div
     *ngIf="drawing"
-    class="my-2 flex flex-row flex-nowrap justify-between text-2xl">
+    class="row my-2 flex flex-row flex-nowrap justify-between text-2xl">
     <div
       class="flex select-none flex-row flex-nowrap items-center gap-4"
       [title]="drawing.likes + ' kudos'">

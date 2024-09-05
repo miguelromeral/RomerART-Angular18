@@ -1,7 +1,7 @@
-<app-layout>
+<app-layout class="lg:max-h-screen">
   <div
     *ngIf="loading || !drawingNotFound"
-    class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2"
+    class="mr-details-container"
     [ngClass]="{ favorite: drawing.favorite }">
     <div class="flex w-full flex-col gap-2 sm:col-span-2">
       <app-loading [loading]="loading">
@@ -15,18 +15,23 @@
       </app-loading>
     </div>
 
-    <div class="flex w-full flex-col flex-nowrap gap-2">
+    <div class="mr-main-details-container">
+      <!-- <div class="mr-detail-grid-cell min-h-96 w-96 bg-yellow-700"></div>
+      <div class="mr-detail-grid-cell min-h-96  bg-red-600"></div> -->
+
       <app-art-details-image
+        class="mr-detail-grid-cell"
         [loading]="loading"
         [drawing]="drawing"
-        (submittedCheer)="receiveCheer($event)"></app-art-details-image>
-    </div>
-    <div class="w-full" *ngIf="drawing">
-      <app-drawing-info
-        [drawing]="drawing"
-        [loading]="loading"
-        (voteSubmitted)="receiveVoteSubmitted($event)">
-      </app-drawing-info>
+        (submittedCheer)="receiveCheer($event)">
+      </app-art-details-image>
+      <div class="mr-detail-grid-cell-details" *ngIf="drawing">
+        <app-drawing-info
+          [drawing]="drawing"
+          [loading]="loading"
+          (voteSubmitted)="receiveVoteSubmitted($event)">
+        </app-drawing-info>
+      </div>
     </div>
   </div>
 
