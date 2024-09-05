@@ -23,12 +23,21 @@
       id="iFavoriteIcon"
       class="bi bi-star-fill absolute right-1 top-1 block"
       title="One of my favorites drawings."></i>
+
+    <button class="btn-rounded" type="button" (click)="fullScreenImage()">
+      <i
+        class="bi"
+        [ngClass]="{
+          'bi-fullscreen-exit': isFullScreen,
+          'bi-fullscreen': !isFullScreen,
+        }"></i>
+    </button>
+
     <!-- TODO: volver a poner el icono y arreglar el pantalla completa -->
     <!-- <div
       id="divIconFullScreen"
       class="absolute left-0 top-0 flex aspect-square h-6 w-6 cursor-pointer flex-nowrap justify-center rounded-br-md bg-black p-1 align-middle text-sm text-white"
       tabindex="0"
-      (click)="fullScreenImage()"
       (keydown)="fullScreenImageOnKeyDown($event)">
       <i id="iFS" class="bi bi-fullscreen" title="Ver en pantalla completa"></i>
       <i

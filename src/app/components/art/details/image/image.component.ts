@@ -63,6 +63,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   }
 
   admin = false;
+  isFullScreen = false;
   showKudos = settingShowKudos.defaultValue;
   showScoreCritic = settingShowScoreCritic.defaultValue;
   showScorePopular = settingShowScorePopular.defaultValue;
@@ -137,13 +138,12 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   }
 
   fullScreenImage() {
-    $('#divImgFull').toggleClass('fullscreen');
-  }
-
-  fullScreenImageOnKeyDown(event: KeyboardEvent) {
-    if (event.key === 'F' || event.key === 'f') {
-      this.fullScreenImage();
+    if (this.isFullScreen) {
+      $('#divImgFull').removeClass('fullscreen');
+    } else {
+      $('#divImgFull').addClass('fullscreen');
     }
+    this.isFullScreen = !this.isFullScreen;
   }
 
   formatoLegible(numero: number) {
