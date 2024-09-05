@@ -148,3 +148,16 @@ export const settingMaxZoom: ISettingNumber = {
   descriptionCode: 'SCREENS.SETTINGS.FORM.MAX-ZOOM.DESCRIPTION',
   formControlName: 'maxZoom',
 };
+
+export const settingShowFullScreen: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  icon: 'fullscreen',
+  inputId: 'iSwitchShowFullScreen',
+  key: 'show-fullscreen',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-FULLSCREEN.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-FULLSCREEN.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-FULLSCREEN.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-FULLSCREEN.HIDE',
+  formControlName: 'showFullScreen',
+};

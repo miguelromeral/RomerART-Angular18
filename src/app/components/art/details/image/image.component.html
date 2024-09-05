@@ -24,7 +24,11 @@
       class="bi bi-star-fill absolute right-1 top-1 block"
       title="One of my favorites drawings."></i>
 
-    <button class="btn-rounded" type="button" (click)="fullScreenImage()">
+    <button
+      *ngIf="showBtnFullScreen"
+      class="btn-rounded"
+      type="button"
+      (click)="fullScreenImage()">
       <i
         class="bi"
         [ngClass]="{

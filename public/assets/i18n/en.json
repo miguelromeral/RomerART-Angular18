@@ -283,6 +283,12 @@
           "TITLE": "Maximum Zoom",
           "DESCRIPTION": "Indicate the maximum zoom the image will get when hovering over"
         },
+        "SHOW-FULLSCREEN": {
+          "TITLE": "Fullscreen Button",
+          "DESCRIPTION": "Show a floating button to display drawings on fullscreen",
+          "SHOW": "Show",
+          "HIDE": "Hide"
+        },
         "FORMAT-DATE": {
           "TITLE": "Date Format",
           "DESCRIPTION": "Change the way dates are displayed throughout the app.",

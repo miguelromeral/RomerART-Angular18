@@ -23,6 +23,7 @@ import { AuthService } from '@app/services/api/auth/auth.service';
 import { heartsAnimationConfig } from 'config/customization/heart-animation.config';
 import { ZoomImageComponent } from '@app/components/shared/zoom-image/zoom-image.component';
 import {
+  settingShowFullScreen,
   settingShowKudos,
   settingShowScoreCritic,
   settingShowScorePopular,
@@ -63,6 +64,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   }
 
   admin = false;
+  showBtnFullScreen = settingShowFullScreen.defaultValue;
   isFullScreen = false;
   showKudos = settingShowKudos.defaultValue;
   showScoreCritic = settingShowScoreCritic.defaultValue;
@@ -97,6 +99,11 @@ export class ImageComponent extends LanguageComponent implements OnInit {
       .booleanSetting$(settingShowScorePopular)
       .subscribe(show => {
         this.showScorePopular = show;
+      });
+    this.settingsService
+      .booleanSetting$(settingShowFullScreen)
+      .subscribe(show => {
+        this.showBtnFullScreen = show;
       });
   }
 

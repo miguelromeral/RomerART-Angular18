@@ -279,6 +279,12 @@
           "SHOW": "Habilitado",
           "HIDE": "Deshabilitado"
         },
+        "SHOW-FULLSCREEN": {
+          "TITLE": "Botón de Pantalla Completa",
+          "DESCRIPTION": "Mostrar un botón flotante para poder ver los dibujos en pantalla completa",
+          "SHOW": "Mostrar",
+          "HIDE": "Esconder"
+        },
         "MAX-ZOOM": {
           "TITLE": "Zoom Máximo",
           "DESCRIPTION": "Indica la cantidad máxima de zoom al pasar el ratón por encima."
