@@ -20,7 +20,7 @@ export const filterFormAnimation = trigger('filterFormAnimation', [
     'open',
     style({
       height: '*',
-      overflow: 'hidden',
+      overflow: 'auto',
       opacity: 1,
     })
   ),

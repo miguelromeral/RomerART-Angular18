@@ -18,7 +18,10 @@
   transition: var(--mr-transition-time) ease-in-out;
 }
 
-
+#filterContainer {
+  @apply sticky top-0 z-10;
+  background-color: var(--mr-background-color);
+}
 
 .mr-loader {
   @apply absolute flex flex-col items-center justify-start content-center;

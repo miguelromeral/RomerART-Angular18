@@ -1,11 +1,11 @@
-<app-layout>
-  <div class="grid grid-cols-1 gap-2 lg:grid-cols-3">
+<app-layout
+  ><div class="relative flex min-h-screen flex-col gap-2">
     <div class="mb-10 lg:col-span-2">
       <h1>{{ text('TITLE') | mrTranslate }}</h1>
       <p>{{ text('SUBTITLE') | mrTranslate }}</p>
     </div>
 
-    <div class="lg:row-span-2">
+    <div id="filterContainer">
       <div class="flex flex-nowrap items-start justify-between">
         <div class="flex flex-wrap items-end gap-4">
           <button
@@ -14,7 +14,9 @@
             tabindex="0"
             (keydown.f)="showHideFilters()">
             <i class="bi bi-funnel"></i
-            ><span>{{ text('FORM.TITLE') | mrTranslate }}</span>
+            ><span class="hidden sm:block">{{
+              text('FORM.TITLE') | mrTranslate
+            }}</span>
           </button>
           <div id="divImageCounter" *ngIf="lastFilterResults" #divImageCounter>
             {{
@@ -30,7 +32,9 @@
                     }
             }}
           </div>
-          <div *ngIf="lastFilterResults">({{ nTotalMinutesHuman }})</div>
+          <div *ngIf="lastFilterResults" class="hidden">
+            ({{ nTotalMinutesHuman }})
+          </div>
         </div>
 
         <button
@@ -38,19 +42,22 @@
           class="btn flex flex-row items-center gap-2"
           (click)="createNewDrawing()">
           <i class="bi bi-plus"></i>
-          <span>{{ text('FORM.CREATE-NEW.TITLE') | mrTranslate }}</span>
+          <span class="hidden sm:block">{{
+            text('FORM.CREATE-NEW.TITLE') | mrTranslate
+          }}</span>
         </button>
       </div>
 
       <app-art-search-filter-form
-        class="block"
+        class="block max-h-[80vh] overflow-y-auto"
         [@filterFormAnimation]="showFilters ? 'open' : 'closed'"
         (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
         (fetchedResults)="onFetchedResults($event)"
         (isLoading)="onIsFilterFormLoading($event)">
       </app-art-search-filter-form>
     </div>
-    <div class="lg:col-span-2">
+
+    <div>
       <div class="row mt-2" style="padding-bottom: 20px">
         <div class="mr-loader-container">
           <!-- <div
@@ -68,7 +75,7 @@
           <div
             id="artGallery"
             [@listAnimation]
-            class="mr-img-gallery grid h-full w-full grid-cols-3 items-start gap-[2px] sm:grid-cols-4">
+            class="mr-img-gallery grid h-full w-full grid-cols-3 items-start gap-[2px] sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
             <app-drawing-thumbnail
               class="h-full w-full"
               [fullsize]="first"
