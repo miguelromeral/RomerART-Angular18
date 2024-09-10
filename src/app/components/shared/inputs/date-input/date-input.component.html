@@ -1,5 +1,5 @@
 <div class="form-group">
-  <label *ngIf="label !== ''">{{ label }}</label>
+  <app-label [label]="label" [icon]="icon"></app-label>
   <input
     type="date"
     [value]="value"

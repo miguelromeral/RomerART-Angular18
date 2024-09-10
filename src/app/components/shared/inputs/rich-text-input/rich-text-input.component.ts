@@ -16,6 +16,7 @@ import {
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { TranslateModule } from '@ngx-translate/core';
 import { QuillModule } from 'ngx-quill';
+import { LabelComponent } from '../label/label.component';
 
 @Component({
   selector: 'app-rich-text-input',
@@ -27,6 +28,7 @@ import { QuillModule } from 'ngx-quill';
     QuillModule,
     TranslateModule,
     CustomTranslatePipe,
+    LabelComponent,
   ],
   templateUrl: './rich-text-input.component.html',
   styleUrls: ['./rich-text-input.component.scss'],
@@ -40,6 +42,7 @@ import { QuillModule } from 'ngx-quill';
 })
 export class RichTextInputComponent implements ControlValueAccessor {
   @Input() label = '';
+  @Input() icon = '';
   @Input() placeholder = '';
   @Input() formControl: FormControl = new FormControl();
 

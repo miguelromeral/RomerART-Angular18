@@ -13,11 +13,12 @@ import {
   ControlValueAccessor,
   FormControl,
 } from '@angular/forms';
+import { LabelComponent } from '../label/label.component';
 
 @Component({
   selector: 'app-text-input',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, LabelComponent],
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
   providers: [
@@ -30,6 +31,7 @@ import {
 })
 export class TextInputComponent implements ControlValueAccessor {
   @Input() label = '';
+  @Input() icon = '';
   @Input() placeholder = '';
   @Input() type: 'text' | 'number' = 'text';
   @Input() step = 1;

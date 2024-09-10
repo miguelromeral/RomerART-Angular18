@@ -490,6 +490,10 @@
           "TITLE": "Título",
           "PLACEHOLDER": "Título del Dibujo"
         },
+        "TIME": {
+          "TITLE": "Tiempo",
+          "PLACEHOLDER": "Minutos del Dibujo"
+        },
         "FAVORITE": {
           "TITLE": "Favorito"
         },

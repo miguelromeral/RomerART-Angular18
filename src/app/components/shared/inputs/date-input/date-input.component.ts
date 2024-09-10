@@ -13,11 +13,12 @@ import {
   ControlValueAccessor,
   FormControl,
 } from '@angular/forms';
+import { LabelComponent } from '../label/label.component';
 
 @Component({
   selector: 'app-date-input',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, LabelComponent],
   templateUrl: './date-input.component.html',
   styleUrls: ['./date-input.component.scss'],
   providers: [
@@ -30,6 +31,7 @@ import {
 })
 export class DateInputComponent implements ControlValueAccessor {
   @Input() label = '';
+  @Input() icon = '';
   @Input() placeholder = '';
   @Input() formControl: FormControl = new FormControl();
   @Output() keyDown = new EventEmitter<KeyboardEvent>();
