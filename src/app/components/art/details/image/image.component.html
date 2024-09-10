@@ -83,6 +83,16 @@
         <div class="h-10 w-10" loading></div>
 
         <div content>
+          <button target="_blank" (click)="flipDrawing()" class="btn-image">
+            <i class="bi bi-phone-flip"></i>
+          </button>
+        </div>
+      </app-loading>
+
+      <app-loading [loading]="loading">
+        <div class="h-10 w-10" loading></div>
+
+        <div content>
           <button
             class="btn-image"
             (click)="shareDrawing()"

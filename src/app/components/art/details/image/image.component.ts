@@ -183,4 +183,8 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   editDrawing() {
     this.router.navigate([`/art/edit/${this.drawing.id}`]);
   }
+
+  flipDrawing() {
+    $('#divImgFull img').toggleClass('flipped');
+  }
 }

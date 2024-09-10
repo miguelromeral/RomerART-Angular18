@@ -219,9 +219,14 @@
     <div class="swiper-slide" *ngIf="isTabVisible(panelTabsId.reference)">
       <app-loading [loading]="loading" class="swiper-content aspect-square">
         <div class="h-32 w-full" loading></div>
-        <div content>
+        <div content class="flex flex-col gap-2">
           <app-flip-card-image
+            class="grid h-min max-h-[90vh] object-contain"
             [url]="drawing.referenceUrl"></app-flip-card-image>
+          <a [href]="drawing.referenceUrl" target="_blank">
+            <i class="bi bi-box-arrow-up-right"></i>
+            {{ text('DETAILS.OPEN-REFERENCE') | mrTranslate }}
+          </a>
         </div>
       </app-loading>
     </div>

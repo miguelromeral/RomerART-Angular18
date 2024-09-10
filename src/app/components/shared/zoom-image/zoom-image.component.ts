@@ -6,6 +6,8 @@ import {
   Renderer2,
   ViewChild,
   OnInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { SettingsService } from '@app/services/settings/settings.service';
@@ -38,6 +40,8 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
     this.initZoom();
     this._url = value;
   }
+
+  @Output() imageNotFound = new EventEmitter<void>();
 
   @ViewChild('imageElement') imageElement!: ElementRef;
   initialDistance = 0;
@@ -72,6 +76,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
   errorLoading() {
     this.error = true;
     this.enableZoom = false;
+    this.imageNotFound.next();
   }
 
   onMouseEnter(event: MouseEvent) {
@@ -143,7 +148,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
     }
 
     if (event.touches.length === 2) {
-      // si se está pellizcando la imagen, capturamos las coordenadas y calculamos el zoom
+      // Capturamos las coordenadas y calculamos el zoom
       this.initialDistance = this.getDistance(event.touches);
 
       const rect = this.imageElement.nativeElement.getBoundingClientRect();
@@ -155,7 +160,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
         y: (centerY - rect.top) / rect.height,
       };
 
-      // Set the transform-origin to the center of the pinch
+      // Set transform-origin to the center of the pinch
       this.imageElement.nativeElement.style.transformOrigin = `${this.initialTouchPosition.x * 100}% ${this.initialTouchPosition.y * 100}%`;
 
       // Disable transition for immediate response
@@ -193,7 +198,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       // Actualizar el origen de la transformación para seguir los dedos
       this.imageElement.nativeElement.style.transformOrigin = `${newTouchPosition.x * 100}% ${newTouchPosition.y * 100}%`;
 
-      // Immediate transformation during pinch
+      // Actualizar la transformación para mover y escalar la imagen
       requestAnimationFrame(() => {
         this.transform = `scale(${scale})`;
         this.imageElement.nativeElement.style.transform = this.transform;

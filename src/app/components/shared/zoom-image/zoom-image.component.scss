@@ -10,5 +10,10 @@ img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.1s ease;
+  transition: transform 0.3s ease;
+}
+
+
+img.flipped {
+  transform: rotateY(180deg);
 }
