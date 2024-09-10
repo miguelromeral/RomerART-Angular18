@@ -43,6 +43,10 @@
         "OK": "OK"
       }
     },
+    "FLIP-CARD": {
+      "TITLE": "Reveal Reference Image",
+      "OPEN-NEW-TAB": "Open Reference in New Tab"
+    },
     "RICH-TEXT": {
       "LENGTH-COUNT": "{{count}} characters"
     },
@@ -437,7 +441,8 @@
           "DISLIKES": "Dislikes",
           "VOTE": "Vote",
           "SPOTIFY": "Spotify",
-          "INFO": "Details"
+          "INFO": "Details",
+          "REFERENCE": "Reference"
         },
         "OPEN-REFERENCE": "Open reference in new tab",
         "SECTIONS": {

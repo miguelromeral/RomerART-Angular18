@@ -45,6 +45,7 @@ import { TrackComponent } from '@app/components/spotify/track/track.component';
 import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.model';
 import Swiper from 'swiper';
 import { SwiperOptions } from 'swiper/types';
+import { FlipCardImageComponent } from '@app/components/shared/flip-card-image/flip-card-image.component';
 
 @Component({
   selector: 'app-drawing-info',
@@ -64,6 +65,7 @@ import { SwiperOptions } from 'swiper/types';
     LoadingComponent,
     TrackComponent,
     TranslatableComponent,
+    FlipCardImageComponent,
   ],
   templateUrl: './drawing-info.component.html',
   styleUrl: './drawing-info.component.scss',
@@ -138,7 +140,8 @@ export class DrawingInfoComponent
     this.panelTabs = ArtInfoTabsConfig.getTabs(
       this.drawing,
       this.showScorePopular,
-      this.showSpotify
+      this.showSpotify,
+      this.bErrorReferenceImage
     );
     // console.log('Panel Tabs: ', this.panelTabs);
   }
@@ -211,5 +214,12 @@ export class DrawingInfoComponent
       this.swiper.slideTo(this.panelTabs.length - 1);
     }
     this.currentTabIndex = this.swiper.activeIndex; // Actualiza el índice de la pestaña actual
+  }
+
+  bErrorReferenceImage = false;
+
+  onImageNotFound() {
+    this.bErrorReferenceImage = true;
+    this.loadTabs();
   }
 }

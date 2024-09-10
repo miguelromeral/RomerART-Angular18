@@ -1,0 +1,31 @@
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-side {
+  @apply bg-white-300 p-4 dark:bg-black-500;
+}
+
+.flip-card-front,
+.flip-card-back {
+  @apply absolute inset-0 flex items-center justify-center text-center shadow-lg card-side;
+  @apply text-gray-700 dark:text-white-950;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  @apply flex flex-col gap-4;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}

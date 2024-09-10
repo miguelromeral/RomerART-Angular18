@@ -9,6 +9,7 @@ export interface IArtInfoTabsConfigId {
   spotify: string;
   details: string;
   vote: string;
+  reference: string;
 }
 
 export const artTabInfoIds: IArtInfoTabsConfigId = {
@@ -19,24 +20,26 @@ export const artTabInfoIds: IArtInfoTabsConfigId = {
   spotify: 'spotify',
   details: 'details',
   vote: 'vote',
+  reference: 'reference',
 };
 
 export class ArtInfoTabsConfig {
   static getTabs(
     drawing: Drawing,
     showScorePopular: boolean,
-    showSpotify: boolean
+    showSpotify: boolean,
+    errorReference: boolean
   ): TabPanelItem[] {
     return ArtInfoTabsConfig.tabs
       .filter(tab => {
         switch (tab.id) {
           case artTabInfoIds.vote:
             return tab.visible(drawing, showScorePopular);
-            break;
           case artTabInfoIds.spotify:
             return tab.visible(drawing, showSpotify);
+          case artTabInfoIds.reference:
+            return tab.visible(drawing, errorReference);
 
-            break;
           default:
             return tab.visible(drawing);
         }
@@ -101,6 +104,17 @@ export class ArtInfoTabsConfig {
       icon: 'bi-info-circle',
       iconSelected: 'bi-info-circle-fill',
       visible: (drawing: Drawing) => drawing && true,
+    },
+    {
+      id: artTabInfoIds.reference,
+      order: 800,
+      textCode: 'DETAILS.TAB-TITLES.REFERENCE',
+      icon: 'bi-image',
+      iconSelected: 'bi-image-fill',
+      visible: (drawing: Drawing, errorReference?: boolean) =>
+        drawing &&
+        drawing.referenceUrl !== '' &&
+        (errorReference === undefined || !errorReference),
     },
   ];
 }

@@ -1,0 +1,43 @@
+<!-- <div
+  class="flip-card aspect-square w-full overflow-hidden rounded-lg"
+  onclick="this.classList.toggle('flipped')">
+  <div class="flip-card-inner relative h-full w-full">
+    <div class="flip-card-front">
+      <i class="bi bi-card-image text-2xl"></i>
+      <h2 class="text-lg">{{ text('TITLE') | mrTranslate }}</h2>
+    </div>
+
+    <div class="flip-card-back overflow-hidden rounded-lg bg-transparent">
+      <app-zoom-image
+        (imageNotFound)="onImageNotFound()"
+        class="h-full w-full rounded-lg object-cover"
+        [url]="url"></app-zoom-image>
+      <img
+        [src]="url"
+        alt="Imagen"
+        class="h-full rounded-lg object-cover"
+        (error)="onImageNotFound()" />
+    </div>
+  </div>
+</div> -->
+
+<div class="flip-card h-full w-full overflow-hidden rounded-lg object-cover">
+  <app-zoom-image
+    *ngIf="!error; else errorLoading"
+    (imageNotFound)="onImageNotFound()"
+    class="h-full w-full rounded-lg object-cover"
+    [url]="url"></app-zoom-image>
+
+  <ng-template #errorLoading>
+    <a [href]="url" target="_blank">
+      <div
+        class="card-side flex aspect-square w-full flex-col items-center justify-center gap-4">
+        <i class="bi bi-image text-3xl"></i>
+
+        <span>
+          {{ text('OPEN-NEW-TAB') | mrTranslate }}
+        </span>
+      </div>
+    </a>
+  </ng-template>
+</div>

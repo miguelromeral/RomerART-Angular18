@@ -13,7 +13,7 @@
       <ng-template #iconNotSelected>
         <i class="bi" [ngClass]="tab.icon"></i>
       </ng-template>
-      <span *ngIf="currentTabIndex === i">
+      <span *ngIf="currentTabIndex === i" class="hidden sm:block">
         {{ text(tab.textCode) | mrTranslate }}
       </span>
     </button>
@@ -205,14 +205,6 @@
             </app-details-section>
 
             <app-details-section
-              *ngIf="drawing.referenceUrl !== ''"
-              type="reference">
-              <a [href]="drawing.referenceUrl" target="_blank">{{
-                text('DETAILS.OPEN-REFERENCE') | mrTranslate
-              }}</a>
-            </app-details-section>
-
-            <app-details-section
               class="sm:col-span-2"
               *ngIf="drawing.tags.length > 0"
               [tags]="true"
@@ -220,6 +212,16 @@
               [listTags]="drawing.tags">
             </app-details-section>
           </div>
+        </div>
+      </app-loading>
+    </div>
+
+    <div class="swiper-slide" *ngIf="isTabVisible(panelTabsId.reference)">
+      <app-loading [loading]="loading" class="swiper-content aspect-square">
+        <div class="h-32 w-full" loading></div>
+        <div content>
+          <app-flip-card-image
+            [url]="drawing.referenceUrl"></app-flip-card-image>
         </div>
       </app-loading>
     </div>
