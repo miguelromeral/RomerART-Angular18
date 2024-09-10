@@ -161,3 +161,16 @@ export const settingShowFullScreen: ISettingSwitch = {
   hideCode: 'SCREENS.SETTINGS.FORM.SHOW-FULLSCREEN.HIDE',
   formControlName: 'showFullScreen',
 };
+
+export const settingShowFlipButton: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  icon: 'phone-flip',
+  inputId: 'iSwitchShowFlipButton',
+  key: 'show-flipbutton',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-FLIPBUTTON.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-FLIPBUTTON.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-FLIPBUTTON.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-FLIPBUTTON.HIDE',
+  formControlName: 'showFlipButton',
+};

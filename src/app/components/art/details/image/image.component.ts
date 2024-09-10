@@ -23,6 +23,7 @@ import { AuthService } from '@app/services/api/auth/auth.service';
 import { heartsAnimationConfig } from 'config/customization/heart-animation.config';
 import { ZoomImageComponent } from '@app/components/shared/zoom-image/zoom-image.component';
 import {
+  settingShowFlipButton,
   settingShowFullScreen,
   settingShowKudos,
   settingShowScoreCritic,
@@ -69,6 +70,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   showKudos = settingShowKudos.defaultValue;
   showScoreCritic = settingShowScoreCritic.defaultValue;
   showScorePopular = settingShowScorePopular.defaultValue;
+  showFlip = settingShowFlipButton.defaultValue;
 
   btnCheerId = 'btnCheer';
 
@@ -104,6 +106,11 @@ export class ImageComponent extends LanguageComponent implements OnInit {
       .booleanSetting$(settingShowFullScreen)
       .subscribe(show => {
         this.showBtnFullScreen = show;
+      });
+    this.settingsService
+      .booleanSetting$(settingShowFlipButton)
+      .subscribe(show => {
+        this.showFlip = show;
       });
   }
 

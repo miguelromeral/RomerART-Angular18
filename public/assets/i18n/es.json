@@ -289,6 +289,12 @@
           "SHOW": "Mostrar",
           "HIDE": "Esconder"
         },
+        "SHOW-FLIPBUTTON": {
+          "TITLE": "Girar Horizontalmente",
+          "DESCRIPTION": "Mostrar un botón para girar horizontalmente el dibujo",
+          "SHOW": "Mostrar",
+          "HIDE": "Esconder"
+        },
         "MAX-ZOOM": {
           "TITLE": "Zoom Máximo",
           "DESCRIPTION": "Indica la cantidad máxima de zoom al pasar el ratón por encima."

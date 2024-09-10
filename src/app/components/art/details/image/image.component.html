@@ -79,7 +79,7 @@
         </app-loading>
       </form>
 
-      <app-loading [loading]="loading">
+      <app-loading [loading]="loading" *ngIf="showFlip">
         <div class="h-10 w-10" loading></div>
 
         <div content>

@@ -293,6 +293,12 @@
           "SHOW": "Show",
           "HIDE": "Hide"
         },
+        "SHOW-FLIPBUTTON": {
+          "TITLE": "Flip Horizontally",
+          "DESCRIPTION": "Show a button to flip the drawing horizontally",
+          "SHOW": "Show",
+          "HIDE": "Hide"
+        },
         "FORMAT-DATE": {
           "TITLE": "Date Format",
           "DESCRIPTION": "Change the way dates are displayed throughout the app.",
