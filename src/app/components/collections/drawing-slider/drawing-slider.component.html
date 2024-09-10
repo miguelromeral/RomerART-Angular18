@@ -8,7 +8,7 @@
     class="item"
     [ngStyle]="getDrawingStyle(i)"
     [ngClass]="{ selected: i === activeIndex }">
-    <app-drawing-thumbnail [drawing]="drawing" [fullsize]="true">
+    <app-drawing-thumbnail [drawing]="drawing" [fullsize]="false">
     </app-drawing-thumbnail>
   </div>
   <button id="prev" (click)="prevSlide()">&#60;</button>
