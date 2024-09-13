@@ -59,9 +59,9 @@ export class ArtInfoTabsConfig {
     {
       id: artTabInfoIds.style,
       order: 200,
-      icon: 'bi-patch-exclamation',
+      icon: 'bi-vector-pen',
       textCode: 'DETAILS.TAB-TITLES.STYLE',
-      iconSelected: 'bi-patch-exclamation-fill',
+      iconSelected: 'bi-vector-pen',
       visible: (drawing: Drawing) => drawing.listCommentsStyle.length > 0,
     },
     {

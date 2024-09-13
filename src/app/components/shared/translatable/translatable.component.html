@@ -1,7 +1,7 @@
 <div
   *ngIf="bSettingEnabled && originalText !== ''; else noTranslated"
   class="translation-container inline-flex w-full items-start justify-between gap-2">
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col">
     <div [@translateTextAnimation]="state">
       <ng-container *ngIf="bShowTranslation; else showOriginal">
         <div [innerHTML]="translation"></div>

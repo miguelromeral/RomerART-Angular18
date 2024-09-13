@@ -1,4 +1,4 @@
-<div class="flex flex-col flex-nowrap gap-0">
+<div class="grid-rows-[1fr, auto, 1fr] grid flex-nowrap gap-0">
   <app-art-details-title
     [loading]="loading"
     [character]="drawing.name"
@@ -7,7 +7,7 @@
 
   <div
     id="divImgFull"
-    class="mr-img-full-container heart-rain relative min-h-24 w-full"
+    class="mr-img-full-container heart-rain relative min-h-24"
     [ngClass]="{ favorite: drawing.favorite }"
     (dblclick)="cheerDrawing($event)">
     <app-loading [loading]="loading">

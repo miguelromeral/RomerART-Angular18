@@ -1,9 +1,9 @@
-<app-layout>
+<app-layout class="lg:block lg:h-screen">
   <div
     *ngIf="loading || !drawingNotFound"
-    class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2"
+    class="lg:grid-rows-[1fr, minmax(1fr, auto)] sm:grid-cols-[1fr, auto] flex flex-col flex-nowrap gap-2 sm:grid lg:h-[98vh] lg:max-h-[98vh] lg:items-start lg:justify-stretch"
     [ngClass]="{ favorite: drawing.favorite }">
-    <div class="flex w-full flex-col gap-2 sm:col-span-2">
+    <div class="flex w-full flex-col sm:col-span-2">
       <app-loading [loading]="loading">
         <h1 class="mr-image-page-title" content *ngIf="drawing.title !== ''">
           <span>
@@ -15,13 +15,13 @@
       </app-loading>
     </div>
 
-    <div class="flex w-full flex-col flex-nowrap gap-2">
-      <app-art-details-image
-        [loading]="loading"
-        [drawing]="drawing"
-        (submittedCheer)="receiveCheer($event)"></app-art-details-image>
-    </div>
-    <div class="w-full" *ngIf="drawing">
+    <app-art-details-image
+      class="lg:h-fit lg:min-w-[15vw] lg:flex-grow lg:overflow-hidden"
+      [loading]="loading"
+      [drawing]="drawing"
+      (submittedCheer)="receiveCheer($event)"></app-art-details-image>
+
+    <div class="h-max overflow-visible lg:overflow-auto" *ngIf="drawing">
       <app-drawing-info
         [drawing]="drawing"
         [loading]="loading"

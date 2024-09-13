@@ -52,16 +52,21 @@ export class HeartUtils {
 
   static showHearts(): void {
     const i1 = setInterval(HeartUtils.createHeart, 0);
-    const i2 = setInterval(() => {
-      const heartArr = document.querySelectorAll('.heart-kudos');
-      if (heartArr.length > 200) {
-        heartArr[0].remove();
-      }
-    }, 100);
 
     setTimeout(() => {
       clearInterval(i1);
-      clearInterval(i2);
     }, heartsAnimationConfig.duration.max * 1000);
+
+    setTimeout(
+      () => {
+        HeartUtils.removeHearts();
+      },
+      heartsAnimationConfig.duration.max * 2.2 * 1000
+    );
+  }
+
+  static removeHearts(): void {
+    const heartArr = document.querySelectorAll('.heart-kudos');
+    heartArr.forEach(h => h.remove());
   }
 }
