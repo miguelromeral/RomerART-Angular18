@@ -39,7 +39,7 @@ import {
   styleUrl: './me.component.scss',
 })
 export class MeComponent extends LanguageComponent implements OnInit {
-  listInspirations: Inspiration[] = [];
+  // listInspirations: Inspiration[] = [];
 
   birthday = myBirthday;
   age = 0;
@@ -55,9 +55,9 @@ export class MeComponent extends LanguageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getInspirations().subscribe(list => {
-      this.listInspirations = list;
-    });
+    // this.apiService.getInspirations().subscribe(list => {
+    //   this.listInspirations = list;
+    // });
     this.age = yearsDifference(this.birthday, new Date(Date.now()));
     this.healthPoints = getRandomNumber(healthConfig.min, healthConfig.max);
     this.magicPoints = getRandomNumber(magicConfig.min, magicConfig.max);
