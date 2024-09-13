@@ -30,7 +30,10 @@
     </div>
   </app-section>
 
-  <app-section [title]="text('FILTER-TITLES.CHARACTER') | mrTranslate">
+  <app-section
+    [title]="text('FILTER-TITLES.CHARACTER') | mrTranslate"
+    [collapsable]="true"
+    [isCollapsed]="false">
     <div class="mr-filter-container">
       <app-loading [loading]="loadingDrawingCharacters" class="mr-filter-item">
         <div class="h-8 w-full" loading></div>
@@ -93,7 +96,10 @@
     </div>
   </app-section>
 
-  <app-section [title]="text('FILTER-TITLES.THEME') | mrTranslate">
+  <app-section
+    [title]="text('FILTER-TITLES.THEME') | mrTranslate"
+    [collapsable]="true"
+    [isCollapsed]="false">
     <div class="mr-filter-container">
       <div class="mr-filter-item">
         <div class="filter-input-container">
@@ -162,7 +168,10 @@
     </div>
   </app-section>
 
-  <app-section [title]="text('FILTER-TITLES.STYLE') | mrTranslate">
+  <app-section
+    [title]="text('FILTER-TITLES.STYLE') | mrTranslate"
+    [collapsable]="true"
+    [isCollapsed]="false">
     <div class="mr-filter-container">
       <div class="mr-filter-item">
         <div class="filter-input-container" content>
