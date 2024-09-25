@@ -195,7 +195,7 @@ export class FilterFormComponent
     private settingsService: SettingsService
   ) {
     super('SCREENS.DRAWING-SEARCH.FORM');
-    this.setValuesFromQueryParams();
+    // this.setValuesFromQueryParams();
   }
 
   ngOnInit(): void {
