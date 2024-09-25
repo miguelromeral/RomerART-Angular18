@@ -30,6 +30,12 @@ export interface IArtFilterValuesSortBy extends ICustomSelectOption {
 
 export const artFilterValuesSortBy: IArtFilterValuesSortBy[] = [
   {
+    value: '',
+    labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.POPULARITY',
+    label: '',
+    visible: true,
+  },
+  {
     value: 'date-desc',
     labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.DATE-DESC',
     label: '',
@@ -122,3 +128,10 @@ export const artFilterValuesSortBy: IArtFilterValuesSortBy[] = [
     visible: true,
   },
 ];
+
+export const settingArtFilterValuesSortBy: ICustomSelectOption[] =
+  artFilterValuesSortBy.map((x: IArtFilterValuesSortBy) => ({
+    value: x.value,
+    label: x.label,
+    labelCode: x.labelCode,
+  }));

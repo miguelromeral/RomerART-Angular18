@@ -43,6 +43,7 @@ import { SelectInputComponent } from '@app/components/shared/inputs/select-input
 import { ICustomSelectOption } from '@models/inputs/select-option.model';
 import { SectionComponent } from '@app/components/shared/section/section.component';
 import {
+  settingDefaultFilterSortBy,
   settingFilterCount,
   settingShowKudos,
   settingShowScoreCritic,
@@ -80,6 +81,15 @@ export class FilterFormComponent
   implements OnInit, OnDestroy
 {
   queryParamsSubscription: Subscription | undefined;
+
+  /* Filter Behaviour */
+  showSoftware = true;
+  showPaper = true;
+  showKudos = settingShowKudos.defaultValue;
+  showViews = settingShowViews.defaultValue;
+  showScoreCritic = settingShowScoreCritic.defaultValue;
+  showScorePopular = settingShowScorePopular.defaultValue;
+  defaultSortBy = environment.forms.drawingFilter.default.sortBy;
 
   /* Communication to parent */
   @Output() fetchedResults = new EventEmitter<FilterResultsDrawing>();
@@ -143,7 +153,7 @@ export class FilterFormComponent
 
   /* Filter Form */
   filterForm = new FormGroup({
-    sortBy: new FormControl(environment.forms.drawingFilter.default.sortBy),
+    sortBy: new FormControl(this.defaultSortBy),
     textQuery: new FormControl(
       environment.forms.drawingFilter.default.textQuery
     ),
@@ -175,14 +185,6 @@ export class FilterFormComponent
     pageNumber: new FormControl(ArtFilterFormConfig.pagination.firstPage),
   });
 
-  /* Filter Behaviour */
-  showSoftware = true;
-  showPaper = true;
-  showKudos = settingShowKudos.defaultValue;
-  showViews = settingShowViews.defaultValue;
-  showScoreCritic = settingShowScoreCritic.defaultValue;
-  showScorePopular = settingShowScorePopular.defaultValue;
-
   lastResult: FilterResultsDrawing | null = null;
 
   constructor(
@@ -197,6 +199,18 @@ export class FilterFormComponent
   }
 
   ngOnInit(): void {
+    this.settingsService
+      .selectSetting$(settingDefaultFilterSortBy)
+      .subscribe(value => {
+        const option = this.listOptionsSortBy.find(x => x.value === value);
+        // console.log('Option: ', option);
+        if (option === undefined || option === null) {
+          value = environment.forms.drawingFilter.default.sortBy;
+        }
+        // console.log('Value Patched: ', value);
+        this.defaultSortBy = value;
+        this.filterForm.controls.sortBy.patchValue(value);
+      });
     this.settingsService.booleanSetting$(settingFilterCount).subscribe(show => {
       this.showFilterCount = show;
     });
@@ -268,9 +282,7 @@ export class FilterFormComponent
   }
 
   resetFilters() {
-    this.filterForm.controls.sortBy.setValue(
-      environment.forms.drawingFilter.default.sortBy
-    );
+    this.filterForm.controls.sortBy.setValue(this.defaultSortBy);
     this.filterForm.controls.textQuery.reset();
     this.filterForm.controls.type.setValue(
       environment.forms.drawingFilter.default.type

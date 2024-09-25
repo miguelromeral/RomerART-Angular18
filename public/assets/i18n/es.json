@@ -299,6 +299,10 @@
           "TITLE": "Zoom Máximo",
           "DESCRIPTION": "Indica la cantidad máxima de zoom al pasar el ratón por encima."
         },
+        "DEFAULT-FILTER-SORTBY": {
+          "TITLE": "Ordenar Dibujos",
+          "DESCRIPTION": "Indica de qué manera se deben ordenar los dibujos por defecto al entrar en la galería."
+        },
         "FORMAT-DATE": {
           "TITLE": "Formato de Fecha",
           "DESCRIPTION": "Cambia el formato en que se muestran las fechas en la aplicación.",

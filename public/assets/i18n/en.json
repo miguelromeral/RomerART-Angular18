@@ -287,6 +287,10 @@
           "TITLE": "Maximum Zoom",
           "DESCRIPTION": "Indicate the maximum zoom the image will get when hovering over"
         },
+        "DEFAULT-FILTER-SORTBY": {
+          "TITLE": "Sort Drawings",
+          "DESCRIPTION": "Indicate the default sorting when visitng the gallery."
+        },
         "SHOW-FULLSCREEN": {
           "TITLE": "Fullscreen Button",
           "DESCRIPTION": "Show a floating button to display drawings on fullscreen",

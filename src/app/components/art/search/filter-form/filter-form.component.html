@@ -2,11 +2,6 @@
   <app-section [title]="text('SORTBY.TITLE') | mrTranslate">
     <app-select-input
       class="mr-filter-item"
-      [firstOption]="{
-        value: '',
-        label: '',
-        labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SORTBY.POPULARITY',
-      }"
       [options]="listOptionsSortBy"
       formControlName="sortBy"
       (change)="filterControlChange()">

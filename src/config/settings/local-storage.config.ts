@@ -3,6 +3,8 @@ import {
   ISettingSelect,
   ISettingSwitch,
 } from '@models/settings/settings.model';
+import { settingArtFilterValuesSortBy } from 'config/art/art-filter-form.config';
+import { environment } from 'environments/environment';
 
 export const settingTranslations: ISettingSwitch = {
   defaultValue: true,
@@ -173,4 +175,15 @@ export const settingShowFlipButton: ISettingSwitch = {
   showCode: 'SCREENS.SETTINGS.FORM.SHOW-FLIPBUTTON.SHOW',
   hideCode: 'SCREENS.SETTINGS.FORM.SHOW-FLIPBUTTON.HIDE',
   formControlName: 'showFlipButton',
+};
+
+export const settingDefaultFilterSortBy: ISettingSelect = {
+  defaultValue: environment.forms.drawingFilter.default.sortBy,
+  type: 'select',
+  key: 'default-fiilter-sort-by',
+  icon: 'sort-numeric-down',
+  formControlName: 'defaultFilterSortBy',
+  titleCode: 'SCREENS.SETTINGS.FORM.DEFAULT-FILTER-SORTBY.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.DEFAULT-FILTER-SORTBY.DESCRIPTION',
+  options: settingArtFilterValuesSortBy,
 };

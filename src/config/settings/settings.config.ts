@@ -1,4 +1,5 @@
 import {
+  settingDefaultFilterSortBy,
   settingFilterCount,
   settingFormatDate,
   settingMaxZoom,
@@ -44,6 +45,7 @@ export const settingsConfig: SettingSection[] = [
     icon: 'easel',
     titleCode: 'SCREENS.SETTINGS.SECTIONS.DRAWINGS',
     settings: [
+      new SettingSelect(settingDefaultFilterSortBy),
       new SettingSwitch(settingFilterCount),
       new SettingSwitch(settingZoomImage),
       new SettingNumber(settingMaxZoom),
