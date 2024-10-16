@@ -5,7 +5,6 @@ import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail
 import { DrawingSliderComponent } from '@app/components/collections/drawing-slider/drawing-slider.component';
 import { LayoutComponent } from '@app/components/shared/layout/layout.component';
 import { LoadingComponent } from '@app/components/shared/loading/loading.component';
-import { InstagramPostComponent } from '@app/components/shared/social/instagram-post/instagram-post.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LanguageService } from '@app/services/language/language.service';
@@ -27,7 +26,6 @@ import {
     LayoutComponent,
     TranslateModule,
     CustomTranslatePipe,
-    InstagramPostComponent,
     DrawingThumbnailComponent,
     CommonModule,
     LoadingComponent,

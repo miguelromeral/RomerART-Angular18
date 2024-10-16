@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarLinkComponent } from './navbar-link.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('NavbarLinkComponent', () => {
   let component: NavbarLinkComponent;
@@ -8,9 +9,11 @@ describe('NavbarLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarLinkComponent]
-    })
-    .compileComponents();
+      imports: [NavbarLinkComponent],
+      providers: [
+        { provide: ActivatedRoute, useValue: {} }, // Si necesitas agregar algo para ActivatedRoute
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NavbarLinkComponent);
     component = fixture.componentInstance;

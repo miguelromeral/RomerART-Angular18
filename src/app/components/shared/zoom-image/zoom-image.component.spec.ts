@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ZoomImageComponent } from './zoom-image.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ZoomImageComponent', () => {
   let component: ZoomImageComponent;
@@ -8,9 +9,8 @@ describe('ZoomImageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZoomImageComponent]
-    })
-    .compileComponents();
+      imports: [ZoomImageComponent, TranslateModule.forRoot()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ZoomImageComponent);
     component = fixture.componentInstance;

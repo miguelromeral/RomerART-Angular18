@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FlipCardImageComponent } from './flip-card-image.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FlipCardImageComponent', () => {
   let component: FlipCardImageComponent;
@@ -8,9 +9,8 @@ describe('FlipCardImageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FlipCardImageComponent]
-    })
-    .compileComponents();
+      imports: [FlipCardImageComponent, TranslateModule.forRoot()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FlipCardImageComponent);
     component = fixture.componentInstance;
