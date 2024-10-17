@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class TranslateService {
+export class MrTranslateService {
   private apiKey = environment.translation.apiKey;
   private endpoint = environment.translation.url;
   private location = environment.translation.region;

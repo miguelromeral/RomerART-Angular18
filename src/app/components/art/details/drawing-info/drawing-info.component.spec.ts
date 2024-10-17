@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DrawingInfoComponent } from './drawing-info.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('DrawingInfoComponent', () => {
   let component: DrawingInfoComponent;
@@ -8,9 +9,8 @@ describe('DrawingInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DrawingInfoComponent]
-    })
-    .compileComponents();
+      imports: [DrawingInfoComponent, TranslateModule.forRoot()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DrawingInfoComponent);
     component = fixture.componentInstance;

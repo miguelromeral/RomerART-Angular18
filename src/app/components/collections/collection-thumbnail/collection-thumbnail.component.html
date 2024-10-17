@@ -5,17 +5,19 @@
   (keydown)="click()"
   tabindex="0"
   content>
-  <img
-    *ngIf="collection.drawings.length > 0"
-    [src]="collection.drawings[0].urlThumbnail"
-    [alt]="collection.drawings[0].pageTitle()" />
-  <span class="count">{{ collection.drawingsId.length }}</span>
-  <div class="content">
-    <h2>
-      {{ collection.name }}
-    </h2>
-    <span *ngIf="admin" class="text-sm text-black-100 dark:text-white-950">
-      {{ text('ORDER') | mrTranslate: { order: collection.order } }}
-    </span>
-  </div>
+  <ng-container *ngIf="collection">
+    <img
+      *ngIf="collection.drawings.length > 0"
+      [src]="collection.drawings[0].urlThumbnail"
+      [alt]="collection.drawings[0].pageTitle()" />
+    <span class="count">{{ collection.drawingsId.length }}</span>
+    <div class="content">
+      <h2>
+        {{ collection.name }}
+      </h2>
+      <span *ngIf="admin" class="text-sm text-black-100 dark:text-white-950">
+        {{ text('ORDER') | mrTranslate: { order: collection.order } }}
+      </span>
+    </div>
+  </ng-container>
 </div>

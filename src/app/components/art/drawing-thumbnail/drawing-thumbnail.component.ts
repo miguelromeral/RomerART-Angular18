@@ -100,12 +100,14 @@ export class DrawingThumbnailComponent
   }
 
   detectThumbnailUrl() {
-    this.url = this.drawing.urlThumbnail;
-    if (this.fullsize) {
-      this.url = this.drawing.url;
-    }
-    if (this.url.length === 0) {
-      this.url = this.drawing.url;
+    if (this.drawing) {
+      this.url = this.drawing.urlThumbnail;
+      if (this.fullsize) {
+        this.url = this.drawing.url;
+      }
+      if (this.url.length === 0) {
+        this.url = this.drawing.url;
+      }
     }
   }
 

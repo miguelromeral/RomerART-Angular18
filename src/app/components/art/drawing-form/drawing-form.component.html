@@ -1,4 +1,4 @@
-<app-layout>
+<app-layout *ngIf="drawing">
   <h1>
     <ng-container *ngIf="newDrawing; else titleEditForm">
       {{ text('TITLE.CREATE') | mrTranslate }}
@@ -40,6 +40,7 @@
       <div class="seccion-content">
         <div class="image-container">
           <img
+            *ngIf="drawing?.url"
             #image
             [src]="drawing.url"
             alt="Image"
@@ -47,6 +48,7 @@
             loading="lazy" />
           <img
             #imageThumbnail
+            *ngIf="drawing?.urlThumbnail"
             [src]="drawing.urlThumbnail"
             alt="Image"
             loading="lazy" />

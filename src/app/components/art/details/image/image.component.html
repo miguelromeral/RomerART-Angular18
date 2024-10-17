@@ -1,4 +1,4 @@
-<div class="grid-rows-[1fr, auto, 1fr] grid flex-nowrap gap-0">
+<div *ngIf="drawing" class="grid-rows-[1fr, auto, 1fr] grid flex-nowrap gap-0">
   <app-art-details-title
     [loading]="loading"
     [character]="drawing.name"

@@ -1,4 +1,7 @@
-<div class="empresa" [style.--mr-custom-color]="project.colorVariable">
+<div
+  *ngIf="project"
+  class="empresa"
+  [style.--mr-custom-color]="project.colorVariable">
   <div class="titulo">
     <h5>
       <img

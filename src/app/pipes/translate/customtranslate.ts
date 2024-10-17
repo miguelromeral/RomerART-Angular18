@@ -18,6 +18,7 @@ export class CustomTranslatePipe
   }
 
   override transform(query: string, ...args: any[]): any {
+    if (query === '') return '';
     const translation = super.transform(query, ...args);
     if (environment.production) {
       if (translation === query) {

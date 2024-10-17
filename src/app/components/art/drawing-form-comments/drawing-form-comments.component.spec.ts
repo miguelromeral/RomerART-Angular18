@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DrawingFormCommentsComponent } from './drawing-form-comments.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('DrawingFormCommentsComponent', () => {
   let component: DrawingFormCommentsComponent;
@@ -8,9 +9,8 @@ describe('DrawingFormCommentsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DrawingFormCommentsComponent]
-    })
-    .compileComponents();
+      imports: [DrawingFormCommentsComponent, TranslateModule.forRoot()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DrawingFormCommentsComponent);
     component = fixture.componentInstance;

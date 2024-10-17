@@ -8,7 +8,7 @@ import {
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { LanguageService } from '@app/services/language/language.service';
 import { SettingsService } from '@app/services/settings/settings.service';
-import { TranslateService } from '@app/services/translate/translate.service';
+import { MrTranslateService } from '@app/services/translate/mr-translate.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import { settingLanguage } from 'config/settings/language.config';
@@ -45,7 +45,7 @@ export class TranslatableComponent extends LanguageComponent implements OnInit {
   }
 
   constructor(
-    private translateService: TranslateService,
+    private translateService: MrTranslateService,
     private languageService: LanguageService,
     private settingsService: SettingsService,
     private sanitizer: DomSanitizer // Inyectar el DomSanitizer
