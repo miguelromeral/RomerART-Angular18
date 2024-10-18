@@ -128,22 +128,22 @@ export class DrawingService {
 
   voteDrawing(id: string, score: number): Observable<IVoteDrawingResponse> {
     const url = `${this.apiUrl}art/vote/${id}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http
-      .post<IVoteDrawingResponse>(url, JSON.stringify(score), { headers })
+      .post<IVoteDrawingResponse>(url, JSON.stringify(score), {
+        headers: this.postHeaders,
+      })
       .pipe(catchError(this.handleError<IVoteDrawingResponse>('voteDrawing')));
   }
 
   checkAzurePath(path: string): Observable<ICheckAzurePathResponse> {
     const url = `${this.apiUrl}art/checkazurepath`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     const body: ICheckAzurePathRequest = {
       id: path,
     };
     return this.http
-      .post<ICheckAzurePathResponse>(url, body, { headers })
+      .post<ICheckAzurePathResponse>(url, body, { headers: this.postHeaders })
       .pipe(
         catchError(this.handleError<ICheckAzurePathResponse>('checkAzurePath'))
       );
@@ -151,28 +151,25 @@ export class DrawingService {
 
   removeCollection(id: string): Observable<void> {
     const url = `${this.apiUrl}art/collection/remove`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http
-      .post<void>(url, JSON.stringify(id), { headers })
+      .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
       .pipe(catchError(this.handleError<void>('removeCollection')));
   }
 
   saveDrawing(drawing: ISaveDrawingRequest): Observable<Drawing> {
     const url = `${this.apiUrl}art/save/${drawing.id}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http
-      .post<Drawing>(url, drawing, { headers })
+      .post<Drawing>(url, drawing, { headers: this.postHeaders })
       .pipe(catchError(this.handleError<Drawing>('saveDrawing')));
   }
 
   saveCollection(collection: ISaveCollectionRequest): Observable<Collection> {
     const url = `${this.apiUrl}art/save/collection/${collection.id}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http
-      .post<Collection>(url, collection, { headers })
+      .post<Collection>(url, collection, { headers: this.postHeaders })
       .pipe(catchError(this.handleError<Collection>('saveCollection')));
   }
 
@@ -209,28 +206,38 @@ export class DrawingService {
     filters: DrawingFilter
   ): Observable<FilterResultsDrawing> {
     const url = `${this.apiUrl}art/filter-public`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // console.log('Filters', filters);
     // console.log('Page Number', filters.pageNumber);
-    return this.http.post<FilterResultsDrawing>(url, filters, { headers }).pipe(
-      map((results: FilterResultsDrawing) => new FilterResultsDrawing(results)),
-      catchError(this.handleError<FilterResultsDrawing>('filterDrawingsPublic'))
-    );
+    return this.http
+      .post<FilterResultsDrawing>(url, filters, { headers: this.postHeaders })
+      .pipe(
+        map(
+          (results: FilterResultsDrawing) => new FilterResultsDrawing(results)
+        ),
+        catchError(
+          this.handleError<FilterResultsDrawing>('filterDrawingsPublic')
+        )
+      );
   }
 
   filterDrawingsAdmin(
     filters: DrawingFilter
   ): Observable<FilterResultsDrawing> {
     const url = `${this.apiUrl}art/filter-admin`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // console.log('Filters', filters);
     // console.log('Page Number', filters.pageNumber);
-    return this.http.post<FilterResultsDrawing>(url, filters, { headers }).pipe(
-      map((results: FilterResultsDrawing) => new FilterResultsDrawing(results)),
-      catchError(this.handleError<FilterResultsDrawing>('filterDrawingsAdmin'))
-    );
+    return this.http
+      .post<FilterResultsDrawing>(url, filters, { headers: this.postHeaders })
+      .pipe(
+        map(
+          (results: FilterResultsDrawing) => new FilterResultsDrawing(results)
+        ),
+        catchError(
+          this.handleError<FilterResultsDrawing>('filterDrawingsAdmin')
+        )
+      );
   }
 
   getAllDrawingsOfCollection(
@@ -279,7 +286,20 @@ export class DrawingService {
       .get<Collection>(`${this.apiUrl}art/collection/details-public/${id}`)
       .pipe(
         map((collection: Collection) => new Collection(collection)),
-        catchError(this.handleError<Collection>('getCollectionDetails'))
+        catchError(
+          this.handleError<Collection>('getCollectionDetails', {
+            id: '',
+            description: '',
+            drawings: [],
+            drawingsId: [],
+            label: '',
+            labelCode: '',
+            name: 'not-found',
+            order: 0,
+            textDrawingsReferences: '',
+            value: '',
+          })
+        )
       );
   }
 
@@ -292,7 +312,7 @@ export class DrawingService {
       );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation: string, result?: T) {
     return (error: HttpErrorResponse): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
       return of(result as T);
