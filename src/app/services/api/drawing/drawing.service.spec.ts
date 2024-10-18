@@ -216,8 +216,10 @@ describe('DrawingService', () => {
       done();
     });
 
-    expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/cheer`
+    expect(httpClientSpy.post).toHaveBeenCalledWith(
+      `${service['apiUrl']}art/cheer`,
+      JSON.stringify('id'),
+      { headers: service.postHeaders }
     );
   });
 });

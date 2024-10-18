@@ -1,5 +1,10 @@
 import { CommonModule, NgClass, NgFor } from '@angular/common';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  AfterViewChecked,
+} from '@angular/core';
 import { LanguageService } from '@app/services/language/language.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
@@ -54,10 +59,7 @@ import { TextInputComponent } from '@app/components/shared/inputs/text-input/tex
   styleUrl: './settings.component.scss',
 })
 // implements OnInit, OnDestroy
-export class SettingsComponent
-  extends LanguageComponent
-  implements OnInit, AfterViewInit
-{
+export class SettingsComponent extends LanguageComponent implements OnInit {
   loginPath = loginPath;
 
   version = environment.appVersion;
@@ -92,13 +94,12 @@ export class SettingsComponent
   }
 
   ngOnInit() {
+    // this.settingsService.init();
+    this.initSettings();
+
     this.languageService.translateText(this.text('TITLE')).subscribe(text => {
       this.metadataService.updateTitle(text);
     });
-  }
-
-  ngAfterViewInit() {
-    this.initSettings();
   }
 
   findControlByName(name: string) {

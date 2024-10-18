@@ -39,6 +39,8 @@ export class DrawingService {
 
   user: User | null = null;
 
+  public postHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -118,10 +120,9 @@ export class DrawingService {
 
   cheerDrawing(id: string): Observable<void> {
     const url = `${this.apiUrl}art/cheer`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http
-      .post<void>(url, JSON.stringify(id), { headers })
+      .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
       .pipe(catchError(this.handleError<void>('cheerDrawing')));
   }
 
