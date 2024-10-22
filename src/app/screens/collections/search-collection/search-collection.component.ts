@@ -66,8 +66,8 @@ export class SearchCollectionComponent
 
   ngOnInit() {
     this.setPageTitle(this.metadataService, this.languageService);
-    this.authService.loggedUser$.subscribe(user => {
-      this.admin = user ? this.authService.isAdmin(user) : false;
+    this.authService.isAdmin().subscribe(isAdmin => {
+      this.admin = isAdmin;
     });
     this.drawingService.getAllCollections().subscribe(list => {
       if (list) {

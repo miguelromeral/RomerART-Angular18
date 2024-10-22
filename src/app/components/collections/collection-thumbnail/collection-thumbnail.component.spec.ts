@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CollectionThumbnailComponent } from './collection-thumbnail.component';
 import { AuthService } from '@app/services/api/auth/auth.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { User } from '@models/auth/user.model';
 
 describe('CollectionThumbnailComponent', () => {
@@ -22,6 +22,7 @@ describe('CollectionThumbnailComponent', () => {
     }).compileComponents();
 
     authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
+    authServiceSpy.isAdmin.and.returnValue(of(false));
 
     fixture = TestBed.createComponent(CollectionThumbnailComponent);
     component = fixture.componentInstance;

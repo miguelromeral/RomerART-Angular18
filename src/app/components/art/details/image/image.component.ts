@@ -115,8 +115,8 @@ export class ImageComponent extends LanguageComponent implements OnInit {
   }
 
   loadLoggedUser() {
-    this.authService.loggedUser$.subscribe(user => {
-      this.admin = user ? this.authService.isAdmin(user) : false;
+    this.authService.isAdmin().subscribe(isAdmin => {
+      this.admin = isAdmin;
     });
   }
 

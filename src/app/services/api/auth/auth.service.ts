@@ -10,7 +10,7 @@ import {
 } from 'config/auth/auth.config';
 import { environment } from 'environments/environment';
 import { jwtDecode } from 'jwt-decode';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -57,11 +57,10 @@ export class AuthService {
       if (decodedToken?.exp !== undefined) {
         return decodedToken.exp < currentTime;
       }
-      return false;
     } catch (e) {
       console.error('Error decoding token', e);
-      return true; // En caso de error, consideramos el token como caducado
     }
+    return true; // En caso de error, consideramos el token como caducado
   }
 
   login(credentials: { username: string; password: string }): Observable<User> {
@@ -79,18 +78,18 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(localStorageKey);
+    return this.localStorageService.getItem(localStorageKey);
   }
 
   logout() {
-    localStorage.removeItem(localStorageKey);
-    localStorage.removeItem(loggedUserLocalStorageKey);
+    this.localStorageService.removeItem(localStorageKey);
+    this.localStorageService.removeItem(loggedUserLocalStorageKey);
     this.router.navigate([loginPath]);
     this.loggedUserSubject.next(null);
   }
 
   public get loggedIn(): boolean {
-    return localStorage.getItem(localStorageKey) !== null;
+    return this.localStorageService.getItem(localStorageKey) !== null;
   }
 
   saveLoggedUser(newUser: User) {
@@ -102,8 +101,17 @@ export class AuthService {
     this.localStorageService.setItem(localStorageKey, newUser.token);
   }
 
-  isAdmin(user: User) {
-    return user?.role === 'admin';
+  isAdmin(): Observable<boolean> {
+    return this.loggedUser$.pipe(switchMap(user => this.isAdminUser(user)));
+  }
+
+  isAdminUser(user: User | null): Observable<boolean> {
+    if (!user) {
+      return of(false); // Si no hay usuario, retorna inmediatamente 'false'
+    }
+    return this.validateToken(user.token).pipe(
+      map((result: boolean) => result && user.role === 'admin') // Si el token es válido y el rol es 'admin', retorna true
+    );
   }
 
   uptadeRedirectUrl(url: string) {

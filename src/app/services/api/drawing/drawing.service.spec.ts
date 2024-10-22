@@ -37,7 +37,10 @@ describe('DrawingService', () => {
     environment.api.url = 'https://mocked-url.com/api/';
 
     const spyHttp = jasmine.createSpyObj('HttpClient', ['get', 'post']);
-    const spyAuth = jasmine.createSpyObj('AuthService', ['isAdmin']);
+    const spyAuth = jasmine.createSpyObj('AuthService', [
+      'isAdmin',
+      'isAdminUser',
+    ]);
 
     // Crear un BehaviorSubject simulado para loggedUser$
     const loggedUserSubject = new BehaviorSubject<User | null>(null);
@@ -51,9 +54,12 @@ describe('DrawingService', () => {
       ],
     });
 
+    authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
+    authServiceSpy.isAdmin.and.returnValue(of(false));
+    authServiceSpy.isAdminUser.and.returnValue(of(false));
+
     service = TestBed.inject(DrawingService);
     httpClientSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
-    authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
 
     // Para simular un usuario logueado (admin o no)
     loggedUserSubject.next({
@@ -70,7 +76,7 @@ describe('DrawingService', () => {
 
   it('should return false if not user is found', () => {
     service.user = null;
-    expect(service.adminAccess()).toBeFalsy();
+    expect(service.isAdmin).toBeFalsy();
   });
 
   it('should return all drawing styles', () => {
@@ -149,7 +155,9 @@ describe('DrawingService', () => {
       title: 'Admin Drawing',
     } as Drawing;
     httpClientSpy.get.and.returnValue(of(mockDrawing));
-    authServiceSpy.isAdmin.and.returnValue(true);
+    service.isAdmin = true;
+    authServiceSpy.isAdmin.and.returnValue(of(true));
+    authServiceSpy.isAdminUser.and.returnValue(of(true));
 
     service.getDrawingDetails('admin123').subscribe(drawing => {
       expect(drawing).toEqual(mockDrawing);
@@ -300,6 +308,7 @@ describe('DrawingService', () => {
   });
 
   it('should save drawing', done => {
+    service.isAdmin = true;
     const request: ISaveDrawingRequest = {
       id: 'id',
       dateHyphen: '',
@@ -399,6 +408,7 @@ describe('DrawingService', () => {
   });
 
   it('should save collection', done => {
+    service.isAdmin = true;
     const mockCollection: Collection = {
       description: '',
       drawings: [],
@@ -433,6 +443,7 @@ describe('DrawingService', () => {
   });
 
   it('should upload image to azure', done => {
+    service.isAdmin = true;
     const formData: FormData = new FormData();
     const mockResponse: UploadAzureImageRequest = {
       image: '',
@@ -452,6 +463,7 @@ describe('DrawingService', () => {
   });
 
   it('should check drawing ID', done => {
+    service.isAdmin = true;
     const id = 'id';
     httpClientSpy.get.and.returnValue(of(false));
 
@@ -478,7 +490,10 @@ describe('DrawingService', () => {
   });
 
   it('should return filtered drawings for public access', (done: DoneFn) => {
-    authServiceSpy.isAdmin.and.returnValue(false);
+    service.isAdmin = false;
+    authServiceSpy.isAdmin.and.returnValue(of(false));
+    authServiceSpy.isAdminUser.and.returnValue(of(false));
+
     const mockResponse: FilterResultsDrawing = {
       fetchedCount: 0,
       filteredCollections: [],
@@ -536,7 +551,10 @@ describe('DrawingService', () => {
   });
 
   it('should return filtered drawings for public access', (done: DoneFn) => {
-    authServiceSpy.isAdmin.and.returnValue(true);
+    service.isAdmin = true;
+    authServiceSpy.isAdmin.and.returnValue(of(true));
+    authServiceSpy.isAdminUser.and.returnValue(of(true));
+
     const mockResponse: FilterResultsDrawing = {
       fetchedCount: 0,
       filteredCollections: [],
@@ -594,7 +612,8 @@ describe('DrawingService', () => {
   });
 
   it('should return all drawings of collection', done => {
-    authServiceSpy.isAdmin.and.returnValue(false);
+    authServiceSpy.isAdmin.and.returnValue(of(false));
+    authServiceSpy.isAdminUser.and.returnValue(of(false));
     const collectionId = 'id';
 
     const mockResponse: FilterResultsDrawing = {
@@ -631,7 +650,9 @@ describe('DrawingService', () => {
   });
 
   it('should return all collections for public access', (done: DoneFn) => {
-    authServiceSpy.isAdmin.and.returnValue(false);
+    authServiceSpy.isAdmin.and.returnValue(of(false));
+    authServiceSpy.isAdminUser.and.returnValue(of(false));
+
     const mockResponse: Collection[] = [
       {
         description: '',
@@ -658,7 +679,10 @@ describe('DrawingService', () => {
   });
 
   it('should return all collections for admin access', (done: DoneFn) => {
-    authServiceSpy.isAdmin.and.returnValue(true);
+    service.isAdmin = true;
+    authServiceSpy.isAdmin.and.returnValue(of(true));
+    authServiceSpy.isAdminUser.and.returnValue(of(true));
+
     const mockResponse: Collection[] = [
       {
         description: '',
@@ -685,8 +709,11 @@ describe('DrawingService', () => {
   });
 
   it('should return collection details for public access', done => {
+    service.isAdmin = false;
     const id = 'id';
-    authServiceSpy.isAdmin.and.returnValue(false);
+    authServiceSpy.isAdmin.and.returnValue(of(false));
+    authServiceSpy.isAdminUser.and.returnValue(of(false));
+
     const mockResponse: Collection = {
       description: '',
       drawings: [],
@@ -712,7 +739,8 @@ describe('DrawingService', () => {
 
   it('should return collection details for admin access', done => {
     const id = 'id';
-    authServiceSpy.isAdmin.and.returnValue(true);
+    service.isAdmin = true;
+
     const mockResponse: Collection = {
       description: '',
       drawings: [],
@@ -737,6 +765,7 @@ describe('DrawingService', () => {
   });
 
   it('should handle error when getCollectionDetailsPublic fails', () => {
+    service.isAdmin = false;
     const id = 'id';
     const mockErrorResponse = new HttpErrorResponse({
       status: 500,

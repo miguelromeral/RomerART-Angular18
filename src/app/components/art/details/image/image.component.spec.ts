@@ -5,7 +5,7 @@ import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { loggedUserLocalStorageKey } from 'config/auth/auth.config';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { User } from '@models/auth/user.model';
 
 describe('ImageComponent', () => {
@@ -35,6 +35,8 @@ describe('ImageComponent', () => {
     drawingServiceSpy = TestBed.inject(
       DrawingService
     ) as jasmine.SpyObj<DrawingService>;
+
+    authServiceSpy.isAdmin.and.returnValue(of(false));
 
     fixture = TestBed.createComponent(ImageComponent);
     component = fixture.componentInstance;

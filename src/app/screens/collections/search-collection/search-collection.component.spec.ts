@@ -44,6 +44,7 @@ describe('SearchCollectionComponent', () => {
     drawingServiceSpy = TestBed.inject(
       DrawingService
     ) as jasmine.SpyObj<DrawingService>;
+    authServiceSpy.isAdmin.and.returnValue(of(false));
 
     const mockCollections: Collection[] = [
       {

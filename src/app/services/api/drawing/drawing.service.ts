@@ -38,6 +38,7 @@ export class DrawingService {
   private apiUrl = environment.api.url;
 
   user: User | null = null;
+  isAdmin = false;
 
   public postHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -47,12 +48,10 @@ export class DrawingService {
   ) {
     this.authService.loggedUser$.subscribe(user => {
       this.user = user;
+      this.authService.isAdminUser(user).subscribe(admin => {
+        this.isAdmin = admin;
+      });
     });
-  }
-
-  adminAccess(): boolean {
-    if (this.user) return this.authService.isAdmin(this.user);
-    return false;
   }
 
   getDrawingStyles = (): DrawingStyle[] =>
@@ -71,7 +70,7 @@ export class DrawingService {
     drawingPaperSizes.map(paper => new DrawingPaperSize(paper));
 
   getDrawingDetails(id: string): Observable<Drawing> {
-    return this.adminAccess()
+    return this.isAdmin
       ? this.getDrawingDetailsAdmin(id)
       : this.getDrawingDetailsPublic(id);
   }
@@ -197,7 +196,7 @@ export class DrawingService {
   }
 
   filterDrawings(filters: DrawingFilter): Observable<FilterResultsDrawing> {
-    return this.adminAccess()
+    return this.isAdmin
       ? this.filterDrawingsAdmin(filters)
       : this.filterDrawingsPublic(filters);
   }
@@ -248,7 +247,7 @@ export class DrawingService {
   }
 
   getAllCollections(): Observable<Collection[]> {
-    return this.adminAccess()
+    return this.isAdmin
       ? this.getAllCollectionsAdmin()
       : this.getAllCollectionsPublic();
   }
@@ -276,7 +275,7 @@ export class DrawingService {
   }
 
   getCollectionDetails(id: string): Observable<Collection> {
-    return this.adminAccess()
+    return this.isAdmin
       ? this.getCollectionDetailsAdmin(id)
       : this.getCollectionDetailsPublic(id);
   }

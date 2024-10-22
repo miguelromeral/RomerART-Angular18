@@ -4,7 +4,7 @@ import { DetailsComponent } from './details.component';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { User } from '@models/auth/user.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { AuthService } from '@app/services/api/auth/auth.service';
 
 describe('DetailsComponent', () => {
@@ -34,6 +34,7 @@ describe('DetailsComponent', () => {
     drawingServiceSpy = TestBed.inject(
       DrawingService
     ) as jasmine.SpyObj<DrawingService>;
+    authServiceSpy.isAdmin.and.returnValue(of(false));
 
     fixture = TestBed.createComponent(DetailsComponent);
     component = fixture.componentInstance;

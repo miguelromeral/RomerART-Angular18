@@ -10,4 +10,5 @@ export const routesWithoutAuth = [
   '/api/about',
   'art/collection/details-public',
   'microsofttranslator',
+  'validate-token',
 ];
