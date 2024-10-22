@@ -38,7 +38,7 @@ export class DrawingService {
   private apiUrl = environment.api.url;
 
   user: User | null = null;
-  isAdmin = false;
+  private isAdmin = false;
 
   public postHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
