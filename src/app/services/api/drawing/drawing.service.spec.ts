@@ -277,8 +277,6 @@ describe('DrawingService', () => {
       id: path,
     };
 
-    console.log('API: ', service['apiUrl']);
-
     expect(httpClientSpy.post).toHaveBeenCalledWith(
       `${service['apiUrl']}art/checkazurepath`,
       body,

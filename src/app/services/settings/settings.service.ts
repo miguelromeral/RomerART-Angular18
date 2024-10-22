@@ -17,6 +17,7 @@ import { settingsConfig } from 'config/settings/settings.config';
 import { FormControl, FormGroup } from '@angular/forms';
 import { settingLanguage } from 'config/settings/language.config';
 import { settingTheme } from 'config/settings/theme.config';
+import { SettingNotFoundError } from '@app/errors/settings/setting-not-found.error';
 
 @Injectable({
   providedIn: 'root',
@@ -50,17 +51,17 @@ export class SettingsService {
     return this.settings;
   }
 
-  setFormControls(fg: FormGroup) {
-    this.settings.forEach(section => {
-      section.settings.forEach(setting => {
-        if (fg.contains(setting.key)) {
-          setting.formControlName = setting.key;
-          const formControl = fg.get(setting.key) as FormControl;
-          setting.setFormControl(formControl);
-        }
-      });
-    });
-  }
+  // setFormControls(fg: FormGroup) {
+  //   this.settings.forEach(section => {
+  //     section.settings.forEach(setting => {
+  //       if (fg.contains(setting.key)) {
+  //         setting.formControlName = setting.key;
+  //         const formControl = fg.get(setting.key) as FormControl;
+  //         setting.setFormControl(formControl);
+  //       }
+  //     });
+  //   });
+  // }
 
   private getBooleanSetting(key: string): SettingSwitch | undefined {
     const allSettings: Setting[] = [];
@@ -162,21 +163,33 @@ export class SettingsService {
     return this.getBooleanSetting(setting.key)!.subject.asObservable();
   }
   booleanSettingValue(setting: ISettingSwitch): boolean {
-    return this.getBooleanSetting(setting.key)!.subject.getValue();
+    const settingFound = this.getBooleanSetting(setting.key);
+    if (!settingFound) {
+      throw new SettingNotFoundError(setting.key);
+    }
+    return settingFound.subject.getValue();
   }
 
   selectSetting$(setting: ISettingSelect): Observable<string> {
     return this.getSelectSetting(setting.key)!.subject.asObservable();
   }
   selectSettingValue(setting: ISettingSelect): string {
-    return this.getSelectSetting(setting.key)!.subject.getValue();
+    const settingFound = this.getSelectSetting(setting.key);
+    if (!settingFound) {
+      throw new SettingNotFoundError(setting.key);
+    }
+    return settingFound.subject.getValue();
   }
 
   numberSetting$(setting: ISettingNumber): Observable<number> {
     return this.getNumberSetting(setting.key)!.subject.asObservable();
   }
-  numberSettingValue(setting: ISettingSelect): number {
-    return this.getNumberSetting(setting.key)!.subject.getValue();
+  numberSettingValue(setting: ISettingNumber): number {
+    const settingFound = this.getNumberSetting(setting.key);
+    if (!settingFound) {
+      throw new SettingNotFoundError(setting.key);
+    }
+    return settingFound.subject.getValue();
   }
 
   isSettingSwitch(setting: Setting): setting is SettingSwitch {

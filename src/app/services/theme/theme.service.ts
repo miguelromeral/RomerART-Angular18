@@ -45,8 +45,6 @@ export class ThemeService {
         this.setDarkTheme();
         return;
     }
-
-    this.setting.subject.next(theme);
   }
 
   private setSystemTheme() {

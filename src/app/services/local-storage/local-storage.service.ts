@@ -36,12 +36,11 @@ export class LocalStorageService {
         return this.storage.getItem(key);
       } catch (e) {
         console.error(`Error al recuperar del localStorage: ${e}`);
-        return null;
       }
     } else {
       console.warn('Storage not supported in Server side');
     }
-    return '---';
+    return null;
   }
 
   // Método para eliminar un ítem del localStorage

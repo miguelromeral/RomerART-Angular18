@@ -12,6 +12,12 @@ export class MrTranslateService {
   private endpoint = environment.translation.url;
   private location = environment.translation.region;
 
+  public httpHeaders = new HttpHeaders({
+    'Ocp-Apim-Subscription-Key': this.apiKey,
+    'Ocp-Apim-Subscription-Region': this.location,
+    'Content-Type': 'application/json',
+  });
+
   constructor(private http: HttpClient) {}
 
   translate(text: string, to: string): Observable<ITranslateResponse[]> {
@@ -23,14 +29,9 @@ export class MrTranslateService {
     const body = [{ Text: text }];
     const requestBody = JSON.stringify(body);
 
-    // Configurar los encabezados de la solicitud
-    const headers = new HttpHeaders({
-      'Ocp-Apim-Subscription-Key': this.apiKey,
-      'Ocp-Apim-Subscription-Region': this.location,
-      'Content-Type': 'application/json',
-    });
-
     // Realizar la solicitud POST y retornar el Observable
-    return this.http.post<ITranslateResponse[]>(url, requestBody, { headers });
+    return this.http.post<ITranslateResponse[]>(url, requestBody, {
+      headers: this.httpHeaders,
+    });
   }
 }
