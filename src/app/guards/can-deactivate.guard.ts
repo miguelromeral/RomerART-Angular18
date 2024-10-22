@@ -15,7 +15,7 @@ export class CanDeactivateGuard
   canDeactivate(
     component: CanComponentDeactivate
   ): Observable<boolean> | boolean {
-    console.log('Estoy en el guard');
+    // console.log('Estoy en el guard');
     return component.canDeactivate();
   }
 }

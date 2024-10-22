@@ -31,7 +31,7 @@ export class EditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate(): boolean | Observable<boolean> {
-    console.log('canDeactivate en el componente ejecutado');
+    // console.log('canDeactivate en el componente ejecutado');
 
     return this.alertService.showConfirmDialog(
       '¿Salir?',
