@@ -3,6 +3,7 @@
     <h1>{{ text('TITLE') | mrTranslate }}</h1>
 
     <form
+      id="formLogin"
       [formGroup]="loginForm"
       (submit)="login()"
       class="flex flex-col gap-2">
@@ -40,7 +41,7 @@
         {{ text('ERRORS.PASSWORD-REQUIRED') | mrTranslate }}
       </div>
 
-      <button class="btn" type="submit">
+      <button id="bLogin" class="btn" type="submit">
         {{ text('FORM.LOGIN') | mrTranslate }}
       </button>
     </form>

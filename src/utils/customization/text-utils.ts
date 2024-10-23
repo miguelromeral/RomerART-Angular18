@@ -7,10 +7,10 @@ export class TextUtils {
       return numero.toString();
     } else if (numero < UN_MILLON) {
       const valorFormateado = Math.round((numero / MIL) * 10) / 10;
-      return `${valorFormateado} k`;
+      return `${valorFormateado}k`;
     } else {
       const valorFormateado = Math.round((numero / UN_MILLON) * 10) / 10;
-      return `${valorFormateado} M`;
+      return `${valorFormateado}M`;
     }
   }
 }

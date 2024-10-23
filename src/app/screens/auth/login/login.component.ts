@@ -41,21 +41,19 @@ export class LoginComponent extends LanguageComponent {
   }
 
   login() {
-    if (this.loginForm.valid) {
-      const username = this.loginForm.value.username ?? '';
-      const password = this.loginForm.value.password ?? '';
+    const username = this.loginForm.value.username ?? '';
+    const password = this.loginForm.value.password ?? '';
 
+    if (this.loginForm.valid) {
       this.authService.login({ username, password }).subscribe(
         response => {
           if (response) {
             this.authService.saveLoggedUser(response);
             this.router.navigate([this.authService.getRedirectUrl()]);
-          } else {
-            console.log('Error al recivir el usuario logado');
           }
         },
         err => {
-          console.log('Error al recivir el token: ', err);
+          console.log('Error al recibir el token: ', err);
         }
       );
     }

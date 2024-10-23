@@ -37,7 +37,7 @@ import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
 export class DrawingService {
   private apiUrl = environment.api.url;
 
-  user: User | null = null;
+  private user: User | null = null;
   private isAdmin = false;
 
   public postHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -117,12 +117,12 @@ export class DrawingService {
       .pipe(catchError(this.handleError<string[]>('getDrawingModels')));
   }
 
-  cheerDrawing(id: string): Observable<void> {
+  cheerDrawing(id: string): Observable<unknown> {
     const url = `${this.apiUrl}art/cheer`;
 
     return this.http
       .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
-      .pipe(catchError(this.handleError<void>('cheerDrawing')));
+      .pipe(catchError(this.handleError<unknown>('cheerDrawing')));
   }
 
   voteDrawing(id: string, score: number): Observable<IVoteDrawingResponse> {
