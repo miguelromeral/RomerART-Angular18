@@ -50,11 +50,11 @@ jobs:
 
       - name: Building app
         run: |
-          npm run github --if-present
+          npm run prod-github --if-present
 
       - name: Testing app
         run: |
-          npm run test --if-present
+          npm run test-github --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
