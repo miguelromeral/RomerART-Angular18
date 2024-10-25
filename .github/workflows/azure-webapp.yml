@@ -33,16 +33,16 @@ jobs:
       - name: Build environment.ts file replacing GitHub secrets.
         run: |
           cp src/environments/environment.github.ts src/environments/environment.ts
-          sed -i 's/<<FIREBASE_PROJECT_ID>>/${{ secrets.FIREBASE_PROJECT_ID }}/g' src/environments/environment.ts
-          sed -i 's/<<FIREBASE_APP_ID>>/${{ secrets.FIREBASE_APP_ID }}/g' src/environments/environment.ts
-          sed -i 's/<<FIREBASE_STORAGE_BUCKET>>/${{ secrets.FIREBASE_STORAGE_BUCKET }}/g' src/environments/environment.ts
-          sed -i 's/<<FIREBASE_API_KEY>>/${{ secrets.FIREBASE_API_KEY }}/g' src/environments/environment.ts
-          sed -i 's/<<FIREBASE_AUTH_DOMAIN>>/${{ secrets.FIREBASE_AUTH_DOMAIN }}/g' src/environments/environment.ts
-          sed -i 's/<<FIREBASE_MESSAGING_SENDER_ID>>/${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}/g' src/environments/environment.ts
-          sed -i 's/<<FIREBASE_MEASUREMENT_ID>>/${{ secrets.FIREBASE_MEASUREMENT_ID }}/g' src/environments/environment.ts
-          sed -i 's/<<API_URL>>/${{ secrets.API_URL }}/g' src/environments/environment.ts
-          sed -i 's/<<TRANSLATION_API_KEY>>/${{ secrets.TRANSLATION_API_KEY }}/g' src/environments/environment.ts
-          sed -i 's/<<TRANSLATION_REGION>>/${{ secrets.TRANSLATION_REGION }}/g' src/environments/environment.ts
+          sed -i 's|<<FIREBASE_PROJECT_ID>>|${{ secrets.FIREBASE_PROJECT_ID }}|g' src/environments/environment.ts
+          sed -i 's|<<FIREBASE_APP_ID>>|${{ secrets.FIREBASE_APP_ID }}|g' src/environments/environment.ts
+          sed -i 's|<<FIREBASE_STORAGE_BUCKET>>|${{ secrets.FIREBASE_STORAGE_BUCKET }}|g' src/environments/environment.ts
+          sed -i 's|<<FIREBASE_API_KEY>>|${{ secrets.FIREBASE_API_KEY }}|g' src/environments/environment.ts
+          sed -i 's|<<FIREBASE_AUTH_DOMAIN>>|${{ secrets.FIREBASE_AUTH_DOMAIN }}|g' src/environments/environment.ts
+          sed -i 's|<<FIREBASE_MESSAGING_SENDER_ID>>|${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}|g' src/environments/environment.ts
+          sed -i 's|<<FIREBASE_MEASUREMENT_ID>>|${{ secrets.FIREBASE_MEASUREMENT_ID }}|g' src/environments/environment.ts
+          sed -i 's|<<API_URL>>|${{ secrets.API_URL }}|g' src/environments/environment.ts
+          sed -i 's|<<TRANSLATION_API_KEY>>|${{ secrets.TRANSLATION_API_KEY }}|g' src/environments/environment.ts
+          sed -i 's|<<TRANSLATION_REGION>>|${{ secrets.TRANSLATION_REGION }}|g' src/environments/environment.ts
 
       - name: npm install, build, and test
         run: |
