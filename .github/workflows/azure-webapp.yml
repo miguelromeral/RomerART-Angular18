@@ -46,12 +46,10 @@ jobs:
           rm -rf node_modules
           rm -f package-lock.json
 
-      # npm install --include=optional --force
-
       - name: npm install, build, and test
         run: |
-          npm ci
-          npm run build --if-present
+          npm install --include=optional --force
+          npm run prod --if-present
           npm run test --if-present
 
       - name: Upload artifact for deployment job
