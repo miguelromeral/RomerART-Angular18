@@ -7,6 +7,7 @@
     "build": "ng build && copyfiles web.config dist/romerart-angular18/",
     "watch": "ng build --watch --configuration development",
     "prod": "ng build --configuration production && copyfiles web.config dist/romerart-angular18/",
+    "github": "ng build --configuration production && cp web.config dist/romerart-angular18/",
     "test": "ng test --code-coverage",
     "serve:ssr:romerart-angular18": "node dist/romerart-angular18/server/server.mjs",
     "lint": "ng lint --fix",

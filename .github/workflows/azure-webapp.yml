@@ -44,10 +44,16 @@ jobs:
           sed -i 's|<<TRANSLATION_API_KEY>>|${{ secrets.TRANSLATION_API_KEY }}|g' src/environments/environment.ts
           sed -i 's|<<TRANSLATION_REGION>>|${{ secrets.TRANSLATION_REGION }}|g' src/environments/environment.ts
 
-      - name: npm install, build, and test
+      - name: Installing packages
         run: |
           npm install --include=optional --force
-          npm run prod --if-present
+
+      - name: Building app
+        run: |
+          npm run github --if-present
+
+      - name: Testing app
+        run: |
           npm run test --if-present
 
       - name: Upload artifact for deployment job
