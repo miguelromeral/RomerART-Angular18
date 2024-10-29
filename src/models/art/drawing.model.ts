@@ -27,8 +27,6 @@ export class Drawing {
   productType: number;
   productTypeName: string;
   productName: string;
-  comment: string;
-  commentPros: string;
   views: number;
   viewsHuman: string;
   likes: number;
@@ -40,10 +38,9 @@ export class Drawing {
   votesPopular: number;
   scorePopularHuman: number;
   listComments: string[];
-  listCommentPros: string[];
-  commentCons: string;
-  listCommentCons: string[];
   listCommentsStyle: string[];
+  listCommentsPros: string[];
+  listCommentsCons: string[];
   url: string;
   urlThumbnail: string;
   isTraditional: boolean;
@@ -84,8 +81,6 @@ export class Drawing {
     this.productType = data.productType || 0;
     this.productTypeName = data.productTypeName || '';
     this.productName = data.productName || '';
-    this.comment = data.comment || '';
-    this.commentPros = data.commentPros || '';
     this.views = data.views || 0;
     this.viewsHuman = data.viewsHuman || '';
     this.likes = data.likes || 0;
@@ -97,10 +92,9 @@ export class Drawing {
     this.votesPopular = data.votesPopular || 0;
     this.scorePopularHuman = data.scorePopularHuman || 0;
     this.listComments = data.listComments || [];
-    this.listCommentPros = data.listCommentPros || [];
-    this.commentCons = data.commentCons || '';
-    this.listCommentCons = data.listCommentCons || [];
     this.listCommentsStyle = data.listCommentsStyle || [];
+    this.listCommentsPros = data.listCommentsPros || [];
+    this.listCommentsCons = data.listCommentsCons || [];
     this.url = data.url || '';
     this.urlThumbnail = data.urlThumbnail || '';
     this.isTraditional = data.isTraditional || false;

@@ -296,7 +296,7 @@
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
           [formArrayName]="'listComments'"
-          [formArray]="listCommentStyle"
+          [formArray]="listCommentsStyle"
           [comments]="drawing.listCommentsStyle"
           [placeholder]="text('FORM.COMMENTS-STYLE.PLACEHOLDER') | mrTranslate">
         </app-drawing-form-comments>
@@ -310,9 +310,9 @@
       <div class="seccion-content">
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
-          [formArrayName]="'listCommentPros'"
-          [formArray]="listCommentPros"
-          [comments]="drawing.listCommentPros"
+          [formArrayName]="'listCommentsPros'"
+          [formArray]="listCommentsPros"
+          [comments]="drawing.listCommentsPros"
           [placeholder]="text('FORM.COMMENTS-PROS.PLACEHOLDER') | mrTranslate">
         </app-drawing-form-comments>
       </div>
@@ -324,9 +324,9 @@
       <div class="seccion-content">
         <app-drawing-form-comments
           class="col-span-1 sm:col-span-3"
-          [formArrayName]="'listCommentCons'"
-          [formArray]="listCommentCons"
-          [comments]="drawing.listCommentCons"
+          [formArrayName]="'listCommentsCons'"
+          [formArray]="listCommentsCons"
+          [comments]="drawing.listCommentsCons"
           [placeholder]="text('FORM.COMMENTS-CONS.PLACEHOLDER') | mrTranslate">
         </app-drawing-form-comments>
       </div>

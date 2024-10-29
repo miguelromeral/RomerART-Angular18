@@ -54,7 +54,7 @@ export class ArtInfoTabsConfig {
       icon: 'bi-chat',
       textCode: 'DETAILS.TAB-TITLES.COMMENTS',
       iconSelected: 'bi-chat-fill',
-      visible: (drawing: Drawing) => drawing.comment !== '',
+      visible: (drawing: Drawing) => drawing.listComments.length > 0,
     },
     {
       id: artTabInfoIds.style,
@@ -70,7 +70,7 @@ export class ArtInfoTabsConfig {
       order: 300,
       textCode: 'DETAILS.TAB-TITLES.LIKES',
       iconSelected: 'bi-hand-thumbs-up-fill',
-      visible: (drawing: Drawing) => drawing.commentPros !== '',
+      visible: (drawing: Drawing) => drawing.listCommentsPros.length > 0,
     },
     {
       id: artTabInfoIds.dislikes,
@@ -78,7 +78,7 @@ export class ArtInfoTabsConfig {
       textCode: 'DETAILS.TAB-TITLES.DISLIKES',
       icon: 'bi-hand-thumbs-down',
       iconSelected: 'bi-hand-thumbs-down-fill',
-      visible: (drawing: Drawing) => drawing.commentCons !== '',
+      visible: (drawing: Drawing) => drawing.listCommentsCons.length > 0,
     },
     {
       id: artTabInfoIds.vote,

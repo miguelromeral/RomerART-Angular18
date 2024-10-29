@@ -23,9 +23,9 @@ export interface ISaveDrawingRequest {
   referenceUrl: string;
   scoreCritic: number;
   listComments: string[];
-  listCommentPros: string[];
-  listCommentCons: string[];
-  listCommentStyle: string[];
+  listCommentsPros: string[];
+  listCommentsCons: string[];
+  listCommentsStyle: string[];
 
   // constructor(data: Partial<SaveDrawingRequest> = {}) {
   //   this.id = data.id || '';
@@ -49,7 +49,7 @@ export interface ISaveDrawingRequest {
   //   this.referenceUrl = data.referenceUrl || '';
   //   this.scoreCritic = data.scoreCritic || 0;
   //   this.listComments = data.listComments || [];
-  //   this.listCommentPros = data.listCommentPros || [];
-  //   this.listCommentCons = data.listCommentCons || [];
+  //   this.listCommentsPros = data.listCommentsPros || [];
+  //   this.listCommentsCons = data.listCommentsCons || [];
   // }
 }

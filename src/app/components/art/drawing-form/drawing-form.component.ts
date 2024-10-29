@@ -120,9 +120,9 @@ export class DrawingFormComponent extends LanguageComponent {
     ]),
     productName: new FormControl(''),
     listComments: new FormArray<FormControl>([]),
-    listCommentStyle: new FormArray<FormControl>([]),
-    listCommentPros: new FormArray<FormControl>([]),
-    listCommentCons: new FormArray<FormControl>([]),
+    listCommentsStyle: new FormArray<FormControl>([]),
+    listCommentsPros: new FormArray<FormControl>([]),
+    listCommentsCons: new FormArray<FormControl>([]),
     tagsText: new FormControl(''),
     referenceUrl: new FormControl(''),
     spotifyUrl: new FormControl(''),
@@ -134,14 +134,14 @@ export class DrawingFormComponent extends LanguageComponent {
   get listComments(): FormArray<FormControl> {
     return this.form.controls.listComments as FormArray<FormControl>;
   }
-  get listCommentStyle(): FormArray<FormControl> {
-    return this.form.controls.listCommentStyle as FormArray<FormControl>;
+  get listCommentsStyle(): FormArray<FormControl> {
+    return this.form.controls.listCommentsStyle as FormArray<FormControl>;
   }
-  get listCommentPros(): FormArray<FormControl> {
-    return this.form.controls.listCommentPros as FormArray<FormControl>;
+  get listCommentsPros(): FormArray<FormControl> {
+    return this.form.controls.listCommentsPros as FormArray<FormControl>;
   }
-  get listCommentCons(): FormArray<FormControl> {
-    return this.form.controls.listCommentCons as FormArray<FormControl>;
+  get listCommentsCons(): FormArray<FormControl> {
+    return this.form.controls.listCommentsCons as FormArray<FormControl>;
   }
 
   /* List of Select Options */
@@ -322,9 +322,9 @@ export class DrawingFormComponent extends LanguageComponent {
       dateHyphen: values.dateHyphen!,
       favorite: values.favorite!,
       isEditing: values.isEditing!,
-      listCommentCons: values.listCommentCons!,
-      listCommentPros: values.listCommentPros!,
-      listCommentStyle: values.listCommentStyle!,
+      listCommentsCons: values.listCommentsCons!,
+      listCommentsPros: values.listCommentsPros!,
+      listCommentsStyle: values.listCommentsStyle!,
       listComments: values.listComments!,
       modelName: values.modelName!,
       name: values.name!,
