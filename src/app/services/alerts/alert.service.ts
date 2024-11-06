@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@app/components/shared/confirm-dialog/confirm-dialog.component';
 import { IConfirmDialogData } from '@models/alert/confirm-dialog.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AlertService {
+  private errorList: string[] = [];
+  private errorListSubject = new BehaviorSubject<string[]>([]);
+  errorList$: Observable<string[]> = this.errorListSubject.asObservable();
+
   constructor(public dialog: MatDialog) {}
 
   showAlert(
@@ -21,6 +25,27 @@ export class AlertService {
       cancelText: undefined,
     };
     return this.sendDialog(data);
+  }
+
+  showBasicAlert(
+    message: string
+  ): MatDialogRef<ConfirmDialogComponent, boolean> {
+    const data: IConfirmDialogData = {
+      title: '',
+      message,
+      cancelText: undefined,
+    };
+    return this.sendDialog(data);
+  }
+
+  showSilentAlert(message: string) {
+    this.errorList.push(message);
+    this.errorListSubject.next(this.errorList);
+  }
+
+  cleanSilentAlerts() {
+    this.errorList = [];
+    this.errorListSubject.next([]);
   }
 
   showConfirmDialog(
