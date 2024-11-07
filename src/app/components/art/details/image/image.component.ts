@@ -30,6 +30,7 @@ import {
   settingShowScorePopular,
 } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
+import { AlertService } from '@app/services/alerts/alert.service';
 
 @Component({
   selector: 'app-art-details-image',
@@ -82,6 +83,7 @@ export class ImageComponent extends LanguageComponent implements OnInit {
     private router: Router,
     private customTranslate: CustomTranslatePipe,
     private settingsService: SettingsService,
+    private alertService: AlertService,
     private renderer: Renderer2
   ) {
     super('SCREENS.DRAWING-DETAILS');
@@ -142,9 +144,16 @@ export class ImageComponent extends LanguageComponent implements OnInit {
 
     this.drawingService.cheerDrawing(this.drawing.id).subscribe({
       next: () => {
-        this.submittedCheer.emit(this.drawing?.likes + 1);
+        this.drawing.likes = this.drawing.likes + 1;
+        this.submittedCheer.emit(this.drawing.likes);
       },
-      error: err => console.error('Error al enviar cheer:', err),
+      error: () => {
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.DRAWING.CHEER',
+          { id: this.drawing.id }
+        );
+      },
       complete: () => {
         $('#' + this.btnCheerId).removeAttr('disabled');
       },

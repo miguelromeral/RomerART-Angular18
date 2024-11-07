@@ -1,5 +1,16 @@
-<app-drawing-form
-  [drawing]="drawing"
-  [drawingNotFound]="drawingNotFound"
-  [loading]="loading"
-  [newDrawing]="false"></app-drawing-form>
+<app-layout>
+  <ng-container *ngIf="!drawingNotFound; else showDrawingNotFound">
+    <app-drawing-form
+      [drawing]="drawing"
+      [drawingNotFound]="drawingNotFound"
+      [loading]="loading"
+      [newDrawing]="false"></app-drawing-form>
+  </ng-container>
+  <ng-template #showDrawingNotFound>
+    <app-partial-error
+      [title]="'ERRORS.DRAWING.NOTFOUND' | mrTranslate: { id }"
+      [canRefresh]="true"
+      (refreshContent)="loadDrawing()">
+    </app-partial-error>
+  </ng-template>
+</app-layout>

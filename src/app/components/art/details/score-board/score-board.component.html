@@ -3,9 +3,14 @@
     class="mr-scores-form mr-score-popular mt-2"
     id="containerCollapseVoteForm">
     <form
-      *ngIf="showVoteForm; else thxVotePanel"
+      *ngIf="!voteSent"
       class="flex flex-col flex-nowrap gap-8"
       [formGroup]="voteForm">
+      <app-partial-error
+        *ngIf="errorSendingVote"
+        [title]="'ERRORS.DRAWING.VOTE' | mrTranslate: { id: drawing.id }">
+      </app-partial-error>
+
       <div class="grid grid-cols-3">
         <span class="col-span-2"> {{ text('TITLE') | mrTranslate }}</span>
         <app-drawing-score
@@ -15,25 +20,27 @@
       </div>
 
       <!-- TODO: mover el input de tipo range a shared -->
-      <input
-        formControlName="score"
-        type="range"
-        class="mr-custom-range form-range"
-        min="1"
-        max="100"
-        step="1"
-        id="rScoreUser" />
+      <ng-container *ngIf="!sendingVote">
+        <input
+          formControlName="score"
+          type="range"
+          class="mr-custom-range form-range"
+          min="1"
+          max="100"
+          step="1"
+          id="rScoreUser" />
 
-      <button
-        type="button"
-        class="btn mr-custom-btn flex w-fit gap-2"
-        (click)="voteDrawing()">
-        {{ text('SEND') | mrTranslate }}
-      </button>
+        <button
+          type="button"
+          class="btn mr-custom-btn flex w-fit gap-2"
+          (click)="voteDrawing()">
+          {{ text('SEND') | mrTranslate }}
+        </button>
+      </ng-container>
     </form>
 
-    <ng-template #thxVotePanel>
+    <div *ngIf="voteSent" #thxVotePanel>
       {{ text('THANKS') | mrTranslate }}
-    </ng-template>
+    </div>
   </div>
 </div>

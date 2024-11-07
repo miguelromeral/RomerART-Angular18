@@ -18,45 +18,54 @@
     </div>
   </div>
   <div class="section flex flex-col">
-    <div>
-      <h2>
-        {{ text('DRAWINGS.NEW-UPLOADS') | mrTranslate }}
-      </h2>
-      <div class="my-5">
-        <app-loading [loading]="loadingCollection">
-          <div class="h-4 w-20" loading></div>
+    <ng-container *ngIf="errorCollection === false; else showErrorCollection">
+      <div>
+        <h2>
+          {{ text('DRAWINGS.NEW-UPLOADS') | mrTranslate }}
+        </h2>
+        <div class="my-5">
+          <app-loading [loading]="loadingCollection">
+            <div class="h-4 w-20" loading></div>
 
-          <h3 content *ngIf="collection">
-            {{ collection.name }}
-          </h3>
-        </app-loading>
-
-        <app-loading [loading]="loadingCollection">
-          <div class="h-4 w-full" loading></div>
-
-          <h6 content *ngIf="collection">
-            {{ collection.description }}
-          </h6>
-        </app-loading>
-      </div>
-      <div class="flex flex-row flex-nowrap gap-6 overflow-x-auto pb-4">
-        <ng-container *ngIf="!loadingCollection; else skDrawings">
-          <app-drawing-slider
-            class="w-full"
-            *ngIf="collection"
-            [drawings]="collection.drawings">
-          </app-drawing-slider>
-        </ng-container>
-        <ng-template #skDrawings>
-          <app-loading
-            [loading]="loadingCollection"
-            *ngFor="let number of [0, 1, 2]">
-            <div class="h-48 w-48" loading></div>
-            <div content></div>
+            <h3 content *ngIf="collection">
+              {{ collection.name }}
+            </h3>
           </app-loading>
-        </ng-template>
+
+          <app-loading [loading]="loadingCollection">
+            <div class="h-4 w-full" loading></div>
+
+            <h6 content *ngIf="collection">
+              {{ collection.description }}
+            </h6>
+          </app-loading>
+        </div>
+        <div class="flex flex-row flex-nowrap gap-6 overflow-x-auto pb-4">
+          <ng-container *ngIf="!loadingCollection; else skDrawings">
+            <app-drawing-slider
+              class="w-full"
+              *ngIf="collection"
+              [drawings]="collection.drawings">
+            </app-drawing-slider>
+          </ng-container>
+          <ng-template #skDrawings>
+            <app-loading
+              [loading]="loadingCollection"
+              *ngFor="let number of [0, 1, 2]">
+              <div class="h-48 w-48" loading></div>
+              <div content></div>
+            </app-loading>
+          </ng-template>
+        </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-template #showErrorCollection>
+      <app-partial-error
+        [title]="'ERRORS.COLLECTION.HOME-NOTLOADED' | mrTranslate"
+        [canRefresh]="true"
+        (refreshContent)="loadHighlightedCollection()"></app-partial-error>
+    </ng-template>
+
     <div class="flex w-full justify-end">
       <button class="btn" (click)="goToGallery()">
         {{ text('DRAWINGS.GO-TO-GALLERY') | mrTranslate }}

@@ -17,6 +17,7 @@ import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.
 import { LoadingComponent } from '../../../components/shared/loading/loading.component';
 import { ArtFilterFormConfig } from 'config/art/art-filter-form.config';
 import { artGalleryAnimation } from '@app/animations/art/drawing-thumbnail.animation';
+import { PartialErrorComponent } from '@app/components/shared/errors/partial-error/partial-error.component';
 
 @Component({
   selector: 'app-search',
@@ -31,6 +32,7 @@ import { artGalleryAnimation } from '@app/animations/art/drawing-thumbnail.anima
     TranslateModule,
     CustomTranslatePipe,
     LoadingComponent,
+    PartialErrorComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -44,6 +46,7 @@ export class SearchComponent extends LanguageComponent implements OnInit {
   // showButtonFetchMore = false;
   showButtonFetchMore = true;
 
+  filterFormError = false;
   filterFormLoading = true;
   get resultsNotFound(): boolean {
     if (this.listDrawings) {
@@ -103,6 +106,13 @@ export class SearchComponent extends LanguageComponent implements OnInit {
         this.imageCounterAnimationClass
       );
     }
+  }
+  onIsFilterFormError(error: boolean) {
+    this.filterFormError = error;
+  }
+
+  requestDrawingsAfterError() {
+    this.filterFormComponent.requestDrawingsAfterError();
   }
 
   requestMoreDrawings() {

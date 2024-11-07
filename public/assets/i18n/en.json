@@ -672,5 +672,37 @@
         }
       }
     }
+  },
+  "ERRORS": {
+    "DRAWING": {
+      "CHEER": "Error when sending kudos to <strong>{{id}}</strong>",
+      "VOTE": "Could not send your vote to <strong>{{id}}</strong>",
+      "SEARCH": {
+        "NOTFOUND": "Error when retrieving drawing list"
+      },
+      "NOTFOUND": "Could not load drawing <strong>{{id}}</strong>",
+      "PRODUCT": {
+        "NOTLOADED": "Error when filling filter <strong>Themes</strong>"
+      },
+      "CHARACTER": {
+        "NOTLOADED": "Error when filling filter <strong>Characters</strong>"
+      },
+      "MODEL": {
+        "NOTLOADED": "Error when filling filter <strong>Models</strong>"
+      },
+      "FORM": {
+        "CHECKID": "Error when checking ID <strong>{{id}}</strong>",
+        "UPLOAD-IMAGE": "Error when uploading image to Azure"
+      }
+    },
+    "COLLECTION": {
+      "HOME-NOTLOADED": "Error when retrieving highlighted collection",
+      "SEARCH-NOTLOADED": "Error when retrieving <strong>collections</strong>",
+      "NOTLOADED": "Error when filling filter <strong>collections</strong>",
+      "FORM": {
+        "CHECKID": "Error when checking ID <strong>{{id}}</strong>",
+        "REMOVE": "Error when deleting collection <strong>{{id}}</strong>"
+      }
+    }
   }
 }

@@ -672,5 +672,37 @@
         }
       }
     }
+  },
+  "ERRORS": {
+    "DRAWING": {
+      "CHEER": "No se ha podido enviar kudos a <strong>{{id}}</strong>",
+      "VOTE": "No se ha podido votar a <strong>{{id}}</strong>",
+      "SEARCH": {
+        "NOTFOUND": "Error al recuperar la lista de dibujos"
+      },
+      "NOTFOUND": "No se ha encontrado el dibujo <strong>{{id}}</strong>",
+      "PRODUCT": {
+        "NOTLOADED": "Error al rellenar el filtro de <strong>Temáticas</strong>"
+      },
+      "CHARACTER": {
+        "NOTLOADED": "Error al rellenar el filtro de <strong>Personajes</strong>"
+      },
+      "MODEL": {
+        "NOTLOADED": "Error al rellenar el filtro de <strong>Modelos</strong>"
+      },
+      "FORM": {
+        "CHECKID": "Error al comprobar el ID <strong>{{id}}</strong>",
+        "UPLOAD-IMAGE": "Error al subir la imagen a Azure"
+      }
+    },
+    "COLLECTION": {
+      "HOME-NOTLOADED": "Error al recuperar la colección destacada",
+      "SEARCH-NOTLOADED": "Error al recuperar las <strong>Colecciones</strong>",
+      "NOTLOADED": "Error al rellenar el filtro de <strong>Colecciones</strong>",
+      "FORM": {
+        "CHECKID": "Error al comprobar el ID <strong>{{id}}</strong>",
+        "REMOVE": "Error al eliminar la colección <strong>{{id}}</strong>"
+      }
+    }
   }
 }

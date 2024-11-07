@@ -2,17 +2,17 @@
   class="none relative mx-auto flex h-full flex-col pb-20 lg:ml-48 lg:pb-4"
   [ngClass]="{ 'px-2 py-2': padding }">
   <div
-    id="divPageErrors"
-    #divPageErrors
+    *ngIf="errorList.length > 0"
     class="sticky top-0 z-50"
     [@filterFormAnimation]="showErrors ? 'open' : 'closed'">
     <div
       class="mb-2 flex h-min w-full flex-col items-end gap-2 bg-red-400 p-2 text-white dark:bg-red-600">
-      <ul #divPageErrorsList id="divPageErrorsList" class="list-item w-full">
+      <ul class="list-item w-full">
         <li *ngFor="let error of errorList" [innerHTML]="error"></li>
       </ul>
       <button type="button" class="btn-image" (click)="hideErrors()">OK</button>
     </div>
   </div>
   <ng-content></ng-content>
+  <div id="divPageErrors"></div>
 </div>

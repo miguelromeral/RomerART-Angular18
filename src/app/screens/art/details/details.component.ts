@@ -22,6 +22,9 @@ import { LoadingComponent } from '@app/components/shared/loading/loading.compone
 import { TranslatableComponent } from '@app/components/shared/translatable/translatable.component';
 import { LanguageService } from '@app/services/language/language.service';
 import { DrawingInfoComponent } from '@app/components/art/details/drawing-info/drawing-info.component';
+import { finalize } from 'rxjs';
+import { AlertService } from '@app/services/alerts/alert.service';
+import { PartialErrorComponent } from '@app/components/shared/errors/partial-error/partial-error.component';
 
 @Component({
   selector: 'app-details',
@@ -46,6 +49,7 @@ import { DrawingInfoComponent } from '@app/components/art/details/drawing-info/d
     LoadingComponent,
     TranslatableComponent,
     DrawingInfoComponent,
+    PartialErrorComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -62,7 +66,9 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
     private logger: LoggerService,
     private drawingService: DrawingService,
     private languageService: LanguageService,
-    private metadataService: MetadataService
+    private alertService: AlertService,
+    private metadataService: MetadataService,
+    private customTranslate: CustomTranslatePipe
   ) {
     super('SCREENS.DRAWING-DETAILS');
   }
@@ -74,9 +80,26 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   loadDrawing() {
     if (this.id) {
       this.loading = true;
-      this.drawingService.getDrawingDetails(this.id).subscribe(data => {
-        this.processresult(data);
-      });
+      this.drawingNotFound = false;
+      this.drawingService
+        .getDrawingDetails(this.id)
+        .pipe(
+          finalize(() => {
+            this.loading = false;
+          })
+        )
+        .subscribe({
+          next: data => {
+            this.processresult(data);
+          },
+          error: () => {
+            this.alertService.showSilentAlert(
+              this.customTranslate,
+              this.text('NOTFOUND.TITLE')
+            );
+            this.drawingNotFound = true;
+          },
+        });
     }
   }
 
@@ -114,7 +137,7 @@ export class DetailsComponent extends LanguageComponent implements OnInit {
   }
   receiveCheer(likes: number) {
     if (this.drawing) {
-      // console.log('New likes: ' + likes);
+      console.log('New likes: ' + likes);
       this.drawing.likes = likes;
     }
   }

@@ -15,9 +15,11 @@ import { Collection } from '@models/art/collection.model';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { TranslateModule } from '@ngx-translate/core';
 import { sortCollectionsByOrder } from '@utils/sorting/sort-utils';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { DrawingScoreComponent } from '../../../components/art/drawing-score/drawing-score.component';
 import { CollectionThumbnailComponent } from '@app/components/collections/collection-thumbnail/collection-thumbnail.component';
+import { AlertService } from '@app/services/alerts/alert.service';
+import { PartialErrorComponent } from '@app/components/shared/errors/partial-error/partial-error.component';
 
 @Component({
   selector: 'app-search-collection',
@@ -33,6 +35,7 @@ import { CollectionThumbnailComponent } from '@app/components/collections/collec
     DrawingSliderComponent,
     DrawingScoreComponent,
     CollectionThumbnailComponent,
+    PartialErrorComponent,
   ],
   templateUrl: './search-collection.component.html',
   styleUrl: './search-collection.component.scss',
@@ -44,6 +47,7 @@ export class SearchCollectionComponent
 {
   listCollections: Collection[] = [];
   loadingCollections = true;
+  errorCollections = false;
 
   selectedCollection: Collection | undefined;
   selectedQueryParameter = 'details';
@@ -55,6 +59,7 @@ export class SearchCollectionComponent
     private authService: AuthService,
     private metadataService: MetadataService,
     private languageService: LanguageService,
+    private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router,
     private customTranslate: CustomTranslatePipe
@@ -69,17 +74,30 @@ export class SearchCollectionComponent
     this.authService.isAdmin().subscribe(isAdmin => {
       this.admin = isAdmin;
     });
-    this.drawingService.getAllCollections().subscribe(list => {
-      if (list) {
-        this.listCollections = list
-          .filter(c => c.drawingsId.length > 0)
-          .sort(sortCollectionsByOrder);
-        // if (list.length > 0) this.selectCollection(this.listCollections[0].id);
-        this.loadQueryParameters();
-        this.loadingCollections = false;
-      }
-    });
-    this.loadQueryParameters();
+    this.drawingService
+      .getAllCollections()
+      .pipe(
+        finalize(() => {
+          this.loadingCollections = false;
+        })
+      )
+      .subscribe({
+        next: list => {
+          this.listCollections = list
+            .filter(c => c.drawingsId.length > 0)
+            .sort(sortCollectionsByOrder);
+          this.loadQueryParameters();
+          this.errorCollections = false;
+        },
+        error: () => {
+          this.listCollections = [];
+          this.errorCollections = true;
+          this.alertService.showSilentAlert(
+            this.customTranslate,
+            'ERRORS.COLLECTION.SEARCH-NOTLOADED'
+          );
+        },
+      });
   }
 
   loadQueryParameters() {

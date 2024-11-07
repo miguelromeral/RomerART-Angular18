@@ -53,7 +53,8 @@
         [@filterFormAnimation]="showFilters ? 'open' : 'closed'"
         (existsMoreResultsToFetch)="existsMoreResultsToFetch($event)"
         (fetchedResults)="onFetchedResults($event)"
-        (isLoading)="onIsFilterFormLoading($event)">
+        (isLoading)="onIsFilterFormLoading($event)"
+        (isError)="onIsFilterFormError($event)">
       </app-art-search-filter-form>
     </div>
 
@@ -84,7 +85,7 @@
               *ngFor="let drawing of listDrawings; let first = first">
             </app-drawing-thumbnail>
 
-            <ng-container *ngIf="filterFormLoading">
+            <ng-container *ngIf="!filterFormError && filterFormLoading">
               <app-loading
                 [loading]="filterFormLoading"
                 class="aspect-square h-full w-full"
@@ -100,7 +101,10 @@
 
             <button
               *ngIf="
-                !filterFormLoading && showButtonFetchMore && !resultsNotFound
+                !filterFormError &&
+                !filterFormLoading &&
+                showButtonFetchMore &&
+                !resultsNotFound
               "
               type="button"
               class="btn-fetch-more"
@@ -108,10 +112,18 @@
               <i class="bi bi-plus text-2xl"></i>
               <span>{{ text('LOADING.LOADMORE') | mrTranslate }}</span>
             </button>
+
+            <app-partial-error
+              *ngIf="filterFormError"
+              [title]="'ERRORS.DRAWING.SEARCH.NOTFOUND' | mrTranslate"
+              class="h-full w-full sm:col-span-4 lg:col-span-5 xl:col-span-6"
+              [canRefresh]="true"
+              (refreshContent)="requestDrawingsAfterError()">
+            </app-partial-error>
           </div>
           <div
             id="divNoResults"
-            *ngIf="!filterFormLoading && resultsNotFound"
+            *ngIf="!filterFormError && !filterFormLoading && resultsNotFound"
             class="mt-20 flex min-h-32 flex-col items-center justify-start gap-3">
             <span>{{ text('NOTFOUND.TITLE') | mrTranslate }}</span>
             <h2>😔</h2>

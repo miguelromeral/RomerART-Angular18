@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@app/components/shared/confirm-dialog/confirm-dialog.component';
+import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { IConfirmDialogData } from '@models/alert/confirm-dialog.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,11 +10,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AlertService {
-  private errorList: string[] = [];
+  private errorList: string[];
   private errorListSubject = new BehaviorSubject<string[]>([]);
-  errorList$: Observable<string[]> = this.errorListSubject.asObservable();
+  errorList$ = () => this.errorListSubject.asObservable();
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    this.errorList = [];
+  }
 
   showAlert(
     title: string,
@@ -38,9 +41,26 @@ export class AlertService {
     return this.sendDialog(data);
   }
 
-  showSilentAlert(message: string) {
-    this.errorList.push(message);
-    this.errorListSubject.next(this.errorList);
+  // TODO: esto es un desastre, arreglarlo cuanto antes
+  showSilentAlert(
+    translatePipe: CustomTranslatePipe,
+    key: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...args: any[]
+  ) {
+    const text = translatePipe.transform(key, ...args);
+    // // const text = key;
+    // this.errorList.push(text);
+    // // console.log('--> Sending: ', list);
+    // this.errorListSubject.next(this.errorList);
+
+    // console.error('NUEVO ERROR: ', text);
+
+    const newError = document.createElement('div');
+    newError.classList.add('mr-error-msg');
+    newError.innerHTML = text;
+
+    document.getElementById('divPageErrors')?.appendChild(newError);
   }
 
   cleanSilentAlerts() {

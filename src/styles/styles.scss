@@ -85,3 +85,36 @@ pre {
 .fullscreen .image-container {
   max-height: 100vh !important;
 }
+
+#divPageErrors {
+  @apply fixed bottom-0 mb-2 flex h-min flex-col-reverse items-stretch gap-2;
+  width: -webkit-fill-available;
+}
+
+.mr-error-msg {
+  @apply relative bg-red-400 p-2 text-white dark:bg-red-600;
+  opacity: 0;
+  animation: mr-error-msg-anim 7s ease-in-out forwards;
+}
+
+@keyframes mr-error-msg-anim {
+  0% {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  5% {
+    opacity: 1;
+    z-index: 100;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    z-index: -1;
+    display: none;
+  }
+}

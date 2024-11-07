@@ -1,0 +1,16 @@
+<div
+  class="flex flex-col gap-2 border border-red-500 bg-red-100 dark:bg-red-900"
+  [ngClass]="{
+    'filter-input-container px-1': type === 'select',
+    'p-4': type === '',
+  }">
+  <h2 *ngIf="title !== ''" [innerHTML]="title"></h2>
+  <h2 *ngIf="showIcons">😔💔</h2>
+  <h3 *ngIf="description !== ''" [innerHTML]="description"></h3>
+
+  <div *ngIf="canRefresh">
+    <button type="button" class="btn btn-image" (click)="onRefreshContent()">
+      <i class="bi bi-arrow-clockwise"></i>
+    </button>
+  </div>
+</div>

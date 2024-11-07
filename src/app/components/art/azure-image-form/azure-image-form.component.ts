@@ -8,10 +8,12 @@ import {
 } from '@angular/forms';
 import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
+import { AlertService } from '@app/services/alerts/alert.service';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { LanguageComponent } from '@models/components/LanguageComponent';
 import { UploadAzureImageResponse } from '@models/responses/upload-azure-image.response';
 import { TranslateModule } from '@ngx-translate/core';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-azure-image-form',
@@ -24,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     NgFor,
   ],
+  providers: [CustomTranslatePipe],
   templateUrl: './azure-image-form.component.html',
   styleUrl: './azure-image-form.component.scss',
 })
@@ -41,7 +44,11 @@ export class AzureImageFormComponent extends LanguageComponent {
   @Output() imageUploaded = new EventEmitter<UploadAzureImageResponse>();
   isBeingUploaded = false;
 
-  constructor(private drawingService: DrawingService) {
+  constructor(
+    private drawingService: DrawingService,
+    private alertService: AlertService,
+    private customTranslate: CustomTranslatePipe
+  ) {
     super('SCREENS.DRAWING-FORM');
   }
 
@@ -83,17 +90,25 @@ export class AzureImageFormComponent extends LanguageComponent {
     formData.append('size', value.size.toString());
     formData.append('path', value.path);
 
-    // const form: UploadAzureImageRequest = {
-    //   image: value.image,
-    //   path: value.path,
-    //   size: value.size,
-    // };
-
-    this.drawingService.uploadAzureImage(formData).subscribe(resp => {
-      if (resp && resp.ok) {
-        this.imageUploaded.emit(resp);
-      }
-      this.isBeingUploaded = false;
-    });
+    this.drawingService
+      .uploadAzureImage(formData)
+      .pipe(
+        finalize(() => {
+          this.isBeingUploaded = false;
+        })
+      )
+      .subscribe({
+        next: resp => {
+          if (resp && resp.ok) {
+            this.imageUploaded.emit(resp);
+          }
+        },
+        error: () => {
+          this.alertService.showSilentAlert(
+            this.customTranslate,
+            'ERRORS.DRAWING.FORM.UPLOAD-IMAGE'
+          );
+        },
+      });
   }
 }

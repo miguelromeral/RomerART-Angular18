@@ -238,29 +238,38 @@ export class DrawingFormComponent extends LanguageComponent {
   checkDrawingId(event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-    this.drawingService.checkDrawingId(value).subscribe(resp => {
-      this.duplicateId = resp;
-      if (this.duplicateId) {
-        this.alertService.showAlert(
-          this.customTranslate.transform(
-            this.text('ALERTS.DUPLICATE-ID.TITLE')
-          ),
-          this.customTranslate.transform(
-            this.text('ALERTS.DUPLICATE-ID.MESSAGE'),
-            {
-              id: value,
-            }
-          )
+    this.drawingService.checkDrawingId(value).subscribe({
+      next: resp => {
+        this.duplicateId = resp;
+        if (this.duplicateId) {
+          this.alertService.showAlert(
+            this.customTranslate.transform(
+              this.text('ALERTS.DUPLICATE-ID.TITLE')
+            ),
+            this.customTranslate.transform(
+              this.text('ALERTS.DUPLICATE-ID.MESSAGE'),
+              {
+                id: value,
+              }
+            )
+          );
+        }
+      },
+      error: () => {
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.DRAWING.FORM.CHECKID',
+          { id: value }
         );
-      }
+      },
     });
   }
 
   checkAzurePath(event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-    this.drawingService.checkAzurePath(value).subscribe(resp => {
-      if (resp) {
+    this.drawingService.checkAzurePath(value).subscribe({
+      next: resp => {
         if (resp.existe) {
           this.drawing.url = resp.url;
           this.drawing.urlThumbnail = resp.urlThumbnail;
@@ -280,7 +289,8 @@ export class DrawingFormComponent extends LanguageComponent {
           );
         }
         this.showAzureForm = !resp.existe;
-      } else {
+      },
+      error: () => {
         this.alertService.showAlert(
           this.customTranslate.transform(
             this.text('ALERTS.ERROR-CHECK-AZURE-PATH.TITLE')
@@ -289,7 +299,7 @@ export class DrawingFormComponent extends LanguageComponent {
             this.text('ALERTS.ERROR-CHECK-AZURE-PATH.MESSAGE')
           )
         );
-      }
+      },
     });
   }
 
@@ -346,9 +356,8 @@ export class DrawingFormComponent extends LanguageComponent {
       twitterUrl: values.twitterUrl!,
       instagramUrl: values.instagramUrl!,
     };
-    this.drawingService.saveDrawing(formData).subscribe(resp => {
-      // console.log('Respuesta: ', resp);
-      if (resp) {
+    this.drawingService.saveDrawing(formData).subscribe({
+      next: resp => {
         this._drawing.id = resp.id;
         this.newDrawing = false;
         this.form.controls.isEditing.setValue(true);
@@ -361,7 +370,8 @@ export class DrawingFormComponent extends LanguageComponent {
           })
         );
         this.router.navigate([`art/details/${resp.id}`]);
-      } else {
+      },
+      error: () => {
         this.alertService.showAlert(
           this.customTranslate.transform(
             this.text('ALERTS.ERROR-ON-SAVE.TITLE')
@@ -371,7 +381,7 @@ export class DrawingFormComponent extends LanguageComponent {
             { id: values.id }
           )
         );
-      }
+      },
     });
   }
 }

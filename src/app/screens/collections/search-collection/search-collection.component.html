@@ -16,25 +16,26 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-4">
-      <app-loading [loading]="loadingCollections">
-        <div class="container-collections container" loading>
-          <div class="h-56 w-48"></div>
-          <div class="h-56 w-48"></div>
-        </div>
+    <ng-container *ngIf="!errorCollections; else showErrorCollection">
+      <div class="flex flex-col gap-4">
+        <app-loading [loading]="loadingCollections">
+          <div class="container-collections container" loading>
+            <div class="h-56 w-48"></div>
+            <div class="h-56 w-48"></div>
+          </div>
 
-        <div class="container-collections h-full w-full" content>
-          <app-collection-thumbnail
-            *ngFor="let collection of listCollections"
-            [collection]="collection"
-            [selectedStyle]="isCollectionSelected(collection.id)"
-            class="h-full w-full"
-            (cardClicked)="selectCollection($event)"
-            content>
-          </app-collection-thumbnail>
-        </div>
+          <div class="container-collections h-full w-full" content>
+            <app-collection-thumbnail
+              *ngFor="let collection of listCollections"
+              [collection]="collection"
+              [selectedStyle]="isCollectionSelected(collection.id)"
+              class="h-full w-full"
+              (cardClicked)="selectCollection($event)"
+              content>
+            </app-collection-thumbnail>
+          </div>
 
-        <!-- <div
+          <!-- <div
           *ngFor="let collection of listCollections"
           class="collection-card"
           [ngClass]="{ selected: isCollectionSelected(collection.id) }"
@@ -58,41 +59,48 @@
             </span>
           </div>
         </div> -->
-      </app-loading>
-    </div>
-    <div class="px-2 py-2">
-      <div *ngIf="selectedCollection" class="flex flex-col gap-4">
-        <h1 class="border-b dark:border-b-main-300 dark:text-main-300">
-          <app-translatable [originalText]="selectedCollection.name">
-          </app-translatable>
-        </h1>
-        <h3>
-          <app-translatable [originalText]="selectedCollection.description">
-          </app-translatable>
-        </h3>
-        <div class="flex flex-row gap-2">
-          <button
-            class="btn-image"
-            (click)="shareCollection()"
-            (keypress.enter)="shareCollection()"
-            tabindex="0"
-            title="Compartir Colección">
-            <i class="bi bi-send"></i>
-          </button>
-
-          <button
-            *ngIf="admin"
-            class="btn-image"
-            (click)="editCollection(selectedCollection.id)"
-            (keypress.enter)="editCollection(selectedCollection.id)"
-            tabindex="0"
-            title="Editar Colección">
-            <i class="bi bi-pencil"></i>
-          </button>
-        </div>
-        <app-drawing-slider [drawings]="selectedCollection.drawings">
-        </app-drawing-slider>
+        </app-loading>
       </div>
-    </div>
+      <div class="px-2 py-2">
+        <div *ngIf="selectedCollection" class="flex flex-col gap-4">
+          <h1 class="border-b dark:border-b-main-300 dark:text-main-300">
+            <app-translatable [originalText]="selectedCollection.name">
+            </app-translatable>
+          </h1>
+          <h3>
+            <app-translatable [originalText]="selectedCollection.description">
+            </app-translatable>
+          </h3>
+          <div class="flex flex-row gap-2">
+            <button
+              class="btn-image"
+              (click)="shareCollection()"
+              (keypress.enter)="shareCollection()"
+              tabindex="0"
+              title="Compartir Colección">
+              <i class="bi bi-send"></i>
+            </button>
+
+            <button
+              *ngIf="admin"
+              class="btn-image"
+              (click)="editCollection(selectedCollection.id)"
+              (keypress.enter)="editCollection(selectedCollection.id)"
+              tabindex="0"
+              title="Editar Colección">
+              <i class="bi bi-pencil"></i>
+            </button>
+          </div>
+          <app-drawing-slider [drawings]="selectedCollection.drawings">
+          </app-drawing-slider>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #showErrorCollection>
+      <app-partial-error
+        [title]="
+          'ERRORS.COLLECTION.SEARCH-NOTLOADED' | mrTranslate
+        "></app-partial-error>
+    </ng-template>
   </div>
 </app-layout>

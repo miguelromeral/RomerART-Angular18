@@ -30,50 +30,72 @@
     [collapsable]="true"
     [isCollapsed]="false">
     <div class="mr-filter-container">
-      <app-loading [loading]="loadingDrawingCharacters" class="mr-filter-item">
-        <div class="h-8 w-full" loading></div>
+      <ng-container *ngIf="!errorCharacters; else showErrorCharacters">
+        <app-loading
+          [loading]="loadingDrawingCharacters"
+          class="mr-filter-item">
+          <div class="h-8 w-full" loading></div>
 
-        <div class="filter-input-container" content>
-          <app-select-input
-            class="mr-filter-item"
-            [firstOption]="{
-              value: '',
-              label: '',
-              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE',
-            }"
-            [options]="filteredDrawingCharacters"
-            formControlName="characterName"
-            (change)="filterControlChange()">
-          </app-select-input>
+          <div class="filter-input-container" content>
+            <app-select-input
+              class="mr-filter-item"
+              [firstOption]="{
+                value: '',
+                label: '',
+                labelCode: 'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE',
+              }"
+              [options]="filteredDrawingCharacters"
+              formControlName="characterName"
+              (change)="filterControlChange()">
+            </app-select-input>
 
-          <span class="filter-results-count" *ngIf="showFilterCount">{{
-            nDrawingCharacters
-          }}</span>
-        </div>
-      </app-loading>
+            <span class="filter-results-count" *ngIf="showFilterCount">{{
+              nDrawingCharacters
+            }}</span>
+          </div>
+        </app-loading>
+      </ng-container>
+      <ng-template #showErrorCharacters class="filter-input-container">
+        <app-partial-error
+          class="mr-filter-item"
+          [description]="
+            'SCREENS.DRAWING-SEARCH.FORM.CHARACTER.TITLE' | mrTranslate
+          "
+          type="select"></app-partial-error>
+      </ng-template>
 
-      <app-loading [loading]="loadingDrawingModels" class="mr-filter-item">
-        <div class="h-8 w-full" loading></div>
+      <ng-container *ngIf="!errorModels; else showErrorModels">
+        <app-loading [loading]="loadingDrawingModels" class="mr-filter-item">
+          <div class="h-8 w-full" loading></div>
 
-        <div class="filter-input-container" content>
-          <app-select-input
-            class="mr-filter-item"
-            [firstOption]="{
-              value: '',
-              label: '',
-              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE',
-            }"
-            [options]="filteredDrawingModels"
-            formControlName="modelName"
-            (change)="filterControlChange()"
-            content>
-          </app-select-input>
+          <div class="filter-input-container" content>
+            <app-select-input
+              class="mr-filter-item"
+              [firstOption]="{
+                value: '',
+                label: '',
+                labelCode: 'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE',
+              }"
+              [options]="filteredDrawingModels"
+              formControlName="modelName"
+              (change)="filterControlChange()"
+              content>
+            </app-select-input>
 
-          <span class="filter-results-count" *ngIf="showFilterCount">{{
-            nDrawingModels
-          }}</span>
-        </div>
-      </app-loading>
+            <span class="filter-results-count" *ngIf="showFilterCount">{{
+              nDrawingModels
+            }}</span>
+          </div>
+        </app-loading>
+      </ng-container>
+      <ng-template #showErrorModels class="filter-input-container">
+        <app-partial-error
+          class="mr-filter-item"
+          [description]="
+            'SCREENS.DRAWING-SEARCH.FORM.MODEL.TITLE' | mrTranslate
+          "
+          type="select"></app-partial-error>
+      </ng-template>
 
       <div class="favorite mr-filter-item" content>
         <div class="filter-input-container">
@@ -116,50 +138,70 @@
         </div>
       </div>
 
-      <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
-        <div class="h-8 w-full" loading></div>
+      <ng-container *ngIf="!errorProducts; else showErrorProducts">
+        <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
+          <div class="h-8 w-full" loading></div>
 
-        <div class="filter-input-container" content>
-          <app-select-input
-            class="mr-filter-item"
-            [firstOption]="{
-              value: '',
-              label: '',
-              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT.TITLE',
-            }"
-            [options]="filteredDrawingProducts"
-            formControlName="productName"
-            (change)="filterControlChange()"
-            content>
-          </app-select-input>
+          <div class="filter-input-container" content>
+            <app-select-input
+              class="mr-filter-item"
+              [firstOption]="{
+                value: '',
+                label: '',
+                labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT.TITLE',
+              }"
+              [options]="filteredDrawingProducts"
+              formControlName="productName"
+              (change)="filterControlChange()"
+              content>
+            </app-select-input>
 
-          <span class="filter-results-count" *ngIf="showFilterCount">{{
-            nDrawingProducts
-          }}</span>
-        </div>
-      </app-loading>
+            <span class="filter-results-count" *ngIf="showFilterCount">{{
+              nDrawingProducts
+            }}</span>
+          </div>
+        </app-loading>
+      </ng-container>
+      <ng-template #showErrorProducts class="filter-input-container">
+        <app-partial-error
+          class="mr-filter-item"
+          [description]="
+            'SCREENS.DRAWING-SEARCH.FORM.PRODUCT.TITLE' | mrTranslate
+          "
+          type="select"></app-partial-error>
+      </ng-template>
 
-      <app-loading [loading]="loadingDrawingProducts" class="mr-filter-item">
-        <div class="h-8 w-full" loading></div>
+      <ng-container *ngIf="!errorCollections; else showErrorCollections">
+        <app-loading [loading]="loadingCollections" class="mr-filter-item">
+          <div class="h-8 w-full" loading></div>
 
-        <div class="filter-input-container" content>
-          <app-select-input
-            class="mr-filter-item"
-            [firstOption]="{
-              value: '',
-              label: '',
-              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.COLLECTION.TITLE',
-            }"
-            [options]="filteredCollections"
-            formControlName="collection"
-            (change)="filterControlChange()">
-          </app-select-input>
+          <div class="filter-input-container" content>
+            <app-select-input
+              class="mr-filter-item"
+              [firstOption]="{
+                value: '',
+                label: '',
+                labelCode: 'SCREENS.DRAWING-SEARCH.FORM.COLLECTION.TITLE',
+              }"
+              [options]="filteredCollections"
+              formControlName="collection"
+              (change)="filterControlChange()">
+            </app-select-input>
 
-          <span class="filter-results-count" *ngIf="showFilterCount">{{
-            nDrawingCollections
-          }}</span>
-        </div>
-      </app-loading>
+            <span class="filter-results-count" *ngIf="showFilterCount">{{
+              nDrawingCollections
+            }}</span>
+          </div>
+        </app-loading>
+      </ng-container>
+      <ng-template #showErrorCollections class="filter-input-container">
+        <app-partial-error
+          class="mr-filter-item"
+          [description]="
+            'SCREENS.DRAWING-SEARCH.FORM.COLLECTION.TITLE' | mrTranslate
+          "
+          type="select"></app-partial-error>
+      </ng-template>
     </div>
   </app-section>
 

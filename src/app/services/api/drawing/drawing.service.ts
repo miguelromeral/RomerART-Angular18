@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, throwError, timeout } from 'rxjs';
 import { Drawing } from '../../../../models/art/drawing.model';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
@@ -39,6 +39,7 @@ export class DrawingService {
 
   private user: User | null = null;
   private isAdmin = false;
+  private timeoutMs = 30 * 1000;
 
   public postHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -48,9 +49,13 @@ export class DrawingService {
   ) {
     this.authService.loggedUser$.subscribe(user => {
       this.user = user;
-      this.authService.isAdminUser(user).subscribe(admin => {
-        this.isAdmin = admin;
-      });
+      // this.authService.isAdminUser(user).subscribe(admin => {
+      //   this.isAdmin = admin;
+      // });
+    });
+    this.authService.isAdmin().subscribe(admin => {
+      // console.log('Setting admin: ', admin);
+      this.isAdmin = admin;
     });
   }
 
@@ -70,6 +75,7 @@ export class DrawingService {
     drawingPaperSizes.map(paper => new DrawingPaperSize(paper));
 
   getDrawingDetails(id: string): Observable<Drawing> {
+    // console.log('Is Admin? ', this.isAdmin);
     return this.isAdmin
       ? this.getDrawingDetailsAdmin(id)
       : this.getDrawingDetailsPublic(id);
@@ -78,12 +84,12 @@ export class DrawingService {
   private getDrawingDetailsPublic(id: string): Observable<Drawing> {
     return this.http
       .get<Drawing>(`${this.apiUrl}art/details/${id}`)
-      .pipe(catchError(this.handleError<Drawing>('getArtDetails')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
   private getDrawingDetailsAdmin(id: string): Observable<Drawing> {
     return this.http
       .get<Drawing>(`${this.apiUrl}art/details-admin/${id}`)
-      .pipe(catchError(this.handleError<Drawing>('getDrawingDetailsAdmin')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   // getAllDrawings(): Observable<Drawing[]> {
@@ -98,23 +104,19 @@ export class DrawingService {
   getDrawingProducts(): Observable<DrawingProduct[]> {
     return this.http
       .get<DrawingProduct[]>(`${this.apiUrl}art/select/products`)
-      .pipe(
-        catchError(this.handleError<DrawingProduct[]>('getDrawingProducts'))
-      );
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   getDrawingCharacters(): Observable<DrawingCharacter[]> {
     return this.http
       .get<DrawingCharacter[]>(`${this.apiUrl}art/select/characters`)
-      .pipe(
-        catchError(this.handleError<DrawingCharacter[]>('getDrawingCharacters'))
-      );
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   getDrawingModels(): Observable<string[]> {
     return this.http
       .get<string[]>(`${this.apiUrl}art/select/models`)
-      .pipe(catchError(this.handleError<string[]>('getDrawingModels')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   cheerDrawing(id: string): Observable<unknown> {
@@ -122,7 +124,7 @@ export class DrawingService {
 
     return this.http
       .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
-      .pipe(catchError(this.handleError<unknown>('cheerDrawing')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   voteDrawing(id: string, score: number): Observable<IVoteDrawingResponse> {
@@ -132,7 +134,7 @@ export class DrawingService {
       .post<IVoteDrawingResponse>(url, JSON.stringify(score), {
         headers: this.postHeaders,
       })
-      .pipe(catchError(this.handleError<IVoteDrawingResponse>('voteDrawing')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   checkAzurePath(path: string): Observable<ICheckAzurePathResponse> {
@@ -143,9 +145,7 @@ export class DrawingService {
     };
     return this.http
       .post<ICheckAzurePathResponse>(url, body, { headers: this.postHeaders })
-      .pipe(
-        catchError(this.handleError<ICheckAzurePathResponse>('checkAzurePath'))
-      );
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   removeCollection(id: string): Observable<void> {
@@ -153,7 +153,7 @@ export class DrawingService {
 
     return this.http
       .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
-      .pipe(catchError(this.handleError<void>('removeCollection')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   saveDrawing(drawing: ISaveDrawingRequest): Observable<Drawing> {
@@ -161,7 +161,7 @@ export class DrawingService {
 
     return this.http
       .post<Drawing>(url, drawing, { headers: this.postHeaders })
-      .pipe(catchError(this.handleError<Drawing>('saveDrawing')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   saveCollection(collection: ISaveCollectionRequest): Observable<Collection> {
@@ -169,30 +169,26 @@ export class DrawingService {
 
     return this.http
       .post<Collection>(url, collection, { headers: this.postHeaders })
-      .pipe(catchError(this.handleError<Collection>('saveCollection')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   uploadAzureImage(form: FormData): Observable<UploadAzureImageResponse> {
     const url = `${this.apiUrl}art/upload`;
     return this.http
       .post<UploadAzureImageResponse>(url, form)
-      .pipe(
-        catchError(
-          this.handleError<UploadAzureImageResponse>('uploadAzureImage')
-        )
-      );
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   checkDrawingId(id: string): Observable<boolean> {
     return this.http
       .get<boolean>(`${this.apiUrl}art/checkdrawing/${id}`)
-      .pipe(catchError(this.handleError<boolean>('checkDrawingId')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   checkCollectionId(id: string): Observable<boolean> {
     return this.http
       .get<boolean>(`${this.apiUrl}art/check/collection/${id}`)
-      .pipe(catchError(this.handleError<boolean>('checkCollectionId')));
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
   filterDrawings(filters: DrawingFilter): Observable<FilterResultsDrawing> {
@@ -205,17 +201,13 @@ export class DrawingService {
     filters: DrawingFilter
   ): Observable<FilterResultsDrawing> {
     const url = `${this.apiUrl}art/filter-public`;
-
-    // console.log('Filters', filters);
-    // console.log('Page Number', filters.pageNumber);
     return this.http
       .post<FilterResultsDrawing>(url, filters, { headers: this.postHeaders })
       .pipe(
+        timeout(this.timeoutMs),
+        catchError(this.handleRequestError),
         map(
           (results: FilterResultsDrawing) => new FilterResultsDrawing(results)
-        ),
-        catchError(
-          this.handleError<FilterResultsDrawing>('filterDrawingsPublic')
         )
       );
   }
@@ -224,17 +216,13 @@ export class DrawingService {
     filters: DrawingFilter
   ): Observable<FilterResultsDrawing> {
     const url = `${this.apiUrl}art/filter-admin`;
-
-    // console.log('Filters', filters);
-    // console.log('Page Number', filters.pageNumber);
     return this.http
       .post<FilterResultsDrawing>(url, filters, { headers: this.postHeaders })
       .pipe(
+        timeout(this.timeoutMs),
+        catchError(this.handleRequestError),
         map(
           (results: FilterResultsDrawing) => new FilterResultsDrawing(results)
-        ),
-        catchError(
-          this.handleError<FilterResultsDrawing>('filterDrawingsAdmin')
         )
       );
   }
@@ -256,10 +244,11 @@ export class DrawingService {
     return this.http
       .get<Collection[]>(`${this.apiUrl}art/collections-public`)
       .pipe(
+        timeout(this.timeoutMs),
+        catchError(this.handleRequestError),
         map((collections: Collection[]) =>
           collections.map(collection => new Collection(collection))
-        ),
-        catchError(this.handleError<Collection[]>('getAllCollections'))
+        )
       );
   }
 
@@ -267,10 +256,11 @@ export class DrawingService {
     return this.http
       .get<Collection[]>(`${this.apiUrl}art/collections-admin`)
       .pipe(
+        timeout(this.timeoutMs),
+        catchError(this.handleRequestError),
         map((collections: Collection[]) =>
           collections.map(collection => new Collection(collection))
-        ),
-        catchError(this.handleError<Collection[]>('getAllCollections'))
+        )
       );
   }
 
@@ -284,21 +274,9 @@ export class DrawingService {
     return this.http
       .get<Collection>(`${this.apiUrl}art/collection/details-public/${id}`)
       .pipe(
-        map((collection: Collection) => new Collection(collection)),
-        catchError(
-          this.handleError<Collection>('getCollectionDetails', {
-            id: '',
-            description: '',
-            drawings: [],
-            drawingsId: [],
-            label: '',
-            labelCode: '',
-            name: 'not-found',
-            order: 0,
-            textDrawingsReferences: '',
-            value: '',
-          })
-        )
+        timeout(this.timeoutMs),
+        catchError(this.handleRequestError),
+        map((collection: Collection) => new Collection(collection))
       );
   }
 
@@ -306,8 +284,9 @@ export class DrawingService {
     return this.http
       .get<Collection>(`${this.apiUrl}art/collection/details-admin/${id}`)
       .pipe(
-        map((collection: Collection) => new Collection(collection)),
-        catchError(this.handleError<Collection>('getCollectionDetails'))
+        timeout(this.timeoutMs),
+        catchError(this.handleRequestError),
+        map((collection: Collection) => new Collection(collection))
       );
   }
 
@@ -316,5 +295,34 @@ export class DrawingService {
       console.error(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
+  }
+
+  private handleRequestError(error: HttpErrorResponse) {
+    /*let errorMessage = '';
+
+    if (error.error instanceof ErrorEvent) {
+      // Error del lado del cliente
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Error del lado del servidor
+      switch (error.status) {
+        case 400:
+          errorMessage = 'Solicitud incorrecta. Por favor revisa los datos enviados.';
+          break;
+        case 404:
+          errorMessage = 'No se encontraron productos.';
+          break;
+        case 500:
+          errorMessage = 'Ocurrió un error en el servidor. Inténtalo de nuevo más tarde.';
+          break;
+        default:
+          errorMessage = error.message;
+          break;
+      }
+    }
+
+    // Puedes agregar un servicio de notificación o simplemente hacer el throwError
+    return throwError(() => new Error(errorMessage));*/
+    return throwError(() => new Error(error.message));
   }
 }

@@ -136,30 +136,50 @@ export class CollectionFormComponent
     const input = event.target as HTMLInputElement;
     const value = input.value;
 
-    this.drawingService.checkCollectionId(value).subscribe(resp => {
-      this.duplicateId = resp;
-      if (this.duplicateId) {
-        this.alertService.showAlert(
-          this.customTranslate.transform(
-            this.text('ALERTS.DUPLICATE-ID.TITLE')
-          ),
-          this.customTranslate.transform(
-            this.text('ALERTS.DUPLICATE-ID.MESSAGE'),
-            {
-              id: value,
-            }
-          )
+    this.drawingService.checkCollectionId(value).subscribe({
+      next: resp => {
+        this.duplicateId = resp;
+        if (this.duplicateId) {
+          this.alertService.showAlert(
+            this.customTranslate.transform(
+              this.text('ALERTS.DUPLICATE-ID.TITLE')
+            ),
+            this.customTranslate.transform(
+              this.text('ALERTS.DUPLICATE-ID.MESSAGE'),
+              {
+                id: value,
+              }
+            )
+          );
+          this.form.controls.id.setValue('');
+        }
+      },
+      error: () => {
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.COLLECTION.FORM.CHECKID',
+          { id: value }
         );
-        this.form.controls.id.setValue('');
-      }
+      },
     });
   }
 
   deleteCollection() {
+    // TODO: cambiar estos hardcode strings a plantilla
+    // TODO: arreglar que el showconfirm dialog no funciona
     if (this.alertService.showConfirmDialog('ELIMINAR?', 'SEGURO?', 'SÍ')) {
-      this.drawingService.removeCollection(this.collection.id).subscribe(() => {
-        this.alertService.showAlert('ELIMINADO', 'ELIMINADO');
-        this.router.navigate([`/collections`]);
+      this.drawingService.removeCollection(this.collection.id).subscribe({
+        next: () => {
+          this.alertService.showAlert('ELIMINADO', 'ELIMINADO');
+          this.router.navigate([`/collections`]);
+        },
+        error: () => {
+          this.alertService.showSilentAlert(
+            this.customTranslate,
+            'ERRORS.COLLECTION.FROM.REMOVE',
+            { id: this.collection.id }
+          );
+        },
       });
     }
   }
@@ -215,8 +235,8 @@ export class CollectionFormComponent
       order: values.order!,
     };
 
-    this.drawingService.saveCollection(formData).subscribe(resp => {
-      if (resp) {
+    this.drawingService.saveCollection(formData).subscribe({
+      next: resp => {
         this._collection.id = resp.id;
         this.newCollection = false;
         this.form.controls.isEditing.setValue(true);
@@ -229,7 +249,8 @@ export class CollectionFormComponent
         );
 
         this.router.navigate([`/collections`]);
-      } else {
+      },
+      error: () => {
         this.alertService.showAlert(
           this.customTranslate.transform(
             this.text('ALERTS.ERROR-ON-SAVE.TITLE')
@@ -239,7 +260,7 @@ export class CollectionFormComponent
             { id: values.id }
           )
         );
-      }
+      },
     });
   }
 }
