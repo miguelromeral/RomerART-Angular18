@@ -35,7 +35,7 @@ import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
   providedIn: 'root',
 })
 export class DrawingService {
-  private apiUrl = environment.api.url;
+  private apiUrl = `${environment.api.url}art/`;
 
   private user: User | null = null;
   private isAdmin = false;
@@ -74,6 +74,32 @@ export class DrawingService {
   getDrawingPaperSizes = (): DrawingPaperSize[] =>
     drawingPaperSizes.map(paper => new DrawingPaperSize(paper));
 
+  /**********************************/
+  /* Drawing Selects
+  /**********************************/
+
+  getDrawingProducts(): Observable<DrawingProduct[]> {
+    return this.http
+      .get<DrawingProduct[]>(`${this.apiUrl}drawing/products`)
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  getDrawingCharacters(): Observable<DrawingCharacter[]> {
+    return this.http
+      .get<DrawingCharacter[]>(`${this.apiUrl}drawing/characters`)
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  getDrawingModels(): Observable<string[]> {
+    return this.http
+      .get<string[]>(`${this.apiUrl}drawing/models`)
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  /**********************************/
+  /* Drawing Details
+  /**********************************/
+
   getDrawingDetails(id: string): Observable<Drawing> {
     // console.log('Is Admin? ', this.isAdmin);
     return this.isAdmin
@@ -83,113 +109,18 @@ export class DrawingService {
 
   private getDrawingDetailsPublic(id: string): Observable<Drawing> {
     return this.http
-      .get<Drawing>(`${this.apiUrl}art/details/${id}`)
+      .get<Drawing>(`${this.apiUrl}drawing/details/${id}`)
       .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
   private getDrawingDetailsAdmin(id: string): Observable<Drawing> {
     return this.http
-      .get<Drawing>(`${this.apiUrl}art/details-admin/${id}`)
+      .get<Drawing>(`${this.apiUrl}drawing/details/admin/${id}`)
       .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
-  // getAllDrawings(): Observable<Drawing[]> {
-  //   return this.http.get<Drawing[]>(`${this.apiUrl}art/drawings`).pipe(
-  //     map((drawings: Drawing[]) =>
-  //       drawings.map(drawing => new Drawing(drawing))
-  //     ),
-  //     catchError(this.handleError<Drawing[]>('getAllDrawings'))
-  //   );
-  // }
-
-  getDrawingProducts(): Observable<DrawingProduct[]> {
-    return this.http
-      .get<DrawingProduct[]>(`${this.apiUrl}art/select/products`)
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  getDrawingCharacters(): Observable<DrawingCharacter[]> {
-    return this.http
-      .get<DrawingCharacter[]>(`${this.apiUrl}art/select/characters`)
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  getDrawingModels(): Observable<string[]> {
-    return this.http
-      .get<string[]>(`${this.apiUrl}art/select/models`)
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  cheerDrawing(id: string): Observable<unknown> {
-    const url = `${this.apiUrl}art/cheer`;
-
-    return this.http
-      .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  voteDrawing(id: string, score: number): Observable<IVoteDrawingResponse> {
-    const url = `${this.apiUrl}art/vote/${id}`;
-
-    return this.http
-      .post<IVoteDrawingResponse>(url, JSON.stringify(score), {
-        headers: this.postHeaders,
-      })
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  checkAzurePath(path: string): Observable<ICheckAzurePathResponse> {
-    const url = `${this.apiUrl}art/checkazurepath`;
-
-    const body: ICheckAzurePathRequest = {
-      id: path,
-    };
-    return this.http
-      .post<ICheckAzurePathResponse>(url, body, { headers: this.postHeaders })
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  removeCollection(id: string): Observable<void> {
-    const url = `${this.apiUrl}art/collection/remove`;
-
-    return this.http
-      .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  saveDrawing(drawing: ISaveDrawingRequest): Observable<Drawing> {
-    const url = `${this.apiUrl}art/save/${drawing.id}`;
-
-    return this.http
-      .post<Drawing>(url, drawing, { headers: this.postHeaders })
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  saveCollection(collection: ISaveCollectionRequest): Observable<Collection> {
-    const url = `${this.apiUrl}art/save/collection/${collection.id}`;
-
-    return this.http
-      .post<Collection>(url, collection, { headers: this.postHeaders })
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  uploadAzureImage(form: FormData): Observable<UploadAzureImageResponse> {
-    const url = `${this.apiUrl}art/upload`;
-    return this.http
-      .post<UploadAzureImageResponse>(url, form)
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  checkDrawingId(id: string): Observable<boolean> {
-    return this.http
-      .get<boolean>(`${this.apiUrl}art/checkdrawing/${id}`)
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
-
-  checkCollectionId(id: string): Observable<boolean> {
-    return this.http
-      .get<boolean>(`${this.apiUrl}art/check/collection/${id}`)
-      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
-  }
+  /**********************************/
+  /* Drawing Filters
+  /**********************************/
 
   filterDrawings(filters: DrawingFilter): Observable<FilterResultsDrawing> {
     return this.isAdmin
@@ -200,7 +131,7 @@ export class DrawingService {
   private filterDrawingsPublic(
     filters: DrawingFilter
   ): Observable<FilterResultsDrawing> {
-    const url = `${this.apiUrl}art/filter-public`;
+    const url = `${this.apiUrl}drawing/filter`;
     return this.http
       .post<FilterResultsDrawing>(url, filters, { headers: this.postHeaders })
       .pipe(
@@ -215,7 +146,7 @@ export class DrawingService {
   filterDrawingsAdmin(
     filters: DrawingFilter
   ): Observable<FilterResultsDrawing> {
-    const url = `${this.apiUrl}art/filter-admin`;
+    const url = `${this.apiUrl}drawing/filter/admin`;
     return this.http
       .post<FilterResultsDrawing>(url, filters, { headers: this.postHeaders })
       .pipe(
@@ -234,35 +165,67 @@ export class DrawingService {
     return this.filterDrawings(filters);
   }
 
-  getAllCollections(): Observable<Collection[]> {
-    return this.isAdmin
-      ? this.getAllCollectionsAdmin()
-      : this.getAllCollectionsPublic();
+  /**********************************/
+  /* Drawing Interactions
+  /**********************************/
+
+  cheerDrawing(id: string): Observable<unknown> {
+    const url = `${this.apiUrl}drawing/cheer`;
+
+    return this.http
+      .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
-  getAllCollectionsPublic(): Observable<Collection[]> {
+  voteDrawing(id: string, score: number): Observable<IVoteDrawingResponse> {
+    const url = `${this.apiUrl}drawing/vote/${id}`;
+
     return this.http
-      .get<Collection[]>(`${this.apiUrl}art/collections-public`)
-      .pipe(
-        timeout(this.timeoutMs),
-        catchError(this.handleRequestError),
-        map((collections: Collection[]) =>
-          collections.map(collection => new Collection(collection))
-        )
-      );
+      .post<IVoteDrawingResponse>(url, JSON.stringify(score), {
+        headers: this.postHeaders,
+      })
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
-  getAllCollectionsAdmin(): Observable<Collection[]> {
+  /**********************************/
+  /* Drawing Form
+  /**********************************/
+
+  saveDrawing(drawing: ISaveDrawingRequest): Observable<Drawing> {
+    const url = `${this.apiUrl}drawing/save/${drawing.id}`;
+
     return this.http
-      .get<Collection[]>(`${this.apiUrl}art/collections-admin`)
-      .pipe(
-        timeout(this.timeoutMs),
-        catchError(this.handleRequestError),
-        map((collections: Collection[]) =>
-          collections.map(collection => new Collection(collection))
-        )
-      );
+      .post<Drawing>(url, drawing, { headers: this.postHeaders })
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
+
+  checkDrawingId(id: string): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${this.apiUrl}drawing/exist/${id}`)
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  checkAzurePath(path: string): Observable<ICheckAzurePathResponse> {
+    const url = `${this.apiUrl}drawing/check/blob`;
+
+    const body: ICheckAzurePathRequest = {
+      id: path,
+    };
+    return this.http
+      .post<ICheckAzurePathResponse>(url, body, { headers: this.postHeaders })
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  uploadAzureImage(form: FormData): Observable<UploadAzureImageResponse> {
+    const url = `${this.apiUrl}drawing/upload/blob`;
+    return this.http
+      .post<UploadAzureImageResponse>(url, form)
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  /**********************************/
+  /* Collection Details
+  /**********************************/
 
   getCollectionDetails(id: string): Observable<Collection> {
     return this.isAdmin
@@ -272,7 +235,7 @@ export class DrawingService {
 
   getCollectionDetailsPublic(id: string): Observable<Collection> {
     return this.http
-      .get<Collection>(`${this.apiUrl}art/collection/details-public/${id}`)
+      .get<Collection>(`${this.apiUrl}collection/details/${id}`)
       .pipe(
         timeout(this.timeoutMs),
         catchError(this.handleRequestError),
@@ -282,13 +245,71 @@ export class DrawingService {
 
   getCollectionDetailsAdmin(id: string): Observable<Collection> {
     return this.http
-      .get<Collection>(`${this.apiUrl}art/collection/details-admin/${id}`)
+      .get<Collection>(`${this.apiUrl}collection/details/admin/${id}`)
       .pipe(
         timeout(this.timeoutMs),
         catchError(this.handleRequestError),
         map((collection: Collection) => new Collection(collection))
       );
   }
+
+  /**********************************/
+  /* Collection List
+  /**********************************/
+
+  getAllCollections(): Observable<Collection[]> {
+    return this.isAdmin
+      ? this.getAllCollectionsAdmin()
+      : this.getAllCollectionsPublic();
+  }
+
+  getAllCollectionsPublic(): Observable<Collection[]> {
+    return this.http.get<Collection[]>(`${this.apiUrl}collections`).pipe(
+      timeout(this.timeoutMs),
+      catchError(this.handleRequestError),
+      map((collections: Collection[]) =>
+        collections.map(collection => new Collection(collection))
+      )
+    );
+  }
+
+  getAllCollectionsAdmin(): Observable<Collection[]> {
+    return this.http.get<Collection[]>(`${this.apiUrl}collections/admin`).pipe(
+      timeout(this.timeoutMs),
+      catchError(this.handleRequestError),
+      map((collections: Collection[]) =>
+        collections.map(collection => new Collection(collection))
+      )
+    );
+  }
+
+  /**********************************/
+  /* Collection Form
+  /**********************************/
+
+  checkCollectionId(id: string): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${this.apiUrl}collection/exist/${id}`)
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  saveCollection(collection: ISaveCollectionRequest): Observable<Collection> {
+    const url = `${this.apiUrl}collection/save/${collection.id}`;
+
+    return this.http
+      .post<Collection>(url, collection, { headers: this.postHeaders })
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  removeCollection(id: string): Observable<void> {
+    const url = `${this.apiUrl}collection/delete`;
+
+    return this.http
+      .post<void>(url, JSON.stringify(id), { headers: this.postHeaders })
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  ////////////////////////////////////////////////////////
 
   private handleRequestError(error: HttpErrorResponse) {
     let errorMessage = '';
