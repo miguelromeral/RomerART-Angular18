@@ -87,7 +87,7 @@ pre {
 }
 
 #divPageErrors {
-  @apply fixed bottom-0 mb-2 flex h-min flex-col-reverse items-stretch gap-2;
+  @apply fixed bottom-14 lg:bottom-0 mb-2 flex h-min flex-col-reverse items-stretch gap-2;
   width: -webkit-fill-available;
 }
 

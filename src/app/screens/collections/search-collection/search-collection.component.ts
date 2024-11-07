@@ -74,6 +74,11 @@ export class SearchCollectionComponent
     this.authService.isAdmin().subscribe(isAdmin => {
       this.admin = isAdmin;
     });
+    this.loadCollections();
+  }
+
+  loadCollections() {
+    this.loadingCollections = true;
     this.drawingService
       .getAllCollections()
       .pipe(

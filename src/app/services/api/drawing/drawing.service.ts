@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { catchError, map, Observable, of, throwError, timeout } from 'rxjs';
+import { catchError, map, Observable, throwError, timeout } from 'rxjs';
 import { Drawing } from '../../../../models/art/drawing.model';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
@@ -290,15 +290,8 @@ export class DrawingService {
       );
   }
 
-  private handleError<T>(operation: string, result?: T) {
-    return (error: HttpErrorResponse): Observable<T> => {
-      console.error(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-
   private handleRequestError(error: HttpErrorResponse) {
-    /*let errorMessage = '';
+    let errorMessage = '';
 
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente
@@ -307,13 +300,15 @@ export class DrawingService {
       // Error del lado del servidor
       switch (error.status) {
         case 400:
-          errorMessage = 'Solicitud incorrecta. Por favor revisa los datos enviados.';
+          errorMessage =
+            'Solicitud incorrecta. Por favor revisa los datos enviados.';
           break;
         case 404:
           errorMessage = 'No se encontraron productos.';
           break;
         case 500:
-          errorMessage = 'Ocurrió un error en el servidor. Inténtalo de nuevo más tarde.';
+          errorMessage =
+            'Ocurrió un error en el servidor. Inténtalo de nuevo más tarde.';
           break;
         default:
           errorMessage = error.message;
@@ -322,7 +317,6 @@ export class DrawingService {
     }
 
     // Puedes agregar un servicio de notificación o simplemente hacer el throwError
-    return throwError(() => new Error(errorMessage));*/
-    return throwError(() => new Error(error.message));
+    return throwError(() => new Error(errorMessage));
   }
 }

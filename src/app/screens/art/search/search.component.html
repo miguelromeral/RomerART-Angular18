@@ -116,7 +116,7 @@
             <app-partial-error
               *ngIf="filterFormError"
               [title]="'ERRORS.DRAWING.SEARCH.NOTFOUND' | mrTranslate"
-              class="h-full w-full sm:col-span-4 lg:col-span-5 xl:col-span-6"
+              class="col-span-3 h-full w-full sm:col-span-4 lg:col-span-5 xl:col-span-6"
               [canRefresh]="true"
               (refreshContent)="requestDrawingsAfterError()">
             </app-partial-error>

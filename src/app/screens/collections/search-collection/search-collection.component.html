@@ -98,9 +98,9 @@
     </ng-container>
     <ng-template #showErrorCollection>
       <app-partial-error
-        [title]="
-          'ERRORS.COLLECTION.SEARCH-NOTLOADED' | mrTranslate
-        "></app-partial-error>
+        [title]="'ERRORS.COLLECTION.SEARCH-NOTLOADED' | mrTranslate"
+        [canRefresh]="true"
+        (refreshContent)="loadCollections()"></app-partial-error>
     </ng-template>
   </div>
 </app-layout>
