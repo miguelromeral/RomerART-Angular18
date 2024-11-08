@@ -186,7 +186,9 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       }
 
       // Calcular la nueva posición media entre los dos dedos
-      const rect = this.imageElement.nativeElement.getBoundingClientRect();
+      // Acedemos al padre, ya que la imagen se va a deformar con la escala
+      const element = this.imageElement.nativeElement as HTMLElement;
+      const rect = element.parentElement!.getBoundingClientRect();
       const centerX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
       const centerY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
 
@@ -196,7 +198,11 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       };
 
       // Actualizar el origen de la transformación para seguir los dedos
-      this.imageElement.nativeElement.style.transformOrigin = `${newTouchPosition.x * 100}% ${newTouchPosition.y * 100}%`;
+      this.imageElement.nativeElement.style.transformOrigin =
+        this.calculateTransformOriginTouchMove(
+          newTouchPosition.x,
+          newTouchPosition.y
+        );
 
       // Actualizar la transformación para mover y escalar la imagen
       requestAnimationFrame(() => {
@@ -204,6 +210,19 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
         this.imageElement.nativeElement.style.transform = this.transform;
       });
     }
+  }
+
+  calculateTransformOriginTouchMove(x: number, y: number): string {
+    let xPerc = (1 - x) * 100;
+    let yPerc = (1 - y) * 100;
+
+    if (xPerc < 0) xPerc = 0;
+    if (xPerc > 100) xPerc = 100;
+
+    if (yPerc < 0) yPerc = 0;
+    if (yPerc > 100) yPerc = 100;
+
+    return `${xPerc}% ${yPerc}%`;
   }
 
   onTouchEnd(event: TouchEvent) {
