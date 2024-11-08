@@ -41,7 +41,6 @@ export class AlertService {
     return this.sendDialog(data);
   }
 
-  // TODO: esto es un desastre, arreglarlo cuanto antes
   showSilentAlert(
     translatePipe: CustomTranslatePipe,
     key: string,
@@ -49,17 +48,11 @@ export class AlertService {
     ...args: any[]
   ) {
     const text = translatePipe.transform(key, ...args);
-    // // const text = key;
-    // this.errorList.push(text);
-    // // console.log('--> Sending: ', list);
-    // this.errorListSubject.next(this.errorList);
-
-    // console.error('NUEVO ERROR: ', text);
 
     const newError = document.createElement('div');
+    newError.classList.add('mr-error-content');
     newError.classList.add('mr-error-msg');
     newError.innerHTML = text;
-
     document.getElementById('divPageErrors')?.appendChild(newError);
   }
 

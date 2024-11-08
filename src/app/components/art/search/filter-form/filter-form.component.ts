@@ -373,25 +373,20 @@ export class FilterFormComponent
     this.queryParamsSubscription?.unsubscribe();
     this.changeBasicArtUrl();
 
-    this.drawingService
-      .filterDrawings(filters)
-      .pipe(
-        finalize(() => {
-          this.isLoading.emit(false);
-        })
-      )
-      .subscribe({
-        next: results => {
-          this.processFilteredDrawings(results);
-        },
-        error: () => {
-          this.alertService.showSilentAlert(
-            this.customTranslate,
-            'ERRORS.DRAWING.SEARCH.NOTFOUND'
-          );
-          this.isError.emit(true);
-        },
-      });
+    this.drawingService.filterDrawings(filters).subscribe({
+      next: results => {
+        this.processFilteredDrawings(results);
+        this.isLoading.emit(false);
+      },
+      error: () => {
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.DRAWING.SEARCH.NOTFOUND'
+        );
+        this.isError.emit(true);
+        this.isLoading.emit(false);
+      },
+    });
   }
 
   processFilteredDrawings(results: FilterResultsDrawing) {
