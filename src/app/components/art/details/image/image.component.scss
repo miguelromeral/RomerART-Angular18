@@ -24,6 +24,7 @@
 #iFavoriteIcon {
   color: var(--mr-favorite-icon-color);
   text-shadow: 0px 0px 10px var(--mr-favorite-icon-color);
+  z-index: 10;
 }
 
 #divIconFullScreen {

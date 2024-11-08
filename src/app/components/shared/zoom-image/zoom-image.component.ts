@@ -131,6 +131,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
       'transform',
       `scale(${scale})`
     );
+    this.imageElement.nativeElement.style.zIndex = '10';
   }
 
   // Restablece la escala de la imagen
@@ -203,6 +204,7 @@ export class ZoomImageComponent extends LanguageComponent implements OnInit {
           newTouchPosition.x,
           newTouchPosition.y
         );
+      this.imageElement.nativeElement.style.zIndex = '10';
 
       // Actualizar la transformación para mover y escalar la imagen
       requestAnimationFrame(() => {

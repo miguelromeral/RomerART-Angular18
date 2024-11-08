@@ -74,8 +74,7 @@
 
 
 .heart-rain {
-  // overflow: hidden;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
 }
 
@@ -85,7 +84,7 @@
   position: absolute;
   animation: heartMove linear 1;
   top: -10vh;
-  z-index: 0;
+  z-index: 11;
 }
 
 @keyframes heartMove {

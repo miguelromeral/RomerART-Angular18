@@ -1,9 +1,9 @@
 <app-layout class="lg:block lg:h-screen">
   <div
     *ngIf="loading || !drawingNotFound"
-    class="lg:grid-rows-[1fr, minmax(1fr, auto)] sm:grid-cols-[1fr, auto] flex flex-col flex-nowrap gap-2 sm:grid lg:h-[98vh] lg:max-h-[98vh] lg:items-start lg:justify-stretch"
+    class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-2 lg:items-start lg:justify-stretch"
     [ngClass]="{ favorite: drawing.favorite }">
-    <div class="flex w-full flex-col sm:col-span-2">
+    <div class="flex h-fit w-full flex-col sm:col-span-2">
       <app-loading [loading]="loading">
         <h1 class="mr-image-page-title" content *ngIf="drawing.title !== ''">
           <span>
