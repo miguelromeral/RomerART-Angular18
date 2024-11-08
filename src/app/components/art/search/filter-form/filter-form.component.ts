@@ -418,70 +418,95 @@ export class FilterFormComponent
 
     this.processDrawingCharacters();
     this.processDrawingModels();
-    this.processDrawingStyles(results);
-    this.processDrawingProductTypes(results);
-    this.processDrawingProducts(results);
-    this.processDrawingSoftware(results);
-    this.processDrawingPapers(results);
+    this.processDrawingStyles();
+    this.processDrawingProductTypes();
+    this.processDrawingProducts();
+    this.processDrawingSoftware();
+    this.processDrawingPapers();
 
     this.nDrawingFavorites = results.nDrawingFavorites;
 
-    this.processDrawingCollections(results);
+    this.processDrawingCollections();
 
     this.existsMoreResultsToFetch.emit(
       this.listDrawings.length < results.totalCount
     );
   }
 
-  private processDrawingCollections(results: FilterResultsDrawing) {
-    this.filteredCollections = this.listCollections.filter(
-      c => results.filteredCollections.filter(id => id == c.id).length > 0
-    );
-    this.nDrawingCollections = results.nDrawingCollections;
+  private processDrawingCollections() {
+    if (this.listCollections.length > 0 && this.lastResult !== null) {
+      this.filteredCollections = this.listCollections.filter(
+        c =>
+          this.lastResult &&
+          this.lastResult.filteredCollections.filter(id => id == c.id).length >
+            0
+      );
+      this.nDrawingCollections = this.lastResult.nDrawingCollections;
+    }
   }
 
-  private processDrawingPapers(results: FilterResultsDrawing) {
-    this.filteredDrawingPapers = this.listDrawingPapers.filter(
-      p =>
-        results.filteredDrawingPapers.filter(d => d.toString() == p.value)
-          .length > 0
-    );
-    this.nDrawingPapers = results.nDrawingPapers;
+  private processDrawingPapers() {
+    if (this.listDrawingPapers.length > 0 && this.lastResult !== null) {
+      this.filteredDrawingPapers = this.listDrawingPapers.filter(
+        p =>
+          this.lastResult &&
+          this.lastResult.filteredDrawingPapers.filter(
+            d => d.toString() == p.value
+          ).length > 0
+      );
+      this.nDrawingPapers = this.lastResult.nDrawingPapers;
+    }
   }
 
-  private processDrawingSoftware(results: FilterResultsDrawing) {
-    this.filteredDrawingSoftwares = this.listDrawingSoftwares.filter(
-      s =>
-        results.filteredDrawingSoftwares.filter(d => d.toString() == s.value)
-          .length > 0
-    );
-    this.nDrawingSoftwares = results.nDrawingSoftwares;
+  private processDrawingSoftware() {
+    if (this.listDrawingSoftwares.length > 0 && this.lastResult !== null) {
+      this.filteredDrawingSoftwares = this.listDrawingSoftwares.filter(
+        s =>
+          this.lastResult &&
+          this.lastResult.filteredDrawingSoftwares.filter(
+            d => d.toString() == s.value
+          ).length > 0
+      );
+      this.nDrawingSoftwares = this.lastResult.nDrawingSoftwares;
+    }
   }
 
-  private processDrawingProducts(results: FilterResultsDrawing) {
-    this.filteredDrawingProducts = this.listDrawingProducts.filter(
-      p => results.filteredDrawingProducts.filter(d => d == p.value).length > 0
-    );
-    this.nDrawingProducts = results.nDrawingProducts;
+  private processDrawingProducts() {
+    if (this.listDrawingProducts.length > 0 && this.lastResult !== null) {
+      this.filteredDrawingProducts = this.listDrawingProducts.filter(
+        p =>
+          this.lastResult &&
+          this.lastResult.filteredDrawingProducts.filter(d => d == p.value)
+            .length > 0
+      );
+      this.nDrawingProducts = this.lastResult.nDrawingProducts;
+    }
   }
 
-  private processDrawingProductTypes(results: FilterResultsDrawing) {
-    this.filteredDrawingProductTypes = this.listDrawingProductTypes.filter(
-      pt =>
-        results.filteredDrawingProductTypes.filter(
-          d => d.toString() == pt.value
-        ).length > 0
-    );
-    this.nDrawingProductTypes = results.nDrawingProductTypes;
+  private processDrawingProductTypes() {
+    if (this.listDrawingProductTypes.length > 0 && this.lastResult !== null) {
+      this.filteredDrawingProductTypes = this.listDrawingProductTypes.filter(
+        pt =>
+          this.lastResult &&
+          this.lastResult.filteredDrawingProductTypes.filter(
+            d => d.toString() == pt.value
+          ).length > 0
+      );
+      this.nDrawingProductTypes = this.lastResult.nDrawingProductTypes;
+    }
   }
 
-  private processDrawingStyles(results: FilterResultsDrawing) {
-    this.filteredDrawingStyles = this.listDrawingStyles.filter(
-      s =>
-        results.filteredDrawingStyles.filter(d => d.toString() == s.value)
-          .length > 0
-    );
-    this.nDrawingTypes = results.nDrawingTypes;
+  private processDrawingStyles() {
+    if (this.listDrawingStyles.length > 0 && this.lastResult !== null) {
+      this.filteredDrawingStyles = this.listDrawingStyles.filter(
+        s =>
+          this.lastResult &&
+          this.lastResult.filteredDrawingStyles.filter(
+            d => d.toString() == s.value
+          ).length > 0
+      );
+      this.nDrawingTypes = this.lastResult.nDrawingTypes;
+    }
   }
 
   processDrawingCharacters() {
@@ -510,110 +535,92 @@ export class FilterFormComponent
   }
 
   loadSelects() {
-    this.drawingService
-      .getAllCollections()
-      .pipe(
-        finalize(() => {
-          this.loadingCollections = false;
-        })
-      )
-      .subscribe({
-        next: list => {
-          this.listCollections = list.map(c => new Collection(c));
-          this.errorCollections = false;
-        },
-        error: () => {
-          this.listCollections = [];
-          this.alertService.showSilentAlert(
-            this.customTranslate,
-            'ERRORS.COLLECTION.NOTLOADED'
-          );
-          this.errorCollections = true;
-        },
-      });
+    this.drawingService.getAllCollections().subscribe({
+      next: list => {
+        this.listCollections = list.map(c => new Collection(c));
+        this.processDrawingCollections();
+        this.errorCollections = false;
+        this.loadingCollections = false;
+      },
+      error: () => {
+        this.listCollections = [];
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.COLLECTION.NOTLOADED'
+        );
+        this.errorCollections = true;
+        this.loadingCollections = false;
+      },
+    });
 
     this.listDrawingStyles = this.drawingService.getDrawingStyles();
     this.listDrawingProductTypes = this.drawingService.getDrawingProductTypes();
     this.listDrawingSoftwares = this.drawingService.getDrawingSoftwares();
     this.listDrawingPapers = this.drawingService.getDrawingPaperSizes();
-    this.drawingService
-      .getDrawingProducts()
-      .pipe(
-        finalize(() => {
-          this.loadingDrawingProducts = false;
-        })
-      )
-      .subscribe({
-        next: list => {
-          this.listDrawingProducts = list
-            .map(p => new DrawingProduct(p))
-            .sort(sortProductsByName);
-          this.filteredDrawingProducts = this.listDrawingProducts;
-          this.errorProducts = false;
-        },
-        error: () => {
-          this.listDrawingProducts = [];
-          this.filteredDrawingProducts = [];
-          this.alertService.showSilentAlert(
-            this.customTranslate,
-            'ERRORS.DRAWING.PRODUCT.NOTLOADED'
-          );
-          this.errorProducts = true;
-        },
-      });
-    this.drawingService
-      .getDrawingCharacters()
-      .pipe(
-        finalize(() => {
-          this.processDrawingCharacters();
-          this.loadingDrawingCharacters = false;
-        })
-      )
-      .subscribe({
-        next: list => {
-          // TODO: añadir el option de ningúno: Value: "none", Label: "CHARACTER.NONE"
-          this.listDrawingCharacters = list
-            .map(c => new DrawingCharacter(c))
-            .filter(c => c.characterName !== '')
-            .sort(sortCharactersByName);
-          this.errorCharacters = false;
-        },
-        error: () => {
-          this.listDrawingCharacters = [];
-          this.filteredDrawingCharacters = [];
-          this.alertService.showSilentAlert(
-            this.customTranslate,
-            'ERRORS.DRAWING.CHARACTER.NOTLOADED'
-          );
-          this.errorCharacters = true;
-        },
-      });
-    this.drawingService
-      .getDrawingModels()
-      .pipe(
-        finalize(() => {
-          this.loadingDrawingModels = false;
-        })
-      )
-      .subscribe({
-        next: list => {
-          this.errorModels = false;
-          this.listDrawingModels = list
-            .sort(sortByTextAscending)
-            .map<ICustomSelectOption>(m => {
-              return { value: m, label: m, labelCode: '' };
-            });
-        },
-        error: () => {
-          this.listDrawingModels = [];
-          this.filteredDrawingModels = [];
-          this.alertService.showSilentAlert(
-            this.customTranslate,
-            'ERRORS.DRAWING.MODEL.NOTLOADED'
-          );
-          this.errorModels = true;
-        },
-      });
+    this.drawingService.getDrawingProducts().subscribe({
+      next: list => {
+        this.listDrawingProducts = list
+          .map(p => new DrawingProduct(p))
+          .sort(sortProductsByName);
+        this.processDrawingProducts();
+        this.errorProducts = false;
+        this.loadingDrawingProducts = false;
+      },
+      error: () => {
+        this.listDrawingProducts = [];
+        this.filteredDrawingProducts = [];
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.DRAWING.PRODUCT.NOTLOADED'
+        );
+        this.errorProducts = true;
+        this.loadingDrawingProducts = false;
+      },
+    });
+    this.drawingService.getDrawingCharacters().subscribe({
+      next: list => {
+        // TODO: añadir el option de ningúno: Value: "none", Label: "CHARACTER.NONE"
+        this.listDrawingCharacters = list
+          .map(c => new DrawingCharacter(c))
+          .filter(c => c.characterName !== '')
+          .sort(sortCharactersByName);
+        this.processDrawingCharacters();
+        this.errorCharacters = false;
+        this.loadingDrawingCharacters = false;
+      },
+      error: () => {
+        this.listDrawingCharacters = [];
+        this.filteredDrawingCharacters = [];
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.DRAWING.CHARACTER.NOTLOADED'
+        );
+        this.errorCharacters = true;
+        this.loadingDrawingCharacters = false;
+      },
+    });
+    this.drawingService.getDrawingModels().subscribe({
+      next: list => {
+        this.errorModels = false;
+        this.listDrawingModels = list
+          .sort(sortByTextAscending)
+          .map<ICustomSelectOption>(m => {
+            return { value: m, label: m, labelCode: '' };
+          });
+        this.processDrawingModels();
+        this.loadingDrawingModels = false;
+      },
+      error: () => {
+        this.listDrawingModels = [];
+        this.filteredDrawingModels = [];
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.DRAWING.MODEL.NOTLOADED'
+        );
+        this.errorModels = true;
+        this.loadingDrawingModels = false;
+      },
+    });
   }
 
   // TODO: arreglar keydown del input

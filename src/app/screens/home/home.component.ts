@@ -20,7 +20,6 @@ import {
   ISocialLink,
   socialLinksConfig,
 } from 'config/data/social-links.config';
-import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -66,26 +65,21 @@ export class HomeComponent extends LanguageComponent implements OnInit {
   loadHighlightedCollection() {
     this.loadingCollection = true;
     this.errorCollection = false;
-    this.drawingService
-      .getCollectionDetails(homeCollectionConfig)
-      .pipe(
-        finalize(() => {
-          this.loadingCollection = false;
-        })
-      )
-      .subscribe({
-        next: col => {
-          this.collection = col;
-        },
-        error: () => {
-          this.collection = undefined;
-          this.alertService.showSilentAlert(
-            this.customTranslate,
-            'ERRORS.COLLECTION.HOME-NOTLOADED'
-          );
-          this.errorCollection = true;
-        },
-      });
+    this.drawingService.getCollectionDetails(homeCollectionConfig).subscribe({
+      next: col => {
+        this.collection = col;
+        this.loadingCollection = false;
+      },
+      error: () => {
+        this.collection = undefined;
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.COLLECTION.HOME-NOTLOADED'
+        );
+        this.errorCollection = true;
+        this.loadingCollection = false;
+      },
+    });
   }
 
   goToGallery() {

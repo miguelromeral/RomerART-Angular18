@@ -5,7 +5,14 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { catchError, map, Observable, throwError, timeout } from 'rxjs';
+import {
+  catchError,
+  map,
+  Observable,
+  switchMap,
+  throwError,
+  timeout,
+} from 'rxjs';
 import { Drawing } from '../../../../models/art/drawing.model';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
@@ -26,7 +33,6 @@ import { drawingSoftwares } from 'config/data/drawing-softwares.config';
 import { drawingPaperSizes } from 'config/data/drawing-paper-sizes.config';
 import { ISaveCollectionRequest } from '@models/requests/save-collection-request.model';
 import { AuthService } from '../auth/auth.service';
-import { User } from '@models/auth/user.model';
 import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
 import { DrawingFilterEffect } from '@models/art/drawing-filter-effect.model';
 import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
@@ -37,8 +43,6 @@ import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
 export class DrawingService {
   private apiUrl = `${environment.api.url}art/`;
 
-  private user: User | null = null;
-  private isAdmin = false;
   private timeoutMs = 30 * 1000;
 
   public postHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -46,18 +50,7 @@ export class DrawingService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {
-    this.authService.loggedUser$.subscribe(user => {
-      this.user = user;
-      // this.authService.isAdminUser(user).subscribe(admin => {
-      //   this.isAdmin = admin;
-      // });
-    });
-    this.authService.isAdmin().subscribe(admin => {
-      // console.log('Setting admin: ', admin);
-      this.isAdmin = admin;
-    });
-  }
+  ) {}
 
   getDrawingStyles = (): DrawingStyle[] =>
     drawingStyles.map(style => new DrawingStyle(style));
@@ -101,10 +94,13 @@ export class DrawingService {
   /**********************************/
 
   getDrawingDetails(id: string): Observable<Drawing> {
-    // console.log('Is Admin? ', this.isAdmin);
-    return this.isAdmin
-      ? this.getDrawingDetailsAdmin(id)
-      : this.getDrawingDetailsPublic(id);
+    return this.authService.isAdmin().pipe(
+      switchMap(authorized => {
+        return authorized
+          ? this.getDrawingDetailsAdmin(id)
+          : this.getDrawingDetailsPublic(id);
+      })
+    );
   }
 
   private getDrawingDetailsPublic(id: string): Observable<Drawing> {
@@ -123,9 +119,13 @@ export class DrawingService {
   /**********************************/
 
   filterDrawings(filters: DrawingFilter): Observable<FilterResultsDrawing> {
-    return this.isAdmin
-      ? this.filterDrawingsAdmin(filters)
-      : this.filterDrawingsPublic(filters);
+    return this.authService.isAdmin().pipe(
+      switchMap(authorized => {
+        return authorized
+          ? this.filterDrawingsAdmin(filters)
+          : this.filterDrawingsPublic(filters);
+      })
+    );
   }
 
   private filterDrawingsPublic(
@@ -228,9 +228,13 @@ export class DrawingService {
   /**********************************/
 
   getCollectionDetails(id: string): Observable<Collection> {
-    return this.isAdmin
-      ? this.getCollectionDetailsAdmin(id)
-      : this.getCollectionDetailsPublic(id);
+    return this.authService.isAdmin().pipe(
+      switchMap(authorized => {
+        return authorized
+          ? this.getCollectionDetailsAdmin(id)
+          : this.getCollectionDetailsPublic(id);
+      })
+    );
   }
 
   getCollectionDetailsPublic(id: string): Observable<Collection> {
@@ -258,9 +262,13 @@ export class DrawingService {
   /**********************************/
 
   getAllCollections(): Observable<Collection[]> {
-    return this.isAdmin
-      ? this.getAllCollectionsAdmin()
-      : this.getAllCollectionsPublic();
+    return this.authService.isAdmin().pipe(
+      switchMap(authorized => {
+        return authorized
+          ? this.getAllCollectionsAdmin()
+          : this.getAllCollectionsPublic();
+      })
+    );
   }
 
   getAllCollectionsPublic(): Observable<Collection[]> {

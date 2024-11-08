@@ -20,7 +20,6 @@ export class AuthService {
 
   redirectUrlAfterLogin = '/admin';
 
-  // TODO: cuando se refresca la página no detecta el usuario, y por tanto no sabe si eres admin, tienes que navegar a través de la SPA
   private loggedUserSubject = new BehaviorSubject<User | null>(null);
   loggedUser$: Observable<User | null> = this.loggedUserSubject.asObservable();
 

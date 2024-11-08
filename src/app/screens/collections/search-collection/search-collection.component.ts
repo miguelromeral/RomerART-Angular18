@@ -79,30 +79,25 @@ export class SearchCollectionComponent
 
   loadCollections() {
     this.loadingCollections = true;
-    this.drawingService
-      .getAllCollections()
-      .pipe(
-        finalize(() => {
-          this.loadingCollections = false;
-        })
-      )
-      .subscribe({
-        next: list => {
-          this.listCollections = list
-            .filter(c => c.drawingsId.length > 0)
-            .sort(sortCollectionsByOrder);
-          this.loadQueryParameters();
-          this.errorCollections = false;
-        },
-        error: () => {
-          this.listCollections = [];
-          this.errorCollections = true;
-          this.alertService.showSilentAlert(
-            this.customTranslate,
-            'ERRORS.COLLECTION.SEARCH-NOTLOADED'
-          );
-        },
-      });
+    this.drawingService.getAllCollections().subscribe({
+      next: list => {
+        this.errorCollections = false;
+        this.listCollections = list
+          .filter(c => c.drawingsId.length > 0)
+          .sort(sortCollectionsByOrder);
+        this.loadingCollections = false;
+        this.loadQueryParameters();
+      },
+      error: () => {
+        this.listCollections = [];
+        this.errorCollections = true;
+        this.alertService.showSilentAlert(
+          this.customTranslate,
+          'ERRORS.COLLECTION.SEARCH-NOTLOADED'
+        );
+        this.loadingCollections = false;
+      },
+    });
   }
 
   loadQueryParameters() {
