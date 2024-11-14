@@ -377,7 +377,6 @@ describe('DrawingService', () => {
       dateObject: new Date(),
       filterName: '',
       formattedDate: '',
-      formattedDateMini: '',
       isTraditional: false,
       likes: 0,
       likesHuman: '',

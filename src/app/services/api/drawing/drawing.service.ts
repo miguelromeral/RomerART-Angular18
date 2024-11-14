@@ -110,7 +110,7 @@ export class DrawingService {
   }
   private getDrawingDetailsAdmin(id: string): Observable<Drawing> {
     return this.http
-      .get<Drawing>(`${this.apiUrl}drawing/details/admin/${id}`)
+      .get<Drawing>(`${this.apiUrl}drawing/full-details/${id}`)
       .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 
@@ -146,7 +146,7 @@ export class DrawingService {
   filterDrawingsAdmin(
     filters: DrawingFilter
   ): Observable<FilterResultsDrawing> {
-    const url = `${this.apiUrl}drawing/filter/admin`;
+    const url = `${this.apiUrl}drawing/full-filter`;
     return this.http
       .post<FilterResultsDrawing>(url, filters, { headers: this.postHeaders })
       .pipe(
@@ -249,7 +249,7 @@ export class DrawingService {
 
   getCollectionDetailsAdmin(id: string): Observable<Collection> {
     return this.http
-      .get<Collection>(`${this.apiUrl}collection/details/admin/${id}`)
+      .get<Collection>(`${this.apiUrl}collection/full-details/${id}`)
       .pipe(
         timeout(this.timeoutMs),
         catchError(this.handleRequestError),
@@ -282,7 +282,7 @@ export class DrawingService {
   }
 
   getAllCollectionsAdmin(): Observable<Collection[]> {
-    return this.http.get<Collection[]>(`${this.apiUrl}collections/admin`).pipe(
+    return this.http.get<Collection[]>(`${this.apiUrl}collections/full`).pipe(
       timeout(this.timeoutMs),
       catchError(this.handleRequestError),
       map((collections: Collection[]) =>

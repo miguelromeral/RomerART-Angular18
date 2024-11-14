@@ -45,7 +45,6 @@ export class Drawing {
   urlThumbnail: string;
   isTraditional: boolean;
   formattedDate: string;
-  formattedDateMini: string;
   instagramUrl: string;
   twitterUrl: string;
   popularity: number;
@@ -99,7 +98,6 @@ export class Drawing {
     this.urlThumbnail = data.urlThumbnail || '';
     this.isTraditional = data.isTraditional || false;
     this.formattedDate = data.formattedDate || '';
-    this.formattedDateMini = data.formattedDateMini || '';
     this.instagramUrl = data.instagramUrl || '';
     this.twitterUrl = data.twitterUrl || '';
     this.popularity = data.popularity || 0;
