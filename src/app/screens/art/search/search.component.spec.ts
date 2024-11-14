@@ -10,6 +10,8 @@ import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { Collection } from '@models/art/collection.model';
+import { DrawingProduct } from '@models/art/drawing-product.model';
+import { DrawingCharacter } from '@models/art/drawing-character.model';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -24,6 +26,13 @@ describe('SearchComponent', () => {
     const spyAuth = jasmine.createSpyObj('AuthService', ['isAdmin']);
     const spyDrawing = jasmine.createSpyObj('DrawingService', [
       'getAllCollections',
+      'getDrawingStyles',
+      'getDrawingProductTypes',
+      'getDrawingSoftwares',
+      'getDrawingPaperSizes',
+      'getDrawingProducts',
+      'getDrawingCharacters',
+      'getDrawingModels',
     ]);
 
     const routerSpy = jasmine.createSpyObj(
@@ -90,6 +99,30 @@ describe('SearchComponent', () => {
       },
     ];
     drawingServiceSpy.getAllCollections.and.returnValue(of(mockCollections));
+    const mockProducts: DrawingProduct[] = [
+      {
+        label: 'label',
+        labelCode: 'CODE',
+        productName: 'Product',
+        productType: 'Type',
+        productTypeId: 1,
+        value: 'value',
+      },
+    ];
+    drawingServiceSpy.getDrawingProducts.and.returnValue(of(mockProducts));
+    const mockDrawings: DrawingCharacter[] = [
+      {
+        characterName: 'Character',
+        label: 'label',
+        labelCode: 'CODE',
+        productType: 'Product',
+        productTypeId: 1,
+        value: 'value',
+      },
+    ];
+    drawingServiceSpy.getDrawingCharacters.and.returnValue(of(mockDrawings));
+    const mockModels: string[] = ['model1', 'model2'];
+    drawingServiceSpy.getDrawingModels.and.returnValue(of(mockModels));
 
     fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;

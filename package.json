@@ -9,6 +9,7 @@
     "prod": "ng build --configuration production && copyfiles web.config dist/romerart-angular18/",
     "prod-github": "ng build --configuration production",
     "test": "ng test --code-coverage",
+    "test-debug": "ng test",
     "test-github": "ng test --browsers=ChromeHeadless --watch=false",
     "serve:ssr:romerart-angular18": "node dist/romerart-angular18/server/server.mjs",
     "lint": "ng lint --fix",

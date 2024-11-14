@@ -176,9 +176,10 @@ describe('ImageComponent', () => {
   });
 
   it('should cheer drawing', fakeAsync(() => {
+    const initialLikes = 0;
     component.drawing = {
       id: 'jasmine-test',
-      likes: 0,
+      likes: initialLikes,
     } as Drawing;
     component.loading = false;
     fixture.detectChanges();
@@ -215,7 +216,7 @@ describe('ImageComponent', () => {
 
     expect(component.submittedCheer.emit).toHaveBeenCalledTimes(1);
     expect(component.submittedCheer.emit).toHaveBeenCalledWith(
-      component.drawing.likes + 1
+      initialLikes + 1
     );
 
     const customError = new Error('Cheer drawing failed');
