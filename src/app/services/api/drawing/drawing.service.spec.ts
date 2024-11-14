@@ -128,7 +128,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/details/123`
+      `${service['apiUrl']}drawing/details/123`
     );
   });
 
@@ -141,7 +141,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/details/invalid-id`
+      `${service['apiUrl']}drawing/details/invalid-id`
     );
   });
 
@@ -165,7 +165,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/details-admin/admin123`
+      `${service['apiUrl']}drawing/full-details/admin123`
     );
   });
 
@@ -188,7 +188,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/select/products`
+      `${service['apiUrl']}drawing/products`
     );
   });
 
@@ -211,7 +211,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/select/characters`
+      `${service['apiUrl']}drawing/characters`
     );
   });
 
@@ -225,7 +225,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/select/models`
+      `${service['apiUrl']}drawing/models`
     );
   });
 
@@ -237,7 +237,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/cheer`,
+      `${service['apiUrl']}drawing/cheer`,
       JSON.stringify('id'),
       { headers: service.postHeaders }
     );
@@ -261,7 +261,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/vote/${id}`,
+      `${service['apiUrl']}drawing/vote/${id}`,
       JSON.stringify(score),
       { headers: service.postHeaders }
     );
@@ -286,7 +286,7 @@ describe('DrawingService', () => {
     };
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/checkazurepath`,
+      `${service['apiUrl']}drawing/check/blob`,
       body,
       { headers: service.postHeaders }
     );
@@ -301,7 +301,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/collection/remove`,
+      `${service['apiUrl']}collection/delete`,
       JSON.stringify(id),
       { headers: service.postHeaders }
     );
@@ -370,9 +370,6 @@ describe('DrawingService', () => {
       twitterUrl: '',
       type: 0,
       visible: false,
-      comment: '',
-      commentCons: '',
-      commentPros: '',
       date: '',
       dateObject: new Date(),
       filterName: '',
@@ -405,7 +402,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/save/${request.id}`,
+      `${service['apiUrl']}drawing/save/${request.id}`,
       request,
       { headers: service.postHeaders }
     );
@@ -446,7 +443,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/save/collection/${request.id}`,
+      `${service['apiUrl']}collection/save/${request.id}`,
       request,
       { headers: service.postHeaders }
     );
@@ -473,7 +470,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/upload`,
+      `${service['apiUrl']}drawing/upload/blob`,
       formData
     );
   });
@@ -494,7 +491,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/checkdrawing/${id}`
+      `${service['apiUrl']}drawing/exist/${id}`
     );
   });
 
@@ -507,7 +504,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/check/collection/${id}`
+      `${service['apiUrl']}collection/exist/${id}`
     );
   });
 
@@ -565,7 +562,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/filter-public`,
+      `${service['apiUrl']}drawing/filter`,
       filters,
       { headers: service.postHeaders }
     );
@@ -630,7 +627,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/filter-admin`,
+      `${service['apiUrl']}drawing/full-filter`,
       filters,
       { headers: service.postHeaders }
     );
@@ -699,7 +696,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/collections-public`
+      `${service['apiUrl']}collections`
     );
   });
 
@@ -733,7 +730,7 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/collections-admin`
+      `${service['apiUrl']}collections/full`
     );
   });
 
@@ -761,14 +758,14 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/collection/details-public/${id}`
+      `${service['apiUrl']}collection/details/${id}`
     );
   });
 
   it('should return collection details for admin access', done => {
     const id = 'id';
 
-    authServiceSpy.isAdminUser.and.returnValue(of(true));
+    authServiceSpy.isAdmin.and.returnValue(of(true));
     loggedUserSubject.next({
       role: 'admin',
       token: 'token',
@@ -794,32 +791,28 @@ describe('DrawingService', () => {
     });
 
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${service['apiUrl']}art/collection/details-admin/${id}`
+      `${service['apiUrl']}collection/full-details/${id}`
     );
   });
 
   it('should handle error when getCollectionDetailsPublic fails', () => {
-    const id = 'id';
-    const mockErrorResponse = new HttpErrorResponse({
-      status: 500,
-      statusText: 'Internal Server Error',
+    const expectedError =
+      'Ocurrió un error en el servidor. Inténtalo de nuevo más tarde.';
+    const id = 'error-id';
+
+    httpClientSpy.get.and.returnValue(
+      throwError(() => new Error(expectedError))
+    );
+
+    service.getCollectionDetailsPublic(id).subscribe({
+      next: () => fail('expected an error, not data'),
+      error: error => {
+        expect(error.message).toEqual(expectedError);
+      },
     });
 
-    const expectedResult = {
-      name: 'not-found',
-    };
-
-    // Simular que la llamada HTTP falla
-    httpClientSpy.get.and.returnValue(throwError(mockErrorResponse));
-
-    // Llamada al método y verificación
-    service.getCollectionDetailsPublic('id').subscribe(result => {
-      expect(result.name).toEqual(expectedResult.name); // Verificar que retorna el valor por defecto en caso de error
-    });
-
-    // Verifica que se haya llamado a la URL correcta
     expect(httpClientSpy.get).toHaveBeenCalledWith(
-      `${environment.api.url}art/collection/details-public/${id}`
+      `${environment.api.url}art/collection/details/${id}`
     );
   });
 });
