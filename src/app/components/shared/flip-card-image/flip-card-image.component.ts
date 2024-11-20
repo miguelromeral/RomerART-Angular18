@@ -48,6 +48,9 @@ export class FlipCardImageComponent extends LanguageComponent {
       if (this.url.includes('twimg')) {
         return 'bi-twitter-x';
       }
+      if (this.url.includes('bsky')) {
+        return 'bi-at';
+      }
       if (this.url.includes('pinimg') || this.url.includes('pinterest')) {
         return 'bi-pinterest';
       }

@@ -127,7 +127,7 @@ export class DrawingFormComponent extends LanguageComponent {
     referenceUrl: new FormControl(''),
     spotifyUrl: new FormControl(''),
     instagramUrl: new FormControl(''),
-    twitterUrl: new FormControl(''),
+    blueskyUrl: new FormControl(''),
     visible: new FormControl(true, Validators.required),
   });
 
@@ -219,7 +219,7 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.referenceUrl.setValue(drawing.referenceUrl);
     this.form.controls.spotifyUrl.setValue(drawing.spotifyUrl);
     this.form.controls.visible.setValue(drawing.visible);
-    this.form.controls.twitterUrl.setValue(drawing.twitterUrl);
+    this.form.controls.blueskyUrl.setValue(drawing.blueskyUrl);
     this.form.controls.instagramUrl.setValue(drawing.instagramUrl);
   }
 
@@ -353,7 +353,7 @@ export class DrawingFormComponent extends LanguageComponent {
       type: values.type!,
       filter: values.filter!,
       visible: values.visible!,
-      twitterUrl: values.twitterUrl!,
+      blueskyUrl: values.blueskyUrl!,
       instagramUrl: values.instagramUrl!,
     };
     this.drawingService.saveDrawing(formData).subscribe({

@@ -35,6 +35,7 @@ describe('AboutService', () => {
         pinterest: '',
         twitch: '',
         twitter: '',
+        bluesky: '',
         type: 1,
         typeName: 'Type',
         youTube: '',

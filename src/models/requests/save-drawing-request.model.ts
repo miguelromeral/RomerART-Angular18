@@ -10,7 +10,7 @@ export interface ISaveDrawingRequest {
   name: string;
   modelName: string;
   spotifyUrl: string;
-  twitterUrl: string;
+  blueskyUrl: string;
   instagramUrl: string;
   title: string;
   dateHyphen: string;

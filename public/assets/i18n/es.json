@@ -559,9 +559,9 @@
           "TITLE": "Instagram",
           "PLACEHOLDER": "URL de la publicación en Instagram"
         },
-        "TWITTER": {
-          "TITLE": "Twitter",
-          "PLACEHOLDER": "URL de la publicación en Twitter"
+        "BLUESKY": {
+          "TITLE": "Bluesky",
+          "PLACEHOLDER": "URL Bluesky Post"
         },
         "VISIBLE": {
           "TITLE": "Visible"

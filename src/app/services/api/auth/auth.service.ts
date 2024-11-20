@@ -63,6 +63,7 @@ export class AuthService {
     return true; // En caso de error, consideramos el token como caducado
   }
 
+  // TODO: retornar respuesta y que se muestre al usuario en caso de login fallido
   login(credentials: { username: string; password: string }): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}auth/login`, credentials);
   }
