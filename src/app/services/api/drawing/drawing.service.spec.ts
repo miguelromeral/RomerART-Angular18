@@ -339,7 +339,7 @@ describe('DrawingService', () => {
       tagsText: '',
       time: 0,
       title: '',
-      twitterUrl: '',
+      blueskyUrl: '',
       type: 0,
       visible: false,
     };
@@ -367,7 +367,7 @@ describe('DrawingService', () => {
       tagsText: '',
       time: 0,
       title: '',
-      twitterUrl: '',
+      blueskyUrl: '',
       type: 0,
       visible: false,
       date: '',

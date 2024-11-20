@@ -89,7 +89,7 @@ describe('ImageComponent', () => {
     component.drawing = {
       id: 'jasmine-test',
       instagramUrl: '',
-      twitterUrl: '',
+      blueskyUrl: '',
       likes: 0,
       likesHuman: '',
       modelName: '',

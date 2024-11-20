@@ -46,7 +46,7 @@ export class Drawing {
   isTraditional: boolean;
   formattedDate: string;
   instagramUrl: string;
-  twitterUrl: string;
+  blueskyUrl: string;
   popularity: number;
   filter: number;
   filterName: string;
@@ -99,7 +99,7 @@ export class Drawing {
     this.isTraditional = data.isTraditional || false;
     this.formattedDate = data.formattedDate || '';
     this.instagramUrl = data.instagramUrl || '';
-    this.twitterUrl = data.twitterUrl || '';
+    this.blueskyUrl = data.blueskyUrl || '';
     this.popularity = data.popularity || 0;
     this.filter = data.filter || 0;
     this.filterName = data.filterName || '';
