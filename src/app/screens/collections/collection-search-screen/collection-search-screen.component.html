@@ -1,0 +1,110 @@
+<app-layout>
+  <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-4">
+      <div class="px-2 py-2">
+        <h1>
+          {{ text('TITLE') | mrTranslate }}
+        </h1>
+        <h3>
+          {{ text('DESCRIPTION') | mrTranslate }}
+        </h3>
+        <div *ngIf="admin" class="flex flex-row flex-nowrap justify-end">
+          <button class="btn" (click)="createNewCollection()">
+            <i class="bi bi-plus"></i>
+            {{ text('FORM.CREATE') | mrTranslate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="!errorCollections; else showErrorCollection">
+      <div class="flex flex-col gap-4">
+        <app-loading [loading]="loadingCollections">
+          <div class="container-collections container" loading>
+            <div class="h-56 w-48"></div>
+            <div class="h-56 w-48"></div>
+            <div class="h-56 w-48"></div>
+            <div class="h-56 w-48"></div>
+            <div class="h-56 w-48"></div>
+            <div class="h-56 w-48"></div>
+          </div>
+
+          <div class="container-collections h-full w-full" content>
+            <app-collection-thumbnail
+              *ngFor="let collection of listCollections"
+              [collection]="collection"
+              [selectedStyle]="isCollectionSelected(collection.id)"
+              class="h-full w-full"
+              (cardClicked)="selectCollection($event)"
+              content>
+            </app-collection-thumbnail>
+          </div>
+
+          <!-- <div
+          *ngFor="let collection of listCollections"
+          class="collection-card"
+          [ngClass]="{ selected: isCollectionSelected(collection.id) }"
+          (click)="selectCollection(collection.id)"
+          (keydown)="selectCollection(collection.id)"
+          tabindex="0"
+          content>
+          <img
+            *ngIf="collection.drawings.length > 0"
+            [src]="collection.drawings[0].urlThumbnail"
+            [alt]="collection.drawings[0].pageTitle()" />
+          <span class="count">{{ collection.drawingsId.length }}</span>
+          <div class="content">
+            <h2>
+              {{ collection.name }}
+            </h2>
+            <span
+              *ngIf="admin"
+              class="text-sm text-black-100 dark:text-white-950">
+              {{ text('ORDER') | mrTranslate: { order: collection.order } }}
+            </span>
+          </div>
+        </div> -->
+        </app-loading>
+      </div>
+      <div class="px-2 py-2">
+        <div *ngIf="selectedCollection" class="flex flex-col gap-4">
+          <h1 class="border-b dark:border-b-main-300 dark:text-main-300">
+            <app-translatable [originalText]="selectedCollection.name">
+            </app-translatable>
+          </h1>
+          <h3>
+            <app-translatable [originalText]="selectedCollection.description">
+            </app-translatable>
+          </h3>
+          <div class="flex flex-row gap-2">
+            <button
+              class="btn-image"
+              (click)="shareCollection()"
+              (keypress.enter)="shareCollection()"
+              tabindex="0"
+              title="Compartir Colección">
+              <i class="bi bi-send"></i>
+            </button>
+
+            <button
+              *ngIf="admin"
+              class="btn-image"
+              (click)="editCollection(selectedCollection.id)"
+              (keypress.enter)="editCollection(selectedCollection.id)"
+              tabindex="0"
+              title="Editar Colección">
+              <i class="bi bi-pencil"></i>
+            </button>
+          </div>
+          <app-collection-drawing-slider [drawings]="selectedCollection.drawings">
+          </app-collection-drawing-slider>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #showErrorCollection>
+      <app-partial-error
+        [title]="'ERRORS.COLLECTION.SEARCH-NOTLOADED' | mrTranslate"
+        [canRefresh]="true"
+        (refreshContent)="loadCollections()"></app-partial-error>
+    </ng-template>
+  </div>
+</app-layout>

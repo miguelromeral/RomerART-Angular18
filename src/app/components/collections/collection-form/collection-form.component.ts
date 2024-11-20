@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { LayoutComponent } from '@app/components/shared/layout/layout.component';
+import { LayoutComponent } from '@app/components/common/layout/layout/layout.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { DrawingService } from '@app/services/api/drawing/drawing.service';
 import { Collection } from '@models/art/collection.model';
@@ -19,8 +19,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SectionComponent } from '@app/components/shared/section/section.component';
-import { TextInputComponent } from '@app/components/shared/inputs/text-input/text-input.component';
+import { SectionComponent } from '@app/components/common/layout/section/section.component';
+import { TextInputComponent } from '@app/components/common/inputs/text-input/text-input.component';
 import { CollectionDrawingListComponent } from '@app/components/collections/collection-drawing-list/collection-drawing-list.component';
 import { ISaveCollectionRequest } from '@models/requests/save-collection-request.model';
 import { AlertService } from '@app/services/alerts/alert.service';

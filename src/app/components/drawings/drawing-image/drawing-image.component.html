@@ -1,0 +1,159 @@
+<div *ngIf="drawing" class="grid-rows-[1fr, auto, 1fr] grid flex-nowrap gap-0">
+  <app-loading [loading]="loading">
+    <div class="h-4 w-40" loading></div>
+
+    <div class="flex h-10 flex-row items-center justify-between gap-1" content>
+      <h3>
+        {{ drawing.name }}
+      </h3>
+      <h5 class="text-sm italic">
+        {{ drawing.modelName }}
+      </h5>
+    </div>
+  </app-loading>
+
+  <div
+    id="divImgFull"
+    class="mr-img-full-container heart-rain relative min-h-24"
+    [ngClass]="{ favorite: drawing.favorite }"
+    (dblclick)="cheerDrawing($event)">
+    <app-loading [loading]="loading">
+      <div class="flex h-80 w-full items-center justify-center rounded" loading>
+        <i class="bi bi-image-fill text-2xl"></i>
+      </div>
+
+      <app-zoom-image [url]="drawing.url" content> </app-zoom-image>
+    </app-loading>
+
+    <i
+      *ngIf="drawing?.favorite || false"
+      id="iFavoriteIcon"
+      class="bi bi-star-fill absolute right-1 top-1 block"
+      title="One of my favorites drawings."></i>
+
+    <button
+      *ngIf="showBtnFullScreen"
+      class="btn-rounded"
+      type="button"
+      (click)="fullScreenImage()">
+      <i
+        class="bi"
+        [ngClass]="{
+          'bi-fullscreen-exit': isFullScreen,
+          'bi-fullscreen': !isFullScreen,
+        }"></i>
+    </button>
+
+    <!-- TODO: volver a poner el icono y arreglar el pantalla completa -->
+    <!-- <div
+      id="divIconFullScreen"
+      class="absolute left-0 top-0 flex aspect-square h-6 w-6 cursor-pointer flex-nowrap justify-center rounded-br-md bg-black p-1 align-middle text-sm text-white"
+      tabindex="0"
+      (keydown)="fullScreenImageOnKeyDown($event)">
+      <i id="iFS" class="bi bi-fullscreen" title="Ver en pantalla completa"></i>
+      <i
+        id="iFSe"
+        class="bi bi-fullscreen-exit"
+        title="Cerrar la pantalla completa"></i>
+    </div> -->
+  </div>
+  <div
+    *ngIf="drawing"
+    class="my-2 flex flex-row flex-nowrap justify-between text-2xl">
+    <div
+      class="flex select-none flex-row flex-nowrap items-center gap-4"
+      [title]="drawing.likes + ' kudos'">
+      <form id="cheerForm">
+        <input type="hidden" name="id" [value]="drawing.id" />
+
+        <app-loading [loading]="loading">
+          <div class="h-10 w-10" loading></div>
+
+          <div
+            class="mr-like-container flex flex-row flex-nowrap items-end gap-1"
+            content>
+            <button
+              class="btn-image"
+              [id]="btnCheerId"
+              type="button"
+              (click)="cheerDrawing($event)">
+              <i id="iCheerIcon" class="bi bi-heart"></i>
+            </button>
+            <div *ngIf="showKudos" id="spLikesCounter" class="text-sm">
+              {{ drawing.likes }}
+            </div>
+          </div>
+        </app-loading>
+      </form>
+
+      <app-loading [loading]="loading" *ngIf="showFlip">
+        <div class="h-10 w-10" loading></div>
+
+        <div content>
+          <button target="_blank" (click)="flipDrawing()" class="btn-image">
+            <i class="bi bi-phone-flip"></i>
+          </button>
+        </div>
+      </app-loading>
+
+      <app-loading [loading]="loading">
+        <div class="h-10 w-10" loading></div>
+
+        <div content>
+          <button
+            class="btn-image"
+            (click)="shareDrawing()"
+            (keypress.enter)="shareDrawing()"
+            tabindex="0"
+            title="Compartir dibujo">
+            <i class="bi bi-send"></i>
+          </button>
+        </div>
+      </app-loading>
+
+      <a
+        *ngIf="drawing.blueskyUrl !== ''"
+        [href]="drawing.blueskyUrl"
+        target="_blank"
+        class="btn-image">
+        <i class="bi bi-at"></i>
+      </a>
+
+      <a
+        *ngIf="drawing.instagramUrl !== ''"
+        [href]="drawing.instagramUrl"
+        target="_blank"
+        class="btn-image">
+        <i class="bi bi-instagram"></i>
+      </a>
+
+      <button
+        *ngIf="!loading && admin"
+        class="btn-image"
+        (click)="editDrawing()"
+        (keypress.enter)="editDrawing()"
+        tabindex="0"
+        title="Editar dibujo">
+        <i class="bi bi-pencil"></i>
+      </button>
+    </div>
+
+    <app-loading [loading]="loading">
+      <div class="h-10 w-10" loading></div>
+
+      <div
+        content
+        class="flex select-none flex-row flex-nowrap gap-4 text-xl font-bold">
+        <app-drawing-score
+          *ngIf="showScorePopular"
+          class="h-8 w-8"
+          [score]="drawing.scorePopularHuman"
+          [popular]="true"></app-drawing-score>
+        <app-drawing-score
+          *ngIf="showScoreCritic"
+          class="h-8 w-8"
+          [score]="drawing.scoreCritic"></app-drawing-score>
+      </div>
+    </app-loading>
+  </div>
+</div>

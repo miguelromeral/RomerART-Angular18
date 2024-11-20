@@ -1,0 +1,48 @@
+<app-layout class="lg:block lg:h-screen">
+  <div
+    *ngIf="loading || !drawingNotFound"
+    class="flex flex-col flex-nowrap gap-2 sm:grid sm:grid-cols-5 lg:items-start lg:justify-stretch"
+    [ngClass]="{ favorite: drawing.favorite }">
+    <div class="flex h-fit w-full flex-col sm:col-span-5">
+      <app-loading [loading]="loading">
+        <h1 class="mr-image-page-title" content *ngIf="drawing.title !== ''">
+          <span>
+            <app-translatable [originalText]="drawing.title">
+            </app-translatable>
+          </span>
+        </h1>
+        <div loading class="h-8 w-full"></div>
+      </app-loading>
+    </div>
+
+    <app-art-details-drawing-image
+      class="sm:col-span-2 lg:h-fit lg:min-w-[15vw] lg:flex-grow lg:overflow-hidden"
+      [loading]="loading"
+      [drawing]="drawing"
+      (submittedCheer)="receiveCheer($event)"></app-art-details-drawing-image>
+
+    <div
+      class="h-max overflow-visible sm:col-span-3 lg:overflow-auto"
+      *ngIf="drawing">
+      <app-drawing-info
+        [drawing]="drawing"
+        [loading]="loading"
+        (voteSubmitted)="receiveVoteSubmitted($event)">
+      </app-drawing-info>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!loading && drawingNotFound"
+    class="flex flex-col flex-nowrap gap-3">
+    <app-partial-error
+      [title]="text('NOTFOUND.TITLE') | mrTranslate"
+      [description]="text('NOTFOUND.SUBTITLE') | mrTranslate: { id }"
+      [canRefresh]="true"
+      (refreshContent)="loadDrawing()">
+    </app-partial-error>
+    <a routerLink="/art">
+      {{ text('NOTFOUND.GO-TO-GALLERY') | mrTranslate }}
+    </a>
+  </div>
+</app-layout>

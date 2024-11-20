@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DrawingThumbnailComponent } from '@app/components/art/drawing-thumbnail/drawing-thumbnail.component';
+import { DrawingThumbnailComponent } from '@app/components/drawings/drawing-thumbnail/drawing-thumbnail.component';
 import { CustomTranslatePipe } from '@app/pipes/translate/customtranslate';
 import { AuthService } from '@app/services/api/auth/auth.service';
 import { Collection } from '@models/art/collection.model';

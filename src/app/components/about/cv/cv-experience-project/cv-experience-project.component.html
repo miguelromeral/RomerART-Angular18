@@ -1,0 +1,71 @@
+<div
+  *ngIf="project"
+  class="empresa"
+  [style.--mr-custom-color]="project.colorVariable">
+  <div class="titulo">
+    <h5>
+      <img
+        class="logo rounded-full"
+        [alt]="project.name"
+        [src]="project.logo" />
+      <a [href]="project.url" target="_blank">{{ project.name }}</a>
+    </h5>
+    <div class="fecha">
+      (<span *ngIf="project.beginDate">{{
+        formatDateMini(project.beginDate)
+      }}</span>
+      -
+      <span *ngIf="project.endDate">{{ formatDateMini(project.endDate) }}</span
+      >)
+    </div>
+  </div>
+  <div class="info">
+    <div class="flex flex-wrap items-center gap-1 text-xs">
+      <span *ngIf="project.address" class="direccion">{{
+        project.address
+      }}</span>
+      <span *ngIf="project.presencial" class="presencial">{{
+        text('PRESENTIAL') | mrTranslate
+      }}</span>
+      <span *ngIf="project.remoto" class="presencial">{{
+        text('REMOTE') | mrTranslate
+      }}</span>
+    </div>
+
+    <div
+      class="apartado competencias"
+      [innerHTML]="project.roleDescriptionCode | mrTranslate"></div>
+
+    <div
+      class="apartado referencias"
+      *ngIf="project.references?.length ?? 0 > 0">
+      <span *ngFor="let person of project.references">
+        {{ person.name }} ({{ person.role }})</span
+      >
+    </div>
+
+    <div
+      class="apartado tecnologiaContainer"
+      *ngIf="project.tecnology?.length ?? 0 > 0">
+      <div class="tecnologia text-sm">
+        <div class="tecnologiaItemsContainer">
+          <span
+            *ngFor="let item of sortedTechnology()"
+            [ngClass]="{
+              basico: item.level === 1,
+              intermedio: item.level === 2,
+              avanzado: item.level === 3,
+            }">
+            {{ item.name }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="proyectos">
+      <app-cv-experience-project
+        *ngFor="let subproject of project.projects"
+        [project]="subproject">
+      </app-cv-experience-project>
+    </div>
+  </div>
+</div>

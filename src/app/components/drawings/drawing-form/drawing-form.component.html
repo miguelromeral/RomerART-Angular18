@@ -1,0 +1,427 @@
+<ng-container *ngIf="drawing">
+  <h1>
+    <ng-container *ngIf="newDrawing; else titleEditForm">
+      {{ text('TITLE.CREATE') | mrTranslate }}
+    </ng-container>
+    <ng-template #titleEditForm>
+      {{ text('TITLE.EDIT') | mrTranslate: { id: drawing.id } }}
+    </ng-template>
+  </h1>
+  <form class="main-container" (submit)="saveDrawing()" [formGroup]="form">
+    <div class="sm:col-span-3">
+      <app-text-input
+        *ngIf="newDrawing; else idEdit"
+        formControlName="id"
+        (change)="checkDrawingId($event)"
+        [placeholder]="text('FORM.ID.PLACEHOLDER') | mrTranslate"
+        [label]="text('FORM.ID.TITLE') | mrTranslate">
+      </app-text-input>
+
+      <ng-template #idEdit>
+        <span>{{ drawing.id }}</span>
+      </ng-template>
+
+      <div *ngIf="duplicateId" class="form-error">
+        {{
+          text('ERRORS.DUPLICATE-ID') | mrTranslate: { id: this.form.value.id }
+        }}
+      </div>
+
+      <div *ngIf="form.controls.id.errors" class="form-error">
+        <p *ngIf="form.controls.id.hasError('required')">
+          {{ text('ERRORS.REQUIRED-ID') | mrTranslate }}
+        </p>
+      </div>
+    </div>
+
+    <app-section
+      [title]="text('SECTIONS.IMAGE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <div class="image-container">
+          <img
+            *ngIf="drawing?.url"
+            #image
+            [src]="drawing.url"
+            alt="Image"
+            class="col-span-2"
+            loading="lazy" />
+          <img
+            #imageThumbnail
+            *ngIf="drawing?.urlThumbnail"
+            [src]="drawing.urlThumbnail"
+            alt="Image"
+            loading="lazy" />
+        </div>
+        <div class="azure-container">
+          <app-text-input
+            icon="cloud"
+            formControlName="path"
+            (change)="checkAzurePath($event)"
+            [placeholder]="text('FORM.PATH.PLACEHOLDER') | mrTranslate"
+            [label]="text('FORM.PATH.TITLE') | mrTranslate">
+          </app-text-input>
+
+          <div *ngIf="form.controls.path.errors" class="form-error">
+            <p *ngIf="form.controls.path.hasError('required')">
+              {{ text('ERRORS.PATH-NOT-VALID') | mrTranslate }}
+            </p>
+          </div>
+
+          <app-drawing-azure-image-form
+            *ngIf="showAzureForm"
+            [path]="form.value.path ?? ''"
+            (imageUploaded)="receiveUploadedImage($event)">
+          </app-drawing-azure-image-form>
+        </div>
+      </div>
+    </app-section>
+    <app-section
+      [title]="text('FORM.TITLE.TITLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content items-end">
+        <app-text-input
+          class="col-span-1 sm:col-span-2"
+          formControlName="title"
+          [placeholder]="text('FORM.TITLE.PLACEHOLDER') | mrTranslate">
+        </app-text-input>
+
+        <div class="favorite">
+          <app-switch
+            [id]="'iSwitchFavorite'"
+            [text]="text('FORM.FAVORITE.TITLE') | mrTranslate"
+            [formControl]="form.controls.favorite">
+          </app-switch>
+        </div>
+      </div>
+    </app-section>
+    <app-section
+      [title]="text('SECTIONS.NAMES') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <app-text-input
+          icon="person"
+          formControlName="name"
+          [placeholder]="text('FORM.NAME.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.NAME.TITLE') | mrTranslate">
+        </app-text-input>
+
+        <app-text-input
+          icon="camera"
+          formControlName="modelName"
+          [placeholder]="text('FORM.MODEL-NAME.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.MODEL-NAME.TITLE') | mrTranslate">
+        </app-text-input>
+      </div>
+    </app-section>
+
+    <app-section
+      [title]="text('FORM.PRODUCT.TITLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <div>
+          <app-select-input
+            [firstOption]="{
+              value: '0',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PRODUCT-TYPE.TITLE',
+            }"
+            [options]="listDrawingProductTypes"
+            formControlName="productType">
+          </app-select-input>
+
+          <div *ngIf="form.controls.productType.errors" class="form-error">
+            <p
+              *ngIf="
+                form.controls.productType.hasError('required') ||
+                form.controls.productType.hasError('notValidValue')
+              ">
+              {{ text('ERRORS.PRODUCT-TYPE-REQUIRED') | mrTranslate }}
+            </p>
+          </div>
+        </div>
+
+        <app-text-input
+          formControlName="productName"
+          [placeholder]="text('FORM.PRODUCT.PLACEHOLDER') | mrTranslate">
+        </app-text-input>
+      </div>
+    </app-section>
+    <app-section
+      [title]="text('SECTIONS.STYLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <div>
+          <app-select-input
+            [firstOption]="{
+              value: '0',
+              label: '',
+              labelCode: 'SCREENS.DRAWING-SEARCH.FORM.STYLE.TITLE',
+            }"
+            [options]="listDrawingStyles"
+            formControlName="type">
+          </app-select-input>
+
+          <div *ngIf="form.controls.type.errors" class="form-error">
+            <p
+              *ngIf="
+                form.controls.type.hasError('required') ||
+                form.controls.type.hasError('notValidValue')
+              ">
+              {{ text('ERRORS.TYPE-REQUIRED') | mrTranslate }}
+            </p>
+          </div>
+        </div>
+
+        <app-select-input
+          [firstOption]="{
+            value: '0',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.SOFTWARE.TITLE',
+          }"
+          [options]="listDrawingSoftwares"
+          formControlName="software">
+        </app-select-input>
+
+        <app-select-input
+          [firstOption]="{
+            value: '0',
+            label: '',
+            labelCode: 'SCREENS.DRAWING-SEARCH.FORM.PAPER.TITLE',
+          }"
+          [options]="listDrawingPapers"
+          formControlName="paper">
+        </app-select-input>
+
+        <app-select-input
+          [firstOption]="{
+            value: '0',
+            label: '',
+            labelCode: 'DATA.DRAWING.FILTERS.NONE',
+          }"
+          [options]="listDrawingFilters"
+          formControlName="filter">
+        </app-select-input>
+      </div>
+    </app-section>
+
+    <app-section
+      [title]="text('SECTIONS.DETAILS') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <div>
+          <app-date-input
+            icon="calendar-date"
+            formControlName="dateHyphen"
+            [label]="text('FORM.DATE.TITLE') | mrTranslate">
+          </app-date-input>
+
+          <div *ngIf="form.controls.dateHyphen.errors" class="form-error">
+            <p *ngIf="form.controls.dateHyphen.hasError('required')">
+              {{ text('ERRORS.DATE-REQUIRED') | mrTranslate }}
+            </p>
+          </div>
+        </div>
+        <div>
+          <app-text-input
+            type="number"
+            icon="stopwatch"
+            [min]="0"
+            (change)="updateTime($event)"
+            formControlName="time"
+            [placeholder]="text('FORM.TIME.PLACEHOLDER') | mrTranslate"
+            [label]="text('FORM.TIME.TITLE') | mrTranslate">
+          </app-text-input>
+
+          <div class="m-2">
+            {{ timeHuman }}
+          </div>
+        </div>
+        <div>
+          <app-text-input
+            type="number"
+            icon="9-square"
+            [min]="1"
+            [max]="100"
+            formControlName="scoreCritic"
+            [placeholder]="text('FORM.SCORE-CRITIC.PLACEHOLDER') | mrTranslate"
+            [label]="text('FORM.SCORE-CRITIC.TITLE') | mrTranslate">
+          </app-text-input>
+
+          <div *ngIf="form.controls.scoreCritic.errors" class="form-error">
+            <p *ngIf="form.controls.scoreCritic.hasError('required')">
+              {{ text('ERRORS.SCORE.REQUIRED') | mrTranslate }}
+            </p>
+            <p *ngIf="form.controls.scoreCritic.hasError('min')">
+              {{
+                text('ERRORS.SCORE.MIN')
+                  | mrTranslate: { value: scoreConfig.min }
+              }}
+            </p>
+            <p *ngIf="form.controls.scoreCritic.hasError('max')">
+              {{
+                text('ERRORS.SCORE.MAX')
+                  | mrTranslate: { value: scoreConfig.max }
+              }}
+            </p>
+          </div>
+
+          <div class="h-fit">
+            <app-drawing-score [score]="form.value.scoreCritic ?? 0">
+            </app-drawing-score>
+          </div>
+        </div>
+      </div>
+    </app-section>
+
+    <app-section
+      icon="chat"
+      [title]="text('FORM.COMMENTS.TITLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <app-drawing-comments-form
+          class="col-span-1 sm:col-span-3"
+          [formArrayName]="'listComments'"
+          [formArray]="listComments"
+          [comments]="drawing.listComments"
+          [placeholder]="text('FORM.COMMENTS.PLACEHOLDER') | mrTranslate">
+        </app-drawing-comments-form>
+      </div>
+    </app-section>
+    <app-section
+      icon="patch-exclamation"
+      [title]="text('FORM.COMMENTS-STYLE.TITLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <app-drawing-comments-form
+          class="col-span-1 sm:col-span-3"
+          [formArrayName]="'listComments'"
+          [formArray]="listCommentsStyle"
+          [comments]="drawing.listCommentsStyle"
+          [placeholder]="text('FORM.COMMENTS-STYLE.PLACEHOLDER') | mrTranslate">
+        </app-drawing-comments-form>
+      </div>
+    </app-section>
+
+    <app-section
+      icon="hand-thumbs-up"
+      [title]="text('FORM.COMMENTS-PROS.TITLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <app-drawing-comments-form
+          class="col-span-1 sm:col-span-3"
+          [formArrayName]="'listCommentsPros'"
+          [formArray]="listCommentsPros"
+          [comments]="drawing.listCommentsPros"
+          [placeholder]="text('FORM.COMMENTS-PROS.PLACEHOLDER') | mrTranslate">
+        </app-drawing-comments-form>
+      </div>
+    </app-section>
+    <app-section
+      icon="hand-thumbs-down"
+      [title]="text('FORM.COMMENTS-CONS.TITLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <app-drawing-comments-form
+          class="col-span-1 sm:col-span-3"
+          [formArrayName]="'listCommentsCons'"
+          [formArray]="listCommentsCons"
+          [comments]="drawing.listCommentsCons"
+          [placeholder]="text('FORM.COMMENTS-CONS.PLACEHOLDER') | mrTranslate">
+        </app-drawing-comments-form>
+      </div>
+    </app-section>
+
+    <app-section
+      [title]="text('SECTIONS.REFERENCES') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content items-end">
+        <app-text-input
+          formControlName="referenceUrl"
+          icon="image"
+          [placeholder]="text('FORM.REFERENCE.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.REFERENCE.TITLE') | mrTranslate">
+        </app-text-input>
+
+        <app-text-input
+          formControlName="spotifyUrl"
+          icon="spotify"
+          [placeholder]="text('FORM.SPOTIFY.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.SPOTIFY.TITLE') | mrTranslate">
+        </app-text-input>
+
+        <app-switch
+          [id]="'iSwitchVisible'"
+          [text]="text('FORM.VISIBLE.TITLE') | mrTranslate"
+          [formControl]="form.controls.visible">
+        </app-switch>
+      </div>
+    </app-section>
+
+    <app-section
+      [title]="text('SECTIONS.SOCIAL') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <app-text-input
+          formControlName="blueskyUrl"
+          icon="at"
+          [placeholder]="text('FORM.BLUESKY.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.BLUESKY.TITLE') | mrTranslate">
+        </app-text-input>
+
+        <app-text-input
+          formControlName="instagramUrl"
+          icon="instagram"
+          [placeholder]="text('FORM.INSTAGRAM.PLACEHOLDER') | mrTranslate"
+          [label]="text('FORM.INSTAGRAM.TITLE') | mrTranslate">
+        </app-text-input>
+      </div>
+    </app-section>
+    <app-section
+      [title]="text('FORM.TAGS.TITLE') | mrTranslate"
+      [collapsable]="true">
+      <div class="seccion-content">
+        <app-text-input
+          class="col-span-1 sm:col-span-3"
+          formControlName="tagsText"
+          [placeholder]="text('FORM.TAGS.PLACEHOLDER') | mrTranslate">
+        </app-text-input>
+      </div>
+    </app-section>
+
+    <div class="col-span-1 sm:col-span-3">
+      <div *ngIf="!validForm; else formValid" class="form-error">
+        <p>{{ text('ERRORS.TITLE') | mrTranslate }}</p>
+
+        <ul *ngIf="formErrors.length > 0">
+          <li *ngFor="let error of formErrors">{{ error }}</li>
+        </ul>
+      </div>
+      <ng-template #formValid>
+        <button class="btn-rounded" type="submit">
+          <i class="bi bi-floppy"></i>
+          <!--
+          <ng-container *ngIf="newDrawing; else btnSaveEditForm">
+            {{ text('FORM.SAVE.CREATE') | mrTranslate }}
+          </ng-container>
+          <ng-template #btnSaveEditForm>
+            {{ text('FORM.SAVE.EDIT') | mrTranslate: { id: drawing.id } }}
+          </ng-template> -->
+        </button>
+      </ng-template>
+    </div>
+  </form>
+
+  <!-- TODO: llevar esto al Art/Edit component -->
+  <div *ngIf="drawingNotFound" class="flex flex-col flex-nowrap gap-3">
+    <h1>
+      {{ text('NOTFOUND.TITLE') | mrTranslate }}
+    </h1>
+    <h3>
+      {{ text('NOTFOUND.SUBTITLE') | mrTranslate: { id: drawing.id } }}
+    </h3>
+    <a routerLink="/art">
+      {{ text('NOTFOUND.GO-TO-GALLERY') | mrTranslate }}
+    </a>
+  </div>
+</ng-container>

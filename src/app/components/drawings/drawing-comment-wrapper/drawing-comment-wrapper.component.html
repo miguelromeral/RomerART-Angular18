@@ -1,0 +1,15 @@
+<div
+  class="mr-social-container flex w-full flex-col items-start"
+  [ngClass]="{
+    'mr-comment-pro': type === 'like',
+    'mr-comment-con': type === 'dislike',
+  }">
+  <div class="flex flex-col items-stretch gap-2">
+    <app-art-details-drawing-comment
+      *ngFor="let comment of comments; let first = first"
+      [comment]="comment"
+      [first]="first"
+      [type]="type">
+    </app-art-details-drawing-comment>
+  </div>
+</div>

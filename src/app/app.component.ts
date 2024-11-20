@@ -5,7 +5,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { NavbarComponent } from './components/common/layout/navbar/navbar/navbar.component';
 import {
   CommonModule,
   isPlatformBrowser,
@@ -13,7 +13,7 @@ import {
   NgClass,
   NgIf,
 } from '@angular/common';
-import { HeaderComponent } from './components/shared/header/header.component';
+import { HeaderComponent } from './components/common/layout/header/header.component';
 import { environment } from 'environments/environment';
 import { MetadataService } from './services/metadata/metadata.service';
 import { LanguageService } from './services/language/language.service';
