@@ -36,34 +36,34 @@ export const experienceConfig: IExperience[] = [
     references: undefined,
     colorVariable: 'var(--mr-color-prodware)',
     projects: [
-      {
-        address: undefined,
-        remoto: true,
-        beginDate: new Date(2019, 1, 1),
-        endDate: new Date(2019, 5, 1),
-        logo: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwEBAQEIAQgKCgkBDRYPDQEMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzg3NTc3Nzc3Nzc3Nzc3Ky03Nzc3Nzc3Nzc3NzItK//AABEIABAAEAMBEQACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAABBQD/xAAmEAAABAQFBQEAAAAAAAAAAAABAgYHAwUIEQASITEyExhBYXEE/8QAGAEAAgMAAAAAAAAAAAAAAAAAAAMCBQf/xAAeEQACAgICAwAAAAAAAAAAAAABAgARAwQxcSFCof/aAAwDAQACEQMRAD8AhSiRObUq1FQ/6m3Eo9upSmMix5HAb7fAARxXKhYEiaJl2kwZER/aM5kblUpJ1gDuQYmd+IXUBJBuTXYfeBkK1cdrbabDOE4U13CUzpa03tqtYbZXJHUceFFKuQHjkzaW83vgVio8ReTUXO4L8URXdTTGZq+pBLtcVf3NFQoxBMrhHmJzZsRZ75j8GsuFmK8Gvgqf/9k=',
-        name: 'Macsa Id',
-        projects: undefined,
-        roleDescriptionCode: 'DATA.CV.MACSA',
-        tecnology: [
-          {
-            level: 1,
-            name: 'C#',
-          },
-          {
-            level: 1,
-            name: 'Javascript',
-          },
-          {
-            level: 2,
-            name: 'Microsoft Dynamics 365 CRM',
-          },
-        ],
-        url: 'https://www.macsa.com/',
-        colorVariable: 'var(--mr-color-macsa)',
-        references: undefined,
-        presencial: false,
-      },
+      // {
+      //   address: undefined,
+      //   remoto: true,
+      //   beginDate: new Date(2019, 1, 1),
+      //   endDate: new Date(2019, 5, 1),
+      //   logo: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwEBAQEIAQgKCgkBDRYPDQEMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzg3NTc3Nzc3Nzc3Nzc3Ky03Nzc3Nzc3Nzc3NzItK//AABEIABAAEAMBEQACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAABBQD/xAAmEAAABAQFBQEAAAAAAAAAAAABAgYHAwUIEQASITEyExhBYXEE/8QAGAEAAgMAAAAAAAAAAAAAAAAAAAMCBQf/xAAeEQACAgICAwAAAAAAAAAAAAABAgARAwQxcSFCof/aAAwDAQACEQMRAD8AhSiRObUq1FQ/6m3Eo9upSmMix5HAb7fAARxXKhYEiaJl2kwZER/aM5kblUpJ1gDuQYmd+IXUBJBuTXYfeBkK1cdrbabDOE4U13CUzpa03tqtYbZXJHUceFFKuQHjkzaW83vgVio8ReTUXO4L8URXdTTGZq+pBLtcVf3NFQoxBMrhHmJzZsRZ75j8GsuFmK8Gvgqf/9k=',
+      //   name: 'Macsa Id',
+      //   projects: undefined,
+      //   roleDescriptionCode: 'DATA.CV.MACSA',
+      //   tecnology: [
+      //     {
+      //       level: 1,
+      //       name: 'C#',
+      //     },
+      //     {
+      //       level: 1,
+      //       name: 'Javascript',
+      //     },
+      //     {
+      //       level: 2,
+      //       name: 'Microsoft Dynamics 365 CRM',
+      //     },
+      //   ],
+      //   url: 'https://www.macsa.com/',
+      //   colorVariable: 'var(--mr-color-macsa)',
+      //   references: undefined,
+      //   presencial: false,
+      // },
       {
         name: 'Openbank',
         remoto: false,
@@ -165,7 +165,7 @@ export const experienceConfig: IExperience[] = [
           },
           {
             level: 2,
-            name: 'Javascro`t',
+            name: 'Javascript',
           },
           {
             level: 2,
@@ -250,6 +250,67 @@ export const experienceConfig: IExperience[] = [
           {
             level: 1,
             name: 'PL/SQL',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Valum | Sociedad de Tasaciones y Valoraciones',
+    remoto: false,
+    colorVariable: 'var(--mr-color-valum)',
+    beginDate: new Date(2024, 10, 27),
+    endDate: undefined,
+    logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAKlBMVEUWdnFHcEwWdnEWdnEWdnEWdnEWdnEWdnEWdnEWdnEWdnEWdnEWdnEWdnH0gh+7AAAADnRSTlP/AO0THTuSqCy5gM9abuPWbfcAAADcSURBVCiRjdLrrsMgCABgFBDq5f1f9yhklK0ny/zRJnzeQKB8GfAb4hdcTX0OPXFVaCdMTfQTtwE0LNgAhN6xH4NBRc5fMOGZvseldMEDbU8QVbPaiDsG8mXGYQNc7cwdDus0x/lhXIg7vdm+nKY82UKw0K3Oe2Xh6lZmdUt5RqjbnMopT7cxcZkNTnn6eWOSF+pi6nyvPMFkKvsTZ2LfW1FzUxWbEhfC/rIo4kp5onjNye083ydKoRHrUpuQ7Jqf165hqcFUrNjUwnJrkj+itlme+Bp3j/7Y1P+MP0KEBx2Y9fHCAAAAAElFTkSuQmCC',
+    url: 'https://www.valumre.com/',
+    address: 'Av. de Europa, 26, Ática 1 3º, 28224 Pozuelo de Alarcón, Madrid',
+    roleDescriptionCode: 'DATA.CV.VALUM',
+    references: undefined,
+    presencial: false,
+    tecnology: undefined,
+    projects: [
+      {
+        name: 'Inteligencia Versátil',
+        address: undefined,
+        remoto: true,
+        beginDate: new Date(2024, 10, 27),
+        endDate: undefined,
+        url: 'https://inteligenciaversatil.com/',
+        logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAM1BMVEVHcEwDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwQDAwS9OwjRAAAAEXRSTlMAVrByoP8zZyPuQ8SPf+INFdYJ1O0AAACFSURBVHgB5Y5RDgMhCAURHSvuar3/aRsJMfvTE+x8kTcAyPtI+kdkLQlqNOnnoRoOJiLV2LQjQWu/AJEEV68KEtzsax3qdr5SGSEnXw/6bkgeLWZIiKLG3DMzzl9DAiyKQg53S8P/HJSQi20HOyg+nWFJkADiXsZJcmhqs0TvKmba5E38AFPWA4euT3ZHAAAAAElFTkSuQmCC',
+        colorVariable: 'var(--mr-color-iv)',
+        projects: undefined,
+        references: [
+          {
+            name: 'Arturo Aguado Arnold',
+            role: 'CTO',
+          },
+        ],
+        presencial: false,
+        roleDescriptionCode: 'DATA.CV.IV',
+        tecnology: [
+          {
+            level: 3,
+            name: '.NET Core 8.0',
+          },
+          {
+            level: 2,
+            name: 'SQL',
+          },
+          {
+            level: 2,
+            name: 'Git',
+          },
+          {
+            level: 1,
+            name: 'LaTeX',
+          },
+          {
+            level: 1,
+            name: 'Jira',
+          },
+          {
+            level: 1,
+            name: 'Angular',
           },
         ],
       },
