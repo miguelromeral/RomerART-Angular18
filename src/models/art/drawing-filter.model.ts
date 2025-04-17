@@ -3,14 +3,14 @@ import { environment } from 'environments/environment';
 export class DrawingFilter {
   sortBy: string | null;
   textQuery: string | null;
-  type: string | null;
-  productType: string | null;
+  type: number | null;
+  productType: number | null;
   productName: string | null;
   collection: string | null;
   characterName: string | null;
   modelName: string | null;
-  software: string | null;
-  paper: string | null;
+  software: number | null;
+  paper: number | null;
   formSpotify: string | null;
   spotify: boolean | null;
   formFavorites: boolean | null;

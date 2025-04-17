@@ -8,6 +8,13 @@ export interface IDrawingStyle {
 
 export const drawingStyles: IDrawingStyle[] = [
   {
+    id: 0,
+    code: 'DATA.DRAWING.STYLES.OTHER',
+    text: 'Otros',
+    showSoftware: true,
+    showPaper: true,
+  },
+  {
     id: 1,
     code: 'DATA.DRAWING.STYLES.PENCILS',
     text: 'Lápices de Grafito',

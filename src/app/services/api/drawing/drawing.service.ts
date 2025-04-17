@@ -272,7 +272,7 @@ export class DrawingService {
   }
 
   getAllCollectionsPublic(): Observable<Collection[]> {
-    return this.http.get<Collection[]>(`${this.apiUrl}collections`).pipe(
+    return this.http.get<Collection[]>(`${this.apiUrl}collection/list`).pipe(
       timeout(this.timeoutMs),
       catchError(this.handleRequestError),
       map((collections: Collection[]) =>
@@ -282,13 +282,15 @@ export class DrawingService {
   }
 
   getAllCollectionsAdmin(): Observable<Collection[]> {
-    return this.http.get<Collection[]>(`${this.apiUrl}collections/full`).pipe(
-      timeout(this.timeoutMs),
-      catchError(this.handleRequestError),
-      map((collections: Collection[]) =>
-        collections.map(collection => new Collection(collection))
-      )
-    );
+    return this.http
+      .get<Collection[]>(`${this.apiUrl}collection/full-list`)
+      .pipe(
+        timeout(this.timeoutMs),
+        catchError(this.handleRequestError),
+        map((collections: Collection[]) =>
+          collections.map(collection => new Collection(collection))
+        )
+      );
   }
 
   /**********************************/

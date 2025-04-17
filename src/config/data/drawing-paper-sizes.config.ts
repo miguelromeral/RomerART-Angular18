@@ -1,5 +1,9 @@
 export const drawingPaperSizes = [
   {
+    id: 0,
+    name: '--',
+  },
+  {
     id: 4,
     name: 'A4',
   },

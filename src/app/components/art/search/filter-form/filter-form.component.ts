@@ -166,8 +166,8 @@ export class FilterFormComponent
     textQuery: new FormControl(
       environment.forms.drawingFilter.default.textQuery
     ),
-    type: new FormControl(environment.forms.drawingFilter.default.type),
-    productType: new FormControl(
+    type: new FormControl<number>(environment.forms.drawingFilter.default.type),
+    productType: new FormControl<number>(
       environment.forms.drawingFilter.default.productType
     ),
     productName: new FormControl(
@@ -182,8 +182,12 @@ export class FilterFormComponent
     modelName: new FormControl(
       environment.forms.drawingFilter.default.modelName
     ),
-    software: new FormControl(environment.forms.drawingFilter.default.software),
-    paper: new FormControl(environment.forms.drawingFilter.default.paper),
+    software: new FormControl<number>(
+      environment.forms.drawingFilter.default.software
+    ),
+    paper: new FormControl<number>(
+      environment.forms.drawingFilter.default.paper
+    ),
     formSpotify: new FormControl(
       environment.forms.drawingFilter.default.spotify
     ),

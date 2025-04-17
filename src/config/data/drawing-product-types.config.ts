@@ -1,5 +1,10 @@
 export const drawingProductTypes = [
   {
+    id: 0,
+    labelCode: 'DATA.DRAWING.PRODUCTS_TYPES.OTHER',
+    emoji: '❓',
+  },
+  {
     id: 1,
     labelCode: 'DATA.DRAWING.PRODUCTS_TYPES.VIDEOGAME',
     emoji: '🎮',
