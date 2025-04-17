@@ -83,7 +83,7 @@ export class SearchCollectionComponent
       next: list => {
         this.errorCollections = false;
         this.listCollections = list
-          .filter(c => c.drawingsId.length > 0)
+          .filter(c => c.drawingIds.length > 0)
           .sort(sortCollectionsByOrder);
         this.loadingCollections = false;
         this.loadQueryParameters();

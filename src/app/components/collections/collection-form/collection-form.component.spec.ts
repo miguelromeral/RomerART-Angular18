@@ -37,7 +37,7 @@ describe('CollectionFormComponent', () => {
         id: '',
         description: '',
         drawings: [],
-        drawingsId: [],
+        drawingIds: [],
         label: '',
         labelCode: '',
         name: '',

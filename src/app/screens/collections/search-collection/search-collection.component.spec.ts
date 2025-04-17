@@ -51,7 +51,7 @@ describe('SearchCollectionComponent', () => {
         id: '',
         description: '',
         drawings: [],
-        drawingsId: [],
+        drawingIds: [],
         label: '',
         labelCode: '',
         name: '',

@@ -419,7 +419,7 @@ describe('DrawingService', () => {
     const mockCollection: Collection = {
       description: '',
       drawings: [],
-      drawingsId: [],
+      drawingIds: [],
       id: '',
       label: '',
       labelCode: '',
@@ -432,9 +432,8 @@ describe('DrawingService', () => {
 
     const request: ISaveCollectionRequest = {
       description: '',
-      drawingsIds: [],
+      drawingIds: [],
       id: '',
-      isEditing: false,
       name: '',
       order: 0,
     };
@@ -545,16 +544,16 @@ describe('DrawingService', () => {
       modelName: '',
       pageNumber: 1,
       pageSize: 0,
-      paper: '0',
+      paper: 0,
       productName: '',
-      productType: '0',
+      productType: 0,
       formFavorites: false,
       formSpotify: '',
-      software: '0',
+      software: 0,
       sortBy: '',
       spotify: false,
       textQuery: '',
-      type: '',
+      type: environment.forms.drawingFilter.default.type,
     };
     service.filterDrawings(filters).subscribe(results => {
       // expect(results).toEqual(mockResponse);
@@ -619,7 +618,7 @@ describe('DrawingService', () => {
       sortBy: '',
       spotify: false,
       textQuery: '',
-      type: '',
+      type: environment.forms.drawingFilter.default.type,
     };
     service.filterDrawings(filters).subscribe(results => {
       // expect(results).toEqual(mockResponse);
@@ -679,7 +678,7 @@ describe('DrawingService', () => {
       {
         description: '',
         drawings: [],
-        drawingsId: [],
+        drawingIds: [],
         id: '',
         label: '',
         labelCode: '',
@@ -713,7 +712,7 @@ describe('DrawingService', () => {
       {
         description: '',
         drawings: [],
-        drawingsId: [],
+        drawingIds: [],
         id: '',
         label: '',
         labelCode: '',
@@ -742,7 +741,7 @@ describe('DrawingService', () => {
     const mockResponse: Collection = {
       description: '',
       drawings: [],
-      drawingsId: [],
+      drawingIds: [],
       id: id,
       label: '',
       labelCode: '',
@@ -775,7 +774,7 @@ describe('DrawingService', () => {
     const mockResponse: Collection = {
       description: '',
       drawings: [],
-      drawingsId: [],
+      drawingIds: [],
       id: id,
       label: '',
       labelCode: '',

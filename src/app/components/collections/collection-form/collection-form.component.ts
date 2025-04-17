@@ -82,12 +82,11 @@ export class CollectionFormComponent
 
   /* Form */
   form = new FormGroup({
-    isEditing: new FormControl(this.newCollection, Validators.required),
     id: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     order: new FormControl(0),
-    drawingsIds: new FormControl<string[]>([], Validators.required),
+    drawingIds: new FormControl<string[]>([], Validators.required),
   });
 
   /* Form Behaviour */
@@ -121,7 +120,7 @@ export class CollectionFormComponent
   loadUsedDrawings() {
     if (this.collection) {
       const used: Drawing[] = [];
-      this.collection.drawingsId.forEach(id => {
+      this.collection.drawingIds.forEach(id => {
         const found = this.drawings.find(drawing => drawing.id === id);
         if (found) used.push(found);
       });
@@ -186,12 +185,11 @@ export class CollectionFormComponent
 
   setFormValues(col: Collection) {
     if (col && col.id) {
-      this.form.controls.isEditing.setValue(col.id !== '');
       this.form.controls.id.setValue(col.id);
       this.form.controls.description.setValue(col.description);
       this.form.controls.name.setValue(col.name);
       this.form.controls.order.setValue(col.order);
-      this.form.controls.drawingsIds.setValue(col.drawingsId);
+      this.form.controls.drawingIds.setValue(col.drawingIds);
       this.loadUsedDrawings();
     }
   }
@@ -220,7 +218,7 @@ export class CollectionFormComponent
       }
     }
     // Actualizar los dibujos en el formulario
-    this.form.controls.drawingsIds.setValue(this.listUsed.map(d => d.id));
+    this.form.controls.drawingIds.setValue(this.listUsed.map(d => d.id));
   }
 
   saveCollection() {
@@ -228,9 +226,8 @@ export class CollectionFormComponent
 
     const formData: ISaveCollectionRequest = {
       id: values.id!,
-      isEditing: values.isEditing!,
       description: values.description!,
-      drawingsIds: values.drawingsIds!,
+      drawingIds: values.drawingIds!,
       name: values.name!,
       order: values.order!,
     };
@@ -239,7 +236,6 @@ export class CollectionFormComponent
       next: resp => {
         this._collection.id = resp.id;
         this.newCollection = false;
-        this.form.controls.isEditing.setValue(true);
 
         this.alertService.showAlert(
           this.customTranslate.transform(this.text('ALERTS.SAVED.TITLE')),

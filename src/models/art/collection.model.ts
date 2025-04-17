@@ -7,7 +7,7 @@ export class Collection implements ICustomSelectOption {
   description: string;
   order: number;
   drawings: Drawing[];
-  drawingsId: string[];
+  drawingIds: string[];
   // drawingsReferences
   textDrawingsReferences: string;
   value: string;
@@ -20,7 +20,7 @@ export class Collection implements ICustomSelectOption {
     this.description = data.description || '';
     this.order = data.order || 0;
     this.drawings = data.drawings?.map(drawing => new Drawing(drawing)) || [];
-    this.drawingsId = data.drawingsId || [];
+    this.drawingIds = data.drawingIds || [];
     this.textDrawingsReferences = data.textDrawingsReferences || '';
     this.value = this.id;
     this.label = this.name;
