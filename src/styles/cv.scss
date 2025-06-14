@@ -25,7 +25,9 @@
   /* Experiencia */
   --mr-experiencia-logo-height: 20px;
   --mr-experiencia-logo-border: 1px;
-  --mr-experiencia-logo-height-half: calc(var(--mr-experiencia-logo-height) / 2);
+  --mr-experiencia-logo-height-half: calc(
+    var(--mr-experiencia-logo-height) / 2
+  );
   --mr-experiencia-fecha-color: var(--mr-text-not-important-color);
   --mr-experiencia-fecha-size: var(--mr-text-not-important-size);
   --mr-experiencia-empleo-margin-left: 20px;
@@ -41,6 +43,8 @@
   --mr-color-sas: #006219;
   --mr-color-valum: #137671;
   --mr-color-iv: #515755;
+  --mr-color-infortec: #00fe00;
+  --mr-color-fundae: #ffb500;
   /* Certificaciones */
   --mr-badge-size: 40px;
   --mr-badge-margin: -2px;
@@ -80,11 +84,10 @@
   --mr-fact-background-color: rgb(248, 228, 255);
 }
 
-
 /* Tecnología */
 
 .tecnologiaContainer:not(.apartado) {
-  @apply flex flex-col gap-2 flex-nowrap;
+  @apply flex flex-col flex-nowrap gap-2;
   // display: flex;
   // flex-direction: row;
   // flex-wrap: wrap;
@@ -114,7 +117,7 @@ span.tecnologia {
 .tecnologiaContainer .tecnologia .tecnologiaItemsContainer span,
 .tecnologiaContainer div.tecnologia span:not(.nivel),
 span.tecnologia {
-  @apply bg-gray-200 hover:bg-gray-300 text-black-100 dark:bg-gray-800 dark:text-white-800 transition-all hover:dark:bg-black-600;
+  @apply bg-gray-200 text-black-100 transition-all hover:bg-gray-300 dark:bg-gray-800 dark:text-white-800 hover:dark:bg-black-600;
   padding: 0px var(--mr-padding-content);
   border-radius: var(--mr-circle-border-radius);
   position: relative;
@@ -123,19 +126,19 @@ span.tecnologia {
 .tecnologiaContainer .tecnologia .tecnologiaItemsContainer.avanzado span,
 .tecnologiaContainer div.tecnologia span.avanzado,
 span.tecnologia.avanzado {
-  @apply bg-green-400 hover:bg-green-500 text-black-100 dark:bg-green-500 dark:text-black-800 transition-all hover:dark:bg-green-400;
+  @apply bg-green-400 text-black-100 transition-all hover:bg-green-500 dark:bg-green-500 dark:text-black-800 hover:dark:bg-green-400;
 }
 
 .tecnologiaContainer .tecnologia .tecnologiaItemsContainer.intermedio span,
 .tecnologiaContainer div.tecnologia span.intermedio,
 span.tecnologia.intermedio {
-  @apply bg-green-300 hover:bg-green-400 text-black-100 dark:bg-green-700 dark:text-black-800 transition-all hover:dark:bg-green-600;
+  @apply bg-green-300 text-black-100 transition-all hover:bg-green-400 dark:bg-green-700 dark:text-black-800 hover:dark:bg-green-600;
 }
 
 .tecnologiaContainer .tecnologia .tecnologiaItemsContainer.basico span,
 .tecnologiaContainer div.tecnologia span.basico,
 span.tecnologia.basico {
-  @apply bg-green-200 hover:bg-green-300 text-black-100 dark:bg-green-900 dark:text-white-800 transition-all hover:dark:bg-green-800;
+  @apply bg-green-200 text-black-100 transition-all hover:bg-green-300 dark:bg-green-900 dark:text-white-800 hover:dark:bg-green-800;
 }
 
 /* .avaznado::after{
