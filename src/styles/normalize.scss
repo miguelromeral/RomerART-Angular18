@@ -6,14 +6,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import 'variables.scss';
 
-
-
 html {
   line-height: 1.15;
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
-  transition: background-color var(--mr-transition-time), color var(--mr-transition-time);
+  transition:
+    background-color var(--mr-transition-time),
+    color var(--mr-transition-time);
 }
 
 body {
@@ -29,7 +29,6 @@ body {
 main {
   display: block;
 }
-
 
 hr {
   box-sizing: content-box;
@@ -112,9 +111,9 @@ select {
  */
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button;
 }
 
@@ -163,11 +162,10 @@ table {
 
 /* Add your custom styles below this line */
 
-
 // TODO: revisar estos estilos de nav
 
 nav {
-  background-color: var(--mr-nav-color);
+  background-color: var(--mr-nav-bg-color);
 }
 
 nav a,
@@ -193,7 +191,6 @@ footer {
   padding-top: 0px;
   padding-bottom: 0px;
 }
-
 
 h1 {
   @apply text-2xl uppercase;
