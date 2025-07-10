@@ -424,6 +424,9 @@
         "PAPER": {
           "TITLE": "📄 SIZE"
         },
+        "FILTER": {
+          "TITLE": "✨ FILTER"
+        },
         "SPOTIFY": {
           "TITLE": "🎵 MUSIC",
           "YES": "Spotify Track Suggested",
