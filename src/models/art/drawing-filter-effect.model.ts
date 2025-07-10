@@ -10,7 +10,7 @@ export class DrawingFilterEffect
   labelCode: string;
 
   constructor(data: Partial<DrawingFilterEffect> = {}) {
-    this.id = data.id || -1;
+    this.id = data.id == undefined ? -1 : data.id;
     this.value = this.id.toString();
     this.label = this.id.toString();
     this.labelCode = data.labelCode || '';

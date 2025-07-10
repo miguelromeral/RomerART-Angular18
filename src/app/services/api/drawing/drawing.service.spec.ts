@@ -432,7 +432,7 @@ describe('DrawingService', () => {
 
     const request: ISaveCollectionRequest = {
       description: '',
-      drawingIds: [],
+      drawingsIds: [],
       id: '',
       name: '',
       order: 0,

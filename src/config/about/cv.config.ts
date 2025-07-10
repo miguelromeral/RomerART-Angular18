@@ -288,6 +288,59 @@ export const experienceConfig: IExperience[] = [
       },
     ],
   },
+  {
+    name: 'Infortec Consultores S.A.',
+    remoto: true,
+    colorVariable: 'var(--mr-color-infortec)',
+    beginDate: new Date(2025, 3, 28),
+    endDate: undefined,
+    logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAgCAIAAABhFeQrAAAA7UlEQVR4Ae3WIWjDQBSA4U/Ow+zU7FRVXc1Moa6e1taLelkXKExOV9WUqNq6eKLj5+JCyGxYAtnlMmZy/OqJL4F74mj+pv5pHdiAW3JmH9iOI7l+V8VS1Ml73Qs4UgXWkIJtr3tqfTO0khVPVF03Adkot2bPirrrZuCVK+lAgXuW+O15hO5vTspNf3cO4B7qDvYR6RYUlJ35ebRbsOGFZxbcJnFLFmDJGuAR76bg1LpG7OLdT9DeUGyoJ3Fv/+XO7uzO7rrlJlO5by3oi3dQjHOvrcnDz3OkCXVzks7vZBzYsucS8e7rr4p+T8b3DV/J92lg2IcPAAAAAElFTkSuQmCC',
+    url: 'https://infortec.net/',
+    address:
+      'C. de la Condesa de Venadito, 1, planta 1, Cdad. Lineal, 28027 Madrid',
+    roleDescriptionCode: 'DATA.CV.INFORTEC',
+    references: undefined,
+    presencial: false,
+    tecnology: undefined,
+    projects: [
+      {
+        name: 'Fundae: Fundación Estatal para la Formación en el Empleo',
+        address: 'C. de Torrelaguna, 56, Cdad. Lineal, 28027 Madrid',
+        remoto: false,
+        beginDate: new Date(2025, 3, 28),
+        endDate: undefined,
+        url: 'https://www.fundae.es/',
+        logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAOVBMVEVHcEz/3HP/yVH/vzT/vCz/wTj/z1v/uif/shD/sg7/rgH/txv/sxL/wDL/uSH/sAj/vS7/tx7/xULcMabTAAAAE3RSTlMADidOZ0MaiuLu/73VWZ/4eqo3uF09bQAAAKRJREFUeAHlTYWBBDAIgyqk3v2HfXi3Ce5Sb4weGxxiSpn/o0oVFQG0/jSwbVVbtDMr8I1NHb1k0fH2rIB8hs2aFmTNQm9oQCfH3qFlF6PzOzcAbPIa6ScQXQFw3lhLgfp1l+pnRMv21S6X2ACs6wE3qJFjTabqn6owdOdocpvYFdMbOhyf8XG3a+3OOXssGXLM5phIFFQSvSPkHPjjsbcbmJ4ZL5Q3Br10+hUvAAAAAElFTkSuQmCC',
+        colorVariable: 'var(--mr-color-fundae)',
+        projects: undefined,
+        references: undefined,
+        presencial: false,
+        roleDescriptionCode: 'DATA.CV.FUNDAE',
+        tecnology: [
+          {
+            level: 3,
+            name: '.NET Core 6.0',
+          },
+          {
+            level: 3,
+            name: 'Angular',
+          },
+          {
+            level: 2,
+            name: 'Git',
+          },
+          {
+            level: 2,
+            name: 'TFVC',
+          },
+          {
+            level: 1,
+            name: 'SQL',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const experienceLanguagesConfig: IExperienceLanguage[] = [

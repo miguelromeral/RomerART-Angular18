@@ -1,6 +1,6 @@
 .mr-bottom-bar {
-  @apply bg-main-50 dark:bg-black-700 rounded-full gap-1 lg:rounded-md overflow-hidden flex h-12 flex-row flex-nowrap items-center justify-around p-1 lg:h-fit max-h-screen lg:flex-col lg:items-start lg:gap-1 lg:p-2;
-  @apply m-2;
+  @apply flex h-12 max-h-screen flex-row flex-nowrap items-center justify-around gap-1 overflow-hidden p-1 lg:h-fit lg:flex-col lg:items-start lg:gap-1 lg:rounded-md lg:p-2;
+  @apply m-0 lg:m-2;
   @apply fixed bottom-0 left-0 right-0 lg:top-0;
   @apply lg:w-44;
   backdrop-filter: blur(5px);

@@ -13,13 +13,11 @@
       </ng-template>
     </option>
     <option *ngFor="let option of options" [value]="option.value">
-      {{ option.emoji }}
+      <span>{{ option.emoji }}</span>
       <ng-container *ngIf="option.labelCode !== ''; else literal">
         {{ text(option.labelCode) | mrTranslate }}
       </ng-container>
-      <ng-template #literal>
-        {{ option.label }}
-      </ng-template>
+      <ng-template #literal> {{ option.label }} </ng-template>
     </option>
   </select>
 </div>

@@ -227,7 +227,7 @@ export class CollectionFormComponent
     const formData: ISaveCollectionRequest = {
       id: values.id!,
       description: values.description!,
-      drawingIds: values.drawingIds!,
+      drawingsIds: values.drawingIds!,
       name: values.name!,
       order: values.order!,
     };

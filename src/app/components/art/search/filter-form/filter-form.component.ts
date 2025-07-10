@@ -11,7 +11,7 @@ import { DrawingFilter } from '@models/art/drawing-filter.model';
 import { DrawingThumbnailComponent } from '../../drawing-thumbnail/drawing-thumbnail.component';
 import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { finalize, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { DrawingStyle } from '@models/art/drawing-style.model';
 import { DrawingProductType } from '@models/art/drawing-product-type.model';
 import { DrawingProduct } from '@models/art/drawing-product.model';

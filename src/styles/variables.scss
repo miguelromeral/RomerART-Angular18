@@ -12,8 +12,7 @@ $mr-text-color-secondary-dark: theme('colors.main.400');
 
 /* Font Families */
 $mr-font-family-josefine:
-  /*'Manrope', */
-  'Josefin Sans', sans-serif;
+  /*'Manrope', */ 'Josefin Sans', sans-serif;
 $mr-font-family-sans-serif: sans-serif;
 
 /* Input Background Color */
@@ -24,7 +23,6 @@ $mr-input-border-color-dark: $mr-input-bg-color-dark;
 $mr-input-placeholder-color-light: theme('colors.white.800');
 $mr-input-placeholder-color-dark: theme('colors.white.950');
 
-
 /* Profile Pic Size */
 $mr-profile-pic-size: 40px;
 
@@ -33,17 +31,22 @@ $mr-profile-pic-size: 40px;
 /********************************/
 $mr-nav-bg-opacity: 0.9;
 /* Navbar Background Color */
-$mr-nav-bg-color-light: rgba(#f4daf7, $mr-nav-bg-opacity); // TODO: resolver esto del alpha y tailwind
-$mr-nav-bg-color-dark: rgb(#131313, $mr-nav-bg-opacity); // TODO: resolver esto del alpha y tailwind
+$mr-nav-bg-color-light: rgba(244, 218, 247, 0.6);
+$mr-nav-bg-color-dark: rgba(19, 19, 19, 0.6);
 /* Navbar Background Color on Hover */
-$mr-nav-bg-color-hover-light: rgba(#e9b5ef, $mr-nav-bg-opacity); // TODO: resolver esto del alpha y tailwind
-$mr-nav-bg-color-hover-dark: rgba(#501c56, $mr-nav-bg-opacity); // TODO: resolver esto del alpha y tailwind
+$mr-nav-bg-color-hover-light: rgba(
+  #e9b5ef,
+  $mr-nav-bg-opacity
+); // TODO: resolver esto del alpha y tailwind
+$mr-nav-bg-color-hover-dark: rgba(
+  #501c56,
+  $mr-nav-bg-opacity
+); // TODO: resolver esto del alpha y tailwind
 /* Navbar Text Color */
 $mr-nav-text-color-light: theme('colors.main.600');
 $mr-nav-text-color-dark: theme('colors.main.200');
 /* Navbar Profile Pic Size */
 $mr-nav-profile-pic-size: 30px;
-
 
 /********************************/
 //    Drawing Thumbnails
@@ -56,17 +59,36 @@ $mr-thumbnail-date-bg-color-dark: theme('colors.white.DEFAULT');
 $mr-thumbnail-date-text-color-light: theme('colors.white.DEFAULT');
 $mr-thumbnail-date-text-color-dark: theme('colors.black.DEFAULT');
 /* Thumbnail Background on Hover */
-$mr-thumbnail-bg-hover-light: linear-gradient(160deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, #{$mr-bg-color-light} 100%);
-$mr-thumbnail-bg-hover-dark: linear-gradient(160deg, transparent 0%, rgba(0, 0, 0, 0.6) 50%, #{$mr-bg-color-dark} 100%);
-$mr-thumbnail-bg-hover-favorite-light: linear-gradient(160deg, transparent 0%, rgba(255, 174, 35, 0.8) 50%, #{$mr-bg-color-light} 100%); // TODO: resolver esto del alpha y tailwind
-$mr-thumbnail-bg-hover-favorite-dark: linear-gradient(160deg, transparent 0%, rgba(255, 174, 35, 0.8) 50%, #{$mr-bg-color-dark} 100%); // TODO: resolver esto del alpha y tailwind
+$mr-thumbnail-bg-hover-light: linear-gradient(
+  160deg,
+  transparent 0%,
+  rgba(255, 255, 255, 0.6) 50%,
+  #{$mr-bg-color-light} 100%
+);
+$mr-thumbnail-bg-hover-dark: linear-gradient(
+  160deg,
+  transparent 0%,
+  rgba(0, 0, 0, 0.6) 50%,
+  #{$mr-bg-color-dark} 100%
+);
+$mr-thumbnail-bg-hover-favorite-light: linear-gradient(
+  160deg,
+  transparent 0%,
+  rgba(255, 174, 35, 0.8) 50%,
+  #{$mr-bg-color-light} 100%
+); // TODO: resolver esto del alpha y tailwind
+$mr-thumbnail-bg-hover-favorite-dark: linear-gradient(
+  160deg,
+  transparent 0%,
+  rgba(255, 174, 35, 0.8) 50%,
+  #{$mr-bg-color-dark} 100%
+); // TODO: resolver esto del alpha y tailwind
 /* Thumbnail Text Color */
 $mr-thumbnail-text-color-light: theme('colors.black.DEFAULT');
 $mr-thumbnail-text-color-dark: theme('colors.white.DEFAULT');
 $mr-thumbnail-text-color-favorite: theme('colors.white.DEFAULT');
 /* Thumbnail Spotify Icon Color */
 $mr-thumbnail-spotify-color: theme('colors.green.500');
-
 
 /********************************/
 //    Score Label
@@ -93,7 +115,13 @@ $mr-score-border-color-good-dark: theme('colors.green.300');
 $mr-score-text-color-good-light: theme('colors.black.DEFAULT');
 $mr-score-text-color-good-dark: theme('colors.green.400');
 // Score Platinum
-$mr-score-bg-color-platinum-light: linear-gradient(135deg, white 30%, var(--mr-score-platinum-blue) 55%, white 55%, var(--mr-score-platinum-white) 100%);
+$mr-score-bg-color-platinum-light: linear-gradient(
+  135deg,
+  white 30%,
+  var(--mr-score-platinum-blue) 55%,
+  white 55%,
+  var(--mr-score-platinum-white) 100%
+);
 $mr-score-bg-color-platinum-dark: transparent;
 $mr-score-border-color-platinum-light: theme('colors.platinum.800');
 $mr-score-border-color-platinum-dark: theme('colors.platinum.200');
@@ -154,9 +182,6 @@ $mr-scrollbar-width: 8px;
 $mr-scrollbar-bg-color: transparent;
 $mr-scrollbar-color-light: theme('colors.main.300');
 $mr-scrollbar-color-dark: theme('colors.main.500');
-
-
-
 
 /**************************************************************/
 
@@ -246,11 +271,12 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-range-bubble-bg-color-light: theme('colors.main.500');
   --mr-range-bubble-bg-color-dark: theme('colors.main.300');
   --mr-range-bubble-bg-color: var(--mr-range-bubble-bg-color-light);
-  --mr-range-track-margin-top: calc(calc(var(--mr-range-bubble-height) - var(--mr-range-track-height)) / 2);
+  --mr-range-track-margin-top: calc(
+    calc(var(--mr-range-bubble-height) - var(--mr-range-track-height)) / 2
+  );
   // --mr-range-track-margin-top: 0.25rem;
   --mr-range-bubble-height: 1.5rem;
   --mr-range-bubble-width: 1.5rem;
-
 
   /* Buttons */
   --mr-btn-bg-color: var(--mr-chat-color);
@@ -342,8 +368,6 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-alert-text-color: var(--mr-alert-text-color-dark);
 }
 
-
-
 /* variables.css */
 
 :root {
@@ -410,11 +434,36 @@ $mr-scrollbar-color-dark: theme('colors.main.500');
   --mr-ff-progress-bar-width: 80px;
   --mr-ff-progress-bar-total-color: black;
   --mr-ff-progress-bar-total-health: linear-gradient(90deg, #0d7ff7, white);
-  --mr-ff-progress-bar-total-magic: linear-gradient(90deg, rgb(4 255 130), white);
+  --mr-ff-progress-bar-total-magic: linear-gradient(
+    90deg,
+    rgb(4 255 130),
+    white
+  );
   --mr-ff-materia-summon-border: #fd9da2;
-  --mr-ff-materia-summon-color: radial-gradient(circle at 30% 30%, white 0%, #652e2d 5%, #340400 20%, #ab1d1b 60%, var(--mr-ff-materia-summon-border) 100%);
+  --mr-ff-materia-summon-color: radial-gradient(
+    circle at 30% 30%,
+    white 0%,
+    #652e2d 5%,
+    #340400 20%,
+    #ab1d1b 60%,
+    var(--mr-ff-materia-summon-border) 100%
+  );
   --mr-ff-materia-support-border: #75c4ff;
-  --mr-ff-materia-support-color: radial-gradient(circle at 30% 30%, white 0%, #061194 5%, #000d33 20%, #0255fd 60%, var(--mr-ff-materia-support-border) 100%);
+  --mr-ff-materia-support-color: radial-gradient(
+    circle at 30% 30%,
+    white 0%,
+    #061194 5%,
+    #000d33 20%,
+    #0255fd 60%,
+    var(--mr-ff-materia-support-border) 100%
+  );
   --mr-ff-materia-magic-border: #8cfe81;
-  --mr-ff-materia-magic-color: radial-gradient(circle at 30% 30%, white 0%, #127d14 5%, #081b0b 20%, #12b408 60%, var(--mr-ff-materia-magic-border) 100%);
+  --mr-ff-materia-magic-color: radial-gradient(
+    circle at 30% 30%,
+    white 0%,
+    #127d14 5%,
+    #081b0b 20%,
+    #12b408 60%,
+    var(--mr-ff-materia-magic-border) 100%
+  );
 }
