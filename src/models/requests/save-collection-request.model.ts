@@ -3,5 +3,5 @@ export interface ISaveCollectionRequest {
   description: string;
   name: string;
   order: number;
-  drawingIds: string[];
+  drawingsIds: string[];
 }
