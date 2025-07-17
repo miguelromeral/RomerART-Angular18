@@ -320,6 +320,12 @@
           "SHOW": "Mostrar",
           "HIDE": "Ocultar"
         },
+        "SHOW-REFERENCE": {
+          "TITLE": "Referencia",
+          "DESCRIPTION": "Mostrar, en caso de haberla, la imagen de referencia que se usó para el dibujo.",
+          "SHOW": "Mostrar",
+          "HIDE": "Ocultar"
+        },
         "SHOW-KUDOS": {
           "TITLE": "Kudos",
           "DESCRIPTION": "Mostrar la cantidad de kudos (o likes) que un dibujo tiene.",

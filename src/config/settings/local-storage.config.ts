@@ -187,3 +187,16 @@ export const settingDefaultFilterSortBy: ISettingSelect = {
   descriptionCode: 'SCREENS.SETTINGS.FORM.DEFAULT-FILTER-SORTBY.DESCRIPTION',
   options: settingArtFilterValuesSortBy,
 };
+
+export const settingShowReference: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  icon: 'image',
+  inputId: 'iSwitchShowReference',
+  key: 'showReference',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-REFERENCE.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-REFERENCE.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-REFERENCE.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-REFERENCE.HIDE',
+  formControlName: 'showReference',
+};

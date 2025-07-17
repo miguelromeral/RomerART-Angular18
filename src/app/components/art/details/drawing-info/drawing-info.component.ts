@@ -34,6 +34,7 @@ import { LanguageService } from '@app/services/language/language.service';
 import { formattedDate } from '@utils/customization/date-utils';
 import { settingLanguage } from 'config/settings/language.config';
 import {
+  settingShowReference,
   settingShowScorePopular,
   settingShowSpotify,
   settingShowViews,
@@ -93,6 +94,7 @@ export class DrawingInfoComponent
   panelTabsId: IArtInfoTabsConfigId = artTabInfoIds;
   currentLanguage: string = settingLanguage.defaultValue;
   showSpotify = settingShowSpotify.defaultValue;
+  showReference = settingShowReference.defaultValue;
   showViews = settingShowViews.defaultValue;
   showScorePopular = settingShowScorePopular.defaultValue;
 
@@ -116,6 +118,11 @@ export class DrawingInfoComponent
     this.settingsService.booleanSetting$(settingShowViews).subscribe(show => {
       this.showViews = show;
     });
+    this.settingsService
+      .booleanSetting$(settingShowReference)
+      .subscribe(show => {
+        this.showReference = show;
+      });
     this.settingsService
       .booleanSetting$(settingShowScorePopular)
       .subscribe(show => {
@@ -141,7 +148,7 @@ export class DrawingInfoComponent
       this.drawing,
       this.showScorePopular,
       this.showSpotify,
-      this.bErrorReferenceImage
+      this.showReference
     );
     // console.log('Panel Tabs: ', this.panelTabs);
   }
@@ -219,7 +226,7 @@ export class DrawingInfoComponent
   bErrorReferenceImage = false;
 
   onImageNotFound() {
-    this.bErrorReferenceImage = true;
+    this.showReference = false;
     this.loadTabs();
   }
 }

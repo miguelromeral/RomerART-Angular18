@@ -6,6 +6,7 @@ import {
   settingShowFlipButton,
   settingShowFullScreen,
   settingShowKudos,
+  settingShowReference,
   settingShowScoreCritic,
   settingShowScorePopular,
   settingShowSpotify,
@@ -56,6 +57,7 @@ export const settingsConfig: SettingSection[] = [
       new SettingSwitch(settingShowScoreCritic),
       new SettingSwitch(settingShowScorePopular),
       new SettingSwitch(settingShowSpotify),
+      new SettingSwitch(settingShowReference),
     ],
   }),
 ];

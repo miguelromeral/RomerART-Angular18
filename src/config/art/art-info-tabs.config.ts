@@ -28,7 +28,7 @@ export class ArtInfoTabsConfig {
     drawing: Drawing,
     showScorePopular: boolean,
     showSpotify: boolean,
-    errorReference: boolean
+    showReference: boolean
   ): TabPanelItem[] {
     return ArtInfoTabsConfig.tabs
       .filter(tab => {
@@ -38,7 +38,7 @@ export class ArtInfoTabsConfig {
           case artTabInfoIds.spotify:
             return tab.visible(drawing, showSpotify);
           case artTabInfoIds.reference:
-            return tab.visible(drawing, errorReference);
+            return tab.visible(drawing, showReference);
 
           default:
             return tab.visible(drawing);
@@ -111,10 +111,8 @@ export class ArtInfoTabsConfig {
       textCode: 'DETAILS.TAB-TITLES.REFERENCE',
       icon: 'bi-image',
       iconSelected: 'bi-image-fill',
-      visible: (drawing: Drawing, errorReference?: boolean) =>
-        drawing &&
-        drawing.referenceUrl !== '' &&
-        (errorReference === undefined || !errorReference),
+      visible: (drawing: Drawing, visible?: boolean) =>
+        (visible ?? false) && drawing.referenceUrl !== '',
     },
   ];
 }
