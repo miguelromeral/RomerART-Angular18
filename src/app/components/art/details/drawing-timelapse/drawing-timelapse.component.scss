@@ -1,0 +1,18 @@
+.timelapse-container {
+  .gif-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .video-wrapper {
+    width: 100%;
+  }
+
+  .fallback-wrapper {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

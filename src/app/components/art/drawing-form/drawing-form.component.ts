@@ -99,6 +99,7 @@ export class DrawingFormComponent extends LanguageComponent {
     id: new FormControl('', Validators.required),
     path: new FormControl('', Validators.required),
     pathThumbnail: new FormControl('', Validators.required),
+    pathTimelapse: new FormControl(''),
     title: new FormControl(''),
     favorite: new FormControl(false, Validators.required),
     name: new FormControl(''),
@@ -221,6 +222,7 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.visible.setValue(drawing.visible);
     this.form.controls.blueskyUrl.setValue(drawing.blueskyUrl);
     this.form.controls.instagramUrl.setValue(drawing.instagramUrl);
+    this.form.controls.pathTimelapse.setValue(drawing.pathTimelapse);
   }
 
   updateTime(event: Event) {
@@ -341,6 +343,7 @@ export class DrawingFormComponent extends LanguageComponent {
       paper: values.paper!,
       path: values.path!,
       pathThumbnail: values.pathThumbnail!,
+      pathTimelapse: values.pathTimelapse!,
       productName: values.productName!,
       productType: values.productType!,
       referenceUrl: values.referenceUrl!,

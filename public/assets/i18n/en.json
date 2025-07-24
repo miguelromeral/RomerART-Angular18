@@ -60,6 +60,14 @@
     },
     "IMAGE": {
       "NOTFOUND": "Image Not Found"
+    },
+    "VIDEO": {
+      "NOT-SUPPORTED": "Your browser doesn't support HTML5 video.",
+      "DOWNLOAD": "Download video",
+      "LOADING": "Loading video...",
+      "ERROR": "Error loading video",
+      "RETRY": "Retry",
+      "TIMELAPSE-INFO": "Drawing process timelapse video"
     }
   },
   "SCREENS": {
@@ -326,6 +334,12 @@
           "SHOW": "Show",
           "HIDE": "Hide"
         },
+        "SHOW-TIMELAPSE": {
+          "TITLE": "Timelapse Video",
+          "DESCRIPTION": "Show, if available, the timelapse video of the drawing process.",
+          "SHOW": "Show",
+          "HIDE": "Hide"
+        },
         "SHOW-KUDOS": {
           "TITLE": "Kudos",
           "DESCRIPTION": "Show how many kudos (or likes) a drawing has.",
@@ -465,7 +479,8 @@
           "VOTE": "Vote",
           "SPOTIFY": "Spotify",
           "INFO": "Details",
-          "REFERENCE": "Reference"
+          "REFERENCE": "Reference",
+          "TIMELAPSE": "Timelapse"
         },
         "OPEN-REFERENCE": "Open reference in new tab",
         "SECTIONS": {
@@ -578,6 +593,10 @@
         },
         "VISIBLE": {
           "TITLE": "Visible"
+        },
+        "TIMELAPSE": {
+          "TITLE": "Timelapse",
+          "PLACEHOLDER": "URL Timelapse Video"
         }
       },
       "ERRORS": {

@@ -10,6 +10,7 @@ export interface IArtInfoTabsConfigId {
   details: string;
   vote: string;
   reference: string;
+  timelapse: string;
 }
 
 export const artTabInfoIds: IArtInfoTabsConfigId = {
@@ -21,6 +22,7 @@ export const artTabInfoIds: IArtInfoTabsConfigId = {
   details: 'details',
   vote: 'vote',
   reference: 'reference',
+  timelapse: 'timelapse',
 };
 
 export class ArtInfoTabsConfig {
@@ -28,7 +30,8 @@ export class ArtInfoTabsConfig {
     drawing: Drawing,
     showScorePopular: boolean,
     showSpotify: boolean,
-    showReference: boolean
+    showReference: boolean,
+    showTimelapse: boolean
   ): TabPanelItem[] {
     return ArtInfoTabsConfig.tabs
       .filter(tab => {
@@ -39,6 +42,8 @@ export class ArtInfoTabsConfig {
             return tab.visible(drawing, showSpotify);
           case artTabInfoIds.reference:
             return tab.visible(drawing, showReference);
+          case artTabInfoIds.timelapse:
+            return tab.visible(drawing, showTimelapse);
 
           default:
             return tab.visible(drawing);
@@ -113,6 +118,15 @@ export class ArtInfoTabsConfig {
       iconSelected: 'bi-image-fill',
       visible: (drawing: Drawing, visible?: boolean) =>
         (visible ?? false) && drawing.referenceUrl !== '',
+    },
+    {
+      id: artTabInfoIds.timelapse,
+      order: 900,
+      icon: 'bi-play-btn',
+      textCode: 'DETAILS.TAB-TITLES.TIMELAPSE',
+      iconSelected: 'bi-play-btn-fill',
+      visible: (drawing: Drawing, visible?: boolean) =>
+        (visible ?? false) && drawing.urlTimelapse !== '',
     },
   ];
 }

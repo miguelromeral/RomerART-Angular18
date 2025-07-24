@@ -73,6 +73,14 @@
             [path]="form.value.path ?? ''"
             (imageUploaded)="receiveUploadedImage($event)">
           </app-azure-image-form>
+
+          <app-text-input
+            class="mt-2"
+            icon="play-btn"
+            formControlName="pathTimelapse"
+            [placeholder]="text('FORM.TIMELAPSE.PLACEHOLDER') | mrTranslate"
+            [label]="text('FORM.TIMELAPSE.TITLE') | mrTranslate">
+          </app-text-input>
         </div>
       </div>
     </app-section>

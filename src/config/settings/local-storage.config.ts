@@ -200,3 +200,16 @@ export const settingShowReference: ISettingSwitch = {
   hideCode: 'SCREENS.SETTINGS.FORM.SHOW-REFERENCE.HIDE',
   formControlName: 'showReference',
 };
+
+export const settingShowTimelapse: ISettingSwitch = {
+  defaultValue: true,
+  type: 'switch',
+  icon: 'play-btn',
+  inputId: 'iSwitchShowTimelapse',
+  key: 'showTimelapse',
+  titleCode: 'SCREENS.SETTINGS.FORM.SHOW-TIMELAPSE.TITLE',
+  descriptionCode: 'SCREENS.SETTINGS.FORM.SHOW-TIMELAPSE.DESCRIPTION',
+  showCode: 'SCREENS.SETTINGS.FORM.SHOW-TIMELAPSE.SHOW',
+  hideCode: 'SCREENS.SETTINGS.FORM.SHOW-TIMELAPSE.HIDE',
+  formControlName: 'showTimelapse',
+};

@@ -18,7 +18,7 @@ export const socialLinksConfig: ISocialLink[] = [
   },
   {
     name: 'Bluesky',
-    icon: 'bi-at',
+    icon: 'bi-bluesky',
     link: 'https://bsky.app/profile/miguelromeral.bsky.social',
     showInAbout: true,
     showInCV: false,

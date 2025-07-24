@@ -37,6 +37,7 @@ import {
   settingShowReference,
   settingShowScorePopular,
   settingShowSpotify,
+  settingShowTimelapse,
   settingShowViews,
 } from 'config/settings/local-storage.config';
 import { SettingsService } from '@app/services/settings/settings.service';
@@ -47,6 +48,8 @@ import { IVoteDrawingResponse } from '@models/responses/vote-drawing-response.mo
 import Swiper from 'swiper';
 import { SwiperOptions } from 'swiper/types';
 import { FlipCardImageComponent } from '@app/components/shared/flip-card-image/flip-card-image.component';
+import { VideoPlayerComponent } from '@app/components/shared/video-player/video-player.component';
+import { DrawingTimelapseComponent } from '@app/components/art/details/drawing-timelapse/drawing-timelapse.component';
 
 @Component({
   selector: 'app-drawing-info',
@@ -67,6 +70,8 @@ import { FlipCardImageComponent } from '@app/components/shared/flip-card-image/f
     TrackComponent,
     TranslatableComponent,
     FlipCardImageComponent,
+    VideoPlayerComponent,
+    DrawingTimelapseComponent,
   ],
   templateUrl: './drawing-info.component.html',
   styleUrl: './drawing-info.component.scss',
@@ -95,6 +100,7 @@ export class DrawingInfoComponent
   currentLanguage: string = settingLanguage.defaultValue;
   showSpotify = settingShowSpotify.defaultValue;
   showReference = settingShowReference.defaultValue;
+  showTimelapse = settingShowTimelapse.defaultValue;
   showViews = settingShowViews.defaultValue;
   showScorePopular = settingShowScorePopular.defaultValue;
 
@@ -124,6 +130,11 @@ export class DrawingInfoComponent
         this.showReference = show;
       });
     this.settingsService
+      .booleanSetting$(settingShowTimelapse)
+      .subscribe(show => {
+        this.showTimelapse = show;
+      });
+    this.settingsService
       .booleanSetting$(settingShowScorePopular)
       .subscribe(show => {
         this.showScorePopular = show;
@@ -148,7 +159,8 @@ export class DrawingInfoComponent
       this.drawing,
       this.showScorePopular,
       this.showSpotify,
-      this.showReference
+      this.showReference,
+      this.showTimelapse
     );
     // console.log('Panel Tabs: ', this.panelTabs);
   }

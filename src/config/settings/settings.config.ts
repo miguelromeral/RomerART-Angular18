@@ -10,6 +10,7 @@ import {
   settingShowScoreCritic,
   settingShowScorePopular,
   settingShowSpotify,
+  settingShowTimelapse,
   settingShowViews,
   settingTranslations,
   settingZoomImage,
@@ -58,6 +59,7 @@ export const settingsConfig: SettingSection[] = [
       new SettingSwitch(settingShowScorePopular),
       new SettingSwitch(settingShowSpotify),
       new SettingSwitch(settingShowReference),
+      new SettingSwitch(settingShowTimelapse),
     ],
   }),
 ];

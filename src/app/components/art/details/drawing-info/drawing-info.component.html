@@ -230,5 +230,15 @@
         </div>
       </app-loading>
     </div>
+
+    <div class="swiper-slide" *ngIf="isTabVisible(panelTabsId.timelapse)">
+      <app-loading [loading]="loading" class="swiper-content">
+        <div class="h-32 w-full" loading></div>
+        <div content>
+          <app-drawing-timelapse [timelapseUrl]="drawing.urlTimelapse">
+          </app-drawing-timelapse>
+        </div>
+      </app-loading>
+    </div>
   </div>
 </div>
