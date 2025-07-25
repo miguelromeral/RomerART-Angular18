@@ -26,7 +26,6 @@ export class VideoPlayerComponent extends LanguageComponent implements OnInit {
   @Input() loop = true;
   @Input() preload: 'none' | 'metadata' | 'auto' = 'metadata';
 
-  @Input() showLoadingOverlay = true;
   @Input() showErrorOverlay = true;
 
   // Video player state
