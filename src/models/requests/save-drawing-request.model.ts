@@ -3,6 +3,7 @@ export interface ISaveDrawingRequest {
   id: string;
   path: string;
   pathThumbnail: string;
+  pathTimelapse: string;
   visible: boolean;
   type: number;
   filter: number;

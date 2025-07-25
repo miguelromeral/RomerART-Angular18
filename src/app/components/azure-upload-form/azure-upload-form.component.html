@@ -1,0 +1,18 @@
+<form
+  [formGroup]="azureForm"
+  (submit)="upload()"
+  class="grid grid-cols-1 items-end sm:grid-cols-4">
+  <input
+    class="col-span-1 sm:col-span-3"
+    *ngIf="!isBeingUploaded"
+    type="file"
+    (change)="onFileChange($event)"
+    [accept]="accept" />
+
+  <button
+    type="submit"
+    class="btn col-span-1 sm:col-span-4"
+    [disabled]="!azureForm.valid || isBeingUploaded">
+    {{ text('BTN-UPLOAD') | mrTranslate }}
+  </button>
+</form>

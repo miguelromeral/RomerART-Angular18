@@ -1,6 +1,7 @@
 <div class="form-group">
   <app-label *ngIf="label !== ''" [label]="label" [icon]="icon"></app-label>
   <input
+    #input
     type="{{ type }}"
     [value]="internalValue"
     (input)="onInputChange($event)"

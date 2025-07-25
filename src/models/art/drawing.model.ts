@@ -4,6 +4,7 @@ export class Drawing {
   id: string;
   path: string;
   pathThumbnail: string;
+  pathTimelapse: string;
   urlBase: string;
   visible: boolean;
   type: number;
@@ -43,6 +44,7 @@ export class Drawing {
   listCommentsCons: string[];
   url: string;
   urlThumbnail: string;
+  urlTimelapse: string;
   isTraditional: boolean;
   formattedDate: string;
   instagramUrl: string;
@@ -103,6 +105,8 @@ export class Drawing {
     this.popularity = data.popularity || 0;
     this.filter = data.filter || 0;
     this.filterName = data.filterName || '';
+    this.pathTimelapse = data.pathTimelapse || '';
+    this.urlTimelapse = data.urlTimelapse || '';
   }
 
   pageTitle(): string {

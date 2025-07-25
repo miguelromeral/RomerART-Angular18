@@ -60,6 +60,20 @@
     },
     "IMAGE": {
       "NOTFOUND": "Image Not Found"
+    },
+    "VIDEO": {
+      "NOT-SUPPORTED": "Your browser doesn't support HTML5 video.",
+      "DOWNLOAD": "Download video",
+      "LOADING": "Loading video...",
+      "ERROR": "Error loading video",
+      "RETRY": "Retry",
+      "TIMELAPSE-INFO": "Drawing process timelapse video"
+    },
+    "AZURE": {
+      "UPLOAD": {
+        "BTN-UPLOAD": "Upload to Azure",
+        "ERROR-UPLOADING": "Error uploading file"
+      }
     }
   },
   "SCREENS": {
@@ -320,6 +334,18 @@
           "SHOW": "Show",
           "HIDE": "Hide"
         },
+        "SHOW-REFERENCE": {
+          "TITLE": "Reference",
+          "DESCRIPTION": "Show, if possible, the image used as a reference for the drawing.",
+          "SHOW": "Show",
+          "HIDE": "Hide"
+        },
+        "SHOW-TIMELAPSE": {
+          "TITLE": "Timelapse Video",
+          "DESCRIPTION": "Show, if available, the timelapse video of the drawing process.",
+          "SHOW": "Show",
+          "HIDE": "Hide"
+        },
         "SHOW-KUDOS": {
           "TITLE": "Kudos",
           "DESCRIPTION": "Show how many kudos (or likes) a drawing has.",
@@ -459,7 +485,8 @@
           "VOTE": "Vote",
           "SPOTIFY": "Spotify",
           "INFO": "Details",
-          "REFERENCE": "Reference"
+          "REFERENCE": "Reference",
+          "TIMELAPSE": "Timelapse"
         },
         "OPEN-REFERENCE": "Open reference in new tab",
         "SECTIONS": {
@@ -572,6 +599,11 @@
         },
         "VISIBLE": {
           "TITLE": "Visible"
+        },
+        "TIMELAPSE": {
+          "TITLE": "Timelapse",
+          "PLACEHOLDER": "URL Timelapse Video",
+          "EXISTS": "The file exists in the server: ({{path}})"
         }
       },
       "ERRORS": {
@@ -600,8 +632,12 @@
           "MESSAGE": "The ID \"{{id}}\" is already used. Try again with other value"
         },
         "IMAGE-NOT-FOUND": {
-          "TITLE": "Image Not Fouund",
+          "TITLE": "Image Not Found",
           "MESSAGE": "No image was found on path \"{{path}}\". You can change the path if already exists or upload a new image in this path"
+        },
+        "TIMELAPSE-NOT-FOUND": {
+          "TITLE": "Timelapse Not Found",
+          "MESSAGE": "No timelapse was found on path \"{{path}}\". You can change the path if already exists or upload a new image in this path"
         },
         "ERROR-CHECK-AZURE-PATH": {
           "TITLE": "Error",

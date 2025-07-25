@@ -1,0 +1,24 @@
+.video-player-container {
+  .video-overlay {
+    backdrop-filter: blur(2px);
+  }
+
+  video {
+    object-fit: contain;
+    max-height: 90vh;
+  }
+
+  // Custom loading animation
+  .loading-spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}

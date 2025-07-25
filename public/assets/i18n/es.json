@@ -60,6 +60,20 @@
     },
     "IMAGE": {
       "NOTFOUND": "Imagen No Encontrada"
+    },
+    "VIDEO": {
+      "NOT-SUPPORTED": "Tu navegador no soporta videos HTML5.",
+      "DOWNLOAD": "Descargar video",
+      "LOADING": "Cargando video...",
+      "ERROR": "Error al cargar el video",
+      "RETRY": "Reintentar",
+      "TIMELAPSE-INFO": "Video timelapse del proceso de dibujo"
+    },
+    "AZURE": {
+      "UPLOAD": {
+        "BTN-UPLOAD": "Subir a Azure",
+        "ERROR-UPLOADING": "Error al subir el fichero"
+      }
     }
   },
   "SCREENS": {
@@ -320,6 +334,18 @@
           "SHOW": "Mostrar",
           "HIDE": "Ocultar"
         },
+        "SHOW-REFERENCE": {
+          "TITLE": "Referencia",
+          "DESCRIPTION": "Mostrar, en caso de haberla, la imagen de referencia que se usó para el dibujo.",
+          "SHOW": "Mostrar",
+          "HIDE": "Ocultar"
+        },
+        "SHOW-TIMELAPSE": {
+          "TITLE": "Video Timelapse",
+          "DESCRIPTION": "Mostrar, en caso de haberlo, el video timelapse del proceso de dibujo.",
+          "SHOW": "Mostrar",
+          "HIDE": "Ocultar"
+        },
         "SHOW-KUDOS": {
           "TITLE": "Kudos",
           "DESCRIPTION": "Mostrar la cantidad de kudos (o likes) que un dibujo tiene.",
@@ -459,7 +485,8 @@
           "VOTE": "Vota",
           "SPOTIFY": "Spotify",
           "INFO": "Detalles",
-          "REFERENCE": "Referencia"
+          "REFERENCE": "Referencia",
+          "TIMELAPSE": "Timelapse"
         },
         "OPEN-REFERENCE": "Abrir referencia en nueva pestaña",
         "SECTIONS": {
@@ -572,6 +599,11 @@
         },
         "VISIBLE": {
           "TITLE": "Visible"
+        },
+        "TIMELAPSE": {
+          "TITLE": "Timelapse",
+          "PLACEHOLDER": "Path del video timelapse",
+          "EXISTS": "El video existe en el servidor: ({{path}})"
         }
       },
       "ERRORS": {
@@ -602,6 +634,10 @@
         "IMAGE-NOT-FOUND": {
           "TITLE": "Imagen No Encontrada",
           "MESSAGE": "No se ha encontrado la imagen en la ruta \"{{path}}\". Puede cambiar la ruta si es una ya existente o subir una nueva imagen a esa ubicación"
+        },
+        "TIMELAPSE-NOT-FOUND": {
+          "TITLE": "Timelapse No Encontrado",
+          "MESSAGE": "No se ha encontrado el timelapse en la ruta \"{{path}}\". Puede cambiar la ruta si es una ya existente o subir una nueva imagen a esa ubicación"
         },
         "ERROR-CHECK-AZURE-PATH": {
           "TITLE": "Error",

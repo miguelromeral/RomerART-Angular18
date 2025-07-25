@@ -36,6 +36,7 @@ export class TabPanelComponent
   @Input() showCommentsCons = true;
   @Input() showDetails = true;
   @Input() showSpotify!: boolean;
+  @Input() showReference!: boolean;
   @Input() showScorePopular!: boolean;
   panelsId: IArtInfoTabsConfigId = artTabInfoIds;
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
