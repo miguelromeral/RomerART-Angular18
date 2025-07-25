@@ -19,14 +19,12 @@ select {
 }
 
 .form-group {
-  @apply flex flex-col w-full gap-2
+  @apply flex w-full flex-col gap-2;
 }
-
 
 .form-error {
-  @apply bg-red-400 text-white-50 p-2;
+  @apply bg-red-400 p-2 text-white-50;
 }
-
 
 .dark input {
   color-scheme: dark;
@@ -54,7 +52,6 @@ quill-editor:hover {
   border-color: theme('colors.main.500') !important;
 }
 
-
 quill-editor {
   @apply dark:text-white;
   border: none !important;
@@ -70,13 +67,21 @@ quill-editor .ql-toolbar.ql-snow {
   border: none;
 }
 
-
 quill-editor .ql-toolbar.ql-snow svg {
   @apply contrast-0;
 }
 
-
 quill-editor .ql-container * {
   font-family: var(--mr-font-family) !important;
   font-size: 16px;
+}
+
+.blob {
+  .exists {
+    @apply border border-green-600;
+  }
+
+  .not-exists {
+    @apply border border-red-600;
+  }
 }

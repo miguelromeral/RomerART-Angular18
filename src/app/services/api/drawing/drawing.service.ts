@@ -36,6 +36,7 @@ import { AuthService } from '../auth/auth.service';
 import { FilterResultsDrawing } from '@models/responses/filter-drawing-response.model';
 import { DrawingFilterEffect } from '@models/art/drawing-filter-effect.model';
 import { drawingFilterEffects } from 'config/data/drawing-filter-effect.config';
+import { UploadAzureBlobResponse } from '@models/responses/upload-azure-blob.response';
 
 @Injectable({
   providedIn: 'root',
@@ -217,9 +218,16 @@ export class DrawingService {
   }
 
   uploadAzureImage(form: FormData): Observable<UploadAzureImageResponse> {
-    const url = `${this.apiUrl}drawing/upload/blob`;
+    const url = `${this.apiUrl}drawing/upload/image`;
     return this.http
       .post<UploadAzureImageResponse>(url, form)
+      .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
+  }
+
+  uploadAzureBlob(form: FormData): Observable<UploadAzureBlobResponse> {
+    const url = `${this.apiUrl}drawing/upload/blob`;
+    return this.http
+      .post<UploadAzureBlobResponse>(url, form)
       .pipe(timeout(this.timeoutMs), catchError(this.handleRequestError));
   }
 

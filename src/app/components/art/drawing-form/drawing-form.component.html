@@ -56,6 +56,7 @@
         <div class="azure-container">
           <app-text-input
             icon="cloud"
+            class="blob"
             formControlName="path"
             (change)="checkAzurePath($event)"
             [placeholder]="text('FORM.PATH.PLACEHOLDER') | mrTranslate"
@@ -74,13 +75,24 @@
             (imageUploaded)="receiveUploadedImage($event)">
           </app-azure-image-form>
 
-          <app-text-input
-            class="mt-2"
-            icon="play-btn"
-            formControlName="pathTimelapse"
-            [placeholder]="text('FORM.TIMELAPSE.PLACEHOLDER') | mrTranslate"
-            [label]="text('FORM.TIMELAPSE.TITLE') | mrTranslate">
-          </app-text-input>
+          <app-label
+            [label]="text('FORM.TIMELAPSE.TITLE') | mrTranslate"
+            [icon]="'play-btn'"></app-label>
+
+          <app-azure-upload-form
+            [label]="text('FORM.THUMBNAIL.TITLE') | mrTranslate"
+            [accept]="'video/mp4,video/webm,image/gif'"
+            [path]="timelapsePath"
+            (fileNameChanged)="checkAzurePathTimelapse($event)"
+            (uploaded)="receiveUploadedThumbnail($event)">
+          </app-azure-upload-form>
+
+          <div *ngIf="showTimelapseForm" class="text-green-500">
+            {{
+              text('FORM.TIMELAPSE.EXISTS')
+                | mrTranslate: { path: drawing.pathTimelapse }
+            }}
+          </div>
         </div>
       </div>
     </app-section>

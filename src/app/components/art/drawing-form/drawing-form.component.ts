@@ -43,6 +43,9 @@ import { AlertService } from '@app/services/alerts/alert.service';
 import { notValidValueValidator } from '@app/validators/not-valid-value.validator';
 import { SectionComponent } from '@app/components/shared/section/section.component';
 import { DrawingFilterEffect } from '@models/art/drawing-filter-effect.model';
+import { AzureUploadFormComponent } from '@app/components/azure-upload-form/azure-upload-form.component';
+import { UploadAzureBlobResponse } from '@models/responses/upload-azure-blob.response';
+import { LabelComponent } from '@app/components/shared/inputs/label/label.component';
 
 @Component({
   selector: 'app-drawing-form',
@@ -64,6 +67,8 @@ import { DrawingFilterEffect } from '@models/art/drawing-filter-effect.model';
     DateInputComponent,
     DrawingThumbnailComponent,
     AzureImageFormComponent,
+    AzureUploadFormComponent,
+    LabelComponent,
   ],
   providers: [CustomTranslatePipe],
   templateUrl: './drawing-form.component.html',
@@ -81,6 +86,8 @@ export class DrawingFormComponent extends LanguageComponent {
     // console.log('Drawing:', value);
     this.setFormValues(value);
   }
+
+  protected timelapsePath = 'timelapses';
 
   @Input() drawingNotFound: boolean | undefined;
   @Input() loading = true;
@@ -158,6 +165,7 @@ export class DrawingFormComponent extends LanguageComponent {
   /* Form Behaviour */
   duplicateId = false;
   showAzureForm = true;
+  showTimelapseForm = false;
   validationAzureImage = false;
   timeHuman = '';
 
@@ -203,6 +211,10 @@ export class DrawingFormComponent extends LanguageComponent {
       this.validationAzureImage = true;
     }
     this.form.controls.title.setValue(drawing.title);
+    if (drawing.pathTimelapse !== '') {
+      this.showTimelapseForm = false;
+      this.checkAzurePathTimelapseFromData(drawing.pathTimelapse);
+    }
     this.form.controls.favorite.setValue(drawing.favorite);
     this.form.controls.name.setValue(drawing.name);
     this.form.controls.modelName.setValue(drawing.modelName);
@@ -222,7 +234,6 @@ export class DrawingFormComponent extends LanguageComponent {
     this.form.controls.visible.setValue(drawing.visible);
     this.form.controls.blueskyUrl.setValue(drawing.blueskyUrl);
     this.form.controls.instagramUrl.setValue(drawing.instagramUrl);
-    this.form.controls.pathTimelapse.setValue(drawing.pathTimelapse);
   }
 
   updateTime(event: Event) {
@@ -272,6 +283,7 @@ export class DrawingFormComponent extends LanguageComponent {
     const value = input.value;
     this.drawingService.checkAzurePath(value).subscribe({
       next: resp => {
+        this.setStylePathInputDirect(input, resp.existe);
         if (resp.existe) {
           this.drawing.url = resp.url;
           this.drawing.urlThumbnail = resp.urlThumbnail;
@@ -305,6 +317,19 @@ export class DrawingFormComponent extends LanguageComponent {
     });
   }
 
+  private setStylePathInputDirect(
+    htmlInput: HTMLInputElement,
+    exists: boolean
+  ) {
+    if (exists) {
+      htmlInput.classList.remove('not-exists');
+      htmlInput.classList.add('exists');
+    } else {
+      htmlInput.classList.remove('exists');
+      htmlInput.classList.add('not-exists');
+    }
+  }
+
   receiveUploadedImage(event: UploadAzureImageResponse) {
     this.drawing.url = event.url;
     this.drawing.urlThumbnail = event.urlThumbnail;
@@ -323,6 +348,34 @@ export class DrawingFormComponent extends LanguageComponent {
         event.urlThumbnail
       );
     });
+  }
+
+  checkAzurePathTimelapse(event: string) {
+    const path = `${this.timelapsePath}/${event}`;
+    this.checkAzurePathTimelapseFromData(path);
+  }
+
+  checkAzurePathTimelapseFromData(fullPathTimelapse: string) {
+    this.drawingService.checkAzurePath(fullPathTimelapse).subscribe({
+      next: resp => {
+        if (resp.existe) {
+          this._drawing.pathTimelapse = fullPathTimelapse;
+          this.form.controls.pathTimelapse.setValue(fullPathTimelapse);
+        } else {
+          this._drawing.urlTimelapse = '';
+          this._drawing.pathTimelapse = '';
+          this.form.controls.pathTimelapse.setValue('');
+        }
+        this.showTimelapseForm = resp.existe;
+      },
+    });
+  }
+
+  receiveUploadedThumbnail(event: UploadAzureBlobResponse) {
+    this.showTimelapseForm = event.ok;
+    this.drawing.urlTimelapse = event.url;
+    this.drawing.pathTimelapse = event.path;
+    this.form.controls.pathTimelapse.setValue(event.ok ? event.path : '');
   }
 
   saveDrawing() {

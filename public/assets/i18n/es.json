@@ -68,6 +68,12 @@
       "ERROR": "Error al cargar el video",
       "RETRY": "Reintentar",
       "TIMELAPSE-INFO": "Video timelapse del proceso de dibujo"
+    },
+    "AZURE": {
+      "UPLOAD": {
+        "BTN-UPLOAD": "Subir a Azure",
+        "ERROR-UPLOADING": "Error al subir el fichero"
+      }
     }
   },
   "SCREENS": {
@@ -596,7 +602,8 @@
         },
         "TIMELAPSE": {
           "TITLE": "Timelapse",
-          "PLACEHOLDER": "Path del video timelapse"
+          "PLACEHOLDER": "Path del video timelapse",
+          "EXISTS": "El video existe en el servidor: ({{path}})"
         }
       },
       "ERRORS": {
@@ -627,6 +634,10 @@
         "IMAGE-NOT-FOUND": {
           "TITLE": "Imagen No Encontrada",
           "MESSAGE": "No se ha encontrado la imagen en la ruta \"{{path}}\". Puede cambiar la ruta si es una ya existente o subir una nueva imagen a esa ubicación"
+        },
+        "TIMELAPSE-NOT-FOUND": {
+          "TITLE": "Timelapse No Encontrado",
+          "MESSAGE": "No se ha encontrado el timelapse en la ruta \"{{path}}\". Puede cambiar la ruta si es una ya existente o subir una nueva imagen a esa ubicación"
         },
         "ERROR-CHECK-AZURE-PATH": {
           "TITLE": "Error",

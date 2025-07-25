@@ -68,6 +68,12 @@
       "ERROR": "Error loading video",
       "RETRY": "Retry",
       "TIMELAPSE-INFO": "Drawing process timelapse video"
+    },
+    "AZURE": {
+      "UPLOAD": {
+        "BTN-UPLOAD": "Upload to Azure",
+        "ERROR-UPLOADING": "Error uploading file"
+      }
     }
   },
   "SCREENS": {
@@ -596,7 +602,8 @@
         },
         "TIMELAPSE": {
           "TITLE": "Timelapse",
-          "PLACEHOLDER": "URL Timelapse Video"
+          "PLACEHOLDER": "URL Timelapse Video",
+          "EXISTS": "The file exists in the server: ({{path}})"
         }
       },
       "ERRORS": {
@@ -625,8 +632,12 @@
           "MESSAGE": "The ID \"{{id}}\" is already used. Try again with other value"
         },
         "IMAGE-NOT-FOUND": {
-          "TITLE": "Image Not Fouund",
+          "TITLE": "Image Not Found",
           "MESSAGE": "No image was found on path \"{{path}}\". You can change the path if already exists or upload a new image in this path"
+        },
+        "TIMELAPSE-NOT-FOUND": {
+          "TITLE": "Timelapse Not Found",
+          "MESSAGE": "No timelapse was found on path \"{{path}}\". You can change the path if already exists or upload a new image in this path"
         },
         "ERROR-CHECK-AZURE-PATH": {
           "TITLE": "Error",

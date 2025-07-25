@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   Output,
+  ViewChild,
   forwardRef,
 } from '@angular/core';
 import {
@@ -40,6 +42,8 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input() formControl: FormControl = new FormControl();
 
   @Output() keyDown = new EventEmitter<KeyboardEvent>();
+
+  @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 
   internalValue = ''; // Valor interno del componente
 
